@@ -1,0 +1,9 @@
+<h1>Espejo</h1>
+<?=$post->txt_descripcion?><br>
+<?=$post->idUsuario->nombreCompleto?><br>
+<?=$post->idUsuario->txt_imagen?><br>
+<?=$post->fch_creacion?><br>
+<?=$post->entEspejos->num_subscriptores?><br>
+<?=$post->entRespuestasEspejo->txt_respuesta?><br>
+<?=$post->entRespuestasEspejo->fch_publicacion_respuesta?><br>
+<?=$post->entRespuestasEspejo->b_de_acuerdo?><br>
