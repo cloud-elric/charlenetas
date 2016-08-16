@@ -12,7 +12,7 @@ class EntPostsExtend extends EntPosts
      * @param integer $page
      * @param integer $pageSize
      */
-	public static function getPostByPagination($page = 0, $pageSize=15){
+	public static function getPostByPagination($page = 0, $pageSize=1){
 
 		$query = EntPosts::find('fch_publicacion <=NOW() AND b_habilitado=1');
 

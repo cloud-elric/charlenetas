@@ -35,8 +35,8 @@ Proyecto tipo red social
 ### 2016-08-16 [added]
 - Se agregaron los archivos pins.min.js y pins.min.css
 - Se agregaron los archivos necesarios para las tarjetas full con la información completa (Exepto la tarjeta en contexto)
-
 - Se agrego el proyecto a un repositorio en github
+
 ### 2016-08-15 [added]
 - En el modelo EntPostsExtend.php se genero el metodo para recuperar un post por el token
 - En controlador NetasController.php se agregaron los metodos necesarios para recuperar un post por el token
