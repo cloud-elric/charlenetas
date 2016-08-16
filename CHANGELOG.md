@@ -34,6 +34,7 @@ Proyecto tipo red social
 - Se borraron los archivos pins-grid.css, vendor.js y pins-grid.js
 ### 2016-08-16 [added]
 - Se agregaron los archivos pins.min.js y pins.min.css
+- Se agregaron los archivos necesarios para las tarjetas full con la información completa (Exepto la tarjeta en contexto)
 
 - Se agrego el proyecto a un repositorio en github
 ### 2016-08-15 [added]
