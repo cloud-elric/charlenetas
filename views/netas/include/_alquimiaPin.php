@@ -2,15 +2,19 @@
 /* @var $post EntPosts*/
 ?>
 
-<div class=pin>
+<div onclick="showPostFull('<?=$post->txt_token?>')" class=pin>
 	<div class=image>
 		<img data-src="images/03fb13e8.image1.jpg">
 	</div>
-	<div class=description><span onclick="showPostFull('<?=$post->txt_token?>')">Ver más</span><br>
-		<div class="clase-de-alf-que-hace-algo">
+	<div class=description>
+		<span onclick="showPostFull('<?=$post->txt_token?>')">Ver más</span><br>
+		<div class="">
 				<?=$post->txt_titulo?><br>
 		</div>
-			<?=$post->txt_descripcion?><br>
+		<div class="pin-descripcion">
+			<?=$post->txt_descripcion?>
+		</div>
+
 
 			<?=$post->id_usuario_administrador?><br>
 			<?=$post->fch_creacion?><br>
