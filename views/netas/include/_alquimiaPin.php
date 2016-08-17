@@ -7,7 +7,7 @@
 		<img data-src="images/03fb13e8.image1.jpg">
 	</div>
 	<div class=description>
-		<span onclick="showPostFull('<?=$post->txt_token?>')">Ver más</span><br>
+		
 		<div class="">
 				<?=$post->txt_titulo?><br>
 		</div>
