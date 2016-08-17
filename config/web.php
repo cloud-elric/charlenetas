@@ -7,6 +7,7 @@ $config = [
 		'bootstrap' => [ 
 				'log' 
 		],
+		'defaultRoute' => 'netas/index',
 		'modules' => [ 
 				'modUsuarios' => [ 
 						'class' => 'app\modules\ModUsuarios\ModUsuarios' 
@@ -89,7 +90,7 @@ $config = [
 								'sign-up' => 'modUsuarios/manager/sign-up',
 								'login' => 'modUsuarios/manager/login',
 								'callback-facebook' => 'modUsuarios/manager/callback-facebook',
-								'/' => 'site/index' 
+								'/' => 'netas/index' 
 						] 
 				] 
 		],

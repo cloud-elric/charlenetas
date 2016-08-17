@@ -8,14 +8,14 @@ class EntPostsExtend extends EntPosts
 {
     /**
      * Obtiene post indicados por paginacion y cantidad por pagina
-     * 
+     *
      * @param integer $page
      * @param integer $pageSize
      */
 	public static function getPostByPagination($page = 0, $pageSize=1){
-		
+
 		$query = EntPosts::find('fch_publicacion <=NOW() AND b_habilitado=1');
-		
+
 		// Carga el dataprovider
 		$dataProvider = new ActiveDataProvider([
 				'query' => $query,
@@ -25,10 +25,10 @@ class EntPostsExtend extends EntPosts
 						'page' => $page
 				]
 		]);
-		
+
 		return $dataProvider->getModels();
 	}
-	
+
 	/**
 	 * Busca un post por el token
 	 * @param unknown $token
@@ -37,7 +37,7 @@ class EntPostsExtend extends EntPosts
 	public static function getPostByToken($token){
 		return EntPosts::find()->where(['txt_token'=>$token])->one();
 	}
-	
+
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
@@ -45,5 +45,5 @@ class EntPostsExtend extends EntPosts
 	{
 		return $this->hasOne(EntRespuestasEspejo::className(), ['id_post' => 'id_post']);
 	}
-	
+
 }
