@@ -35,7 +35,7 @@ function cargarMasPosts(){
 		if(tmp.html().trim().length>0){
 			contenedor.append(tmp.html());
 			pages++;
-			
+			ready();
 		}else{
 			alert('Sin datos para cargar');
 		}
