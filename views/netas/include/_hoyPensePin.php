@@ -2,7 +2,7 @@
 /* @var $post EntPosts*/
 ?>
 
-<div class=pin>
+<div onclick="showPostFull('<?=$post->txt_token?>')" class=pin>
 	<div class=image>
 		<img data-src="images/8675367f.image5.jpg">
 	</div>
