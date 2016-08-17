@@ -21,7 +21,6 @@ Proyecto tipo red social
 ### 2016-08-10 [added]
 - Creación de base de datos
 - Generación de tablas y comentarios
-
 ### 2016-08-10 [fixed]
 - Crear la tabla para el usuario administrador
 - Agregarle llave foranea a la tabla "ent_posts" que apunte a una tabla de usuarios administradores
@@ -30,6 +29,8 @@ Proyecto tipo red social
 
 
 ## Frontend (Aplicación web)
+### 2016-08-16 [fixed]
+- Se arreglo la habilidad para que el grid se cargue por medio asyncrono 
 ### 2016-08-16 [changed]
 - Se borraron los archivos pins-grid.css, vendor.js y pins-grid.js
 ### 2016-08-16 [added]
