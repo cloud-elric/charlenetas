@@ -3,7 +3,7 @@
 namespace app\modules\ModUsuarios\models;
 
 use Yii;
-use yii\base\NotSupportedException;
+
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use app\modules\ModUsuarios\models\Utils;
@@ -44,6 +44,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	const STATUS_BLOCKED = 3;
 	public $password;
 	public $repeatPassword;
+	public $imageProfile;
 	
 	/**
 	 * @inheritdoc
@@ -57,6 +58,19 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	 */
 	public function rules() {
 		return [ 
+				[ 
+						[ 
+								'imageProfile' 
+						],
+						'image',
+						'skipOnEmpty' => false,
+						'extensions' => 'png, jpg',
+						'minWidth' => 300,
+						'maxWidth' => 300,
+						'minHeight' => 300,
+						'maxHeight' => 300,
+						'on' => 'registerInput' 
+				],
 				[ 
 						'password',
 						'compare',
@@ -98,8 +112,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						'lower' => 2,
 						'special' => 2,
 						'hasUser' => false 
-				]
-				,
+				],
 				[ 
 						[ 
 								'password',
@@ -201,43 +214,55 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	}
 	
 	/**
+	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getIdTipoUsuario()
-	{
-		return $this->hasOne(CatTiposUsuarios::className(), ['id_tipo_usuario' => 'id_tipo_usuario']);
+	public function getIdTipoUsuario() {
+		return $this->hasOne ( CatTiposUsuarios::className (), [ 
+				'id_tipo_usuario' => 'id_tipo_usuario' 
+		] );
 	}
 	
 	/**
+	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getEntCalificacionAlquimias()
-	{
-		return $this->hasMany(EntCalificacionAlquimias::className(), ['id_usuario' => 'id_usuario']);
+	public function getEntCalificacionAlquimias() {
+		return $this->hasMany ( EntCalificacionAlquimias::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
 	}
 	
 	/**
+	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getIdPosts()
-	{
-		return $this->hasMany(EntAlquimias::className(), ['id_post' => 'id_post'])->viaTable('ent_calificacion_alquimias', ['id_usuario' => 'id_usuario']);
+	public function getIdPosts() {
+		return $this->hasMany ( EntAlquimias::className (), [ 
+				'id_post' => 'id_post' 
+		] )->viaTable ( 'ent_calificacion_alquimias', [ 
+				'id_usuario' => 'id_usuario' 
+		] );
 	}
 	
 	/**
+	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getEntPosts()
-	{
-		return $this->hasMany(EntPosts::className(), ['id_usuario' => 'id_usuario']);
+	public function getEntPosts() {
+		return $this->hasMany ( EntPosts::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
 	}
 	
 	/**
+	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getEntUsuariosSubscripciones()
-	{
-		return $this->hasMany(EntUsuariosSubscripciones::className(), ['id_usuario' => 'id_usuario']);
+	public function getEntUsuariosSubscripciones() {
+		return $this->hasMany ( EntUsuariosSubscripciones::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
 	}
 	
 	/**
@@ -444,6 +469,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		$user->txt_apellido_paterno = $this->txt_apellido_paterno;
 		$user->txt_apellido_materno = $this->txt_apellido_materno;
 		$user->txt_email = $this->txt_email;
+		$user->txt_imagen = $this->txt_imagen;
 		$user->setPassword ( $this->password );
 		$user->generateAuthKey ();
 		$user->fch_creacion = Utils::getFechaActual ();
@@ -498,5 +524,15 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	public function bloquearUsuario() {
 		$this->id_status = self::STATUS_BLOCKED;
 		return $this->save () ? $this : null;
+	}
+	
+	/**
+	 * Guarda la imagen de perfil para el usuario
+	 * 
+	 * @return boolean
+	 */
+	public function upload($nombreImagen) {
+		// Guardado de la imagen
+		$this->imageProfile->saveAs ( Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $nombreImagen );
 	}
 }

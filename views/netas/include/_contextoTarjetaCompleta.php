@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* @var $post EntPosts*/
 ?>
 
@@ -7,5 +7,13 @@
 <?=$post->fch_creacion?><br>
 <?=$post->txt_imagen?><br>
 
+<div id="js-comments"></div>
 
+<?php
+
+echo $this->render ( 'elementos/inputComentario', [ 
+		'token' => $post->txt_token 
+] );
+
+?>
 

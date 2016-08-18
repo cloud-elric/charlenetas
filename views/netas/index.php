@@ -58,8 +58,12 @@ function cargarMasPosts(){
 
 		 // Carga los comentarios via asincrona
 		 comentariosContenedor.load(urlComentarios, function(){
-			// Coloca un botón para cargar mas comentarios
-			$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');	
+
+			 if(comentariosContenedor.html().trim().length>0){
+			 
+				// Coloca un botón para cargar mas comentarios
+				$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
+			 }	
 		});
 		 
 	}else{
@@ -202,6 +206,30 @@ function enviarComentario(token){
 		method:'POST',
 		success:function(res){
 			$('#js-cargar-comentarios').before(res);
+		},
+		error:function(){
+			// Colocar un error
+			alert('no se pudo guardar');
+		}
+	});
+}
+
+/**
+ * Guarda un comentario del usuario
+ */
+function agregarFeedback(token, feed){
+	var url = 'netas/agregar-feedback?token='+token+'&feed='+feed;
+	
+	$.ajax({
+		url:url,
+		dataType:'html',
+		method:'POST',
+		success:function(res){
+			if(res=='exist'){
+				
+				}else{
+
+					}
 		},
 		error:function(){
 			// Colocar un error
