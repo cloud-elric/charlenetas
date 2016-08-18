@@ -38,11 +38,7 @@ function cargarMasPosts(){
 		if(tmp.html().trim().length>0){
 			contenedor.append(tmp.html());
 			pages++;
-<<<<<<< HEAD
-
-=======
 			ready();
->>>>>>> agregar-comentarios
 		}else{
 			alert('Sin datos para cargar');
 		}
@@ -59,11 +55,7 @@ function cargarMasPosts(){
 
 	// Borra los comentarios anteriores
 	 if(borrarAnteriores){
-
-<<<<<<< HEAD
-=======
 		 // Limpia el contenedor de los comentarios
->>>>>>> agregar-comentarios
 		 comentariosContenedor.html('');
 
 		 // Carga los comentarios via asincrona
@@ -73,11 +65,9 @@ function cargarMasPosts(){
 		});
 
 	}else{
-<<<<<<< HEAD
 
-=======
 		// Carga los comentarios via asincrona
->>>>>>> agregar-comentarios
+
 		$.ajax({
 			url:urlComentarios,
 			dataType:'html',
@@ -119,36 +109,36 @@ function cargarMasPosts(){
 	 $('body').css('overflow', 'auto');
 	 pagesComentarios = 0;
 	 $('#js-content').html(' ');
-} 
+}
 
  // Metodo para suscribirse a una pregunta espejo
  function suscribirseEspejo(token){
 	var url = 'netas/suscripcion-espejo?token='+token;
-	
+
 	$.ajax({
 		url:url,
 		dataType:'html',
 		beforeSend:function(){
-			// Colocar un loading o algo asi 
-			
+			// Colocar un loading o algo asi
+
 			$('#js-btn-suscribirse-'+token).attr('onclick', ' ');
 		},
 		success:function(res){
-			
+
 			 if(res==='subscrito'){
 				// Colocar un mensaje de que usuario ya esta inscrito
 				 removeSubscriptores(token);
 			}else{
 				addSubscriptores(token);
 			}
-				
+
 		},
 		error:function(){
 			// Colocar un mensaje de que no se pudo subscribir
 			removeSubscriptores(token);
 		}
 	});
-	 
+
 }
 
  /**
@@ -169,7 +159,7 @@ function cargarMasPosts(){
 function removeSubscriptores(token){
 	var btnSuscribirse = '<div id="js-btn-suscribirse-'+token+'"onclick=\'suscribirseEspejo("'+token+'");\' style="border: 1px solid black">Me interesa la pregunta</div>';
 	var subs = $('#js-suscriptores-'+token).text();
-	 
+
 	$('#js-suscriptores-'+token).text(parseInt(subs)-1);
 	$('#js-btn-suscribirse-'+token).replaceWith(btnSuscribirse);
 }
@@ -179,23 +169,23 @@ function removeSubscriptores(token){
  */
  function desSuscribirseEspejo(token){
 		var url = 'netas/des-suscripcion-espejo?token='+token;
-		
+
 		$.ajax({
 			url:url,
 			dataType:'html',
 			beforeSend:function(){
-				// Colocar un loading o algo asi 
-				
+				// Colocar un loading o algo asi
+
 				$('#js-btn-suscribirse-'+token).attr('onclick', ' ');
 			},
 			success:function(res){
-				
+
 				if(res==='sinSubscripcion'){
 					addSubscriptores(token);
 				}else{
 					removeSubscriptores(token);
 				}
-					
+
 			},error:function(){
 				addSubscriptores(token);
 			}
