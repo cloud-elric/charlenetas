@@ -26,14 +26,6 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-<<<<<<< HEAD
 .CHANGELOG.md.html
 .CHANGELOG.md.html
 .CHANGELOG.md.html
-=======
-<<<<<<< HEAD
-*.codekit
-=======
-.CHANGELOG.md.html
->>>>>>> origin/master
->>>>>>> master
