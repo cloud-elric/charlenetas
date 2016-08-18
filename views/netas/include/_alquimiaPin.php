@@ -7,6 +7,7 @@
 	<div class="image">
 		<img data-src="assets/images/<?=$post->txt_imagen?>">
 	</div>
+
 	<div class="pin-content-wrapper" lang="en">
 		<h3 class="pin-titulo">
 			<?=$post->txt_titulo?>

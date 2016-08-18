@@ -111,16 +111,16 @@ class NetasController extends Controller {
 				$render = '//netas/include/_verdadazosTarjetaCompleta';
 				break;
 			case 4 : // Hoy pense
-				$render = '//netas/include/_alquimiaTarjetaCompleta';
+				$render = '//netas/include/_hoyPenseTarjetaCompleta';
 				break;
 			case 5 : // Media
-				$render = '//netas/include/_alquimiaTarjetaCompleta';
+				$render = '//netas/include/_mediaTarjetaCompleta';
 				break;
 			case 6 : // En contexto
-				$render = '//netas/include/_alquimiaTarjetaCompleta';
+				$render = '//netas/include/_contextoTarjetaCompleta';
 				break;
 			case 7 : // Solo por hoy
-				$render = '//netas/include/_alquimiaTarjetaCompleta';
+				$render = '//netas/include/_soloPorHoyTarjetaCompleta';
 				break;
 			default :
 				$render = '//netas/include/_alquimiaTarjetaCompleta';

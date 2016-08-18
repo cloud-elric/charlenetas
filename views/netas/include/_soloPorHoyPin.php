@@ -2,10 +2,8 @@
 /* @var $post EntPosts*/
 ?>
 
-<div class="pin pin-solo-por-hoy">
+<div class="pin pin-solo-por-hoy" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header"></div>
-
-
 
 	<div class=image>
 		<img data-src="assets/images/<?=$post->txt_imagen?>">
@@ -24,10 +22,6 @@
 			<h3><a href="<?=$post->txt_url?>"> Ver nota</a></h3>
 		</div>
 	</div>
-
-
-
-
 
 
 
