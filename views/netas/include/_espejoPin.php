@@ -3,9 +3,7 @@
 ?>
 
 <div class="pin pin-espejo" onclick="showPostFull('<?=$post->txt_token?>')">
-	<div class="pin-header"></div>
-
-<div  class=pin>
+	<div class="pin-header pin-header-espejo"></div>
 
 	<div class=image>
 		<img data-src="assets/images/<?=$post->txt_imagen?>">
@@ -21,7 +19,7 @@
 
 
 <div class="pin-social">
-	
+
 	<div class="pin-social-usr">
 		<img src="assets/images/usr-avatar.png" alt="" />
 		<span>Alfie<!--?=$post->idUsuario->txt_imagen?--></span>

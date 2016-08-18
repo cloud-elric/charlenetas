@@ -3,7 +3,7 @@
 ?>
 
 <div class="pin pin-solo-por-hoy" onclick="showPostFull('<?=$post->txt_token?>')">
-	<div class="pin-header"></div>
+	<div class="pin-header pin-header-solo-por-hoy"></div>
 
 	<div class=image>
 		<img data-src="assets/images/<?=$post->txt_imagen?>">
@@ -19,21 +19,16 @@
 		</p>
 
 		<div class="pin-link">
-			<h3><a href="<?=$post->txt_url?>">Ver nota</a></h3>
+			<h3><a class="waves-effect waves-light btn" href="<?=$post->txt_url?>">Ver nota</a></h3>
 		</div>
 	</div>
 
 
 
 
-	<div class="pin-social">
-		<div class="pin-social-counters-wrapper">
-			<div class="pin-social-interactions">
-				<span>140</span>
-				<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
-				<span>45</span>
-				<i class="glyphicon glyphicon-comment"></i>
-			</div>
-		</div>
-	</div>
+	<?php
+		include 'elementos/pins-social.php';
+	?>
+
+
 </div>

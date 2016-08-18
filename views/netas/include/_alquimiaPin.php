@@ -3,7 +3,7 @@
 ?>
 
 <div class="pin pin-alquimia" data-post="<?=$post->txt_token?>">
-	<div class="pin-header"></div>
+	<div class="pin-header pin-header-alquimia"></div>
 	<div class="image">
 		<img data-src="assets/images/<?=$post->txt_imagen?>">
 	</div>
@@ -18,22 +18,27 @@
 			<span>Calificacion Charlenetas</span>
 
 			<!-- //TODO:: poner el "for2 para por cada numero de calificción total poner las estrellas -->
-			<i class="glyphicon glyphicon-star"></i>
-			<?=$post->entAlquimias->num_calificacion_admin?>
+			<div class="star-wrapper">
+				<i class="icon-star"></i>
+				<i class="icon-star"></i>
+				<i class="icon-star"></i>
+				<i class="icon-star"></i><?=$post->entAlquimias->num_calificacion_admin?>
+			</div>
+
 			<span>Los usuarios</span>
-			<i class="glyphicon glyphicon-star"></i>
-			<?=$post->entAlquimias->num_calificacion_usuario?>
-		</div>
-	</div>
-	<div class="pin-social">
-		<div class="pin-social-counters-wrapper">
-			<div class="pin-social-interactions">
-				<span>140</span>
-				<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
-				<span>45</span>
-				<i class="glyphicon glyphicon-comment"></i>
+			<div class="star-wrapper">
+				<i class="icon-star"></i>
+				<i class="icon-star"></i>
+				<i class="icon-star"></i>
+				<i class="icon-star-empty"></i><?=$post->entAlquimias->num_calificacion_usuario?>
 			</div>
 		</div>
 	</div>
+
+	<?php
+		include 'elementos/pins-social.php';
+	?>
+
+
 	<!--?=$post->fch_creacion?-->
 </div>
