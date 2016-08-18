@@ -1,5 +1,7 @@
 <?php
 
+use app\modules\ModUsuarios\models\Utils;
+
 /* @var $post EntPosts*/
 
 ?>
@@ -14,7 +16,7 @@
  			<?=$post->txt_titulo?>
  		</h3>
  		<p class="pin-descripcion">
- 			<?=$post->txt_descripcion?>
+ 			<?=Utils::subStrTexto($post->txt_descripcion, 500)?>
  		</p>
  	</div>
  	<div class="pin-social">

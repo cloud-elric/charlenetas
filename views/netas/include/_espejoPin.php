@@ -2,8 +2,9 @@
 /* @var $post EntPosts*/
 ?>
 
-<div class="pin pin-espejo">
+<div class="pin pin-espejo" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header"></div>
+
 	<div class=image>
 		<img data-src="assets/images/<?=$post->txt_imagen?>">
 	</div>
