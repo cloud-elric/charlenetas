@@ -2,6 +2,11 @@
 Proyecto tipo red social
 
 ## Base de datos
+### 2016-08-17 [changed]
+- A todas las llaves foraneas de la base de datos se cambiaron para que cuando se borre el padre se eliminen los relacionados
+- La tabla "ent_usuarios_subscripciones" se le agrego un campo llamado "b_leido"
+- Se agrego el campo "txt_token" a la tabla de "ent_comentarios_posts"
+
 ### 2016-08-15 [changed]
 - Se agrego la relacion ent_posts con usuarios 
 - Se agrego la relación ent_respuestas_espejo con la de usuarios
@@ -29,6 +34,10 @@ Proyecto tipo red social
 
 
 ## Frontend (Aplicación web)
+### 2016-08-17 [added]
+- Se agrego la habilidad de subscribirse a una pregunta de espejo
+- Se agrego la habilidad de desSubscribirse a una pregunta de espejo
+
 ### 2016-08-16 [fixed]
 - Se arreglo la habilidad para que el grid se cargue por medio asyncrono 
 ### 2016-08-16 [changed]
