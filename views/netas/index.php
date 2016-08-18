@@ -9,6 +9,15 @@
 	</div>
 </div>
 
+
+
+
+
+<div >
+<?php
+#include 'masPosts.php';
+?>
+</div>
 <div style="border: 1px solid black" id="js-cargar-mas-posts"
 	onclick="cargarMasPosts();">Cargar mas</div>
 
@@ -26,17 +35,17 @@
 var pages = 1;
 var pagesComentarios = 0;
 
-/**
- * Carga mas pins de los post
- */
-function cargarMasPosts(){
+// Carga mas pins de los post
+ function cargarMasPosts(){
 	var contenedor = $('#js-contenedor-posts-tarjetas');
 	var tmp = $('#js-tmp');
 
 	tmp.load('netas/get-mas-posts?page='+pages,function(){
+		
 		if(tmp.html().trim().length>0){
 			contenedor.append(tmp.html());
 			pages++;
+
 
 		}else{
 			alert('Sin datos para cargar');
@@ -48,6 +57,15 @@ function cargarMasPosts(){
 /**
  * Carga los comentarios de un post y los nuevos borraran los anteriores o se pondran abajo
  */
+
+			}else{
+			alert('Sin datos para cargar');
+				}
+		
+		});
+}
+
+ // Carga los comentarios de un post y los nuevos borraran los anteriores o se pondran abajo
  function cargarComentarios(token, borrarAnteriores){
 	 var comentariosContenedor = $('#js-comments');
 	 var urlComentarios = 'netas/cargar-comentarios?token='+token+'&page='+pagesComentarios;
@@ -76,9 +94,7 @@ function cargarMasPosts(){
 
 }
 
- /**
- * Muestra un post con toda su información
- */
+ // Muestra un post con toda su información
  function showPostFull(token){
 	 var background = $('#backScreen');
 	 var content = $('#js-content');
@@ -95,9 +111,7 @@ function cargarMasPosts(){
 	});
 }
 
- /**
- * Cierra el post con toda su información
- */
+ // Cierra el post con toda su información
  function hidePostFull(){
 	 var background = $('#backScreen');
 	 background.toggle();

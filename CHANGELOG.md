@@ -30,12 +30,6 @@ Proyecto tipo red social
 
 
 ## Frontend (Aplicación web)
-### 2016-08-16 [changed]
-- Se borraron los archivos pins-grid.css, vendor.js y pins-grid.js
-### 2016-08-16 [added]
-- Se agregaron los archivos pins.min.js y pins.min.css
-
-- Se agrego el proyecto a un repositorio en github
 ### 2016-08-15 [added]
 - En el modelo EntPostsExtend.php se genero el metodo para recuperar un post por el token
 - En controlador NetasController.php se agregaron los metodos necesarios para recuperar un post por el token
