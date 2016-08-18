@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\modules\ModUsuarios\models\EntUsuarios;
+use app\modules\ModUsuarios\models\Utils;
 
 /**
  * This is the model class for table "ent_comentarios_posts".
@@ -37,7 +39,7 @@ class EntComentariosPosts extends \yii\db\ActiveRecord
             [['id_comentario_padre', 'id_post', 'id_usuario'], 'integer'],
             [['id_usuario', 'txt_comentario'], 'required'],
             [['txt_comentario'], 'string'],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => ModUsuariosEntUsuarios::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => EntUsuarios::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
             [['id_comentario_padre'], 'exist', 'skipOnError' => true, 'targetClass' => EntComentariosPosts::className(), 'targetAttribute' => ['id_comentario_padre' => 'id_comentario_post']],
             [['id_post'], 'exist', 'skipOnError' => true, 'targetClass' => EntPosts::className(), 'targetAttribute' => ['id_post' => 'id_post']],
         ];
@@ -62,7 +64,7 @@ class EntComentariosPosts extends \yii\db\ActiveRecord
      */
     public function getIdUsuario()
     {
-        return $this->hasOne(ModUsuariosEntUsuarios::className(), ['id_usuario' => 'id_usuario']);
+        return $this->hasOne(EntUsuarios::className(), ['id_usuario' => 'id_usuario']);
     }
 
     /**
@@ -87,5 +89,21 @@ class EntComentariosPosts extends \yii\db\ActiveRecord
     public function getIdPost()
     {
         return $this->hasOne(EntPosts::className(), ['id_post' => 'id_post']);
+    }
+    
+    /**
+     * Guarda el comentario del usuario
+     * 
+     * @param number $idUsuario
+     * @param number $idPost
+     * @return EntComentariosPosts|NULL
+     */
+    public function guardarComentarioUsuario($idUsuario, $idPost){
+    	$this->id_post = $idPost;
+    	$this->id_usuario = $idUsuario;
+    	$this->fch_comentario = Utils::getFechaActual();
+    	$this->txt_token = Utils::generateToken('com');
+    	
+    	return $this->save()?$this:null;
     }
 }

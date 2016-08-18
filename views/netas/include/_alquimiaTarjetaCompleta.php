@@ -10,3 +10,11 @@
 <?=$post->entAlquimias->num_calificacion_admin?><br>
 <?=$post->entAlquimias->num_calificacion_usuario?><br>
 
+<div id="js-comments">
+
+
+</div>
+
+<?php 
+echo $this->render( 'elementos/inputComentario', ['token'=>$post->txt_token]);
+?>

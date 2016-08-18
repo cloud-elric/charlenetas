@@ -1,11 +1,12 @@
-<?php
+
+<?php 
+use app\modules\ModUsuarios\models\Utils;
+
 /* @var $post EntPosts*/
 ?>
 
 <div class="pin pin-hoy-pense" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header"></div>
-
-<div  class=pin>
 	<div class=image>
 		<img data-src="assets/images/<?=$post->txt_imagen?>">
 	</div>
@@ -15,7 +16,7 @@
  			<?=$post->txt_titulo?>
  		</h3>
 		<p class="pin-descripcion">
-			<?=$post->txt_descripcion?>
+			<?=Utils::subStrTexto($post->txt_descripcion, 500)?>
 		</p>
 	</div>
 

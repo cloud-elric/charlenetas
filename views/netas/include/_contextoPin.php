@@ -1,6 +1,7 @@
 <?php
 
-/* @var $post EntPosts*/
+use app\modules\ModUsuarios\models\Utils;
+
 ?>
 
  <div class="pin pin-contexto" onclick="showPostFull('<?=$post->txt_token?>')">
@@ -13,7 +14,7 @@
  			<?=$post->txt_titulo?>
  		</h3>
  		<p class="pin-descripcion">
- 			<?=$post->txt_descripcion?>
+ 			<?=Utils::subStrTexto($post->txt_descripcion, 500)?>
  		</p>
  	</div>
  	<div class="pin-social">

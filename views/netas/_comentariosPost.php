@@ -6,7 +6,7 @@ if (count ( $comentarios ) > 0) {
 	foreach ( $comentarios as $comentario ) {
 
 		// Comentario
-		echo 'Comentarios:' . $comentario->txt_comentario . "<br>";
+		echo $this->render('include/elementos/comentario', ['comentario'=>$comentario]);
 
 	}
 	

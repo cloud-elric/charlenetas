@@ -6,6 +6,15 @@ use Yii;
 
 class Utils {
 	
+	
+	public static function subStrTexto($string, $lenght, $start=0 ){
+		$cadenaNueva = $string;
+		if(strlen($string)>$lenght){
+			$cadenaNueva = substr($string, $start, $lenght).'...';
+		}
+		return $cadenaNueva;
+	}
+	
 	/**
 	 * Obtenemos la fecha actual para almacenarla
 	 *

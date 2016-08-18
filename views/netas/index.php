@@ -1,4 +1,5 @@
 
+
 <div class=container-fluid >
 	<div class="pins-grid-container">
 		<div class=pins-grid id="js-contenedor-posts-tarjetas">
@@ -27,7 +28,7 @@
 	<div id="wrapper">
 		<span class="closeBackScreen" onclick="hidePostFull()">X</span>
 		<div id="js-content"></div>
-		<div id="js-comments"></div>
+
 	</div>
 </div>
 
@@ -45,7 +46,10 @@ var pagesComentarios = 0;
 		if(tmp.html().trim().length>0){
 			contenedor.append(tmp.html());
 			pages++;
+<<<<<<< HEAD
 
+=======
+>>>>>>> diseño-de-Pins-grid
 			ready();
 		}else{
 			alert('Sin datos para cargar');
@@ -72,14 +76,18 @@ var pagesComentarios = 0;
 
 	// Borra los comentarios anteriores
 	 if(borrarAnteriores){
-
+		 // Limpia el contenedor de los comentarios
 		 comentariosContenedor.html('');
+
+		 // Carga los comentarios via asincrona
 		 comentariosContenedor.load(urlComentarios, function(){
 			// Coloca un botón para cargar mas comentarios
 			$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
 		});
 
 	}else{
+
+		// Carga los comentarios via asincrona
 
 		$.ajax({
 			url:urlComentarios,
@@ -117,6 +125,110 @@ var pagesComentarios = 0;
 	 background.toggle();
 	 $('body').css('overflow', 'auto');
 	 pagesComentarios = 0;
+	 $('#js-content').html(' ');
+}
+
+ // Metodo para suscribirse a una pregunta espejo
+ function suscribirseEspejo(token){
+	var url = 'netas/suscripcion-espejo?token='+token;
+
+	$.ajax({
+		url:url,
+		dataType:'html',
+		beforeSend:function(){
+			// Colocar un loading o algo asi
+
+			$('#js-btn-suscribirse-'+token).attr('onclick', ' ');
+		},
+		success:function(res){
+
+			 if(res==='subscrito'){
+				// Colocar un mensaje de que usuario ya esta inscrito
+				 removeSubscriptores(token);
+			}else{
+				addSubscriptores(token);
+			}
+
+		},
+		error:function(){
+			// Colocar un mensaje de que no se pudo subscribir
+			removeSubscriptores(token);
+		}
+	});
+
+}
+
+ /**
+ * Agrega el botón para agregar subscritores
+ */
+ function addSubscriptores(token){
+	 var btnDesSuscribirse = '<div id="js-btn-suscribirse-'+token+'"onclick=\'desSuscribirseEspejo("'+token+'");\' style="border: 1px solid black">No me interesa la pregunta</div>';
+	 var subs = $('#js-suscriptores-'+token).text();
+
+	$('#js-suscriptores-'+token).text(parseInt(subs)+1);
+
+	$('#js-btn-suscribirse-'+token).replaceWith(btnDesSuscribirse);
+}
+
+ /**
+ * Remueve el botón para eliminar subscritores
+ */
+function removeSubscriptores(token){
+	var btnSuscribirse = '<div id="js-btn-suscribirse-'+token+'"onclick=\'suscribirseEspejo("'+token+'");\' style="border: 1px solid black">Me interesa la pregunta</div>';
+	var subs = $('#js-suscriptores-'+token).text();
+
+	$('#js-suscriptores-'+token).text(parseInt(subs)-1);
+	$('#js-btn-suscribirse-'+token).replaceWith(btnSuscribirse);
+}
+
+ /**
+ * Metodo para suscribirse a una pregunta espejo
+ */
+ function desSuscribirseEspejo(token){
+		var url = 'netas/des-suscripcion-espejo?token='+token;
+
+		$.ajax({
+			url:url,
+			dataType:'html',
+			beforeSend:function(){
+				// Colocar un loading o algo asi
+
+				$('#js-btn-suscribirse-'+token).attr('onclick', ' ');
+			},
+			success:function(res){
+
+				if(res==='sinSubscripcion'){
+					addSubscriptores(token);
+				}else{
+					removeSubscriptores(token);
+				}
+
+			},error:function(){
+				addSubscriptores(token);
+			}
+		});
+}
+
+ /**
+ * Guarda un comentario del usuario
+ */
+function enviarComentario(token){
+	var data  = $('#js-comentario-form-'+token).serialize();
+	var url = 'netas/comentar-post?token='+token;
+
+	$.ajax({
+		url:url,
+		data:data,
+		dataType:'html',
+		method:'POST',
+		success:function(res){
+			$('#js-cargar-comentarios').before(res);
+		},
+		error:function(){
+			// Colocar un error
+			alert('no se pudo guardar');
+		}
+	});
 }
 
 </script>

@@ -19,7 +19,7 @@
 		</p>
 
 		<div class="pin-link">
-			<h3><a href="<?=$post->txt_url?>"> Ver nota</a></h3>
+			<h3><a href="<?=$post->txt_url?>">Ver nota</a></h3>
 		</div>
 	</div>
 
