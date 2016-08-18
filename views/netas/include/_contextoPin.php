@@ -1,22 +1,31 @@
 <?php
 
 /* @var $post EntPosts*/
+
 ?>
 
-<div class=pin>
-	<div class=image>
-		<img data-src="images/437ea18b.image3.jpg">
-	</div>
-	<div class=description><span onclick="showPostFull('<?=$post->txt_token?>')">Ver más</span>
-<?=$post->txt_descripcion?><br>
-<?=$post->fch_creacion?><br>
-<?=$post->txt_imagen?><br></div>
-	<div class=credits>Sample credits</div>
-
-</div>
-
-<!-- <div class="pin"> -->
-<!-- 	<h1>Contexto</h1>
-
- </div> -->
-
+ <div class="pin pin-contexto" onclick="showPostFull('<?=$post->txt_token?>')">
+ 	<div class="pin-header "></div>
+ 	<div class="image">
+ 		<img data-src="assets/images/<?=$post->txt_imagen?>">
+ 	</div>
+ 	<div class="pin-content-wrapper" lang="en">
+ 		<h3 class="pin-titulo">
+ 			<?=$post->txt_titulo?>
+ 		</h3>
+ 		<p class="pin-descripcion">
+ 			<?=$post->txt_descripcion?>
+ 		</p>
+ 	</div>
+ 	<div class="pin-social">
+ 		<div class="pin-social-counters-wrapper">
+      <div class="pin-social-interactions">
+				<span>140</span>
+				<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
+				<span>45</span>
+				<i class="glyphicon glyphicon-comment"></i>
+			</div>
+ 		</div>
+ 	</div>
+ 	<!--?=$post->fch_creacion?-->
+ </div>
