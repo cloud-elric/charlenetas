@@ -19,11 +19,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
       'css/charlenetas.css',
-    	'plugins/pins-grid/pins.min.css',
-      'assets/css/web-styles.css'
+      'plugins/pins-grid/pins.min.css',
+      'assets/css/web-styles.css',
+      'plugins/pins-grid/pins-grid.css',
+      'css/tarjetas.css'
     ];
     public $js = [
-    	'plugins/pins-grid/pins.min.js'
+    	'plugins/pins-grid/vendor.js',
+    	'plugins/pins-grid/pins-grid.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
