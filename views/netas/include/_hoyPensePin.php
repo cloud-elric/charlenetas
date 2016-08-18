@@ -1,24 +1,34 @@
+
 <?php 
 use app\modules\ModUsuarios\models\Utils;
 
 /* @var $post EntPosts*/
 ?>
 
-<div onclick="showPostFull('<?=$post->txt_token?>')" class=pin>
+<div class="pin pin-hoy-pense" onclick="showPostFull('<?=$post->txt_token?>')">
+	<div class="pin-header"></div>
 	<div class=image>
-		<img data-src="images/8675367f.image5.jpg">
+		<img data-src="assets/images/<?=$post->txt_imagen?>">
 	</div>
-	<div class=description><?=$post->txt_titulo?><br>
-<?=Utils::subStrTexto($post->txt_descripcion, 500)?><br><br>
-<?=$post->fch_creacion?><br>
-<?=$post->txt_imagen?><br>
-</div>
-	<div class=credits>Sample credits</div>
+
+	<div class="pin-content-wrapper" lang="en">
+		<h3 class="pin-titulo">
+ 			<?=$post->txt_titulo?>
+ 		</h3>
+		<p class="pin-descripcion">
+			<?=Utils::subStrTexto($post->txt_descripcion, 500)?>
+		</p>
+	</div>
+
+	<div class="pin-social">
+		<div class="pin-social-counters-wrapper">
+			<div class="pin-social-interactions">
+				<span>140</span>
+				<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
+				<span>45</span>
+				<i class="glyphicon glyphicon-comment"></i>
+			</div>
+		</div>
+	</div>
 
 </div>
-
-<!-- <div class="pin"> -->
-<!-- <h1>Hoy pense</h1> 
-
- </div> -->
-
