@@ -9,7 +9,7 @@ use app\modules\ModUsuarios\models\Utils;
 	<div class="pin-header"></div>
 
 	<div class=image>
-		<img data-src="images/8675367f.image5.jpg">
+		<img data-src="assets/images/<?=$post->txt_imagen?>">
 	</div>
 
 	<div class="pin-content-wrapper" lang="en">
@@ -21,3 +21,15 @@ use app\modules\ModUsuarios\models\Utils;
 		</p>
 	</div>
 
+	<div class="pin-social">
+		<div class="pin-social-counters-wrapper">
+			<div class="pin-social-interactions">
+				<span>140</span>
+				<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
+				<span>45</span>
+				<i class="glyphicon glyphicon-comment"></i>
+			</div>
+		</div>
+	</div>
+
+</div>
