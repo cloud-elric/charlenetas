@@ -18,8 +18,9 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        //'css/charlenetas.css',
     	'plugins/pins-grid/pins.min.css',
-      'assets/css/web-styles.css'
+      'css/tarjetas.css'
     ];
     public $js = [
     	'plugins/pins-grid/pins.min.js'

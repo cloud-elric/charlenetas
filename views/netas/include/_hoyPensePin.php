@@ -1,31 +1,22 @@
-<?php
+<?php 
 /* @var $post EntPosts*/
 ?>
 
-<div class="pin pin-hoy-pense">
-	<div class="pin-header"></div>
+<div class=pin>
 	<div class=image>
-		<img data-src="assets/images/<?=$post->txt_imagen?>">
+		<img data-src="images/8675367f.image5.jpg">
 	</div>
-
-	<div class="pin-content-wrapper" lang="en">
-		<h3 class="pin-titulo">
- 			<?=$post->txt_titulo?>
- 		</h3>
-		<p class="pin-descripcion">
-			<?=$post->txt_descripcion?>
-		</p>
-	</div>
-
-	<div class="pin-social">
-		<div class="pin-social-counters-wrapper">
-			<div class="pin-social-interactions">
-				<span>140</span>
-				<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
-				<span>45</span>
-				<i class="glyphicon glyphicon-comment"></i>
-			</div>
-		</div>
-	</div>
+	<div class=description><?=$post->txt_titulo?><br>
+<?=$post->txt_descripcion?><br>
+<?=$post->fch_creacion?><br>
+<?=$post->txt_imagen?><br>
+</div>
+	<div class=credits>Sample credits</div>
 
 </div>
+
+<!-- <div class="pin"> -->
+<!-- <h1>Hoy pense</h1> 
+
+ </div> -->
+

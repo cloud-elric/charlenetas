@@ -1,13 +1,20 @@
-<?php
+<?php 
 /* @var $post EntPosts*/
 ?>
 
-<div class="pin pin-media">
-	<div class="pin-header"></div>
+<div class=pin>
 	<div class=image>
-		<img data-src="assets/images/c7002690.image6.jpg">
+		<img data-src="images/c7002690.image6.jpg">
 	</div>
-	<div class="pin-video-icon">
-		<i class=""></i>
-	</div>
+	<div class=description><?=$post->txt_titulo?><br>
+<?=$post->txt_url?><br></div>
+	<div class=credits>Sample credits</div>
+
 </div>
+<!-- 
+<div class="pin">
+<h1>Media</h1>
+
+</div>
+
+ -->

@@ -1,2 +1,2 @@
-_yiiAssets
-*.sass-cache
+*
+!.gitignore
