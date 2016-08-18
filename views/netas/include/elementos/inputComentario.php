@@ -1,7 +1,9 @@
 <?php
+
 use yii\widgets\ActiveForm;
 use app\models\EntComentariosPosts;
 
+if (! Yii::$app->user->isGuest) {
 $comentario = new EntComentariosPosts();
 
 $form = ActiveForm::begin([
@@ -11,9 +13,9 @@ $form = ActiveForm::begin([
 	
 	<div id="js-comentar" style='border:1px solid black;' onclick="enviarComentario('<?=$token?>');">Comentar</div>
 		
-<?php ActiveForm::end() ?>
+<?php 
+ActiveForm::end(); 
+}else{
 
-
-
-</form>
-</div>
+	
+}?>

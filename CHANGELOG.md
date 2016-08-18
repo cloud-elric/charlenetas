@@ -65,6 +65,9 @@ Proyecto tipo red social
 Proyecto tipo red social
 
 ## Base de datos
+### 2016-08-18 [added]
+- Se creo la vista "view_contador_feedback_comentarios"
+
 ### 2016-08-17 [changed]
 - A todas las llaves foraneas de la base de datos se cambiaron para que cuando se borre el padre se eliminen los relacionados
 - La tabla "ent_usuarios_subscripciones" se le agrego un campo llamado "b_leido"
@@ -97,6 +100,13 @@ Proyecto tipo red social
 
 
 ## Frontend (Aplicación web)
+### 2016-08-18 [added]
+- Se agrego la funcionalidad de que al registrarse se suba una foto
+- Permisos para los actions que deben llevar permiso
+- Impresiones de los datos que se necesitan del usuario logueado
+- Creacion del modelo "EntUsuariosFeedbacks"
+- Creacion de modelo "ViewContadorFeedbackComentarios"
+
 ### 2016-08-17 [added]
 - Se agrego la habilidad de subscribirse a una pregunta de espejo
 - Se agrego la habilidad de desSubscribirse a una pregunta de espejo

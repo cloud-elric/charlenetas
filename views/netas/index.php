@@ -1,6 +1,5 @@
 
-
-<div class=container-fluid >
+<div class=container-fluid>
 	<div class="pins-grid-container">
 		<div class=pins-grid id="js-contenedor-posts-tarjetas">
 				<?php
@@ -11,14 +10,6 @@
 </div>
 
 
-
-
-
-<div >
-<?php
-#include 'masPosts.php';
-?>
-</div>
 <div style="border: 1px solid black" id="js-cargar-mas-posts"
 	onclick="cargarMasPosts();">Cargar mas</div>
 
@@ -46,10 +37,7 @@ var pagesComentarios = 0;
 		if(tmp.html().trim().length>0){
 			contenedor.append(tmp.html());
 			pages++;
-<<<<<<< HEAD
 
-=======
->>>>>>> diseño-de-Pins-grid
 			ready();
 		}else{
 			alert('Sin datos para cargar');
@@ -58,16 +46,6 @@ var pagesComentarios = 0;
 		});
 }
 
-/**
- * Carga los comentarios de un post y los nuevos borraran los anteriores o se pondran abajo
- */
-
-			}else{
-			alert('Sin datos para cargar');
-				}
-		
-		});
-}
 
  // Carga los comentarios de un post y los nuevos borraran los anteriores o se pondran abajo
  function cargarComentarios(token, borrarAnteriores){
@@ -81,8 +59,14 @@ var pagesComentarios = 0;
 
 		 // Carga los comentarios via asincrona
 		 comentariosContenedor.load(urlComentarios, function(){
-			// Coloca un botón para cargar mas comentarios
-			$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
+
+
+			 if(comentariosContenedor.html().trim().length>0){
+			 
+				// Coloca un botón para cargar mas comentarios
+				$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
+			 }	
+
 		});
 
 	}else{
@@ -231,4 +215,30 @@ function enviarComentario(token){
 	});
 }
 
+
+/**
+ * Guarda un comentario del usuario
+ */
+function agregarFeedback(token, feed){
+	var url = 'netas/agregar-feedback?token='+token+'&feed='+feed;
+	
+	$.ajax({
+		url:url,
+		dataType:'html',
+		method:'POST',
+		success:function(res){
+			if(res=='exist'){
+				
+				}else{
+
+					}
+		},
+		error:function(){
+			// Colocar un error
+			alert('no se pudo guardar');
+		}
+	});
+}
+ 
 </script>
+
