@@ -1,12 +1,10 @@
 
 
 <div class=container-fluid >
-	<div class="pins-grid-container">
-		<div class=pins-grid id="js-contenedor-posts-tarjetas">
-				<?php
-				include 'masPosts.php';
-				?>
-		</div>
+	<div class=pins-grid id="js-contenedor-posts-tarjetas">
+			<?php
+			include 'masPosts.php';
+			?>
 	</div>
 </div>
 
@@ -33,51 +31,45 @@ var pagesComentarios = 0;
 function cargarMasPosts(){
 	var contenedor = $('#js-contenedor-posts-tarjetas');
 	var tmp = $('#js-tmp');
-
+	
 	tmp.load('netas/get-mas-posts?page='+pages,function(){
 		if(tmp.html().trim().length>0){
 			contenedor.append(tmp.html());
 			pages++;
-<<<<<<< HEAD
 
-=======
 			ready();
->>>>>>> agregar-comentarios
+
 		}else{
 			alert('Sin datos para cargar');
 		}
-
+		
 		});
 }
 
 /**
- * Carga los comentarios de un post y los nuevos borraran los anteriores o se pondran abajo
+ * Carga los comentarios de un post y los nuevos borraran los anteriores o se pondran abajo 
  */
  function cargarComentarios(token, borrarAnteriores){
 	 var comentariosContenedor = $('#js-comments');
 	 var urlComentarios = 'netas/cargar-comentarios?token='+token+'&page='+pagesComentarios;
 
-	// Borra los comentarios anteriores
+	// Borra los comentarios anteriores		
 	 if(borrarAnteriores){
 
-<<<<<<< HEAD
-=======
 		 // Limpia el contenedor de los comentarios
->>>>>>> agregar-comentarios
+
 		 comentariosContenedor.html('');
 
 		 // Carga los comentarios via asincrona
 		 comentariosContenedor.load(urlComentarios, function(){
 			// Coloca un botón para cargar mas comentarios
-			$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
+			$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');	
 		});
-
+		 
 	}else{
-<<<<<<< HEAD
 
-=======
 		// Carga los comentarios via asincrona
->>>>>>> agregar-comentarios
+
 		$.ajax({
 			url:urlComentarios,
 			dataType:'html',
@@ -86,9 +78,9 @@ function cargarMasPosts(){
 			}
 			})
 	}
-
+	 
 	 pagesComentarios++;
-
+	 
 }
 
  /**
@@ -98,13 +90,13 @@ function cargarMasPosts(){
 	 var background = $('#backScreen');
 	 var content = $('#js-content');
 	 var url = 'netas/cargar-post?token='+token;
-
+	
 
 	$('body').css('overflow', 'hidden');
-
+	 
 	 background.toggle();
 	 content.html('');
-
+	 
 	 content.load(url, function(){
 		 cargarComentarios(token, true);
 	});
@@ -223,5 +215,5 @@ function enviarComentario(token){
 		}
 	});
 }
-
+ 
 </script>

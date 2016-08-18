@@ -3,7 +3,6 @@
 use app\modules\ModUsuarios\models\Utils;
 
 /* @var $post EntPosts*/
-
 ?>
 
  <div class="pin pin-contexto" onclick="showPostFull('<?=$post->txt_token?>')">
@@ -31,3 +30,5 @@ use app\modules\ModUsuarios\models\Utils;
  	</div>
  	<!--?=$post->fch_creacion?-->
  </div>
+
+

@@ -1,6 +1,7 @@
-<?php
+<?php 
 /* @var $post EntPosts*/
 ?>
+
 
 <div class="pin pin-solo-por-hoy" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header"></div>
@@ -21,23 +22,5 @@
 		<div class="pin-link">
 			<h3><a href="<?=$post->txt_url?>">Ver nota</a></h3>
 		</div>
-	</div>
-
-
-
-
-
-
-
-
-	<div class="pin-social">
-		<div class="pin-social-counters-wrapper">
-			<div class="pin-social-interactions">
-				<span>140</span>
-				<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
-				<span>45</span>
-				<i class="glyphicon glyphicon-comment"></i>
-			</div>
-		</div>
-	</div>
 </div>
+
