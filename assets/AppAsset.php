@@ -20,9 +20,9 @@ class AppAsset extends AssetBundle
     public $css = [
       'css/charlenetas.css',
     	'plugins/pins-grid/pins.min.css',
-      'assets/css/web-styles.css',
       'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css',
-      'https://fonts.googleapis.com/icon?family=Material+Icons'
+      'https://fonts.googleapis.com/icon?family=Material+Icons',
+      'assets/css/web-styles.css'
     ];
     public $js = [
       'plugins/pins-grid/pins.min.js',

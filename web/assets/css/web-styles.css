@@ -4,7 +4,8 @@
  * 1. Change the default font family in all browsers (opinionated).
  * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
  */
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,900);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,900);
 html {
   font-family: sans-serif;
   /* 1 */
@@ -553,11 +554,48 @@ p {
   line-height: 1.5em; }
 
 h3, a {
-  font-family: "Lato", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 2em;
   font-weight: 900;
   color: #DDD;
   margin: 0; }
+
+.btn,
+.btn-primary,
+.btn-secondary {
+  padding: 5px 20px;
+  border: 1px solid #345678;
+  border-radius: 6px;
+  background-color: #345678;
+  transition: all 300ms ease-in-out;
+  color: white;
+  line-height: 2.5em;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  margin: 0 5px; }
+  .btn:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    background-color: transparent;
+    color: #345678; }
+
+.btn-secondary {
+  background-color: transparent;
+  color: #345678; }
+  .btn-secondary:hover {
+    background-color: #345678;
+    color: white; }
+
+.btn-link {
+  background-color: transparent;
+  color: #345678;
+  border: none;
+  text-shadow: none;
+  box-shadow: none; }
+
+.margin-bottom-10px {
+  margin-bottom: -10px !important; }
 
 .pins-grid {
   padding-right: 15px; }
@@ -652,8 +690,11 @@ h3, a {
   text-align: left;
   text-decoration: none;
   font-size: 2em;
-  margin-top: 15px;
-  display: block; }
+  margin: 25px 0;
+  display: block;
+  line-height: 2.2em;
+  font-weight: 900;
+  font-family: "Raleway", sans-serif; }
 
 .pin-media .pin-video-icon {
   position: absolute;
@@ -695,10 +736,81 @@ h3, a {
   justify-content: center;
   padding: 10px 0;
   background-color: #FCFFF6; }
-  .header span {
-    margin: 0 20px;
-    text-transform: uppercase;
-    font-size: 0.7em;
-    letter-spacing: 1px;
-    color: #345678;
-    font-weight: 400; }
+  .header div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; }
+    .header div a {
+      margin: 0 10px;
+      padding: 10px 20px;
+      text-transform: uppercase;
+      font-size: 0.7em;
+      letter-spacing: 1px;
+      color: #345678;
+      font-weight: 400;
+      font-family: "Raleway", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .header div a i {
+        margin-left: 10px;
+        margin-top: -5px; }
+      .header div a:hover {
+        color: #7ea2c7; }
+  .header .logo {
+    margin: 0 40px; }
+
+nav {
+  background-color: white;
+  width: 90%;
+  min-width: 1024px;
+  max-width: 1280px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin: 10px auto 50px; }
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+    height: 100%; }
+    nav ul li {
+      height: inherit; }
+      nav ul li a {
+        height: inherit;
+        font-family: "Raleway", sans-serif;
+        font-size: 0.9em;
+        font-weight: 400;
+        color: #e9eff5;
+        transition: color 300ms ease-in-out;
+        padding: 0 20px;
+        border-bottom: 0px solid #e9eff5;
+        position: relative;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: flex-start; }
+        nav ul li a span {
+          height: 3px;
+          width: 150%;
+          background-color: transparent;
+          transition: transform 300ms ease-in-out; }
+        nav ul li a.filter-active {
+          color: #345678; }
+          nav ul li a.filter-active span.color-espejo {
+            background-color: #658BEA; }
+          nav ul li a.filter-active span.color-hoy-pense {
+            background-color: #57ED5F; }
+          nav ul li a.filter-active span.color-sabias-que {
+            background-color: #EF3893; }
+          nav ul li a.filter-active span.color-contexto {
+            background-color: #DFF040; }
+          nav ul li a.filter-active span.color-media {
+            background-color: #0F2687; }
+          nav ul li a.filter-active span.color-alquimia {
+            background-color: #F3B924; }
+          nav ul li a.filter-active span.color-verdadazos {
+            background-color: #1940e3; }
+        nav ul li a:hover {
+          background-color: transparent;
+          color: #7ea2c7; }
+          nav ul li a:hover span {
+            transform: translateY(-3px); }

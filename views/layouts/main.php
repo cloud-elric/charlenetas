@@ -19,21 +19,21 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body style='background:white'>
+<body>
 <div style='border:2px solid black'>
-<?php 
+<?php
 // Si el usuario esta autenticado
 if(!Yii::$app->user->isGuest){
-echo Html::img(Yii::$app->params ['modUsuarios'] ['pathImageProfile'].Yii::$app->user->identity->txt_imagen);	
+echo Html::img(Yii::$app->params ['modUsuarios'] ['pathImageProfile'].Yii::$app->user->identity->txt_imagen);
 echo Yii::$app->user->identity->nombreCompleto.'<br>';
-echo Html::a('Cerrar sesión', ['site/logout']);	
+echo Html::a('Cerrar sesión', ['site/logout']);
 }?>
 </div>
 <?php $this->beginBody() ?>
 
 
         <?= $content ?>
-   
+
 
 <?php $this->endBody() ?>
 </body>

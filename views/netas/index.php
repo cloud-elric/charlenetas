@@ -1,23 +1,33 @@
 
 <div class="header">
-	<span>Workshops</span>
-	<span>Tutoriales</span>
+	<div class="">
+		<a href="#">Workshops</a>
+		<a href="#">Tutoriales</a>
+	</div>
+
 	<div class="logo">
 		<img src="assets/images/logo-charlenetas.png" alt="Charlenetas.com" />
 	</div>
-	<span>Mi perfil</span>
-	<span>Buscar</span>
+
+	<div class="">
+		<!-- <div class="btn btn-link ">Ingresar</div>
+		<div class="btn btn-secondary">Registrarme</div> -->
+		<a href="#">Mi perfil</a>
+		<a href="#">Buscar<i class="material-icons">search</i></a>
+	</div>
+
+
 </div>
 
 <nav>
 	<ul>
-		<li>Espejo</li>
-		<li>Solo por hoy</li>
-		<li>Alquimia</li>
-		<li>En contexto</li>
-		<li>Sabias que</li>
-		<li>Media</li>
-		<li>Verdadazos</li>
+		<li><a href="#" class="filter-active"><span class="color-espejo"></span>Espejo</a></li>
+		<li><a href="#"><span class="color-solo-por-hoy"></span>Solo por hoy</a></li>
+		<li><a href="#"><span class="color-alquimia"></span>Alquimia</a></li>
+		<li><a href="#" class="filter-active"><span class="color-contexto"></span>En contexto</a></li>
+		<li><a href="#"><span class="color-sabias-que"></span>Sabias que</a></li>
+		<li><a href="#" class="filter-active"><span class="color-media"></span>Media</a></li>
+		<li><a href="#"><span class="color-verdadazos"></span>Verdadazos</a></li>
 	</ul>
 </nav>
 
