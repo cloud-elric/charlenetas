@@ -17,8 +17,6 @@
 	</p>
 </div>
 
-
-
 <div class="pin-social">
 
 	<div class="pin-social-usr">
