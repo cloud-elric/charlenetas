@@ -11,6 +11,7 @@ use app\modules\ModUsuarios\models\Utils;
 use app\modules\ModUsuarios\models\EntUsuariosActivacion;
 use app\modules\ModUsuarios\models\EntUsuariosCambioPass;
 use app\modules\ModUsuarios\models\EntUsuariosFacebook;
+use yii\web\UploadedFile;
 
 /**
  * Default controller for the `musuarios` module
@@ -28,7 +29,15 @@ class ManagerController extends Controller {
 		
 		if ($model->load ( Yii::$app->request->post () )) {
 			
+			// Obtiene la imagen de perfil para le usuario
+			$model->imageProfile = UploadedFile::getInstance($model, 'imageProfile');
+			$nombreImagen = Utils::generateToken('ava') . '.' . $model->imageProfile->extension;
+			$model->txt_imagen = $nombreImagen;
+			
 			if ($user = $model->signup ()) {
+				
+				// Guarda la imagen de usuario
+				$model->upload($nombreImagen);
 				
 				if (Yii::$app->params ['modUsuarios'] ['mandarCorreoActivacion']) {
 					

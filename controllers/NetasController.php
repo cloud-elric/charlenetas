@@ -11,8 +11,44 @@ use app\models\EntUsuariosSubscripciones;
 use app\models\EntEspejos;
 use app\modules\ModUsuarios\models\Utils;
 use app\models\CatTiposFeedback;
+use app\models\EntUsuariosFeedbacks;
+use app\models\ViewContadorFeedbackComentarios;
 
 class NetasController extends Controller {
+	
+	/**
+	 * Definicion de permisos
+	 *
+	 * {@inheritdoc}
+	 *
+	 * @see \yii\base\Component::behaviors()
+	 */
+	public function behaviors() {
+		return [ 
+				'access' => [ 
+						'class' => \yii\filters\AccessControl::className (),
+						'only' => [ 
+								'des-suscripcion-espejo',
+								'suscripcion-espejo',
+								'comentar-post',
+								'agregar-feedback' 
+						],
+						'rules' => [
+								
+								// allow authenticated users
+								[ 
+										'allow' => true,
+										'roles' => [ 
+												'@' 
+										] 
+								] 
+						] 
+				] 
+		]
+		// everything else is denied
+		
+		;
+	}
 	
 	/**
 	 * Busca todos los post por orden de fecha de publicacion
@@ -84,10 +120,14 @@ class NetasController extends Controller {
 		// Cargar los comentarios del post
 		$comentarios = EntComentariosPostsExtend::getComentariosPostByPagination ( $post->id_post, $page );
 		
+		// Tipos de feedbacks
+		$feedbacks = $this->obtenerTiposFeedbacks ();
+		
 		// Pintar vista
 		return $this->render ( '_comentariosPost', [ 
 				'comentarios' => $comentarios,
-				'post' => $post 
+				'post' => $post,
+				'feedbacks' => $feedbacks 
 		] );
 	}
 	
@@ -98,13 +138,9 @@ class NetasController extends Controller {
 	 * @return json
 	 */
 	public function actionSuscripcionEspejo($token = null) {
+		$this->layout = false;
 		
-		/**
-		 *
-		 * @todo Colocar al usuario en sesion
-		 * @var integer $idUsuario
-		 */
-		$idUsuario = 18;
+		$idUsuario = Yii::$app->user->identity->id_usuario;
 		
 		// Obtenemos el post
 		$post = $this->getPostByToken ( $token );
@@ -141,12 +177,10 @@ class NetasController extends Controller {
 	 * @param unknown $token        	
 	 */
 	public function actionDesSuscripcionEspejo($token = null) {
-		/**
-		 *
-		 * @todo Colocar al usuario en sesion
-		 * @var integer $idUsuario
-		 */
-		$idUsuario = 18;
+		$this->layout = false;
+		
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		;
 		
 		// Obtenemos el post
 		$post = $this->getPostByToken ( $token );
@@ -170,12 +204,8 @@ class NetasController extends Controller {
 	 * @param unknown $token        	
 	 */
 	public function actionComentarPost($token = null) {
-		/**
-		 *
-		 * @todo Colocar al usuario en sesion
-		 * @var integer $idUsuario
-		 */
-		$idUsuario = 18;
+		$this->layout = false;
+		$idUsuario = Yii::$app->user->identity->id_usuario;
 		
 		// Obtenemos el post
 		$post = $this->getPostByToken ( $token );
@@ -184,21 +214,108 @@ class NetasController extends Controller {
 		$comentario->load ( Yii::$app->request->post () );
 		
 		if ($comentario->guardarComentarioUsuario ( $idUsuario, $post->id_post )) {
+			// Tipos de feedbacks
+			$feedbacks = $this->obtenerTiposFeedbacks ();
+			
 			return $this->render ( 'include/elementos/comentario', [ 
-					'comentario' => $comentario 
+					'comentario' => $comentario,
+					'feedbacks' => $feedbacks 
 			] );
 		}
 	}
 	
-	
-	private function obtenerTiposFeedbacks(){
-	#$feedbacks = CatTiposFeedback::	
+	/**
+	 * Guardamos un punto dependiendo del feedback del usuario
+	 *
+	 * @param string $token
+	 *        	token del comentario
+	 * @param string $feed        	
+	 */
+	public function actionAgregarFeedback($token, $feed) {
+		$this->layout = false;
 		
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		$comentario = $this->getComentarioByToken ( $token );
+		$feedback = $this->getFeedbackByToken ( $feed );
+		
+		// Revisa si existe un registro previo
+		if (! EntUsuariosFeedbacks::existFeedbackUsuario ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback )) {
+			// Generar un registro para el usuario
+			$entUsuariosFeedbacks = new EntUsuariosFeedbacks ();
+			$entUsuariosFeedbacks->guardarUsuarioFeed ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback );
+			
+			// Generar contador
+			$feedbackComentarios = ViewContadorFeedbackComentarios::find ()->where ( [ 
+					'id_comentario' => $comentario->id_comentario_post,
+					'id_tipo_feedback' => $feedback->id_tipo_feedback 
+			] )->one ();
+			
+			// Asignar contador
+			switch ($feedback->id_tipo_feedback) {
+				case 1 : // like
+					$comentario->num_likes = $feedbackComentarios->num_usuarios;
+					break; // no like
+				case 2 :
+					$comentario->num_dislikes = $feedbackComentarios->num_usuarios;
+					break;
+				case 3 : // troll
+					$comentario->num_trolls = $feedbackComentarios->num_usuarios;
+					break;
+			}
+			
+			// Actualizar los comentarios para que sepamos cuantos hay de cada cosa
+			$comentario->save ();
+		}else{
+			echo 'exist';
+		}
+	}
+	
+	/**
+	 * Busca un comentario por su token
+	 *
+	 * @param unknown $token        	
+	 * @throws NotFoundHttpException
+	 * @return EntComentariosPosts
+	 */
+	private function getComentarioByToken($token) {
+		if (($comentario = EntComentariosPostsExtend::getComentarioByToken ( $token )) !== null) {
+			return $comentario;
+		} else {
+			throw new NotFoundHttpException ( 'The requested page does not exist.' );
+		}
+	}
+	
+	/**
+	 * Busca un feedback por su token
+	 *
+	 * @param unknown $token        	
+	 * @throws NotFoundHttpException
+	 * @return CatTiposFeedback
+	 */
+	private function getFeedbackByToken($token) {
+		if (($feedback = CatTiposFeedback::getFeedbackByToken ( $token )) !== null) {
+			return $feedback;
+		} else {
+			throw new NotFoundHttpException ( 'The requested page does not exist.' );
+		}
+	}
+	
+	/**
+	 * Obtenemos todos los tipos de feedbacks para un comentario
+	 *
+	 * @return \yii\db\ActiveRecord[]
+	 */
+	private function obtenerTiposFeedbacks() {
+		$feedbacks = CatTiposFeedback::find ()->all ();
+		
+		return $feedbacks;
 	}
 	
 	/**
 	 * Actualiza la subscripcion de un espejo
-	 * @param unknown $idPost
+	 *
+	 * @param unknown $idPost        	
 	 */
 	private function actualizarSubscriptoresEspejo($idPost) {
 		// Actualiza el contador de espejo
@@ -260,8 +377,7 @@ class NetasController extends Controller {
 		
 		return $render;
 	}
-	
-	public function actionGt($tk){
-		echo Utils::generateToken($tk);
+	public function actionGt($tk) {
+		echo Utils::generateToken ( $tk );
 	}
 }

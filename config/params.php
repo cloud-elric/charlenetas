@@ -4,7 +4,8 @@
 if (YII_ENV_DEV) {
 	$params = [ 
 			'adminEmail' => 'admin@example.com',
-			'modUsuarios' => [ 
+			'modUsuarios' => [
+					'pathImageProfile'=>'uploads/profiles/',
 					'facebook' => [ 
 							'usarLoginFacebook' => true,
 							'APP_ID' => '1754524001428992', // Identificador de la aplicación
@@ -38,7 +39,8 @@ if (YII_ENV_DEV) {
 } else {
 	$params = [ 
 			'adminEmail' => 'admin@example.com',
-			'modUsuarios' => [ 
+			'modUsuarios' => [
+					'pathImageProfile'=>'uploads/profiles/',
 					'facebook' => [ 
 							'usarLoginFacebook' => true,
 							'APP_ID' => '1754524001428992', // Identificador de la aplicación

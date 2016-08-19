@@ -13,7 +13,7 @@ class EntComentariosPostsExtend extends \yii\db\ActiveRecord {
 	 * @param integer $page        	
 	 * @param integer $pageSize        	
 	 */
-	public static function getComentariosPostByPagination($idPost=0,$page = 0, $pageSize = 1) {
+	public static function getComentariosPostByPagination($idPost = 0, $page = 0, $pageSize = 1) {
 		
 		// query de la busqueda
 		$query = EntComentariosPosts::find ()->where ( [ 
@@ -22,13 +22,17 @@ class EntComentariosPostsExtend extends \yii\db\ActiveRecord {
 				null 
 		] )->andWhere ( [ 
 				'b_habilitado' => 1,
-				'id_post'=>$idPost
+				'id_post' => $idPost 
 		] );
 		
 		// Carga el dataprovider
 		$dataProvider = new ActiveDataProvider ( [ 
 				'query' => $query,
-				'sort'=> ['defaultOrder' => ['fch_comentario'=>'asc']],
+				'sort' => [ 
+						'defaultOrder' => [ 
+								'fch_comentario' => 'asc' 
+						] 
+				],
 				'pagination' => [ 
 						'pageSize' => $pageSize,
 						'page' => $page 
@@ -36,5 +40,19 @@ class EntComentariosPostsExtend extends \yii\db\ActiveRecord {
 		] );
 		
 		return $dataProvider->getModels ();
+	}
+	
+	/**
+	 * Obtiene un comentario por el token
+	 * 
+	 * @param string $token
+	 * @return EntComentariosPosts|NULL
+	 */
+	public static function getComentarioByToken($token) {
+		$comentario = EntComentariosPosts::find ()->where ( [ 
+				'txt_token' => $token 
+		] )->one ();
+		
+		return $comentario;
 	}
 }

@@ -9,26 +9,28 @@ use app\models\EntUsuariosSubscripciones;
 
 <p id='js-suscriptores-<?=$post->txt_token?>'><?=$post->entEspejos->num_subscriptores?></p>
 <br>
-<?php 
+<?php
 /**
+ *
  * @todo Colocar al usuario correspondiente
  */
-$usuarioIsSubscrito = EntUsuariosSubscripciones::findSubscripcion(18, $post->id_post);
-$onclick = 'suscribirseEspejo("'.$post->txt_token.'");';
-$messageSub = 'Me interesa la pregunta';
 
-// Validación de usuario ya se haya subscrito
-if($usuarioIsSubscrito){
-	$onclick = 'desSuscribirseEspejo("'.$post->txt_token.'");';
-	$messageSub = 'No me interesa la pregunta';
-}
-
-?>
-
+if (! Yii::$app->user->isGuest) {
+	$usuarioIsSubscrito = EntUsuariosSubscripciones::findSubscripcion ( Yii::$app->user->identity->id_usuario, $post->id_post );
+	$onclick = 'suscribirseEspejo("' . $post->txt_token . '");';
+	$messageSub = 'Me interesa la pregunta';
+	
+	// Validación de usuario ya se haya subscrito
+	if ($usuarioIsSubscrito) {
+		$onclick = 'desSuscribirseEspejo("' . $post->txt_token . '");';
+		$messageSub = 'No me interesa la pregunta';
+	}
+	
+	?>
 <div id="js-btn-suscribirse-<?=$post->txt_token?>"
 	onclick='<?=$onclick?>' style="border: 1px solid black"><?=$messageSub?></div>
-
 <?php
+}
 // Obtenemos la respuesta para el post
 $respuesta = $post->entRespuestasEspejo;
 

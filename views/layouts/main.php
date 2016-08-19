@@ -3,10 +3,8 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -21,7 +19,16 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body style='background:white'>
+<div style='border:2px solid black'>
+<?php 
+// Si el usuario esta autenticado
+if(!Yii::$app->user->isGuest){
+echo Html::img(Yii::$app->params ['modUsuarios'] ['pathImageProfile'].Yii::$app->user->identity->txt_imagen);	
+echo Yii::$app->user->identity->nombreCompleto.'<br>';
+echo Html::a('Cerrar sesión', ['site/logout']);	
+}?>
+</div>
 <?php $this->beginBody() ?>
 
 
