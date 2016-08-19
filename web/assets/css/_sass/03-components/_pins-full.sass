@@ -1,0 +1,82 @@
+#backScreen
+  background-color: rgba(255,255,255,0.9)
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  display: none
+  padding: 50px 20px
+  overflow: scroll
+
+#wrapper
+  margin: 0 auto
+  width: 80%
+  min-width: 900px
+  max-width: 1024px
+  background-color: transparent
+  & > i
+    position: absolute
+    top: 40px
+    right: 40px
+    font-size: 2em
+    padding: 20px
+    color: $headers
+    cursor: pointer
+
+.full-pin-content
+  height: 100%
+  width: 100%
+  display: block
+  background-color: transparent
+
+  .full-pin-header
+    background-color: transparent
+    display: flex
+    align-items: top
+    justify-content: space-between
+    h2
+      font-weight: 400
+      font-size: 3em
+      color: $headers
+      font-family: $header-font
+      margin: 0
+
+    .post-publisher-data
+      .post-publisher
+        display: flex
+        align-items: center
+        img
+          margin-left: 20px
+      .post-date
+        font-size: .7em
+        color: $black
+        text-align: right
+        padding-right: 44px
+
+  .full-pin-body,
+  .full-pin-social
+    overflow: hidden
+    background-color: $white
+    box-shadow: 0 0 15px rgba(0,0,0,0.4)
+    border-radius: 6px
+    padding: 15px
+    margin: 20px 0
+    h3
+      font-weight: 400
+      font-size: 3em
+
+
+  .full-pin-social
+
+
+
+.full-pin-body-alquimia
+  img
+    float: left
+    margin-right: 20px
+  .pin-alquimia-grades
+    .calificable
+      cursor: pointer
+      i.calificada
+        color: yellow

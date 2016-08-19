@@ -51,8 +51,8 @@
 
 <div id="backScreen">
 	<div id="wrapper">
-		<span class="closeBackScreen" onclick="hidePostFull()">X</span>
-		<div id="js-content"></div>
+		<i onclick="hidePostFull()" class="icon-close"></i>
+		<div id="js-content" class="full-pin-content"></div>
 
 	</div>
 </div>

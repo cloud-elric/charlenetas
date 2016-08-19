@@ -2,7 +2,7 @@
 /* @var $post EntPosts*/
 ?>
 
-<div class="pin pin-alquimia" data-post="<?=$post->txt_token?>">
+<div class="pin pin-alquimia" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header pin-header-alquimia"></div>
 	<div class="image">
 		<img data-src="assets/images/<?=$post->txt_imagen?>">

@@ -32983,14 +32983,30 @@
 		"shouldRunBless": 0,
 		"useLibsass": false
 		},
-	"\/web\/assets\/css\/_sass\/03-components\/_tarjetas.sass": {
+	"\/web\/assets\/css\/_sass\/03-components\/_pins-full.sass": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 2,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/css\/_sass\/03-components\/_tarjetas.sass",
+		"inputAbbreviatedPath": "\/web\/assets\/css\/_sass\/03-components\/_pins-full.sass",
+		"outputAbbreviatedPath": "\/web\/assets\/css\/web-styles.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
+		},
+	"\/web\/assets\/css\/_sass\/03-components\/_pins.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/css\/_sass\/03-components\/_pins.sass",
 		"outputAbbreviatedPath": "\/web\/assets\/css\/web-styles.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,

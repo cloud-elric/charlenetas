@@ -814,3 +814,76 @@ nav {
           color: #7ea2c7; }
           nav ul li a:hover span {
             transform: translateY(-3px); }
+
+#backScreen {
+  background-color: rgba(255, 255, 255, 0.9);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  padding: 50px 20px;
+  overflow: scroll; }
+
+#wrapper {
+  margin: 0 auto;
+  width: 80%;
+  min-width: 900px;
+  max-width: 1024px;
+  background-color: transparent; }
+  #wrapper > i {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    font-size: 2em;
+    padding: 20px;
+    color: #DDD;
+    cursor: pointer; }
+
+.full-pin-content {
+  height: 100%;
+  width: 100%;
+  display: block;
+  background-color: transparent; }
+  .full-pin-content .full-pin-header {
+    background-color: transparent;
+    display: flex;
+    align-items: top;
+    justify-content: space-between; }
+    .full-pin-content .full-pin-header h2 {
+      font-weight: 400;
+      font-size: 3em;
+      color: #DDD;
+      font-family: "Raleway", sans-serif;
+      margin: 0; }
+    .full-pin-content .full-pin-header .post-publisher-data .post-publisher {
+      display: flex;
+      align-items: center; }
+      .full-pin-content .full-pin-header .post-publisher-data .post-publisher img {
+        margin-left: 20px; }
+    .full-pin-content .full-pin-header .post-publisher-data .post-date {
+      font-size: 0.7em;
+      color: black;
+      text-align: right;
+      padding-right: 44px; }
+  .full-pin-content .full-pin-body,
+  .full-pin-content .full-pin-social {
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    padding: 15px;
+    margin: 20px 0; }
+    .full-pin-content .full-pin-body h3,
+    .full-pin-content .full-pin-social h3 {
+      font-weight: 400;
+      font-size: 3em; }
+
+.full-pin-body-alquimia img {
+  float: left;
+  margin-right: 20px; }
+.full-pin-body-alquimia .pin-alquimia-grades .calificable {
+  cursor: pointer; }
+  .full-pin-body-alquimia .pin-alquimia-grades .calificable i.calificada {
+    color: yellow; }
