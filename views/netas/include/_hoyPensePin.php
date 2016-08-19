@@ -1,12 +1,12 @@
 
-<?php 
+<?php
 use app\modules\ModUsuarios\models\Utils;
 
 /* @var $post EntPosts*/
 ?>
 
 <div class="pin pin-hoy-pense" onclick="showPostFull('<?=$post->txt_token?>')">
-	<div class="pin-header"></div>
+	<div class="pin-header pin-header-hoy-pense"></div>
 	<div class=image>
 		<img data-src="assets/images/<?=$post->txt_imagen?>">
 	</div>
@@ -20,15 +20,8 @@ use app\modules\ModUsuarios\models\Utils;
 		</p>
 	</div>
 
-	<div class="pin-social">
-		<div class="pin-social-counters-wrapper">
-			<div class="pin-social-interactions">
-				<span>140</span>
-				<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
-				<span>45</span>
-				<i class="glyphicon glyphicon-comment"></i>
-			</div>
-		</div>
-	</div>
+	<?php
+		include 'elementos/pins-social.php';
+	?>
 
 </div>

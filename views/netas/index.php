@@ -1,4 +1,5 @@
 
+
 <div class=container-fluid>
 	<div class="pins-grid-container">
 		<div class=pins-grid id="js-contenedor-posts-tarjetas">
@@ -10,10 +11,12 @@
 </div>
 
 
-<div style="border: 1px solid black" id="js-cargar-mas-posts"
-	onclick="cargarMasPosts();">Cargar mas</div>
+<div class="waves-effect waves-light btn" id="js-cargar-mas-posts"
+	onclick="cargarMasPosts();">Cargar mas entradas</div>
 
 <div id="js-tmp" style="display: none;"></div>
+
+
 
 <div id="backScreen">
 	<div id="wrapper">
@@ -33,11 +36,10 @@ var pagesComentarios = 0;
 	var tmp = $('#js-tmp');
 
 	tmp.load('netas/get-mas-posts?page='+pages,function(){
-		
+
 		if(tmp.html().trim().length>0){
 			contenedor.append(tmp.html());
 			pages++;
-
 			ready();
 		}else{
 			alert('Sin datos para cargar');

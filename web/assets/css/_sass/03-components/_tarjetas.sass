@@ -11,8 +11,8 @@
   &:hover
     box-shadow: 0 25px 25px -15px rgba(0,0,0,0.3)
   .pin-header
-    background-color: red
-    height: 20px
+    background-color: yellow
+    height: 10px
   .image
     padding-bottom: 0
     img
@@ -37,18 +37,19 @@
 
     .pin-link
       a
-        display: block
-        margin: 0 auto
+        // display: block
+        // margin: 0 auto
         text-align: center
-        text-decoration: none
+        // text-decoration: none
         font-size: .8rem
-        padding: 5px 10px
-        border: 1px solid $link-btn-color
+        // padding: 5px 10px
+        // border: 1px solid $link-btn-color
         border-radius: 5px
-        background-color: $btn-primary
-        color: $link-btn-color
+        // background-color: $btn-primary
+        // color: $link-btn-color
 
   .pin-social
+    cursor: pointer
     padding: 0 20px
     height: 50px
     background-color: #FAFAFA
@@ -73,15 +74,16 @@
         color: $social-txt
 
     .pin-social-interactions
+      cursor: pointer
       span
         display: inline-block
         font-size: .8em
       i
         display: inline-block
-        height: 10px
-        width: 10px
-        border-radius: 50%
-        background-color: $test-color
+        // height: 10px
+        // width: 10px
+        // border-radius: 50%
+        // background-color: $test-color
         &.margin-right-20
           margin-right: 20px
 
@@ -97,17 +99,20 @@
     box-sizing: border-box
   .pin-alquimia-grades
     //background-color: red
+    margin: 40px 0
+    .star-wrapper
+      display: flex
+      align-items: center
+      justify-content: center
+      margin: 5px 0
     span
+      margin: 0 auto
       display: block
-      font-size: .8em
-
-    i
-      display: block
-      height: 10px
-      width: 10px
-      border-radius: 50%
-      background-color: orangered
-      margin: 10px
+      font-size: .9em
+      text-align: center
+    div:nth-child(2)
+      margin-bottom: 20px
+      
   .pin-content-wrapper
     h3
       margin-top: -10px
@@ -136,16 +141,10 @@
 .pin-media
   .pin-video-icon
     position: absolute
-    top: 45%
-    left: 45%
-    margin-left: -20px
-    margin-top: -20px
+    top: 30%
+    left: 25%
     i
-      display: block
-      height: 40px
-      width: 40px
-      border-radius: 50%
-      background-color: red
+      color: $white
 
 
 //	========================
@@ -158,3 +157,20 @@
       box-sizing: border-box
   .pin-social
     justify-content: space-between
+
+
+
+.pin-header-alquimia
+  background-color: $color-alquimia !important
+.pin-header-solo-por-hoy
+  background-color: $color-solo-por-hoy !important
+.pin-header-espejo
+  background-color: $color-espejo !important
+.pin-header-contexto
+  background-color: $color-contexto !important
+.pin-header-media
+  background-color: $color-media !important
+.pin-header-sabias-que
+  background-color: $color-sabias-que !important
+.pin-header-hoy-pense
+  background-color: $color-hoy-pense !important

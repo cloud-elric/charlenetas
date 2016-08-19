@@ -19,19 +19,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
       'css/charlenetas.css',
-<<<<<<< HEAD
-      'plugins/pins-grid/pins.min.css',
-      'assets/css/web-styles.css',
-      'plugins/pins-grid/pins-grid.css',
-      'css/tarjetas.css'
-=======
     	'plugins/pins-grid/pins.min.css',
-      'assets/css/web-styles.css'
->>>>>>> diseño-de-Pins-grid
+      'assets/css/web-styles.css',
+      'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css',
+      'https://fonts.googleapis.com/icon?family=Material+Icons'
     ];
     public $js = [
-    	'plugins/pins-grid/vendor.js',
-    	'plugins/pins-grid/pins-grid.js'
+      'plugins/pins-grid/pins.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
