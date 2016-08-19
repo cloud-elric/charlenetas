@@ -6,6 +6,7 @@ use yii\data\ActiveDataProvider;
 
 class EntPostsExtend extends EntPosts
 {
+	
     /**
      * Obtiene post indicados por paginacion y cantidad por pagina
      *
@@ -28,6 +29,7 @@ class EntPostsExtend extends EntPosts
 
 		return $dataProvider->getModels();
 	}
+	
 
 	/**
 	 * Busca un post por el token
@@ -45,5 +47,5 @@ class EntPostsExtend extends EntPosts
 	{
 		return $this->hasOne(EntRespuestasEspejo::className(), ['id_post' => 'id_post']);
 	}
-
+	
 }
