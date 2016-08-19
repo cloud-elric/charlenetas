@@ -1,4 +1,25 @@
 
+<div class="header">
+	<span>Workshops</span>
+	<span>Tutoriales</span>
+	<div class="logo">
+		<img src="assets/images/logo-charlenetas.png" alt="Charlenetas.com" />
+	</div>
+	<span>Mi perfil</span>
+	<span>Buscar</span>
+</div>
+
+<nav>
+	<ul>
+		<li>Espejo</li>
+		<li>Solo por hoy</li>
+		<li>Alquimia</li>
+		<li>En contexto</li>
+		<li>Sabias que</li>
+		<li>Media</li>
+		<li>Verdadazos</li>
+	</ul>
+</nav>
 
 <div class=container-fluid>
 	<div class="pins-grid-container">
@@ -64,10 +85,10 @@ var pagesComentarios = 0;
 
 
 			 if(comentariosContenedor.html().trim().length>0){
-			 
+
 				// Coloca un botón para cargar mas comentarios
 				$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
-			 }	
+			 }
 
 		});
 
@@ -223,14 +244,14 @@ function enviarComentario(token){
  */
 function agregarFeedback(token, feed){
 	var url = 'netas/agregar-feedback?token='+token+'&feed='+feed;
-	
+
 	$.ajax({
 		url:url,
 		dataType:'html',
 		method:'POST',
 		success:function(res){
 			if(res=='exist'){
-				
+
 				}else{
 
 					}
@@ -241,6 +262,5 @@ function agregarFeedback(token, feed){
 		}
 	});
 }
- 
-</script>
 
+</script>
