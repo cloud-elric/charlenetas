@@ -230,6 +230,7 @@ function enviarComentario(token){
 		method:'POST',
 		success:function(res){
 			$('#js-cargar-comentarios').before(res);
+			$('#js-comentario-form-'+token+' textarea').val('');
 		},
 		error:function(){
 			// Colocar un error
@@ -252,9 +253,11 @@ function agregarFeedback(token, feed){
 		success:function(res){
 			if(res=='exist'){
 
-				}else{
+			}else{
+				var contador = $('#js-contador-'+token+'-'+feed).text();
+				$('#js-contador-'+token+'-'+feed).text(parseInt(contador)+1);
+			}
 
-					}
 		},
 		error:function(){
 			// Colocar un error
