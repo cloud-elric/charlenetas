@@ -14,6 +14,7 @@ use app\models\CatTiposFeedback;
 use app\models\EntUsuariosFeedbacks;
 use app\models\ViewContadorFeedbackComentarios;
 use app\models\EntUsuariosLikePost;
+use app\models\EntUsuariosCalificacionAlquimia;
 
 class NetasController extends Controller {
 	
@@ -295,7 +296,7 @@ class NetasController extends Controller {
 			$usuarioLike = new EntUsuariosLikePost ();
 			$usuarioLike->guardarUsuarioLike ( $idUsuario, $post->id_post );
 			
-			// Obtenemos el numero de likes del usuario
+			// Obtenemos el numero de likes del post
 			$numLikes = $post->viewContadorLikes;
 			
 			// Si existen likes
@@ -305,6 +306,38 @@ class NetasController extends Controller {
 			}
 		}else{
 			echo 'existe';
+		}
+	}
+	
+	/**
+	 * Califica usuario un post de tipo alquimia
+	 * 
+	 * @param unknown $token
+	 */
+	public function actionCalificarAlquimia($token){
+		// no se usara un layout
+		$this->layout = false;
+		
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		// Busca el post por el token
+		$post = $this->getPostByToken ( $token );
+		
+		// Si el usuario no ha dado calificacion guardamos su calificacion
+		if(!EntUsuariosCalificacionAlquimia::existsCalificacionUsuario($idUsuario, $post->id_post)){
+			$usuarioCalificacion = new EntUsuariosCalificacionAlquimia();
+			$usuarioCalificacion->guardarCalificacionUsuario($idUsuario, $post->id_post, 4);
+			
+			// Obtenemos el numero de likes del post
+			$alquimia = $post->entAlquimias;
+			$numCalificaciones = $alquimia->calificacionAlquimia;
+			
+			// Si existe calificaciones
+			if($numCalificaciones){
+				$alquimia->actualizarCalificacion($numCalificaciones->num_calificacion);
+			}
+			
 		}
 	}
 	

@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `ent_alquimias` (
 -- Volcando datos para la tabla charlenetas_geekdb.ent_alquimias: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ent_alquimias` DISABLE KEYS */;
 INSERT INTO `ent_alquimias` (`id_post`, `num_calificacion_admin`, `num_calificacion_usuario`) VALUES
-	(3, 5, 5);
+	(3, 1, 5);
 /*!40000 ALTER TABLE `ent_alquimias` ENABLE KEYS */;
 
 
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `ent_posts` (
 /*!40000 ALTER TABLE `ent_posts` DISABLE KEYS */;
 INSERT INTO `ent_posts` (`id_post`, `id_tipo_post`, `id_usuario`, `id_usuario_administrador`, `txt_titulo`, `txt_token`, `txt_descripcion`, `txt_imagen`, `txt_url`, `num_likes`, `fch_creacion`, `fch_publicacion`, `b_habilitado`) VALUES
 	(2, 1, 18, NULL, NULL, 'post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc', 'Mi novio y yo llevamos 3 años juntos y me ha pedido un tiempo. Dice que necesita su espacio para replantear su vida pero no quiere perderme porque me ama mucho. A mí no me gusta la idea pero lo amo mucho y no quiero perderlo. Tenemos mucha historia juntos y hasta hemos pensado en casarnos y tener hijos. ¿Qué puedo hacer?', '89430171.image32.jpg', NULL, 0, '2016-08-10 18:13:15', '2016-08-10 18:13:15', 1),
-	(3, 2, NULL, NULL, 'Kevin', 'post_311b7f15cd6325f98cc0cce2987fecb857b2170a3703f', 'Esta película trata el importante tema de detectar y atender el comportamiento violento en los niños desde las primeras señales. Es responsabilidad de los padres y madres poner atención a las señales y no justificar actos violentos de los hijos pensando que "es normal porque los niños son curiosos", o "es normal porque los niños juegan pesado", etc. No hacerlo traerá peores consecuencias como se muestra en esta película muy recomendable.', '89430171.image32.jpg', NULL, 0, '2016-08-10 18:39:55', '2016-08-10 18:39:55', 1),
+	(3, 2, NULL, NULL, 'Kevin', 'post_311b7f15cd6325f98cc0cce2987fecb857b2170a3703f', 'Esta película trata el importante tema de detectar y atender el comportamiento violento en los niños desde las primeras señales. Es responsabilidad de los padres y madres poner atención a las señales y no justificar actos violentos de los hijos pensando que "es normal porque los niños son curiosos", o "es normal porque los niños juegan pesado", etc. No hacerlo traerá peores consecuencias como se muestra en esta película muy recomendable.', '89430171.image32.jpg', NULL, 1, '2016-08-10 18:39:55', '2016-08-10 18:39:55', 1),
 	(4, 3, NULL, NULL, NULL, 'post_4018d935a74d1521c3324b6b84a3794157b21703e4262', '¿Has notado que cuando una mujer pide respeto a un hombre, en lugar de recibir una respuesta favorable o inclusive neutral, usualmente recibe una agresión como respuesta? Frases como "ni que estuvieras tan buena", "por eso nadie te soporta", o inclusive groserías son usualmente las respuestas. No sería una mejor respuesta inclusive guardar silencio en señal de respeto por las decisiones y gustos ajenos?', '89430171.image32.jpg', NULL, 0, '2016-08-11 16:47:03', '2016-08-11 16:47:03', 1),
 	(5, 4, NULL, NULL, 'Men are jerks because women let them', 'post_47252123b2fb91be8db0c4a185d965da57b216fd3f779', 'Platicando hace rato con amig@s de los dramas emocionales de la vida, recordé lo que alguna vez escuché decir, de un hombre precisamente: "man are jerks because women let them" que significa "los hombres son patanes porque las mujeres lo toleran". Ahora no dudo que haya excepciones y que existan hombres que amaron mucho y mujeres que no los apreciaron. Pero en la generalidad, somos las mujeres las que, en nuestro afán de encontrar y mantener el tan anhelado amor y cuento de hadas de felices para siempre, las que queremos creer tanto en el cuento y justificaciones que se inventan nuestras pareja para excusar las cosas malas que hacen (que si no sabía lo que hacía, que no pensé que te fueras a enterar, que no imaginé que te fueras a molestar, que es que estoy traumado porque me pasó x cosa, etc.) que nos olvidamos de analizar lo que verdaderamente nos merecemos. Los amamos tanto que nos olvidamos de amarnos a nosotras mismas. Y es que al final del día, por cada mujer que por fin decide quererse y terminar una relación que no le satisface, hay varias otras mujeres dispuestas a ser "el verdadero amor" del galán en cuestión, que inevitablemente contará la amarga historia de cómo su anterior pareja "no lo entendía", "no era la correcta", "era una histérica, celosa, posesiva, bipolar", "siempre tuvo dudas de que ella fuera la indicada", etc. Ósea el clásico "es que ella no era como tú". Y vaya que nos encanta escucharlo! Nos valida los sentimientos de inseguridad y superioridad sobre otras mujeres perfectamente incorporados a nuestro disco duro como una necesidad para el amor propio por esta sociedad patriarcal. Es decir, no vales por tí mujer, sino que vales en la medida que eres más santa, más capaz, vaya, "más perfecta" que la otra. Pero, y si todas las mujeres decidiéramos que antes del final feliz de Disney y la comparación con otras mujeres, nos merecemos todo el respeto y amor propio hacia nosotras mismas? Si nos convenciéramos de que nos merecemos relaciones afectivas en las que seamos valoradas y apreciadas sin necesidad de "demostrar que lo merecemos"? Si dejáramos de justificar las faltas de respeto y desamor de nuestras parejas y simplemente aceptáramos que nos merecemos un buen amor? Uno que no nos haga daño, uno al que le importe que estés feliz en la misma medida en la que a tí te importa que él sea feliz. Que pasaría? Yo creo que si así fuera, si todas las mujeres tuviéramos amor propio y erradicáramos la necesidad de tener un hombre en nuestras vidas como requisito indispensable para sentirnos felices y plenas, eventualmente los hombres tendrían que modificar patrones de conducta y aprender a respetar las necesidades de las mujeres en la misma medida que respetan y valoran las suyas. Los hombres que quisieran tener una pareja (que son la mayoría en mi opinión) tendrían que aprender que los sentimientos y necesidades de las mujeres son igual de importantes que los suyos, que las necesidades de las mujeres no son tonterías propias del género femenino y que sus acciones tienen consecuencias que no se resuelven con "la novia/esposa/amante nueva que es mejor que la anterior porque le aguanta todo". Y también creo que una vez que esas relaciones sentimentales entre hombres y mujeres fueran más equilibradas, nuestra sociedad podría avanzar a pasos agigantados. Por eso con gusto veo con más frecuencia mujeres empoderadas que ya no aceptan relaciones abusivas, que ya no buscan justificar el mal actuar de sus parejas y que deciden disfrutar y gozar su vida, con o sin pareja, por igual. Esas mujeres, muchas siquiera sin saberlo, poco a poco, están formando un nuevo futuro, un nuevo abanico de posibilidades en el que tanto hombres y mujeres, puedan relacionarse con verdadero respeto y amor, el uno por el otro. Y tu, qué opinas?  ', '89430171.image32.jpg', NULL, 0, '2016-08-11 16:47:40', '2016-08-11 16:47:40', 1),
 	(6, 5, NULL, NULL, NULL, 'post_927fd38293fd8695c09e4fb13aaec46b57b216f6b9686', 'La Lista Completa de la primera temporada de Atando Cabos que se cargará está en el link: ', '89430171.image32.jpg', 'https://www.youtube.com/watch?v=_tv7RttRQcs&feature=youtu.be&list=PLPfjqq4-lB3R4WJ7U80RgObjR5fcdwQes ', 0, '2016-08-11 16:52:33', '2016-08-11 16:52:33', 1),
@@ -247,6 +247,25 @@ INSERT INTO `ent_solo_por_hoys` (`id_post`, `num_articulo`) VALUES
 /*!40000 ALTER TABLE `ent_solo_por_hoys` ENABLE KEYS */;
 
 
+-- Volcando estructura para tabla charlenetas_geekdb.ent_usuarios_calificacion_alquimia
+CREATE TABLE IF NOT EXISTS `ent_usuarios_calificacion_alquimia` (
+  `id_post` int(10) unsigned NOT NULL,
+  `id_usuario` int(10) unsigned NOT NULL,
+  `num_calificacion` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id_post`,`id_usuario`),
+  KEY `FK_ent_usuarios_calificacion_alquimia_mod_usuarios_ent_usuarios` (`id_usuario`),
+  CONSTRAINT `FK_ent_usuarios_calificacion_alquimia_ent_posts` FOREIGN KEY (`id_post`) REFERENCES `ent_posts` (`id_post`),
+  CONSTRAINT `FK_ent_usuarios_calificacion_alquimia_mod_usuarios_ent_usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `mod_usuarios_ent_usuarios` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla charlenetas_geekdb.ent_usuarios_calificacion_alquimia: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `ent_usuarios_calificacion_alquimia` DISABLE KEYS */;
+INSERT INTO `ent_usuarios_calificacion_alquimia` (`id_post`, `id_usuario`, `num_calificacion`) VALUES
+	(3, 18, 5),
+	(3, 25, 4);
+/*!40000 ALTER TABLE `ent_usuarios_calificacion_alquimia` ENABLE KEYS */;
+
+
 -- Volcando estructura para tabla charlenetas_geekdb.ent_usuarios_feedbacks
 CREATE TABLE IF NOT EXISTS `ent_usuarios_feedbacks` (
   `id_comentario` int(10) unsigned NOT NULL,
@@ -279,8 +298,10 @@ CREATE TABLE IF NOT EXISTS `ent_usuarios_like_post` (
   CONSTRAINT `FK_ent_usuarios_like_post_mod_usuarios_ent_usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `mod_usuarios_ent_usuarios` (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla charlenetas_geekdb.ent_usuarios_like_post: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla charlenetas_geekdb.ent_usuarios_like_post: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ent_usuarios_like_post` DISABLE KEYS */;
+INSERT INTO `ent_usuarios_like_post` (`id_post`, `id_usuario`) VALUES
+	(3, 25);
 /*!40000 ALTER TABLE `ent_usuarios_like_post` ENABLE KEYS */;
 
 
@@ -387,7 +408,7 @@ CREATE TABLE IF NOT EXISTS `mod_usuarios_ent_usuarios` (
 -- Volcando datos para la tabla charlenetas_geekdb.mod_usuarios_ent_usuarios: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `mod_usuarios_ent_usuarios` DISABLE KEYS */;
 INSERT INTO `mod_usuarios_ent_usuarios` (`id_usuario`, `id_tipo_usuario`, `txt_token`, `txt_username`, `txt_apellido_paterno`, `txt_apellido_materno`, `txt_imagen`, `txt_auth_key`, `txt_password_hash`, `txt_password_reset_token`, `txt_email`, `fch_creacion`, `fch_actualizacion`, `id_status`) VALUES
-	(18, 1, 'usr4b41842f47272f78d0b8dcff7b11f30257abb1fe02b62', 'humberto', 'Antonio', 'Marquez', 'humberto.png', 'HGYeSCW_BQp-CoB3tL0C2IHhXreFwdVC', '$2y$13$HXZ0bqNZ5vps36IpeT7ztuejKLTRGKpIcUVuFhu0m/mzvyT6TDaxO', NULL, '2GomDev@2gom.com.mx', '2016-08-10 18:00:14', NULL, 2),
+	(18, 1, 'usr4b41842f47272f78d0b8dcff7b11f30257abb1fe02b62', 'humberto', 'Antonio', 'Marquez', NULL, 'HGYeSCW_BQp-CoB3tL0C2IHhXreFwdVC', '$2y$13$HXZ0bqNZ5vps36IpeT7ztuejKLTRGKpIcUVuFhu0m/mzvyT6TDaxO', NULL, '2GomDev@2gom.com.mx', '2016-08-10 18:00:14', NULL, 2),
 	(25, 1, 'usra6f65e11a13def539972e900c15c586e57b5ffb576ed8', 'Humberto', 'Antonio', 'Marquez', 'ava127c9f55dbc4839b4894f1732052e24757b5ffb56dfb1.jpg', '10yHObCmcDsrbQsHfZHSUAcy0nLkRTBC', '$2y$13$56K/rEzin8tqYki94MUMTOGVNfvc03C74dKFmD80DlyEeRSBdtqQe', NULL, 'humberto@2gom.com.mx', '2016-08-18 13:34:30', NULL, 2);
 /*!40000 ALTER TABLE `mod_usuarios_ent_usuarios` ENABLE KEYS */;
 
@@ -454,6 +475,14 @@ CREATE TABLE IF NOT EXISTS `mod_usuarios_ent_usuarios_facebook` (
 /*!40000 ALTER TABLE `mod_usuarios_ent_usuarios_facebook` ENABLE KEYS */;
 
 
+-- Volcando estructura para vista charlenetas_geekdb.view_calificacion_alquimias
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `view_calificacion_alquimias` (
+	`id_post` INT(10) UNSIGNED NOT NULL,
+	`num_calificacion` DECIMAL(14,4) NULL
+) ENGINE=MyISAM;
+
+
 -- Volcando estructura para vista charlenetas_geekdb.view_contador_feedback_comentarios
 -- Creando tabla temporal para superar errores de dependencia de VIEW
 CREATE TABLE `view_contador_feedback_comentarios` (
@@ -463,12 +492,36 @@ CREATE TABLE `view_contador_feedback_comentarios` (
 ) ENGINE=MyISAM;
 
 
+-- Volcando estructura para vista charlenetas_geekdb.view_contador_likes
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `view_contador_likes` (
+	`id_post` INT(10) UNSIGNED NOT NULL,
+	`num_likes` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
+
+-- Volcando estructura para vista charlenetas_geekdb.view_calificacion_alquimias
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `view_calificacion_alquimias`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` VIEW `charlenetas_geekdb`.`view_calificacion_alquimias` AS select id_post, avg(num_calificacion) as num_calificacion
+from ent_usuarios_calificacion_alquimia
+group by id_post ;
+
+
 -- Volcando estructura para vista charlenetas_geekdb.view_contador_feedback_comentarios
 -- Eliminando tabla temporal y crear estructura final de VIEW
 DROP TABLE IF EXISTS `view_contador_feedback_comentarios`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` VIEW `charlenetas_geekdb`.`view_contador_feedback_comentarios` AS select count(*) as num_usuarios, id_comentario, id_tipo_feedback 
 from ent_usuarios_feedbacks
 group by id_tipo_feedback, id_comentario ;
+
+
+-- Volcando estructura para vista charlenetas_geekdb.view_contador_likes
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `view_contador_likes`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` VIEW `charlenetas_geekdb`.`view_contador_likes` AS select id_post, count(*) as num_likes
+from ent_usuarios_like_post
+group by id_post ;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

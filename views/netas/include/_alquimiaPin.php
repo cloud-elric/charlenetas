@@ -19,18 +19,21 @@
 
 			<!-- //TODO:: poner el "for2 para por cada numero de calificción total poner las estrellas -->
 			<div class="star-wrapper">
-				<i class="icon-star"></i>
-				<i class="icon-star"></i>
-				<i class="icon-star"></i>
-				<i class="icon-star"></i><?=$post->entAlquimias->num_calificacion_admin?>
+			<?php
+			// Asignamos el modelo de alquimia a una variable
+			$alquimia = $post->entAlquimias;
+			
+			// Pintar estrellas
+			echo $alquimia->generarEstrellas(5, $alquimia->num_calificacion_admin);
+			?>
 			</div>
 
 			<span>Los usuarios</span>
 			<div class="star-wrapper">
-				<i class="icon-star"></i>
-				<i class="icon-star"></i>
-				<i class="icon-star"></i>
-				<i class="icon-star-empty"></i><?=$post->entAlquimias->num_calificacion_usuario?>
+				<?php 
+				// Pintar estrellas
+				echo $alquimia->generarEstrellas(5, $alquimia->num_calificacion_usuario);
+				?>
 			</div>
 		</div>
 	</div>

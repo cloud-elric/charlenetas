@@ -5,6 +5,8 @@ Proyecto tipo red social
 ### 2016-08-19 [added]
 - Se creo la tabla "ent_usuarios_like_post";
 - Agregada vista "view_contador_likes"
+- Se creo la tabla "ent_usuarios_calificacion_alquimia"
+- Agregada vista "view_calificacion_alquimias"
 ### 2016-08-19 [changed]
 -Se cambio el nombre de la base de datos de pruebas a "charlenetas_geekdb";
 
@@ -49,6 +51,11 @@ Proyecto tipo red social
 - Agregada funcionalidad para guardar likes de los usuarios
 - Agregada funcionalidad para la Actualizacion el campo "num_likes" de la tabla "ent_posts"
 - Creación de modelo "ViewContadorLikes"
+- Se agrego la habilidad para cuando el usuario no tiene una foto de perfil utiliza una por default
+- En la tarjeta de alquimia las calificaciones se pintan con estrellas dependiendo de la base de datos
+- Creación de modelo "ViewCalificacionAlquimias"
+- Agregada funcionalidad para guardar calificaciones de los usuarios sobre una alquimia
+- Agregada funcionalidad para la actualización el campo "num_calificaciones_usuario" de la tabla "ent_espejos"
 
 ### 2016-08-18 [added]
 - Se agrego la funcionalidad de que al registrarse se suba una foto

@@ -535,4 +535,18 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		// Guardado de la imagen
 		$this->imageProfile->saveAs ( Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $nombreImagen );
 	}
+	
+	/**
+	 * Si la imagen esta vacia mandamos una por default
+	 * @return string
+	 */
+	public function getImageProfile(){
+		$basePath = Yii::getAlias ( '@web' ); 
+		
+		if($this->txt_imagen){
+			return $basePath.  '/' . Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $this->txt_imagen;
+		}
+		
+		return $basePath.'/'.Yii::$app->params ['modUsuarios'] ['pathImageDefault'];
+	}
 }
