@@ -3,6 +3,7 @@
 ?>
 
 <div class="pin pin-espejo" onclick="showPostFull('<?=$post->txt_token?>')">
+
 	<div class="pin-header pin-header-espejo"></div>
 
 	<div class=image>
