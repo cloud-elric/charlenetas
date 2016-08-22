@@ -1,8 +1,11 @@
 <?php
+use yii\helpers\Html;
+
 /* @var $post EntPosts*/
 ?>
 
-<div class="pin pin-espejo" onclick="showPostFull('<?=$post->txt_token?>')">
+<div class="pin pin-espejo"
+	onclick="showPostFull('<?=$post->txt_token?>')">
 
 	<div class="pin-header pin-header-espejo"></div>
 
@@ -11,25 +14,31 @@
 	</div>
 
 
-<div class="pin-content-wrapper" lang="en">
-	<p class="pin-descripcion">
+	<div class="pin-content-wrapper" lang="en">
+		<p class="pin-descripcion">
 		<?=$post->txt_descripcion?>
 	</p>
-</div>
-
-<div class="pin-social">
-
-	<div class="pin-social-usr">
-		<img src="assets/images/usr-avatar.png" alt="" />
-		<span>Alfie<!--?=$post->idUsuario->txt_imagen?--></span>
-	</div>
-	<div class="pin-social-interactions">
-		<span><?=$post->entEspejos->num_subscriptores?></span>
-		<i class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
-		<span>45</span>
-		<i class="glyphicon glyphicon-comment"></i>
 	</div>
 
-</div>
+	<div class="pin-social">
+
+		<div class="pin-social-usr">
+		<?php
+		$usuario = $post->idUsuario;
+		
+		if (! empty ( $usuario )) {
+			echo Html::img ( $usuario->getImageProfile());
+			echo '<span>' . $usuario->txt_username . '</span>';
+		}
+		
+		?>
+		
+	</div>
+		<div class="pin-social-interactions">
+			<span><?=$post->entEspejos->num_subscriptores?></span> <i
+				class="glyphicon glyphicon-thumbs-up margin-right-20"></i> 
+		</div>
+
+	</div>
 
 </div>

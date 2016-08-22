@@ -8,7 +8,7 @@ use yii\helpers\Html;
 if (! Yii::$app->user->isGuest) {
 
 // avatar del usuario
-echo Html::img(Yii::$app->params ['modUsuarios'] ['pathImageProfile'].Yii::$app->user->identity->txt_imagen, ['width'=>'30px']);	
+echo Html::img(Yii::$app->user->identity->getImageProfile(), ['width'=>'30px']);	
 $comentario = new EntComentariosPosts();
 
 // Formulario para guardar un comentario

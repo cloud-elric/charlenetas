@@ -3,7 +3,7 @@
 if (YII_ENV_DEV) {
 	$dataBase = [ 
 			'class' => 'yii\db\Connection',
-			'dsn' => 'mysql:host=localhost;dbname=charlenetas',
+			'dsn' => 'mysql:host=localhost;dbname=charlenetas_geekdb',
 			'username' => 'root',
 			'password' => 'root',
 			'charset' => 'utf8' 
