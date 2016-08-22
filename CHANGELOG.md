@@ -45,6 +45,9 @@ Proyecto tipo red social
 
 
 ## Frontend (Aplicación web)
+### 2016-08-22 [added]
+- Se creo un modelo llamado "ConstantesWeb.php" que contiene las constantes generales del sistema
+
 ### 2016-08-19 [added]
 - Se agreo el contador de likes al post
 - Creación de modelo "EntUsuariosLikePost"

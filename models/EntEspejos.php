@@ -16,6 +16,9 @@ use Yii;
  */
 class EntEspejos extends \yii\db\ActiveRecord
 {
+	
+	private $_subscriptoresCount;
+	
     /**
      * @inheritdoc
      */
@@ -68,6 +71,32 @@ class EntEspejos extends \yii\db\ActiveRecord
      */
     public function getEntUsuariosSubscripciones()
     {
-        return $this->hasOne(EntUsuariosSubscripciones::className(), ['id_post' => 'id_post']);
+        return $this->hasMany(EntUsuariosSubscripciones::className(), ['id_post' => 'id_post']);
+    }
+    
+    /**
+     * Coloca hot contador
+     * @param unknown $count
+     */
+    public function setHotCount($count)
+    {
+    	$this->_subscriptoresCount = (int) $count;
+    }
+    
+    /**
+     * Obtiene los hot contador
+     * @return NULL
+     */
+    public function getHotCount()
+    {
+    	if ($this->isNewRecord) {
+    		return null; // This avoid calling a query searching for null primary keys.
+    	}
+    
+    	if ($this->_subscriptoresCount === null) {
+    		$this->setHotCount(count($this->entUsuariosSubscripciones));
+    	}
+    
+    	return $this->_subscriptoresCount;
     }
 }

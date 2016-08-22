@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\data\ActiveDataProvider;
+use app\models\ConstantesWeb;
 
 class EntPostsExtend extends EntPosts
 {
@@ -13,7 +14,7 @@ class EntPostsExtend extends EntPosts
      * @param integer $page
      * @param integer $pageSize
      */
-	public static function getPostByPagination($page = 0, $pageSize=15){
+	public static function getPostByPagination($page = 0, $pageSize=ConstantesWeb::PINS_A_MOSTRAR){
 
 		$query = EntPosts::find('fch_publicacion <=NOW() AND b_habilitado=1');
 

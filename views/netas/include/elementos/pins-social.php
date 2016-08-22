@@ -3,7 +3,9 @@
     <div class="pin-social-interactions">
       <span><?=$post->num_likes?></span>
       <i class="icon icon-heart margin-right-20"></i>
-      <span><?=$post->comentariosCount?></span>
+      <span>
+      <?=$post->comentariosCount?>
+      </span>
       <i class="icon icon-comment"></i>
     </div>
   </div>

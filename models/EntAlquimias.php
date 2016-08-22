@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\modules\ModUsuarios\models\EntUsuarios;
+use app\models\ConstantesWeb;
 
 /**
  * This is the model class for table "ent_alquimias".
@@ -17,6 +18,7 @@ use app\modules\ModUsuarios\models\EntUsuarios;
  * @property ModUsuariosEntUsuarios[] $idUsuarios
  */
 class EntAlquimias extends \yii\db\ActiveRecord {
+	
 	/**
 	 * @inheritdoc
 	 */
@@ -39,8 +41,8 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 				[ 
 						[ 
 								'id_post',
-								'num_calificacion_admin',
-								'num_calificacion_usuario' 
+// 								'num_calificacion_admin',
+// 								'num_calificacion_usuario' 
 						],
 						'integer' 
 				],
@@ -103,6 +105,11 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 		] );
 	}
 	
+	
+	public function setEstrellas($numEstrellasEncendidas,$numEstrellas=ConstantesWeb::ESTRELLAS_MAXIMAS, $estrellasCalificadas=false){
+		
+	}
+	
 	/**
 	 * Genera las estrellas
 	 * 
@@ -110,7 +117,7 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 	 * @param unknown $numEstrellasEncendidas        	
 	 * @return string
 	 */
-	public function generarEstrellas($numEstrellas, $numEstrellasEncendidas, $estrellaCalificada=false) {
+	public function generarEstrellas($numEstrellasEncendidas, $numEstrellas=ConstantesWeb::ESTRELLAS_MAXIMAS, $estrellaCalificada=false) {
 		$estrellas = '';
 		// pinta n estrellas
 		for($i = 1; $i <= $numEstrellas; $i ++) {
@@ -134,4 +141,5 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 		
 		return $this->save()?$this:null;
 	}
+	
 }

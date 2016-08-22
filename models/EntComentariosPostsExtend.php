@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\ConstantesWeb;
 use yii\data\ActiveDataProvider;
 
 class EntComentariosPostsExtend extends \yii\db\ActiveRecord {
@@ -13,7 +14,7 @@ class EntComentariosPostsExtend extends \yii\db\ActiveRecord {
 	 * @param integer $page        	
 	 * @param integer $pageSize        	
 	 */
-	public static function getComentariosPostByPagination($idPost = 0, $page = 0, $pageSize = 1) {
+	public static function getComentariosPostByPagination($idPost = 0, $page = 0, $pageSize = ConstantesWeb::COMENTARIOS_A_MOSTRAR) {
 		
 		// query de la busqueda
 		$query = EntComentariosPosts::find ()->where ( [ 

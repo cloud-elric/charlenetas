@@ -24,7 +24,7 @@
 			$alquimia = $post->entAlquimias;
 			
 			// Pintar estrellas
-			echo $alquimia->generarEstrellas(5, $alquimia->num_calificacion_admin);
+			echo $alquimia->generarEstrellas($alquimia->num_calificacion_admin);
 			?>
 			</div>
 
@@ -32,7 +32,7 @@
 			<div class="star-wrapper">
 				<?php 
 				// Pintar estrellas
-				echo $alquimia->generarEstrellas(5, $alquimia->num_calificacion_usuario);
+				echo $alquimia->generarEstrellas($alquimia->num_calificacion_usuario);
 				?>
 			</div>
 		</div>
