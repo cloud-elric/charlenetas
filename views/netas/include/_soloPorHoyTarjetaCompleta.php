@@ -2,6 +2,7 @@
 /* @var $post EntPosts*/
 ?>
 
+<<<<<<< HEAD
 <section class="full-pin-header">
 
 	<h2>Solo por hoy...</h2>
@@ -18,6 +19,23 @@
 	</div>
 
 </section>
+=======
+<?=$post->txt_descripcion?><br>
+<?=$post->fch_creacion?><br>
+<?=$post->txt_imagen?><br>
+http:://constitucion.com.mx<?=$post->entSoloPorHoys->num_articulo?>/
+<br>
+</div>
+
+<div id="js-comments"></div>
+
+<?php
+
+echo $this->render ( 'elementos/inputComentario', [ 
+		'token' => $post->txt_token,
+		'respuesta'=>false 
+] );
+>>>>>>> master
 
 
 

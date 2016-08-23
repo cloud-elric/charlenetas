@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use app\modules\ModUsuarios\models\Utils;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "ent_comentarios_posts".
@@ -105,5 +106,38 @@ class EntComentariosPosts extends \yii\db\ActiveRecord
     	$this->txt_token = Utils::generateToken('com');
     	
     	return $this->save()?$this:null;
+    }
+    
+    
+    /**
+     * Obtenemos la respuestas del comentario
+     * 
+     * @param unknown $idComentario
+     * @param number $page
+     * @param unknown $pageSize
+     */
+    public static function getRespuestasComentario($idComentario, $page=0, $pageSize=ConstantesWeb::NUMERO_DE_RESPUESTAS){
+    	// query de la busqueda
+    	$query = EntComentariosPosts::find ()->where ( [
+    			'id_comentario_padre'=>$idComentario,
+    	] )->andWhere ( [
+    			'b_habilitado' => 1,
+    	] );
+    	
+    	// Carga el dataprovider
+    	$dataProvider = new ActiveDataProvider( [
+    			'query' => $query,
+    			'sort' => [
+    					'defaultOrder' => [
+    							'fch_comentario' => 'asc'
+    					]
+    			],
+    			'pagination' => [
+    					'pageSize' => $pageSize,
+    					'page' => $page
+    			]
+    	] );
+    	
+    	return $dataProvider->getModels ();
     }
 }

@@ -13,6 +13,8 @@ use app\modules\ModUsuarios\models\Utils;
 use app\models\CatTiposFeedback;
 use app\models\EntUsuariosFeedbacks;
 use app\models\ViewContadorFeedbackComentarios;
+use app\models\EntUsuariosLikePost;
+use app\models\EntUsuariosCalificacionAlquimia;
 
 class NetasController extends Controller {
 	
@@ -31,7 +33,8 @@ class NetasController extends Controller {
 								'des-suscripcion-espejo',
 								'suscripcion-espejo',
 								'comentar-post',
-								'agregar-feedback' 
+								'agregar-feedback',
+								'like-post' 
 						],
 						'rules' => [
 								
@@ -44,10 +47,10 @@ class NetasController extends Controller {
 								] 
 						] 
 				] 
-		]
+		];
 		// everything else is denied
 		
-		;
+		
 	}
 	
 	/**
@@ -127,7 +130,8 @@ class NetasController extends Controller {
 		return $this->render ( '_comentariosPost', [ 
 				'comentarios' => $comentarios,
 				'post' => $post,
-				'feedbacks' => $feedbacks 
+				'feedbacks' => $feedbacks,
+				'respuestas'=>false
 		] );
 	}
 	
@@ -219,7 +223,9 @@ class NetasController extends Controller {
 			
 			return $this->render ( 'include/elementos/comentario', [ 
 					'comentario' => $comentario,
-					'feedbacks' => $feedbacks 
+					'feedbacks' => $feedbacks,
+					'respuesta'=>false
+					
 			] );
 		}
 	}
@@ -266,8 +272,135 @@ class NetasController extends Controller {
 			
 			// Actualizar los comentarios para que sepamos cuantos hay de cada cosa
 			$comentario->save ();
-		}else{
+		} else {
 			echo 'exist';
+		}
+	}
+	
+	/**
+	 * Da like a un post
+	 * 
+	 * @param unknown $token        	
+	 */
+	public function actionLikePost($token) {
+		// no se usara un layout
+		$this->layout = false;
+		
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		// Busca el post por el token
+		$post = $this->getPostByToken ( $token );
+		
+		// Si el usuario no le ha dado like al post guardamos su like
+		if (! EntUsuariosLikePost::existsUsuarioLike ( $idUsuario, $post->id_post )) {
+			
+			// Guarda el registro
+			$usuarioLike = new EntUsuariosLikePost ();
+			$usuarioLike->guardarUsuarioLike ( $idUsuario, $post->id_post );
+			
+			// Obtenemos el numero de likes del post
+			$numLikes = $post->viewContadorLikes;
+			
+			// Si existen likes
+			if($numLikes){
+				// Agregamos un like al post
+				$post->actualizarNumLikes($numLikes->num_likes);
+			}
+		}else{
+			echo 'existe';
+		}
+	}
+	
+	/**
+	 * Califica usuario un post de tipo alquimia
+	 * 
+	 * @param unknown $token
+	 */
+	public function actionCalificarAlquimia($token){
+		// no se usara un layout
+		$this->layout = false;
+		
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		// Busca el post por el token
+		$post = $this->getPostByToken ( $token );
+		
+		// Si el usuario no ha dado calificacion guardamos su calificacion
+		if(!EntUsuariosCalificacionAlquimia::existsCalificacionUsuario($idUsuario, $post->id_post)){
+			$usuarioCalificacion = new EntUsuariosCalificacionAlquimia();
+			$usuarioCalificacion->guardarCalificacionUsuario($idUsuario, $post->id_post, 4);
+			
+			// Obtenemos el numero de likes del post
+			$alquimia = $post->entAlquimias;
+			$numCalificaciones = $alquimia->calificacionAlquimia;
+			
+			// Si existe calificaciones
+			if($numCalificaciones){
+				$alquimia->actualizarCalificacion($numCalificaciones->num_calificacion);
+			}
+			
+		}
+	}
+	
+	/**
+	 * Carga las respuesta de un comentario
+	 * 
+	 * @param unknown $token
+	 * @param unknown $page
+	 */
+	public function actionCargarRespuestas($token, $page){
+		
+		// no se usara un layout
+		$this->layout = false;
+		
+		// Busca el comentario por el token
+		$comentario = $this->getComentarioByToken($token);
+		
+		// Busqueda de las respuestas por la paginacion
+		$respuestasComentario = EntComentariosPosts::getRespuestasComentario($comentario->id_comentario_post, $page);
+		
+		// Tipos de feedbacks
+		$feedbacks = $this->obtenerTiposFeedbacks ();
+		
+		// Pintar vista
+		return $this->render ( '_comentariosPost', [
+				'comentarios' => $respuestasComentario,
+				'feedbacks' => $feedbacks,
+				'respuestas'=>true
+		] );
+	}
+	
+	/**
+	 * Agrega respuesta a un comentario
+	 * @param unknown $token
+	 */
+	public function actionResponderComentario($token){
+		// no se usara un layout
+		$this->layout = false;
+		
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		// Busca el comentario por el token
+		$comentario = $this->getComentarioByToken($token);
+		
+		$respuesta = new EntComentariosPosts ();
+		$respuesta->load ( Yii::$app->request->post () );
+		
+		$respuesta->id_comentario_padre = $comentario->id_comentario_post;
+		
+		if ($respuesta->guardarComentarioUsuario ( $idUsuario, $comentario->id_post )) {
+			// Tipos de feedbacks
+			$feedbacks = $this->obtenerTiposFeedbacks ();
+				
+			return $this->render ( 'include/elementos/comentario', [
+					'comentario' => $respuesta,
+					'feedbacks' => $feedbacks,
+					'respuesta'=>true
+						
+			] );
 		}
 	}
 	
@@ -379,5 +512,10 @@ class NetasController extends Controller {
 	}
 	public function actionGt($tk) {
 		echo Utils::generateToken ( $tk );
+	}
+	
+	public function actionTest($url){
+		
+		
 	}
 }

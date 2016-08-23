@@ -3,16 +3,18 @@
 namespace app\models;
 
 use yii\data\ActiveDataProvider;
+use app\models\ConstantesWeb;
 
 class EntPostsExtend extends EntPosts
 {
+	
     /**
      * Obtiene post indicados por paginacion y cantidad por pagina
      *
      * @param integer $page
      * @param integer $pageSize
      */
-	public static function getPostByPagination($page = 0, $pageSize=15){
+	public static function getPostByPagination($page = 0, $pageSize=ConstantesWeb::PINS_A_MOSTRAR){
 
 		$query = EntPosts::find('fch_publicacion <=NOW() AND b_habilitado=1');
 
@@ -28,6 +30,7 @@ class EntPostsExtend extends EntPosts
 
 		return $dataProvider->getModels();
 	}
+	
 
 	/**
 	 * Busca un post por el token
@@ -45,5 +48,5 @@ class EntPostsExtend extends EntPosts
 	{
 		return $this->hasOne(EntRespuestasEspejo::className(), ['id_post' => 'id_post']);
 	}
-
+	
 }

@@ -6,6 +6,7 @@ if (YII_ENV_DEV) {
 			'adminEmail' => 'admin@example.com',
 			'modUsuarios' => [
 					'pathImageProfile'=>'uploads/profiles/',
+					'pathImageDefault'=>'uploads/profiles/imgDefault.png',
 					'facebook' => [ 
 							'usarLoginFacebook' => true,
 							'APP_ID' => '1754524001428992', // Identificador de la aplicación
@@ -41,6 +42,7 @@ if (YII_ENV_DEV) {
 			'adminEmail' => 'admin@example.com',
 			'modUsuarios' => [
 					'pathImageProfile'=>'uploads/profiles/',
+					'pathImageDefault'=>'uploads/profiles/imgDefault.png',
 					'facebook' => [ 
 							'usarLoginFacebook' => true,
 							'APP_ID' => '1754524001428992', // Identificador de la aplicación

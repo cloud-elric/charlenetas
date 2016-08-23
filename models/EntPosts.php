@@ -31,6 +31,9 @@ use app\modules\ModUsuarios\models\EntUsuarios;
  */
 class EntPosts extends \yii\db\ActiveRecord
 {
+	
+	private $_comentariosCount;
+	
     /**
      * @inheritdoc
      */
@@ -140,4 +143,48 @@ class EntPosts extends \yii\db\ActiveRecord
     {
         return $this->hasOne(EntSoloPorHoys::className(), ['id_post' => 'id_post']);
     }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getViewContadorLikes()
+    {
+    	return $this->hasOne(ViewContadorLikes::className(), ['id_post' => 'id_post']);
+    }
+    
+    /**
+     * Coloca comentarios contador
+     * @param unknown $count
+     */
+    public function setComentariosCount($count)
+    {
+    	$this->_comentariosCount = (int) $count;
+    }
+    
+    /**
+     * Obtiene los comentarios contador
+     * @return NULL
+     */
+    public function getComentariosCount()
+    {
+    	if ($this->isNewRecord) {
+    		return null; // This avoid calling a query searching for null primary keys.
+    	}
+    
+    	if ($this->_comentariosCount === null) {
+    		$this->setComentariosCount(count($this->entComentariosPosts));
+    	}
+    
+    	return $this->_comentariosCount;
+    }
+    
+    /**
+     * Actualiza el numero de likes del post
+     * @param unknown $numLikes
+     */
+    public function actualizarNumLikes($numLikes){
+    	$this->num_likes = $numLikes;
+    	$this->save();
+    }
+    
 }

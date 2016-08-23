@@ -57,6 +57,7 @@
 	</div>
 </div>
 
+<<<<<<< HEAD
 <script>
 var pages = 1;
 var pagesComentarios = 0;
@@ -275,5 +276,7 @@ function agregarFeedback(token, feed){
 		}
 	});
 }
+=======
+>>>>>>> master
 
 </script>

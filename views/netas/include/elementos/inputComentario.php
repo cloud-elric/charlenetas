@@ -14,17 +14,34 @@ $form = ActiveForm::begin([
 if (! Yii::$app->user->isGuest) {
 
 // avatar del usuario
+<<<<<<< HEAD
 echo Html::img(Yii::$app->params ['modUsuarios'] ['pathImageProfile'].Yii::$app->user->identity->txt_imagen, ['width'=>'30px']);
+=======
+echo Html::img(Yii::$app->user->identity->getImageProfile(), ['width'=>'30px']);	
+>>>>>>> master
 $comentario = new EntComentariosPosts();
 
  ?>
     <?= $form->field($comentario, 'txt_comentario')->textArea(['rows'=>3])->label(false) ?>
+<<<<<<< HEAD
 
 	<!-- Boton para guardar el comentario -->
 	<div id="js-comentar" style='border:1px solid black;' onclick="enviarComentario('<?=$token?>');">Comentar</div>
 
 <?php
 
+=======
+	
+	<?php if($respuesta){?>
+		<!-- Boton para guardar el comentario -->
+		<div id="js-responder" style='border:1px solid black;' onclick="enviarRespuesta('<?=$token?>');">Responder</div>	
+	<?php }else{?>
+		<!-- Boton para guardar el comentario -->
+		<div id="js-comentar" style='border:1px solid black;' onclick="enviarComentario('<?=$token?>');">Comentar</div>
+	<?php }?>
+<?php 
+ActiveForm::end(); 
+>>>>>>> master
 }else{
 
   <input>

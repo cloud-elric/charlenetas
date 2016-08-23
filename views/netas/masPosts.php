@@ -24,6 +24,8 @@ foreach ( $listaPost as $post ) {
 		case 7 : // Solo por hoy
 			include 'include/_soloPorHoyPin.php';
 			break;
+		case 8: // Sabias que
+			include 'include/_sabiasQuePin.php';
 		default :
 			include 'include/_tarjetaPrincipal.php';
 			break;
