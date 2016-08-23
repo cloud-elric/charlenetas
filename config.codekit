@@ -235,11 +235,29 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/models\/EntUsuariosFeedbacks.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntUsuariosFeedbacks.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/models\/EntUsuariosSubscripciones.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/models\/EntUsuariosSubscripciones.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/models\/ViewContadorFeedbackComentarios.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/ViewContadorFeedbackComentarios.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -31444,6 +31462,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/views\/netas\/include\/elementos\/comentarios.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/comentarios.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/netas\/include\/elementos\/feedbacks.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -31471,6 +31498,24 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/views\/netas\/include\/elementos\/pintar-estrellas.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/pintar-estrellas.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/netas\/include\/elementos\/respuesta-admin.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/respuesta-admin.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/netas\/index.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -31488,6 +31533,83 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
+		},
+	"\/web\/assets\/23faa3e5\/jquery.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/23faa3e5\/jquery.js",
+		"outputAbbreviatedPath": "\/web\/assets\/23faa3e5\/min\/jquery-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/assets\/23faa3e5\/jquery.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/23faa3e5\/jquery.min.js",
+		"outputAbbreviatedPath": "\/web\/assets\/23faa3e5\/min\/jquery.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/assets\/2cd8798c\/yii.activeForm.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.activeForm.js",
+		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii.activeForm-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/assets\/2cd8798c\/yii.captcha.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.captcha.js",
+		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii.captcha-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/assets\/2cd8798c\/yii.gridView.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.gridView.js",
+		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii.gridView-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/assets\/2cd8798c\/yii.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.js",
+		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/assets\/2cd8798c\/yii.validation.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.validation.js",
+		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii.validation-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
 		},
 	"\/web\/assets\/34fd83b0\/yii.activeForm.js": {
 		"fileType": 64,
@@ -32872,14 +32994,46 @@
 		"shouldRunBless": 0,
 		"useLibsass": false
 		},
-	"\/web\/assets\/css\/_sass\/03-components\/_tarjetas.sass": {
+	"\/web\/assets\/css\/_sass\/03-components\/_header.sass": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 2,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/css\/_sass\/03-components\/_tarjetas.sass",
+		"inputAbbreviatedPath": "\/web\/assets\/css\/_sass\/03-components\/_header.sass",
+		"outputAbbreviatedPath": "\/web\/assets\/css\/web-styles.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
+		},
+	"\/web\/assets\/css\/_sass\/03-components\/_pins-full.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/css\/_sass\/03-components\/_pins-full.sass",
+		"outputAbbreviatedPath": "\/web\/assets\/css\/web-styles.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
+		},
+	"\/web\/assets\/css\/_sass\/03-components\/_pins.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/assets\/css\/_sass\/03-components\/_pins.sass",
 		"outputAbbreviatedPath": "\/web\/assets\/css\/web-styles.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -33375,6 +33529,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/web\/assets\/images\/logo-charlenetas.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 25967,
+		"inputAbbreviatedPath": "\/web\/assets\/images\/logo-charlenetas.png",
+		"outputAbbreviatedPath": "\/web\/assets\/images\/logo-charlenetas.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/web\/assets\/images\/usr-avatar.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -33444,21 +33609,27 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/web\/plugins\/pins-grid\/pins.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
+	"\/web\/uploads\/ani.jpg": {
+		"fileType": 16384,
 		"ignore": 0,
-		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/web\/plugins\/pins-grid\/pins.scss",
-		"outputAbbreviatedPath": "\/web\/plugins\/pins-grid\/pins.min.css",
+		"ignoreWasSetByUser": 0,
+		"initialSize": 16534,
+		"inputAbbreviatedPath": "\/web\/uploads\/ani.jpg",
+		"outputAbbreviatedPath": "\/web\/uploads\/ani.jpg",
 		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 1,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 0,
-		"shouldRunBless": 0,
-		"useLibsass": 0
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/web\/uploads\/profiles\/ava127c9f55dbc4839b4894f1732052e24757b5ffb56dfb1.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 16534,
+		"inputAbbreviatedPath": "\/web\/uploads\/profiles\/ava127c9f55dbc4839b4894f1732052e24757b5ffb56dfb1.jpg",
+		"outputAbbreviatedPath": "\/web\/uploads\/profiles\/ava127c9f55dbc4839b4894f1732052e24757b5ffb56dfb1.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		}
 	},
 "hooks": [
