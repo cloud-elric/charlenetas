@@ -1,0 +1,83 @@
+.header
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 10px 0
+  background-color: $base-color
+  div
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    a
+      margin: 0 10px
+      padding: 10px 20px
+      text-transform: uppercase
+      font-size: .7em
+      letter-spacing: 1px
+      color: $header-menu
+      font-weight: 400
+      font-family: $header-main
+      display: flex
+      align-items: center
+      justify-content: center
+      i
+        margin-left: 10px
+        margin-top: -5px
+      &:hover
+        color: $header-menu-hover
+  .logo
+    margin: 0 40px
+nav
+  background-color: $white
+  width: 90%
+  min-width: 1024px
+  max-width: 1280px
+  overflow: hidden
+  border-radius: 6px
+  margin: 10px auto 50px
+  ul
+    display: flex
+    justify-content: space-around
+    height: 100%
+    li
+      height: inherit
+      a
+        height: inherit
+        font-family: $header-main
+        font-size: .9em
+        font-weight: 400
+        color: $header-menu-off
+        transition: color 300ms ease-in-out
+        padding: 0 20px
+        border-bottom: 0px solid $header-menu-off
+        position: relative
+        display: flex
+        flex-direction: column-reverse
+        align-items: center
+        justify-content: flex-start
+        span
+          height: 3px
+          width: 150%
+          background-color: transparent
+          transition: transform 300ms ease-in-out
+        &.filter-active
+          color: $header-menu
+          span.color-espejo
+            background-color: $color-espejo
+          span.color-hoy-pense
+            background-color: $color-hoy-pense
+          span.color-sabias-que
+            background-color: $color-sabias-que
+          span.color-contexto
+            background-color: $color-contexto
+          span.color-media
+            background-color: $color-media
+          span.color-alquimia
+            background-color: $color-alquimia
+          span.color-verdadazos
+            background-color: $color-verdadazos
+        &:hover
+          background-color: transparent
+          color: $header-menu-hover
+          span
+            transform: translateY(-3px)

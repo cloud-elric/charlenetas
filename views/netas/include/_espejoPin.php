@@ -10,7 +10,7 @@ use yii\helpers\Html;
 	<div class="pin-header pin-header-espejo"></div>
 
 	<div class=image>
-		<img data-src="assets/images/<?=$post->txt_imagen?>">
+		<img data-src="assets/images/d3dd554f.image17.jpg">
 	</div>
 
 
@@ -25,18 +25,18 @@ use yii\helpers\Html;
 		<div class="pin-social-usr">
 		<?php
 		$usuario = $post->idUsuario;
-		
+
 		if (! empty ( $usuario )) {
 			echo Html::img ( $usuario->getImageProfile());
 			echo '<span>' . $usuario->txt_username . '</span>';
 		}
-		
+
 		?>
-		
+
 	</div>
 		<div class="pin-social-interactions">
 			<span><?=$post->entEspejos->num_subscriptores?></span> <i
-				class="glyphicon glyphicon-thumbs-up margin-right-20"></i> 
+				class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
 		</div>
 
 	</div>
