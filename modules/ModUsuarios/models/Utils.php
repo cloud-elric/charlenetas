@@ -5,7 +5,21 @@ namespace app\modules\ModUsuarios\models;
 use Yii;
 
 class Utils {
-	
+
+	/**
+	 * Recupera el id de un video de youtube a partir de la url de youtube
+	 * 
+	 * @param unknown $url
+	 */
+	public static function getIdVideoYoutube($url){
+		parse_str( parse_url( $url, PHP_URL_QUERY ), $params );
+		
+		if(key_exists('v', $params)){
+			return $parmas['v'];
+		}
+		
+		return null;
+	}
 	
 	/**
 	 * Corta un texto y le coloca 3 puntos suspensivos al final

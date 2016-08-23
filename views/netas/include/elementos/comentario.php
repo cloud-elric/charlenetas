@@ -1,8 +1,34 @@
 <?php
+use yii\helpers\Html;
 
 // Comentario
-echo 'Comentarios:' . $comentario->txt_comentario . "<br>";
+echo Html::img ( $comentario->idUsuario->getImageProfile (), [ 
+		'width' => '50px' 
+] ) . $comentario->txt_comentario . "<br>";
 ?>
+
+<?php
+// Si solamente es un comentario
+if (! $respuesta) {
+	?>
+<hr>
+<label>Respuestas:</label>
+<div style='width: 90%; margin-left: 10%' id='js-respuestas-comentario-<?=$comentario->txt_token?>'>aqui van
+	las respuestas</div>
+	<script>
+		var page<?=$comentario->txt_token?>= 0;
+		cargarRespuestas('<?=$comentario->txt_token?>', page<?=$comentario->txt_token?>, true);
+	</script>
+<?php
+	
+// Coloca el input para responder
+	echo $this->render ( 'inputComentario', [ 
+			'token' => $comentario->txt_token,
+			'respuesta'=>true
+	] );
+}?>
+
+
 
 
 <?php
@@ -30,7 +56,7 @@ if (! Yii::$app->user->isGuest) {
 				break;
 			default :
 				echo '0';
-			break;
+				break;
 		}
 		?>
 		</div>

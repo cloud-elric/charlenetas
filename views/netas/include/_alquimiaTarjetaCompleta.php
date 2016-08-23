@@ -15,7 +15,8 @@
 <?php
 
 echo $this->render ( 'elementos/inputComentario', [ 
-		'token' => $post->txt_token 
+		'token' => $post->txt_token,
+		'respuesta'=>false
 ] );
 
 ?>

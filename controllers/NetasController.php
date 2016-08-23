@@ -130,7 +130,8 @@ class NetasController extends Controller {
 		return $this->render ( '_comentariosPost', [ 
 				'comentarios' => $comentarios,
 				'post' => $post,
-				'feedbacks' => $feedbacks 
+				'feedbacks' => $feedbacks,
+				'respuestas'=>false
 		] );
 	}
 	
@@ -222,7 +223,9 @@ class NetasController extends Controller {
 			
 			return $this->render ( 'include/elementos/comentario', [ 
 					'comentario' => $comentario,
-					'feedbacks' => $feedbacks 
+					'feedbacks' => $feedbacks,
+					'respuesta'=>false
+					
 			] );
 		}
 	}
@@ -342,6 +345,66 @@ class NetasController extends Controller {
 	}
 	
 	/**
+	 * Carga las respuesta de un comentario
+	 * 
+	 * @param unknown $token
+	 * @param unknown $page
+	 */
+	public function actionCargarRespuestas($token, $page){
+		
+		// no se usara un layout
+		$this->layout = false;
+		
+		// Busca el comentario por el token
+		$comentario = $this->getComentarioByToken($token);
+		
+		// Busqueda de las respuestas por la paginacion
+		$respuestasComentario = EntComentariosPosts::getRespuestasComentario($comentario->id_comentario_post, $page);
+		
+		// Tipos de feedbacks
+		$feedbacks = $this->obtenerTiposFeedbacks ();
+		
+		// Pintar vista
+		return $this->render ( '_comentariosPost', [
+				'comentarios' => $respuestasComentario,
+				'feedbacks' => $feedbacks,
+				'respuestas'=>true
+		] );
+	}
+	
+	/**
+	 * Agrega respuesta a un comentario
+	 * @param unknown $token
+	 */
+	public function actionResponderComentario($token){
+		// no se usara un layout
+		$this->layout = false;
+		
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		// Busca el comentario por el token
+		$comentario = $this->getComentarioByToken($token);
+		
+		$respuesta = new EntComentariosPosts ();
+		$respuesta->load ( Yii::$app->request->post () );
+		
+		$respuesta->id_comentario_padre = $comentario->id_comentario_post;
+		
+		if ($respuesta->guardarComentarioUsuario ( $idUsuario, $comentario->id_post )) {
+			// Tipos de feedbacks
+			$feedbacks = $this->obtenerTiposFeedbacks ();
+				
+			return $this->render ( 'include/elementos/comentario', [
+					'comentario' => $respuesta,
+					'feedbacks' => $feedbacks,
+					'respuesta'=>true
+						
+			] );
+		}
+	}
+	
+	/**
 	 * Busca un comentario por su token
 	 *
 	 * @param unknown $token        	
@@ -449,5 +512,10 @@ class NetasController extends Controller {
 	}
 	public function actionGt($tk) {
 		echo Utils::generateToken ( $tk );
+	}
+	
+	public function actionTest($url){
+		
+		
 	}
 }

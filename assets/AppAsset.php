@@ -25,6 +25,7 @@ class AppAsset extends AssetBundle
       'https://fonts.googleapis.com/icon?family=Material+Icons'
     ];
     public $js = [
+    	'js/charlenetas.js',	
       'plugins/pins-grid/pins.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js'
 
