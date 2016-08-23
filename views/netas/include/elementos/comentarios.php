@@ -1,9 +1,17 @@
-
-
-
+<!-- @TODO 1.0 implementar la foto del usuario dinamicamente solo si esta logeado al crear nuevo comentario-->
+<!-- @TODO 2.0 implementar la foto del usuario dinamicamente para cada post-->
 
 <div class="new-comment">
-  <!-- TODO implementar la foto del usuario dinamicamente solo si esta logeado -->
+
+
+  <!-- TODO 1.0 -->
+
+  <!-- echo $this->render ( 'elementos/inputComentario', [
+  		'token' => $post->txt_token,
+  		'respuesta'=>false
+  ] ); -->
+
+
   <img src="assets/images/usr-avatar.png" alt="" />
   <form class="add-new-comment" id="">
     <textarea name="comentario" placeholder="Yo opino que..."></textarea>
@@ -16,7 +24,7 @@
 
 
   <div class="comment-header">
-    <!-- TODO implementar la foto del usuario dinamicamente -->
+    <!-- TODO 2.0 implementar la foto del usuario dinamicamente -->
     <div class="comment-usr">
       <img src="assets/images/usr-avatar.png" alt="" />
       <h5>Alfie</h5>

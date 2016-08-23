@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 <section class="full-pin-header">
 
@@ -24,7 +23,7 @@
 	<p>
 		<?=$post->txt_descripcion?>
 	</p>
-	<img src="assets/images/<?=$post->txt_imagen?>" alt="Verdadazos - Netas bien duras" />	
+	<img src="assets/images/<?=$post->txt_imagen?>" alt="Verdadazos - Netas bien duras" />
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
 			<div class="feedback did-usr-interact">
@@ -59,22 +58,3 @@
 
 
 </section>
-=======
-<?php
-/* @var $post EntPosts*/
-?>
-<h1>Verdadazos</h1>
-<?=$post->num_likes?><br>
-<?=$post->txt_imagen?><br>
-<?=$post->fch_publicacion?><br>
-<?=$post->txt_descripcion?><br>
-
-<div id="js-comments"></div>
-
-<?php
-echo $this->render ( 'elementos/inputComentario', [ 
-		'token' => $post->txt_token,
-		'respuesta'=>false 
-] );
-?>
->>>>>>> master

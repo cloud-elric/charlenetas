@@ -12,14 +12,8 @@
 			<img src="assets/images/usr-avatar.png" alt="" />
 		</div>
 
-<<<<<<< HEAD
 	</div>
-=======
-echo $this->render ( 'elementos/inputComentario', [ 
-		'token' => $post->txt_token,
-		'respuesta'=>false 
-] );
->>>>>>> master
+
 
 </section>
 

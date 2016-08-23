@@ -15,14 +15,8 @@
 
 	</div>
 
-<<<<<<< HEAD
 </section>
-=======
-echo $this->render ( 'elementos/inputComentario', [ 
-		'token' => $post->txt_token,
-		'respuesta'=>false
-] );
->>>>>>> master
+
 
 
 
