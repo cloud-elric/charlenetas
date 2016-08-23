@@ -6,11 +6,11 @@
 	<div class="post-publisher-data">
 		<div class="post-publisher">
 			<h6>Publicado por: Charlene</h6>
-			<img src="assets/images/usr-avatar.png" alt="" />
+			<h6><?=$post->fch_creacion?></h6>
 		</div>
 
-		<div class="post-date">
-			<?=$post->fch_creacion?>
+		<div class="post-publisher-avatar">
+			<img src="assets/images/usr-avatar.png" alt="" />
 		</div>
 
 	</div>
@@ -19,7 +19,7 @@
 
 
 
-<section class="full-pin-body full-pin-body-alquimia">
+<section class="full-pin-body full-pin-body-alquimia full-pin-body-img-vertical">
 	<img src="assets/images/<?=$post->txt_imagen?>" alt="Alquimia - Películas que transforman" />
 	<h3><?=$post->txt_titulo?></h3>
 	<p>
@@ -27,58 +27,42 @@
 	</p>
 
 	<div class="pin-alquimia-grades">
-		<span>Calificacion Charlenetas</span>
 
-		<!-- //TODO:: poner el "for2 para por cada numero de calificción total poner las estrellas -->
-		<div class="star-wrapper">
-			<i class="icon-star"></i>
-			<i class="icon-star"></i>
-			<i class="icon-star"></i>
-			<i class="icon-star"></i><?=$post->entAlquimias->num_calificacion_admin?>
+		<?php include 'elementos/pintar-estrellas.php' ?>
+
+	</div>
+
+	<div class="full-pin-body-footer">
+		<div class="full-pin-body-footer-sharebar">
+			<div class="feedback did-usr-interact">
+				<i class="icon icon-facebook"></i>
+			</div>
+			<div class="feedback">
+				<i class="icon icon-twitter"></i>
+			</div>
 		</div>
-
-		<span>Los usuarios</span>
-		<div class="star-wrapper">
-			<i class="icon-star"></i>
-			<i class="icon-star"></i>
-			<i class="icon-star"></i>
-			<i class="icon-star-empty"></i><?=$post->entAlquimias->num_calificacion_usuario?>
-		</div>
-
-		<span>Tu calificación</span>
-		<div class="star-wrapper calificable">
-			<i class="icon-star calificada"></i>
-			<i class="icon-star calificada"></i>
-			<i class="icon-star calificada"></i>
-			<i class="icon-star-half calificada"></i><?=$post->entAlquimias->num_calificacion_usuario?>
+		<div class="full-pin-body-footer-feedbacks">
+			<div class="feedback">
+				<span>345</span>
+				<i class="icon icon-thumbs-up"></i>
+			</div>
 		</div>
 	</div>
 
 </section>
 
 
+
+
 <section class="full-pin-social">
 
-	<div class="coment-new">
+	<div id="//-js-comments">
+
 		<?php
-
-		echo $this->render ( 'elementos/inputComentario', [
-				'token' => $post->txt_token
-		] );
-
+		include 'elementos/comentarios.php'
 		?>
-	</div>
 
-	<div class="comment-reply">
-		<?php
-
-		echo $this->render ( 'elementos/inputComentario', [
-				'token' => $post->txt_token
-		] );
-
-		?>
 	</div>
 
 
-	<div id="js-comments"></div>
 </section>
