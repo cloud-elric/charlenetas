@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* @var $post EntPosts*/
 ?>
 <h1>Verdadazos</h1>
@@ -7,11 +7,11 @@
 <?=$post->fch_publicacion?><br>
 <?=$post->txt_descripcion?><br>
 
-<div id="js-comments">
+<div id="js-comments"></div>
 
-
-</div>
-
-<?php 
-	echo $this->render( 'elementos/inputComentario', ['token'=>$post->txt_token]);
+<?php
+echo $this->render ( 'elementos/inputComentario', [ 
+		'token' => $post->txt_token,
+		'respuesta'=>false 
+] );
 ?>

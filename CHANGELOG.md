@@ -45,6 +45,9 @@ Proyecto tipo red social
 
 
 ## Frontend (Aplicación web)
+### 2016-08-23 [changed]
+- Se cambio los javascript a un archivo llamado "charlenetas.js"
+
 ### 2016-08-22 [added]
 - Se creo un modelo llamado "ConstantesWeb.php" que contiene las constantes generales del sistema
 

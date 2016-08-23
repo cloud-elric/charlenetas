@@ -17,9 +17,13 @@ $form = ActiveForm::begin([
 ]) ?>
     <?= $form->field($comentario, 'txt_comentario')->textArea(['rows'=>3])->label(false) ?>
 	
-	<!-- Boton para guardar el comentario -->
-	<div id="js-comentar" style='border:1px solid black;' onclick="enviarComentario('<?=$token?>');">Comentar</div>
-		
+	<?php if($respuesta){?>
+		<!-- Boton para guardar el comentario -->
+		<div id="js-responder" style='border:1px solid black;' onclick="enviarRespuesta('<?=$token?>');">Responder</div>	
+	<?php }else{?>
+		<!-- Boton para guardar el comentario -->
+		<div id="js-comentar" style='border:1px solid black;' onclick="enviarComentario('<?=$token?>');">Comentar</div>
+	<?php }?>
 <?php 
 ActiveForm::end(); 
 }else{
