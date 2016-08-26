@@ -101,7 +101,7 @@ class EntPosts extends \yii\db\ActiveRecord
      */
     public function getEntComentariosPosts()
     {
-        return $this->hasMany(EntComentariosPosts::className(), ['id_post' => 'id_post']);
+        return $this->hasMany(EntComentariosPosts::className(), ['id_post' => 'id_post'])->where(['is','id_comentario_padre', null ]);
     }
 
     /**

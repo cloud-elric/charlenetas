@@ -1,5 +1,7 @@
 <?php
 use app\models\EntUsuariosSubscripciones;
+use yii\helpers\Html;
+use app\modules\ModUsuarios\models\Utils;
 ?>
 
 
@@ -37,11 +39,11 @@ if (! Yii::$app->user->isGuest) {
 	<div class="post-publisher-data">
 		<div class="post-publisher">
 			<h6>Publicado por: <?=$post->idUsuario->nombreCompleto?></h6>
-			<h6><?=$post->fch_creacion?></h6>
+			<h6><?=Utils::changeFormatDate(Html::encode($post->fch_creacion))?></h6>
 		</div>
 
 		<div class="post-publisher-avatar">
-			<img src="assets/images/<?=$post->idUsuario->txt_imagen?>" alt="Netanauta que publico en el Espejo" />
+		<?=Html::img ( $post->idUsuario->getImageProfile (), [ 'width' => '50px','alt'=>'Avatar de NetaAdmin que respondio en el Espejo'] )?>
 		</div>
 
 	</div>

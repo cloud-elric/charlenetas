@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Html;
+?>
 
 <section class="full-pin-header">
 
@@ -34,27 +37,26 @@
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<div class="feedback">
-				<span><?=$post->num_likes?></span>
-				<i class="icon icon-thumbs-up"></i>
+			<?php 
+				if (Yii::$app->user->isGuest) {
+					$onclick = 'showModalLogin();';
+				}else{
+					$onclick = 'likePost("'.$post->txt_token.'");';
+				}
+				?>
+			<div class="feedback js-feedback-like" onclick='<?=$onclick?>'>
+				<span  id='js-like-<?=$post->txt_token?>'><?=Html::encode($post->num_likes)?></span> <i class="icon icon-thumbs-up"></i>
 			</div>
 		</div>
 	</div>
 
 </section>
 
-
-
-
 <section class="full-pin-social">
-
-	<div id="//-js-comments">
-
+	<div id="js-comments">
 		<?php
-		include 'elementos/comentarios.php'
+		include 'elementos/comentarios.php';
 		?>
-
 	</div>
-
-
+	<div id="js-cargar-comentarios" onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">Cargar más comentarios</div>
 </section>
