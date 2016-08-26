@@ -43,7 +43,7 @@ function cargarComentarios(token, borrarAnteriores) {
 }
 
 // Carga las respuestas de cada comentario
-function cargarRespuestas(token, pageRespuestas, borrarAnteriores) {
+function cargarRespuestas(token, pageRespuestas) {
 	var url = 'netas/cargar-respuestas?token=' + token + '&page='
 			+ pageRespuestas;
 
@@ -53,16 +53,27 @@ function cargarRespuestas(token, pageRespuestas, borrarAnteriores) {
 		success : function(res) {
 			// Poner las respuestas en el contenedor adecuado
 
-			if (borrarAnteriores) {
-				$('#js-respuestas-comentario-' + token).html(res);
-			} else {
-
-			}
+			
+				$('#js-respuestas-comentario-' + token).append(res);
+			
 
 		}
 
 	});
 
+}
+
+/**
+ * Carga las siguientes respuestas por token
+ * @param element
+ */
+function cargarRespuestasPage(element){
+	var token = element.data('token');
+	var page = $('#js-page-respuesta-'+token).val();
+	var pageAdd = parseInt(page)+1;
+	$('#js-page-respuesta-'+token).val(pageAdd);
+	
+	cargarRespuestas(token, pageAdd);
 }
 
 // Muestra un post con toda su información

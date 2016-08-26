@@ -80,11 +80,11 @@ $dataTokenReply = 'data-token="' . $comentario->txt_token . '"';
   <div class="comment-reply"
 		id="js-respuestas-comentario-<?=$comentario->txt_token?>"></div>
 
-	<div id="js-cargar-mas-respuestas-<?=$comentario->txt_token?>">Cargar mas respuestas</div>
-		
+	<div id="js-cargar-mas-respuestas-<?=$comentario->txt_token?>" data-token='<?=$comentario->txt_token?>' onclick="cargarRespuestasPage($(this))">Cargar mas respuestas</div>
+	
+	<input type="hidden" id='js-page-respuesta-<?=$comentario->txt_token?>'  value='0'/>	
 	<script>
-		var page<?=$comentario->txt_token?>= 0;
-		cargarRespuestas('<?=$comentario->txt_token?>', page<?=$comentario->txt_token?>, true);
+		cargarRespuestas('<?=$comentario->txt_token?>', 0);
 	</script>
 
 	<?php }?>
