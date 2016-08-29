@@ -2,7 +2,9 @@
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
 $usuario = $post->idUsuario;
+$alquimia = $post->entAlquimias;
 ?>
+<input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
 	<h2>Alquimia</h2>
 	<div class="post-publisher-data">
@@ -38,15 +40,8 @@ $usuario = $post->idUsuario;
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
 			<?php 
-				if (Yii::$app->user->isGuest) {
-					$onclick = 'showModalLogin();';
-				}else{
-					$onclick = 'likePost("'.$post->txt_token.'");';
-				}
-				?>
-			<div class="feedback js-feedback-like" onclick='<?=$onclick?>'>
-				<span  id='js-like-<?=$post->txt_token?>'><?=Html::encode($post->num_likes)?></span> <i class="icon icon-thumbs-up"></i>
-			</div>
+				include 'elementos/like-post.php';
+			?>
 		</div>
 	</div>
 </section>

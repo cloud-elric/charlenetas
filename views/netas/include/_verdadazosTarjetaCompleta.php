@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 ?>
-
+<input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
 
 	<h2>Verdadazos</h2>
@@ -19,14 +19,14 @@ use yii\helpers\Html;
 
 </section>
 
-
-
-<section class="full-pin-body full-pin-body-alquimia full-pin-body-img-horizontal">
+<section
+	class="full-pin-body full-pin-body-alquimia full-pin-body-img-horizontal">
 	<h3><?=$post->txt_titulo?></h3>
 	<p>
 		<?=$post->txt_descripcion?>
 	</p>
-	<img src="assets/images/<?=$post->txt_imagen?>" alt="Verdadazos - Netas bien duras" />
+	<img src="assets/images/<?=$post->txt_imagen?>"
+		alt="Verdadazos - Netas bien duras" />
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
 			<div class="feedback did-usr-interact">
@@ -38,15 +38,8 @@ use yii\helpers\Html;
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
 			<?php 
-				if (Yii::$app->user->isGuest) {
-					$onclick = 'showModalLogin();';
-				}else{
-					$onclick = 'likePost("'.$post->txt_token.'");';
-				}
-				?>
-			<div class="feedback js-feedback-like" onclick='<?=$onclick?>'>
-				<span  id='js-like-<?=$post->txt_token?>'><?=Html::encode($post->num_likes)?></span> <i class="icon icon-thumbs-up"></i>
-			</div>
+				include 'elementos/like-post.php';
+			?>
 		</div>
 	</div>
 
@@ -58,5 +51,7 @@ use yii\helpers\Html;
 		include 'elementos/comentarios.php';
 		?>
 	</div>
-	<div id="js-cargar-comentarios" onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">Cargar más comentarios</div>
+	<div id="js-cargar-comentarios"
+		onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">Cargar
+		más comentarios</div>
 </section>

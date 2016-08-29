@@ -38,41 +38,9 @@ $dataTokenReply = 'data-token="' . $comentario->txt_token . '"';
 }
 		?>
     <div class="comment-feedbacks">
-   	 		<?php
-							foreach ( $feedbacks as $feedback ) {
-								
-								// did-usr-interact
-								if (Yii::$app->user->isGuest) {
-									$onclick = 'showModalLogin();';
-								} else {
-									$onclick = 'agregarFeedback("' . $comentario->txt_token . '","' . $feedback->txt_token . '");';
-								}
-								
-								switch ($feedback->id_tipo_feedback) {
-									case 1 : // like
-										$numFeed = $comentario->num_likes;
-										$icon = "icon-thumbs-up";
-										break;
-									case 2 : // no like
-										$numFeed = $comentario->num_dislikes;
-										$icon = "icon-thumbs-down";
-										break;
-									case 3 : // troll
-										$numFeed = $comentario->num_trolls;
-										$icon = "icon-trollface";
-										break;
-									default :
-										$numFeed = '0';
-										break;
-								}
-								?>
-     		 <div class="feedback js-feedback js-feedback-<?=$comentario->txt_token?>" onclick='<?=$onclick?>'
-				data-token='<?=$comentario->txt_token?>'
-				data-tfb='<?=$feedback->txt_token?>'>
-				<i class="icon <?=$icon?>"></i> <span
-					id='js-contador-<?=$comentario->txt_token?>-<?=$feedback->txt_token?>'><?=$numFeed?></span>
-			</div>
-      <?php }?>
+   	 		<?php 
+   	 		include 'feedbacks-comentario.php';
+   	 		?>
     </div>
 	</div>
   

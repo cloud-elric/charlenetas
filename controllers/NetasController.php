@@ -19,6 +19,7 @@ use yii\widgets\ActiveForm;
 use yii\web\Response;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use app\modules\ModUsuarios\models\LoginForm;
+use app\models\CatTiposPosts;
 
 class NetasController extends Controller {
 	
@@ -60,7 +61,7 @@ class NetasController extends Controller {
 	
 	/**
 	 * Obtenemos la calificacion del usuario logueado
-	 * 
+	 *
 	 * @param unknown $token        	
 	 */
 	public function actionGetCalificacionUsuario($token) {
@@ -111,20 +112,20 @@ class NetasController extends Controller {
 	
 	/**
 	 * Obtiene el input de la respuesta
-	 * 
-	 * @param unknown $token
+	 *
+	 * @param unknown $token        	
 	 */
 	public function actionCargarInputRespuesta($token) {
 		// Layout
 		$this->layout = false;
-	
+		
 		// Buscamos el post
-		$comentario = $this->getComentarioByToken($token);
-	
+		$comentario = $this->getComentarioByToken ( $token );
+		
 		// pinta el input
-		echo $this->render ( 'include/elementos/inputComentario', [
+		echo $this->render ( 'include/elementos/inputComentario', [ 
 				'token' => $comentario->txt_token,
-				'respuesta' => true
+				'respuesta' => true 
 		] );
 	}
 	
@@ -148,9 +149,14 @@ class NetasController extends Controller {
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
 		
+		
+		// Tipos de post
+		$tiposPost = CatTiposPosts::find()->where(['b_habilitado'=>1])->all();
+		
 		// Pintar vista
 		return $this->render ( 'index', [ 
-				'listaPost' => $listaPost 
+				'listaPost' => $listaPost,
+				'tiposPost'=>$tiposPost
 		] );
 	}
 	
@@ -332,35 +338,45 @@ class NetasController extends Controller {
 		$feedback = $this->getFeedbackByToken ( $feed );
 		
 		// Revisa si existe un registro previo
-		if (! EntUsuariosFeedbacks::existFeedbackUsuario ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback )) {
+		if (! ($usuarioFeedback = EntUsuariosFeedbacks::existFeedbackUsuario ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback ))) {
 			// Generar un registro para el usuario
 			$entUsuariosFeedbacks = new EntUsuariosFeedbacks ();
 			$entUsuariosFeedbacks->guardarUsuarioFeed ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback );
 			
-			// Generar contador
-			$feedbackComentarios = ViewContadorFeedbackComentarios::find ()->where ( [ 
-					'id_comentario' => $comentario->id_comentario_post,
-					'id_tipo_feedback' => $feedback->id_tipo_feedback 
-			] )->one ();
 			
-			// Asignar contador
-			switch ($feedback->id_tipo_feedback) {
-				case 1 : // like
-					$comentario->num_likes = $feedbackComentarios->num_usuarios;
-					break; // no like
-				case 2 :
-					$comentario->num_dislikes = $feedbackComentarios->num_usuarios;
-					break;
-				case 3 : // troll
-					$comentario->num_trolls = $feedbackComentarios->num_usuarios;
-					break;
-			}
-			
-			// Actualizar los comentarios para que sepamos cuantos hay de cada cosa
-			$comentario->save ();
 		} else {
-			echo 'exist';
+			$usuarioFeedback->delete();
 		}
+		
+		// Generar contador
+		$feedbackComentarios = ViewContadorFeedbackComentarios::find ()->where ( [
+				'id_comentario' => $comentario->id_comentario_post,
+				'id_tipo_feedback' => $feedback->id_tipo_feedback
+		] )->one ();
+			
+		// Si existen feedbacks al comentario
+		if($feedbackComentarios){
+			$feedbackComentarios = $feedbackComentarios->num_usuarios;
+		}else{
+			$feedbackComentarios = 0;
+		}
+		
+		// Asignar contador
+		switch ($feedback->id_tipo_feedback) {
+			case 1 : // like
+				$comentario->num_likes = $feedbackComentarios;
+				break; // no like
+			case 2 :
+				$comentario->num_dislikes = $feedbackComentarios;
+				break;
+			case 3 : // troll
+				$comentario->num_trolls = $feedbackComentarios;
+				break;
+		}
+			
+		// Actualizar los comentarios para que sepamos cuantos hay de cada cosa
+		$comentario->save ();
+		
 	}
 	
 	/**
@@ -379,23 +395,28 @@ class NetasController extends Controller {
 		$post = $this->getPostByToken ( $token );
 		
 		// Si el usuario no le ha dado like al post guardamos su like
-		if (! EntUsuariosLikePost::existsUsuarioLike ( $idUsuario, $post->id_post )) {
+		if (! ($usuarioLike = EntUsuariosLikePost::existsUsuarioLike ( $idUsuario, $post->id_post ))) {
 			
 			// Guarda el registro
 			$usuarioLike = new EntUsuariosLikePost ();
 			$usuarioLike->guardarUsuarioLike ( $idUsuario, $post->id_post );
-			
-			// Obtenemos el numero de likes del post
-			$numLikes = $post->viewContadorLikes;
-			
-			// Si existen likes
-			if ($numLikes) {
-				// Agregamos un like al post
-				$post->actualizarNumLikes ( $numLikes->num_likes );
-			}
 		} else {
-			echo 'existe';
+			// Elimina el like del usuario al post
+			$usuarioLike->delete ();
 		}
+		
+		// Obtenemos el numero de likes del post
+		$numLikes = $post->viewContadorLikes;
+		
+		// Si no existen likes
+		if (! $numLikes) {
+			$numLikes = 0;
+		} else {
+			$numLikes = $numLikes->num_likes;
+		}
+		
+		// Actualizamos los like del post
+		$post->actualizarNumLikes ( $numLikes );
 	}
 	
 	/**

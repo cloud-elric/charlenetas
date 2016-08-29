@@ -664,4 +664,5 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		
 		return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageDefault'];
 	}
+	
 }

@@ -27,7 +27,8 @@ class AppAsset extends AssetBundle {
 	];
 	public $js = [ 
 			'js/charlenetas.js',
-			'plugins/pins-grid/pins.min.js',
+			//'plugins/pins-grid/pins.min.js',
+			'plugins/pins-grid/pins.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js',
 			'plugins/ladda-bootstrap/dist/spin.min.js',
 			'plugins/ladda-bootstrap/dist/ladda.min.js'

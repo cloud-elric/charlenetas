@@ -22,14 +22,9 @@ use yii\web\View;
 
 <nav>
 	<ul>
-		<li><a href="#" class="filter-active"><span class="color-espejo"></span>Espejo</a></li>
-		<li><a href="#"><span class="color-solo-por-hoy"></span>Solo por hoy</a></li>
-		<li><a href="#"><span class="color-alquimia"></span>Alquimia</a></li>
-		<li><a href="#" class="filter-active"><span class="color-contexto"></span>En
-				contexto</a></li>
-		<li><a href="#"><span class="color-sabias-que"></span>Sabias que</a></li>
-		<li><a href="#" class="filter-active"><span class="color-media"></span>Media</a></li>
-		<li><a href="#"><span class="color-verdadazos"></span>Verdadazos</a></li>
+	<?php foreach($tiposPost as $tipoPost){?>
+		<li><a href="#" class="filter-active js-filter-tipo-post" data-value="<?=$tipoPost->id_tipo_post?>"><span class="color-espejo"></span><?=$tipoPost->txt_nombre?></a></li>
+	<?php }?>	
 	</ul>
 </nav>
 
