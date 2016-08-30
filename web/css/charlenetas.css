@@ -1,28 +1,5 @@
 
-
-#js-content {
-	padding: 15px;
+.pin{
+	display:inline-block;
+	width:18%;
 }
-
-#js-comments {
-	background-color: black;
-	color: white;
-
-}
-
-#js-comentarios-tmp {
-	display: none;
-}
-
-/*.closeBackScreen {
-	float: right;
-	margin-right: 20px;
-	font-size: 14pt;
-	background: black;
-	color: white;
-	width: 50px;
-	text-align: center;
-	padding: 5px;
-	border-radius: 50%;
-	cursor: pointer;
-}*/

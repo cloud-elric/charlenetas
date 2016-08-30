@@ -30,7 +30,7 @@ use yii\web\View;
 
 <div class=container-fluid>
 	<div class="pins-grid-container">
-		<div class=pins-grid id="js-contenedor-posts-tarjetas">
+		<div class="pins-grid grid" id="js-contenedor-posts-tarjetas">
 				<?php
 				include 'masPosts.php';
 				?>
@@ -111,7 +111,28 @@ use yii\web\View;
 <a class="waves-effect waves-light btn modal-trigger" href="#modal-login"></a>
 <?php
 if (Yii::$app->user->isGuest) {
-$this->registerJs("loadLogin();", View::POS_END);
+// $this->registerJs('
+// 		// Masonry Grid
+// var grid = $(".grid").masonry({
+//   itemSelector: ".pin",
+//   percentPosition: true,
+//   gutter: 10
+// });
+
+// $("#agregar-item").on("click", function(){
+// 	// create new item elements
+//   var $items = $("<div class=\"pin is-visible\">hola mundo</div><div class=\"pin is-visible\">hola mundo</div>");
+//   // append items to grid // add and lay out newly appended items
+//   grid.append( $items ).masonry( "appended", $items );
+    
+// });
+
+// $(".item").each(function(i){
+//   setTimeout(function(){
+//     $(".item").eq(i).addClass("is-visible");
+//   }, 200 * i);
+// });
+// 		', View::POS_END);
 
 }
 ?>

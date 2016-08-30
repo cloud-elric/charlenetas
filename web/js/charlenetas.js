@@ -11,7 +11,7 @@ function cargarMasPosts() {
 		url:url,
 		success:function(res){
 			contenedor.append(res);
-			ready();
+			
 			pages++;
 		}
 	});
@@ -722,7 +722,7 @@ $(document).ready(function() {
 
 		ocultarTipoPost(tipoPost, opacity)
 		elemento.toggleClass('filter-active');
-		ready();
+		
 	});
 
 });
