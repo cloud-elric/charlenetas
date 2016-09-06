@@ -1,99 +1,97 @@
-<?php
-use yii\helpers\Html;
-?>
-<input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
+
 <section class="full-pin-header">
-	<h2>Contexto
-	</h2>
+
+	<h2>Contexto</h2>
 	<div class="post-publisher-data">
 		<div class="post-publisher">
-			<h6>Publicado por: <?=$post->idUsuarioAdmin->nombreCompleto?></h6>
-			<h6><?=$post->fch_publicacion?></h6>
+			<h6>Publicado por: Charlene</h6>
+			<h6><?=$post->fch_creacion?></h6>
 		</div>
 
 		<div class="post-publisher-avatar">
-			<?=Html::img ( $post->idUsuarioAdmin->getImageProfile (), [ 'width' => '50px','alt'=>'Avatar de NetaAdmin que respondio en el Espejo'] )?>
+			<img src="assets/images/usr-avatar.png" alt="" />
 		</div>
 
 	</div>
+
+
 </section>
+
+
 
 <section class="full-pin-body full-pin-body-contexto">
 	<div class="full-pin-contexto-tabs-menu">
 		<ul class="tabs">
-			<li class="tab col s3"><a class="active" href="#test1"><?=Html::encode($post->txt_titulo)?></a></li>
-			<?php
-			$i = 2;
-			
-			if($post->entContextos){
-				$contestosHijos = $post->entContextos->entContextos;
-			}else{
-				$contestosHijos = [];
-			}
-			foreach ( $contestosHijos  as $contextoHijo ) {
-				$hijo = $contextoHijo->idPost;
-				?>
-			<li class="tab col s3"><a href="#test<?=$i?>"><?=$hijo->txt_titulo?></a></li>
-		<?php
-				$i ++;
-			}
-			?>
+			<li class="tab col s3"><a class="active" href="#test1">Titulo del contexto</a></li>
+			<li class="tab col s3"><a href="#test2">Titulo del contexto</a></li>
+			<li class="tab col s3"><a href="#test3">Titulo del contexto</a></li>
+			<li class="tab col s3"><a href="#test4">Titulo del contexto</a></li>
 		</ul>
 	</div>
 
 	<div class="full-pin-body-contexto-tabs">
-		<div id="test1" class="contexto-data-tab full-pin-body-img-vertical">
-			<img src="assets/images/<?=$post->txt_imagen?>"
-				alt="<?=$post->txt_titulo?>" />
-			<h3><?=$post->txt_titulo?></h3>
-			<p>
+
+		    <div id="test1" class="contexto-data-tab full-pin-body-img-vertical">
+					<img src="assets/images/<?=$post->txt_imagen?>" alt="En Contexto - contradicciones de nuestros funcionarios" />
+					<h3><?=$post->txt_titulo?></h3>
+					<p>
 						<?=$post->txt_descripcion?>
 					</p>
-		</div>
-		<?php
-			$i = 2;
-			foreach ( $contestosHijos  as $contextoHijo ) {
-				$hijo = $contextoHijo->idPost;
-			?>
-		<div id="test<?=$i?>" class="contexto-data-tab full-pin-body-img-vertical">
-			<img src="assets/images/<?=$hijo->txt_imagen?>"
-				alt="<?=$hijo->txt_titulo?>" />
-			<h3><?=$hijo->txt_titulo?></h3>
-			<p>
-						<?=$hijo->txt_descripcion?>
+		    </div>
+		    <div id="test2" class="contexto-data-tab full-pin-body-img-vertical">
+					<img src="assets/images/usr-avatar.png" alt="En Contexto - contradicciones de nuestros funcionarios" />
+					<h3><?=$post->txt_titulo?></h3>
+					<p>
+						<?=$post->txt_descripcion?>
 					</p>
-		</div>
-		<?php 
-			$i++;		
-			}?>
+		    </div>
+		    <div id="test3" class="contexto-data-tab full-pin-body-img-vertical">
+					<img src="assets/images/<?=$post->txt_imagen?>" alt="En Contexto - contradicciones de nuestros funcionarios" />
+					<h3><?=$post->txt_titulo?></h3>
+					<p>
+						<?=$post->txt_descripcion?>
+					</p>
+		    </div>
+		    <div id="test4" class="contexto-data-tab full-pin-body-img-vertical">
+					<img src="assets/images/<?=$post->txt_imagen?>" alt="En Contexto - contradicciones de nuestros funcionarios" />
+					<h3><?=$post->txt_titulo?></h3>
+					<p>
+						<?=$post->txt_descripcion?>
+					</p>
+		    </div>
 	</div>
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
 			<div class="feedback did-usr-interact">
-				<i class="icon icon-facebook"></i>
-			</div>
+        <i class="icon icon-facebook"></i>
+      </div>
 			<div class="feedback">
-				<i class="icon icon-twitter"></i>
-			</div>
+        <i class="icon icon-twitter"></i>
+      </div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<?php
-			include 'elementos/like-post.php';
-			?>
-		</div>
+      <div class="feedback">
+				<span>345</span>
+        <i class="icon icon-thumbs-up"></i>
+      </div>
+    </div>
 	</div>
 
 </section>
 
+
+
+
 <section class="full-pin-social">
-	<div id="js-comments">
+
+	<div id="//-js-comments">
+
 		<?php
-		include 'elementos/comentarios.php';
+		include 'elementos/comentarios.php'
 		?>
+
 	</div>
-	<div id="js-cargar-comentarios"
-		onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">Cargar
-		más comentarios</div>
+
 </section>
 
 <script>

@@ -15,11 +15,6 @@ use app\models\EntUsuariosFeedbacks;
 use app\models\ViewContadorFeedbackComentarios;
 use app\models\EntUsuariosLikePost;
 use app\models\EntUsuariosCalificacionAlquimia;
-use yii\widgets\ActiveForm;
-use yii\web\Response;
-use app\modules\ModUsuarios\models\EntUsuarios;
-use app\modules\ModUsuarios\models\LoginForm;
-use app\models\CatTiposPosts;
 
 class NetasController extends Controller {
 	
@@ -39,10 +34,7 @@ class NetasController extends Controller {
 								'suscripcion-espejo',
 								'comentar-post',
 								'agregar-feedback',
-								'like-post',
-								'cargar-input-comentario',
-								'calificar-alquimia',
-								'get-calificacion-usuario' 
+								'like-post' 
 						],
 						'rules' => [
 								
@@ -57,88 +49,8 @@ class NetasController extends Controller {
 				] 
 		];
 		// everything else is denied
-	}
-	
-	/**
-	 * Obtenemos la calificacion del usuario logueado
-	 *
-	 * @param unknown $token        	
-	 */
-	public function actionGetCalificacionUsuario($token) {
 		
-		// Layout
-		$this->layout = false;
 		
-		// usuario logueado
-		$usuario = Yii::$app->user->identity;
-		
-		// Buscamos el post
-		$post = $this->getPostByToken ( $token );
-		
-		// Busca el registro de la calificacion del usuario
-		$calificacionUsuario = Yii::$app->user->identity->getEntUsuariosCalificacionAlquimias ()->where ( [ 
-				'id_post' => $post->id_post 
-		] )->one ();
-		
-		// Obtenemos la calificacion del usuario
-		if ($calificacionUsuario) {
-			$numCalificacion = $calificacionUsuario->num_calificacion;
-		} else {
-			$numCalificacion = 0;
-		}
-		
-		echo $numCalificacion;
-	}
-	
-	/**
-	 * Obtiene el comentario input
-	 *
-	 * @param unknown $token        	
-	 * @return string
-	 */
-	public function actionCargarInputComentario($token) {
-		// Layout
-		$this->layout = false;
-		
-		// Buscamos el post
-		$post = $this->getPostByToken ( $token );
-		
-		// pinta el input
-		echo $this->render ( 'include/elementos/inputComentario', [ 
-				'token' => $post->txt_token,
-				'respuesta' => false 
-		] );
-	}
-	
-	/**
-	 * Obtiene el input de la respuesta
-	 *
-	 * @param unknown $token        	
-	 */
-	public function actionCargarInputRespuesta($token) {
-		// Layout
-		$this->layout = false;
-		
-		// Buscamos el post
-		$comentario = $this->getComentarioByToken ( $token );
-		
-		// pinta el input
-		echo $this->render ( 'include/elementos/inputComentario', [ 
-				'token' => $comentario->txt_token,
-				'respuesta' => true 
-		] );
-	}
-	
-	/**
-	 * Valida al usuario
-	 */
-	public function actionValidacionUsuario() {
-		$model = new LoginForm ();
-		$model->scenario = 'login';
-		if (Yii::$app->request->isAjax && $model->load ( Yii::$app->request->post () )) {
-			Yii::$app->response->format = Response::FORMAT_JSON;
-			return ActiveForm::validate ( $model );
-		}
 	}
 	
 	/**
@@ -149,14 +61,9 @@ class NetasController extends Controller {
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
 		
-		
-		// Tipos de post
-		$tiposPost = CatTiposPosts::find()->where(['b_habilitado'=>1])->all();
-		
 		// Pintar vista
 		return $this->render ( 'index', [ 
-				'listaPost' => $listaPost,
-				'tiposPost'=>$tiposPost
+				'listaPost' => $listaPost 
 		] );
 	}
 	
@@ -224,7 +131,7 @@ class NetasController extends Controller {
 				'comentarios' => $comentarios,
 				'post' => $post,
 				'feedbacks' => $feedbacks,
-				'respuestas' => false 
+				'respuestas'=>false
 		] );
 	}
 	
@@ -317,7 +224,8 @@ class NetasController extends Controller {
 			return $this->render ( 'include/elementos/comentario', [ 
 					'comentario' => $comentario,
 					'feedbacks' => $feedbacks,
-					'respuesta' => false 
+					'respuesta'=>false
+					
 			] );
 		}
 	}
@@ -338,50 +246,40 @@ class NetasController extends Controller {
 		$feedback = $this->getFeedbackByToken ( $feed );
 		
 		// Revisa si existe un registro previo
-		if (! ($usuarioFeedback = EntUsuariosFeedbacks::existFeedbackUsuario ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback ))) {
+		if (! EntUsuariosFeedbacks::existFeedbackUsuario ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback )) {
 			// Generar un registro para el usuario
 			$entUsuariosFeedbacks = new EntUsuariosFeedbacks ();
 			$entUsuariosFeedbacks->guardarUsuarioFeed ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback );
 			
+			// Generar contador
+			$feedbackComentarios = ViewContadorFeedbackComentarios::find ()->where ( [ 
+					'id_comentario' => $comentario->id_comentario_post,
+					'id_tipo_feedback' => $feedback->id_tipo_feedback 
+			] )->one ();
 			
+			// Asignar contador
+			switch ($feedback->id_tipo_feedback) {
+				case 1 : // like
+					$comentario->num_likes = $feedbackComentarios->num_usuarios;
+					break; // no like
+				case 2 :
+					$comentario->num_dislikes = $feedbackComentarios->num_usuarios;
+					break;
+				case 3 : // troll
+					$comentario->num_trolls = $feedbackComentarios->num_usuarios;
+					break;
+			}
+			
+			// Actualizar los comentarios para que sepamos cuantos hay de cada cosa
+			$comentario->save ();
 		} else {
-			$usuarioFeedback->delete();
+			echo 'exist';
 		}
-		
-		// Generar contador
-		$feedbackComentarios = ViewContadorFeedbackComentarios::find ()->where ( [
-				'id_comentario' => $comentario->id_comentario_post,
-				'id_tipo_feedback' => $feedback->id_tipo_feedback
-		] )->one ();
-			
-		// Si existen feedbacks al comentario
-		if($feedbackComentarios){
-			$feedbackComentarios = $feedbackComentarios->num_usuarios;
-		}else{
-			$feedbackComentarios = 0;
-		}
-		
-		// Asignar contador
-		switch ($feedback->id_tipo_feedback) {
-			case 1 : // like
-				$comentario->num_likes = $feedbackComentarios;
-				break; // no like
-			case 2 :
-				$comentario->num_dislikes = $feedbackComentarios;
-				break;
-			case 3 : // troll
-				$comentario->num_trolls = $feedbackComentarios;
-				break;
-		}
-			
-		// Actualizar los comentarios para que sepamos cuantos hay de cada cosa
-		$comentario->save ();
-		
 	}
 	
 	/**
 	 * Da like a un post
-	 *
+	 * 
 	 * @param unknown $token        	
 	 */
 	public function actionLikePost($token) {
@@ -395,36 +293,31 @@ class NetasController extends Controller {
 		$post = $this->getPostByToken ( $token );
 		
 		// Si el usuario no le ha dado like al post guardamos su like
-		if (! ($usuarioLike = EntUsuariosLikePost::existsUsuarioLike ( $idUsuario, $post->id_post ))) {
+		if (! EntUsuariosLikePost::existsUsuarioLike ( $idUsuario, $post->id_post )) {
 			
 			// Guarda el registro
 			$usuarioLike = new EntUsuariosLikePost ();
 			$usuarioLike->guardarUsuarioLike ( $idUsuario, $post->id_post );
-		} else {
-			// Elimina el like del usuario al post
-			$usuarioLike->delete ();
+			
+			// Obtenemos el numero de likes del post
+			$numLikes = $post->viewContadorLikes;
+			
+			// Si existen likes
+			if($numLikes){
+				// Agregamos un like al post
+				$post->actualizarNumLikes($numLikes->num_likes);
+			}
+		}else{
+			echo 'existe';
 		}
-		
-		// Obtenemos el numero de likes del post
-		$numLikes = $post->viewContadorLikes;
-		
-		// Si no existen likes
-		if (! $numLikes) {
-			$numLikes = 0;
-		} else {
-			$numLikes = $numLikes->num_likes;
-		}
-		
-		// Actualizamos los like del post
-		$post->actualizarNumLikes ( $numLikes );
 	}
 	
 	/**
 	 * Califica usuario un post de tipo alquimia
-	 *
-	 * @param unknown $token        	
+	 * 
+	 * @param unknown $token
 	 */
-	public function actionCalificarAlquimia($token, $calificacion = 0) {
+	public function actionCalificarAlquimia($token){
 		// no se usara un layout
 		$this->layout = false;
 		
@@ -435,60 +328,55 @@ class NetasController extends Controller {
 		$post = $this->getPostByToken ( $token );
 		
 		// Si el usuario no ha dado calificacion guardamos su calificacion
-		if (! ($calificacionUsuario = EntUsuariosCalificacionAlquimia::existsCalificacionUsuario ( $idUsuario, $post->id_post ))) {
-			$usuarioCalificacion = new EntUsuariosCalificacionAlquimia ();
-			$usuarioCalificacion->guardarCalificacionUsuario ( $idUsuario, $post->id_post, $calificacion );
+		if(!EntUsuariosCalificacionAlquimia::existsCalificacionUsuario($idUsuario, $post->id_post)){
+			$usuarioCalificacion = new EntUsuariosCalificacionAlquimia();
+			$usuarioCalificacion->guardarCalificacionUsuario($idUsuario, $post->id_post, 4);
 			
 			// Obtenemos el numero de likes del post
 			$alquimia = $post->entAlquimias;
 			$numCalificaciones = $alquimia->calificacionAlquimia;
 			
 			// Si existe calificaciones
-			if ($numCalificaciones) {
-				$alquimia->actualizarCalificacion ( $numCalificaciones->num_calificacion );
-			} else {
-				echo 'nada se encontro';
+			if($numCalificaciones){
+				$alquimia->actualizarCalificacion($numCalificaciones->num_calificacion);
 			}
-		} else {
-			$calificacionUsuario->num_calificacion = $calificacion;
-			$calificacionUsuario->save ();
+			
 		}
 	}
 	
 	/**
 	 * Carga las respuesta de un comentario
-	 *
-	 * @param unknown $token        	
-	 * @param unknown $page        	
+	 * 
+	 * @param unknown $token
+	 * @param unknown $page
 	 */
-	public function actionCargarRespuestas($token, $page) {
+	public function actionCargarRespuestas($token, $page){
 		
 		// no se usara un layout
 		$this->layout = false;
 		
 		// Busca el comentario por el token
-		$comentario = $this->getComentarioByToken ( $token );
+		$comentario = $this->getComentarioByToken($token);
 		
 		// Busqueda de las respuestas por la paginacion
-		$respuestasComentario = EntComentariosPosts::getRespuestasComentario ( $comentario->id_comentario_post, $page );
+		$respuestasComentario = EntComentariosPosts::getRespuestasComentario($comentario->id_comentario_post, $page);
 		
 		// Tipos de feedbacks
 		$feedbacks = $this->obtenerTiposFeedbacks ();
 		
 		// Pintar vista
-		return $this->render ( '_comentariosPost', [ 
+		return $this->render ( '_comentariosPost', [
 				'comentarios' => $respuestasComentario,
 				'feedbacks' => $feedbacks,
-				'respuestas' => true 
+				'respuestas'=>true
 		] );
 	}
 	
 	/**
 	 * Agrega respuesta a un comentario
-	 *
-	 * @param unknown $token        	
+	 * @param unknown $token
 	 */
-	public function actionResponderComentario($token) {
+	public function actionResponderComentario($token){
 		// no se usara un layout
 		$this->layout = false;
 		
@@ -496,7 +384,7 @@ class NetasController extends Controller {
 		$idUsuario = Yii::$app->user->identity->id_usuario;
 		
 		// Busca el comentario por el token
-		$comentario = $this->getComentarioByToken ( $token );
+		$comentario = $this->getComentarioByToken($token);
 		
 		$respuesta = new EntComentariosPosts ();
 		$respuesta->load ( Yii::$app->request->post () );
@@ -506,11 +394,12 @@ class NetasController extends Controller {
 		if ($respuesta->guardarComentarioUsuario ( $idUsuario, $comentario->id_post )) {
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
-			
-			return $this->render ( 'include/elementos/comentario', [ 
+				
+			return $this->render ( 'include/elementos/comentario', [
 					'comentario' => $respuesta,
 					'feedbacks' => $feedbacks,
-					'respuesta' => true 
+					'respuesta'=>true
+						
 			] );
 		}
 	}
@@ -624,6 +513,9 @@ class NetasController extends Controller {
 	public function actionGt($tk) {
 		echo Utils::generateToken ( $tk );
 	}
-	public function actionTest($url) {
+	
+	public function actionTest($url){
+		
+		
 	}
 }

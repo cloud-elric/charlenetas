@@ -129,7 +129,7 @@ class EntUsuariosCalificacionAlquimia extends \yii\db\ActiveRecord {
 		] )->one ();
 		
 		if ($calificacionUsuario) {
-			return $calificacionUsuario;
+			return true;
 		}
 		
 		return false;

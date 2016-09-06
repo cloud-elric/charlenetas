@@ -12,7 +12,6 @@ use app\modules\ModUsuarios\models\EntUsuariosActivacion;
 use app\modules\ModUsuarios\models\EntUsuariosCambioPass;
 use app\modules\ModUsuarios\models\EntUsuariosFacebook;
 use yii\web\UploadedFile;
-use yii\base\Response;
 
 /**
  * Default controller for the `musuarios` module
@@ -166,9 +165,6 @@ class ManagerController extends Controller {
 	 * Loguea al usuario
 	 */
 	public function actionLogin() {
-		
-		$this->layout = false;
-		
 		if (! Yii::$app->user->isGuest) {
 			return $this->goHome ();
 		}
@@ -176,11 +172,10 @@ class ManagerController extends Controller {
 		$model = new LoginForm ();
 		$model->scenario = 'login';
 		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {
-			echo "success";
-			return;
+			
 			return $this->goBack ();
 		}
-		return  $this->renderAjax ( 'login', [ 
+		return $this->render ( 'login', [ 
 				'model' => $model 
 		] );
 	}

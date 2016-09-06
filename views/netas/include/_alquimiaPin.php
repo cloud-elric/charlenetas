@@ -1,6 +1,4 @@
 <?php
-use yii\helpers\Html;
-
 /* @var $post EntPosts*/
 ?>
 
@@ -18,11 +16,18 @@ use yii\helpers\Html;
 		</p>
 		<div class="pin-alquimia-grades">
 			<span>Calificacion Charlenetas</span>
+
+			<!-- //TODO:: poner el "for2 para por cada numero de calificción total poner las estrellas -->
+			<div class="star-wrapper">
 			<?php
 			// Asignamos el modelo de alquimia a una variable
 			$alquimia = $post->entAlquimias;
+			
+			// Pintar estrellas
+			echo $alquimia->generarEstrellas($alquimia->num_calificacion_admin);
 			?>
-			<?=$alquimia->contenedorEstrellas(Html::encode($alquimia->num_calificacion_admin))?>
+			</div>
+
 			<span>Los usuarios</span>
 			<div class="star-wrapper">
 				<?php 
@@ -32,9 +37,11 @@ use yii\helpers\Html;
 			</div>
 		</div>
 	</div>
+
 	<?php
 		include 'elementos/pins-social.php';
 	?>
+
 
 	<!--?=$post->fch_creacion?-->
 </div>

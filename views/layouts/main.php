@@ -20,15 +20,14 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<div>
+<div style='border:2px solid black'>
 <?php
 // Si el usuario esta autenticado
- if(!Yii::$app->user->isGuest){
-//  echo Html::img(Yii::$app->user->identity->getImageProfile());	
-//  echo Yii::$app->user->identity->nombreCompleto.'<br>';
- echo Html::a('Cerrar sesión', ['site/logout']);
- }
-?>
+if(!Yii::$app->user->isGuest){
+echo Html::img(Yii::$app->user->identity->getImageProfile());	
+echo Yii::$app->user->identity->nombreCompleto.'<br>';
+echo Html::a('Cerrar sesión', ['site/logout']);
+}?>
 </div>
 <?php $this->beginBody() ?>
 
