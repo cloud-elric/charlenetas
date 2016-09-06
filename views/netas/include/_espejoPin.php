@@ -36,7 +36,7 @@ use yii\helpers\Html;
 	</div>
 		<div class="pin-social-interactions">
 			<span><?=$post->entEspejos->num_subscriptores?></span> <i
-				class="glyphicon glyphicon-thumbs-up margin-right-20"></i>
+				class="icon icon-fire"></i>
 		</div>
 
 	</div>
