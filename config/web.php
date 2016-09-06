@@ -11,7 +11,10 @@ $config = [
 		'modules' => [ 
 				'modUsuarios' => [ 
 						'class' => 'app\modules\ModUsuarios\ModUsuarios' 
-				] 
+				],
+				'modAdmin' => [
+						'class' => 'app\modules\ModAdmin\Admin',
+				],
 		],
 		'components' => [ 
 				'assetManager' => [
@@ -90,7 +93,9 @@ $config = [
 								'sign-up' => 'modUsuarios/manager/sign-up',
 								'login' => 'modUsuarios/manager/login',
 								'callback-facebook' => 'modUsuarios/manager/callback-facebook',
-								'/' => 'netas/index' 
+								'/' => 'netas/index',
+								//modulo de administrador
+								"prueba"=>"modAdmin/admin/prueba"
 						] 
 				] 
 		],
