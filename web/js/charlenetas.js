@@ -29,9 +29,16 @@ var pagesComentarios = 0;
 	 if(borrarAnteriores){
 		 // Limpia el contenedor de los comentarios
 		 comentariosContenedor.html('');
+<<<<<<< HEAD
 
 		 // Carga los comentarios via asincrona
 		 comentariosContenedor.load(urlComentarios, function(){
+=======
+
+		 // Carga los comentarios via asincrona
+		 comentariosContenedor.load(urlComentarios, function(){
+
+>>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
 
 			 if(comentariosContenedor.html().trim().length>0){
 			 

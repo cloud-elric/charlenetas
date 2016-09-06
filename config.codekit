@@ -33577,6 +33577,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/web\/js\/min\/charlenetas-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/js\/min\/charlenetas-min.js",
+		"outputAbbreviatedPath": "\/web\/js\/min\/min\/charlenetas-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/web\/plugins\/pins-grid\/pins.min.css": {
 		"fileType": 16,
 		"ignore": 1,

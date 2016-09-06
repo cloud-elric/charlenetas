@@ -118,9 +118,40 @@ var pagesComentarios = 0;
 	}
 
 	 pagesComentarios++;
+<<<<<<< HEAD
 
 }
 
+ // Muestra un post con toda su información
+ function showPostFull(token){
+	 var background = $('#backScreen');
+	 var content = $('#js-content');
+	 var url = 'netas/cargar-post?token='+token;
+
+
+	$('body').css('overflow', 'hidden');
+
+	 background.toggle();
+	 content.html('');
+
+	 content.load(url, function(){
+		 cargarComentarios(token, true);
+	});
+}
+=======
+>>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
+
+ // Cierra el post con toda su información
+ function hidePostFull(){
+	 var background = $('#backScreen');
+	 background.toggle();
+	 $('body').css('overflow', 'auto');
+	 pagesComentarios = 0;
+	 $('#js-content').html(' ');
+}
+
+<<<<<<< HEAD
+=======
  // Muestra un post con toda su información
  function showPostFull(token){
 	 var background = $('#backScreen');
@@ -147,6 +178,7 @@ var pagesComentarios = 0;
 	 $('#js-content').html(' ');
 }
 
+>>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
  // Metodo para suscribirse a una pregunta espejo
  function suscribirseEspejo(token){
 	var url = 'netas/suscripcion-espejo?token='+token;
