@@ -25,7 +25,7 @@ class AppAsset extends AssetBundle
       'assets/css/web-styles.css'
     ];
     public $js = [
-    	'js/charlenetas.js',	
+    	'js/charlenetas.js',
       'plugins/pins-grid/pins.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js'
 

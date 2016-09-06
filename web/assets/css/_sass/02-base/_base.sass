@@ -75,6 +75,12 @@ h6
   box-shadow: none
 
 
+.more-entries
+  position: fixed
+  bottom: 10px
+  left: 50%
+  width: 200px
+  margin-left: -100px
 
 
 //	========================
@@ -83,3 +89,25 @@ h6
 
 .margin-bottom-10px
   margin-bottom: -10px !important
+
+
+//	========================
+// 4.0 Media Queries
+//	========================
+
+=respond-to($media)
+  @if $media == lg
+    @media (min-width: $screen-md + 1)
+      @content
+  @else if $media == md
+    @media (min-width: $screen-sm) and (max-width: $screen-md)
+      @content
+  @else if $media == sm
+    @media (min-width: $screen-xs + 1) and (max-width: $screen-sm - 1)
+      @content
+  @else if $media == xs
+    @media screen and (max-width: $screen-xs)
+      @content
+  @else if $media == xx
+    @media screen and (max-width: $screen-xx)
+      @content
