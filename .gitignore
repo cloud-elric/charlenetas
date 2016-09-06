@@ -37,3 +37,5 @@ phpunit.phar
 .CHANGELOG.md.html
 .CHANGELOG.md.html
 >>>>>>> diseño-de-Pins-grid
+
+*.codekit
