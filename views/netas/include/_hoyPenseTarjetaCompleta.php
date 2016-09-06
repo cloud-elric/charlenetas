@@ -1,5 +1,7 @@
-
-
+<?php
+use yii\helpers\Html;
+?>
+<input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
 
 	<h2>Hoy Pense</h2>
@@ -35,27 +37,20 @@
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<div class="feedback">
-				<span>345</span>
-				<i class="icon icon-thumbs-up"></i>
-			</div>
+			<?php 
+				include 'elementos/like-post.php';
+			?>
 		</div>
 	</div>
 
 </section>
 
 
-
-
 <section class="full-pin-social">
-
-	<div id="//-js-comments">
-
+	<div id="js-comments">
 		<?php
-		include 'elementos/comentarios.php'
+		include 'elementos/comentarios.php';
 		?>
-
 	</div>
-
-
+	<div id="js-cargar-comentarios" onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">Cargar más comentarios</div>
 </section>
