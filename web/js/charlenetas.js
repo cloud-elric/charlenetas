@@ -33,12 +33,12 @@ var pagesComentarios = 0;
 		 // Carga los comentarios via asincrona
 		 comentariosContenedor.load(urlComentarios, function(){
 
-
 			 if(comentariosContenedor.html().trim().length>0){
 			 
 				// Coloca un botón para cargar mas comentarios
 				$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
-			 }	
+
+			 }
 
 		});
 
@@ -310,3 +310,8 @@ function enviarRespuesta(token){
 }
 	});
 }
+
+
+$('.filters-toggle').on('click',function(){
+  $('nav').toggleClass('mobile');
+});
