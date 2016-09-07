@@ -1,28 +1,23 @@
-
-
-#js-content {
-	padding: 15px;
+/* clear fix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.pin{
+	float: left;
+	 margin-bottom: 15px;
 }
 
-#js-comments {
-	background-color: black;
-	color: white;
-
+.grid-sizer,
+.pin {
+  width: 250px;
 }
 
-#js-comentarios-tmp {
-	display: none;
+.gutter-sizer {
+  width: 2.5%;
 }
 
-/*.closeBackScreen {
-	float: right;
-	margin-right: 20px;
-	font-size: 14pt;
-	background: black;
-	color: white;
-	width: 50px;
-	text-align: center;
-	padding: 5px;
-	border-radius: 50%;
-	cursor: pointer;
-}*/
+.pin .image img {
+    width:100%;
+}

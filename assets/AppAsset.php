@@ -18,8 +18,8 @@ class AppAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-			// 'css/charlenetas.css',
-			'plugins/pins-grid/pins.min.css',
+			 'css/charlenetas.css',
+			//'plugins/pins-grid/pins.min.css',
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css',
 			'https://fonts.googleapis.com/icon?family=Material+Icons',
 			'assets/css/web-styles.css',
@@ -28,10 +28,11 @@ class AppAsset extends AssetBundle {
 	public $js = [ 
 			'js/charlenetas.js',
 			//'plugins/pins-grid/pins.min.js',
-			'plugins/pins-grid/pins.js',
+			//'plugins/pins-grid/pins.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js',
 			'plugins/ladda-bootstrap/dist/spin.min.js',
-			'plugins/ladda-bootstrap/dist/ladda.min.js'
+			'plugins/ladda-bootstrap/dist/ladda.min.js',
+			'http://masonry.desandro.com/masonry.pkgd.js'
 	]
 	;
 	public $depends = [ 

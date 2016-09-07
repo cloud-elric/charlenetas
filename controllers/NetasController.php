@@ -20,6 +20,8 @@ use yii\web\Response;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use app\modules\ModUsuarios\models\LoginForm;
 use app\models\CatTiposPosts;
+use app\models\ConstantesWeb;
+use app\models\EntPosts;
 
 class NetasController extends Controller {
 	
@@ -42,7 +44,8 @@ class NetasController extends Controller {
 								'like-post',
 								'cargar-input-comentario',
 								'calificar-alquimia',
-								'get-calificacion-usuario' 
+								'get-calificacion-usuario',
+								'validar-respuesta' 
 						],
 						'rules' => [
 								
@@ -149,14 +152,15 @@ class NetasController extends Controller {
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
 		
-		
 		// Tipos de post
-		$tiposPost = CatTiposPosts::find()->where(['b_habilitado'=>1])->all();
+		$tiposPost = CatTiposPosts::find ()->where ( [ 
+				'b_habilitado' => 1 
+		] )->all ();
 		
 		// Pintar vista
 		return $this->render ( 'index', [ 
 				'listaPost' => $listaPost,
-				'tiposPost'=>$tiposPost
+				'tiposPost' => $tiposPost 
 		] );
 	}
 	
@@ -189,6 +193,17 @@ class NetasController extends Controller {
 		
 		// Se obtiene el post por el token. En caso de no encontrarse lanzara una excepcion
 		$post = $this->getPostByToken ( $token );
+		
+		// si el post es tipo
+		if ($post->id_tipo_post == ConstantesWeb::POST_TYPE_CONTEXTO) {
+			$contextoPadre = $post->entContextos;
+			if (! empty ( $contextoPadre->id_contexto_padre )) {
+				
+				$post = EntPosts::find ()->where ( [ 
+						'id_post' => $contextoPadre->id_contexto_padre 
+				] )->one();
+			}
+		}
 		
 		// Nombre de la vista (Tarjeta con datos completos) que se mostraran
 		$render = $this->cargarTarjetaCompleta ( $post->id_tipo_post );
@@ -342,22 +357,20 @@ class NetasController extends Controller {
 			// Generar un registro para el usuario
 			$entUsuariosFeedbacks = new EntUsuariosFeedbacks ();
 			$entUsuariosFeedbacks->guardarUsuarioFeed ( $idUsuario, $comentario->id_comentario_post, $feedback->id_tipo_feedback );
-			
-			
 		} else {
-			$usuarioFeedback->delete();
+			$usuarioFeedback->delete ();
 		}
 		
 		// Generar contador
-		$feedbackComentarios = ViewContadorFeedbackComentarios::find ()->where ( [
+		$feedbackComentarios = ViewContadorFeedbackComentarios::find ()->where ( [ 
 				'id_comentario' => $comentario->id_comentario_post,
-				'id_tipo_feedback' => $feedback->id_tipo_feedback
+				'id_tipo_feedback' => $feedback->id_tipo_feedback 
 		] )->one ();
-			
+		
 		// Si existen feedbacks al comentario
-		if($feedbackComentarios){
+		if ($feedbackComentarios) {
 			$feedbackComentarios = $feedbackComentarios->num_usuarios;
-		}else{
+		} else {
 			$feedbackComentarios = 0;
 		}
 		
@@ -373,10 +386,9 @@ class NetasController extends Controller {
 				$comentario->num_trolls = $feedbackComentarios;
 				break;
 		}
-			
+		
 		// Actualizar los comentarios para que sepamos cuantos hay de cada cosa
 		$comentario->save ();
-		
 	}
 	
 	/**
@@ -513,6 +525,14 @@ class NetasController extends Controller {
 					'respuesta' => true 
 			] );
 		}
+	}
+	
+	/**
+	 * Valida la respuesta del usuario con la respuesta correcta
+	 * 
+	 * @param unknown $token        	
+	 */
+	public function actionValidarRespuesta($token) {
 	}
 	
 	/**

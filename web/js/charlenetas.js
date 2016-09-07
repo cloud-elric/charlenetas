@@ -10,9 +10,21 @@ function cargarMasPosts() {
 	$.ajax({
 		url:url,
 		success:function(res){
-			contenedor.append(res);
-			ready();
+			
+			 var $items = $(res);
+			 
+			 console.log($items);
+			 
+			 grid.append( $items ).masonry( 'appended', $items );
+			 
+//			 contenedor.append(res).each(function(){
+//			   		grid.masonry('reloadItems');
+//			 	});
+//			      
+//			      grid.masonry();
 			pages++;
+			 
+			  // append items to grid
 		}
 	});
 //	tmp.load('netas/get-mas-posts?page=' + pages, function() {
@@ -27,7 +39,9 @@ function cargarMasPosts() {
 		
 
 	//});
+	
 }
+
 
 // Carga los comentarios de un post y los nuevos borraran los anteriores o se
 // pondran abajo
@@ -724,7 +738,13 @@ $(document).ready(function() {
 		elemento.toggleClass('filter-active');
 		ready();
 	});
-
+	grid.on( 'removeComplete',
+			  function( event, removedItems  ) {
+		alert();
+			    
+			  }
+			);
+	
 });
 
 $('body').on('beforeSubmit', '#login-form', function() {

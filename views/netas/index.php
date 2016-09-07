@@ -30,7 +30,9 @@ use yii\web\View;
 
 <div class=container-fluid>
 	<div class="pins-grid-container">
-		<div class=pins-grid id="js-contenedor-posts-tarjetas">
+		<div class="grid" id="js-contenedor-posts-tarjetas">
+			<div class="grid-sizer"></div>
+  			<div class="gutter-sizer"></div>
 				<?php
 				include 'masPosts.php';
 				?>
@@ -108,10 +110,22 @@ use yii\web\View;
 		</div>
 	</div>
 </div>
-<a class="waves-effect waves-light btn modal-trigger" href="#modal-login"></a>
+<a class="waves-effect waves-light btn modal-trigger" href="#modal-login" style="display:none;"></a>
 <?php
 if (Yii::$app->user->isGuest) {
-$this->registerJs("loadLogin();", View::POS_END);
+$this->registerJs("
+		loadLogin();
+		// Masonry Grid
+		var grid = $('.grid').masonry({
+  			itemSelector: '.pin',
+			columnWidth:250,
+  			gutter: 15,
+  			
+		});
+		
+		
+		
+		", View::POS_END);
 
 }
 ?>
