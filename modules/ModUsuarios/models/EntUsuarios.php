@@ -8,6 +8,8 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use app\modules\ModUsuarios\models\Utils;
 use kartik\password\StrengthValidator;
+use yii\data\ActiveDataProvider;
+use app\models\ConstantesWeb;
 
 /**
  * This is the model class for table "ent_usuarios".
@@ -51,6 +53,23 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	 */
 	public static function tableName() {
 		return 'mod_usuarios_ent_usuarios';
+	}
+	
+	public static function getUsuarios($usuario = '', $page = 0, $pageSize = ConstantesWeb::USUARIOS_MOSTRAR){
+	
+		$query = EntUsuarios::find()->where(["like","txt_username",$usuario])->orWhere(["like","txt_email",$usuario]);
+	
+		// Carga el dataprovider
+		$dataProvider = new ActiveDataProvider([
+				'query' => $query,
+				//'sort'=> ['defaultOrder' => ['fch_publicacion'=>'asc']],
+				'pagination' => [
+						'pageSize' => $pageSize,
+						'page' => $page
+				]
+		]);
+	
+		return $dataProvider->getModels();
 	}
 	
 	/**
@@ -314,6 +333,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 				'id_usuario' => 'id_usuario' 
 		] );
 	}
+	
+	
 	
 	/**
 	 * INCLUDE USER LOGIN VALIDATION FUNCTIONS*

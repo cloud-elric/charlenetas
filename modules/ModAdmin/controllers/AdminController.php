@@ -4,6 +4,7 @@ namespace app\modules\ModAdmin\controllers;
 
 use yii\web\Controller;
 use app\models\EntPosts;
+use app\models\EntComentariosPosts;
 
 /**
  * Default controller for the `admin` module
@@ -25,8 +26,9 @@ class AdminController extends Controller
 	public function actionPrueba(){
 		
 		
-		$post =  EntPosts::find()->where(["id_tipo_post"=>1])->all();
+		$post =  EntPosts::find()->all();
+		$comentarios = EntComentariosPosts::find()->all();
 		
-		return $this->render("prueba", ["post"=>$post]);
+		return $this->render("prueba", ["post"=>$post, "comentarios"=>$comentarios]);
 	}
 }

@@ -12,6 +12,7 @@ class ConstantesWeb {
 	const POST_TYPE_CONTEXTO = 6;
 	const POST_TYPE_SOLO_POR_HOY = 7;
 	const POST_TYPE_SABIAS_QUE = 8;
+	const USUARIOS_MOSTRAR = 1;
 	
 	// Número de pines a mostrar
 	const PINS_A_MOSTRAR = 10;

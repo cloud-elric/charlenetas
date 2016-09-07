@@ -15,6 +15,9 @@ $config = [
 				'modAdmin' => [
 						'class' => 'app\modules\ModAdmin\Admin',
 				],
+				'adminPanel' => [
+						'class' => 'app\modules\modAdminPanel\AdminPanel',
+				],
 		],
 		'components' => [ 
 				'assetManager' => [
