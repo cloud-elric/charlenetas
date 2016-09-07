@@ -24,9 +24,19 @@ class AdminController extends Controller
 		return $this->render('dashboard');
 	}
 	
+	/**
+	 * Los parametros los resive por get
+	 * @param number $page
+	 * @param string $q
+	 * @return string
+	 */
 	public function actionUsuarios($page = 0, $q='')
 	{
-		$usuarios  = EntUsuarios::getUsuarios($q, $page);
+		/**
+		 * getUsuarios es un metodo static para mostrar usuarios con el string $q
+		 * @var array $usuarios
+		 */
+		$usuarios  = EntUsuarios::getUsuarios($page, $q);
 		return $this->render('usuarios', ["usuarios"=>$usuarios]);
 	}
 	

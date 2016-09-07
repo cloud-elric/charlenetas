@@ -55,8 +55,19 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		return 'mod_usuarios_ent_usuarios';
 	}
 	
-	public static function getUsuarios($usuario = '', $page = 0, $pageSize = ConstantesWeb::USUARIOS_MOSTRAR){
+	/**
+	 * USUARIOS_MOSTRAR es constante tiene un valor de 1
+	 * @param number $page=0
+	 * @param string $usuario
+	 * @param unknown $pageSize
+	 */
+	public static function getUsuarios($page = 0, $usuario = '', $pageSize = ConstantesWeb::USUARIOS_MOSTRAR){
 	
+		/**
+		 * Busca en la base de datos EntUsuarios donde txt_username o txt_email contenga el string $usuario
+		 * y muestra 1 por que const USUARIOS_MOSTRAR es igual a 1 
+		 * @var \yii\db\ActiveQuery $query
+		 */
 		$query = EntUsuarios::find()->where(["like","txt_username",$usuario])->orWhere(["like","txt_email",$usuario]);
 	
 		// Carga el dataprovider
