@@ -1,65 +1,62 @@
 <?php
 use yii\helpers\Html;
+use app\modules\ModUsuarios\models\Utils;
 
-// Comentario
-echo Html::img ( $comentario->idUsuario->getImageProfile (), [ 
-		'width' => '50px' 
-] ) . $comentario->txt_comentario . "<br>";
+$classInputComentario = 'js-reply-comentario';
+$dataTokenReply = 'data-token="' . $comentario->txt_token . '"';
 ?>
-
-<?php
-// Si solamente es un comentario
-if (! $respuesta) {
-	?>
-<hr>
-<label>Respuestas:</label>
-<div style='width: 90%; margin-left: 10%' id='js-respuestas-comentario-<?=$comentario->txt_token?>'>aqui van
-	las respuestas</div>
-	<script>
-		var page<?=$comentario->txt_token?>= 0;
-		cargarRespuestas('<?=$comentario->txt_token?>', page<?=$comentario->txt_token?>, true);
-	</script>
-<?php
-	
-// Coloca el input para responder
-	echo $this->render ( 'inputComentario', [ 
-			'token' => $comentario->txt_token,
-			'respuesta'=>true
-	] );
-}?>
-
-
-
-
-<?php
-if (! Yii::$app->user->isGuest) {
-	foreach ( $feedbacks as $feedback ) {
-		?>
-
-<div style='display: inline-block; border: 1px solid white'
-	onclick='agregarFeedback("<?=$comentario->txt_token?>", "<?=$feedback->txt_token?>")'>
-		<?=$feedback->txt_nombre?>
+<div class="comment">
+	<div class="comment-header">
+		<!-- TODO 2.0 implementar la foto del usuario dinamicamente -->
+		<div class="comment-usr">
+      		<?=Html::img ( $comentario->idUsuario->getImageProfile (), [ 'width' => '50px' ] )?>
+      		<h5><?=$comentario->idUsuario->txt_username?></h5>
 		</div>
-
-<div style='display: inline-block; border: 1px solid white'
-	id='js-contador-<?=$comentario->txt_token?>-<?=$feedback->txt_token?>'>
+		<div class="comment-date">
+			<h6><?=Utils::changeFormatDate(Html::encode($comentario->fch_comentario))?></h6>
+		</div>
+	</div>
+	<div class="comment-body">
+		<p>
+       		<?=$comentario->txt_comentario?>
+    	</p>
+	</div>
+	<div class="comment-footer">
+		<?php if(!$respuesta){?>
+		<a class="waves-effect waves-light btn btn-secondary">Responder</a>
+		<div class="new-comment <?=$classInputComentario?>"
+			<?=$dataTokenReply?>>
+	   			<?php
+			echo $this->render ( 'inputComentario', [ 
+					'token' => $comentario->txt_token,
+					'respuesta' => true 
+			] );
+			?>
+		</div>
 		<?php
-		switch ($feedback->id_tipo_feedback) {
-			case 1 : // like
-				echo $comentario->num_likes;
-				break;
-			case 1 : // like
-				echo $comentario->num_likes;
-				break;
-			case 1 : // like
-				echo $comentario->num_likes;
-				break;
-			default :
-				echo '0';
-				break;
-		}
+		
+}
 		?>
-		</div>
-<?php }}?>
+    <div class="comment-feedbacks">
+   	 		<?php 
+   	 		include 'feedbacks-comentario.php';
+   	 		?>
+    </div>
+	</div>
+  
+  <?php if(!$respuesta){?>
+  <div class="comment-reply"
+		id="js-respuestas-comentario-<?=$comentario->txt_token?>"></div>
 
-<br>
+	<div id="js-cargar-mas-respuestas-<?=$comentario->txt_token?>" data-token='<?=$comentario->txt_token?>' onclick="cargarRespuestasPage($(this))">Cargar mas respuestas</div>
+	
+	<input type="hidden" id='js-page-respuesta-<?=$comentario->txt_token?>'  value='0'/>	
+	<script>
+		cargarRespuestas('<?=$comentario->txt_token?>', 0);
+	</script>
+
+	<?php }?>
+
+</div>
+
+

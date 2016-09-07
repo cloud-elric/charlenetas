@@ -5,17 +5,17 @@ namespace app\modules\ModUsuarios\models;
 use Yii;
 
 class Utils {
-
+	
 	/**
 	 * Recupera el id de un video de youtube a partir de la url de youtube
-	 * 
-	 * @param unknown $url
+	 *
+	 * @param unknown $url        	
 	 */
-	public static function getIdVideoYoutube($url){
-		parse_str( parse_url( $url, PHP_URL_QUERY ), $params );
+	public static function getIdVideoYoutube($url) {
+		parse_str ( parse_url ( $url, PHP_URL_QUERY ), $params );
 		
-		if(key_exists('v', $params)){
-			return $parmas['v'];
+		if (key_exists ( 'v', $params )) {
+			return $params ['v'];
 		}
 		
 		return null;
@@ -23,7 +23,7 @@ class Utils {
 	
 	/**
 	 * Corta un texto y le coloca 3 puntos suspensivos al final
-	 * 
+	 *
 	 * @param unknown $string        	
 	 * @param unknown $lenght        	
 	 * @param number $start        	
@@ -35,6 +35,16 @@ class Utils {
 			$cadenaNueva = substr ( $string, $start, $lenght ) . '...';
 		}
 		return $cadenaNueva;
+	}
+	
+	/**
+	 * Cambia el formato de la fecha
+	 * 
+	 * @param unknown $string        	
+	 */
+	public static function changeFormatDate($string) {
+		$date = date_create ($string );
+		return date_format ( $date, "d-M-Y" );
 	}
 	
 	/**
@@ -62,7 +72,7 @@ class Utils {
 	
 	/**
 	 * Obtiene fecha de vencimiento para una fecha
-	 * 
+	 *
 	 * @param unknown $fechaActualTimestamp        	
 	 */
 	public static function getFechaVencimiento($fechaActualTimestamp) {
@@ -110,8 +120,8 @@ class Utils {
 				// 'html' => '@app/mail/layouts/example',
 				// 'text' => '@app/mail/layouts/text'
 				'html' => $templateHtml 
-		]
-		// 'text' => $templateText
-		, $params )->setFrom ( $from )->setTo ( $to )->setSubject ( $subject )->send ();
+		], 
+				// 'text' => $templateText
+				$params )->setFrom ( $from )->setTo ( $to )->setSubject ( $subject )->send ();
 	}
 }

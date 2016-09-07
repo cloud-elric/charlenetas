@@ -16,6 +16,7 @@ use app\models\ConstantesWeb;
  * @property EntPosts $idPost
  * @property EntCalificacionAlquimias[] $entCalificacionAlquimias
  * @property ModUsuariosEntUsuarios[] $idUsuarios
+ * @property EntUsuariosCalificacionAlquimia[] $entUsuariosCalificacionAlquimias
  */
 class EntAlquimias extends \yii\db\ActiveRecord {
 	
@@ -105,9 +106,31 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 		] );
 	}
 	
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosCalificacionAlquimias()
+	{
+		return $this->hasMany(EntUsuariosCalificacionAlquimia::className(), ['id_post' => 'id_post']);
+	}
 	
-	public function setEstrellas($numEstrellasEncendidas,$numEstrellas=ConstantesWeb::ESTRELLAS_MAXIMAS, $estrellasCalificadas=false){
+	/**
+	 * Genera un contenedor con estrellas 
+	 * 
+	 * @param unknown $numEstrellasEncendidas
+	 * @param string $estrellasCalificadas
+	 * @return string
+	 */
+	public function contenedorEstrellas($numEstrellasEncendidas, $token='', $estrellasCalificadas=false, $isOnClicked=false){
+		$id = '';
+		if($isOnClicked){
+			$id = 'id="js-estrellas-usuario"';
+		}
 		
+		$contenedorEstrellas = '<div '.$id.' class="star-wrapper '.($estrellasCalificadas?'calificable js-estrella-usuario':'').'" data-token="'.$token.'">';
+		$contenedorEstrellas.=$this->generarEstrellas($numEstrellasEncendidas, ConstantesWeb::ESTRELLAS_MAXIMAS, $isOnClicked);
+		$contenedorEstrellas.='</div>';
+		return $contenedorEstrellas;		
 	}
 	
 	/**
@@ -117,15 +140,28 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 	 * @param unknown $numEstrellasEncendidas        	
 	 * @return string
 	 */
-	public function generarEstrellas($numEstrellasEncendidas, $numEstrellas=ConstantesWeb::ESTRELLAS_MAXIMAS, $estrellaCalificada=false) {
+	public function generarEstrellas($numEstrellasEncendidas, $numEstrellas=ConstantesWeb::ESTRELLAS_MAXIMAS, $isOnClicked=false) {
 		$estrellas = '';
+		$onclick = '';
+		
 		// pinta n estrellas
 		for($i = 1; $i <= $numEstrellas; $i ++) {
 			$class = 'icon-star';
 			if ($numEstrellasEncendidas < $i) {
-				$class = 'icon-star-empty';
+				$class.= ' icon-star-empty';
 			}
-			$estrellas .= '<i class="' . $class . '"></i>';
+			
+			if($isOnClicked){
+				$class.= ' star-clickeble';
+				$onclick ='onclick=calificarPrenderEstrellas($(this))';
+				
+				if(Yii::$app->user->isGuest){
+					$onclick = 'onclick="showModalLogin();"';
+				}
+				
+			}
+			
+			$estrellas .= '<i class="' . $class . '" '.$onclick.' data-value="'.$i.'"></i>';
 		}
 		
 		return $estrellas;
@@ -137,7 +173,7 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 	 * @return \app\models\EntAlquimias|NULL
 	 */
 	public function actualizarCalificacion($calificacion){
-		$this->num_calificacion_admin = $calificacion;
+		$this->num_calificacion_usuario = $calificacion;
 		
 		return $this->save()?$this:null;
 	}

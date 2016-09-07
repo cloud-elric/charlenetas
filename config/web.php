@@ -11,7 +11,10 @@ $config = [
 		'modules' => [ 
 				'modUsuarios' => [ 
 						'class' => 'app\modules\ModUsuarios\ModUsuarios' 
-				] 
+				],
+				'admin'=>[
+						'class'=>'app\modules\admin\Administrador'
+				]
 		],
 		'components' => [ 
 				'assetManager' => [

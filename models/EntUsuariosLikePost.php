@@ -124,7 +124,7 @@ class EntUsuariosLikePost extends \yii\db\ActiveRecord {
 		] )->one();
 		
 		if ($likeUsuario) {
-			return true;
+			return $likeUsuario;
 		}
 		
 		return false;
