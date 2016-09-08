@@ -118,7 +118,6 @@ var pagesComentarios = 0;
 	}
 
 	 pagesComentarios++;
-<<<<<<< HEAD
 
 }
 
@@ -138,8 +137,7 @@ var pagesComentarios = 0;
 		 cargarComentarios(token, true);
 	});
 }
-=======
->>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
+
 
  // Cierra el post con toda su información
  function hidePostFull(){
@@ -150,35 +148,7 @@ var pagesComentarios = 0;
 	 $('#js-content').html(' ');
 }
 
-<<<<<<< HEAD
-=======
- // Muestra un post con toda su información
- function showPostFull(token){
-	 var background = $('#backScreen');
-	 var content = $('#js-content');
-	 var url = 'netas/cargar-post?token='+token;
 
-
-	$('body').css('overflow', 'hidden');
-
-	 background.toggle();
-	 content.html('');
-
-	 content.load(url, function(){
-		 cargarComentarios(token, true);
-	});
-}
-
- // Cierra el post con toda su información
- function hidePostFull(){
-	 var background = $('#backScreen');
-	 background.toggle();
-	 $('body').css('overflow', 'auto');
-	 pagesComentarios = 0;
-	 $('#js-content').html(' ');
-}
-
->>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
  // Metodo para suscribirse a una pregunta espejo
  function suscribirseEspejo(token){
 	var url = 'netas/suscripcion-espejo?token='+token;
@@ -221,6 +191,75 @@ var pagesComentarios = 0;
 	$('#js-btn-suscribirse-'+token).replaceWith(btnDesSuscribirse);
 }
 
+ // Muestra un post con toda su información
+ function showPostFull(token){
+	 var background = $('#backScreen');
+	 var content = $('#js-content');
+	 var url = 'netas/cargar-post?token='+token;
+
+
+	$('body').css('overflow', 'hidden');
+
+	 background.toggle();
+	 content.html('');
+
+	 content.load(url, function(){
+		 cargarComentarios(token, true);
+	});
+}
+
+ // Cierra el post con toda su información
+ function hidePostFull(){
+	 var background = $('#backScreen');
+	 background.toggle();
+	 $('body').css('overflow', 'auto');
+	 pagesComentarios = 0;
+	 $('#js-content').html(' ');
+}
+
+ // Metodo para suscribirse a una pregunta espejo
+ function suscribirseEspejo(token){
+	var url = 'netas/suscripcion-espejo?token='+token;
+
+	$.ajax({
+		url:url,
+		dataType:'html',
+		beforeSend:function(){
+			// Colocar un loading o algo asi
+
+			$('#js-btn-suscribirse-'+token).attr('onclick', ' ');
+		},
+		success:function(res){
+
+			 if(res==='subscrito'){
+				// Colocar un mensaje de que usuario ya esta inscrito
+				 removeSubscriptores(token);
+			}else{
+				addSubscriptores(token);
+			}
+
+		},
+		error:function(){
+			// Colocar un mensaje de que no se pudo subscribir
+			removeSubscriptores(token);
+		}
+	});
+
+}
+
+ /**
+ * Agrega el botón para agregar subscritores
+ */
+ function addSubscriptores(token){
+	 var btnDesSuscribirse = '<div id="js-btn-suscribirse-'+token+'"onclick=\'desSuscribirseEspejo("'+token+'");\' style="border: 1px solid black">No me interesa la pregunta</div>';
+	 var subs = $('#js-suscriptores-'+token).text();
+
+	$('#js-suscriptores-'+token).text(parseInt(subs)+1);
+
+	$('#js-btn-suscribirse-'+token).replaceWith(btnDesSuscribirse);
+}
+
+>>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
  /**
  * Remueve el botón para eliminar subscritores
  */

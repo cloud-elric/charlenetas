@@ -29,19 +29,13 @@ var pagesComentarios = 0;
 	 if(borrarAnteriores){
 		 // Limpia el contenedor de los comentarios
 		 comentariosContenedor.html('');
-<<<<<<< HEAD
-
-		 // Carga los comentarios via asincrona
-		 comentariosContenedor.load(urlComentarios, function(){
-=======
 
 		 // Carga los comentarios via asincrona
 		 comentariosContenedor.load(urlComentarios, function(){
 
->>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
 
 			 if(comentariosContenedor.html().trim().length>0){
-			 
+
 				// Coloca un botón para cargar mas comentarios
 				$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
 
@@ -81,9 +75,9 @@ var pagesComentarios = 0;
 		}else{
 
 		}
-			
+
 		}
-	
+
 		});
 
 }
@@ -258,14 +252,14 @@ function enviarComentario(token){
  */
 function agregarFeedback(token, feed){
 	var url = 'netas/agregar-feedback?token='+token+'&feed='+feed;
-	
+
 	$.ajax({
 		url:url,
 		dataType:'html',
 		method:'GET',
 		success:function(res){
 			if(res=='exist'){
-				
+
 			}else{
 				var contador = $('#js-contador-'+token+'-'+feed).text();
 				$('#js-contador-'+token+'-'+feed).text(parseInt(contador)+1);
@@ -299,7 +293,7 @@ function enviarRespuesta(token){
 		dataType:'html',
 		method:'POST',
 		success:function(res){
-			
+
 			$('#js-comentario-form-'+token+' textarea').val('');
 		},
 		statusCode: {
