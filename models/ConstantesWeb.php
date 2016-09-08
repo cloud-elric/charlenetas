@@ -13,11 +13,14 @@ class ConstantesWeb {
 	const POST_TYPE_SOLO_POR_HOY = 7;
 	const POST_TYPE_SABIAS_QUE = 8;
 	
+	// Calificación maxima para alquimia
+	const MAX_CALIFICACION_ALQUIMIA = 5;
+	
 	// Número de pines a mostrar
-	const PINS_A_MOSTRAR = 10;
+	const PINS_A_MOSTRAR = 5;
 	
 	// Número de comentarios a mostrar
-	const COMENTARIOS_A_MOSTRAR = 1;
+	const COMENTARIOS_A_MOSTRAR = 5;
 	
 	// Número de estrellas que se mostraran como maximo
 	const ESTRELLAS_MAXIMAS = 5;

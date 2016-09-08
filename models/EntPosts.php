@@ -15,6 +15,7 @@ use app\modules\ModUsuarios\models\EntUsuarios;
  * @property string $txt_titulo
  * @property string $txt_descripcion
  * @property string $txt_imagen
+ * @property string $txt_token 
  * @property string $txt_url
  * @property string $num_likes
  * @property string $fch_creacion
@@ -25,9 +26,12 @@ use app\modules\ModUsuarios\models\EntUsuarios;
  * @property EntComentariosPosts[] $entComentariosPosts
  * @property EntContextos $entContextos
  * @property EntEspejos $entEspejos
+ * @property EntSabiasQue $entSabiasQue
  * @property CatTiposPosts $idTipoPost
  * @property EntUsuarios $idUsuario
  * @property EntSoloPorHoys $entSoloPorHoys
+ * @property EntUsuariosLikePost[] $entUsuariosLikePosts 
+ * @property ModUsuariosEntUsuarios[] $idUsuarios
  */
 class EntPosts extends \yii\db\ActiveRecord
 {
@@ -91,6 +95,22 @@ class EntPosts extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getEntSabiasQue()
+    {
+    	return $this->hasOne(EntSabiasQue::className(), ['id_post' => 'id_post']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEntUsuariosLikePosts()
+    {
+    	return $this->hasMany(EntUsuariosLikePost::className(), ['id_post' => 'id_post']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getEntRespuestasEspejo()
     {
     	return $this->hasOne(EntRespuestasEspejo::className(), ['id_post' => 'id_post']);
@@ -101,7 +121,7 @@ class EntPosts extends \yii\db\ActiveRecord
      */
     public function getEntComentariosPosts()
     {
-        return $this->hasMany(EntComentariosPosts::className(), ['id_post' => 'id_post']);
+        return $this->hasMany(EntComentariosPosts::className(), ['id_post' => 'id_post'])->where(['is','id_comentario_padre', null ]);
     }
 
     /**
@@ -134,6 +154,14 @@ class EntPosts extends \yii\db\ActiveRecord
     public function getIdUsuario()
     {
         return $this->hasOne(EntUsuarios::className(), ['id_usuario' => 'id_usuario']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdUsuarioAdmin()
+    {
+    	return $this->hasOne(EntUsuarios::className(), ['id_usuario' => 'id_usuario_administrador']);
     }
 
     /**

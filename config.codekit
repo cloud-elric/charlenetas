@@ -199,6 +199,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/models\/EntContextos.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntContextos.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/models\/EntEspejos.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -231,6 +240,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/models\/EntRespuestasEspejo.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/models\/EntSabiasQue.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntSabiasQue.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -271,6 +289,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/models\/EntUsuariosRespuestasSabiasQue.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntUsuariosRespuestasSabiasQue.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/models\/EntUsuariosSubscripciones.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -303,6 +330,33 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/models\/ViewContadorLikes.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/modules\/admin\/Administrador.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/modules\/admin\/Administrador.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/modules\/admin\/controllers\/DefaultController.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/modules\/admin\/controllers\/DefaultController.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/modules\/admin\/views\/default\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/modules\/admin\/views\/default\/index.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -31525,11 +31579,11 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/netas\/include\/elementos\/feedbacks.php": {
+	"\/views\/netas\/include\/elementos\/feedbacks-comentario.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/feedbacks.php",
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/feedbacks-comentario.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -31539,6 +31593,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/inputComentario.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/netas\/include\/elementos\/like-post.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/like-post.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -31587,61 +31650,6 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
-		},
-	"\/web\/assets\/34fd83b0\/yii.activeForm.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.activeForm.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii.activeForm-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.captcha.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.captcha.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii.captcha-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.gridView.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.gridView.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii.gridView-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.validation.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.validation.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii.validation-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
 		},
 	"\/web\/assets\/css\/_sass\/01-tools\/animations.scss": {
 		"createSourceMap": 0,
@@ -33044,28 +33052,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/web\/assets\/d96cd018\/jquery.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/d96cd018\/jquery.js",
-		"outputAbbreviatedPath": "\/web\/assets\/d96cd018\/min\/jquery-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/d96cd018\/jquery.min.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/d96cd018\/jquery.min.js",
-		"outputAbbreviatedPath": "\/web\/assets\/d96cd018\/min\/jquery.min-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
 	"\/web\/assets\/images\/03fb13e8.image1.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -33517,6 +33503,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/web\/assets\/images\/tAG_155381.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 55627,
+		"inputAbbreviatedPath": "\/web\/assets\/images\/tAG_155381.jpg",
+		"outputAbbreviatedPath": "\/web\/assets\/images\/tAG_155381.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/web\/assets\/images\/usr-avatar.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -33568,8 +33565,8 @@
 		},
 	"\/web\/js\/charlenetas.js": {
 		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
 		"inputAbbreviatedPath": "\/web\/js\/charlenetas.js",
 		"outputAbbreviatedPath": "\/web\/js\/min\/charlenetas-min.js",
 		"outputPathIsOutsideProject": 0,
@@ -33583,6 +33580,108 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/web\/js\/min\/charlenetas-min.js",
 		"outputAbbreviatedPath": "\/web\/js\/min\/min\/charlenetas-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda-themeless.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda-themeless.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda-themeless.min.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda-themeless.min.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda.jquery.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda.jquery.min.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/min\/ladda.jquery.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/min\/ladda-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda.min.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda.min.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda.min.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/min\/ladda.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/spin.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/spin.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/min\/spin-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/spin.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/spin.min.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/min\/spin.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/pins-grid\/pins.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/pins-grid\/pins.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/pins-grid\/min\/pins-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,

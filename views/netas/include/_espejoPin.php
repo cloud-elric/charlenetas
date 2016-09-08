@@ -10,7 +10,7 @@ use yii\helpers\Html;
 	<div class="pin-header pin-header-espejo"></div>
 
 	<div class=image>
-		<img data-src="assets/images/d3dd554f.image17.jpg">
+		<img src="assets/images/d3dd554f.image17.jpg">
 	</div>
 
 

@@ -3,18 +3,21 @@
 namespace app\models;
 
 use Yii;
+use app\modules\ModUsuarios\models\EntUsuarios;
 
 /**
- * This is the model class for table "ent_respuestas_espejo".
- *
- * @property string $id_post
- * @property string $txt_respuesta
- * @property string $fch_respuesta
- * @property string $fch_publicacion_respuesta
- * @property string $b_de_acuerdo
- *
- * @property EntEspejos $idPost
- */
+* This is the model class for table "ent_respuestas_espejo".
+*
+* @property string $id_post
+* @property string $id_usuario_admin 
+* @property string $txt_respuesta
+* @property string $fch_respuesta
+* @property string $fch_publicacion_respuesta
+* @property string $b_de_acuerdo
+*
+* @property EntUsuarios $idUsuarioAdmin 
+* @property EntEspejos $idPost
+*/
 class EntRespuestasEspejo extends \yii\db\ActiveRecord
 {
     /**
@@ -59,5 +62,13 @@ class EntRespuestasEspejo extends \yii\db\ActiveRecord
     public function getIdPost()
     {
         return $this->hasOne(EntEspejos::className(), ['id_post' => 'id_post']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdUsuarioAdmin()
+    {
+    	return $this->hasOne(EntUsuarios::className(), ['id_usuario' => 'id_usuario_admin']);
     }
 }

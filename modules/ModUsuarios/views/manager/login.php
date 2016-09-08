@@ -3,15 +3,14 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
-
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params ['breadcrumbs'] [] = $this->title;
 
-if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){
-?>
+if (Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']) {
+	?>
 <script>
 
 logInWithFacebook = function() {
@@ -124,45 +123,49 @@ window.fbAsyncInit = function() {
 <?php }?>
 
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <?php
+				$form = ActiveForm::begin ( [ 
+						'enableAjaxValidation' => true,
+						'enableClientValidation' => true,
+						'validationUrl' => 'netas/validacion-usuario',
+						'layout' => 'horizontal',
+						'id' => 'login-form',
+						'fieldConfig' => [ 
+								'template' => "<div class='row'>{input}\n{label}\n{error}</div>",
+								'horizontalCssClasses' => [ 
+										'error' => 'mdl-textfield__error' 
+								],
+								'labelOptions' => [ 
+										'class' => 'mdl-textfield__label' 
+								],
+								'options' => [ 
+										'class' => 'input-field col s12' 
+								] 
+						],
+						'errorCssClass' => 'invalid' 
+				] );
+				?>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+	<?= $form->field($model, 'password')->passwordInput()?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+<div class="center">
+	<?= Html::submitButton('Login <i class="material-icons right">send</i>',['class'=>'btn waves-effect waves-light center', 'name' => 'login-button', 'data-style'=>'"zoom-in'])?>
+</div>
 
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
+	<?php ActiveForm::end(); ?>
 
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
-        </div>
+	<?php if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){?>
 
-    <?php ActiveForm::end(); ?>
-    
-    <?php if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){?>
-    
-<button type="button" class="btn btn-blue btn-facebook"
-					onClick="logInWithFacebook()" scope="<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisos']?>">
-					<i class="fa fa-facebook"></i> Ingresar con Facebook
-				</button>
-<?php }?>				
-				
-    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-    </div>
+<button type="button" onClick="logInWithFacebook()"
+		scope="<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisos']?>">
+		<i></i> Ingresar con Facebook
+	</button>
+<?php }?>
+</div>
+
+</div>
 </div>
