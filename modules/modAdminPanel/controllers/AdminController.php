@@ -4,6 +4,7 @@ namespace app\modules\modAdminPanel\controllers;
 
 use yii\web\Controller;
 use app\modules\ModUsuarios\models\EntUsuarios;
+use app\models\EntComentariosPosts;
 
 /**
  * Default controller for the `adminPanel` module
@@ -36,7 +37,9 @@ class AdminController extends Controller
 		 * getUsuarios es un metodo static para mostrar usuarios con el string $q
 		 * @var array $usuarios
 		 */
-		$usuarios  = EntUsuarios::getUsuarios($page, $q);
+		$usuarios = EntUsuarios::getUsuarios($page, $q);
+		
+		
 		return $this->render('usuarios', ["usuarios"=>$usuarios]);
 	}
 	

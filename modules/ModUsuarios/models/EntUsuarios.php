@@ -10,6 +10,9 @@ use app\modules\ModUsuarios\models\Utils;
 use kartik\password\StrengthValidator;
 use yii\data\ActiveDataProvider;
 use app\models\ConstantesWeb;
+use app\models\EntComentariosPosts;
+use app\models\EntUsuariosFeedbacks;
+use app\models\EntUsuariosLikePost;
 
 /**
  * This is the model class for table "ent_usuarios".
@@ -82,6 +85,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	
 		return $dataProvider->getModels();
 	}
+	
 	
 	/**
 	 * @inheritdoc
@@ -261,6 +265,30 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		return $this->hasMany ( EntCalificacionAlquimias::className (), [ 
 				'id_usuario' => 'id_usuario' 
 		] );
+	}
+	
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntComentariosPosts()
+	{
+		return $this->hasMany(EntComentariosPosts::className(), ['id_usuario' => 'id_usuario']);
+	}
+	
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosFeedbacks()
+	{
+		return $this->hasMany(EntUsuariosFeedbacks::className(), ['id_usuario' => 'id_usuario']);
+	}
+	
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosLikePosts()
+	{
+		return $this->hasMany(EntUsuariosLikePost::className(), ['id_usuario' => 'id_usuario']);
 	}
 	
 	/**
