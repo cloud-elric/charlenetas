@@ -33020,7 +33020,7 @@
 		"useLibsass": false
 		},
 	"\/web\/assets\/css\/_sass\/main.sass": {
-		"createSourceMap": 0,
+		"createSourceMap": 1,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 2,
@@ -33030,7 +33030,7 @@
 		"outputAbbreviatedPath": "\/web\/assets\/css\/css\/main.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 0,
+		"outputStyle": 3,
 		"shouldRunAutoprefixer": 0,
 		"shouldRunBless": 0,
 		"useLibsass": false
@@ -33568,8 +33568,8 @@
 		},
 	"\/web\/js\/charlenetas.js": {
 		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/web\/js\/charlenetas.js",
 		"outputAbbreviatedPath": "\/web\/js\/min\/charlenetas-min.js",
 		"outputPathIsOutsideProject": 0,

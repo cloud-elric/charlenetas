@@ -67,6 +67,8 @@ var pagesComentarios = 0;
  function cargarMasPosts(){
 	var contenedor = $('#js-contenedor-posts-tarjetas');
 	var tmp = $('#js-tmp');
+<<<<<<< HEAD
+=======
 
 	tmp.load('netas/get-mas-posts?page='+pages,function(){
 
@@ -81,6 +83,59 @@ var pagesComentarios = 0;
 		});
 }
 
+
+ // Carga los comentarios de un post y los nuevos borraran los anteriores o se pondran abajo
+ function cargarComentarios(token, borrarAnteriores){
+	 var comentariosContenedor = $('#js-comments');
+	 var urlComentarios = 'netas/cargar-comentarios?token='+token+'&page='+pagesComentarios;
+
+	// Borra los comentarios anteriores
+	 if(borrarAnteriores){
+		 // Limpia el contenedor de los comentarios
+		 comentariosContenedor.html('');
+
+		 // Carga los comentarios via asincrona
+		 comentariosContenedor.load(urlComentarios, function(){
+
+
+			 if(comentariosContenedor.html().trim().length>0){
+
+				// Coloca un botón para cargar mas comentarios
+				$('#js-comments').append('<div id="js-cargar-comentarios" onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
+			 }
+
+		});
+
+	}else{
+
+		// Carga los comentarios via asincrona
+
+		$.ajax({
+			url:urlComentarios,
+			dataType:'html',
+			success:function(res){
+				$('#js-cargar-comentarios').before(res);
+			}
+			})
+	}
+
+	 pagesComentarios++;
+>>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
+
+	tmp.load('netas/get-mas-posts?page='+pages,function(){
+
+		if(tmp.html().trim().length>0){
+			contenedor.append(tmp.html());
+			pages++;
+			ready();
+		}else{
+			alert('Sin datos para cargar');
+		}
+
+		});
+}
+
+<<<<<<< HEAD
 
  // Carga los comentarios de un post y los nuevos borraran los anteriores o se pondran abajo
  function cargarComentarios(token, borrarAnteriores){
@@ -191,6 +246,8 @@ var pagesComentarios = 0;
 	$('#js-btn-suscribirse-'+token).replaceWith(btnDesSuscribirse);
 }
 
+=======
+>>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
  // Muestra un post con toda su información
  function showPostFull(token){
 	 var background = $('#backScreen');
@@ -259,6 +316,9 @@ var pagesComentarios = 0;
 	$('#js-btn-suscribirse-'+token).replaceWith(btnDesSuscribirse);
 }
 
+<<<<<<< HEAD
+>>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
+=======
 >>>>>>> parent of 48610ac... Merge remote-tracking branch 'origin/probando-masonry' into DiseñoDeTarjetasFull
  /**
  * Remueve el botón para eliminar subscritores
