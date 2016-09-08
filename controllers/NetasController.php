@@ -45,7 +45,8 @@ class NetasController extends Controller {
 								'cargar-input-comentario',
 								'calificar-alquimia',
 								'get-calificacion-usuario',
-								'validar-respuesta' 
+								'validar-respuesta',
+								'perfil-usuario'
 						],
 						'rules' => [
 								
@@ -61,6 +62,7 @@ class NetasController extends Controller {
 		];
 		// everything else is denied
 	}
+	
 	
 	/**
 	 * Obtenemos la calificacion del usuario logueado
@@ -525,6 +527,27 @@ class NetasController extends Controller {
 					'respuesta' => true 
 			] );
 		}
+	}
+	
+	/**
+	 * Muestra la ventana de perfil del usuario
+	 */
+	public function actionPerfilUsuario(){
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		// Buscamos el usuario
+		$usuario = EntUsuarios::findOne($idUsuario);
+		
+		return $this->render('perfilUsuario',['usuario'=>$usuario]);
+		
+	}
+	
+	/**
+	 * Ventana para comprar creditos
+	 */
+	public function actionComprarCreditos(){
+		
 	}
 	
 	/**

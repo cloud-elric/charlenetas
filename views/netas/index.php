@@ -89,8 +89,8 @@ use yii\web\View;
 	</div>
 </div>
 
-
 <a class="waves-effect waves-light btn modal-trigger" href="#modal-login" style="display:none;"></a>
+
 <?php
 if (Yii::$app->user->isGuest) {
 $this->registerJs("

@@ -37,6 +37,7 @@ class EntPosts extends \yii\db\ActiveRecord
 {
 	
 	private $_comentariosCount;
+	public $tipoPost;
 	
     /**
      * @inheritdoc

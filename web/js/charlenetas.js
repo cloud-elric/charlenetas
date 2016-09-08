@@ -507,7 +507,9 @@ function loadLada(element) {
  * Carga login
  */
 function loadLogin() {
-	var url = 'http://localhost/charlenetas/web/login';
+	//var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
+	//var url = 'http://localhost/charlenetas/web/login';
+	var url = 'http://localhost:81/charlenetas/web/login';
 	var contentModal = $('#modal-login .modal-content');
 
 	$.ajax({
