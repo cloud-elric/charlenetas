@@ -4,7 +4,11 @@ namespace app\models;
 
 use Yii;
 use app\modules\ModUsuarios\models\EntUsuarios;
+
+use yii\data\ActiveDataProvider;
+
 use app\modules\ModUsuarios\models\Utils;
+
 
 /**
  * This is the model class for table "ent_posts".
@@ -39,12 +43,43 @@ class EntPosts extends \yii\db\ActiveRecord {
 	public $tipoPost;
 	public $imagen;
 	
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName() {
-		return 'ent_posts';
-	}
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'ent_posts';
+    }
+    
+    /**
+     * USUARIOS_MOSTRAR es constante tiene un valor de 1
+     * @param number $page=0
+     * @param string $usuario
+     * @param unknown $pageSize
+     */
+    public static function getPosts($page = 0, $post , $pageSize = ConstantesWeb::POSTS_MOSTRAR){
+    
+    	/**
+    	 * Busca en la base de datos EntUsuarios donde txt_username o txt_email contenga el string $usuario
+    	 * y muestra 1 por que const USUARIOS_MOSTRAR es igual a 1
+    	 * @var \yii\db\ActiveQuery $query
+    	 */
+    	$query = EntPosts::find()->where(["id_tipo_post"=>$post]);
+    
+    	// Carga el dataprovider
+    	$dataProvider = new ActiveDataProvider([
+    			'query' => $query,
+    			//'sort'=> ['defaultOrder' => ['fch_publicacion'=>'asc']],
+    			'pagination' => [
+    					'pageSize' => $pageSize,
+    					'page' => $page
+    			]
+    	]);
+    
+    	return $dataProvider->getModels();
+    }
+
 	
 	/**
 	 * @inheritdoc
@@ -344,4 +379,5 @@ class EntPosts extends \yii\db\ActiveRecord {
 		
 		return false;
 	}
+
 }
