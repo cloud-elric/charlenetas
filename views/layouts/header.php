@@ -8,6 +8,7 @@
 	<div class="">
 		<!-- <div class="btn btn-link ">Ingresar</div>
 		<div class="btn btn-secondary">Registrarme</div> -->
-		<a href="#">Mi perfil</a> <a href="#">Buscar<i class="material-icons">search</i></a>
+		<a href="#">Mi perfil</a>
+		<a href="#" class="filters-toggle"><i class="material-icons">menu</i></a>
 	</div>
 </div>
