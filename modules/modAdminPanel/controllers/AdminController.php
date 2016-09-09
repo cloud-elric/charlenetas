@@ -6,6 +6,8 @@ use yii\web\Controller;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use app\models\EntComentariosPosts;
 use app\models\EntPosts;
+use app\models\EntAlquimias;
+use Yii;
 
 /**
  * Default controller for the `adminPanel` module
@@ -97,6 +99,27 @@ class AdminController extends Controller
 	public function actionAgenda()
 	{
 		return $this->render('Agenda');
+	}
+	
+	
+	/**
+	 * Guarda alquimia
+	 */
+	public function actionCrearAlquimia() {
+		// Declaracion de modelos
+		$alquimia = new EntAlquimias();
+		$post = new EntPosts( [ 
+				'scenario' => 'crear' 
+		] );
+		
+		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->guardarAlquimia ( $alquimia, $post );
+		}
+		
+		return $this->renderAjax( 'crearAlquimia', [ 
+				'alquimia' => $alquimia,
+				'post' => $post 
+		] );
 	}
 	
 }
