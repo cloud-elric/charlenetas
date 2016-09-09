@@ -5,6 +5,7 @@ namespace app\modules\modAdminPanel\controllers;
 use yii\web\Controller;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use app\models\EntComentariosPosts;
+use app\models\EntPosts;
 
 /**
  * Default controller for the `adminPanel` module
@@ -43,14 +44,19 @@ class AdminController extends Controller
 		return $this->render('usuarios', ["usuarios"=>$usuarios]);
 	}
 	
-	public function actionEspejo()
+	public function actionEspejo($page = 0)
 	{
-		return $this->render('espejo');
+		$idPost = 1;
+		$postsEspejo = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('espejo',["postsEspejo"=>$postsEspejo]);
 	}
 	
-	public function actionAlquimia()
+	public function actionAlquimia($page = 0,$post = 2)
 	{
-		return $this->render('Alquimia');
+		$postsAlquimia = EntPosts::getPosts($page, $post);
+		
+		return $this->render('Alquimia',["postsAlquimia"=>$postsAlquimia]);
 	}
 	
 	public function actionVerdadazos()
