@@ -2,10 +2,16 @@
 
 namespace app\modules\ModUsuarios\models;
 
+use app\modules\ModUsuarios\models\Utils;
+use kartik\password\StrengthValidator;
 use Yii;
-
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use app\models\EntAlquimias;
+use app\models\EntComentariosPosts;
+use app\models\EntPosts;
+use app\models\EntRespuestasEspejo;
+use app\models\EntUsuariosCalificacionAlquimia;
 use app\modules\ModUsuarios\models\Utils;
 use kartik\password\StrengthValidator;
 use yii\data\ActiveDataProvider;
@@ -32,14 +38,24 @@ use app\models\EntUsuariosLikePost;
  *
  * @property EntCalificacionAlquimias[] $entCalificacionAlquimias
  * @property EntAlquimias[] $idPosts
+ * @property EntComentariosPosts[] $entComentariosPosts
  * @property EntPosts[] $entPosts
+ * @property EntRespuestasEspejo[] $entRespuestasEspejos
+ * @property EntUsuariosCalificacionAlquimia[] $entUsuariosCalificacionAlquimias
+ * @property EntPosts[] $idPosts0
+ * @property EntUsuariosFeedbacks[] $entUsuariosFeedbacks
+ * @property EntUsuariosLikePost[] $entUsuariosLikePosts
+ * @property EntPosts[] $idPosts1
+ * @property EntUsuariosRespuestaSabiasQue[] $entUsuariosRespuestaSabiasQues
+ * @property EntSabiasQue[] $idPosts2
  * @property EntUsuariosSubscripciones[] $entUsuariosSubscripciones
+ * @property EntEspejos[] $idPosts3
+ * @property ModUsuariosEntSesiones[] $modUsuariosEntSesiones
  * @property CatTiposUsuarios $idTipoUsuario
- * @property EntSesiones[] $entSesiones
- * @property CatStatusUsuarios $idStatus
- * @property EntUsuariosActivacion[] $entUsuariosActivacions
- * @property EntUsuariosCambioPass[] $entUsuariosCambioPasses
- * @property EntUsuariosFacebook $entUsuariosFacebook
+ * @property ModUsuariosCatStatusUsuarios $idStatus
+ * @property ModUsuariosEntUsuariosActivacion[] $modUsuariosEntUsuariosActivacions
+ * @property ModUsuariosEntUsuariosCambioPass[] $modUsuariosEntUsuariosCambioPasses
+ * @property ModUsuariosEntUsuariosFacebook $modUsuariosEntUsuariosFacebook
  */
 class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface 
 
@@ -261,8 +277,10 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getEntCalificacionAlquimias() {
-		return $this->hasMany ( EntCalificacionAlquimias::className (), [ 
+	public function getIdPosts() {
+		return $this->hasMany ( EntAlquimias::className (), [ 
+				'id_post' => 'id_post' 
+		] )->viaTable ( 'ent_calificacion_alquimias', [ 
 				'id_usuario' => 'id_usuario' 
 		] );
 	}
@@ -295,10 +313,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getIdPosts() {
-		return $this->hasMany ( EntAlquimias::className (), [ 
-				'id_post' => 'id_post' 
-		] )->viaTable ( 'ent_calificacion_alquimias', [ 
+	public function getEntComentariosPosts() {
+		return $this->hasMany ( EntComentariosPosts::className (), [ 
 				'id_usuario' => 'id_usuario' 
 		] );
 	}
@@ -317,8 +333,106 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	 *
 	 * @return \yii\db\ActiveQuery
 	 */
+	public function getEntRespuestasEspejos() {
+		return $this->hasMany ( EntRespuestasEspejo::className (), [ 
+				'id_usuario_admin' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosCalificacionAlquimias() {
+		return $this->hasMany ( EntUsuariosCalificacionAlquimia::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getIdPosts0() {
+		return $this->hasMany ( EntPosts::className (), [ 
+				'id_post' => 'id_post' 
+		] )->viaTable ( 'ent_usuarios_calificacion_alquimia', [ 
+				'id_usuario' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosFeedbacks() {
+		return $this->hasMany ( EntUsuariosFeedbacks::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosLikePosts() {
+		return $this->hasMany ( EntUsuariosLikePost::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getIdPosts1() {
+		return $this->hasMany ( EntPosts::className (), [ 
+				'id_post' => 'id_post' 
+		] )->viaTable ( 'ent_usuarios_like_post', [ 
+				'id_usuario' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosRespuestaSabiasQues() {
+		return $this->hasMany ( EntUsuariosRespuestaSabiasQue::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getIdPosts2() {
+		return $this->hasMany ( EntSabiasQue::className (), [ 
+				'id_post' => 'id_post' 
+		] )->viaTable ( 'ent_usuarios_respuesta_sabias_que', [ 
+				'id_usuario' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
 	public function getEntUsuariosSubscripciones() {
 		return $this->hasMany ( EntUsuariosSubscripciones::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
+	}
+	
+	/**
+	 *
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getIdPosts3() {
+		return $this->hasMany ( EntEspejos::className (), [ 
+				'id_post' => 'id_post' 
+		] )->viaTable ( 'ent_usuarios_subscripciones', [ 
 				'id_usuario' => 'id_usuario' 
 		] );
 	}
@@ -588,7 +702,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	
 	/**
 	 * Guarda la imagen de perfil para el usuario
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public function upload($nombreImagen) {
@@ -598,15 +712,17 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	
 	/**
 	 * Si la imagen esta vacia mandamos una por default
+	 * 
 	 * @return string
 	 */
-	public function getImageProfile(){
-		$basePath = Yii::getAlias ( '@web' ); 
+	public function getImageProfile() {
+		$basePath = Yii::getAlias ( '@web' );
 		
-		if($this->txt_imagen){
-			return $basePath.  '/' . Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $this->txt_imagen;
+		if ($this->txt_imagen) {
+			return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $this->txt_imagen;
 		}
 		
-		return $basePath.'/'.Yii::$app->params ['modUsuarios'] ['pathImageDefault'];
+		return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageDefault'];
 	}
+	
 }

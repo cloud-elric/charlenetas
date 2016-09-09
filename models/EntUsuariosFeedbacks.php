@@ -154,7 +154,7 @@ class EntUsuariosFeedbacks extends \yii\db\ActiveRecord {
 		] )->one ();
 		
 		if ($existe) {
-			return true;
+			return $existe;
 		}
 		return false;
 	}
