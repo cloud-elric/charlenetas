@@ -26,14 +26,10 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 *.codekit
-=======
+
 .CHANGELOG.md.html
->>>>>>> origin/master
-=======
-.CHANGELOG.md.html
-.CHANGELOG.md.html
-.CHANGELOG.md.html
->>>>>>> diseño-de-Pins-grid
+
+# Acceso a base de datos 
+/config/db.php
