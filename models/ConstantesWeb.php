@@ -12,6 +12,9 @@ class ConstantesWeb {
 	const POST_TYPE_CONTEXTO = 6;
 	const POST_TYPE_SOLO_POR_HOY = 7;
 	const POST_TYPE_SABIAS_QUE = 8;
+	const USUARIOS_MOSTRAR = 10;
+	const POSTS_MOSTRAR = 10;
+
 	
 	// Calificación maxima para alquimia
 	const MAX_CALIFICACION_ALQUIMIA = 5;

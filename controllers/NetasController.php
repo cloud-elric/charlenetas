@@ -22,6 +22,7 @@ use app\modules\ModUsuarios\models\LoginForm;
 use app\models\CatTiposPosts;
 use app\models\ConstantesWeb;
 use app\models\EntPosts;
+use app\models\EntAlquimias;
 
 class NetasController extends Controller {
 	
@@ -45,7 +46,8 @@ class NetasController extends Controller {
 								'cargar-input-comentario',
 								'calificar-alquimia',
 								'get-calificacion-usuario',
-								'validar-respuesta' 
+								'validar-respuesta',
+								'perfil-usuario' 
 						],
 						'rules' => [
 								
@@ -60,6 +62,26 @@ class NetasController extends Controller {
 				] 
 		];
 		// everything else is denied
+	}
+	
+	/**
+	 * Guarda alquimia
+	 */
+	public function actionCrearAlquimia() {
+		// Declaracion de modelos
+		$alquimia = new EntAlquimias ();
+		$post = new EntPosts ( [ 
+				'scenario' => 'crear' 
+		] );
+		
+		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->guardarAlquimia ( $alquimia, $post );
+		}
+		
+		return $this->render ( 'crearAlquimia', [ 
+				'alquimia' => $alquimia,
+				'post' => $post 
+		] );
 	}
 	
 	/**
@@ -201,7 +223,7 @@ class NetasController extends Controller {
 				
 				$post = EntPosts::find ()->where ( [ 
 						'id_post' => $contextoPadre->id_contexto_padre 
-				] )->one();
+				] )->one ();
 			}
 		}
 		
@@ -528,8 +550,29 @@ class NetasController extends Controller {
 	}
 	
 	/**
+	 * Muestra la ventana de perfil del usuario
+	 */
+	public function actionPerfilUsuario() {
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		// Buscamos el usuario
+		$usuario = EntUsuarios::findOne ( $idUsuario );
+		
+		return $this->render ( 'perfilUsuario', [ 
+				'usuario' => $usuario 
+		] );
+	}
+	
+	/**
+	 * Ventana para comprar creditos
+	 */
+	public function actionComprarCreditos() {
+	}
+	
+	/**
 	 * Valida la respuesta del usuario con la respuesta correcta
-	 * 
+	 *
 	 * @param unknown $token        	
 	 */
 	public function actionValidarRespuesta($token) {

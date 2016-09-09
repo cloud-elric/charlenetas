@@ -23,7 +23,6 @@ class ManagerController extends Controller {
 	 * Registrar usuario en la base de datos
 	 */
 	public function actionSignUp() {
-		
 		$model = new EntUsuarios ( [ 
 				'scenario' => 'registerInput' 
 		] );
@@ -31,14 +30,14 @@ class ManagerController extends Controller {
 		if ($model->load ( Yii::$app->request->post () )) {
 			
 			// Obtiene la imagen de perfil para le usuario
-			$model->imageProfile = UploadedFile::getInstance($model, 'imageProfile');
-			$nombreImagen = Utils::generateToken('ava') . '.' . $model->imageProfile->extension;
+			$model->imageProfile = UploadedFile::getInstance ( $model, 'imageProfile' );
+			$nombreImagen = Utils::generateToken ( 'ava' ) . '.' . $model->imageProfile->extension;
 			$model->txt_imagen = $nombreImagen;
 			
 			if ($user = $model->signup ()) {
 				
 				// Guarda la imagen de usuario
-				$model->upload($nombreImagen);
+				$model->upload ( $nombreImagen );
 				
 				if (Yii::$app->params ['modUsuarios'] ['mandarCorreoActivacion']) {
 					
@@ -54,7 +53,7 @@ class ManagerController extends Controller {
 					$parametrosEmail ['user'] = $user->getNombreCompleto ();
 					
 					// Envio de correo electronico
-					$utils->sendEmailActivacion ( $user->txt_email,$parametrosEmail );
+					$utils->sendEmailActivacion ( $user->txt_email, $parametrosEmail );
 					$this->redirect ( [ 
 							'login' 
 					] );
@@ -95,7 +94,7 @@ class ManagerController extends Controller {
 			$parametrosEmail ['user'] = $user->getNombreCompleto ();
 			
 			// Envio de correo electronico
-			$utils->sendEmailRecuperarPassword ($user->txt_email, $parametrosEmail );
+			$utils->sendEmailRecuperarPassword ( $user->txt_email, $parametrosEmail );
 		}
 		return $this->render ( 'peticionPass', [ 
 				'model' => $model 
@@ -166,7 +165,6 @@ class ManagerController extends Controller {
 	 * Loguea al usuario
 	 */
 	public function actionLogin() {
-		
 		$this->layout = false;
 		
 		if (! Yii::$app->user->isGuest) {
@@ -180,9 +178,15 @@ class ManagerController extends Controller {
 			return;
 			return $this->goBack ();
 		}
-		return  $this->renderAjax ( 'login', [ 
-				'model' => $model 
-		] );
+		if (Yii::$app->request->isAjax) {
+			return $this->renderAjax ( 'login', [ 
+					'model' => $model 
+			] );
+		}
+		
+		return $this->render( 'login', [ 
+					'model' => $model 
+			] );
 	}
 	
 	/**
@@ -204,7 +208,7 @@ class ManagerController extends Controller {
 		}
 		
 		// asi podemos obtener sus datos de los amigos
-		foreach($data['friendsInApp'] as $key=>$value){
+		foreach ( $data ['friendsInApp'] as $key => $value ) {
 			$value->id;
 			$value->name;
 		}

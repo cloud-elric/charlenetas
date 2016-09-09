@@ -2,36 +2,11 @@
 use yii\web\View;
 ?>
 
-<div class="header">
-	<div class="">
-		<a href="#">Workshops</a> <a href="#">Tutoriales</a>
-	</div>
 
-	<div class="logo">
-		<img src="assets/images/logo-charlenetas.png" alt="Charlenetas.com" />
-	</div>
+<?=$this->render('//layouts/header')?>
 
-	<div class="">
-		<!-- <div class="btn btn-link ">Ingresar</div>
-		<div class="btn btn-secondary">Registrarme</div> -->
-		<a href="#">Mi perfil</a>
-		<a href="#" class="filters-toggle"><i class="material-icons">menu</i></a>
+<?=$this->render('//layouts/nav', ['tiposPost'=>$tiposPost])?>
 
-	</div>
-
-
-</div>
-
-<nav>
-	<ul>
-
-	<?php foreach($tiposPost as $tipoPost){?>
-		<li><a href="#" class="filter-active js-filter-tipo-post" data-value="<?=$tipoPost->id_tipo_post?>"><span class="color-espejo"></span><?=$tipoPost->txt_nombre?></a></li>
-	<?php }?>	
-
-
-	</ul>
-</nav>
 
 <div class=container-fluid>
 	<div class="pins-grid-container">
@@ -115,13 +90,15 @@ use yii\web\View;
 		</div>
 	</div>
 </div>
+
 <a class="waves-effect waves-light btn modal-trigger" href="#modal-login" style="display:none;"></a>
+
 <?php
 if (Yii::$app->user->isGuest) {
 $this->registerJs("
 		loadLogin();
 		// Masonry Grid
-		var grid = $('.grid').masonry({
+		grid = $('.grid').masonry({
   			itemSelector: '.pin',
 			columnWidth:250,
   			gutter: 15,
