@@ -44,16 +44,15 @@ class EntPosts extends \yii\db\ActiveRecord
     }
     
     /**
-     * USUARIOS_MOSTRAR es constante tiene un valor de 1
+     * POSTS_MOSTRAR es constante tiene un valor de 10
      * @param number $page=0
-     * @param string $usuario
+     * @param number $post: numero del tipo de post
      * @param unknown $pageSize
      */
     public static function getPosts($page = 0, $post , $pageSize = ConstantesWeb::POSTS_MOSTRAR){
     
     	/**
-    	 * Busca en la base de datos EntUsuarios donde txt_username o txt_email contenga el string $usuario
-    	 * y muestra 1 por que const USUARIOS_MOSTRAR es igual a 1
+    	 * Busca en la base de datos EntPost donde id_tipo_post sea igual al valor de $post
     	 * @var \yii\db\ActiveQuery $query
     	 */
     	$query = EntPosts::find()->where(["id_tipo_post"=>$post]);
@@ -70,6 +69,23 @@ class EntPosts extends \yii\db\ActiveRecord
     
     	return $dataProvider->getModels();
     }
+    
+    
+    /**
+     * Busca un post por su token
+     *
+     * @param unknown $token
+     * @throws NotFoundHttpException
+     * @return EntPostsExtend
+     */
+    public static function getPostByToken($token) {
+    	if (($post = EntPostsExtend::getPostByToken ( $token )) !== null) {
+    		return $post;
+    	} else {
+    		throw new NotFoundHttpException ( 'The requested page does not exist.' );
+    	}
+    }
+    
 
     /**
      * @inheritdoc
@@ -139,6 +155,14 @@ class EntPosts extends \yii\db\ActiveRecord
     public function getEntContextos()
     {
         return $this->hasOne(EntContextos::className(), ['id_post' => 'id_post']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEntSabiasQue()
+    {
+    	return $this->hasOne(EntSabiasQue::className(), ['id_post' => 'id_post']);
     }
 
     /**

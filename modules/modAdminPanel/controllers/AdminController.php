@@ -6,6 +6,7 @@ use yii\web\Controller;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use app\models\EntComentariosPosts;
 use app\models\EntPosts;
+use app\models\EntPostsExtend;
 
 /**
  * Default controller for the `adminPanel` module
@@ -52,41 +53,60 @@ class AdminController extends Controller
 		return $this->render('espejo',["postsEspejo"=>$postsEspejo]);
 	}
 	
-	public function actionAlquimia($page = 0,$post = 2)
+	public function actionAlquimia($page = 0)
 	{
-		$postsAlquimia = EntPosts::getPosts($page, $post);
+		$idPost = 2;
+		$postsAlquimia = EntPosts::getPosts($page, $idPost);
 		
 		return $this->render('Alquimia',["postsAlquimia"=>$postsAlquimia]);
 	}
 	
-	public function actionVerdadazos()
+	public function actionVerdadazos($page = 0)
 	{
-		return $this->render('Verdadazos');
+		$idPost = 3;
+		$postsVerdadazos = EntPosts::getPosts($page, $idPost);
+				
+		return $this->render('Verdadazos',["postsVerdadazos"=>$postsVerdadazos]);
 	}
 	
-	public function actionHoyPense()
+	public function actionHoyPense($page = 0)
 	{
-		return $this->render('HoyPense');
+		$idPost = 4;
+		$postsHoypense = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('HoyPense',["postsHoyPense"=>$postsHoypense]);
 	}
 	
-	public function actionMedia()
+	public function actionMedia($page = 0)
 	{
-		return $this->render('Media');
+		$idPost = 5;
+		$postsMedia = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('Media',["postsMedia"=>$postsMedia]);
 	}
 	
-	public function actionContexto()
+	public function actionContexto($page = 0)
 	{
-		return $this->render('Contexto');
+		$idPost = 6;
+		$postsContexto = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('Contexto',["postsContexto"=>$postsContexto]);
 	}
 	
-	public function actionSoloPorHoy()
+	public function actionSoloPorHoy($page = 0)
 	{
-		return $this->render('SoloPorHoy');
+		$idPost = 7;
+		$postsSoloPorHoy = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('SoloPorHoy',["postsSoloPorHoy"=>$postsSoloPorHoy]);
 	}
 	
-	public function actionSabiasQue()
+	public function actionSabiasQue($page = 0)
 	{
-		return $this->render('SabiasQue');
+		$idPost = 8;
+		$postsSabiasQue = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('SabiasQue',["postsSabiasQue"=>$postsSabiasQue]);
 	}
 	
 	public function actionNotificaciones()
@@ -97,6 +117,28 @@ class AdminController extends Controller
 	public function actionAgenda()
 	{
 		return $this->render('Agenda');
+	}
+	
+	public function actionHabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc")
+	{
+		$postHabilitar = EntPosts::getPostByToken($tokenPost);
+		$postHabilitar->b_habilitado = 1;
+		
+		if($postHabilitar->save())
+			echo "SUCCESS ";
+		else 
+			echo "ERROR";
+	}
+	
+	public function actionDeshabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc")
+	{
+		$postDeshabilitar = EntPosts::getPostByToken($tokenPost);
+		$postDeshabilitar->b_habilitado = 0;
+		
+		if($postDeshabilitar->save())
+			echo "SUCCESS ";
+		else
+			echo "ERROR";
 	}
 	
 }
