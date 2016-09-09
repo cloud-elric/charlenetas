@@ -22,7 +22,7 @@ use yii\helpers\Html;
 
 <section class="full-pin-body full-pin-body-hoy-pense full-pin-body-img-vertical">
 	<h3><?=$post->txt_titulo?></h3>
-	<img src="assets/images/<?=$post->txt_imagen?>" alt="Alquimia - Películas que transforman" />
+	<img src="webAssets/images/<?=$post->txt_imagen?>" alt="Alquimia - Películas que transforman" />
 	<p>
 		<?=$post->txt_descripcion?>
 	</p>
@@ -37,7 +37,7 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<?php 
+			<?php
 				include 'elementos/like-post.php';
 			?>
 		</div>

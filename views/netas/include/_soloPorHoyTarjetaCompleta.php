@@ -22,7 +22,7 @@ use yii\helpers\Html;
 
 <section class="full-pin-body full-pin-body-solo-por-hoy full-pin-body-img-vertical">
 	<h3>...no violare la constitución</h3>
-	<img src="assets/images/<?=$post->txt_imagen?>" alt="Solo por hoy no violare la constitucion" />
+	<img src="webAssets/images/<?=$post->txt_imagen?>" alt="Solo por hoy no violare la constitucion" />
 
 	<p>
 		<?=$post->txt_descripcion?>
@@ -39,7 +39,7 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<?php 
+			<?php
 				include 'elementos/like-post.php';
 			?>
 		</div>

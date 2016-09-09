@@ -3,7 +3,7 @@
 		<a href="#">Workshops</a> <a href="#">Tutoriales</a>
 	</div>
 	<div class="logo">
-		<img src="assets/images/logo-charlenetas.png" alt="Charlenetas.com" />
+		<img src="webAssets/images/logo-charlenetas.png" alt="Charlenetas.com" />
 	</div>
 	<div class="">
 		<!-- <div class="btn btn-link ">Ingresar</div>

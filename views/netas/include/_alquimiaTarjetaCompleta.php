@@ -20,7 +20,7 @@ $alquimia = $post->entAlquimias;
 </section>
 <section
 	class="full-pin-body full-pin-body-alquimia full-pin-body-img-vertical">
-	<img src="assets/images/<?=Html::encode($post->txt_imagen)?>"
+	<img src="webAssets/images/<?=Html::encode($post->txt_imagen)?>"
 		alt="Alquimia - Películas que transforman" />
 	<h3><?=Html::encode($post->txt_titulo)?></h3>
 	<p>
@@ -39,7 +39,7 @@ $alquimia = $post->entAlquimias;
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<?php 
+			<?php
 				include 'elementos/like-post.php';
 			?>
 		</div>

@@ -23,10 +23,10 @@ class AppAsset extends AssetBundle {
 			//'plugins/pins-grid/pins.min.css',
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css',
 			'https://fonts.googleapis.com/icon?family=Material+Icons',
-			'assets/css/web-styles.css',
-			'plugins/ladda-bootstrap/dist/ladda-themeless.min.css' 
+			'webAssets/css/web-styles.css',
+			'plugins/ladda-bootstrap/dist/ladda-themeless.min.css'
 	];
-	public $js = [ 
+	public $js = [
 			'js/charlenetas.js',
 			//'plugins/pins-grid/pins.min.js',
 			//'plugins/pins-grid/pins.js',
@@ -36,8 +36,8 @@ class AppAsset extends AssetBundle {
 			'http://masonry.desandro.com/masonry.pkgd.js'
 	]
 	;
-	public $depends = [ 
-			'yii\web\YiiAsset' 
+	public $depends = [
+			'yii\web\YiiAsset'
 	]
 	// 'yii\bootstrap\BootstrapAsset',
 	;

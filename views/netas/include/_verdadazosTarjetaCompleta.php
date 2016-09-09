@@ -25,7 +25,7 @@ use yii\helpers\Html;
 	<p>
 		<?=$post->txt_descripcion?>
 	</p>
-	<img src="assets/images/<?=$post->txt_imagen?>"
+	<img src="webAssets/images/<?=$post->txt_imagen?>"
 		alt="Verdadazos - Netas bien duras" />
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
@@ -37,7 +37,7 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<?php 
+			<?php
 				include 'elementos/like-post.php';
 			?>
 		</div>

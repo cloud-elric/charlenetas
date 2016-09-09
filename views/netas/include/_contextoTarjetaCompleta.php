@@ -24,7 +24,7 @@ use yii\helpers\Html;
 			<li class="tab col s3"><a class="active" href="#test1"><?=Html::encode($post->txt_titulo)?></a></li>
 			<?php
 			$i = 2;
-			
+
 			if($post->entContextos){
 				$contestosHijos = $post->entContextos->entContextos;
 			}else{
@@ -43,7 +43,7 @@ use yii\helpers\Html;
 
 	<div class="full-pin-body-contexto-tabs">
 		<div id="test1" class="contexto-data-tab full-pin-body-img-vertical">
-			<img src="assets/images/<?=$post->txt_imagen?>"
+			<img src="webAssets/images/<?=$post->txt_imagen?>"
 				alt="<?=$post->txt_titulo?>" />
 			<h3><?=$post->txt_titulo?></h3>
 			<p>
@@ -63,8 +63,8 @@ use yii\helpers\Html;
 						<?=$hijo->txt_descripcion?>
 					</p>
 		</div>
-		<?php 
-			$i++;		
+		<?php
+			$i++;
 			}?>
 	</div>
 	<div class="full-pin-body-footer">
