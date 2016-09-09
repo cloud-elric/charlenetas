@@ -7,11 +7,19 @@ use kartik\password\StrengthValidator;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+
 use app\models\EntAlquimias;
 use app\models\EntComentariosPosts;
 use app\models\EntPosts;
 use app\models\EntRespuestasEspejo;
 use app\models\EntUsuariosCalificacionAlquimia;
+
+use app\modules\ModUsuarios\models\Utils;
+use kartik\password\StrengthValidator;
+use yii\data\ActiveDataProvider;
+use app\models\ConstantesWeb;
+use app\models\EntComentariosPosts;
+
 use app\models\EntUsuariosFeedbacks;
 use app\models\EntUsuariosLikePost;
 
@@ -68,6 +76,35 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	public static function tableName() {
 		return 'mod_usuarios_ent_usuarios';
 	}
+	
+	/**
+	 * USUARIOS_MOSTRAR es constante tiene un valor de 1
+	 * @param number $page=0
+	 * @param string $usuario
+	 * @param unknown $pageSize
+	 */
+	public static function getUsuarios($page = 0, $usuario = '', $pageSize = ConstantesWeb::USUARIOS_MOSTRAR){
+	
+		/**
+		 * Busca en la base de datos EntUsuarios donde txt_username o txt_email contenga el string $usuario
+		 * y muestra 1 por que const USUARIOS_MOSTRAR es igual a 1 
+		 * @var \yii\db\ActiveQuery $query
+		 */
+		$query = EntUsuarios::find()->where(["like","txt_username",$usuario])->orWhere(["like","txt_email",$usuario]);
+	
+		// Carga el dataprovider
+		$dataProvider = new ActiveDataProvider([
+				'query' => $query,
+				//'sort'=> ['defaultOrder' => ['fch_publicacion'=>'asc']],
+				'pagination' => [
+						'pageSize' => $pageSize,
+						'page' => $page
+				]
+		]);
+	
+		return $dataProvider->getModels();
+	}
+	
 	
 	/**
 	 * @inheritdoc
@@ -252,6 +289,30 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	}
 	
 	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntComentariosPosts()
+	{
+		return $this->hasMany(EntComentariosPosts::className(), ['id_usuario' => 'id_usuario']);
+	}
+	
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosFeedbacks()
+	{
+		return $this->hasMany(EntUsuariosFeedbacks::className(), ['id_usuario' => 'id_usuario']);
+	}
+	
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getEntUsuariosLikePosts()
+	{
+		return $this->hasMany(EntUsuariosLikePost::className(), ['id_usuario' => 'id_usuario']);
+	}
+	
+	/**
 	 *
 	 * @return \yii\db\ActiveQuery
 	 */
@@ -428,6 +489,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 				'id_usuario' => 'id_usuario' 
 		] );
 	}
+	
+	
 	
 	/**
 	 * INCLUDE USER LOGIN VALIDATION FUNCTIONS*
