@@ -7,19 +7,16 @@ use kartik\password\StrengthValidator;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-
 use app\models\EntAlquimias;
 use app\models\EntComentariosPosts;
 use app\models\EntPosts;
 use app\models\EntRespuestasEspejo;
 use app\models\EntUsuariosCalificacionAlquimia;
-
 use app\modules\ModUsuarios\models\Utils;
 use kartik\password\StrengthValidator;
 use yii\data\ActiveDataProvider;
 use app\models\ConstantesWeb;
 use app\models\EntComentariosPosts;
-
 use app\models\EntUsuariosFeedbacks;
 use app\models\EntUsuariosLikePost;
 
