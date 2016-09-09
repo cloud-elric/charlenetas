@@ -61,38 +61,11 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/config\/db.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/config\/db.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/config\/params.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/config\/params.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/config\/web.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/config\/web.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/controllers\/NetasController.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/controllers\/NetasController.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -190,29 +163,20 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/models\/EntContextos.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntContextos.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/models\/EntEspejos.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/models\/EntEspejos.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/models\/EntPosts.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/models\/EntPosts.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/models\/EntPostsExtend.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/models\/EntPostsExtend.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -226,11 +190,29 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/models\/EntSabiasQue.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntSabiasQue.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/models\/EntSoloPorHoys.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/models\/EntSoloPorHoys.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/models\/EntUsuariosCalificacionAlquimia.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntUsuariosCalificacionAlquimia.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -244,11 +226,38 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/models\/EntUsuariosLikePost.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntUsuariosLikePost.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/models\/EntUsuariosRespuestasSabiasQue.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/EntUsuariosRespuestasSabiasQue.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/models\/EntUsuariosSubscripciones.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/models\/EntUsuariosSubscripciones.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/models\/ViewCalificacionAlquimias.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/ViewCalificacionAlquimias.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -262,20 +271,47 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/models\/ViewContadorLikes.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/models\/ViewContadorLikes.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/modules\/admin\/Administrador.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/modules\/admin\/Administrador.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/modules\/admin\/controllers\/DefaultController.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/modules\/admin\/controllers\/DefaultController.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/modules\/admin\/views\/default\/index.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/modules\/admin\/views\/default\/index.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/modules\/ModUsuarios\/controllers\/DefaultController.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/modules\/ModUsuarios\/controllers\/DefaultController.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/modules\/ModUsuarios\/controllers\/ManagerController.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/modules\/ModUsuarios\/controllers\/ManagerController.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -384,15 +420,6 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/modules\/ModUsuarios\/models\/EntSesiones.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/modules\/ModUsuarios\/models\/EntUsuarios.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/modules\/ModUsuarios\/models\/EntUsuarios.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -31327,15 +31354,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/netas\/include\/_alquimiaTarjetaCompleta8.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/netas\/include\/_alquimiaTarjetaCompleta8.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/views\/netas\/include\/_contextoPin.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -31408,6 +31426,24 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/views\/netas\/include\/_sabiasQuePin.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/_sabiasQuePin.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/netas\/include\/_sabiasQueTarjetaCompleta.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/_sabiasQueTarjetaCompleta.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/netas\/include\/_soloPorHoyPin.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -31471,11 +31507,11 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/netas\/include\/elementos\/feedbacks.php": {
+	"\/views\/netas\/include\/elementos\/feedbacks-comentario.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/feedbacks.php",
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/feedbacks-comentario.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -31485,6 +31521,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/inputComentario.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/netas\/include\/elementos\/like-post.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/like-post.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -31516,15 +31561,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/netas\/index.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/netas\/index.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/views\/netas\/masPosts.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -31533,138 +31569,6 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
-		},
-	"\/web\/assets\/23faa3e5\/jquery.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/23faa3e5\/jquery.js",
-		"outputAbbreviatedPath": "\/web\/assets\/23faa3e5\/min\/jquery-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/23faa3e5\/jquery.min.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/23faa3e5\/jquery.min.js",
-		"outputAbbreviatedPath": "\/web\/assets\/23faa3e5\/min\/jquery.min-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/2cd8798c\/yii.activeForm.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.activeForm.js",
-		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii.activeForm-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/2cd8798c\/yii.captcha.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.captcha.js",
-		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii.captcha-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/2cd8798c\/yii.gridView.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.gridView.js",
-		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii.gridView-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/2cd8798c\/yii.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.js",
-		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/2cd8798c\/yii.validation.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/2cd8798c\/yii.validation.js",
-		"outputAbbreviatedPath": "\/web\/assets\/2cd8798c\/min\/yii.validation-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.activeForm.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.activeForm.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii.activeForm-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.captcha.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.captcha.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii.captcha-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.gridView.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.gridView.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii.gridView-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/34fd83b0\/yii.validation.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/34fd83b0\/yii.validation.js",
-		"outputAbbreviatedPath": "\/web\/assets\/34fd83b0\/min\/yii.validation-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
 		},
 	"\/web\/assets\/css\/_sass\/01-tools\/animations.scss": {
 		"createSourceMap": 0,
@@ -33043,7 +32947,7 @@
 		"useLibsass": false
 		},
 	"\/web\/assets\/css\/_sass\/main.sass": {
-		"createSourceMap": 0,
+		"createSourceMap": 1,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 2,
@@ -33053,7 +32957,7 @@
 		"outputAbbreviatedPath": "\/web\/assets\/css\/web-styles.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 0,
+		"outputStyle": 3,
 		"shouldRunAutoprefixer": 0,
 		"shouldRunBless": 0,
 		"useLibsass": false
@@ -33066,28 +32970,6 @@
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
-		},
-	"\/web\/assets\/d96cd018\/jquery.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/d96cd018\/jquery.js",
-		"outputAbbreviatedPath": "\/web\/assets\/d96cd018\/min\/jquery-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/web\/assets\/d96cd018\/jquery.min.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/web\/assets\/d96cd018\/jquery.min.js",
-		"outputAbbreviatedPath": "\/web\/assets\/d96cd018\/min\/jquery.min-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
 		},
 	"\/web\/assets\/images\/03fb13e8.image1.jpg": {
 		"fileType": 16384,
@@ -33540,6 +33422,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/web\/assets\/images\/tAG_155381.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 55627,
+		"inputAbbreviatedPath": "\/web\/assets\/images\/tAG_155381.jpg",
+		"outputAbbreviatedPath": "\/web\/assets\/images\/tAG_155381.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/web\/assets\/images\/usr-avatar.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -33589,6 +33482,59 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/web\/js\/min\/charlenetas-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/js\/min\/charlenetas-min.js",
+		"outputAbbreviatedPath": "\/web\/js\/min\/min\/charlenetas-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda-themeless.min.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda-themeless.min.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/ladda.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/ladda.min.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/min\/ladda.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/ladda-bootstrap\/dist\/spin.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/spin.min.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/ladda-bootstrap\/dist\/min\/spin.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/web\/plugins\/pins-grid\/pins.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/plugins\/pins-grid\/pins.js",
+		"outputAbbreviatedPath": "\/web\/plugins\/pins-grid\/min\/pins-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/web\/plugins\/pins-grid\/pins.min.css": {
 		"fileType": 16,
 		"ignore": 1,
@@ -33609,13 +33555,13 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/web\/uploads\/ani.jpg": {
-		"fileType": 16384,
+	"\/web\/uploads\/profiles\/asa.png": {
+		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 16534,
-		"inputAbbreviatedPath": "\/web\/uploads\/ani.jpg",
-		"outputAbbreviatedPath": "\/web\/uploads\/ani.jpg",
+		"initialSize": 81676,
+		"inputAbbreviatedPath": "\/web\/uploads\/profiles\/asa.png",
+		"outputAbbreviatedPath": "\/web\/uploads\/profiles\/asa.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -33627,6 +33573,28 @@
 		"initialSize": 16534,
 		"inputAbbreviatedPath": "\/web\/uploads\/profiles\/ava127c9f55dbc4839b4894f1732052e24757b5ffb56dfb1.jpg",
 		"outputAbbreviatedPath": "\/web\/uploads\/profiles\/ava127c9f55dbc4839b4894f1732052e24757b5ffb56dfb1.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/web\/uploads\/profiles\/ava3c26b989e9c1ddb0b3c2e362c9feee8457bb9170a29f3.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 27632,
+		"inputAbbreviatedPath": "\/web\/uploads\/profiles\/ava3c26b989e9c1ddb0b3c2e362c9feee8457bb9170a29f3.png",
+		"outputAbbreviatedPath": "\/web\/uploads\/profiles\/ava3c26b989e9c1ddb0b3c2e362c9feee8457bb9170a29f3.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/web\/uploads\/profiles\/imgDefault.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 81676,
+		"inputAbbreviatedPath": "\/web\/uploads\/profiles\/imgDefault.png",
+		"outputAbbreviatedPath": "\/web\/uploads\/profiles\/imgDefault.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
