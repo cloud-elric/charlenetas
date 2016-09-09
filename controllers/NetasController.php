@@ -64,25 +64,6 @@ class NetasController extends Controller {
 		// everything else is denied
 	}
 	
-	/**
-	 * Guarda alquimia
-	 */
-	public function actionCrearAlquimia() {
-		// Declaracion de modelos
-		$alquimia = new EntAlquimias ();
-		$post = new EntPosts ( [ 
-				'scenario' => 'crear' 
-		] );
-		
-		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
-			$post->guardarAlquimia ( $alquimia, $post );
-		}
-		
-		return $this->render ( 'crearAlquimia', [ 
-				'alquimia' => $alquimia,
-				'post' => $post 
-		] );
-	}
 	
 	/**
 	 * Obtenemos la calificacion del usuario logueado

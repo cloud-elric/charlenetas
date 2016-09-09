@@ -10,20 +10,20 @@ function cargarMasPosts() {
 	$.ajax({
 		url:url,
 		success:function(res){
-			
+
 			 var $items = $(res);
-			 
+
 			 console.log($items);
-			 
+
 			 grid.append( $items ).masonry( 'appended', $items );
-			 
+
 //			 contenedor.append(res).each(function(){
 //			   		grid.masonry('reloadItems');
 //			 	});
-//			      
+//
 //			      grid.masonry();
 			pages++;
-			 
+
 			  // append items to grid
 		}
 	});
@@ -32,14 +32,14 @@ function cargarMasPosts() {
 //		if (tmp.html().trim().length > 0) {
 //			contenedor.append(tmp.html());
 //			pages++;
-//			
+//
 //		} else {
 //			alert('Sin datos para cargar');
 //		}
-		
+
 
 	//});
-	
+
 }
 
 
@@ -87,7 +87,7 @@ function cargarRespuestas(token, pageRespuestas) {
 
 /**
  * Carga las siguientes respuestas por token
- * 
+ *
  * @param element
  */
 function cargarRespuestasPage(element) {
@@ -310,7 +310,7 @@ function agregarFeedback(token, feed) {
 
 /**
  * Agrega visualmente un feedback a un comentario
- * 
+ *
  * @param token
  */
 function addFeedback(token, feed) {
@@ -326,7 +326,7 @@ function addFeedback(token, feed) {
 
 /**
  * Remueve visulamente un feedback a un comentario
- * 
+ *
  * @param token
  */
 function removeFeedback(token, feed) {
@@ -343,7 +343,7 @@ function removeFeedback(token, feed) {
 
 /**
  * Califica alquimia y prender las estrellas
- * 
+ *
  * @param element
  */
 function calificarPrenderEstrellas(element) {
@@ -433,7 +433,7 @@ function enviarRespuesta(token) {
 
 /**
  * Pone un like a un post
- * 
+ *
  * @param token
  */
 function likePost(token) {
@@ -460,7 +460,7 @@ function likePost(token) {
 
 /**
  * Visualmente agrega la parte de aumento de like
- * 
+ *
  * @param token
  */
 function addLikePost(token) {
@@ -477,7 +477,7 @@ function addLikePost(token) {
 
 /**
  * Visualmente remueve el contador de likes
- * 
+ *
  * @param token
  */
 function removeLikePost(token) {
@@ -494,7 +494,7 @@ function removeLikePost(token) {
 
 /**
  * Muestra el ladda al elemento
- * 
+ *
  * @param element
  */
 function loadLada(element) {
@@ -564,7 +564,7 @@ function cargarCalificacion() {
 /**
  * Carga la calificacion del usuario de una alquimia a traves de una petición
  * ajax
- * 
+ *
  * @param token
  */
 function cargarCalificacionUsuario(token) {
@@ -651,7 +651,7 @@ function cambiarClassPin(elemento, opacity){
  * @param idTipoPost
  */
 function ocultarTipoPost(tipoPost, opacity){
-	
+
 	switch (tipoPost) {
 	case 1: // espejo
 		var elemento = $('.pin-espejo');
@@ -698,7 +698,7 @@ function ocultarTipoPost(tipoPost, opacity){
 		alert('No especificado');
 		break;
 	}
-	
+
 }
 
 $(document).ready(function() {
@@ -739,7 +739,7 @@ $(document).ready(function() {
 		var elemento = $(this);
 		var tipoPost = elemento.data('value');
 		var opacity = 1;
-		
+
 		if (elemento.hasClass('filter-active')) {
 			opacity = 0;
 		}
@@ -751,10 +751,10 @@ $(document).ready(function() {
 	grid.on( 'removeComplete',
 			  function( event, removedItems  ) {
 		alert();
-			    
+
 			  }
 			);
-	
+
 });
 
 $('body').on('beforeSubmit', '#login-form', function() {
@@ -779,4 +779,9 @@ $('body').on('beforeSubmit', '#login-form', function() {
 		}
 	});
 	return false;
+});
+
+
+$('.filters-toggle').on('click',function(){
+  $('nav').toggleClass('mobile');
 });

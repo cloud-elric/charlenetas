@@ -2,9 +2,11 @@
 use yii\web\View;
 ?>
 
+
 <?=$this->render('//layouts/header')?>
 
 <?=$this->render('//layouts/nav', ['tiposPost'=>$tiposPost])?>
+
 
 <div class=container-fluid>
 	<div class="pins-grid-container">
@@ -19,7 +21,7 @@ use yii\web\View;
 </div>
 
 
-<div class="waves-effect waves-light btn" id="js-cargar-mas-posts"
+<div class="more-entries waves-effect waves-light btn" id="js-cargar-mas-posts"
 	onclick="cargarMasPosts();">Cargar mas entradas</div>
 
 <div id="js-tmp" style="display: none;"></div>

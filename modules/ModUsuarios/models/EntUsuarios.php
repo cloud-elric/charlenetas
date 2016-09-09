@@ -2,13 +2,10 @@
 
 namespace app\modules\ModUsuarios\models;
 
-use app\modules\ModUsuarios\models\Utils;
-use kartik\password\StrengthValidator;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use app\models\EntAlquimias;
-use app\models\EntComentariosPosts;
 use app\models\EntPosts;
 use app\models\EntRespuestasEspejo;
 use app\models\EntUsuariosCalificacionAlquimia;
@@ -291,32 +288,6 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	public function getEntComentariosPosts()
 	{
 		return $this->hasMany(EntComentariosPosts::className(), ['id_usuario' => 'id_usuario']);
-	}
-	
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEntUsuariosFeedbacks()
-	{
-		return $this->hasMany(EntUsuariosFeedbacks::className(), ['id_usuario' => 'id_usuario']);
-	}
-	
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEntUsuariosLikePosts()
-	{
-		return $this->hasMany(EntUsuariosLikePost::className(), ['id_usuario' => 'id_usuario']);
-	}
-	
-	/**
-	 *
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEntComentariosPosts() {
-		return $this->hasMany ( EntComentariosPosts::className (), [ 
-				'id_usuario' => 'id_usuario' 
-		] );
 	}
 	
 	/**
