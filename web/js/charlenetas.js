@@ -702,6 +702,14 @@ function ocultarTipoPost(tipoPost, opacity){
 }
 
 $(document).ready(function() {
+	
+	var grid = $('.grid').masonry({
+		itemSelector: '.pin',
+		columnWidth:250,
+			gutter: 15,
+			
+	});
+	
 	$('#js-login').on('click', function(e) {
 		e.preventDefault();
 	});

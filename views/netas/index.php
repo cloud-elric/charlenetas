@@ -96,7 +96,7 @@ if (Yii::$app->user->isGuest) {
 $this->registerJs("
 		loadLogin();
 		// Masonry Grid
-		var grid = $('.grid').masonry({
+		grid = $('.grid').masonry({
   			itemSelector: '.pin',
 			columnWidth:250,
   			gutter: 15,
