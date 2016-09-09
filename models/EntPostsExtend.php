@@ -31,6 +31,7 @@ class EntPostsExtend extends EntPosts
 		return $dataProvider->getModels();
 	}
 	
+	
 
 	/**
 	 * Busca un post por el token

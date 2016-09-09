@@ -507,7 +507,9 @@ function loadLada(element) {
  * Carga login
  */
 function loadLogin() {
-	var url = 'http://localhost/charlenetas/web/login';
+	//var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
+	//var url = 'http://localhost/charlenetas/web/login';
+	var url = 'http://localhost:81/charlenetas/web/login';
 	var contentModal = $('#modal-login .modal-content');
 
 	$.ajax({
@@ -700,6 +702,14 @@ function ocultarTipoPost(tipoPost, opacity){
 }
 
 $(document).ready(function() {
+	
+	var grid = $('.grid').masonry({
+		itemSelector: '.pin',
+		columnWidth:250,
+			gutter: 15,
+			
+	});
+	
 	$('#js-login').on('click', function(e) {
 		e.preventDefault();
 	});
