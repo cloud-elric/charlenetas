@@ -5,7 +5,7 @@ if (YII_ENV_DEV) {
 			'class' => 'yii\db\Connection',
 			'dsn' => 'mysql:host=localhost;dbname=charlenetas_geekdb',
 			'username' => 'root',
-			'password' => '',
+			'password' => 'root',
 			'charset' => 'utf8'
 	];
 } else {
