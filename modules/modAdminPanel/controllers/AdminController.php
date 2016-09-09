@@ -6,7 +6,12 @@ use yii\web\Controller;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use app\models\EntComentariosPosts;
 use app\models\EntPosts;
+
 use app\models\EntPostsExtend;
+
+use app\models\EntAlquimias;
+use Yii;
+
 
 /**
  * Default controller for the `adminPanel` module
@@ -119,6 +124,7 @@ class AdminController extends Controller
 		return $this->render('Agenda');
 	}
 	
+
 	public function actionHabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc")
 	{
 		$postHabilitar = EntPosts::getPostByToken($tokenPost);
@@ -139,6 +145,27 @@ class AdminController extends Controller
 			echo "SUCCESS ";
 		else
 			echo "ERROR";
+	}
+	
+	/**
+	 * Guarda alquimia
+	 */
+	public function actionCrearAlquimia() {
+		// Declaracion de modelos
+		$alquimia = new EntAlquimias();
+		$post = new EntPosts( [ 
+				'scenario' => 'crear' 
+		] );
+		
+		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->guardarAlquimia ( $alquimia, $post );
+		}
+		
+		return $this->renderAjax( 'crearAlquimia', [ 
+				'alquimia' => $alquimia,
+				'post' => $post 
+		] );
+
 	}
 	
 }
