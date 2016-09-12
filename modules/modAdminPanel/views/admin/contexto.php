@@ -1,6 +1,8 @@
 <?php
 use app\models\EntPosts;
 use app\models\EntComentariosPosts;
+use app\modules\modAdminPanel\assets\ModuleAsset;
+use yii\web\View;
 
 	foreach ($postsContexto as $postContexto){
 		echo $postContexto->txt_descripcion . "   ";
@@ -17,3 +19,12 @@ use app\models\EntComentariosPosts;
 	echo "total likes= " . EntPosts::find()->where(['id_tipo_post'=>$postContexto->id_tipo_post])->sum("num_likes");
 	echo "total comentarios= " . EntComentariosPosts::find()->where(['id_post'=>$postContexto->id_tipo_post])->count("id_post");
 	
+	$bundle = ModuleAsset::register ( Yii::$app->view );
+	$bundle->js [] = 'js/charlenetas-contexto.js'; // dynamic file added
+	
+	
+	include 'templates/modalPost.php';
+	
+	$this->registerJs ( "
+		cargarFormulario();
+    ", View::POS_END );

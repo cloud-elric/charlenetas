@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\web\View;
 
 $form = ActiveForm::begin ( [ 
 		'options' => [ 
@@ -15,10 +16,17 @@ $form = ActiveForm::begin ( [
 
   	 <?= $form->field($post, 'imagen')->fileInput()?>
   	 
-  	 <?= $form->field($post, 'fch_publicacion')?>
+  	 <?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
   	 
   	 <?= $form->field($alquimia, 'num_calificacion_admin')?>
    
      <?= Html::submitButton('Crear')?>
        
-<?php ActiveForm::end() ?>
+<?php ActiveForm::end() ;
+
+$this->registerJs ( "
+		$('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+", View::POS_END );

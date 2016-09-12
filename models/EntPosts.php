@@ -396,5 +396,148 @@ class EntPosts extends \yii\db\ActiveRecord {
 		
 		return false;
 	}
+	
+	/**
+	 * Guarda post de Verdadazo
+	 * @param EntPost $verdadazo
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarVerdadazos($verdadazo) {
+		$verdadazo->id_tipo_post = ConstantesWeb::POST_TYPE_VERDADAZOS;
+		$verdadazo->fch_creacion = Utils::getFechaActual ();
+		$verdadazo->txt_token = Utils::generateToken ( 'post' );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($verdadazo->save ()) {
+						
+				$transaction->commit ();
+				return true;	
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda post de Hoy Pense
+	 * @param EntPost $hoyPense
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarHoyPense($hoyPense) {
+		$hoyPense->id_tipo_post = ConstantesWeb::POST_TYPE_HOY_PENSE;
+		$hoyPense->fch_creacion = Utils::getFechaActual ();
+		$hoyPense->txt_token = Utils::generateToken ( 'post' );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($hoyPense->save ()) {
+	
+				$transaction->commit ();
+				return true;
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda post de Media
+	 * @param EntPost $media
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarMedia($media) {
+		$media->id_tipo_post = ConstantesWeb::POST_TYPE_MEDIA;
+		$media->fch_creacion = Utils::getFechaActual ();
+		$media->txt_token = Utils::generateToken ( 'post' );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($media->save ()) {
+	
+				$transaction->commit ();
+				return true;
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda el contexto y el post
+	 * @param EntContexto $contexto
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarContexto($contexto, $post) {
+		$post->id_tipo_post = ConstantesWeb::POST_TYPE_CONTEXTO;
+		$post->fch_creacion = Utils::getFechaActual ();
+		$post->txt_token = Utils::generateToken ( 'post' );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+	
+				if ($contexto->save ()) {
+						
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda el solo por hoy y el post
+	 * @param EntSoloPorHoys $soloporhoy
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarSoloPorHoy($soloporhoy, $post) {
+		$post->id_tipo_post = ConstantesWeb::POST_TYPE_SOLO_POR_HOY;
+		$post->fch_creacion = Utils::getFechaActual ();
+		$post->txt_token = Utils::generateToken ( 'post' );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+	
+				if ($soloporhoy->save ()) {
+	
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
 
 }
