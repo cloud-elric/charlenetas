@@ -277,10 +277,10 @@ class AdminController extends Controller
 		] );
 	
 		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
-			$post->imagen = UploadedFile::getInstance($post, 'txt_imagen');
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
 			$post->txt_imagen = Utils::generateToken("img");
 			$post->guardarSabiasQue ( $sabiasque, $post );
-			
+			exit();
 			if($post->cargarImagen($post))
 			{
 				return;

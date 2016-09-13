@@ -556,6 +556,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 				if ($sabiasque->save ()) {
 	
 					$transaction->commit ();
+					
 					return true;
 				}
 			}
@@ -564,19 +565,17 @@ class EntPosts extends \yii\db\ActiveRecord {
 			$transaction->rollBack ();
 			throw $e;
 		}
-	
+		
+		print_r($post->errors);print_r($sabiasque->errors);
 		return false;
 	}
 	
 	public function cargarImagen($post)
 	{
 		
-		if ($post->validate()) {
 			$post->txt_imagen->saveAs("uploads/" .$post->txt_imagen);
 			return true;
-		} else {
-			return false;
-		}
+	
 	}
 
 }
