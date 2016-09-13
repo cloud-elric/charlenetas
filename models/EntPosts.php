@@ -109,11 +109,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 						],
 						'image',
 						'skipOnEmpty' => false,
-						'extensions' => 'png, jpg',
-						'minWidth' => 300,
-						'maxWidth' => 300,
-						'minHeight' => 300,
-						'maxHeight' => 300,
+						'extensions' => 'png, jpg, jpeg',
 						'on' => 'crear' 
 				],
 				[ 
@@ -538,6 +534,49 @@ class EntPosts extends \yii\db\ActiveRecord {
 		}
 	
 		return false;
+	}
+	
+	/**
+	 * Guarda el sabias que y el post
+	 * @param EntSabiasQue $sabiasque
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarSabiasQue($sabiasque, $post) {
+		$post->id_tipo_post = ConstantesWeb::POST_TYPE_SABIAS_QUE;
+		$post->fch_creacion = Utils::getFechaActual ();
+		$post->txt_token = Utils::generateToken ( 'post' );
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+	
+				if ($sabiasque->save ()) {
+	
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	public function cargarImagen($post)
+	{
+		
+		if ($post->validate()) {
+			$post->txt_imagen->saveAs("uploads/" .$post->txt_imagen);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
