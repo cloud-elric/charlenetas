@@ -10,13 +10,15 @@ $form = ActiveForm::begin ( [
 ] );
 ?>
 
-    <?= $form->field($hoyPense, 'txt_titulo')->textInput(['maxlength' => true])?>
+    <?= $form->field($post, 'txt_titulo')->textInput(['maxlength' => true])?>
 
-    <?= $form->field($hoyPense, 'txt_descripcion')->textInput(['maxlength' => true])?>
+    <?= $form->field($post, 'txt_descripcion')->textInput(['maxlength' => true])?>
 
-  	 <?= $form->field($hoyPense, 'imagen')->fileInput()?>
+  	 <?= $form->field($post, 'imagen')->fileInput()?>
   	 
-  	 <?= $form->field($hoyPense, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
+  	 <?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
+  	 
+  	 <?= $form->field($sabiasque, 'b_verdadero')?>
    
      <?= Html::submitButton('Crear')?>
        
@@ -24,10 +26,16 @@ $form = ActiveForm::begin ( [
 
 $this->registerJs ( "
 		$('.datepicker').pickadate({
-    	weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+		
+		weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
 		monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 		monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
 		weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+
+		//showMonthsShort: undefined,
+		//showWeekdaysFull: undefined,
+  		//showWeekdaysShort: undefined,
+		//showMonthsShort: true,
 		today: 'Hoy',
 		clear: 'Limpiar',
 		close: 'Cerrar',

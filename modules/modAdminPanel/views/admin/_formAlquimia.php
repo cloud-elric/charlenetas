@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\web\View;
 
 $form = ActiveForm::begin ( [ 
 		'options' => [ 
@@ -23,5 +22,6 @@ $form = ActiveForm::begin ( [
      <?= Html::submitButton('Crear')?>
        
 <?php ActiveForm::end() ;
+
 include 'templates/scriptFecha.php';
 ?>

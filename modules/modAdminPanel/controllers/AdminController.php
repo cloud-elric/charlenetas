@@ -13,6 +13,9 @@ use app\models\EntAlquimias;
 use Yii;
 use app\models\EntContextos;
 use app\models\EntSoloPorHoys;
+use app\models\EntSabiasQue;
+use yii\web\UploadedFile;
+use app\modules\ModUsuarios\models\Utils;
 
 
 /**
@@ -263,4 +266,51 @@ class AdminController extends Controller
 		] );
 	
 	}
+	
+	/**
+	 * Guarda sabias que
+	 */
+	public function actionCrearSabiasQue() {
+		// Declaracion de modelos
+		$sabiasque = new EntSabiasQue();
+		$post = new EntPosts( [
+				'scenario' => 'crear'
+		] );
+	
+		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
+			$post->txt_imagen = Utils::generateToken("img");
+			$post->guardarSabiasQue ( $sabiasque, $post );
+			exit();
+			if($post->cargarImagen($post))
+			{
+				return;
+			}
+		}
+	
+		return $this->renderAjax( 'crearSabiasQue', [
+				'sabiasque' => $sabiasque,
+				'post' => $post
+		] );
+	
+	}
+	
+	/**
+	 * Carga una imagen
+	 * @return void|string
+	 
+	public function actionImagen()
+	{
+		$imagen = new EntPosts();
+	
+		if (Yii::$app->request->post()) {
+			$imagen->txt_imagen = UploadedFile::getInstance($imagen, 'txt_imagen');
+			if ($imagen->cargarImagen($imagen)) {
+				// file is uploaded successfully
+				return;
+			}
+		}
+	
+		return $this->render('upload', ['model' => $model]);
+	}*/
 }
