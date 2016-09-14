@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\web\View;
 
 $form = ActiveForm::begin ( [ 
 		'options' => [ 
@@ -25,3 +24,4 @@ $form = ActiveForm::begin ( [
 <?php ActiveForm::end() ;
 
 include '/templates/formato-fecha.php';
+

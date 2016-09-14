@@ -23,6 +23,7 @@ use app\modules\ModUsuarios\models\Utils;
  */
 class AdminController extends Controller
 {
+	
     /**
      * Renders the index view for the module
      * @return string

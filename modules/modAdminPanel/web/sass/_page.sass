@@ -1,0 +1,82 @@
+/*!
+	-----------------------------------------------------------------------------
+
+	4.0 - Page
+			# Page
+			# Modal
+			# Toast
+
+	-----------------------------------------------------------------------------
+	*/
+
+/*  Page
+	================================================ */
+.page
+	background-color: #edf0f5
+	// background-color: #f3f4f5
+	// background-color: #f8f9fb
+	margin-left: 90px
+	margin-top: 66px
+	min-height: calc(100vh - 152px)
+	position: relative
+	z-index: 2
+	.page-header
+		padding-top: 30px
+		padding-left: calc(0.75rem + 30px)
+		padding-right: calc(0.75rem + 30px)
+		.page-title
+			font-size: 1.85em
+			text-shadow: rgba(0,0,0,.15) 0 0 1px
+			i
+				margin-right: 6px
+	.page-cont
+		padding: 30px
+
+/*  Page Agenda
+	================================================ */
+.page-agenda
+	margin-left: 390px
+
+/*  Modal
+	================================================ */
+.modal-form
+	.modal-content
+		h4
+			// background-color: rgba(red,.4)
+			margin-bottom: 20px
+	.modal-footer
+		button
+			background-color: transparent
+			box-shadow: none
+			color: $header-menu
+			font-weight: 400
+			padding: 0 1rem
+			i
+				font-size: 1.3em
+.modal.modal-fixed-footer
+	height: 90%
+	max-height: 90%
+	top: 6%
+
+// .picker--opened
+// 	.picker__holder
+// 		top: 0
+.picker--opened
+	.picker__frame
+		top: 1%
+
+/*  Toast
+	================================================ */
+.toast
+	// height: auto
+	padding: 0
+	.toast-error,
+	.toast-success
+		display: block
+		line-height: 1.5em
+		min-height: 48px
+		padding: 10px 25px
+	.toast-error
+		background-color: #FF4136
+	.toast-success
+		background-color: #2ECC40

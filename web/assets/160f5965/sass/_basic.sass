@@ -1,0 +1,138 @@
+/*!
+	-----------------------------------------------------------------------------
+
+	2.0 - Basicos
+			# Basic
+			# Loader
+			# Header
+			# Nav
+			# Page
+			# Footer
+
+	-----------------------------------------------------------------------------
+	*/
+
+/*  Basic
+	================================================ */
+*,
+*:after,
+*:before
+	box-sizing: border-box
+
+*
+	margin: 0
+	padding: 0
+
+body
+	background-color: #edf0f5
+	font:
+		family: $f-base
+		size: 16px
+		weight: 300
+	color: $text-base
+
+/* a */
+a
+	color: $header-menu
+	font:
+		family: $f-base
+		size: 16px
+		weight: 400
+	text-decoration: none
+	+transition(all 0.3s ease-in)
+	&:hover
+		color: $header-menu-hover
+		text-decoration: none
+		+transition(all 0.3s ease-out)
+
+/* img */
+img
+	+transition(all 0.5s ease-in)
+
+/* h1 - h6 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6
+	font:
+		family: $f-base
+		weight: 400
+	margin: 0
+	padding: 0
+h1,
+.h1
+	font-size: 2.8em
+h2,
+.h2
+	font-size: 2.4em
+h3,
+.h3
+	font-size: 2em
+h4,
+.h4
+	font-size: 1.6em
+h5,
+.h5
+	font-size: 1.4em
+h6,
+.h6
+	font-size: 1.2em
+
+/* hr */
+hr
+	border: none
+	margin: 0
+
+/* Wrap */
+// .wrap
+// 	display: none
+
+/* text align */
+.text-center
+	text-align: center
+.text-left
+	text-align: left
+.text-right
+	text-align: right
+
+/*  Loader
+	================================================ */
+.loader
+	align-items: center
+	background-color: $white
+	bottom: 0
+	display: flex
+	height: 100vh
+	left: 0
+	justify-content: center
+	position: fixed
+	right: 0
+	top: 0
+	width: 100%
+	z-index: 999
+
+/*  Cortar texto y colocar tres puntos
+	================================================ */
+.ellipsis
+	overflow: hidden
+	text-overflow: ellipsis
+	white-space: nowrap
+
+// Large
+// @include respond-to(lg)
+// Desktop
+// @include respond-to(md)
+// Tablet
+// @include respond-to(sm)
+// Mobile
+// @include respond-to(xs)
+// Extra mobile
+// @include respond-to(xx)
