@@ -14,7 +14,6 @@ class ModuleAsset extends AssetBundle {
 	public $js = [ 
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js' 
 	];
-
 	
 	public $depends = [ 
 			'yii\web\YiiAsset' 

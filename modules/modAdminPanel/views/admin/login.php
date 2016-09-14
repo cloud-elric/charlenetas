@@ -6,23 +6,23 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\modules\modAdminPanel\assets\ModuleAsset;
-use yii\helpers\Url;
 
 $this->title = 'Ingresar';
 $this->params ['breadcrumbs'] [] = $this->title;
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/login.js'; // dynamic file added
-
+                                // print_r($bundle);
+                                // exit;
 ?>
 <div class="loader">
-	<img src="<?=Url::to('/images/logo.gif', true).'adminPanel/web/imgs/loader.gif'?>" alt="Loader">
+	<img src="<?=$bundle->baseUrl.'/imgs/loader.gif'?>" alt="Loader">
 </div>
 <div class="wrap">
 	<div class="login">
 		<div class="login-cont">
 			<div class="login-logo">
-				<img src="<?=Yii::getAlias('@webroot')?>/adminPanel/web/imgs/charlenetas.png">
+				<img src="<?=$bundle->baseUrl?>/imgs/charlenetas.png">
 			</div>
 			<div class="login-form">
 				<h2 class="titulo"><?= Html::encode($this->title) ?></h2>
@@ -34,7 +34,7 @@ $bundle->js [] = 'js/login.js'; // dynamic file added
 									'layout' => 'horizontal',
 									'id' => 'login-form',
 									'fieldConfig' => [ 
-											'template' => "<div class='row'><div class='input-field col s12'>{input}</div>\n{label}\n{error}</div>",
+											'template' => "{input}\n{label}\n{error}",
 											'horizontalCssClasses' => [ 
 													'error' => 'mdl-textfield__error' 
 											],
@@ -48,21 +48,25 @@ $bundle->js [] = 'js/login.js'; // dynamic file added
 									'errorCssClass' => 'invalid' 
 							] );
 							?>
+							<div>
 									 <?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
 									<?= $form->field($model, 'password')->passwordInput()?>
 					<div class="col s12 right-align">
 									<?= Html::submitButton('Login <i class="material-icons right">send</i>',['class'=>'btn waves-effect waves-light center', 'name' => 'login-button', 'data-style'=>'"zoom-in'])?>
 								</div>
 				</div>
+
+
+			</div>
 						<?php ActiveForm::end(); ?>
 						<!-- <p class="datos"><a href="" class="crear-cuenta">Crear cuenta</a></p> -->
-				<p class="datos">
-					<a href="" class="olvide-pass">Olvide contraseña</a>
-				</p>
-			</div>
-			<!-- <div class="login-foter"><img src="assets/imgs/power-by-2geeks.png"></div> -->
+			<p class="datos">
+				<a href="" class="olvide-pass">Olvide contraseña</a>
+			</p>
 		</div>
+		<!-- <div class="login-foter"><img src="assets/imgs/power-by-2geeks.png"></div> -->
 	</div>
+</div>
 </div>
 
 

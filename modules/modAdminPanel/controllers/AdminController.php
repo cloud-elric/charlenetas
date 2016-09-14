@@ -7,8 +7,6 @@ use app\modules\ModUsuarios\models\EntUsuarios;
 use app\models\EntComentariosPosts;
 use app\models\EntPosts;
 
-use app\models\EntPostsExtend;
-
 use app\models\EntAlquimias;
 use Yii;
 use app\models\EntContextos;
@@ -16,6 +14,8 @@ use app\models\EntSoloPorHoys;
 use app\models\EntSabiasQue;
 use yii\web\UploadedFile;
 use app\modules\ModUsuarios\models\Utils;
+use app\modules\modAdminPanel\components\AccessRule;
+use yii\filters\AccessControl;
 
 
 /**
@@ -24,6 +24,31 @@ use app\modules\ModUsuarios\models\Utils;
 class AdminController extends Controller
 {
 	
+	public function behaviors()
+	{
+		#http://code.tutsplus.com/tutorials/how-to-program-with-yii2-user-access-controls--cms-23173
+		return [
+				
+				'access' => [
+						'class' => AccessControl::className(),
+						// We will override the default rule config with the new AccessRule class
+						'ruleConfig' => [
+								'class' => AccessRule::className(),
+						],
+						'only' => ['dashboard','alquimia'],
+						'rules' => [
+								[
+										'actions' => ['dashboard', 'alquimia'],
+										'allow' => true,
+										// Allow users, moderators and admins to create
+										'roles' => [
+												EntUsuarios::ROLE_ADMIN,
+										],
+								],
+						],
+				],
+		];
+	}
     /**
      * Renders the index view for the module
      * @return string
