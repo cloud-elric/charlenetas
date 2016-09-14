@@ -20,6 +20,7 @@ use app\models\EntSoloPorHoys;
  */
 class AdminController extends Controller
 {
+	
     /**
      * Renders the index view for the module
      * @return string

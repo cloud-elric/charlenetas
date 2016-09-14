@@ -174,17 +174,20 @@ class ManagerController extends Controller {
 		$model = new LoginForm ();
 		$model->scenario = 'login';
 		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {
+			if (Yii::$app->request->isAjax) {
 			echo "success";
 			return;
+			}
 			return $this->goBack ();
 		}
 		if (Yii::$app->request->isAjax) {
+			
 			return $this->renderAjax ( 'login', [ 
 					'model' => $model 
 			] );
 		}
-		
-		return $this->render( 'login', [ 
+		$this->layout = '@app/modules/modAdminPanel/views/admin/mainLogin';
+		return $this->render( '@app/modules/modAdminPanel/views/admin/login', [ 
 					'model' => $model 
 			] );
 	}

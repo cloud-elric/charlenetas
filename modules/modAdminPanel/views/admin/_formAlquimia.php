@@ -23,10 +23,5 @@ $form = ActiveForm::begin ( [
      <?= Html::submitButton('Crear')?>
        
 <?php ActiveForm::end() ;
-
-$this->registerJs ( "
-		$('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
-", View::POS_END );
+include 'templates/scriptFecha.php';
+?>

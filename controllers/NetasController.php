@@ -557,6 +557,11 @@ class NetasController extends Controller {
 	 * @param unknown $token        	
 	 */
 	public function actionValidarRespuesta($token) {
+		// busca el post necesario
+		$post = $this->getPostByToken($token);
+		
+		$sabiasQue = $post->entSabiasQue;
+		
 	}
 	
 	/**

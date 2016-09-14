@@ -23,12 +23,9 @@ use yii\web\View;
 		
 		echo"</br>";
 	}
-	echo "total= " . EntPosts::find()->where(['id_tipo_post'=>$postAlquimia->id_tipo_post])->count("id_tipo_post" . "   ");
+	echo "total= " . EntPosts::find()->where(['id_tipo_post'=>$postAlquimia->id_tipo_post])->count("id_tipo_post");
 	echo "total likes= " . EntPosts::find()->where(['id_tipo_post'=>$postAlquimia->id_tipo_post])->sum("num_likes");
 	echo "total comentarios= " . EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_tipo_post])->count("id_post");
-
-
-
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-alquimia.js'; // dynamic file added
