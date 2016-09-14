@@ -373,11 +373,13 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_ALQUIMIA;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
-				
+				$alquimia->id_post = $post->id_post;
 				if ($alquimia->save ()) {
 					
 					$transaction->commit ();
@@ -403,6 +405,8 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$verdadazo->id_tipo_post = ConstantesWeb::POST_TYPE_VERDADAZOS;
 		$verdadazo->fch_creacion = Utils::getFechaActual ();
 		$verdadazo->txt_token = Utils::generateToken ( 'post' );
+		$verdadazo->fch_publicacion = Utils::changeFormatDate($verdadazo->fch_publicacion);
+		$verdadazo->txt_imagen = Utils::generateToken("img") . "." . $verdadazo->imagen->extension;
 	
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
@@ -430,6 +434,8 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$hoyPense->id_tipo_post = ConstantesWeb::POST_TYPE_HOY_PENSE;
 		$hoyPense->fch_creacion = Utils::getFechaActual ();
 		$hoyPense->txt_token = Utils::generateToken ( 'post' );
+		$hoyPense->fch_publicacion = Utils::changeFormatDate($hoyPense->fch_publicacion);
+		$hoyPense->txt_imagen = Utils::generateToken("img") . "." . $hoyPense->imagen->extension;
 	
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
@@ -457,6 +463,8 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$media->id_tipo_post = ConstantesWeb::POST_TYPE_MEDIA;
 		$media->fch_creacion = Utils::getFechaActual ();
 		$media->txt_token = Utils::generateToken ( 'post' );
+		$media->fch_publicacion = Utils::changeFormatDate($media->fch_publicacion);
+		$media->txt_imagen = Utils::generateToken("img") . "." . $media->imagen->extension;
 	
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
@@ -485,11 +493,13 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_CONTEXTO;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
 	
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
-	
+				$contexto->id_post = $post->id_post;
 				if ($contexto->save ()) {
 						
 					$transaction->commit ();
@@ -516,11 +526,13 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_SOLO_POR_HOY;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
 	
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
-	
+				$soloporhoy->id_post = $post->id_post;
 				if ($soloporhoy->save ()) {
 	
 					$transaction->commit ();
@@ -548,11 +560,12 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
 		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
 	
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
-	
+				$sabiasque->id_post = $post->id_post;
 				if ($sabiasque->save ()) {
 	
 					$transaction->commit ();
@@ -565,15 +578,13 @@ class EntPosts extends \yii\db\ActiveRecord {
 			$transaction->rollBack ();
 			throw $e;
 		}
-		
-		print_r($post->errors);print_r($sabiasque->errors);
 		return false;
 	}
 	
 	public function cargarImagen($post)
 	{
 		
-			$post->txt_imagen->saveAs("uploads/" .$post->txt_imagen);
+			$post->imagen->saveAs(Yii::$app->params ['modAdmin'] ['path_imagenes_posts'] .$post->txt_imagen);
 			return true;
 	
 	}

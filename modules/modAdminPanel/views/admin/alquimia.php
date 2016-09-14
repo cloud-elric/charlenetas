@@ -6,7 +6,6 @@ use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 
 	foreach ($postsAlquimia as $postAlquimia){
-		//echo $postAlquimia->entAlquimias;
 		echo $postAlquimia->id_post . "   ";
 		echo $postAlquimia->id_tipo_post . "   ";
 		echo $postAlquimia->id_usuario . "   ";
