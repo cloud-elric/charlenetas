@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\modules\modAdminPanel\assets\ModuleAsset;
+use yii\helpers\Url;
 
 $this->title = 'Ingresar';
 $this->params ['breadcrumbs'] [] = $this->title;
@@ -15,7 +16,7 @@ $bundle->js [] = 'js/login.js'; // dynamic file added
 
 ?>
 <div class="loader">
-	<img src="<?=Yii::getAlias('@webroot')?>/adminPanel/web/imgs/loader.gif" alt="Loader">
+	<img src="<?=Url::to('/images/logo.gif', true).'adminPanel/web/imgs/loader.gif'?>" alt="Loader">
 </div>
 <div class="wrap">
 	<div class="login">
