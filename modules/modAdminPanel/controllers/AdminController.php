@@ -16,6 +16,7 @@ use yii\web\UploadedFile;
 use app\modules\ModUsuarios\models\Utils;
 use app\modules\modAdminPanel\components\AccessRule;
 use yii\filters\AccessControl;
+use app\models\CatTiposPosts;
 
 
 /**
@@ -62,7 +63,10 @@ class AdminController extends Controller
     
 	public function actionDashboard()
 	{
-		return $this->render('dashboard');
+		$e = '';
+		$posts = CatTiposPosts::find()->where(['txt_nombre'=>$e]);
+		
+		return $this->render('dashboard', ["dashboard"=>$posts]);
 	}
 	
 	/**
