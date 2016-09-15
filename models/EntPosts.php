@@ -191,13 +191,14 @@ class EntPosts extends \yii\db\ActiveRecord {
 				'id_tipo_post' => 'Id Tipo Post',
 				'id_usuario' => 'Id Usuario',
 				'id_usuario_administrador' => 'Id Usuario Administrador',
-				'txt_titulo' => 'Txt Titulo',
-				'txt_descripcion' => 'Txt Descripcion',
-				'txt_imagen' => 'Txt Imagen',
-				'txt_url' => 'Txt Url',
+				'txt_titulo' => 'Título',
+				'txt_descripcion' => 'Descripción',
+				'txt_imagen' => 'Imagen',
+				'imagen'=>'Imagen para post',
+				'txt_url' => 'Url',
 				'num_likes' => 'Num Likes',
 				'fch_creacion' => 'Fch Creacion',
-				'fch_publicacion' => 'Fch Publicacion',
+				'fch_publicacion' => 'Fecha Publicacion',
 				'b_habilitado' => 'B Habilitado' 
 		];
 	}
