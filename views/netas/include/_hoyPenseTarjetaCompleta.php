@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+use app\modules\ModUsuarios\models\Utils;
+$usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
@@ -12,7 +14,7 @@ use yii\helpers\Html;
 		</div>
 
 		<div class="post-publisher-avatar">
-			<img src="assets/images/usr-avatar.png" alt="" />
+			<?=Html::img(Html::encode($usuario->getImageProfile()))?>
 		</div>
 
 	</div>
@@ -21,11 +23,20 @@ use yii\helpers\Html;
 
 
 <section class="full-pin-body full-pin-body-hoy-pense full-pin-body-img-vertical">
-	<h3><?=$post->txt_titulo?></h3>
-	<img src="assets/images/<?=$post->txt_imagen?>" alt="Alquimia - Películas que transforman" />
-	<p>
-		<?=$post->txt_descripcion?>
-	</p>
+
+	<div class="full-pin-body-content">
+		<h3><?=Html::encode($post->txt_titulo)?></h3>
+		<div class="full-pin-body-content-img">
+			<img src="webAssets/images/<?=Html::encode($post->txt_imagen)?>"
+				alt="Alquimia - Películas que transforman" />
+		</div>
+		<div class="full-pin-body-content-text">
+			<p>
+				<?=Html::encode($post->txt_descripcion)?>
+			</p>
+		</div>
+	</div>
+
 
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
@@ -37,7 +48,7 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<?php 
+			<?php
 				include 'elementos/like-post.php';
 			?>
 		</div>

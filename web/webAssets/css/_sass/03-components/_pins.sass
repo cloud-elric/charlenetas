@@ -1,13 +1,11 @@
-.pins-grid
-  padding-right: 15px
-
 .pin
   background: white
   border-radius: 6px
   box-shadow: 0 15px 10px -5px rgba(0,0,0,0.3)
-  transition: all 300ms ease-in-out
+  //transition: all 300ms ease-in-out
   break-inside: avoid
   overflow: hidden
+  margin-bottom: 20px
   &:hover
     box-shadow: 0 25px 25px -15px rgba(0,0,0,0.3)
   .pin-header
@@ -16,6 +14,8 @@
   .image
     padding-bottom: 0
     img
+      display: block
+      width: 100%
       top: -1px
   > *:not(:first-child)
     border: none

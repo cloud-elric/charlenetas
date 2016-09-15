@@ -13,7 +13,7 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-/vendor
+/vendor/
 
 # composer itself is not needed
 composer.phar
@@ -31,5 +31,8 @@ phpunit.phar
 
 .CHANGELOG.md.html
 
-# Acceso a base de datos 
+# Acceso a base de datos
 /config/db.php
+
+#Carpetas Espeficales de yii
+/web/assets/

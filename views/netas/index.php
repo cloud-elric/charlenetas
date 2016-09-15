@@ -9,16 +9,16 @@ use yii\web\View;
 
 
 <div class=container-fluid>
-	<div class="pins-grid-container">
-		<div class="grid" id="js-contenedor-posts-tarjetas">
-			<div class="grid-sizer"></div>
-  			<div class="gutter-sizer"></div>
-				<?php
-				include 'masPosts.php';
-				?>
-		</div>
-	</div>
+ <div class="pins-grid-container">
+  <div class="grid" id="js-contenedor-posts-tarjetas">
+    <?php
+    include 'masPosts.php';
+    ?>
+  </div>
+ </div>
 </div>
+
+
 
 
 <div class="more-entries waves-effect waves-light btn" id="js-cargar-mas-posts"
@@ -96,18 +96,17 @@ use yii\web\View;
 <?php
 if (Yii::$app->user->isGuest) {
 $this->registerJs("
-		loadLogin();
-		// Masonry Grid
-		grid = $('.grid').masonry({
-  			itemSelector: '.pin',
-			columnWidth:250,
-  			gutter: 15,
-  			
-		});
-		
-		
-		
-		", View::POS_END);
+  loadLogin();
+  // Masonry Grid
+  grid = $('.grid').masonry({
+     itemSelector: '.pin',
+   columnWidth:250,
+     gutter: 15,
+
+  });
+
+
+  ", View::POS_END);
 
 }
 ?>
