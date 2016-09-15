@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+use app\modules\ModUsuarios\models\Utils;
+$usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
@@ -12,7 +14,7 @@ use yii\helpers\Html;
 		</div>
 
 		<div class="post-publisher-avatar">
-			<img src="assets/images/usr-avatar.png" alt="" />
+			<?=Html::img(Html::encode($usuario->getImageProfile()))?>
 		</div>
 
 	</div>

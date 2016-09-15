@@ -23,7 +23,7 @@ use app\modules\ModUsuarios\models\Utils;
 	if ($respuesta) {
 		?>
 <div class="respuesta-body">
-	<div class="comment">
+	<div class="respuesta">
 		<?=Html::encode($respuesta->txt_respuesta)?>
   </div>
 </div>
@@ -44,4 +44,3 @@ use app\modules\ModUsuarios\models\Utils;
 		echo 'Pregunta no contestada aún';
 	}
 ?>
-

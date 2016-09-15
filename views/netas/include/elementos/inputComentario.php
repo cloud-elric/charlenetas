@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 // Si el usuario esta logueado ponemos su avatar
 if (Yii::$app->user->isGuest) {
-	echo Html::img ( 'webAssets/images/usr-avatar.png', [ 
+	echo Html::img ( 'webAssets/images/usr-avatar.png', [
 			'width' => '30px'
 	] );
 } else {
@@ -43,7 +43,7 @@ if (! Yii::$app->user->isGuest) {
 <!-- Boton para guardar la respuesta -->
 <a class="waves-effect waves-light btn btn-primary"
 	id="js-responder-<?=$token?>"
-	onclick="enviarRespuesta('<?=$token?>');">Publicar</a>
+	onclick="enviarRespuesta('<?=$token?>');">Responder</a>
 
 <?php }else{?>
 <!-- Boton para guardar el comentario -->
@@ -56,7 +56,7 @@ if (! Yii::$app->user->isGuest) {
 
 	echo '<textarea name="comentario" placeholder="Yo opino que..."></textarea>
 	<a class="waves-effect waves-light btn btn-primary" id="js-login"
-			onclick="showModalLogin();">Publicar</a>';
+			onclick="showModalLogin();">Responder</a>';
 }
 ActiveForm::end ();
 ?>

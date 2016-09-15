@@ -1,6 +1,6 @@
 <div class="header">
 	<div class="">
-		<a href="#">Workshops</a> <a href="#">Tutoriales</a>
+		<a href="#" class="disabled">Workshops</a> <a href="#" class="disabled">Tutoriales</a>
 	</div>
 	<div class="logo">
 		<img src="webAssets/images/logo-charlenetas.png" alt="Charlenetas.com" />

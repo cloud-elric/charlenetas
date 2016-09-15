@@ -27058,6 +27058,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/views\/netas\/include\/elementos\/espejo-suscribir.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/espejo-suscribir.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/netas\/include\/elementos\/feedbacks-comentario.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -27099,6 +27108,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/pintar-estrellas.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/netas\/include\/elementos\/pruebasUlLiItems.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/netas\/include\/elementos\/pruebasUlLiItems.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -27276,6 +27294,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/web\/css\/component.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/css\/component.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/web\/index-test.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -27300,6 +27327,61 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/web\/js\/charlenetas.js",
 		"outputAbbreviatedPath": "\/web\/js\/min\/charlenetas-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/web\/js\/codrops-js\/AnimOnScroll.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/js\/codrops-js\/AnimOnScroll.js",
+		"outputAbbreviatedPath": "\/web\/js\/codrops-js\/min\/AnimOnScroll-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/web\/js\/codrops-js\/classie.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/js\/codrops-js\/classie.js",
+		"outputAbbreviatedPath": "\/web\/js\/codrops-js\/min\/classie-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/web\/js\/codrops-js\/imagesloaded.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/js\/codrops-js\/imagesloaded.js",
+		"outputAbbreviatedPath": "\/web\/js\/codrops-js\/min\/imagesloaded-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/web\/js\/codrops-js\/masonry.pkgd.min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/js\/codrops-js\/masonry.pkgd.min.js",
+		"outputAbbreviatedPath": "\/web\/js\/codrops-js\/min\/masonry.pkgd.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/web\/js\/codrops-js\/modernizr.custom.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/web\/js\/codrops-js\/modernizr.custom.js",
+		"outputAbbreviatedPath": "\/web\/js\/codrops-js\/min\/modernizr.custom-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
@@ -27472,7 +27554,7 @@
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
-		"ignore": 0,
+		"ignore": 1,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/web\/webAssets\/css\/_sass\/01-tools\/animations.scss",
 		"outputAbbreviatedPath": "\/web\/webAssets\/css\/web-styles.css",
@@ -28736,7 +28818,7 @@
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
-		"ignore": 0,
+		"ignore": 1,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/web\/webAssets\/css\/_sass\/01-tools\/normalize.scss",
 		"outputAbbreviatedPath": "\/web\/webAssets\/css\/web-styles.css",

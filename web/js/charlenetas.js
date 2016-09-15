@@ -3,19 +3,20 @@ var pagesComentarios = 0;
 
 // Carga mas pins de los post
 function cargarMasPosts() {
-	var contenedor = $('#js-contenedor-posts-tarjetas');
-	var tmp = $('#js-tmp');
+	alert('jalando');
+	var contenedor = $('#grid');
 	var url = 'netas/get-mas-posts?page='+pages;
 
 	$.ajax({
 		url:url,
 		success:function(res){
 
-			 var $items = $(res);
+			//  var $items = $(res);
+			 //
+			//  console.log($items);
 
-			 console.log($items);
-
-			 grid.append( $items ).masonry( 'appended', $items );
+			contenedor.append(res);
+			 //grid.append( $items ).masonry( 'appended', $items );
 
 //			 contenedor.append(res).each(function(){
 //			   		grid.masonry('reloadItems');
@@ -702,14 +703,14 @@ function ocultarTipoPost(tipoPost, opacity){
 }
 
 $(document).ready(function() {
-	
+
 	var grid = $('.grid').masonry({
 		itemSelector: '.pin',
 		columnWidth:250,
 			gutter: 15,
-			
+
 	});
-	
+
 	$('#js-login').on('click', function(e) {
 		e.preventDefault();
 	});
@@ -785,3 +786,21 @@ $('body').on('beforeSubmit', '#login-form', function() {
 $('.filters-toggle').on('click',function(){
   $('nav').toggleClass('mobile');
 });
+
+//Codigo para implementacion de codrops
+// new AnimOnScroll( document.getElementById( 'grid' ), {
+// 	minDuration : 0.4,
+// 	maxDuration : 0.7,
+// 	viewportFactor : 0.2
+// } );
+
+
+// new Masonry( self.el, {
+// 	itemSelector: 'li',
+// 	transitionDuration : 0
+// } );
+
+//
+// var msnry = new Masonry( '.grid', {
+//   itemSelector: 'li'
+// });
