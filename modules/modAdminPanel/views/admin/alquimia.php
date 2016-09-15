@@ -78,7 +78,6 @@ use yii\web\View;
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-alquimia.js'; // dynamic file added
 
-
 $this->registerJs ( "
 		cargarFormulario();
 ", View::POS_END );
