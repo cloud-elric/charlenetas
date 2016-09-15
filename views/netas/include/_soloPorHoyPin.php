@@ -4,7 +4,7 @@
 <div class="pin pin-solo-por-hoy" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header pin-header-solo-por-hoy"></div>
 	<div class=image>
-		<img src="assets/images/<?=$post->txt_imagen?>">
+		<img src="webAssets/images/<?=$post->txt_imagen?>">
 	</div>
 	<div class="pin-content-wrapper" lang="en">
 		<a href="<?=$post->entSoloPorHoys->num_articulo?>" class="margin-bottom-10px">Artículo <?=$post->entSoloPorHoys->num_articulo?></a>

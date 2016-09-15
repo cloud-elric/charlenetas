@@ -7,7 +7,7 @@ use app\modules\ModUsuarios\models\Utils;
  <div class="pin pin-contexto" onclick="showPostFull('<?=$post->txt_token?>')">
  	<div class="pin-header pin-header-contexto"></div>
  	<div class="image">
- 		<img src="assets/images/<?=$post->txt_imagen?>">
+ 		<img src="webAssets/images/<?=$post->txt_imagen?>">
  	</div>
  	<div class="pin-content-wrapper" lang="en">
  		<h3 class="pin-titulo">

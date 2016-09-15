@@ -1,13 +1,13 @@
 /* clear fix */
-.grid:after {
+/*.grid:after {
   content: '';
   display: block;
   clear: both;
-}
-.pin{
+}*/
+/*.pin{
 	float: left;
 	 margin-bottom: 15px;
-}
+}*/
 
 .grid-sizer,
 .pin {
@@ -15,9 +15,9 @@
 }
 
 .gutter-sizer {
-  width: 2.5%;
+  width: 40px;
 }
 
-.pin .image img {
+/*.pin .image img {
     width:100%;
-}
+}*/

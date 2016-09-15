@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+use app\modules\ModUsuarios\models\Utils;
+$usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
@@ -12,7 +14,7 @@ use yii\helpers\Html;
 		</div>
 
 		<div class="post-publisher-avatar">
-			<img src="assets/images/usr-avatar.png" alt="" />
+			<?=Html::img(Html::encode($usuario->getImageProfile()))?>
 		</div>
 
 	</div>
@@ -25,7 +27,7 @@ use yii\helpers\Html;
 	<p>
 		<?=$post->txt_descripcion?>
 	</p>
-	<img src="assets/images/<?=$post->txt_imagen?>"
+	<img src="webAssets/images/<?=$post->txt_imagen?>"
 		alt="Verdadazos - Netas bien duras" />
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
@@ -37,7 +39,7 @@ use yii\helpers\Html;
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<?php 
+			<?php
 				include 'elementos/like-post.php';
 			?>
 		</div>

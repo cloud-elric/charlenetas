@@ -14,21 +14,34 @@ $alquimia = $post->entAlquimias;
 		</div>
 		<div class="post-publisher-avatar">
 <!-- 			<img src="assets/images/usr-avatar.png" alt="" />  -->
-			<?=Html::img(Html::encode($usuario->getImageProfile()), ['width'=>'27px'])?>
+			<?=Html::img(Html::encode($usuario->getImageProfile()))?>
 		</div>
 	</div>
 </section>
-<section
-	class="full-pin-body full-pin-body-alquimia full-pin-body-img-vertical">
-	<img src="assets/images/<?=Html::encode($post->txt_imagen)?>"
-		alt="Alquimia - Películas que transforman" />
-	<h3><?=Html::encode($post->txt_titulo)?></h3>
-	<p>
-		<?=Html::encode($post->txt_descripcion)?>
-	</p>
-	<div class="pin-alquimia-grades">
-		<?php include 'elementos/pintar-estrellas.php'?>
+
+
+<section class="full-pin-body full-pin-body-alquimia full-pin-body-img-vertical">
+
+
+	<div class="full-pin-body-content">
+
+		<div class="full-pin-body-content-img">
+			<img src="webAssets/images/<?=Html::encode($post->txt_imagen)?>"
+				alt="Alquimia - Películas que transforman" />
+		</div>
+
+
+		<div class="full-pin-body-content-text">
+			<h3><?=Html::encode($post->txt_titulo)?></h3>
+			<p>
+				<?=Html::encode($post->txt_descripcion)?>
+			</p>
+			<div class="pin-alquimia-grades">
+				<?php include 'elementos/pintar-estrellas.php';?>
+			</div>
+		</div>
 	</div>
+
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
 			<div class="feedback did-usr-interact">
@@ -39,12 +52,15 @@ $alquimia = $post->entAlquimias;
 			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
-			<?php 
+			<?php
 				include 'elementos/like-post.php';
 			?>
 		</div>
 	</div>
 </section>
+
+
+
 <section class="full-pin-social">
 	<div id="js-comments">
 		<?php

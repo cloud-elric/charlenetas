@@ -3,6 +3,6 @@
 ?>
 <div class="pin" onclick="showPostFull('<?=$post->txt_token?>')" >
 	<div class=image>
-		<img src="assets/images/<?=$post->txt_imagen?>">
+		<img src="webAssets/images/<?=$post->txt_imagen?>">
 	</div>
 </div>

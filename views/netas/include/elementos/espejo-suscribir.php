@@ -17,5 +17,5 @@ if (Yii::$app->user->isGuest) {
 <div class="feedback js-feedback-like <?=$likeActivado?>" id="js-feedback-like-<?=$post->txt_token?>" onclick='<?=$onclick?>'
 	data-token='<?=$post->txt_token?>'>
 	<span id='js-like-<?=$post->txt_token?>'><?=Html::encode($post->num_likes)?></span>
-	<i class="icon icon-thumbs-up"></i>
+	<i class="icon icon-fire"></i>
 </div>
