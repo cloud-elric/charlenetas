@@ -38,13 +38,13 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
 		
 		<!-- .page -->
 		<div class="page">
+
 			
 			<!-- .page-header -->
 			<div class="page-header">
 				<h2 class="page-title"><i class="ion ion-home"></i><?=$this->title?></h2>
 			</div>
 			<!-- end /.page-header -->
-
 			<?= $content ?>
 			
 		</div>
