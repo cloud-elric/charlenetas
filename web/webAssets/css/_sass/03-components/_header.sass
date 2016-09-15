@@ -1,0 +1,150 @@
+.header
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 10px 0
+  background-color: $base-color
+  div
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    .filters-toggle
+      display: none
+      +respond-to(sm)
+        display: block
+      +respond-to(xs)
+        display: block
+    a
+      margin: 0 10px
+      padding: 10px 20px
+      text-transform: uppercase
+      font-size: .7em
+      letter-spacing: 1px
+      color: $header-menu
+      font-weight: 400
+      font-family: $header-main
+      display: flex
+      align-items: center
+      justify-content: center
+      i
+        margin-left: 10px
+        margin-top: -5px
+      &:hover
+        color: $header-menu-hover
+  .logo
+    margin: 0 40px
+    img
+      //height: 100px
+      width: 100%
+nav
+  background-color: $white
+  width: 90%
+  min-width: 1024px
+  max-width: 1280px
+  overflow: hidden
+  border-radius: 6px
+  margin: 10px auto 50px
+  +respond-to(sm)
+    display: none
+  +respond-to(xs)
+    display: none
+  +respond-to(xx)
+    display: none
+  ul
+    display: flex
+    justify-content: space-around
+    height: 100%
+    li
+      height: inherit
+      a
+        height: inherit
+        font-family: $header-main
+        font-size: .9em
+        font-weight: 400
+        color: $header-menu-off
+        transition: color 300ms ease-in-out
+        padding: 0 20px
+        border-bottom: 0px solid $header-menu-off
+        position: relative
+        display: flex
+        flex-direction: column-reverse
+        align-items: center
+        justify-content: flex-start
+        span
+          height: 3px
+          width: 150%
+          background-color: transparent
+          transition: transform 300ms ease-in-out
+        &.filter-active
+          color: $header-menu
+          span.color-espejo
+            background-color: $color-espejo
+          span.color-hoy-pense
+            background-color: $color-hoy-pense
+          span.color-sabias-que
+            background-color: $color-sabias-que
+          span.color-contexto
+            background-color: $color-contexto
+          span.color-media
+            background-color: $color-media
+          span.color-alquimia
+            background-color: $color-alquimia
+          span.color-verdadazos
+            background-color: $color-verdadazos
+          span.color-solo-por-hoy
+            background-color: $color-solo-por-hoy
+        &:hover
+          background-color: transparent
+          color: $header-menu-hover
+          span
+            transform: translateY(-3px)
+nav.mobile
+  display: block !important
+  height: 100%
+  width: 80%
+  position: fixed
+  top: 0
+  z-index: 999
+  margin: 0
+  border-radius: 0
+  max-width: 400px
+  min-width: 400px
+  ul
+    flex-flow: column
+    justify-content: space-around
+    padding-top: 100px
+    li
+      height: initial
+      a
+        height: inherit
+        color: $header-menu
+        opacity: 0.3
+        span
+          position: absolute
+          top: 0
+          right: 0
+          height: 100%
+          width: 0px
+          margin-right: 10px
+          border-radius: 5px
+          transition: all 300ms ease-in-out
+        span.color-espejo
+          background-color: $color-espejo
+        span.color-hoy-pense
+          background-color: $color-hoy-pense
+        span.color-sabias-que
+          background-color: $color-sabias-que
+        span.color-contexto
+          background-color: $color-contexto
+        span.color-media
+          background-color: $color-media
+        span.color-alquimia
+          background-color: $color-alquimia
+        span.color-verdadazos
+          background-color: $color-verdadazos
+        span.color-solo-por-hoy
+          background-color: $color-solo-por-hoy
+      a.filter-active
+        opacity: 1
+        span
+          width: 10px

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 <div class="pin pin-alquimia" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header pin-header-alquimia"></div>
 	<div class="image">
-		<img src="assets/images/<?=$post->txt_imagen?>">
+		<img src="webAssets/images/<?=$post->txt_imagen?>">
 	</div>
 	<div class="pin-content-wrapper" lang="en">
 		<h3 class="pin-titulo">
@@ -25,7 +25,7 @@ use yii\helpers\Html;
 			<?=$alquimia->contenedorEstrellas(Html::encode($alquimia->num_calificacion_admin))?>
 			<span>Los usuarios</span>
 			<div class="star-wrapper">
-				<?php 
+				<?php
 				// Pintar estrellas
 				echo $alquimia->generarEstrellas($alquimia->num_calificacion_usuario);
 				?>

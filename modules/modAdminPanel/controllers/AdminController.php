@@ -7,8 +7,6 @@ use app\modules\ModUsuarios\models\EntUsuarios;
 use app\models\EntComentariosPosts;
 use app\models\EntPosts;
 
-use app\models\EntPostsExtend;
-
 use app\models\EntAlquimias;
 use Yii;
 use app\models\EntContextos;
@@ -16,6 +14,8 @@ use app\models\EntSoloPorHoys;
 use app\models\EntSabiasQue;
 use yii\web\UploadedFile;
 use app\modules\ModUsuarios\models\Utils;
+use app\modules\modAdminPanel\components\AccessRule;
+use yii\filters\AccessControl;
 
 
 /**
@@ -26,6 +26,31 @@ class AdminController extends Controller
 
 	public $layout = 'main';
 	
+	public function behaviors()
+	{
+		#http://code.tutsplus.com/tutorials/how-to-program-with-yii2-user-access-controls--cms-23173
+		return [
+				
+				'access' => [
+						'class' => AccessControl::className(),
+						// We will override the default rule config with the new AccessRule class
+						'ruleConfig' => [
+								'class' => AccessRule::className(),
+						],
+						'only' => ['dashboard','alquimia'],
+						'rules' => [
+								[
+										'actions' => ['dashboard', 'alquimia'],
+										'allow' => true,
+										// Allow users, moderators and admins to create
+										'roles' => [
+												EntUsuarios::ROLE_ADMIN,
+										],
+								],
+						],
+				],
+		];
+	}
     /**
      * Renders the index view for the module
      * @return string
@@ -166,7 +191,13 @@ class AdminController extends Controller
 		] );
 		
 		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
 			$post->guardarAlquimia ( $alquimia, $post );
+			
+			if($post->cargarImagen($post))
+			{
+				return;
+			}
 		}
 		
 		return $this->renderAjax( 'crearAlquimia', [ 
@@ -186,7 +217,13 @@ class AdminController extends Controller
 		] );
 	
 		if ($verdadazo->load ( Yii::$app->request->post () )) {
+			$verdadazo->imagen = UploadedFile::getInstance($verdadazo, 'imagen');
 			$verdadazo->guardarVerdadazos ( $verdadazo );
+			
+			if($post->cargarImagen($verdadazo))
+			{
+				return;
+			}
 		}
 	
 		return $this->renderAjax( 'crearVerdadazos', ['verdadazo' => $verdadazo] );
@@ -203,7 +240,13 @@ class AdminController extends Controller
 		] );
 	
 		if ($hoyPense->load ( Yii::$app->request->post () )) {
+			$hoyPense->imagen = UploadedFile::getInstance($hoyPense, 'imagen');
 			$hoyPense->guardarHoyPense ( $hoyPense );
+			
+			if($hoyPense->cargarImagen($hoyPense))
+			{
+				return;
+			}
 		}
 	
 		return $this->renderAjax( 'crearHoyPense', ['hoyPense' => $hoyPense] );
@@ -220,7 +263,13 @@ class AdminController extends Controller
 		] );
 	
 		if ($media->load ( Yii::$app->request->post () )) {
+			$media->imagen = UploadedFile::getInstance($media, 'imagen');
 			$media->guardarMedia ( $media );
+			
+			if($media->cargarImagen($media))
+			{
+				return;
+			}
 		}
 	
 		return $this->renderAjax( 'crearMedia', ['media' => $media] );
@@ -238,7 +287,13 @@ class AdminController extends Controller
 		] );
 	
 		if ($contexto->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
 			$post->guardarContexto ( $contexto, $post );
+			
+			if($post->cargarImagen($post))
+			{
+				return;
+			}
 		}
 	
 		return $this->renderAjax( 'crearContexto', [
@@ -259,7 +314,13 @@ class AdminController extends Controller
 		] );
 	
 		if ($soloporhoy->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
 			$post->guardarSoloPorHoy ( $soloporhoy, $post );
+			
+			if($post->cargarImagen($post))
+			{
+				return;
+			}
 		}
 	
 		return $this->renderAjax( 'crearSoloPorHoy', [
@@ -281,9 +342,8 @@ class AdminController extends Controller
 	
 		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance($post, 'imagen');
-			$post->txt_imagen = Utils::generateToken("img");
 			$post->guardarSabiasQue ( $sabiasque, $post );
-			exit();
+			
 			if($post->cargarImagen($post))
 			{
 				return;
@@ -298,21 +358,14 @@ class AdminController extends Controller
 	}
 	
 	/**
-	 * Carga una imagen
-	 * @return void|string
+	 * Editar
 	 
-	public function actionImagen()
-	{
-		$imagen = new EntPosts();
-	
-		if (Yii::$app->request->post()) {
-			$imagen->txt_imagen = UploadedFile::getInstance($imagen, 'txt_imagen');
-			if ($imagen->cargarImagen($imagen)) {
-				// file is uploaded successfully
-				return;
-			}
-		}
-	
-		return $this->render('upload', ['model' => $model]);
+	public function actionEditarAlquimia(){
+		
+		$token = 'post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc';
+		$alquimia = EntPosts::getPosts($page = 0, $token);
+		
+		return $this->render('Alquimia',["postsAlquimia"=>$alquimia]);
 	}*/
+	
 }

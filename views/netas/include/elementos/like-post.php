@@ -7,7 +7,7 @@ $likeActivado = '';
 if (Yii::$app->user->isGuest) {
 	$onclick = 'showModalLogin();';
 } else if (EntUsuariosLikePost::existsUsuarioLike ( Yii::$app->user->identity->id_usuario, $post->id_post )) {
-	
+
 	$likeActivado = ' did-usr-interact';
 	$onclick = 'removeLikePost("'.$post->txt_token.'")';
 } else {

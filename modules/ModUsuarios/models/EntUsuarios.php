@@ -60,6 +60,10 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	const STATUS_PENDIENTED = 1;
 	const STATUS_ACTIVED = 2;
 	const STATUS_BLOCKED = 3;
+	
+	const ROLE_ADMIN = 2;
+	const ROLE_CHARLENAUTA = 1;
+	
 	public $password;
 	public $repeatPassword;
 	public $imageProfile;

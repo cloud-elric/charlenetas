@@ -2,6 +2,7 @@
 use app\models\EntUsuariosSubscripciones;
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+$usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 
@@ -16,14 +17,14 @@ use app\modules\ModUsuarios\models\Utils;
 if (! Yii::$app->user->isGuest) {
 	$usuarioIsSubscrito = EntUsuariosSubscripciones::findSubscripcion ( Yii::$app->user->identity->id_usuario, $post->id_post );
 	$onclick = 'suscribirseEspejo("' . $post->txt_token . '");';
-	$messageSub = 'Me interesa la pregunta';
-	
+	$messageSub = 'Suscribir a la Pregunta';
+
 	// Validación de usuario ya se haya subscrito
 	if ($usuarioIsSubscrito) {
 		$onclick = 'desSuscribirseEspejo("' . $post->txt_token . '");';
-		$messageSub = 'No me interesa la pregunta';
+		$messageSub = 'Suscrito a la Pregunta';
 	}
-	
+
 	?>
 <div id="js-btn-suscribirse-<?=$post->txt_token?>"
 	onclick='<?=$onclick?>' style="border: 1px solid black"><?=$messageSub?></div>
@@ -43,7 +44,7 @@ if (! Yii::$app->user->isGuest) {
 		</div>
 
 		<div class="post-publisher-avatar">
-		<?=Html::img ( $post->idUsuario->getImageProfile (), [ 'width' => '50px','alt'=>'Avatar de NetaAdmin que respondio en el Espejo'] )?>
+			<?=Html::img(Html::encode($usuario->getImageProfile()))?>
 		</div>
 
 	</div>
@@ -58,13 +59,22 @@ if (! Yii::$app->user->isGuest) {
 		<?=$post->txt_descripcion?>
 	</p>
 
+	<div class="full-pin-body-footer">
+		<div class="full-pin-body-footer-sharebar">
+		</div>
+		<div class="full-pin-body-footer-feedbacks">
+			<?php
+				include 'elementos/espejo-suscribir.php';
+			?>
+		</div>
+	</div>
 
 </section>
 <?php
 // Obtenemos la respuesta para el post
 $respuesta = $post->entRespuestasEspejo;
 
-// Si ya se contesto la pregunta
+// Si el admin ya  contesto la pregunta
 if (! empty ( $respuesta )) {
 	?>
 
@@ -72,8 +82,8 @@ if (! empty ( $respuesta )) {
 
 
 	<?php
-	
-	include 'elementos/respuesta-admin.php'?>
+
+	include 'elementos/respuesta-admin.php';?>
 
 </section>
 <?php }?>

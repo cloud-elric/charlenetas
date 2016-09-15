@@ -1,5 +1,4 @@
 <?php
-
 use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
@@ -25,9 +24,6 @@ use yii\web\View;
 						<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
 						<label for="filled-in-box1"></label>
 					</div>
-
-					<?php include 'templates/modalPost.php'; ?>
-					
 					
 					<!-- <i class="ion ion-edit card-edit"></i> -->
 				</div>
@@ -35,6 +31,8 @@ use yii\web\View;
 		</div>
 
 		<?php } ?>
+
+		<?php include 'templates/modalPost.php'; ?>
 		
 	</div>
 	<!-- end /.row -->
@@ -76,10 +74,9 @@ use yii\web\View;
 	// echo "total likes= " . EntPosts::find()->where(['id_tipo_post'=>$postAlquimia->id_tipo_post])->sum("num_likes");
 	// echo "total comentarios= " . EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_tipo_post])->count("id_post");
 
+
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-alquimia.js'; // dynamic file added
-
-
 
 
 $this->registerJs ( "

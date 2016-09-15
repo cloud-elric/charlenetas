@@ -5,7 +5,7 @@
 <div class="pin" data-post="<?=$post->txt_token?>">
 	<div class="pin-header"></div>
 	<div class="image">
-		<img data-src="assets/images/<?=$post->txt_imagen?>">
+		<img data-src="webAssets/images/<?=$post->txt_imagen?>">
 	</div>
 	<div class="pin-content-wrapper" lang="en">
 		<p class="pin-descripcion">
