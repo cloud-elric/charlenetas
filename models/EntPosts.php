@@ -190,7 +190,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 				'id_post' => 'Id Post',
 				'id_tipo_post' => 'Id Tipo Post',
 				'id_usuario' => 'Id Usuario',
-<<<<<<< HEAD
+
 				'id_usuario_administrador' => 'Id Usuario Administrador',
 				'txt_titulo' => 'Título',
 				'txt_descripcion' => 'Descripción',
@@ -201,16 +201,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 				'fch_creacion' => 'Fch Creacion',
 				'fch_publicacion' => 'Fecha Publicacion',
 				'b_habilitado' => 'B Habilitado' 
-=======
-				'txt_titulo' => 'Txt Titulo',
-				'txt_descripcion' => 'Txt Descripcion',
-				'txt_imagen' => 'Txt Imagen',
-				'txt_url' => 'Txt Url',
-				'num_likes' => 'Num Likes',
-				'fch_creacion' => 'Fch Creacion',
-				'fch_publicacion' => 'Fch Publicacion',
-				'b_habilitado' => 'B Habilitado'
->>>>>>> refs/remotes/origin/master
+
 		];
 	}
 
@@ -376,7 +367,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_ALQUIMIA;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
-<<<<<<< HEAD
+
 		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
 		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
 		
@@ -384,13 +375,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		try {
 			if ($post->save ()) {
 				$alquimia->id_post = $post->id_post;
-=======
 
-		$transaction = EntPosts::getDb ()->beginTransaction ();
-		try {
-			if ($post->save ()) {
-
->>>>>>> refs/remotes/origin/master
 				if ($alquimia->save ()) {
 
 					$transaction->commit ();
