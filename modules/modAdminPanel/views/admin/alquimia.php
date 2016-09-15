@@ -5,34 +5,37 @@ use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 ?>
 
+<!-- .page-header -->
+<div class="page-header">
+	<h2 class="page-title"><i class="ion ion-card"></i> Alquimia</h2>
+</div>
+<!-- end /.page-header -->
+
 <!-- .page-cont -->
 <div class="page-cont">
 	<!-- .row -->
 	<div class="row">
 		
 		<?php
-
 		foreach ($postsAlquimia as $postAlquimia){
 		?>
+
 		<div class="col s12 m6 l4">
 			<div class="card card-alquimia">
 				<h3><?= $postAlquimia->txt_titulo ?></h3>
-				<p><?= $postAlquimia->num_likes ?></p>
+				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_tipo_post])->count("id_post") ?> Comentario(s)</p>
 
 				<div class="card-options">
 					<div class="card-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
 						<label for="filled-in-box1"></label>
 					</div>
-					
-					<!-- <i class="ion ion-edit card-edit"></i> -->
+					<i class="ion ion-android-more-vertical card-edit"></i>
 				</div>
 			</div>
 		</div>
 
 		<?php } ?>
-
-		<?php include 'templates/modalPost.php'; ?>
 		
 	</div>
 	<!-- end /.row -->
@@ -43,14 +46,13 @@ use yii\web\View;
 			<!-- <i class="ion ion-wand"></i> -->
 			<i class="ion ion-ios-trash-outline"></i>
 		</a>
-		<a class="btn-floating btn-large waves-effect waves-light btn-agregar">
-			<i class="material-icons">add</i>
-		</a>
+		<?php include 'templates/modalPost.php'; ?>
 	</div>
 	<!-- end /.fixed-action-btn -->
 
 </div>
 <!-- end /.page-cont -->
+
 <?php
 	// foreach ($postsAlquimia as $postAlquimia){
 	// 	//echo $postAlquimia->entAlquimias;

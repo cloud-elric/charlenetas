@@ -653,22 +653,24 @@ hr {
     position: absolute;
     right: 30px;
     top: 20px; }
-    .card .card-options a.btn-floating,
+    .card .card-options i,
     .card .card-options .card-options-check {
       vertical-align: middle; }
-    .card .card-options a.btn-floating {
-      background-color: #ddd;
-      box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.16), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
-      display: inline-block;
+    .card .card-options i {
+      cursor: pointer;
+      font-size: 1.23em;
+      background-color: #eee;
       height: 27px;
+      width: 27px;
+      text-align: center;
       line-height: 27px;
-      width: 27px; }
-      .card .card-options a.btn-floating i {
-        font-size: 1.23em;
-        height: 27px;
-        width: 27px;
-        text-align: center;
-        line-height: 27px; }
+      border-radius: 50%;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+      .card .card-options i:hover {
+        background-color: #e6e6e6; }
     .card .card-options .card-options-check {
       display: none; }
       .card .card-options .card-options-check [type="checkbox"] + label {

@@ -1,6 +1,6 @@
 <!-- Modal Trigger -->
-<a class="modal-trigger btn-floating waves-effect waves-" href="#js-modal-post">
-	<i class="ion ion-android-more-vertical card-edit"></i>
+<a class="btn-floating btn-large waves-effect waves-light btn-agregar" href="#js-modal-post">
+	<i class="material-icons">add</i>
 </a>
 
 <!-- Modal Structure -->
