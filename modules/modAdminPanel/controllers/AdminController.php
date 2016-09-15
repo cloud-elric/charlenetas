@@ -23,6 +23,8 @@ use app\modules\ModUsuarios\models\Utils;
  */
 class AdminController extends Controller
 {
+
+	public $layout = 'main';
 	
     /**
      * Renders the index view for the module

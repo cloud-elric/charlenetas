@@ -1,5 +1,7 @@
 <!-- Modal Trigger -->
-<a class="modal-trigger waves-effect waves-light btn" href="#js-modal-post">Modal</a>
+<a class="modal-trigger btn-floating waves-effect waves-" href="#js-modal-post">
+	<i class="ion ion-android-more-vertical card-edit"></i>
+</a>
 
 <!-- Modal Structure -->
 <div id="js-modal-post" class="modal modal-fixed-footer">
