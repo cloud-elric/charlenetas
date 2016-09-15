@@ -1,0 +1,84 @@
+/*!
+	-----------------------------------------------------------------------------
+
+	3.0 - Login
+			# Extra
+
+	-----------------------------------------------------------------------------
+	*/
+
+/*  Login
+	================================================ */
+.login
+	align-items: center
+	background: url(../imgs/bg.jpg)
+	background-attachment: fixed
+	background-position: 50%
+	background-repeat: no-repeat
+	background-size: cover
+	display: flex
+	flex-direction: column
+	justify-content: center
+	height: 100vh
+	margin: auto
+	position:relative
+	z-index: 0
+	width: 100%
+	&:before
+		background-color: rgba($black, .24)
+		bottom: 0
+		content: ''
+		// height: 50%
+		left: 0
+		position: absolute
+		right: 0
+		top: 0
+		// width: 50%
+		z-index: 1
+	.login-cont
+		// background-color: red
+		position: relative
+		z-index: 6
+		.login-logo
+			// background-color: pink
+			margin-top: 30px
+			text-align: center
+			img
+				height: 100px
+		.login-form
+			background-color: $white
+			+border-radius(4px)
+			// height: 300px
+			margin: 20px auto 60px
+			max-width: 100%
+			padding: 40px 30px 20px
+			text-align: center
+			width: 300px
+			.titulo
+				font-size: 1.7em
+			.form-login
+				margin: 30px auto
+				text-align: left
+				width: 100%
+				button
+					background-color: $header-menu
+					margin-top: 20px
+					&:active,
+					&:focus,
+					&:hover
+						background-color: $header-menu-hover
+			.datos
+				display: block
+				a
+					color: #777
+					display: inline-block
+					font-weight: 300
+				// .crear-cuenta
+				// 	font-size: 1.3em
+				.olvide-pass
+					font-size: .94em
+					&:hover
+						color: $header-menu-hover
+		.login-foter
+			// background-color: green
+			text-align: center

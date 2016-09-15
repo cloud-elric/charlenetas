@@ -52,16 +52,15 @@ class EntPosts extends \yii\db\ActiveRecord {
     }
 
     /**
-     * USUARIOS_MOSTRAR es constante tiene un valor de 1
+     * POSTS_MOSTRAR es constante tiene un valor de 10
      * @param number $page=0
-     * @param string $usuario
+     * @param number $post: numero del tipo de post
      * @param unknown $pageSize
      */
     public static function getPosts($page = 0, $post , $pageSize = ConstantesWeb::POSTS_MOSTRAR){
 
     	/**
-    	 * Busca en la base de datos EntUsuarios donde txt_username o txt_email contenga el string $usuario
-    	 * y muestra 1 por que const USUARIOS_MOSTRAR es igual a 1
+    	 * Busca en la base de datos EntPost donde id_tipo_post sea igual al valor de $post
     	 * @var \yii\db\ActiveQuery $query
     	 */
     	$query = EntPosts::find()->where(["id_tipo_post"=>$post]);
@@ -78,6 +77,24 @@ class EntPosts extends \yii\db\ActiveRecord {
 
     	return $dataProvider->getModels();
     }
+    
+    
+    /**
+     * Busca un post por su token
+     *
+     * @param unknown $token
+     * @throws NotFoundHttpException
+     * @return EntPostsExtend
+     */
+    public static function getPostByToken($token) {
+    	if (($post = EntPostsExtend::getPostByToken ( $token )) !== null) {
+    		return $post;
+    	} else {
+    		throw new NotFoundHttpException ( 'The requested page does not exist.' );
+    	}
+    }
+    
+
 
 
 	/**
@@ -91,12 +108,10 @@ class EntPosts extends \yii\db\ActiveRecord {
 						],
 						'image',
 						'skipOnEmpty' => false,
-						'extensions' => 'png, jpg',
-						'minWidth' => 300,
-						'maxWidth' => 300,
-						'minHeight' => 300,
-						'maxHeight' => 300,
-						'on' => 'crear'
+
+						'extensions' => 'png, jpg, jpeg',
+						'on' => 'crear' 
+
 				],
 				[
 						[
@@ -175,14 +190,18 @@ class EntPosts extends \yii\db\ActiveRecord {
 				'id_post' => 'Id Post',
 				'id_tipo_post' => 'Id Tipo Post',
 				'id_usuario' => 'Id Usuario',
-				'txt_titulo' => 'Txt Titulo',
-				'txt_descripcion' => 'Txt Descripcion',
-				'txt_imagen' => 'Txt Imagen',
-				'txt_url' => 'Txt Url',
+
+				'id_usuario_administrador' => 'Id Usuario Administrador',
+				'txt_titulo' => 'Título',
+				'txt_descripcion' => 'Descripción',
+				'txt_imagen' => 'Imagen',
+				'imagen'=>'Imagen para post',
+				'txt_url' => 'Url',
 				'num_likes' => 'Num Likes',
 				'fch_creacion' => 'Fch Creacion',
-				'fch_publicacion' => 'Fch Publicacion',
-				'b_habilitado' => 'B Habilitado'
+				'fch_publicacion' => 'Fecha Publicacion',
+				'b_habilitado' => 'B Habilitado' 
+
 		];
 	}
 
@@ -349,9 +368,13 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
 
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
+		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
+				$alquimia->id_post = $post->id_post;
 
 				if ($alquimia->save ()) {
 
@@ -366,6 +389,200 @@ class EntPosts extends \yii\db\ActiveRecord {
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Guarda post de Verdadazo
+	 * @param EntPost $verdadazo
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarVerdadazos($verdadazo) {
+		$verdadazo->id_tipo_post = ConstantesWeb::POST_TYPE_VERDADAZOS;
+		$verdadazo->fch_creacion = Utils::getFechaActual ();
+		$verdadazo->txt_token = Utils::generateToken ( 'post' );
+		$verdadazo->fch_publicacion = Utils::changeFormatDate($verdadazo->fch_publicacion);
+		$verdadazo->txt_imagen = Utils::generateToken("img") . "." . $verdadazo->imagen->extension;
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($verdadazo->save ()) {
+						
+				$transaction->commit ();
+				return true;	
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda post de Hoy Pense
+	 * @param EntPost $hoyPense
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarHoyPense($hoyPense) {
+		$hoyPense->id_tipo_post = ConstantesWeb::POST_TYPE_HOY_PENSE;
+		$hoyPense->fch_creacion = Utils::getFechaActual ();
+		$hoyPense->txt_token = Utils::generateToken ( 'post' );
+		$hoyPense->fch_publicacion = Utils::changeFormatDate($hoyPense->fch_publicacion);
+		$hoyPense->txt_imagen = Utils::generateToken("img") . "." . $hoyPense->imagen->extension;
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($hoyPense->save ()) {
+	
+				$transaction->commit ();
+				return true;
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda post de Media
+	 * @param EntPost $media
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarMedia($media) {
+		$media->id_tipo_post = ConstantesWeb::POST_TYPE_MEDIA;
+		$media->fch_creacion = Utils::getFechaActual ();
+		$media->txt_token = Utils::generateToken ( 'post' );
+		$media->fch_publicacion = Utils::changeFormatDate($media->fch_publicacion);
+		$media->txt_imagen = Utils::generateToken("img") . "." . $media->imagen->extension;
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($media->save ()) {
+	
+				$transaction->commit ();
+				return true;
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda el contexto y el post
+	 * @param EntContexto $contexto
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarContexto($contexto, $post) {
+		$post->id_tipo_post = ConstantesWeb::POST_TYPE_CONTEXTO;
+		$post->fch_creacion = Utils::getFechaActual ();
+		$post->txt_token = Utils::generateToken ( 'post' );
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+				$contexto->id_post = $post->id_post;
+				if ($contexto->save ()) {
+						
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda el solo por hoy y el post
+	 * @param EntSoloPorHoys $soloporhoy
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarSoloPorHoy($soloporhoy, $post) {
+		$post->id_tipo_post = ConstantesWeb::POST_TYPE_SOLO_POR_HOY;
+		$post->fch_creacion = Utils::getFechaActual ();
+		$post->txt_token = Utils::generateToken ( 'post' );
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+				$soloporhoy->id_post = $post->id_post;
+				if ($soloporhoy->save ()) {
+	
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Guarda el sabias que y el post
+	 * @param EntSabiasQue $sabiasque
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function guardarSabiasQue($sabiasque, $post) {
+		$post->id_tipo_post = ConstantesWeb::POST_TYPE_SABIAS_QUE;
+		$post->fch_creacion = Utils::getFechaActual ();
+		$post->txt_token = Utils::generateToken ( 'post' );
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+				$sabiasque->id_post = $post->id_post;
+				if ($sabiasque->save ()) {
+	
+					$transaction->commit ();
+					
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+		return false;
+	}
+	
+	public function cargarImagen($post)
+	{
+		
+			$post->imagen->saveAs(Yii::$app->params ['modAdmin'] ['path_imagenes_posts'] .$post->txt_imagen);
+			return true;
+	
 	}
 
 }

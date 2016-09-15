@@ -6,14 +6,49 @@ use yii\web\Controller;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use app\models\EntComentariosPosts;
 use app\models\EntPosts;
+
 use app\models\EntAlquimias;
 use Yii;
+use app\models\EntContextos;
+use app\models\EntSoloPorHoys;
+use app\models\EntSabiasQue;
+use yii\web\UploadedFile;
+use app\modules\ModUsuarios\models\Utils;
+use app\modules\modAdminPanel\components\AccessRule;
+use yii\filters\AccessControl;
+
 
 /**
  * Default controller for the `adminPanel` module
  */
 class AdminController extends Controller
 {
+	
+	public function behaviors()
+	{
+		#http://code.tutsplus.com/tutorials/how-to-program-with-yii2-user-access-controls--cms-23173
+		return [
+				
+				'access' => [
+						'class' => AccessControl::className(),
+						// We will override the default rule config with the new AccessRule class
+						'ruleConfig' => [
+								'class' => AccessRule::className(),
+						],
+						'only' => ['dashboard','alquimia'],
+						'rules' => [
+								[
+										'actions' => ['dashboard', 'alquimia'],
+										'allow' => true,
+										// Allow users, moderators and admins to create
+										'roles' => [
+												EntUsuarios::ROLE_ADMIN,
+										],
+								],
+						],
+				],
+		];
+	}
     /**
      * Renders the index view for the module
      * @return string
@@ -54,41 +89,60 @@ class AdminController extends Controller
 		return $this->render('espejo',["postsEspejo"=>$postsEspejo]);
 	}
 	
-	public function actionAlquimia($page = 0,$post = 2)
+	public function actionAlquimia($page = 0)
 	{
-		$postsAlquimia = EntPosts::getPosts($page, $post);
+		$idPost = 2;
+		$postsAlquimia = EntPosts::getPosts($page, $idPost);
 		
 		return $this->render('Alquimia',["postsAlquimia"=>$postsAlquimia]);
 	}
 	
-	public function actionVerdadazos()
+	public function actionVerdadazos($page = 0)
 	{
-		return $this->render('Verdadazos');
+		$idPost = 3;
+		$postsVerdadazos = EntPosts::getPosts($page, $idPost);
+				
+		return $this->render('Verdadazos',["postsVerdadazos"=>$postsVerdadazos]);
 	}
 	
-	public function actionHoyPense()
+	public function actionHoyPense($page = 0)
 	{
-		return $this->render('HoyPense');
+		$idPost = 4;
+		$postsHoypense = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('HoyPense',["postsHoyPense"=>$postsHoypense]);
 	}
 	
-	public function actionMedia()
+	public function actionMedia($page = 0)
 	{
-		return $this->render('Media');
+		$idPost = 5;
+		$postsMedia = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('Media',["postsMedia"=>$postsMedia]);
 	}
 	
-	public function actionContexto()
+	public function actionContexto($page = 0)
 	{
-		return $this->render('Contexto');
+		$idPost = 6;
+		$postsContexto = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('Contexto',["postsContexto"=>$postsContexto]);
 	}
 	
-	public function actionSoloPorHoy()
+	public function actionSoloPorHoy($page = 0)
 	{
-		return $this->render('SoloPorHoy');
+		$idPost = 7;
+		$postsSoloPorHoy = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('SoloPorHoy',["postsSoloPorHoy"=>$postsSoloPorHoy]);
 	}
 	
-	public function actionSabiasQue()
+	public function actionSabiasQue($page = 0)
 	{
-		return $this->render('SabiasQue');
+		$idPost = 8;
+		$postsSabiasQue = EntPosts::getPosts($page, $idPost);
+		
+		return $this->render('SabiasQue',["postsSabiasQue"=>$postsSabiasQue]);
 	}
 	
 	public function actionNotificaciones()
@@ -101,6 +155,28 @@ class AdminController extends Controller
 		return $this->render('Agenda');
 	}
 	
+
+	public function actionHabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc")
+	{
+		$postHabilitar = EntPosts::getPostByToken($tokenPost);
+		$postHabilitar->b_habilitado = 1;
+		
+		if($postHabilitar->save())
+			echo "SUCCESS ";
+		else 
+			echo "ERROR";
+	}
+	
+	public function actionDeshabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc")
+	{
+		$postDeshabilitar = EntPosts::getPostByToken($tokenPost);
+		$postDeshabilitar->b_habilitado = 0;
+		
+		if($postDeshabilitar->save())
+			echo "SUCCESS ";
+		else
+			echo "ERROR";
+	}
 	
 	/**
 	 * Guarda alquimia
@@ -113,13 +189,181 @@ class AdminController extends Controller
 		] );
 		
 		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
 			$post->guardarAlquimia ( $alquimia, $post );
+			
+			if($post->cargarImagen($post))
+			{
+				return;
+			}
 		}
 		
 		return $this->renderAjax( 'crearAlquimia', [ 
 				'alquimia' => $alquimia,
 				'post' => $post 
 		] );
+
 	}
+	
+	/**
+	 * Guarda Verdadazos
+	 */
+	public function actionCrearVerdadazos() {
+		// Declaracion de modelos
+		$verdadazo = new EntPosts( [
+				'scenario' => 'crear'
+		] );
+	
+		if ($verdadazo->load ( Yii::$app->request->post () )) {
+			$verdadazo->imagen = UploadedFile::getInstance($verdadazo, 'imagen');
+			$verdadazo->guardarVerdadazos ( $verdadazo );
+			
+			if($post->cargarImagen($verdadazo))
+			{
+				return;
+			}
+		}
+	
+		return $this->renderAjax( 'crearVerdadazos', ['verdadazo' => $verdadazo] );
+	
+	}
+	
+	/**
+	 * Guarda HoyPense
+	 */
+	public function actionCrearHoyPense() {
+		// Declaracion de modelos
+		$hoyPense = new EntPosts( [
+				'scenario' => 'crear'
+		] );
+	
+		if ($hoyPense->load ( Yii::$app->request->post () )) {
+			$hoyPense->imagen = UploadedFile::getInstance($hoyPense, 'imagen');
+			$hoyPense->guardarHoyPense ( $hoyPense );
+			
+			if($hoyPense->cargarImagen($hoyPense))
+			{
+				return;
+			}
+		}
+	
+		return $this->renderAjax( 'crearHoyPense', ['hoyPense' => $hoyPense] );
+	
+	}
+	
+	/**
+	 * Guarda Media
+	 */
+	public function actionCrearMedia() {
+		// Declaracion de modelos
+		$media = new EntPosts( [
+				'scenario' => 'crear'
+		] );
+	
+		if ($media->load ( Yii::$app->request->post () )) {
+			$media->imagen = UploadedFile::getInstance($media, 'imagen');
+			$media->guardarMedia ( $media );
+			
+			if($media->cargarImagen($media))
+			{
+				return;
+			}
+		}
+	
+		return $this->renderAjax( 'crearMedia', ['media' => $media] );
+	
+	}
+	
+	/**
+	 * Guarda contexto
+	 */
+	public function actionCrearContexto() {
+		// Declaracion de modelos
+		$contexto = new EntContextos();
+		$post = new EntPosts( [
+				'scenario' => 'crear'
+		] );
+	
+		if ($contexto->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
+			$post->guardarContexto ( $contexto, $post );
+			
+			if($post->cargarImagen($post))
+			{
+				return;
+			}
+		}
+	
+		return $this->renderAjax( 'crearContexto', [
+				'contexto' => $contexto,
+				'post' => $post
+		] );
+	
+	}
+	
+	/**
+	 * Guarda solo por hoy
+	 */
+	public function actionCrearSoloPorHoy() {
+		// Declaracion de modelos
+		$soloporhoy = new EntSoloPorHoys();
+		$post = new EntPosts( [
+				'scenario' => 'crear'
+		] );
+	
+		if ($soloporhoy->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
+			$post->guardarSoloPorHoy ( $soloporhoy, $post );
+			
+			if($post->cargarImagen($post))
+			{
+				return;
+			}
+		}
+	
+		return $this->renderAjax( 'crearSoloPorHoy', [
+				'soloporhoy' => $soloporhoy,
+				'post' => $post
+		] );
+	
+	}
+	
+	/**
+	 * Guarda sabias que
+	 */
+	public function actionCrearSabiasQue() {
+		// Declaracion de modelos
+		$sabiasque = new EntSabiasQue();
+		$post = new EntPosts( [
+				'scenario' => 'crear'
+		] );
+	
+		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance($post, 'imagen');
+			$post->guardarSabiasQue ( $sabiasque, $post );
+			
+			if($post->cargarImagen($post))
+			{
+				return;
+			}
+		}
+	
+		return $this->renderAjax( 'crearSabiasQue', [
+				'sabiasque' => $sabiasque,
+				'post' => $post
+		] );
+	
+	}
+	
+	/**
+	 * Editar
+	 
+	public function actionEditarAlquimia(){
+		
+		$token = 'post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc';
+		$alquimia = EntPosts::getPosts($page = 0, $token);
+		
+		return $this->render('Alquimia',["postsAlquimia"=>$alquimia]);
+	}*/
 	
 }

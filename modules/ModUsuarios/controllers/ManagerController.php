@@ -13,6 +13,7 @@ use app\modules\ModUsuarios\models\EntUsuariosCambioPass;
 use app\modules\ModUsuarios\models\EntUsuariosFacebook;
 use yii\web\UploadedFile;
 use yii\base\Response;
+use app\models\ConstantesWeb;
 
 /**
  * Default controller for the `musuarios` module
@@ -168,25 +169,37 @@ class ManagerController extends Controller {
 		$this->layout = false;
 		
 		if (! Yii::$app->user->isGuest) {
+			
+			if (Yii::$app->user->identity->id_tipo_usuario == ConstantesWeb::USUARIO_ADMINISTRADOR) {
+				return $this->redirect ( 'adminPanel/admin/dashboard' );
+			}
+			
 			return $this->goHome ();
 		}
 		
 		$model = new LoginForm ();
 		$model->scenario = 'login';
 		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {
-			echo "success";
-			return;
+			if (Yii::$app->request->isAjax) {
+				echo "success";
+				return;
+			}
+			
+			if (Yii::$app->user->identity->id_tipo_usuario == ConstantesWeb::USUARIO_ADMINISTRADOR) {
+				return $this->redirect ( 'adminPanel/admin/dashboard' );
+			}
 			return $this->goBack ();
 		}
 		if (Yii::$app->request->isAjax) {
+			
 			return $this->renderAjax ( 'login', [ 
 					'model' => $model 
 			] );
 		}
-		
-		return $this->render( 'login', [ 
-					'model' => $model 
-			] );
+		$this->layout = '@app/modules/modAdminPanel/views/admin/mainLogin';
+		return $this->render ( '@app/modules/modAdminPanel/views/admin/login', [ 
+				'model' => $model 
+		] );
 	}
 	
 	/**
