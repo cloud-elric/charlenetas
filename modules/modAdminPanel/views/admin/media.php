@@ -3,21 +3,51 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+use app\modules\ModUsuarios\models\Utils;
+?>
+<!-- .page-cont -->
+<div class="page-cont">
 
-	foreach ($postsMedia as $postMedia){
-		echo $postMedia->txt_url . "   ";
-		echo"</br>";
-	}
-	echo "total= " . EntPosts::find()->where(['id_tipo_post'=>$postMedia->id_tipo_post])->count("id_tipo_post" . "   ");
-	echo "total likes= " . EntPosts::find()->where(['id_tipo_post'=>$postMedia->id_tipo_post])->sum("num_likes");
-	echo "total comentarios= " . EntComentariosPosts::find()->where(['id_post'=>$postMedia->id_tipo_post])->count("id_post");
-	
-	$bundle = ModuleAsset::register ( Yii::$app->view );
-	$bundle->js [] = 'js/charlenetas-media.js'; // dynamic file added
-	
-	
-	include 'templates/modalPost.php';
-	
-	$this->registerJs ( "
+	<div class="row">
+					<?php foreach ($postsMedia as $postMedia){?>
+						<div class="col s12 m6 l4">
+			<div class="card card-media">
+				<h3>
+					<img
+						src="http://img.youtube.com/vi/<?=Utils::getIdVideoYoutube($postMedia->txt_url)?>/mqdefault.jpg">
+				</h3>
+
+				<div class="card-options">
+					<div class="card-options-check">
+						<input type="checkbox" class="filled-in" id="filled-in-box6"
+							checked="checked" /> <label for="filled-in-box6"></label>
+					</div>
+					<i class="ion ion-android-more-vertical card-edit"></i>
+				</div>
+			</div>
+		</div>
+					<?php }?>
+						<!-- <div class="col s12">
+							<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
+						</div> -->
+
+	</div>
+
+	<div class="fixed-action-btn horizontal">
+		<a class="btn-floating btn-large waves-effect waves-light btn-check">
+			<i class="ion ion-wand"></i>
+		</a>
+	</div>
+
+
+</div>
+<!-- end /.page-cont -->
+<?php
+$bundle = ModuleAsset::register ( Yii::$app->view );
+$bundle->js [] = 'js/charlenetas-media.js'; // dynamic file added
+
+include 'templates/modalPost.php';
+
+$this->registerJs ( "
 		cargarFormulario();
     ", View::POS_END );
