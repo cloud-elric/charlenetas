@@ -55,6 +55,8 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
 
 	</div>
 	<!-- end /.wrap -->
+	
+	<?=$this->render('@app/modules/modAdminPanel/views/admin/templates/modalPost');?>
 
 <?php $this->endBody() ?>
 </body>

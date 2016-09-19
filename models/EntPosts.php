@@ -368,7 +368,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
 
-		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->fch_publicacion = Utils::changeFormatDateInput($post->fch_publicacion);
 		$post->txt_imagen = Utils::generateToken("img") . "." . $post->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();

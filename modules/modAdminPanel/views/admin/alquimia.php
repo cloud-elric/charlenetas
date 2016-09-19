@@ -46,13 +46,15 @@ use yii\web\View;
 			<!-- <i class="ion ion-wand"></i> -->
 			<i class="ion ion-ios-trash-outline"></i>
 		</a>
-		<?php include 'templates/modalPost.php'; ?>
+		<!-- Modal Trigger -->
+<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
+	<i class="material-icons">add</i>
+</a>
 	</div>
 	<!-- end /.fixed-action-btn -->
 
 </div>
 <!-- end /.page-cont -->
-
 <?php
 	// foreach ($postsAlquimia as $postAlquimia){
 	// 	//echo $postAlquimia->entAlquimias;
@@ -82,6 +84,10 @@ $bundle->js [] = 'js/charlenetas-alquimia.js'; // dynamic file added
 
 $this->registerJs ( "
 		cargarFormulario();
+		$(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+      
 ", View::POS_END );
 
 
