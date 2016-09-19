@@ -8,28 +8,37 @@ use yii\web\View;
 <div class="page-cont">
 
 	<div class="row">
-	<?php foreach ( $postsContexto as $postContexto ) {?>
-		<div class="col s12 m6 l4">
-			<div class="card card-contexto">
-				<h3><?=$postContexto->txt_descripcion?></h3>
-				<p><?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?> comentarios</p>
-				<div class="card-options">
-					<div class="card-options-check">
-						<input type="checkbox" class="filled-in" id="filled-in-box7"
-							checked="checked" /> <label for="filled-in-box7"></label>
-					</div>
-					<i class="ion ion-android-more-vertical card-edit"></i>
-				</div>
-			</div>
-		</div>
-<?php }?>
-		<!-- <div class="col s12">
-							<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
-						</div> -->
+		<div class="col s12 cards-container">
 
+			<?php foreach ( $postsContexto as $postContexto ) {?>
+
+				<div class="card card-contexto">
+					<h3><?= $postContexto->txt_descripcion?></h3>
+					<p>
+						<?= EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?> Comentarios
+					</p>
+					<div class="card-options">
+						<div class="card-options-check">
+							<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
+							<label for="filled-in-box1"></label>
+						</div>
+						<i class="ion ion-android-more-vertical card-edit"></i>
+					</div>
+
+					<div class="card-options-nav">
+						Algo
+					</div>
+
+				</div>
+				
+			<?php }?>
+
+		</div>
 	</div>
 
-
+	<!-- <div class="col s12">
+		<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
+	</div> -->
 
 	<div class="fixed-action-btn horizontal">
 		<a class="btn-floating btn-large waves-effect waves-light btn-check">
@@ -65,6 +74,8 @@ use yii\web\View;
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-contexto.js'; // dynamic file added
+$bundle->css [] = 'css/lenetas.css';
+$bundle->css [] = 'css/animate.css';
 
 include 'templates/modalPost.php';
 
