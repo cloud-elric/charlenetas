@@ -1,21 +1,17 @@
-<?php 
-	
-	foreach($dashboard as $dash){
-		echo $dash->txt_nombre;
-	}
 
-?>
+
 
 <!-- .page-cont -->
 <div class="page-cont dashboard">
 
 	<div class="row">
+	<?php foreach($dashboard as $dash): ?>
 		<div class="col s12 m6 l4">
-			<a class="dashboard-card card-alquimia" href="/charlenetas/web/adminPanel/admin/alquimia">
+			<a class="dashboard-card card-alquimia" href="/charlenetas/web/adminPanel/admin/<?= $dash->txt_action; ?>">
 				<div class="dashboard-card-cont">
 					<div class="row">
 						<div class="col s10">
-							<h3>Alquimia</h3>
+							<h3><?= $dash->txt_nombre; ?></h3>
 							<p>30 post</p>
 						</div>
 						<div class="col s2 text-center">
@@ -28,8 +24,8 @@
 				</div>
 			</a>
 		</div>
-	
-		<div class="col s12 m6 l4">
+	  
+	  	<!--<div class="col s12 m6 l4">
 			<a class="dashboard-card card-contexto" href="/charlenetas/web/adminPanel/admin/contexto">
 				<div class="dashboard-card-cont">
 					<div class="row">
@@ -160,12 +156,14 @@
 					<p><i class="ion ion-email"></i> <span>30 mensajes</span></p>
 				</div>
 			</a>
-		</div>
-
+		</div>-->
+		<?php endforeach;?>
+	
 	</div>
 
 </div>
 <!-- end /.page-cont -->
+
 
 <?php
 use yii\helpers\Html;

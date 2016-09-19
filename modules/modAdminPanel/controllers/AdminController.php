@@ -63,8 +63,8 @@ class AdminController extends Controller
     
 	public function actionDashboard()
 	{
-		$e = '';
-		$posts = CatTiposPosts::find()->where(['txt_nombre'=>$e]);
+		$dashboard = new CatTiposPosts();
+		$posts = $dashboard->find()->orderBy('txt_nombre ASC')->all();
 		
 		return $this->render('dashboard', ["dashboard"=>$posts]);
 	}
