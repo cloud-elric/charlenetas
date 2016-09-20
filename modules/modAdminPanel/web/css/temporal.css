@@ -1,3 +1,28 @@
+.btn, .btn-primary, .btn-secondary{
+    padding: 5px 20px;
+    border: 1px solid #345678;
+    border-radius: 6px;
+    background-color: #345678;
+    transition: all 300ms ease-in-out;
+    color: #fff;
+    line-height: 2.5em;
+    font-family: "Raleway",sans-serif;
+    font-size: 0.7em;
+    letter-spacing: 1px;
+    margin: 0 5px;
+}
+.btn:hover, .btn-primary:hover, .btn-secondary:hover{
+    background-color: transparent;
+    color: #345678;
+}
+
+p{
+    font-family: "Lato",sans-serif;
+    font-size: 1em;
+    line-height: 1.5em;
+    color: #253c54;
+}
+
 #backScreen {
     background-color: rgba(255,255,255,0.9);
     position: fixed;
@@ -8,7 +33,7 @@
     display: none;
     padding: 50px 20px;
     overflow: scroll;
-    z-index: 1;
+    z-index: 99;
 }
 
 #wrapper {
@@ -158,6 +183,22 @@
     transition: all 300ms ease-in-out;
 }
 
+
+.comment-footer, .respuesta-footer, .full-pin-body-footer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+.full-pin-body-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding: 20px 0;
+}
 .full-pin-body-footer .full-pin-body-footer-feedbacks {
     padding-right: 0px;
 }
@@ -213,3 +254,61 @@
     vertical-align: middle;
     display: inline-block;
 }
+
+/**/
+
+
+
+.comment-footer .comment-feedbacks, .comment-footer .respuesta-feedbacks, .comment-footer .full-pin-body-footer-sharebar, .comment-footer .full-pin-body-footer-feedbacks, .respuesta-footer .comment-feedbacks, .respuesta-footer .respuesta-feedbacks, .respuesta-footer .full-pin-body-footer-sharebar, .respuesta-footer .full-pin-body-footer-feedbacks, .full-pin-body-footer .comment-feedbacks, .full-pin-body-footer .respuesta-feedbacks, .full-pin-body-footer .full-pin-body-footer-sharebar, .full-pin-body-footer .full-pin-body-footer-feedbacks{
+    display: flex;
+}
+
+
+
+.full-pin-content .full-pin-social .comment{
+    padding: 20px 40px;
+}
+.full-pin-content .full-pin-social .comment .comment-header{
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+    margin: 0 -20px;
+}
+.full-pin-content .full-pin-social .comment .comment-header .comment-usr{
+    display: flex;
+    align-items: center;
+}
+.full-pin-content .full-pin-social .comment .comment-header .comment-usr img{
+    margin-right: 15px;
+    border-radius: 50%;
+}
+
+.full-pin-content .full-pin-social .new-comment.js-reply-comentario{
+    flex-grow: 2;
+}
+.full-pin-content .full-pin-social .new-comment img{
+    margin-right: 10px;
+}
+.full-pin-content .full-pin-social .new-comment form{
+    flex-grow: 2;
+}
+.full-pin-content .full-pin-social .new-comment form textarea, .full-pin-content .full-pin-social .new-comment form a{
+    vertical-align: middle;
+    display: inline-block;
+}
+.full-pin-content .full-pin-social .new-comment form textarea{
+    border: 1px solid #c5d5e6;
+    border-radius: 6px;
+    height: 36px;
+    padding: 0 20px;
+    line-height: 2em;
+    resize: none;
+    transition: all 300ms ease-in-out;
+    width: calc(100% - 140px);
+}
+.full-pin-content .full-pin-social .new-comment form a{
+    margin-left: 5px;
+}
+
+
+
