@@ -8,7 +8,7 @@ $form = ActiveForm::begin ( [
 		],
  		
 		'layout' => 'horizontal',
-		'id' => 'form-alquimia',
+		'id' => $post->isNewRecord?'form-alquimia':'editar-alquimia',
 		'fieldConfig' => [ 
 				'template' => "{input}\n{label}\n{error}",
 				'horizontalCssClasses' => [ 

@@ -18,6 +18,7 @@ use yii\filters\AccessControl;
 use app\models\CatTiposPosts;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use app\models\EntPostsExtend;
 
 /**
  * Default controller for the `adminPanel` module
@@ -438,16 +439,65 @@ class AdminController extends Controller {
 
 	
 	/**
-	 * Editar
+	 * Editar alquimia
+	 * @param string $token
 	*/ 
 	public function actionEditarAlquimia($token = null){
+		// Busca el post por el token
+		$post = $this->getPostByToken($token);
+		$post->scenario = 'editarAlquimia';
 		
-		$token = 'post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc';
-		$posts = EntPosts::getPosts($page = 0, $token);
-		$alquimia = new EntAlquimias();
+		// Declaracion de modelos
+		$alquimia = $post->entAlquimias;
 		
-		return $this->render('_formAlquimia',['Alquimia'=>$alquimia, 'posts'=> $posts]);
+		// Validacion de los modelos
+		if ($validacion = $this->validarAlquimia ( $post, $alquimia )) {
+			return $validacion;
+		}
+		
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+			
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			
+			if(!empty($post->imagen)){
+				$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
+			}
+			
+			$post->id_usuario = $usuario->id_usuario;
+			$post->guardarAlquimia ( $alquimia, $post );
+			
+			if(!empty($post->imagen)){
+				$post->cargarImagen ( $post );
+			}
+			
+			return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];
+			
+		}
+		
+		return $this->renderAjax ( '_formAlquimia', [ 
+				'alquimia' => $alquimia,
+				'post' => $post 
+		] );
 	}
 	
+	
+	/**
+	 * Busca un post por su token
+	 *
+	 * @param unknown $token
+	 * @throws NotFoundHttpException
+	 * @return EntPostsExtend
+	 */
+	private function getPostByToken($token) {
+		if (($post = EntPostsExtend::getPostByToken ( $token )) !== null) {
+			return $post;
+		} else {
+			throw new NotFoundHttpException ( 'The requested page does not exist.' );
+		}
+	}
 
 }

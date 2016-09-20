@@ -21,14 +21,35 @@ class RulesAlquimia {
 				],
 				[ 
 						[ 
-								'txt_titulo', 'txt_descripcion', 'fch_publicacion' 
+								'imagen' 
+						],
+						'image',
+						'skipOnEmpty' => true,
+						
+						'extensions' => 'png, jpg, jpeg',
+						'on' => 'editarAlquimia' 
+				],
+				[ 
+						[ 
+								'txt_titulo',
+								'txt_descripcion',
+								'fch_publicacion' 
 						],
 						'required',
-						'message'=>'Requerido',
-						'on' => 'crearAlquimia'
+						'message' => 'Requerido',
+						'on' => 'crearAlquimia' 
 				],
-		]
-		;
+				[ 
+						[ 
+								'txt_titulo',
+								'txt_descripcion',
+								'fch_publicacion' 
+						],
+						'required',
+						'message' => 'Requerido',
+						'on' => 'editarAlquimia' 
+				] 
+		];
 		
 		return $rules;
 	}
