@@ -362,15 +362,17 @@ class AdminController extends Controller {
 		] );
 	}
 
-/**
- * Editar
- *
- * public function actionEditarAlquimia(){
- *
- * $token = 'post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc';
- * $alquimia = EntPosts::getPosts($page = 0, $token);
- *
- * return $this->render('Alquimia',["postsAlquimia"=>$alquimia]);
- * }
- */
+	
+	/**
+	 * Editar
+	 
+	public function actionEditarAlquimia(){
+		
+		$token = 'post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc';
+		$alquimia = EntPosts::getPosts($page = 0, $token);
+		
+		return $this->renderAjax('crearAlquimia',['postsAlquimia'=>$alquimia]);
+	}*/
+	
+
 }

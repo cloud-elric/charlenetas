@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*!
 	*	Charlenetas
 	*	Descripción de lo que es proyecto
@@ -925,6 +924,7 @@ hr {
   display: block;
   margin-bottom: 20px;
   padding: 30px 37px 30px 20px;
+<<<<<<< HEAD
   position: relative;
 }
 
@@ -1094,6 +1094,120 @@ hr {
   font-size: 1.1em;
   margin-right: 4px;
 }
+=======
+  position: relative; }
+  .card h3 {
+    font-size: 1.4em;
+    font-weight: 300;
+    margin-bottom: 4px; }
+  .card p {
+    color: #282828;
+    font-weight: 400;
+    letter-spacing: 1px; }
+  .card .card-options {
+    position: absolute;
+    right: 30px;
+    top: 20px; }
+    .card .card-options i,
+    .card .card-options .card-options-check {
+      vertical-align: middle; }
+    .card .card-options i {
+      cursor: pointer;
+      font-size: 1.23em;
+      background-color: #eee;
+      height: 27px;
+      width: 27px;
+      text-align: center;
+      line-height: 27px;
+      border-radius: 50%;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
+      .card .card-options i:hover {
+        background-color: #e6e6e6; }
+    .card .card-options .card-options-check {
+      display: none; }
+      .card .card-options .card-options-check [type="checkbox"] + label {
+        height: 15px;
+        padding-left: 20px; }
+  .card .card-options-nav {
+    background-color: rgba(255, 0, 0, 0.4);
+    border-top: 1px solid #EEE;
+    padding: 20px 10px; }
+  .card.card-contexto p {
+    color: #DFF040; }
+  .card.card-verdadazos p {
+    color: #1940e3; }
+  .card.card-sabias-que p {
+    color: #EF3893; }
+  .card.card-espejo p {
+    color: #658BEA; }
+  .card.card-solo-por-hoy p {
+    color: #75F1F1; }
+  .card.card-alquimia p {
+    color: #F3B924; }
+  .card.card-hoy-pense p {
+    color: #57ED5F; }
+  .card.card-media p {
+    color: #0F2687; }
+  .card.card-user {
+    padding: 0; }
+    .card.card-user .card-user-cont {
+      padding: 30px 10px 4px; }
+      .card.card-user .card-user-cont .card-user-avatar {
+        position: relative; }
+        .card.card-user .card-user-cont .card-user-avatar img {
+          width: 100%; }
+          .card.card-user .card-user-cont .card-user-avatar img.raduis {
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            border-radius: 50%; }
+        .card.card-user .card-user-cont .card-user-avatar .card-user-status {
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          border-radius: 50%;
+          bottom: -2px;
+          height: 20px;
+          left: 10px;
+          position: absolute;
+          width: 20px; }
+          .card.card-user .card-user-cont .card-user-avatar .card-user-status.card-user-status-deshabilitado {
+            background-color: #FF4136; }
+          .card.card-user .card-user-cont .card-user-avatar .card-user-status.card-user-status-habilitado {
+            background-color: #2ECC40; }
+      .card.card-user .card-user-cont .card-user-nombre {
+        font-size: 1.4em;
+        line-height: 1; }
+      .card.card-user .card-user-cont .card-user-email {
+        color: rgba(117, 117, 117, 0.7);
+        font-size: 0.95em;
+        font-weight: 400;
+        width: 100%; }
+      .card.card-user .card-user-cont .card-user-tipo-user {
+        font-weight: 500;
+        margin-top: 6px; }
+    .card.card-user .card-user-statistics {
+      background-color: #ececec;
+      background-color: #e4e4e4;
+      color: #c2c2c2;
+      display: flex;
+      justify-content: space-around;
+      padding: 6px 10px; }
+      .card.card-user .card-user-statistics .card-user-statistics-comentarios,
+      .card.card-user .card-user-statistics .card-user-statistics-feeds,
+      .card.card-user .card-user-statistics .card-user-statistics-creditos,
+      .card.card-user .card-user-statistics .card-user-statistics-contracion {
+        color: #767676; }
+        .card.card-user .card-user-statistics .card-user-statistics-comentarios i,
+        .card.card-user .card-user-statistics .card-user-statistics-feeds i,
+        .card.card-user .card-user-statistics .card-user-statistics-creditos i,
+        .card.card-user .card-user-statistics .card-user-statistics-contracion i {
+          font-size: 1.1em;
+          margin-right: 4px; }
+>>>>>>> origin/implementacion-design
 
 .card-agenda {
   background-color: white;
