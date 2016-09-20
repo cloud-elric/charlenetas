@@ -11,7 +11,8 @@ class ModuleAsset extends AssetBundle {
 			'https://fonts.googleapis.com/icon?family=Material+Icons',
 			'css/ionicons.min.css',
 			'css/asScrollable.min.css',
-			'css/charlenetas.css' 
+			'css/charlenetas.css',
+			'css/temporal.css'
 	];
 	public $js = [ 
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js',

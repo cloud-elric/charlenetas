@@ -7,7 +7,7 @@ use yii\helpers\Html;
 <div class="pin pin-alquimia" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header pin-header-alquimia"></div>
 	<div class="image">
-		<img src="webAssets/images/<?=$post->txt_imagen?>">
+		<img src="uploads/imagenesPosts/<?=$post->txt_imagen?>">
 	</div>
 	<div class="pin-content-wrapper" lang="en">
 		<h3 class="pin-titulo">

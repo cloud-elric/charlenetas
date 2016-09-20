@@ -41,12 +41,11 @@ use yii\web\View;
 
 	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check">
-			<!-- <i class="ion ion-wand"></i> -->
-			<i class="ion ion-ios-trash-outline"></i>
+		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
+			<i class="ion ion-wand"></i>
 		</a>
-		<?php include 'templates/modalPost.php'; ?>
 	</div>
+	
 	<!-- end /.fixed-action-btn -->
 
 </div>
@@ -69,10 +68,10 @@ use yii\web\View;
 	$bundle = ModuleAsset::register ( Yii::$app->view );
 	$bundle->js [] = 'js/charlenetas-hoypense.js'; // dynamic file added
 	
-	
-	// include 'templates/modalPost.php';
-	
 	$this->registerJs ( "
 		cargarFormulario();
+		$(document).ready(function(){
+    	$('.modal-trigger').leanModal();
+		});
     ", View::POS_END );
 	

@@ -34,7 +34,7 @@ use yii\web\View;
 
 
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check">
+		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i>
 		</a>
 	</div>
@@ -71,8 +71,9 @@ use yii\web\View;
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-soloporhoy.js'; // dynamic file added
 
-include 'templates/modalPost.php';
-
 $this->registerJs ( "
 		cargarFormulario();
+		$(document).ready(function(){
+    	$('.modal-trigger').leanModal();
+		});
     ", View::POS_END );

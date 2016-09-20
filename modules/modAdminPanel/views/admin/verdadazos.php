@@ -28,7 +28,7 @@ use yii\web\View;
 <?php }?>
 
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check">
+		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i>
 		</a>
 	</div>
@@ -58,8 +58,9 @@ echo "total likes= " . EntPosts::find ()->where ( [
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-verdadazos.js'; // dynamic file added
 
-include 'templates/modalPost.php';
-
 $this->registerJs ( "
 		cargarFormulario();
+		$(document).ready(function(){
+    	$('.modal-trigger').leanModal();
+		});
     ", View::POS_END );

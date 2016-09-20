@@ -21,12 +21,22 @@ use yii\web\View;
 	echo "total likes= " . EntPosts::find()->where(['id_tipo_post'=>$postSabiasQue->id_tipo_post])->sum("num_likes");
 	echo "total comentarios= " . EntComentariosPosts::find()->where(['id_post'=>$postSabiasQue->id_tipo_post])->count("id_post");
 
+?>
+
+	<div class="fixed-action-btn horizontal">
+		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
+			<i class="ion ion-wand"></i>
+		</a>
+	</div>
+
+<?php 	
 	$bundle = ModuleAsset::register ( Yii::$app->view );
 	$bundle->js [] = 'js/charlenetas-sabiasque.js'; // dynamic file added
 	
-	
-	include 'templates/modalPost.php';
-	
 	$this->registerJs ( "
 		cargarFormulario();
+		$(document).ready(function(){
+    	$('.modal-trigger').leanModal();
+		});
     ", View::POS_END );
+?>

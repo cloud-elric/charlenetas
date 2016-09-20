@@ -26,19 +26,18 @@ use app\modules\ModUsuarios\models\Utils;
 				</div>
 			</div>
 		</div>
-					<?php }?>
-						<!-- <div class="col s12">
-							<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
-						</div> -->
+		<?php }?>
+		<!-- <div class="col s12">
+			<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
+		</div> -->
 
 	</div>
 
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check">
+		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i>
 		</a>
 	</div>
-
 
 </div>
 <!-- end /.page-cont -->
@@ -46,8 +45,9 @@ use app\modules\ModUsuarios\models\Utils;
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-media.js'; // dynamic file added
 
-include 'templates/modalPost.php';
-
 $this->registerJs ( "
 		cargarFormulario();
+		$(document).ready(function(){
+    	$('.modal-trigger').leanModal();
+		});
     ", View::POS_END );
