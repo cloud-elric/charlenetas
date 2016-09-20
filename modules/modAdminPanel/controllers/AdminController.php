@@ -446,7 +446,7 @@ class AdminController extends Controller {
 		// Busca el post por el token
 		$post = $this->getPostByToken($token);
 		$post->scenario = 'editarAlquimia';
-		
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
 		// Declaracion de modelos
 		$alquimia = $post->entAlquimias;
 		
@@ -468,7 +468,7 @@ class AdminController extends Controller {
 			}
 			
 			$post->id_usuario = $usuario->id_usuario;
-			$post->guardarAlquimia ( $alquimia, $post );
+			$post->editarAlquimia ( $alquimia, $post );
 			
 			if(!empty($post->imagen)){
 				$post->cargarImagen ( $post );

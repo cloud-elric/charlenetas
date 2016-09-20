@@ -374,6 +374,38 @@ class EntPosts extends \yii\db\ActiveRecord {
 	}
 	
 	/**
+	 * Guarda la alquimia y el post
+	 *
+	 * @param EntAlquimia $alquimia
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function editarAlquimia($alquimia, $post) {
+	
+		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+				$alquimia->id_post = $post->id_post;
+	
+				if ($alquimia->save ()) {
+						
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
 	 * Guarda post de Verdadazo
 	 *
 	 * @param EntPost $verdadazo        	
