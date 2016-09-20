@@ -4,7 +4,7 @@
 if (YII_ENV_DEV) {
 	$params = [ 
 			'adminEmail' => 'admin@example.com',
-			'modAdmin' => ["path_imagenes_post"=>"uploads/imagenesPosts/"],
+			'modAdmin' => ["path_imagenes_posts"=>"uploads/imagenesPosts/"],
 			'modUsuarios' => [
 					'pathImageProfile'=>'uploads/profiles/',
 					'pathImageDefault'=>'uploads/profiles/imgDefault.png',

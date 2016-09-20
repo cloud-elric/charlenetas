@@ -34,7 +34,6 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 		return [ 
 				[ 
 						[ 
-								'id_post',
 								'num_calificacion_admin' 
 						],
 						'required' 
@@ -42,8 +41,8 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 				[ 
 						[ 
 								'id_post',
-// 								'num_calificacion_admin',
-// 								'num_calificacion_usuario' 
+								'num_calificacion_admin',
+ 								'num_calificacion_usuario' 
 						],
 						'integer' 
 				],
@@ -67,7 +66,7 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 	public function attributeLabels() {
 		return [ 
 				'id_post' => 'Id Post',
-				'num_calificacion_admin' => 'Num Calificacion Admin',
+				'num_calificacion_admin' => 'Calificación',
 				'num_calificacion_usuario' => 'Num Calificacion Usuario' 
 		];
 	}

@@ -6,11 +6,9 @@ $form = ActiveForm::begin ( [
 		'options' => [ 
 				'enctype' => 'multipart/form-data' 
 		],
-// 		'enableAjaxValidation' => true,
-// 		'enableClientValidation' => true,
-// 		'validationUrl' => 'netas/validacion-usuario',
+ 		
 		'layout' => 'horizontal',
-		'id' => 'login-alquimia',
+		'id' => 'form-alquimia',
 		'fieldConfig' => [ 
 				'template' => "{input}\n{label}\n{error}",
 				'horizontalCssClasses' => [ 
@@ -35,8 +33,7 @@ $form = ActiveForm::begin ( [
     <?= $form->field($post, 'txt_descripcion')->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
   	 
   	<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
-  	 
-  	 <?= $form->field($alquimia, 'num_calificacion_admin')?>
+  	 <?= $form->field($alquimia, 'num_calificacion_admin', ['template'=>'{input}{label}'.$alquimia->contenedorEstrellas($alquimia->num_calificacion_admin, '', false, true).'{error}'])->hiddenInput()?>
    </div>
     <?= Html::submitButton('Crear')?>
        

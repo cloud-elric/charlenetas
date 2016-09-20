@@ -42,6 +42,8 @@ $(window).load(function(){
 	$(".wrap").delay(3000).fadeIn();
 });
 
+
+
 /**
  * Variables
  */
