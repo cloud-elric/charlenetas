@@ -579,24 +579,40 @@ hr {
 
 /*  Modal
 	@mixin =============================================== */
-.modal-form .modal-content h4 {
+.modal.modal-fixed-footer .modal-content {
+  height: 100%;
+}
+
+.modal .modal-content h4 {
   margin-bottom: 20px;
 }
 
-.modal-form .modal-footer button {
-  background-color: transparent;
-  box-shadow: none;
-  color: #345678;
-  font-weight: 400;
-  padding: 0 1rem;
+.modal .modal-content .input-calificacion {
+  height: 70px;
 }
 
-.modal-form .modal-footer button i {
+.modal .modal-content .input-calificacion label {
+  display: block;
+  position: relative;
+  left: 0;
+}
+
+.modal .modal-content .input-calificacion .star-wrapper {
+  display: block;
+  position: relative;
+  margin-top: 20px;
+}
+
+.modal .modal-content .btn-submit {
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.modal .modal-content .btn-submit i {
   font-size: 1.3em;
 }
 
 .modal.modal-fixed-footer {
-  height: 90%;
   max-height: 90%;
   top: 6%;
 }

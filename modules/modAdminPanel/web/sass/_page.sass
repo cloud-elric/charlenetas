@@ -39,22 +39,34 @@
 
 /*  Modal
 	================================================ */
-.modal-form
+.modal.modal-fixed-footer
+	.modal-content
+		height: 100%
+.modal
 	.modal-content
 		h4
 			// background-color: rgba(red,.4)
 			margin-bottom: 20px
-	.modal-footer
-		button
-			background-color: transparent
-			box-shadow: none
-			color: $header-menu
+		.input-calificacion
+			// background-color: red
+			height: 70px
+			label
+				display: block
+				// background-color: green
+				position: relative
+				left: 0
+			.star-wrapper 
+				display: block
+				position: relative
+				margin-top: 20px
+		.btn-submit
+			// background-color: transparent
 			font-weight: 400
-			padding: 0 1rem
+			margin-left: 10px
 			i
 				font-size: 1.3em
 .modal.modal-fixed-footer
-	height: 90%
+	// height: 60%
 	max-height: 90%
 	top: 6%
 

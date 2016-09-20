@@ -5,12 +5,6 @@ use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 ?>
 
-<!-- .page-header -->
-<div class="page-header">
-	<h2 class="page-title"><i class="ion ion-card"></i> Alquimia</h2>
-</div>
-<!-- end /.page-header -->
-
 <!-- .page-cont -->
 <div class="page-cont">
 	<!-- .row -->
@@ -47,14 +41,15 @@ use yii\web\View;
 			<i class="ion ion-ios-trash-outline"></i>
 		</a>
 		<!-- Modal Trigger -->
-<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
-	<i class="material-icons">add</i>
-</a>
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
+			<i class="material-icons">add</i>
+		</a>
 	</div>
 	<!-- end /.fixed-action-btn -->
 
 </div>
 <!-- end /.page-cont -->
+
 <?php
 	// foreach ($postsAlquimia as $postAlquimia){
 	// 	//echo $postAlquimia->entAlquimias;
