@@ -363,13 +363,14 @@ class AdminController extends Controller
 	
 	/**
 	 * Editar
-	 
-	public function actionEditarAlquimia(){
+	*/ 
+	public function actionEditarAlquimia($token = null){
 		
 		$token = 'post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc';
-		$alquimia = EntPosts::getPosts($page = 0, $token);
+		$posts = EntPosts::getPosts($page = 0, $token);
+		$alquimia = new EntAlquimias();
 		
-		return $this->renderAjax('crearAlquimia',['postsAlquimia'=>$alquimia]);
-	}*/
+		return $this->render('_formAlquimia',['Alquimia'=>$alquimia, 'posts'=> $posts]);
+	}
 	
 }
