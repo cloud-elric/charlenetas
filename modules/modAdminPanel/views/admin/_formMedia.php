@@ -1,22 +1,31 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\web\View;
+use yii\bootstrap\ActiveForm;
 
 $form = ActiveForm::begin ( [
 		'options' => [
 				'enctype' => 'multipart/form-data'
-		]
+		],
+		
+		'layout' => 'horizontal',
+		'id' => 'form-media',
+		'fieldConfig' => [
+				'template' => "{input}\n{label}\n{error}",
+				'horizontalCssClasses' => [
+						'error' => 'mdl-textfield__error'
+				],
+				'labelOptions' => [
+						'class' => 'mdl-textfield__label'
+				],
+				'options' => [
+						'class' => 'input-field col s6'
+				]
+		],
+		'errorCssClass' => 'invalid'
 ] );
 ?>
 
-    <?= $form->field($media, 'txt_titulo')->textInput(['maxlength' => true])?>
-
-    <?= $form->field($media, 'txt_descripcion')->textInput(['maxlength' => true])?>
-
   	 <?= $form->field($media, 'txt_url')->fileInput()?>
-  	 
-  	 <?= $form->field($media, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
    
      <?= Html::submitButton('Crear')?>
        

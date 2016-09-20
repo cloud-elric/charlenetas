@@ -149,6 +149,12 @@ class EntPosts extends \yii\db\ActiveRecord {
 		];
 		
 		$rules = array_merge($rulesGenerales, RulesAlquimia::rulesCrearAlquimia());
+		$rules = array_merge($rules, RulesVerdadazos::rulesCrearVerdadazos());
+		$rules = array_merge($rules, RulesHoyPense::rulesCrearHoyPense());
+		$rules = array_merge($rules, RulesMedia::rulesCrearMedia());
+		$rules = array_merge($rules, RulesContexto::rulesCrearContexto());
+		$rules = array_merge($rules, RulesSoloPorHoy::rulesCrearSoloPorHoy());
+		$rules = array_merge($rules, RulesSabiasQue::rulesCrearSabiasQue());
 		
 		return $rules;
 	}

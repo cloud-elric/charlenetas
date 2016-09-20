@@ -47,9 +47,9 @@ use yii\web\View;
 			<i class="ion ion-ios-trash-outline"></i>
 		</a>
 		<!-- Modal Trigger -->
-<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
-	<i class="material-icons">add</i>
-</a>
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
+			<i class="material-icons">add</i>
+		</a>
 	</div>
 	<!-- end /.fixed-action-btn -->
 

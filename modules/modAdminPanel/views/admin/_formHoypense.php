@@ -1,12 +1,27 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\web\View;
+use yii\bootstrap\ActiveForm;
 
 $form = ActiveForm::begin ( [
 		'options' => [
 				'enctype' => 'multipart/form-data'
-		]
+		],
+		
+		'layout' => 'horizontal',
+		'id' => 'form-hoypense',
+		'fieldConfig' => [
+				'template' => "{input}\n{label}\n{error}",
+				'horizontalCssClasses' => [
+						'error' => 'mdl-textfield__error'
+				],
+				'labelOptions' => [
+						'class' => 'mdl-textfield__label'
+				],
+				'options' => [
+						'class' => 'input-field col s6'
+				]
+		],
+		'errorCssClass' => 'invalid'
 ] );
 ?>
 

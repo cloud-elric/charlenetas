@@ -224,8 +224,12 @@ class AdminController extends Controller {
 	public function actionCrearVerdadazos() {
 		// Declaracion de modelos
 		$verdadazo = new EntPosts ( [ 
-				'scenario' => 'crear' 
+				'scenario' => 'crearVerdadazos' 
 		] );
+		
+		if ($validacion = $this->validarVerdadazos( $verdadazo )) {
+			return $validacion;
+		}
 		
 		if ($verdadazo->load ( Yii::$app->request->post () )) {
 			$verdadazo->imagen = UploadedFile::getInstance ( $verdadazo, 'imagen' );
@@ -240,6 +244,14 @@ class AdminController extends Controller {
 				'verdadazo' => $verdadazo 
 		] );
 	}
+	public function validarVerdadazos($post) {
+		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			Yii::$app->response->format = Response::FORMAT_JSON;
+				
+			return array_merge ( ActiveForm::validate ( $post ));
+		}
+	}
 	
 	/**
 	 * Guarda HoyPense
@@ -247,8 +259,12 @@ class AdminController extends Controller {
 	public function actionCrearHoyPense() {
 		// Declaracion de modelos
 		$hoyPense = new EntPosts ( [ 
-				'scenario' => 'crear' 
+				'scenario' => 'crearHoyPense' 
 		] );
+		
+		if ($validacion = $this->validarVerdadazos( $hoyPense )) {
+			return $validacion;
+		}
 		
 		if ($hoyPense->load ( Yii::$app->request->post () )) {
 			$hoyPense->imagen = UploadedFile::getInstance ( $hoyPense, 'imagen' );
@@ -263,6 +279,14 @@ class AdminController extends Controller {
 				'hoyPense' => $hoyPense 
 		] );
 	}
+	public function validarHoyPense($post) {
+		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			Yii::$app->response->format = Response::FORMAT_JSON;
+	
+			return array_merge ( ActiveForm::validate ( $post ));
+		}
+	}
 	
 	/**
 	 * Guarda Media
@@ -270,8 +294,12 @@ class AdminController extends Controller {
 	public function actionCrearMedia() {
 		// Declaracion de modelos
 		$media = new EntPosts ( [ 
-				'scenario' => 'crear' 
+				'scenario' => 'crearMedia' 
 		] );
+		
+		if ($validacion = $this->validarMedia( $media )) {
+			return $validacion;
+		}
 		
 		if ($media->load ( Yii::$app->request->post () )) {
 			$media->imagen = UploadedFile::getInstance ( $media, 'imagen' );
@@ -285,6 +313,14 @@ class AdminController extends Controller {
 		return $this->renderAjax ( 'crearMedia', [ 
 				'media' => $media 
 		] );
+	}
+	public function validarMedia($post) {
+		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			Yii::$app->response->format = Response::FORMAT_JSON;
+	
+			return array_merge ( ActiveForm::validate ( $post ));
+		}
 	}
 	
 	/**
@@ -319,8 +355,12 @@ class AdminController extends Controller {
 		// Declaracion de modelos
 		$soloporhoy = new EntSoloPorHoys ();
 		$post = new EntPosts ( [ 
-				'scenario' => 'crear' 
+				'scenario' => 'crearSoloPorHoy' 
 		] );
+		
+		if ($validacion = $this->validarSoloPorHoy( $post, $soloporhoy )) {
+			return $validacion;
+		}
 		
 		if ($soloporhoy->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
@@ -336,6 +376,14 @@ class AdminController extends Controller {
 				'post' => $post 
 		] );
 	}
+	public function validarSoloPorHoy($post, $soloporhoy) {
+		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () ) && $soloporhoy->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			Yii::$app->response->format = Response::FORMAT_JSON;
+				
+			return array_merge ( ActiveForm::validate ( $post ), ActiveForm::validate ( $soloporhoy ) );
+		}
+	}
 	
 	/**
 	 * Guarda sabias que
@@ -344,8 +392,12 @@ class AdminController extends Controller {
 		// Declaracion de modelos
 		$sabiasque = new EntSabiasQue ();
 		$post = new EntPosts ( [ 
-				'scenario' => 'crear' 
+				'scenario' => 'crearSabiasQue' 
 		] );
+		
+		if ($validacion = $this->validarSoloPorHoy( $post, $sabiasque )) {
+			return $validacion;
+		}
 		
 		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
@@ -360,6 +412,14 @@ class AdminController extends Controller {
 				'sabiasque' => $sabiasque,
 				'post' => $post 
 		] );
+	}
+	public function validarSabiasQue($post, $sabiasque) {
+		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () ) && $sabiasque->load ( Yii::$app->request->post () )) {
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			Yii::$app->response->format = Response::FORMAT_JSON;
+	
+			return array_merge ( ActiveForm::validate ( $post ), ActiveForm::validate ( $sabiasque ) );
+		}
 	}
 
 	
