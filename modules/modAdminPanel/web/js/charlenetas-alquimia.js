@@ -31,7 +31,7 @@ function encenderEstrellas(estrellasAEncender) {
 
 function agregarTarjetaNueva(json) {
 	var template = '<div class="col s12 m6 l4" data-token="{token}">'
-			+ '<div class="card card-alquimia" onclick="showPostFull(\'{token}\')">'
+			+ '<div class="card card-alquimia" data-token="{token}">'
 			+ '<h3>{titulo}</h3>'
 			+ '<p>0 Comentario(s)</p>'
 			+ '<div class="card-options">'
@@ -91,3 +91,16 @@ $('body').on(
 			});
 			return false;
 		});
+
+$(document).ready(function(){
+	$('.card-alquimia').on('click', function(e) {
+		console.log(e);
+		
+		if (e.target.className !== '') {
+			return;
+		}
+		var token = $(this).data('token');
+		showPostFull(token)
+	});
+	
+});

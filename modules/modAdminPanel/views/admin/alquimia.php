@@ -17,7 +17,7 @@ $this->title = '<i class="ion ion-card"></i> Alquimia';
 		?>
 
 		<div class="col s12 m6 l4">
-			<div class="card card-alquimia" onclick="showPostFull('<?=$postAlquimia->txt_token?>')">
+			<div class="card card-alquimia" data-token="<?=$postAlquimia->txt_token?>">
 				<h3><?= $postAlquimia->txt_titulo ?></h3>
 				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->count("id_post") ?> Comentario(s)</p>
 

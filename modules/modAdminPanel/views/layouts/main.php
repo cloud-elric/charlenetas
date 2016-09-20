@@ -42,7 +42,7 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
 
 			<!-- .page-header -->
 			<div class="page-header">
-				<h2 class="page-title"><i class="ion ion-home"></i><?=$this->title?></h2>
+				<h2 class="page-title"><?=$this->title?></h2>
 			</div>
 			<!-- end /.page-header -->
 
@@ -56,6 +56,7 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
 
 	</div>
 	<!-- end /.wrap -->
+	<?=$this->render('@app/modules/modAdminPanel/views/admin/templates/modalPostFull');?>
 	
 	<?=$this->render('@app/modules/modAdminPanel/views/admin/templates/modalPost');?>
 
