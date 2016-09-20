@@ -3,27 +3,23 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
-?>
 
-<!-- .page-header -->
-<div class="page-header">
-	<h2 class="page-title"><i class="ion ion-card"></i> Alquimia</h2>
-</div>
-<!-- end /.page-header -->
+$this->title = '<i class="ion ion-card"></i> Alquimia';
+?>
 
 <!-- .page-cont -->
 <div class="page-cont">
 	<!-- .row -->
-	<div class="row">
+	<div class="row" id="js-contenedor-tarjetas">
 		
 		<?php
 		foreach ($postsAlquimia as $postAlquimia){
 		?>
 
 		<div class="col s12 m6 l4">
-			<div class="card card-alquimia">
+			<div class="card card-alquimia" onclick="showPostFull('<?=$postAlquimia->txt_token?>')">
 				<h3><?= $postAlquimia->txt_titulo ?></h3>
-				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_tipo_post])->count("id_post") ?> Comentario(s)</p>
+				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->count("id_post") ?> Comentario(s)</p>
 
 				<div class="card-options">
 					<div class="card-options-check">
@@ -55,6 +51,12 @@ use yii\web\View;
 
 </div>
 <!-- end /.page-cont -->
+
+
+<?php 
+include 'templates/modalPostFull.php';
+?>
+
 <?php
 	// foreach ($postsAlquimia as $postAlquimia){
 	// 	//echo $postAlquimia->entAlquimias;

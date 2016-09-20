@@ -28,18 +28,7 @@ function cargarMasPosts() {
 			  // append items to grid
 		}
 	});
-//	tmp.load('netas/get-mas-posts?page=' + pages, function() {
-//
-//		if (tmp.html().trim().length > 0) {
-//			contenedor.append(tmp.html());
-//			pages++;
-//
-//		} else {
-//			alert('Sin datos para cargar');
-//		}
 
-
-	//});
 
 }
 

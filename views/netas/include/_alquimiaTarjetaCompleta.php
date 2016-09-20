@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+use yii\helpers\Url;
 $usuario = $post->idUsuario;
 $alquimia = $post->entAlquimias;
 ?>
@@ -26,7 +27,7 @@ $alquimia = $post->entAlquimias;
 	<div class="full-pin-body-content">
 
 		<div class="full-pin-body-content-img">
-			<img src="webAssets/images/<?=Html::encode($post->txt_imagen)?>"
+			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
 				alt="Alquimia - Películas que transforman" />
 		</div>
 

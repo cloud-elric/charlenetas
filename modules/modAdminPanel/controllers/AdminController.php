@@ -190,17 +190,24 @@ class AdminController extends Controller {
 		] );
 		$alquimia->num_calificacion_admin = 0;
 		
+		// Validacion de los modelos
 		if ($validacion = $this->validarAlquimia ( $post, $alquimia )) {
 			return $validacion;
 		}
 		
+		// Si la informacion es enviada se carga a su respectivo modelo
 		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+			
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
+			$post->id_usuario = $usuario->id_usuario;
 			$post->guardarAlquimia ( $alquimia, $post );
 			
 			if ($post->cargarImagen ( $post )) {
-				return 'success';
+				return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];
 			}
 		}
 		
@@ -209,6 +216,13 @@ class AdminController extends Controller {
 				'post' => $post 
 		] );
 	}
+	
+	/**
+	 * Metodo para la validacion de post
+	 * @param EntPosts $post
+	 * @param EntAlquimias $alquimia
+	 * @return array
+	 */
 	public function validarAlquimia($post, $alquimia) {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () ) && $alquimia->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
