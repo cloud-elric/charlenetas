@@ -41,10 +41,6 @@ $this->title = '<i class="ion ion-card"></i> Alquimia';
 
 	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check">
-			<!-- <i class="ion ion-wand"></i> -->
-			<i class="ion ion-ios-trash-outline"></i>
-		</a>
 		<!-- Modal Trigger -->
 		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
 			<i class="material-icons">add</i>
