@@ -20,10 +20,15 @@
 	min-height: calc(100vh - 152px)
 	position: relative
 	z-index: 2
+	@include respond-to(xs)
+		margin-left: 60px
 	.page-header
 		padding-top: 30px
 		padding-left: calc(0.75rem + 30px)
 		padding-right: calc(0.75rem + 30px)
+		@include respond-to(xs)
+			padding-left: calc(0.75rem + 16px)
+			padding-right: calc(0.75rem + 16px)
 		.page-title
 			font-size: 1.85em
 			text-shadow: rgba(0,0,0,.15) 0 0 1px
@@ -31,6 +36,8 @@
 				margin-right: 6px
 	.page-cont
 		padding: 30px
+		@include respond-to(xs)
+			padding: 30px 16px
 
 /*  Page Agenda
 	================================================ */

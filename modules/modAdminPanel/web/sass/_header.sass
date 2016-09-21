@@ -29,6 +29,8 @@
 		display: flex
 		justify-content: center
 		width: 90px
+		@include respond-to(xs)
+			width: 60px
 	.header-cont
 		align-items: center
 		background-color: $white
@@ -40,6 +42,9 @@
 		padding: 0 15px
 		position: relative
 		width: calc(100% - 90px)
+		@include respond-to(xs)
+			padding: 0
+			width: calc(100% - 60px)
 		.toolbar
 			align-items: center
 			// background-color: red
@@ -120,6 +125,8 @@
 	// 	width: 100% !important
 	// 	.asScrollable-content
 	// 		width: 100% !important
+	@include respond-to(xs)
+		width: 60px
 	a
 		color: #c2c2c2
 		display: block
