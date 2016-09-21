@@ -436,6 +436,35 @@ class EntPosts extends \yii\db\ActiveRecord {
 	}
 	
 	/**
+	 * Editar verdadazos
+	 *
+	 * @param EntPosts $verdadazo
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function editarVerdadazos($verdadazo) {
+	
+		$verdadazo->fch_publicacion = Utils::changeFormatDateInput ( $verdadazo->fch_publicacion );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($verdadazo->save ()) {
+	
+				$transaction->commit ();
+				return true;				
+			}
+			
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	
+	/**
 	 * Guarda post de Hoy Pense
 	 *
 	 * @param EntPost $hoyPense        	
@@ -466,6 +495,34 @@ class EntPosts extends \yii\db\ActiveRecord {
 	}
 	
 	/**
+	 * Editar Hoy Pense
+	 *
+	 * @param EntPosts $hoypense
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function editarHoyPense($hoypense) {
+	
+		$hoypense->fch_publicacion = Utils::changeFormatDateInput ( $hoypense->fch_publicacion );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($hoypense->save ()) {
+	
+				$transaction->commit ();
+				return true;
+			}
+				
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
 	 * Guarda post de Media
 	 *
 	 * @param EntPost $media        	
@@ -492,6 +549,34 @@ class EntPosts extends \yii\db\ActiveRecord {
 			throw $e;
 		}
 		
+		return false;
+	}
+	
+	/**
+	 * Editar Media
+	 *
+	 * @param EntPosts $media
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function editarMedia($media) {
+	
+		$media->fch_publicacion = Utils::changeFormatDateInput ( $media->fch_publicacion );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($media->save ()) {
+	
+				$transaction->commit ();
+				return true;
+			}
+	
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
 		return false;
 	}
 	
@@ -564,6 +649,38 @@ class EntPosts extends \yii\db\ActiveRecord {
 	}
 	
 	/**
+	 * Guarda la soloporhoy y el post
+	 *
+	 * @param EntSoloPorHoys $soloporhoy
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function editarSoloPorHoy($soloporhoy, $post) {
+	
+		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+				$soloporhoy->id_post = $post->id_post;
+	
+				if ($soloporhoy->save ()) {
+	
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
+	/**
 	 * Guarda el sabias que y el post
 	 *
 	 * @param EntSabiasQue $sabiasque        	
@@ -600,4 +717,38 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->imagen->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_posts'] . $post->txt_imagen );
 		return true;
 	}
+	
+	/**
+	 * Guarda la sabiasque y el post
+	 *
+	 * @param EntSabiasQue $sabiasque
+	 * @param EntPosts $post
+	 * @throws Exception
+	 * @return boolean
+	 */
+	public function editarSabiasQue($sabiasque, $post) {
+	
+		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+				$sabiasque->id_post = $post->id_post;
+	
+				if ($sabiasque->save ()) {
+	
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
 }
+
+

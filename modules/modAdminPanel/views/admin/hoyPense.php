@@ -21,7 +21,7 @@ use yii\web\View;
 		?>
 		
 		<div class="col s12 m6 l4">
-			<div class="card card-hoy-pense">
+			<div class="card card-hoy-pense data-token="<?=$postHoyPense->txt_token?>">
 				<h3><?= $postHoyPense->txt_titulo ?></h3>
 				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postHoyPense->id_tipo_post])->count("id_post") ?> Comentario(s)</p>
 				<div class="card-options">
@@ -29,7 +29,9 @@ use yii\web\View;
 						<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
 						<label for="filled-in-box1"></label>
 					</div>
-					<i class="ion ion-android-more-vertical card-edit"></i>
+					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarHoyPense('<?=$postHoyPense->txt_token?>')" href="#js-modal-post-editar">
+						<i class="ion ion-android-more-vertical card-edit"></i>
+					</a>
 				</div>
 			</div>
 		</div>
