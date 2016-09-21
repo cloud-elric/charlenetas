@@ -247,11 +247,16 @@ class AdminController extends Controller {
 		}
 		
 		if ($verdadazo->load ( Yii::$app->request->post () )) {
+			
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+			
 			$verdadazo->imagen = UploadedFile::getInstance ( $verdadazo, 'imagen' );
+			$verdadazo->txt_imagen = Utils::generateToken ( "img" ) . "." . $verdadazo->imagen->extension;
 			$verdadazo->guardarVerdadazos ( $verdadazo );
 			
 			if ($post->cargarImagen ( $verdadazo )) {
-				return;
+				return ['status'=>'success', 't'=>$verdadazo->txt_titulo,'tk'=>$verdadazo->txt_token];
 			}
 		}
 		
@@ -282,11 +287,15 @@ class AdminController extends Controller {
 		}
 		
 		if ($hoyPense->load ( Yii::$app->request->post () )) {
+			
+			$usuario = Yii::$app->user->identity;
+			
 			$hoyPense->imagen = UploadedFile::getInstance ( $hoyPense, 'imagen' );
+			$verdadazo->txt_imagen = Utils::generateToken ( "img" ) . "." . $hoyPense->imagen->extension;
 			$hoyPense->guardarHoyPense ( $hoyPense );
 			
 			if ($hoyPense->cargarImagen ( $hoyPense )) {
-				return;
+				return ['status'=>'success', 't'=>$hoyPense->txt_titulo,'tk'=>$hoyPense->txt_token];
 			}
 		}
 		
@@ -317,11 +326,15 @@ class AdminController extends Controller {
 		}
 		
 		if ($media->load ( Yii::$app->request->post () )) {
+			
+			$usuario = Yii::$app->user->identity;
+			
 			$media->imagen = UploadedFile::getInstance ( $media, 'imagen' );
+			$media->txt_imagen = Utils::generateToken ( "img" ) . "." . $media->imagen->extension;
 			$media->guardarMedia ( $media );
 			
 			if ($media->cargarImagen ( $media )) {
-				return;
+				return ['status'=>'success', 't'=>$verdadazo->txt_titulo,'tk'=>$verdadazo->txt_token];
 			}
 		}
 		
@@ -378,11 +391,15 @@ class AdminController extends Controller {
 		}
 		
 		if ($soloporhoy->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			
+			$usuario = Yii::$app->user->identity;
+			
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 			$post->guardarSoloPorHoy ( $soloporhoy, $post );
 			
 			if ($post->cargarImagen ( $post )) {
-				return;
+				return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];
 			}
 		}
 		
@@ -415,11 +432,15 @@ class AdminController extends Controller {
 		}
 		
 		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+			
+			$usuario = Yii::$app->user->identity;
+			
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 			$post->guardarSabiasQue ( $sabiasque, $post );
 			
 			if ($post->cargarImagen ( $post )) {
-				return;
+				return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];;
 			}
 		}
 		
@@ -484,6 +505,226 @@ class AdminController extends Controller {
 		] );
 	}
 	
+	/**
+	 * Editar verdadazos
+	 * @param string $token
+	 */
+	public function actionEditarVerdadazos($token = null){
+		// Busca el post por el token
+		$verdadazo = $this->getPostByToken($token);
+		$verdadazo->scenario = 'editarVerdadazos';
+		$verdadazo->fch_publicacion = Utils::changeFormatDate($verdadazo->fch_publicacion);
+	
+		// Validacion de los modelos
+		if ($validacion = $this->validarVerdadazos($verdadazo)) {
+			return $validacion;
+		}
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($verdadazo->load ( Yii::$app->request->post () )) {
+				
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+				
+			$verdadazo->imagen = UploadedFile::getInstance ( $verdadazo, 'imagen' );
+				
+			if(!empty($verdadazo->imagen)){
+				$verdadazo->txt_imagen = Utils::generateToken ( "img" ) . "." . $verdadazo->imagen->extension;
+			}
+				
+			$verdadazo->id_usuario = $usuario->id_usuario;
+			$verdadazo->editarVerdadazos ( $verdadazo );
+				
+			if(!empty($verdadazo->imagen)){
+				$verdadazo->cargarImagen ( $verdadazo );
+			}
+				
+			return ['status'=>'success', 't'=>$verdadazo->txt_titulo,'tk'=>$verdadazo->txt_token];
+				
+		}
+	
+		return $this->renderAjax ( '_formVerdadazos', [
+				'verdadazo' => $verdadazo,
+		] );
+	}
+	
+	/**
+	 * Editar hoy pense
+	 * @param string $token
+	 */
+	public function actionEditarHoyPense($token = null){
+		// Busca el post por el token
+		$hoypense = $this->getPostByToken($token);
+		$hoypense->scenario = 'editarHoyPense';
+		$hoypense->fch_publicacion = Utils::changeFormatDate($hoypense->fch_publicacion);
+	
+		// Validacion de los modelos
+		if ($validacion = $this->validarHoyPense($hoypense)) {
+			return $validacion;
+		}
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($hoypense->load ( Yii::$app->request->post () )) {
+	
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+	
+			$hoypense->imagen = UploadedFile::getInstance ( $hoypense, 'imagen' );
+	
+			if(!empty($hoypense->imagen)){
+				$hoypense->txt_imagen = Utils::generateToken ( "img" ) . "." . $hoypense->imagen->extension;
+			}
+	
+			$hoypense->id_usuario = $usuario->id_usuario;
+			$hoypense->editarHoyPense ( $hoypense );
+	
+			if(!empty($hoypense->imagen)){
+				$hoypense->cargarImagen ( $hoypense );
+			}
+	
+			return ['status'=>'success', 't'=>$hoypense->txt_titulo,'tk'=>$hoypense->txt_token];
+	
+		}
+	
+		return $this->renderAjax ( '_formHoypense', [
+				'hoyPense' => $hoypense,
+		] );
+	}
+	
+	/**
+	 * Editar Media
+	 * @param string $token
+	 */
+	public function actionEditarMedia($token = null){
+		// Busca el post por el token
+		$media = $this->getPostByToken($token);
+		$media->scenario = 'editarMedia';
+		$media->fch_publicacion = Utils::changeFormatDate($media->fch_publicacion);
+	
+		// Validacion de los modelos
+		if ($validacion = $this->validarMedia($media)) {
+			return $validacion;
+		}
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($media->load ( Yii::$app->request->post () )) {
+	
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+	
+			$media->imagen = UploadedFile::getInstance ( $media, 'imagen' );
+	
+			if(!empty($media->imagen)){
+				$media->txt_imagen = Utils::generateToken ( "img" ) . "." . $media->imagen->extension;
+			}
+	
+			$media->id_usuario = $usuario->id_usuario;
+			$media->editarMedia ( $media );
+	
+			if(!empty($media->imagen)){
+				$media->cargarImagen ( $media );
+			}
+	
+			return ['status'=>'success', 't'=>$media->txt_titulo,'tk'=>$media->txt_token];
+	
+		}
+	
+		return $this->renderAjax ( '_formMedia', [
+				'media' => $media,
+		] );
+	}
+	
+	/**
+	 * Editar Solo Por Hoy
+	 * @param string $token
+	 */
+	public function actionEditarSoloPorHoy($token = null){
+		// Busca el post por el token
+		$post = $this->getPostByToken($token);
+		$post->scenario = 'editarSoloPorHoy';
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		// Declaracion de modelos
+		$soloporhoy = $post->entSoloPorHoys;
+	
+		// Validacion de los modelos
+		if ($validacion = $this->validarSoloPorHoy( $post, $soloporhoy )) {
+			return $validacion;
+		}
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($soloporhoy->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+				
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+				
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+				
+			if(!empty($post->imagen)){
+				$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
+			}
+				
+			$post->id_usuario = $usuario->id_usuario;
+			$post->editarSoloPorHoy ( $soloporhoy, $post );
+				
+			if(!empty($post->imagen)){
+				$post->cargarImagen ( $post );
+			}
+				
+			return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];
+				
+		}
+	
+		return $this->renderAjax ( '_formSoloporhoy', [
+				'soloporhoy' => $soloporhoy,
+				'post' => $post
+		] );
+	}
+	
+	/**
+	 * Editar Sabias Que
+	 * @param string $token
+	 */
+	public function actionEditarSabiasQue($token = null){
+		// Busca el post por el token
+		$post = $this->getPostByToken($token);
+		$post->scenario = 'editarSabiasQue';
+		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		// Declaracion de modelos
+		$sabiasque = $post->entSabiasQue;
+	
+		// Validacion de los modelos
+		if ($validacion = $this->validarSabiasQue( $post, $sabiasque )) {
+			return $validacion;
+		}
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
+	
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+	
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+	
+			if(!empty($post->imagen)){
+				$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
+			}
+	
+			$post->id_usuario = $usuario->id_usuario;
+			$post->editarSabiasQue ( $sabiasque, $post );
+	
+			if(!empty($post->imagen)){
+				$post->cargarImagen ( $post );
+			}
+	
+			return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];
+	
+		}
+	
+		return $this->renderAjax ( '_formSabiasque', [
+				'sabiasque' => $sabiasque,
+				'post' => $post
+		] );
+	}
 	
 	/**
 	 * Busca un post por su token

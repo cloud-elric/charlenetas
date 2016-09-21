@@ -21,12 +21,30 @@ class RulesVerdadazos {
 				],
 				[
 						[
+								'imagen'
+						],
+						'image',
+						'skipOnEmpty' => true,
+				
+						'extensions' => 'png, jpg, jpeg',
+						'on' => 'editarVerdadazos'
+				],
+				[
+						[
 								'txt_descripcion', 'fch_publicacion'
 						],
 						'required',
 						'message'=>'Requerido',
 						'on' => 'crearVerdadazos'
 				],
+				[
+						[
+								'txt_descripcion', 'fch_publicacion'
+						],
+						'required',
+						'message'=>'Requerido',
+						'on' => 'editarVerdadazos'
+				]
 		]
 		;
 

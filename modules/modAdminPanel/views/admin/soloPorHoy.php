@@ -11,7 +11,7 @@ use yii\web\View;
 	<div class="row">
 <?php foreach ($postsSoloPorHoy as $postSoloPorHoy){?>
 						<div class="col s12 m6 l4">
-			<div class="card card-solo-por-hoy">
+			<div class="card card-solo-por-hoy" data-token="<?=$postSoloPorHoy->txt_token?>">
 				<h3><?=$postSoloPorHoy->txt_descripcion?></h3>
 				<p><?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postSoloPorHoy->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?> comentarios</p>
 				<div class="card-options">
@@ -19,7 +19,9 @@ use yii\web\View;
 						<input type="checkbox" class="filled-in" id="filled-in-box3"
 							checked="checked" /> <label for="filled-in-box3"></label>
 					</div>
-					<i class="ion ion-android-more-vertical card-edit"></i>
+					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
+						<i class="ion ion-android-more-vertical card-edit"></i>
+					</a>
 				</div>
 			</div>
 		</div>

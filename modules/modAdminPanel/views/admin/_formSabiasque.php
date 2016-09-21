@@ -7,7 +7,7 @@ $form = ActiveForm::begin ( [
 				'enctype' => 'multipart/form-data'
 		],
 		'layout' => 'horizontal',
-		'id' => 'form-sabiasque',
+		'id' => $post->isNewRecord?'form-sabiasque':'editar-sabias-que',
 		'fieldConfig' => [
 				'template' => "{input}\n{label}\n{error}",
 				'horizontalCssClasses' => [
@@ -23,14 +23,14 @@ $form = ActiveForm::begin ( [
 		'errorCssClass' => 'invalid'
 ] );
 ?>
-
+    
     <?= $form->field($sabiasque, 'b_verdadero')->textInput(['maxlength' => true])?>
     
     <?= $form->field($post, 'txt_descripcion')->textInput(['maxlength' => true])?>
   	 
   	<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
   	 
-    <?= Html::submitButton('Crear')?>
+    <?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
        
 <?php ActiveForm::end();
 
