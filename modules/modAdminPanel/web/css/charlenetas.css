@@ -296,6 +296,13 @@ hr {
   white-space: nowrap;
 }
 
+/*  Form (input,email,file,textarea,btn)
+	@mixin =============================================== */
+.file-field .btn,
+.file-field .btn-large {
+  line-height: 2.3rem;
+}
+
 /*!
 	-----------------------------------------------------------------------------
 
@@ -329,6 +336,12 @@ hr {
   width: 90px;
 }
 
+@media screen and (max-width: 768px) {
+  .header .logo {
+    width: 60px;
+  }
+}
+
 .header .header-cont {
   align-items: center;
   background-color: white;
@@ -340,6 +353,13 @@ hr {
   padding: 0 15px;
   position: relative;
   width: calc(100% - 90px);
+}
+
+@media screen and (max-width: 768px) {
+  .header .header-cont {
+    padding: 0;
+    width: calc(100% - 60px);
+  }
 }
 
 .header .header-cont .toolbar {
@@ -431,6 +451,12 @@ hr {
   top: 66px;
   width: 90px;
   z-index: 9;
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    width: 60px;
+  }
 }
 
 .nav a {
@@ -541,10 +567,23 @@ hr {
   z-index: 2;
 }
 
+@media screen and (max-width: 768px) {
+  .page {
+    margin-left: 60px;
+  }
+}
+
 .page .page-header {
   padding-top: 30px;
   padding-left: calc(0.75rem + 30px);
   padding-right: calc(0.75rem + 30px);
+}
+
+@media screen and (max-width: 768px) {
+  .page .page-header {
+    padding-left: calc(0.75rem + 16px);
+    padding-right: calc(0.75rem + 16px);
+  }
 }
 
 .page .page-header .page-title {
@@ -558,6 +597,12 @@ hr {
 
 .page .page-cont {
   padding: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .page .page-cont {
+    padding: 30px 16px;
+  }
 }
 
 /*  Page Agenda
@@ -651,11 +696,23 @@ hr {
   position: relative;
 }
 
+@media screen and (max-width: 768px) {
+  .footer {
+    margin-left: 60px;
+  }
+}
+
 .footer .footer-cont {
   border-top: 1px solid #c8d3e6;
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .footer .footer-cont {
+    flex-direction: column;
+  }
 }
 
 .footer .footer-cont p {
@@ -955,6 +1012,13 @@ hr {
   position: absolute;
   right: 30px;
   top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .card .card-options {
+    right: 16px;
+    top: 10px;
+  }
 }
 
 .card .card-options i,
