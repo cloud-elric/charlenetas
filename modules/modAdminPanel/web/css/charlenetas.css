@@ -613,10 +613,6 @@ hr {
 
 /*  Modal
 	@mixin =============================================== */
-.modal.modal-fixed-footer .modal-content {
-  height: 100%;
-}
-
 .modal .modal-content h4 {
   margin-bottom: 20px;
 }
@@ -639,6 +635,7 @@ hr {
 
 .modal .modal-content .btn-submit {
   margin-left: 10px;
+  margin-top: 30px;
 }
 
 .modal .modal-content .btn-submit i {
@@ -648,6 +645,15 @@ hr {
 .modal.modal-fixed-footer {
   max-height: 90%;
   top: 6%;
+}
+
+.modal.modal-fixed-footer .modal-content {
+  height: 100%;
+}
+
+.modal.modal-small-height {
+  height: 46%;
+  top: 20% !important;
 }
 
 .picker--opened .picker__frame {

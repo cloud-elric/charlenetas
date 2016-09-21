@@ -46,9 +46,6 @@
 
 /*  Modal
 	================================================ */
-.modal.modal-fixed-footer
-	.modal-content
-		height: 100%
 .modal
 	.modal-content
 		h4
@@ -70,12 +67,21 @@
 			// background-color: transparent
 			// font-weight: 400
 			margin-left: 10px
+			margin-top: 30px
 			i
 				font-size: 1.3em
+// Modal fixed footer
 .modal.modal-fixed-footer
 	// height: 60%
 	max-height: 90%
 	top: 6%
+	.modal-content
+		height: 100%
+
+// Modal small height
+.modal.modal-small-height
+	height: 46%
+	top: 20% !important
 
 // .picker--opened
 // 	.picker__holder
