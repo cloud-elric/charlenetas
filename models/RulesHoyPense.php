@@ -21,12 +21,30 @@ class RulesHoyPense {
 				],
 				[
 						[
+								'imagen'
+						],
+						'image',
+						'skipOnEmpty' => true,
+				
+						'extensions' => 'png, jpg, jpeg',
+						'on' => 'editarHoyPense'
+				],
+				[
+						[
 								'txt_titulo', 'txt_descripcion', 'fch_publicacion'
 						],
 						'required',
 						'message'=>'Requerido',
 						'on' => 'crearHoyPense'
 				],
+				[
+						[
+								'txt_titulo', 'txt_descripcion', 'fch_publicacion'
+						],
+						'required',
+						'message'=>'Requerido',
+						'on' => 'editarHoyPense'
+				]
 		]
 		;
 

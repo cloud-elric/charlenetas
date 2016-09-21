@@ -318,6 +318,12 @@ p{
     transition: all 300ms ease-in-out;
     width: calc(100% - 140px);
 }
+.full-pin-content .full-pin-social .new-comment form textarea:focus, .full-pin-content .full-pin-social .new-comment form textarea:active{
+    height: 100px;
+    outline: none
+}
+
+
 .full-pin-content .full-pin-social .new-comment form a{
     margin-left: 5px;
 }

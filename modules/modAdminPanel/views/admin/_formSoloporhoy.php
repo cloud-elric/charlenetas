@@ -8,7 +8,7 @@ $form = ActiveForm::begin ( [
 		],
 		
 		'layout' => 'horizontal',
-		'id' => 'form-soloporhoy',
+		'id' => $post->isNewRecord?'form-soloporhoy':'editar-solo-por-hoy',
 		'fieldConfig' => [
 				'template' => "{input}\n{label}\n{error}",
 				'horizontalCssClasses' => [
@@ -29,9 +29,9 @@ $form = ActiveForm::begin ( [
   	 
   	<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
   	 
-    <?= $form->field($post, 'imagen')->fileInput()?>
+    <?= $form->field($post, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
    
-    <?= Html::submitButton('Crear')?>
+    <?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
        
 <?php ActiveForm::end();
 

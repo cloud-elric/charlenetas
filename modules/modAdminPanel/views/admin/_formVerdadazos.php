@@ -8,7 +8,7 @@ $form = ActiveForm::begin ( [
 		],
 		
 		'layout' => 'horizontal',
-		'id' => 'form-verdadazos',
+		'id' => $verdadazo->isNewRecord?'form-verdadazos':'editar-verdadazos',
 		'fieldConfig' => [
 				'template' => "{input}\n{label}\n{error}",
 				'horizontalCssClasses' => [
@@ -29,13 +29,13 @@ $form = ActiveForm::begin ( [
     
    	 <?= $form->field($verdadazo, 'txt_descripcion')->textInput(['maxlength' => true])?>
 
-  	 <?= $form->field($verdadazo, 'imagen')->fileInput()?>
+  	 <?= $form->field($verdadazo, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
   	 
   	 <?= $form->field($verdadazo, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
   	 
    </div>
    
-     <?= Html::submitButton('Crear')?>
+     <?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
        
 <?php ActiveForm::end();
 
