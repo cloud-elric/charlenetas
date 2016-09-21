@@ -1,6 +1,8 @@
 <?php
 use app\models\EntPosts;
 use app\models\EntComentariosPosts;
+use app\modules\modAdminPanel\assets\ModuleAsset;
+use yii\web\View;
 
 $this->title = 'Espejos';
 ?>
@@ -16,7 +18,7 @@ $this->title = 'Espejos';
 		}
 		?>
 		<div class="col s12 m6 l4">
-			<div class="card card-espejo">
+			<div class="card card-espejo" data-token="<?=$postEspejo->txt_token?>">
 				<h3><?=$postEspejo->txt_descripcion?></h3>
 				<p><?=$postEspejo->entEspejos->num_subscriptores?> susbcritores</p>
 				<?=$espejoContestado?'Espejo respondido':'Espejo no respondido'?>
@@ -37,41 +39,16 @@ $this->title = 'Espejos';
 	</div>
 	<!-- end /.row -->
 
-	<!-- .fixed-action-btn -->
-	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check">
-			<!-- <i class="ion ion-wand"></i> --> <i
-			class="ion ion-ios-trash-outline"></i>
-		</a>
-		<?php # include 'templates/modalPost.php'; ?>
-	</div>
-	<!-- end /.fixed-action-btn -->
-
-
 </div>
 <!-- end /.page-cont -->
 
 <?php
+$bundle = ModuleAsset::register ( Yii::$app->view );
+$bundle->js [] = 'js/charlenetas-espejo.js'; // dynamic file added
 
-// foreach ( $postsEspejo as $postEspejo ) {
-// 	echo $postEspejo->entEspejos->num_subscriptores . "   ";
-// 	echo $postEspejo->txt_descripcion . "   ";
-// 	echo $postEspejo->txt_imagen . "   ";
-// 	echo $postEspejo->txt_url . "   ";
-// 	echo $postEspejo->fch_creacion . "   ";
-// 	echo $postEspejo->fch_publicacion . "   ";
-	
-// 	echo "</br>";
-// 	echo "</br>";
-// }
-// echo "total posts= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postEspejo->id_tipo_post 
-// ] )->count ( "id_tipo_post" . "   " );
-// echo "total likes= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postEspejo->id_tipo_post 
-// ] )->sum ( "num_likes" );
-// echo "total comentarios= " . EntComentariosPosts::find ()->where ( [ 
-// 		'id_post' => $postEspejo->id_tipo_post 
-// ] )->count ( "id_post" );
+$this->registerJs ( "
+		$(document).ready(function(){
+   			 $('.modal-trigger').leanModal();
+  });
 
-	
+", View::POS_END );

@@ -2,6 +2,7 @@
 use app\models\EntUsuariosSubscripciones;
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+use app\models\ConstantesWeb;
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
@@ -86,4 +87,10 @@ if (! empty ( $respuesta )) {
 	include 'elementos/respuesta-admin.php';?>
 
 </section>
-<?php }?>
+<?php }
+
+// Si el usuario es el administrador podra responder al usuario
+if(Yii::$app->user->identity->id_tipo_usuario==ConstantesWeb::USUARIO_ADMINISTRADOR){
+	$this->render('@app/modules/modAdminPanel/views/admin/_formRespuestaEspejo');
+	
+}?>
