@@ -303,7 +303,7 @@ class AdminController extends Controller {
 			$usuario = Yii::$app->user->identity;
 			
 			$hoyPense->imagen = UploadedFile::getInstance ( $hoyPense, 'imagen' );
-			$verdadazo->txt_imagen = Utils::generateToken ( "img" ) . "." . $hoyPense->imagen->extension;
+			$hoyPense->txt_imagen = Utils::generateToken ( "img" ) . "." . $hoyPense->imagen->extension;
 			$hoyPense->guardarHoyPense ( $hoyPense );
 			
 			if ($hoyPense->cargarImagen ( $hoyPense )) {
@@ -529,7 +529,9 @@ class AdminController extends Controller {
 		// Busca el post por el token
 		$post = $this->getPostByToken ( $token );
 		
+		$isEdicion = false;
 		if ($respuesta = $post->entRespuestasEspejo) {
+			$isEdicion = true;
 		} else {
 			$respuesta = new EntRespuestasEspejo ();
 		}
@@ -547,7 +549,8 @@ class AdminController extends Controller {
 			
 			return [ 
 					'status' => 'success',
-					'tk' => $post->txt_token 
+					'tk' => $post->txt_token,
+					'e'=>$isEdicion
 			];
 		}
 		

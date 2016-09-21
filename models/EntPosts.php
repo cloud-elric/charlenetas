@@ -65,10 +65,25 @@ class EntPosts extends \yii\db\ActiveRecord {
 				"id_tipo_post" => $post 
 		] );
 		
+		$order = [ 
+				'fch_creacion' => 'asc' 
+		];
+		
+		if ($post == ConstantesWeb::POST_TYPE_ESPEJO) {
+			
+			$query = EntPosts::find ()->where ( [ 
+					"id_tipo_post" => $post 
+			] )->joinWith('entEspejos ent_espejos')->orderBy('num_subscriptores desc');
+			
+			
+		}
+		
 		// Carga el dataprovider
 		$dataProvider = new ActiveDataProvider ( [ 
 				'query' => $query,
-				'sort'=> ['defaultOrder' => ['fch_creacion'=>'asc']],
+				'sort' => [ 
+						'defaultOrder' => $order 
+				],
 				'pagination' => [ 
 						'pageSize' => $pageSize,
 						'page' => $page 
@@ -148,13 +163,13 @@ class EntPosts extends \yii\db\ActiveRecord {
 				] 
 		];
 		
-		$rules = array_merge($rulesGenerales, RulesAlquimia::rulesCrearAlquimia());
-		$rules = array_merge($rules, RulesVerdadazos::rulesCrearVerdadazos());
-		$rules = array_merge($rules, RulesHoyPense::rulesCrearHoyPense());
-		$rules = array_merge($rules, RulesMedia::rulesCrearMedia());
-		$rules = array_merge($rules, RulesContexto::rulesCrearContexto());
-		$rules = array_merge($rules, RulesSoloPorHoy::rulesCrearSoloPorHoy());
-		$rules = array_merge($rules, RulesSabiasQue::rulesCrearSabiasQue());
+		$rules = array_merge ( $rulesGenerales, RulesAlquimia::rulesCrearAlquimia () );
+		$rules = array_merge ( $rules, RulesVerdadazos::rulesCrearVerdadazos () );
+		$rules = array_merge ( $rules, RulesHoyPense::rulesCrearHoyPense () );
+		$rules = array_merge ( $rules, RulesMedia::rulesCrearMedia () );
+		$rules = array_merge ( $rules, RulesContexto::rulesCrearContexto () );
+		$rules = array_merge ( $rules, RulesSoloPorHoy::rulesCrearSoloPorHoy () );
+		$rules = array_merge ( $rules, RulesSabiasQue::rulesCrearSabiasQue () );
 		
 		return $rules;
 	}
@@ -163,7 +178,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 	 * @inheritdoc
 	 */
 	public function rules() {
-		return $this->rulesPost();
+		return $this->rulesPost ();
 	}
 	
 	/**
@@ -259,7 +274,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 	public function getEntEspejos() {
 		return $this->hasOne ( EntEspejos::className (), [ 
 				'id_post' => 'id_post' 
-		] );
+		] )->orderBy(['ent_espejos.num_subscriptores'=>SORT_ASC]);
 	}
 	
 	/**
@@ -347,7 +362,6 @@ class EntPosts extends \yii\db\ActiveRecord {
 	 * @return boolean
 	 */
 	public function guardarAlquimia($alquimia, $post) {
-		
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_ALQUIMIA;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
@@ -376,22 +390,21 @@ class EntPosts extends \yii\db\ActiveRecord {
 	/**
 	 * Guarda la alquimia y el post
 	 *
-	 * @param EntAlquimia $alquimia
-	 * @param EntPosts $post
+	 * @param EntAlquimia $alquimia        	
+	 * @param EntPosts $post        	
 	 * @throws Exception
 	 * @return boolean
 	 */
 	public function editarAlquimia($alquimia, $post) {
-	
 		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
-	
+		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
 				$alquimia->id_post = $post->id_post;
-	
+				
 				if ($alquimia->save ()) {
-						
+					
 					$transaction->commit ();
 					return true;
 				}
@@ -401,7 +414,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 			$transaction->rollBack ();
 			throw $e;
 		}
-	
+		
 		return false;
 	}
 	
@@ -438,20 +451,19 @@ class EntPosts extends \yii\db\ActiveRecord {
 	/**
 	 * Editar verdadazos
 	 *
-	 * @param EntPosts $verdadazo
+	 * @param EntPosts $verdadazo        	
 	 * @throws Exception
 	 * @return boolean
 	 */
 	public function editarVerdadazos($verdadazo) {
-	
 		$verdadazo->fch_publicacion = Utils::changeFormatDateInput ( $verdadazo->fch_publicacion );
-	
+		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($verdadazo->save ()) {
-	
+				
 				$transaction->commit ();
-				return true;				
+				return true;
 			}
 			
 			$transaction->rollBack ();
@@ -459,15 +471,14 @@ class EntPosts extends \yii\db\ActiveRecord {
 			$transaction->rollBack ();
 			throw $e;
 		}
-	
+		
 		return false;
 	}
-	
 	
 	/**
 	 * Guarda post de Hoy Pense
 	 *
-	 * @param EntPost $hoyPense        	
+	 * @param EntPosts $hoyPense        	
 	 * @throws Exception
 	 * @return boolean
 	 */
@@ -475,7 +486,8 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$hoyPense->id_tipo_post = ConstantesWeb::POST_TYPE_HOY_PENSE;
 		$hoyPense->fch_creacion = Utils::getFechaActual ();
 		$hoyPense->txt_token = Utils::generateToken ( 'post' );
-		$hoyPense->fch_publicacion = Utils::changeFormatDate ( $hoyPense->fch_publicacion );
+		$hoyPense->fch_publicacion = Utils::changeFormatDateInput ( $hoyPense->fch_publicacion );
+		
 		$hoyPense->txt_imagen = Utils::generateToken ( "img" ) . "." . $hoyPense->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
@@ -497,28 +509,27 @@ class EntPosts extends \yii\db\ActiveRecord {
 	/**
 	 * Editar Hoy Pense
 	 *
-	 * @param EntPosts $hoypense
+	 * @param EntPosts $hoypense        	
 	 * @throws Exception
 	 * @return boolean
 	 */
 	public function editarHoyPense($hoypense) {
-	
 		$hoypense->fch_publicacion = Utils::changeFormatDateInput ( $hoypense->fch_publicacion );
-	
+		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($hoypense->save ()) {
-	
+				
 				$transaction->commit ();
 				return true;
 			}
-				
+			
 			$transaction->rollBack ();
 		} catch ( \Exception $e ) {
 			$transaction->rollBack ();
 			throw $e;
 		}
-	
+		
 		return false;
 	}
 	
@@ -555,28 +566,27 @@ class EntPosts extends \yii\db\ActiveRecord {
 	/**
 	 * Editar Media
 	 *
-	 * @param EntPosts $media
+	 * @param EntPosts $media        	
 	 * @throws Exception
 	 * @return boolean
 	 */
 	public function editarMedia($media) {
-	
 		$media->fch_publicacion = Utils::changeFormatDateInput ( $media->fch_publicacion );
-	
+		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($media->save ()) {
-	
+				
 				$transaction->commit ();
 				return true;
 			}
-	
+			
 			$transaction->rollBack ();
 		} catch ( \Exception $e ) {
 			$transaction->rollBack ();
 			throw $e;
 		}
-	
+		
 		return false;
 	}
 	
@@ -651,22 +661,21 @@ class EntPosts extends \yii\db\ActiveRecord {
 	/**
 	 * Guarda la soloporhoy y el post
 	 *
-	 * @param EntSoloPorHoys $soloporhoy
-	 * @param EntPosts $post
+	 * @param EntSoloPorHoys $soloporhoy        	
+	 * @param EntPosts $post        	
 	 * @throws Exception
 	 * @return boolean
 	 */
 	public function editarSoloPorHoy($soloporhoy, $post) {
-	
 		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
-	
+		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
 				$soloporhoy->id_post = $post->id_post;
-	
+				
 				if ($soloporhoy->save ()) {
-	
+					
 					$transaction->commit ();
 					return true;
 				}
@@ -676,7 +685,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 			$transaction->rollBack ();
 			throw $e;
 		}
-	
+		
 		return false;
 	}
 	
@@ -721,22 +730,21 @@ class EntPosts extends \yii\db\ActiveRecord {
 	/**
 	 * Guarda la sabiasque y el post
 	 *
-	 * @param EntSabiasQue $sabiasque
-	 * @param EntPosts $post
+	 * @param EntSabiasQue $sabiasque        	
+	 * @param EntPosts $post        	
 	 * @throws Exception
 	 * @return boolean
 	 */
 	public function editarSabiasQue($sabiasque, $post) {
-	
 		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
-	
+		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
 				$sabiasque->id_post = $post->id_post;
-	
+				
 				if ($sabiasque->save ()) {
-	
+					
 					$transaction->commit ();
 					return true;
 				}
@@ -746,7 +754,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 			$transaction->rollBack ();
 			throw $e;
 		}
-	
+		
 		return false;
 	}
 }

@@ -34,7 +34,7 @@ class EntEspejos extends \yii\db\ActiveRecord
     {
         return [
             [['id_post'], 'required'],
-            [['id_post', 'num_subscriptores'], 'integer'],
+            [['num_subscriptores'], 'integer'],
             [['id_post'], 'exist', 'skipOnError' => true, 'targetClass' => EntPosts::className(), 'targetAttribute' => ['id_post' => 'id_post']],
         ];
     }

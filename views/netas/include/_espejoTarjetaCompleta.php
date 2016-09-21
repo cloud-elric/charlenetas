@@ -94,6 +94,6 @@ if (! empty ( $respuesta )) {
 
 // Si el usuario es el administrador podra responder al usuario
 if(Yii::$app->user->identity->id_tipo_usuario==ConstantesWeb::USUARIO_ADMINISTRADOR){
-	echo $this->render('@app/modules/modAdminPanel/views/admin/_formRespuestaEspejo', ['respuesta'=>$respuesta]);
+	 $this->render('@app/modules/modAdminPanel/views/admin/_formRespuestaEspejo', ['respuesta'=>$respuesta]);
 	
 }?>

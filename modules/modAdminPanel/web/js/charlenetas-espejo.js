@@ -64,6 +64,14 @@ $('body').on(
 					// Si la respuesta contiene la propiedad status y es success
 					if (response.hasOwnProperty('status')
 							&& response.status == 'success') {
+						
+						$('#card_'+response.tk+' .card-espejo .respondido').text('Espejo respondido');
+						
+						if(!response.e){
+							$('#card_'+response.tk).clone().appendTo( "#js-contenedor-tarjetas" );
+							$('#card_'+response.tk).remove();
+							$('.modal-trigger').leanModal();
+						}
 						// Cierra el modal
 						$('#js-modal-post-editar').closeModal();
 
