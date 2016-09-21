@@ -28,7 +28,9 @@ $this->title = 'Espejos';
 							checked="checked" /> <label for="filled-in-box3"></label>
 
 					</div>
-					<i class="ion ion-android-more-vertical card-edit"></i>
+					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalResponderEspejo('<?=$postEspejo->txt_token?>')" href="#js-modal-post-editar">
+						<i class="ion ion-android-more-vertical card-edit"></i>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -49,6 +51,7 @@ $bundle->js [] = 'js/charlenetas-espejo.js'; // dynamic file added
 $this->registerJs ( "
 		$(document).ready(function(){
    			 $('.modal-trigger').leanModal();
+		
   });
 
 ", View::POS_END );

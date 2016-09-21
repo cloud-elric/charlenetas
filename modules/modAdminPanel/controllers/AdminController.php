@@ -19,6 +19,7 @@ use app\models\CatTiposPosts;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use app\models\EntPostsExtend;
+use app\models\EntRespuestasEspejo;
 
 /**
  * Default controller for the `adminPanel` module
@@ -57,12 +58,18 @@ class AdminController extends Controller {
 	}
 	/**
 	 * Renders the index view for the module
-	 * 
+	 *
 	 * @return string
 	 */
 	public function actionIndex() {
 		return $this->render ( 'index' );
 	}
+	
+	/**
+	 * Action para mostrar el dashboard
+	 * 
+	 * @return string
+	 */
 	public function actionDashboard() {
 		$dashboard = new CatTiposPosts ();
 		$posts = $dashboard->find ()->orderBy ( 'txt_nombre ASC' )->all ();
@@ -74,7 +81,7 @@ class AdminController extends Controller {
 	
 	/**
 	 * Los parametros los resive por get
-	 * 
+	 *
 	 * @param number $page        	
 	 * @param string $q        	
 	 * @return string
@@ -82,7 +89,7 @@ class AdminController extends Controller {
 	public function actionUsuarios($page = 0, $q = '') {
 		/**
 		 * getUsuarios es un metodo static para mostrar usuarios con el string $q
-		 * 
+		 *
 		 * @var array $usuarios
 		 */
 		$usuarios = EntUsuarios::getUsuarios ( $page, $q );
@@ -208,7 +215,11 @@ class AdminController extends Controller {
 			$post->guardarAlquimia ( $alquimia, $post );
 			
 			if ($post->cargarImagen ( $post )) {
-				return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];
+				return [ 
+						'status' => 'success',
+						't' => $post->txt_titulo,
+						'tk' => $post->txt_token 
+				];
 			}
 		}
 		
@@ -220,8 +231,9 @@ class AdminController extends Controller {
 	
 	/**
 	 * Metodo para la validacion de post
-	 * @param EntPosts $post
-	 * @param EntAlquimias $alquimia
+	 * 
+	 * @param EntPosts $post        	
+	 * @param EntAlquimias $alquimia        	
 	 * @return array
 	 */
 	public function validarAlquimia($post, $alquimia) {
@@ -242,7 +254,7 @@ class AdminController extends Controller {
 				'scenario' => 'crearVerdadazos' 
 		] );
 		
-		if ($validacion = $this->validarVerdadazos( $verdadazo )) {
+		if ($validacion = $this->validarVerdadazos ( $verdadazo )) {
 			return $validacion;
 		}
 		
@@ -263,8 +275,8 @@ class AdminController extends Controller {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
-				
-			return array_merge ( ActiveForm::validate ( $post ));
+			
+			return array_merge ( ActiveForm::validate ( $post ) );
 		}
 	}
 	
@@ -277,7 +289,7 @@ class AdminController extends Controller {
 				'scenario' => 'crearHoyPense' 
 		] );
 		
-		if ($validacion = $this->validarVerdadazos( $hoyPense )) {
+		if ($validacion = $this->validarVerdadazos ( $hoyPense )) {
 			return $validacion;
 		}
 		
@@ -298,8 +310,8 @@ class AdminController extends Controller {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
-	
-			return array_merge ( ActiveForm::validate ( $post ));
+			
+			return array_merge ( ActiveForm::validate ( $post ) );
 		}
 	}
 	
@@ -312,7 +324,7 @@ class AdminController extends Controller {
 				'scenario' => 'crearMedia' 
 		] );
 		
-		if ($validacion = $this->validarMedia( $media )) {
+		if ($validacion = $this->validarMedia ( $media )) {
 			return $validacion;
 		}
 		
@@ -333,8 +345,8 @@ class AdminController extends Controller {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
-	
-			return array_merge ( ActiveForm::validate ( $post ));
+			
+			return array_merge ( ActiveForm::validate ( $post ) );
 		}
 	}
 	
@@ -373,7 +385,7 @@ class AdminController extends Controller {
 				'scenario' => 'crearSoloPorHoy' 
 		] );
 		
-		if ($validacion = $this->validarSoloPorHoy( $post, $soloporhoy )) {
+		if ($validacion = $this->validarSoloPorHoy ( $post, $soloporhoy )) {
 			return $validacion;
 		}
 		
@@ -395,7 +407,7 @@ class AdminController extends Controller {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () ) && $soloporhoy->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
-				
+			
 			return array_merge ( ActiveForm::validate ( $post ), ActiveForm::validate ( $soloporhoy ) );
 		}
 	}
@@ -410,7 +422,7 @@ class AdminController extends Controller {
 				'scenario' => 'crearSabiasQue' 
 		] );
 		
-		if ($validacion = $this->validarSoloPorHoy( $post, $sabiasque )) {
+		if ($validacion = $this->validarSoloPorHoy ( $post, $sabiasque )) {
 			return $validacion;
 		}
 		
@@ -432,21 +444,21 @@ class AdminController extends Controller {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () ) && $sabiasque->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
-	
+			
 			return array_merge ( ActiveForm::validate ( $post ), ActiveForm::validate ( $sabiasque ) );
 		}
 	}
-
 	
 	/**
 	 * Editar alquimia
-	 * @param string $token
-	*/ 
-	public function actionEditarAlquimia($token = null){
+	 * 
+	 * @param string $token        	
+	 */
+	public function actionEditarAlquimia($token = null) {
 		// Busca el post por el token
-		$post = $this->getPostByToken($token);
+		$post = $this->getPostByToken ( $token );
 		$post->scenario = 'editarAlquimia';
-		$post->fch_publicacion = Utils::changeFormatDate($post->fch_publicacion);
+		$post->fch_publicacion = Utils::changeFormatDate ( $post->fch_publicacion );
 		// Declaracion de modelos
 		$alquimia = $post->entAlquimias;
 		
@@ -463,19 +475,22 @@ class AdminController extends Controller {
 			
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			
-			if(!empty($post->imagen)){
+			if (! empty ( $post->imagen )) {
 				$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 			}
 			
 			$post->id_usuario = $usuario->id_usuario;
 			$post->editarAlquimia ( $alquimia, $post );
 			
-			if(!empty($post->imagen)){
+			if (! empty ( $post->imagen )) {
 				$post->cargarImagen ( $post );
 			}
 			
-			return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];
-			
+			return [ 
+					'status' => 'success',
+					't' => $post->txt_titulo,
+					'tk' => $post->txt_token 
+			];
 		}
 		
 		return $this->renderAjax ( '_formAlquimia', [ 
@@ -484,11 +499,58 @@ class AdminController extends Controller {
 		] );
 	}
 	
+	/**
+	 * Action para responder el espejo
+	 * 
+	 * @param unknown $token        	
+	 */
+	public function actionResponderEspejo($token = null) {
+		// Busca el post por el token
+		$post = $this->getPostByToken ( $token );
+		
+		if ($respuesta = $post->entRespuestasEspejo) {
+		} else {
+			$respuesta = new EntRespuestasEspejo ();
+		}
+		
+		$respuesta->id_post = $post->id_post;
+		
+		if ($validacion = $this->validarRespuestaEspejo ( $respuesta )) {
+			return $validacion;
+		}
+		
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($respuesta->load ( Yii::$app->request->post () )) {
+			
+			$respuesta->guardarRespuesta($respuesta);
+			
+			return [ 
+					'status' => 'success',
+					'tk' => $post->txt_token 
+			];
+		}
+		
+		return $this->renderAjax ( '_formRespuestaEspejo', [ 
+				'respuesta' => $respuesta 
+		] );
+	}
+	
+	/**
+	 * Valida que los campos sean validos
+	 */
+	public function validarRespuestaEspejo($respuesta) {
+		if (Yii::$app->request->isAjax && $respuesta->load ( Yii::$app->request->post () )) {
+			
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			
+			return ActiveForm::validate ( $respuesta );
+		}
+	}
 	
 	/**
 	 * Busca un post por su token
 	 *
-	 * @param unknown $token
+	 * @param unknown $token        	
 	 * @throws NotFoundHttpException
 	 * @return EntPostsExtend
 	 */
@@ -499,5 +561,4 @@ class AdminController extends Controller {
 			throw new NotFoundHttpException ( 'The requested page does not exist.' );
 		}
 	}
-
 }
