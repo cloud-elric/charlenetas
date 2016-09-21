@@ -1,8 +1,10 @@
 /*!
 	-----------------------------------------------------------------------------
 
-	5.0 - Contexto
+	5.0 - Tarjetas
 			# Card
+			# Card Agenda
+			# Btn - Agregar
 
 	-----------------------------------------------------------------------------
 	*/
@@ -13,11 +15,13 @@
 	background-color: $white
 	+border-radius(4px)
 	box-shadow: 0 1px 4px 0 rgba(0,0,0,.1)
-	// cursor: pointer
+	cursor: pointer
 	display: block
 	margin-bottom: 20px
 	padding: 30px 37px 30px 20px
 	position: relative
+	&:hover
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 	h3
 		font-size: 1.4em
 		font-weight: 300
@@ -45,7 +49,7 @@
 			border-radius: 50%
 			+transition(all 0.2s ease-in-out)
 			&:hover
-				background-color: #e6e6e6
+				background-color: #d5d5d5
 		.card-options-check
 			// background-color: red
 			// display: inline-block
@@ -142,7 +146,9 @@
 				i
 					font-size: 1.1em
 					margin-right: 4px
-// Agenda
+
+/*  Card - Agenda
+	================================================ */
 .card-agenda
 	background-color: $white
 	+border-radius(4px)

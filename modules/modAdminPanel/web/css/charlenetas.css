@@ -22,7 +22,7 @@
 			# Footer
 	3.0 - Login
 	4.0 - Dashboard
-	5.0 - Contexto
+	5.0 - Tarjetas
 	--------------------------------------------------------
 	*/
 /*!
@@ -593,7 +593,6 @@ hr {
 }
 
 .modal .modal-content .btn-submit {
-  font-weight: 400;
   margin-left: 10px;
 }
 
@@ -656,7 +655,7 @@ hr {
   border-top: 1px solid #c8d3e6;
   display: flex;
   justify-content: space-between;
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 .footer .footer-cont p {
@@ -913,8 +912,10 @@ hr {
 /*!
 	-----------------------------------------------------------------------------
 
-	5.0 - Contexto
+	5.0 - Tarjetas
 			# Card
+			# Card Agenda
+			# Btn - Agregar
 
 	-----------------------------------------------------------------------------
 	*/
@@ -927,10 +928,15 @@ hr {
   -ms-border-radius: 4px;
   border-radius: 4px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   display: block;
   margin-bottom: 20px;
   padding: 30px 37px 30px 20px;
   position: relative;
+}
+
+.card:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .card h3 {
@@ -972,7 +978,7 @@ hr {
 }
 
 .card .card-options i:hover {
-  background-color: #e6e6e6;
+  background-color: #d5d5d5;
 }
 
 .card .card-options .card-options-check {
@@ -1106,6 +1112,8 @@ hr {
   margin-right: 4px;
 }
 
+/*  Card - Agenda
+	@mixin =============================================== */
 .card-agenda {
   background-color: white;
   -webkit-border-radius: 4px;
