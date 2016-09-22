@@ -304,6 +304,7 @@ class AdminController extends Controller {
 			
 			$hoyPense->imagen = UploadedFile::getInstance ( $hoyPense, 'imagen' );
 			$hoyPense->txt_imagen = Utils::generateToken ( "img" ) . "." . $hoyPense->imagen->extension;
+			$hoyPense->id_usuario = $usuario->id_usuario;
 			$hoyPense->guardarHoyPense ( $hoyPense );
 			
 			if ($hoyPense->cargarImagen ( $hoyPense )) {

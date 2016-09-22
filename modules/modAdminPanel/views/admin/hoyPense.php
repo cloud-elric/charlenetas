@@ -23,7 +23,7 @@ use yii\web\View;
 		<div class="col s12 m6 l4" id="card_<?=$postHoyPense->txt_token?>">
 			<div class="card card-hoy-pense" data-token="<?=$postHoyPense->txt_token?>">
 				<h3><?= $postHoyPense->txt_titulo ?></h3>
-				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postHoyPense->id_tipo_post])->count("id_post") ?> Comentario(s)</p>
+				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postHoyPense->id_post])->count("id_post") ?> Comentario(s)</p>
 				<div class="card-options">
 					<div class="card-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
