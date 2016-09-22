@@ -14,16 +14,16 @@ use yii\web\View;
 <!-- .page-cont -->
 <div class="page-cont">
 	<!-- .row -->
-	<div class="row">
+	<div class="row" id="js-contenedor-tarjetas">
 		
 		<?php
 		foreach ($postsHoyPense as $postHoyPense){
 		?>
 		
-		<div class="col s12 m6 l4">
-			<div class="card card-hoy-pense data-token="<?=$postHoyPense->txt_token?>">
+		<div class="col s12 m6 l4" id="card_<?=$postHoyPense->txt_token?>">
+			<div class="card card-hoy-pense" data-token="<?=$postHoyPense->txt_token?>">
 				<h3><?= $postHoyPense->txt_titulo ?></h3>
-				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postHoyPense->id_tipo_post])->count("id_post") ?> Comentario(s)</p>
+				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postHoyPense->id_post])->count("id_post") ?> Comentario(s)</p>
 				<div class="card-options">
 					<div class="card-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
@@ -43,11 +43,11 @@ use yii\web\View;
 
 	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
-			<i class="ion ion-wand"></i>
+		<!-- Modal Trigger -->
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
+			<i class="material-icons">add</i>
 		</a>
 	</div>
-	
 	<!-- end /.fixed-action-btn -->
 
 </div>

@@ -304,6 +304,8 @@ class AdminController extends Controller {
 			
 			$hoyPense->imagen = UploadedFile::getInstance ( $hoyPense, 'imagen' );
 			$hoyPense->txt_imagen = Utils::generateToken ( "img" ) . "." . $hoyPense->imagen->extension;
+			$hoyPense->id_usuario = $usuario->id_usuario;
+
 			$hoyPense->guardarHoyPense ( $hoyPense );
 			
 			if ($hoyPense->cargarImagen ( $hoyPense )) {
@@ -530,7 +532,10 @@ class AdminController extends Controller {
 		// Busca el post por el token
 		$post = $this->getPostByToken ( $token );
 		
+		$isEdicion = false;
 		if ($respuesta = $post->entRespuestasEspejo) {
+			$isEdicion = true;
+			$respuesta->fch_publicacion_respuesta = Utils::changeFormatDate($respuesta->fch_publicacion_respuesta);
 		} else {
 			$respuesta = new EntRespuestasEspejo ();
 		}
@@ -548,7 +553,8 @@ class AdminController extends Controller {
 			
 			return [ 
 					'status' => 'success',
-					'tk' => $post->txt_token 
+					'tk' => $post->txt_token,
+					'e'=>$isEdicion
 			];
 		}
 		

@@ -60,20 +60,25 @@ function abrirModalEditarAlquimia(token){
 }
 
 function agregarTarjetaNueva(json) {
-	var template = '<div class="col s12 m6 l4" data-token="{token}">'
-			+ '<div class="card card-alquimia" data-token="{token}">'
-			+ '<h3>{titulo}</h3>'
+	var template = '<div class="col s12 m6 l4" id="card_'+json.tk+'">'
+			+ '<div class="card card-alquimia" data-token="'+json.tk+'" onclick="showPostFull(\''+json.tk+'\')">'
+			+ '<h3>'+json.t+'</h3>'
 			+ '<p>0 Comentario(s)</p>'
 			+ '<div class="card-options">'
 			+ '<div class="card-options-check">'
 			+ '<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />'
 			+ '<label for="filled-in-box1"></label>' + '</div>'
-			+ '<i class="ion ion-android-more-vertical card-edit"></i>'
+			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia(\''+json.tk+'\')" href="#js-modal-post-editar">'
+			+'<i class="ion ion-android-more-vertical card-edit"></i>'
+			+'</a>'
 			+ '</div>' + '</div>' + '</div>';
 	var contenedor = $('#js-contenedor-tarjetas');
-	var tarjeta = template.replace('{titulo}', json.t);
-	tarjeta = tarjeta.replace('{token}', json.tk);
-	contenedor.prepend(tarjeta);
+	
+	contenedor.prepend(template);
+	
+	var element = document.getElementById("button_"+json.tk);
+	console.log(element);
+	element.addEventListener("click", stopEvent, false);
 }
 
 $('body').on(
@@ -102,6 +107,7 @@ $('body').on(
 						$('#js-modal-post').closeModal();
 						// Se agrega una nueva tarjeta a la vista
 						agregarTarjetaNueva(response);
+						$('.modal-trigger').leanModal();
 						// Reseteamos el modal
 						document.getElementById("form-alquimia").reset();
 						
@@ -148,7 +154,7 @@ $('body').on(
 						$('#js-modal-post-editar').closeModal();
 						
 						$('#js-modal-post-editar .modal-content').html(loading);
-						
+						$('#card_'+response.tk+' .card-alquimia h3').text(response.t);
 					} else {
 						// Muestra los errores
 						$('#editar-alquimia').yiiActiveForm('updateMessages',
@@ -165,15 +171,21 @@ $('body').on(
 			return false;
 		});
 
+
+function stopEvent(ev) {
+	  // this ought to keep t-daddy from getting the click.
+	  ev.stopPropagation();
+	 
+	}
+
 $(document).ready(function(){
 	$('.card-alquimia').on('click', function(e) {
-		console.log(e);
 		
-		if (e.target.className !== '') {
+		if (e.target.localName == 'i') {
+			e.stopPropagation();
 			return;
 		}
 		var token = $(this).data('token');
 		showPostFull(token)
 	});
-	
 });

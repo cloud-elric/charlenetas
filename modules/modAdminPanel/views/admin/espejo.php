@@ -8,7 +8,7 @@ $this->title = 'Espejos';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">
-	<div class="row">
+	<div class="row" id="js-contenedor-tarjetas">
 	<?php
 	foreach ( $postsEspejo as $postEspejo ) {
 		$espejo = $postEspejo->entEspejos;
@@ -17,11 +17,11 @@ $this->title = 'Espejos';
 			$espejoContestado = true;
 		}
 		?>
-		<div class="col s12 m6 l4">
+		<div class="col s12 m6 l4" id="card_<?=$postEspejo->txt_token?>">
 			<div class="card card-espejo" data-token="<?=$postEspejo->txt_token?>">
 				<h3><?=$postEspejo->txt_descripcion?></h3>
-				<p><?=$postEspejo->entEspejos->num_subscriptores?> susbcritores</p>
-				<?=$espejoContestado?'Espejo respondido':'Espejo no respondido'?>
+				<p><?=empty($postEspejo->entEspejos)?0:$postEspejo->entEspejos->num_subscriptores?> susbcritores</p>
+				<p class='respondido'><?=$espejoContestado?'Espejo respondido':'Espejo no respondido'?></p>
 				<div class="card-options">
 					<div class="card-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box3"

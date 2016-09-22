@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+use yii\helpers\Url;
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
@@ -27,7 +28,7 @@ $usuario = $post->idUsuario;
 	<div class="full-pin-body-content">
 		<h3><?=Html::encode($post->txt_titulo)?></h3>
 		<div class="full-pin-body-content-img">
-			<img src="webAssets/images/<?=Html::encode($post->txt_imagen)?>"
+			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
 				alt="Alquimia - Películas que transforman" />
 		</div>
 		<div class="full-pin-body-content-text">
