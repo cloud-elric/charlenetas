@@ -26,7 +26,7 @@ $this->title = '<i class="ion ion-card"></i> Alquimia';
 						<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
 						<label for="filled-in-box1"></label>
 					</div>
-					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postAlquimia->txt_token?>')" href="#js-modal-post-editar">
+					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postAlquimia->txt_token?>', this)" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 					

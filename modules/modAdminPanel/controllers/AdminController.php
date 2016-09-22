@@ -532,6 +532,7 @@ class AdminController extends Controller {
 		$isEdicion = false;
 		if ($respuesta = $post->entRespuestasEspejo) {
 			$isEdicion = true;
+			$respuesta->fch_publicacion_respuesta = Utils::changeFormatDate($respuesta->fch_publicacion_respuesta);
 		} else {
 			$respuesta = new EntRespuestasEspejo ();
 		}
