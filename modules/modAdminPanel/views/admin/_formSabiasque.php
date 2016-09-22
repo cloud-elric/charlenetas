@@ -17,21 +17,25 @@ $form = ActiveForm::begin ( [
 						'class' => 'mdl-textfield__label'
 				],
 				'options' => [
-						'class' => 'input-field col s6'
+						'class' => 'input-field col s12 m6'
 				]
 		],
 		'errorCssClass' => 'invalid'
 ] );
 ?>
-    
-    <?= $form->field($sabiasque, 'b_verdadero')->textInput(['maxlength' => true])?>
-    
-    <?= $form->field($post, 'txt_descripcion')->textInput(['maxlength' => true])?>
-  	 
-  	<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
-  	 
-    <?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
-       
+	
+	<div class="row">
+
+		<?= $form->field($sabiasque, 'b_verdadero')->textInput(['maxlength' => true])?>
+
+		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
+		
+		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])?>
+	
+	</div>
+
+	<?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
+
 <?php ActiveForm::end();
 
 include '/templates/formato-fecha.php';
