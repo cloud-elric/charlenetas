@@ -8,9 +8,9 @@ use yii\web\View;
 <div class="page-cont">
 
 	<div class="row">
-		<div class="col s12 cards-container">
-
-			<?php foreach ( $postsContexto as $postContexto ) {?>
+		
+		<?php foreach ( $postsContexto as $postContexto ) {?>
+			<div class="col s12 m6 l4">
 
 				<div class="card card-contexto">
 					<h3><?= $postContexto->txt_descripcion?></h3>
@@ -31,9 +31,9 @@ use yii\web\View;
 
 				</div>
 				
-			<?php }?>
+			</div>
+		<?php }?>
 
-		</div>
 	</div>
 
 	<!-- <div class="col s12">
@@ -74,8 +74,7 @@ use yii\web\View;
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-contexto.js'; // dynamic file added
-$bundle->css [] = 'css/lenetas.css';
-$bundle->css [] = 'css/animate.css';
+// $bundle->css [] = 'css/lenetas.css';
 
 include 'templates/modalPost.php';
 

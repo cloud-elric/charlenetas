@@ -18,21 +18,25 @@ $form = ActiveForm::begin ( [
 						'class' => 'mdl-textfield__label'
 				],
 				'options' => [
-						'class' => 'input-field col s6'
+						'class' => 'input-field col s12 m6'
 				]
 		],
 		'errorCssClass' => 'invalid'
 ] );
 ?>
 
-    <?= $form->field($post, 'txt_descripcion')->textInput(['maxlength' => true])?>
-  	 
-  	<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
-  	 
-    <?= $form->field($post, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
-   
-    <?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
-       
+	<div class="row">
+
+		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])?>
+
+		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
+
+		<?= $form->field($post, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
+
+   	</div>
+
+	<?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
+
 <?php ActiveForm::end();
 
 include '/templates/formato-fecha.php';
