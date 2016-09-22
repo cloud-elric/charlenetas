@@ -11,6 +11,9 @@ use yii\web\View;
 <div class=container-fluid>
  <div class="pins-grid-container">
   <div class="grid" id="js-contenedor-posts-tarjetas">
+  
+  
+  
     <?php
     include 'masPosts.php';
     ?>

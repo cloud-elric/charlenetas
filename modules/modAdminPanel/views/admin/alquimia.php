@@ -43,7 +43,7 @@ $this->title = '<i class="ion ion-card"></i> Alquimia';
 	<div class="fixed-action-btn horizontal">
 		<!-- Modal Trigger -->
 		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
-			<i class="material-icons">add</i>
+			<i class="ion ion-wand"></i>
 		</a>
 	</div>
 	<!-- end /.fixed-action-btn -->
