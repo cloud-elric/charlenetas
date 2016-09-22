@@ -1,10 +1,12 @@
 <?php
+use yii\helpers\Url;
+
 /* @var $post EntPosts*/
 ?>
 <div class="pin pin-solo-por-hoy" onclick="showPostFull('<?=$post->txt_token?>')">
 	<div class="pin-header pin-header-solo-por-hoy"></div>
 	<div class=image>
-		<img src="uploads/imagenesPosts/<?=$post->txt_imagen?>">
+		<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=$post->txt_imagen?>">
 	</div>
 	<div class="pin-content-wrapper" lang="en">
 		<a href="<?=$post->entSoloPorHoys->num_articulo?>" class="margin-bottom-10px">Artículo <?=$post->entSoloPorHoys->num_articulo?></a>

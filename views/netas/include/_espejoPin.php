@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $post EntPosts*/
 ?>
@@ -10,7 +11,7 @@ use yii\helpers\Html;
 	<div class="pin-header pin-header-espejo"></div>
 
 	<div class=image>
-		<img src="uploads/imagenesPosts/d3dd554f.image17.jpg">
+		<img src="<?=Url::base()?>/uploads/imagenesPosts/d3dd554f.image17.jpg">
 	</div>
 
 

@@ -100,14 +100,6 @@ use yii\web\View;
 if (Yii::$app->user->isGuest) {
 $this->registerJs("
   loadLogin();
-  // Masonry Grid
-  grid = $('.grid').masonry({
-     itemSelector: '.pin',
-   columnWidth:250,
-     gutter: 15,
-
-  });
-
 
   ", View::POS_END);
 

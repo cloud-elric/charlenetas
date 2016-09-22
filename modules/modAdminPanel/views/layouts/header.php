@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Html;
+?>
 <!-- .header -->
 <div class="header">
 	<!-- .logo -->
@@ -30,7 +33,7 @@
 			<ul id='dropdown-user' class='dropdown-content'>
 				<li><a href="#!">Perfil</a></li>
 				<li><a href="#!">Extra</a></li>
-				<li><a href="#!">Cerrar sesión</a></li>
+				<li><?=Html::a('Cerrar sesión', ['../site/logout'])?></li>
 			</ul>
 			
 			<!-- <a href=""><i class="ion ion-ios-unlocked"></i></a> -->
