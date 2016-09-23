@@ -2,7 +2,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\View;
+?>
 
+<h4>Agregar <span>Contexto</span></h4>
+
+<?php
 $form = ActiveForm::begin ( [
 		'options' => [
 				'enctype' => 'multipart/form-data'

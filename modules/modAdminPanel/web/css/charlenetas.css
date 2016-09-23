@@ -622,7 +622,14 @@ hr {
 /*  Modal
 	@mixin =============================================== */
 .modal .modal-content h4 {
+  font-size: 1.6em;
+  font-weight: 900;
   margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.modal .modal-content h4 span {
+  font-weight: 300;
 }
 
 .modal .modal-content .input-calificacion {
@@ -638,12 +645,15 @@ hr {
 .modal .modal-content .input-calificacion .star-wrapper {
   display: block;
   position: relative;
-  margin-top: 20px;
+}
+
+.modal .modal-content .file-field .btn {
+  margin-left: 0;
 }
 
 .modal .modal-content .btn-submit {
   margin-left: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .modal .modal-content .btn-submit i {
@@ -1002,7 +1012,7 @@ hr {
   cursor: pointer;
   display: block;
   margin-bottom: 20px;
-  padding: 30px 37px 30px 20px;
+  padding: 50px 20px 20px;
   position: relative;
 }
 
@@ -1010,13 +1020,29 @@ hr {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.card h3 {
+.card h3.card-title {
+  color: #345678;
+  font-family: "Raleway", sans-serif;
   font-size: 1.4em;
-  font-weight: 300;
+  font-weight: 900;
   margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
-.card p {
+.card p.card-desc {
+  color: #253c54;
+  font-family: "Lato", sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.5em;
+  margin-bottom: 4px;
+  text-align: justify;
+}
+
+.card p.card-extras {
   color: #282828;
   font-weight: 400;
   letter-spacing: 1px;
@@ -1025,14 +1051,7 @@ hr {
 .card .card-options {
   position: absolute;
   right: 20px;
-  top: 20px;
-}
-
-@media screen and (max-width: 768px) {
-  .card .card-options {
-    right: 16px;
-    top: 10px;
-  }
+  top: 16px;
 }
 
 .card .card-options i,
@@ -1074,35 +1093,35 @@ hr {
   padding: 20px 10px;
 }
 
-.card.card-contexto p {
+.card.card-contexto p.card-extras {
   color: #DFF040;
 }
 
-.card.card-verdadazos p {
+.card.card-verdadazos p.card-extras {
   color: #1940e3;
 }
 
-.card.card-sabias-que p {
+.card.card-sabias-que p.card-extras {
   color: #EF3893;
 }
 
-.card.card-espejo p {
+.card.card-espejo p.card-extras {
   color: #658BEA;
 }
 
-.card.card-solo-por-hoy p {
+.card.card-solo-por-hoy p.card-extras {
   color: #75F1F1;
 }
 
-.card.card-alquimia p {
+.card.card-alquimia p.card-extras {
   color: #F3B924;
 }
 
-.card.card-hoy-pense p {
+.card.card-hoy-pense p.card-extras {
   color: #57ED5F;
 }
 
-.card.card-media p {
+.card.card-media p.card-extras {
   color: #0F2687;
 }
 
@@ -1212,7 +1231,7 @@ hr {
   padding: 10px 50px;
 }
 
-.card-agenda .card-agenda-header p {
+.card-agenda .card-agenda-header p.card-extras {
   font-size: 2.3em;
 }
 
@@ -1253,7 +1272,7 @@ hr {
   font-weight: 300;
 }
 
-.card-agenda.card-agenda-importancia p {
+.card-agenda.card-agenda-importancia p.card-extras {
   font-size: 3em;
   font-weight: 500;
 }
