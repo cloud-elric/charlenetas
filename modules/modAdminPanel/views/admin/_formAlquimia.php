@@ -3,7 +3,11 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $classActive = $post->isNewRecord?'':'active';
+?>
 
+<h4>Agregar <span>Alqumimia</span></h4>
+
+<?php
 $form = ActiveForm::begin ( [ 
 		'options' => [ 
 				'enctype' => 'multipart/form-data' 
@@ -31,12 +35,12 @@ $form = ActiveForm::begin ( [
 
 		<?= $form->field($post, 'txt_titulo')->textInput(['maxlength' => true])?>
 
+		<?= $form->field($alquimia, 'num_calificacion_admin', ['template'=>'{input}{label}'.$alquimia->contenedorEstrellas($alquimia->num_calificacion_admin, '', false, true).'{error}','options'=>['class'=>'input-field col s12 m6 input-calificacion']])->hiddenInput()?>
+		
 		<?= $form->field($post, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
 
-		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker", "style"=>"margin-top: 35px;"])?>
+		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
 
-		<?= $form->field($alquimia, 'num_calificacion_admin', ['template'=>'{input}{label}'.$alquimia->contenedorEstrellas($alquimia->num_calificacion_admin, '', false, true).'{error}','options'=>['class'=>'input-field col s12 m6 input-calificacion']])->hiddenInput()?>
-   
 		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
 
 	</div>

@@ -18,15 +18,29 @@
 	cursor: pointer
 	display: block
 	margin-bottom: 20px
-	padding: 30px 37px 30px 20px
+	padding: 50px 20px 20px
 	position: relative
 	&:hover
 		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-	h3
+	h3.card-title
+		color: $header-menu
+		font-family: $f-secundary
 		font-size: 1.4em
-		font-weight: 300
+		font-weight: 900
 		margin-bottom: 4px
-	p
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+		width: 100%
+	p.card-desc
+		color: $p-body-txt
+		font-family: $f-base
+		font-size: 1em
+		font-weight: 300
+		line-height: 1.5em
+		margin-bottom: 4px
+		text-align: justify
+	p.card-extras
 		color: #282828
 		font-weight: 400
 		letter-spacing: 1px
@@ -34,10 +48,9 @@
 	.card-options
 		position: absolute
 		right: 20px
-		top: 20px
-		@include respond-to(xs)
-			right: 16px
-			top: 10px
+		top: 16px
+		// @include respond-to(xs)
+		// 	top: 10px
 		i,
 		.card-options-check
 			vertical-align: middle
@@ -69,35 +82,35 @@
 	// 	color: $header-menu-hover
 	// En contexto
 	&.card-contexto
-		p
+		p.card-extras
 			color: $color-contexto
 	// A verdadazos
 	&.card-verdadazos
-		p
+		p.card-extras
 			color: $color-verdadazos
 	// Sabias que
 	&.card-sabias-que
-		p
+		p.card-extras
 			color: $color-sabias-que
 	// Espejo
 	&.card-espejo
-		p
+		p.card-extras
 			color: $color-espejo
 	// Solo por hoy
 	&.card-solo-por-hoy
-		p
+		p.card-extras
 			color: $color-solo-por-hoy
 	// Alquimia
 	&.card-alquimia
-		p
+		p.card-extras
 			color: $color-alquimia
 	// Hoy pense
 	&.card-hoy-pense
-		p
+		p.card-extras
 			color: $color-hoy-pense
 	// Media
 	&.card-media
-		p
+		p.card-extras
 			color: $color-media
 	// User
 	&.card-user
@@ -166,7 +179,7 @@
 		background-color: #F5F5F3
 		color: #AAAAA8
 		padding: 10px 50px
-		p
+		p.card-extras
 			font-size: 2.3em
 	.card-agenda-body
 		padding: 10px
@@ -189,7 +202,7 @@
 		h5
 			font-size: 1.3em
 			font-weight: 300
-		p
+		p.card-extras
 			font-size: 3em
 			font-weight: 500
 

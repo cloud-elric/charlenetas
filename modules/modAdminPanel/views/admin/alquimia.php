@@ -18,8 +18,12 @@ $this->title = '<i class="ion ion-card"></i> Alquimia';
 
 		<div class="col s12 m6 l4" id="card_<?=$postAlquimia->txt_token?>">
 			<div class="card card-alquimia" data-token="<?=$postAlquimia->txt_token?>">
-				<h3><?= $postAlquimia->txt_titulo ?></h3>
-				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->count("id_post") ?> Comentario(s)</p>
+				
+				<h3 class="card-title"><?= $postAlquimia->txt_titulo ?></h3>
+				<p class="card-desc">Descripcion</p>
+				<p class="card-extras">
+					<?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->count("id_post") ?> Comentario(s)
+				</p>
 
 				<div class="card-options">
 					<div class="card-options-check">
