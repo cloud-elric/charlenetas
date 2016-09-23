@@ -1,37 +1,51 @@
 var pages = 1;
 var pagesComentarios = 0;
+var masonryOptions = {
+	itemSelector : '.pin',
+	columnWidth : 250,
+	gutter : 15,
+
+};
 
 // Carga mas pins de los post
 function cargarMasPosts() {
-	alert('jalando');
-	var contenedor = $('#grid');
-	var url = 'netas/get-mas-posts?page='+pages;
+
+	var contenedor = $('#js-contenedor-posts-tarjetas');
+	var url = 'netas/get-mas-posts?page=' + pages;
 
 	$.ajax({
-		url:url,
-		success:function(res){
+		url : url,
+		success : function(res) {
 
-			//  var $items = $(res);
-			 //
-			//  console.log($items);
+			var $items = $(res);
 
-			contenedor.append(res);
-			 //grid.append( $items ).masonry( 'appended', $items );
+			grid.append($items);
+			grid.masonry('appended', $items);
 
-//			 contenedor.append(res).each(function(){
-//			   		grid.masonry('reloadItems');
-//			 	});
-//
-//			      grid.masonry();
 			pages++;
 
-			  // append items to grid
+			filtrarPost();
 		}
 	});
 
-
 }
 
+function filtrarPost(){
+
+$( ".js-filter-tipo-post" ).each(function( index ) {
+		var elemento = $(this);
+		var tipoPost = elemento.data('value');
+		
+		var opacity=0;
+
+		if (elemento.hasClass('filter-active')) {
+			opacity = 1;
+		}
+
+		ocultarTipoPost(tipoPost, opacity)
+	  
+	});
+}
 
 // Carga los comentarios de un post y los nuevos borraran los anteriores o se
 // pondran abajo
@@ -77,7 +91,7 @@ function cargarRespuestas(token, pageRespuestas) {
 
 /**
  * Carga las siguientes respuestas por token
- *
+ * 
  * @param element
  */
 function cargarRespuestasPage(element) {
@@ -300,7 +314,7 @@ function agregarFeedback(token, feed) {
 
 /**
  * Agrega visualmente un feedback a un comentario
- *
+ * 
  * @param token
  */
 function addFeedback(token, feed) {
@@ -316,7 +330,7 @@ function addFeedback(token, feed) {
 
 /**
  * Remueve visulamente un feedback a un comentario
- *
+ * 
  * @param token
  */
 function removeFeedback(token, feed) {
@@ -333,7 +347,7 @@ function removeFeedback(token, feed) {
 
 /**
  * Califica alquimia y prender las estrellas
- *
+ * 
  * @param element
  */
 function calificarPrenderEstrellas(element) {
@@ -423,7 +437,7 @@ function enviarRespuesta(token) {
 
 /**
  * Pone un like a un post
- *
+ * 
  * @param token
  */
 function likePost(token) {
@@ -450,7 +464,7 @@ function likePost(token) {
 
 /**
  * Visualmente agrega la parte de aumento de like
- *
+ * 
  * @param token
  */
 function addLikePost(token) {
@@ -467,7 +481,7 @@ function addLikePost(token) {
 
 /**
  * Visualmente remueve el contador de likes
- *
+ * 
  * @param token
  */
 function removeLikePost(token) {
@@ -484,7 +498,7 @@ function removeLikePost(token) {
 
 /**
  * Muestra el ladda al elemento
- *
+ * 
  * @param element
  */
 function loadLada(element) {
@@ -497,9 +511,9 @@ function loadLada(element) {
  * Carga login
  */
 function loadLogin() {
-	//var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
-	//var url = 'http://localhost/charlenetas/web/login';
-	var url = 'http://localhost:81/charlenetas/web/login';
+	// var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
+	// var url = 'http://localhost/charlenetas/web/login';
+	var url = 'http://localhost/charlenetas/web/login';
 	var contentModal = $('#modal-login .modal-content');
 
 	$.ajax({
@@ -554,7 +568,7 @@ function cargarCalificacion() {
 /**
  * Carga la calificacion del usuario de una alquimia a traves de una petición
  * ajax
- *
+ * 
  * @param token
  */
 function cargarCalificacionUsuario(token) {
@@ -626,62 +640,59 @@ function cargarInputRespuestas() {
 	});
 }
 
-
-
 /**
  * Cambia la clase pin a otra
  */
-function cambiarClassPin(elemento, opacity){
-	elemento.toggleClass('pin');
-	elemento.toggle();
+function cambiarClassPin(elemento, opacity) {
+	
+	if(opacity==1){
+		elemento.addClass('pin');
+		elemento.css('display','block');
+	}else{
+		elemento.removeClass('pin');
+		elemento.css('display','none');
+	}
 }
 
 /**
  * Oculta o aparece a los tipo post
+ * 
  * @param idTipoPost
  */
-function ocultarTipoPost(tipoPost, opacity){
+function ocultarTipoPost(tipoPost, opacity) {
 
 	switch (tipoPost) {
 	case 1: // espejo
 		var elemento = $('.pin-espejo');
-		elemento.css('opacity', opacity);
-		cambiarClassPin(elemento);
+		cambiarClassPin(elemento, opacity);
 		break;
 	case 2: // Alquimia
 		var elemento = $('.pin-alquimia');
-		elemento.css('opacity', opacity);
-		cambiarClassPin(elemento);
+		cambiarClassPin(elemento, opacity);
 		break;
 	case 3: // Verdadazos
 		var elemento = $('.pin-verdadazos');
-		elemento.css('opacity', opacity);
-		cambiarClassPin(elemento);
+		cambiarClassPin(elemento, opacity);
 		break;
 	case 4: // Hoy pense
 		var elemento = $('.pin-hoy-pense');
-		elemento.css('opacity', opacity);
-		cambiarClassPin(elemento);
+		cambiarClassPin(elemento, opacity);
 		break;
 	case 5: // Media
 		var elemento = $('.pin-media');
-		elemento.css('opacity', opacity);
-		cambiarClassPin(elemento);
+		cambiarClassPin(elemento, opacity);
 		break;
 	case 6: // Contexto
 		var elemento = $('.pin-contexto');
-		elemento.css('opacity', opacity);
-		cambiarClassPin(elemento);
+		cambiarClassPin(elemento, opacity);
 		break;
 	case 7: // Solo por hoy
 		var elemento = $('.pin-solo-por-hoy');
-		elemento.css('opacity', opacity);
-		cambiarClassPin(elemento);
+		cambiarClassPin(elemento, opacity);
 		break;
 	case 8: // Sabias que
 		var elemento = $('.pin-sabias-que');
-		elemento.css('opacity', opacity);
-		cambiarClassPin(elemento);
+		cambiarClassPin(elemento, opacity);
 		break;
 
 	default:
@@ -691,14 +702,16 @@ function ocultarTipoPost(tipoPost, opacity){
 
 }
 
+var grid;
+
 $(document).ready(function() {
 
-	var grid = $('.grid').masonry({
-		itemSelector: '.pin',
-		columnWidth:250,
-			gutter: 15,
+	grid = $('.grid').masonry(masonryOptions);
 
-	});
+	setInterval(function() {
+		grid.masonry('reloadItems');
+		grid.masonry('layout');
+	}, 500);
 
 	$('#js-login').on('click', function(e) {
 		e.preventDefault();
@@ -736,14 +749,11 @@ $(document).ready(function() {
 
 		ocultarTipoPost(tipoPost, opacity)
 		elemento.toggleClass('filter-active');
-		ready();
-	});
-	grid.on( 'removeComplete',
-			  function( event, removedItems  ) {
-		alert();
 
-			  }
-			);
+	});
+	grid.on('layoutComplete', function(event, laidOutItems) {
+
+	});
 
 });
 
@@ -771,25 +781,23 @@ $('body').on('beforeSubmit', '#login-form', function() {
 	return false;
 });
 
-
-$('.filters-toggle').on('click',function(){
-  $('nav').toggleClass('mobile');
+$('.filters-toggle').on('click', function() {
+	$('nav').toggleClass('mobile');
 });
 
-//Codigo para implementacion de codrops
+// Codigo para implementacion de codrops
 // new AnimOnScroll( document.getElementById( 'grid' ), {
-// 	minDuration : 0.4,
-// 	maxDuration : 0.7,
-// 	viewportFactor : 0.2
+// minDuration : 0.4,
+// maxDuration : 0.7,
+// viewportFactor : 0.2
 // } );
 
-
 // new Masonry( self.el, {
-// 	itemSelector: 'li',
-// 	transitionDuration : 0
+// itemSelector: 'li',
+// transitionDuration : 0
 // } );
 
 //
 // var msnry = new Masonry( '.grid', {
-//   itemSelector: 'li'
+// itemSelector: 'li'
 // });

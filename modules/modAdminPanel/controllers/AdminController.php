@@ -267,7 +267,7 @@ class AdminController extends Controller {
 			$verdadazo->txt_imagen = Utils::generateToken ( "img" ) . "." . $verdadazo->imagen->extension;
 			$verdadazo->guardarVerdadazos ( $verdadazo );
 			
-			if ($post->cargarImagen ( $verdadazo )) {
+			if ($verdadazo->cargarImagen ( $verdadazo )) {
 				return ['status'=>'success', 't'=>$verdadazo->txt_titulo,'tk'=>$verdadazo->txt_token];
 			}
 		}
@@ -305,6 +305,7 @@ class AdminController extends Controller {
 			$hoyPense->imagen = UploadedFile::getInstance ( $hoyPense, 'imagen' );
 			$hoyPense->txt_imagen = Utils::generateToken ( "img" ) . "." . $hoyPense->imagen->extension;
 			$hoyPense->id_usuario = $usuario->id_usuario;
+
 			$hoyPense->guardarHoyPense ( $hoyPense );
 			
 			if ($hoyPense->cargarImagen ( $hoyPense )) {
@@ -357,6 +358,7 @@ class AdminController extends Controller {
 	}
 	public function validarMedia($post) {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )) {
+			
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
 			

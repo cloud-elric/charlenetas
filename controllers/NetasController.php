@@ -158,7 +158,7 @@ class NetasController extends Controller {
 		// Tipos de post
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
 				'b_habilitado' => 1 
-		] )->all ();
+		] )->orderBy('txt_nombre')->all ();
 		
 		// Pintar vista
 		return $this->render ( 'index', [ 
