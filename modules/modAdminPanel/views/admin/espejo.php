@@ -19,11 +19,23 @@ $this->title = 'Espejos';
 		?>
 		<div class="col s12 m6 l4" id="card_<?=$postEspejo->txt_token?>">
 			<div class="card card-espejo" data-token="<?=$postEspejo->txt_token?>">
-				<h3><?=$postEspejo->txt_descripcion?></h3>
-				<p><?=empty($postEspejo->entEspejos)?0:$postEspejo->entEspejos->num_subscriptores?> susbcritores</p>
-				<p class='respondido'><?=$espejoContestado?'Espejo respondido':'Espejo no respondido'?></p>
-				<div class="card-options">
-					<div class="card-options-check">
+				
+				<div class="card-contexto-cont">
+					<h3 class="card-title">Título muy largo a este gran post</h3>
+					<p class="card-desc"><?=$postEspejo->txt_descripcion?></p>
+				</div>
+
+				<div class="card-contexto-status">
+					<p class="card-contexto-status-susbs">
+						<i class="ion ion-person-stalker"></i> <span><?=empty($postEspejo->entEspejos)?0:$postEspejo->entEspejos->num_subscriptores?></span>
+					</p>
+					<p class="card-contexto-status-comen">
+						<i class="ion icon icon-comment"></i> <span><?=$espejoContestado?'Espejo respondido':'Espejo no respondido'?></span>
+					</p>
+				</div>
+
+				<div class="card-contexto-options">
+					<div class="card-contexto-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box3"
 							checked="checked" /> <label for="filled-in-box3"></label>
 

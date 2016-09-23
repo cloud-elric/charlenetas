@@ -12,13 +12,21 @@ use yii\web\View;
 		<?php foreach ($postsSoloPorHoy as $postSoloPorHoy){?>
 		<div class="col s12 m6 l4">
 			<div class="card card-solo-por-hoy" data-token="<?=$postSoloPorHoy->txt_token?>">
-				<h3 class="card-title">Título muy largo a este gran post</h3>
-				<p class="card-desc"><?=$postSoloPorHoy->txt_descripcion?></p>
-				<p class="card-extras">
-					<?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postSoloPorHoy->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?> comentarios
-				</p>
-				<div class="card-options">
-					<div class="card-options-check">
+				
+
+				<div class="card-contexto-cont">
+					<h3 class="card-title">Título muy largo a este gran post</h3>
+					<p class="card-desc"><?=$postSoloPorHoy->txt_descripcion?></p>
+				</div>
+
+				<div class="card-contexto-status">
+					<p class="card-contexto-status-comen">
+						<i class="ion icon icon-comment"></i> <span><?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postSoloPorHoy->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
+					</p>
+				</div>
+
+				<div class="card-contexto-options">
+					<div class="card-contexto-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box3"
 							checked="checked" /> <label for="filled-in-box3"></label>
 					</div>
@@ -26,6 +34,7 @@ use yii\web\View;
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>
+
 			</div>
 		</div>
 		<?php }?>

@@ -9,16 +9,16 @@ use app\modules\ModUsuarios\models\Utils;
 <div class="page-cont">
 
 	<div class="row">
-					<?php foreach ($postsMedia as $postMedia){?>
-						<div class="col s12 m6 l4">
+	<?php foreach ($postsMedia as $postMedia){?>
+		<div class="col s12 m6 l4">
 			<div class="card card-media">
-				<h3>
-					<img
-						src="http://img.youtube.com/vi/<?=Utils::getIdVideoYoutube($postMedia->txt_url)?>/mqdefault.jpg">
-				</h3>
+				
+				<div class="card-contexto-cont">
+					<img src="http://img.youtube.com/vi/<?=Utils::getIdVideoYoutube($postMedia->txt_url)?>/mqdefault.jpg">
+				</div>
 
-				<div class="card-options">
-					<div class="card-options-check">
+				<div class="card-contexto-options">
+					<div class="card-contexto-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box6"
 							checked="checked" /> <label for="filled-in-box6"></label>
 					</div>
@@ -26,6 +26,7 @@ use app\modules\ModUsuarios\models\Utils;
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>
+
 			</div>
 		</div>
 		<?php }?>

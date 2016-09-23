@@ -9,14 +9,23 @@ use yii\web\View;
 <div class="page-cont">
 
 	<div class="row">
-<?php foreach ( $postsVerdadazos as $postVerdadazos ) {?>
+	<?php foreach ( $postsVerdadazos as $postVerdadazos ) {?>
 		<div class="col s12 m6 l4">
 			<div class="card card-verdadazos" data-token="<?=$postVerdadazos->txt_token?>">
-				<h3><?=$postVerdadazos->txt_descripcion?></h3>
-				<p><?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postVerdadazos->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?> comentarios</p>
 				
-				<div class="card-options">
-					<div class="card-options-check">
+				<div class="card-contexto-cont">
+					<h3 class="card-title">Título muy largo a este gran post</h3>
+					<p class="card-desc"><?=$postVerdadazos->txt_descripcion?></p>
+				</div>
+
+				<div class="card-contexto-status">
+					<p class="card-contexto-status-comen">
+						<i class="ion icon icon-comment"></i> <span><?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postVerdadazos->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
+					</p>
+				</div>
+
+				<div class="card-contexto-options">
+					<div class="card-contexto-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box1"
 							checked="checked" /> <label for="filled-in-box1"></label>
 					</div>
@@ -28,7 +37,7 @@ use yii\web\View;
 		</div>
 	</div>
 
-<?php }?>
+	<?php }?>
 
 	<div class="fixed-action-btn horizontal">
 		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
@@ -41,22 +50,22 @@ use yii\web\View;
 <!-- end /.page-cont -->
 
 <?php
-foreach ( $postsVerdadazos as $postVerdadazos ) {
-	echo $postVerdadazos->txt_descripcion . "   ";
-	echo $postVerdadazos->txt_imagen . "   ";
-	echo $postVerdadazos->num_likes . "   ";
-	echo $postVerdadazos->fch_creacion . "   ";
-	echo $postVerdadazos->fch_publicacion . "   ";
+// foreach ( $postsVerdadazos as $postVerdadazos ) {
+// 	echo $postVerdadazos->txt_descripcion . "   ";
+// 	echo $postVerdadazos->txt_imagen . "   ";
+// 	echo $postVerdadazos->num_likes . "   ";
+// 	echo $postVerdadazos->fch_creacion . "   ";
+// 	echo $postVerdadazos->fch_publicacion . "   ";
 	
-	echo "</br>";
-	echo "</br>";
-}
-echo "total= " . EntPosts::find ()->where ( [ 
-		'id_tipo_post' => $postVerdadazos->id_tipo_post 
-] )->count ( "id_tipo_post" . "   " );
-echo "total likes= " . EntPosts::find ()->where ( [ 
-		'id_tipo_post' => $postVerdadazos->id_tipo_post 
-] )->sum ( "num_likes" );
+// 	echo "</br>";
+// 	echo "</br>";
+// }
+// echo "total= " . EntPosts::find ()->where ( [ 
+// 		'id_tipo_post' => $postVerdadazos->id_tipo_post 
+// ] )->count ( "id_tipo_post" . "   " );
+// echo "total likes= " . EntPosts::find ()->where ( [ 
+// 		'id_tipo_post' => $postVerdadazos->id_tipo_post 
+// ] )->sum ( "num_likes" );
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-verdadazos.js'; // dynamic file added
