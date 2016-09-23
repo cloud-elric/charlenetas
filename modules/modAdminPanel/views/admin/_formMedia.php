@@ -25,8 +25,10 @@ $form = ActiveForm::begin ( [
 ] );
 ?>
 
-  	 <?= $form->field($media, 'txt_url', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])?>
-   
+  	 <?= $form->field($media, 'txt_url', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true, 'onchange'=>'cargarImagenes($(this));'])?>
+   	<div id="js-contenedor-imagenes">
+   	
+   	</div>
      <?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
        
 <?php ActiveForm::end();
