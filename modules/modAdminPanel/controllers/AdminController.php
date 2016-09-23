@@ -268,7 +268,7 @@ class AdminController extends Controller {
 			$verdadazo->guardarVerdadazos ( $verdadazo );
 			
 			if ($verdadazo->cargarImagen ( $verdadazo )) {
-				return ['status'=>'success', 't'=>$verdadazo->txt_titulo,'tk'=>$verdadazo->txt_token];
+				return ['status'=>'success', 't'=>$verdadazo->txt_descripcion,'tk'=>$verdadazo->txt_token];
 			}
 		}
 		
@@ -343,13 +343,12 @@ class AdminController extends Controller {
 			
 			$usuario = Yii::$app->user->identity;
 			
-			$media->imagen = UploadedFile::getInstance ( $media, 'imagen' );
-			$media->txt_imagen = Utils::generateToken ( "img" ) . "." . $media->imagen->extension;
+			$media->id_usuario = $usuario->id_usuario;	
 			$media->guardarMedia ( $media );
 			
-			if ($media->cargarImagen ( $media )) {
-				return ['status'=>'success', 't'=>$verdadazo->txt_titulo,'tk'=>$verdadazo->txt_token];
-			}
+			
+				return ['status'=>'success', 't'=>"http://img.youtube.com/vi/".Utils::getIdVideoYoutube($media->txt_url)."/mqdefault.jpg",'tk'=>$media->txt_token];
+			
 		}
 		
 		return $this->renderAjax ( 'crearMedia', [ 
@@ -414,7 +413,7 @@ class AdminController extends Controller {
 			$post->guardarSoloPorHoy ( $soloporhoy, $post );
 			
 			if ($post->cargarImagen ( $post )) {
-				return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];
+				return ['status'=>'success', 't'=>$post->txt_descripcion,'tk'=>$post->txt_token];
 			}
 		}
 		
@@ -450,13 +449,10 @@ class AdminController extends Controller {
 			
 			$usuario = Yii::$app->user->identity;
 			
-			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
-			$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
+			$post->id_usuario = $usuario->id_usuario;
 			$post->guardarSabiasQue ( $sabiasque, $post );
 			
-			if ($post->cargarImagen ( $post )) {
-				return ['status'=>'success', 't'=>$post->txt_titulo,'tk'=>$post->txt_token];;
-			}
+				return ['status'=>'success', 't'=>$post->txt_descripcion,'tk'=>$post->txt_token];;
 		}
 		
 		return $this->renderAjax ( 'crearSabiasQue', [ 
@@ -466,7 +462,7 @@ class AdminController extends Controller {
 	}
 	public function validarSabiasQue($post, $sabiasque) {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () ) && $sabiasque->load ( Yii::$app->request->post () )) {
-			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			//$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
 			
 			return array_merge ( ActiveForm::validate ( $post ), ActiveForm::validate ( $sabiasque ) );

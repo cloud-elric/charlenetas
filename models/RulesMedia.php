@@ -17,6 +17,14 @@ class RulesMedia {
 						'message'=>'Requerido',
 						'on' => 'crearMedia'
 				],
+				[
+						[
+								'txt_url'
+						],
+						'required',
+						'message'=>'Requerido',
+						'on' => 'editarMedia'
+				]
 		]
 		;
 

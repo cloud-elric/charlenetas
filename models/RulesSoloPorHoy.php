@@ -25,7 +25,7 @@ class RulesSoloPorHoy {
 						],
 						'required',
 						'message'=>'Requerido',
-						'on' => 'crearSoloPorHoy'
+						'on' => 'editarSoloPorHoy'
 				],
 		]
 		;

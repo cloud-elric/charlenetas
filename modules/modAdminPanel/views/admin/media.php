@@ -8,10 +8,11 @@ use app\modules\ModUsuarios\models\Utils;
 <!-- .page-cont -->
 <div class="page-cont">
 
-	<div class="row">
-					<?php foreach ($postsMedia as $postMedia){?>
-						<div class="col s12 m6 l4">
-			<div class="card card-media">
+	<div class="row" id="js-contenedor-tarjetas">
+	<?php foreach ($postsMedia as $postMedia){?>
+	
+	<div class="col s12 m6 l4" id="card_<?=$postMedia->txt_token?>">
+			<div class="card card-media" data-token="<?=$postMedia->txt_token?>">
 				<h3>
 					<img
 						src="http://img.youtube.com/vi/<?=Utils::getIdVideoYoutube($postMedia->txt_url)?>/mqdefault.jpg">
@@ -27,8 +28,9 @@ use app\modules\ModUsuarios\models\Utils;
 					</a>
 				</div>
 			</div>
-		</div>
+	</div>
 		<?php }?>
+		
 		<!-- <div class="col s12">
 			<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
 		</div> -->

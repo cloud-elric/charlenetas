@@ -38,6 +38,28 @@ function abrirModalEditarVerdadazos(token){
 	});
 }
 
+function agregarTarjetaNueva(json) {
+	var template = '<div class="col s12 m6 l4" id="card_'+json.tk+'">'
+			+ '<div class="card card-verdadazos" data-token="'+json.tk+'" onclick="showPostFull(\''+json.tk+'\')">'
+			+ '<h3>'+json.t+'</h3>'
+			+ '<p>0 Comentario(s)</p>'
+			+ '<div class="card-options">'
+			+ '<div class="card-options-check">'
+			+ '<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />'
+			+ '<label for="filled-in-box1"></label>' + '</div>'
+			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarVerdadazos(\''+json.tk+'\')" href="#js-modal-post-editar">'
+			+'<i class="ion ion-android-more-vertical card-edit"></i>'
+			+'</a>'
+			+ '</div>' + '</div>' + '</div>';
+	var contenedor = $('#js-contenedor-tarjetas');
+	
+	contenedor.prepend(template);
+	
+	var element = document.getElementById("button_"+json.tk);
+	console.log(element);
+	element.addEventListener("click", stopEvent, false);
+}
+
 
 $('body').on('beforeSubmit', '#form-verdadazos', function() {
 	var form = $(this);
@@ -54,10 +76,20 @@ $('body').on('beforeSubmit', '#form-verdadazos', function() {
 	        contentType: false,
 	        processData: false,
 		success : function(response) {
-			if(response=='success'){
-				 $('#js-modal-post').closeModal();
-			}else{
-				$('#form-verdadazos').yiiActiveForm('updateMessages',response, true);
+			// Si la respuesta contiene la propiedad status y es success
+			if (response.hasOwnProperty('status')
+					&& response.status == 'success') {
+				// Cierra el modal
+				$('#js-modal-post').closeModal();
+				// Se agrega una nueva tarjeta a la vista
+				agregarTarjetaNueva(response);
+				$('.modal-trigger').leanModal();
+				// Reseteamos el modal
+				document.getElementById("form-verdadazos").reset();
+			} else {
+				// Muestra los errores
+				$('#form-verdadazos').yiiActiveForm('updateMessages',
+						response, true);
 			}
 		}
 	});
@@ -119,4 +151,10 @@ $(document).ready(function(){
 	});
 	
 });
+
+function stopEvent(ev) {
+	  // this ought to keep t-daddy from getting the click.
+	  ev.stopPropagation();
+	 
+	}
 

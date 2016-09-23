@@ -545,7 +545,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$media->fch_creacion = Utils::getFechaActual ();
 		$media->txt_token = Utils::generateToken ( 'post' );
 		$media->fch_publicacion = Utils::changeFormatDate ( $media->fch_publicacion );
-		$media->txt_imagen = Utils::generateToken ( "img" ) . "." . $media->imagen->extension;
+		//$media->txt_imagen = Utils::generateToken ( "img" ) . "." . $media->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
@@ -702,7 +702,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
 		$post->fch_publicacion = Utils::changeFormatDate ( $post->fch_publicacion );
-		$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
+		//$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
@@ -722,6 +722,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		}
 		return false;
 	}
+	
 	public function cargarImagen($post) {
 		$post->imagen->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_posts'] . $post->txt_imagen );
 		return true;

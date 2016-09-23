@@ -30,6 +30,8 @@ $form = ActiveForm::begin ( [
 		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])?>
 
 		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
+		
+		<?= $form->field($soloporhoy, 'num_articulo')->textInput()?>
 
 		<?= $form->field($post, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
 

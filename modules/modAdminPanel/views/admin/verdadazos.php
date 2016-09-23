@@ -8,9 +8,9 @@ use yii\web\View;
 <!-- .page-cont -->
 <div class="page-cont">
 
-	<div class="row">
+	<div class="row" id="js-contenedor-tarjetas">
 <?php foreach ( $postsVerdadazos as $postVerdadazos ) {?>
-		<div class="col s12 m6 l4">
+		<div class="col s12 m6 l4" id="card_<?=$postVerdadazos->txt_token?>">
 			<div class="card card-verdadazos" data-token="<?=$postVerdadazos->txt_token?>">
 				<h3><?=$postVerdadazos->txt_descripcion?></h3>
 				<p><?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postVerdadazos->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?> comentarios</p>
@@ -26,10 +26,10 @@ use yii\web\View;
 				</div>
 			</div>
 		</div>
-	</div>
 
 <?php }?>
 
+	</div>
 	<div class="fixed-action-btn horizontal">
 		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i>

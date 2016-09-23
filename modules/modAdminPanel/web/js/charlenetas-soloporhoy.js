@@ -38,6 +38,34 @@ function abrirModalEditarSoloPorHoy(token){
 	});
 }
 
+function agregarTarjetaNueva(json) {
+	var template = '<div class="col s12 m6 l4" id="card_'+json.tk+'">'
+			+ '<div class="card card-solo-por-hoy" data-token="'+json.tk+'" onclick="showPostFull(\''+json.tk+'\')">'
+			+ '<h3>'+json.t+'</h3>'
+			+ '<p>0 Comentario(s)</p>'
+			+ '<div class="card-options">'
+			+ '<div class="card-options-check">'
+			+ '<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />'
+			+ '<label for="filled-in-box1"></label>' + '</div>'
+			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarHoyPense(\''+json.tk+'\')" href="#js-modal-post-editar">'
+			+'<i class="ion ion-android-more-vertical card-edit"></i>'
+			+'</a>'
+			+ '</div>' + '</div>' + '</div>';
+	var contenedor = $('#js-contenedor-tarjetas');
+	
+	contenedor.prepend(template);
+	
+	var element = document.getElementById("button_"+json.tk);
+	console.log(element);
+	element.addEventListener("click", stopEvent, false);
+}
+
+function stopEvent(ev) {
+	  // this ought to keep t-daddy from getting the click.
+	  ev.stopPropagation();
+	 
+	}
+
 $('body').on('beforeSubmit', '#form-soloporhoy', function() {
 	var form = $(this);
 	// return false if form still have some validation errors
@@ -53,10 +81,23 @@ $('body').on('beforeSubmit', '#form-soloporhoy', function() {
 	        contentType: false,
 	        processData: false,
 		success : function(response) {
-			if(response=='success'){
-				 $('#js-modal-post').closeModal();
-			}else{
-				$('#form-soloporhoy').yiiActiveForm('updateMessages',response, true);
+			// Si la respuesta contiene la propiedad status y es success
+			if (response.hasOwnProperty('status')
+					&& response.status == 'success') {
+				// Cierra el modal
+				$('#js-modal-post').closeModal();
+				// Se agrega una nueva tarjeta a la vista
+				agregarTarjetaNueva(response);
+				
+				$('.modal-trigger').leanModal();
+				// Reseteamos el modal
+				document.getElementById("form-soloporhoy").reset();
+				
+				
+			} else {
+				// Muestra los errores
+				$('#form-soloporhoy').yiiActiveForm('updateMessages',
+						response, true);
 			}
 		}
 	});
@@ -89,6 +130,8 @@ $('body').on(
 						$('#js-modal-post-editar').closeModal();
 						
 						$('#js-modal-post-editar .modal-content').html(loading);
+						
+						//$('#card_'+response.tk+' .card-solo-por-hoy h3').text(response.t);
 						
 					} else {
 						// Muestra los errores

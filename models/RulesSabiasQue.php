@@ -11,12 +11,20 @@ class RulesSabiasQue {
 		$rules = [
 				[
 						[
-								'b_verdadero', 'txt_descripcion', 'fch_publicacion'
+								'txt_descripcion', 'fch_publicacion'
 						],
 						'required',
 						'message'=>'Requerido',
 						'on' => 'crearSabiasQue'
 				],
+				[
+						[
+								'txt_descripcion', 'fch_publicacion'
+						],
+						'required',
+						'message'=>'Requerido',
+						'on' => 'editarSabiasQue'
+						]
 		]
 		;
 
