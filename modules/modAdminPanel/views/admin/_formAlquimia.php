@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
+$classActive = $post->isNewRecord?'':'active';
+
 $form = ActiveForm::begin ( [ 
 		'options' => [ 
 				'enctype' => 'multipart/form-data' 
@@ -15,7 +17,7 @@ $form = ActiveForm::begin ( [
 						'error' => 'mdl-textfield__error' 
 				],
 				'labelOptions' => [ 
-						'class' => 'mdl-textfield__label' 
+						'class' => 'mdl-textfield__label '.$classActive 
 				],
 				'options' => [ 
 						'class' => 'input-field col s12 m6' 
