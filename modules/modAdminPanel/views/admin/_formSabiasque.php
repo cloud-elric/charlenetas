@@ -1,7 +1,11 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+?>
 
+<h4>Agregar <span>Sabias que</span></h4>
+
+<?php
 $form = ActiveForm::begin ( [
 		'options' => [
 				'enctype' => 'multipart/form-data'

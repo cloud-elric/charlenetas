@@ -143,3 +143,17 @@ $('body').on(
 			});
 			return false;
 		});
+
+
+function cargarImagenes(elemento){
+	var url = basePath+'adminPanel/admin/cargar-imagenes';
+	var texto = elemento.val();
+	$.ajax({
+		url:url,
+		type:'POST',
+		data:{url:texto},
+		success:function(res){
+			$('#js-contenedor-imagenes').html(res);
+		}
+	});
+}

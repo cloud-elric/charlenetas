@@ -3,6 +3,8 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+
+$this->title = '<i class="ion ion-android-share-alt"></i> Contextos';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">
@@ -11,22 +13,24 @@ use yii\web\View;
 		
 		<?php foreach ( $postsContexto as $postContexto ) {?>
 			<div class="col s12 m6 l4">
-
 				<div class="card card-contexto">
-					<h3><?= $postContexto->txt_descripcion?></h3>
-					<p>
-						<?= EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?> Comentarios
-					</p>
-					<div class="card-options">
-						<div class="card-options-check">
+					
+					<div class="card-contexto-cont">
+						<p class="card-desc"><?= $postContexto->txt_descripcion?></p>
+					</div>
+
+					<div class="card-contexto-status">
+						<p class="card-contexto-status-comen">
+							<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
+						</p>
+					</div>
+
+					<div class="card-contexto-options">
+						<div class="card-contexto-options-check">
 							<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
 							<label for="filled-in-box1"></label>
 						</div>
 						<i class="ion ion-android-more-vertical card-edit"></i>
-					</div>
-
-					<div class="card-options-nav">
-						Algo
 					</div>
 
 				</div>
@@ -42,11 +46,10 @@ use yii\web\View;
 
 	<div class="fixed-action-btn horizontal">
 		<a class="btn-floating btn-large waves-effect waves-light btn-check">
-			<!-- <i class="ion ion-wand"></i> --> <i
-			class="ion ion-ios-trash-outline"></i>
+			<i class="ion ion-ios-trash-outline"></i>
 		</a> <a
 			class="btn-floating btn-large waves-effect waves-light btn-agregar">
-			<i class="material-icons">add</i>
+			<i class="ion ion-wand"></i>
 		</a>
 	</div>
 

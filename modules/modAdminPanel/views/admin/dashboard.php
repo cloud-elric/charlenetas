@@ -10,7 +10,6 @@
 					<div class="row">
 						<div class="col s10">
 							<h3><?= $dash->txt_nombre; ?></h3>
-							<p>30 post</p>
 						</div>
 						<div class="col s2 text-center">
 							<i class="ion <?= $dash->txt_ico ?>"></i>
@@ -18,7 +17,7 @@
 					</div>
 				</div>
 				<div class="dashboard-card-foot">
-					<p><i class="ion ion-email"></i> <span>30 mensajes</span></p>
+					<p><i class="ion ion-email"></i> <span><?=count($dash->entPosts)?> post</span></p>
 				</div>
 			</a>
 		</div>

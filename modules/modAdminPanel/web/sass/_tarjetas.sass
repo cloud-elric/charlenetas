@@ -18,30 +18,65 @@
 	cursor: pointer
 	display: block
 	margin-bottom: 20px
-	padding: 30px 37px 30px 20px
+	padding: 40px 0 0
 	position: relative
 	&:hover
 		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-	h3
-		font-size: 1.4em
-		font-weight: 300
-		margin-bottom: 4px
-	p
+	// Contenido
+	.card-contexto-cont
+		// background-color: rgba(red,.21)
+		padding: 10px 20px
+		h3.card-title
+			color: $header-menu
+			font-family: $f-secundary
+			font-size: 1.4em
+			font-weight: 900
+			margin-bottom: 10px
+			overflow: hidden
+			text-overflow: ellipsis
+			white-space: nowrap
+			width: 100%
+		p.card-desc
+			color: $p-body-txt
+			font-family: $f-base
+			font-size: 1em
+			font-weight: 300
+			line-height: 1.5em
+			margin-bottom: 8px
+			margin-top: 0
+			text-align: justify
+		img
+			+border-radius(3px)
+			width: 100%
+	// Status
+	.card-contexto-status
+		background-color: #f6f6f6
 		color: #282828
+		display: flex
 		font-weight: 400
 		letter-spacing: 1px
+		padding: 0 20px
+		.card-contexto-status-likes,
+		.card-contexto-status-susbs,
+		.card-contexto-status-comen
+			margin-right: 22px
+			i
+				font-size: 1.3rem
+				margin-right: 4px
+			span
+				font-size: 1em
 	// Optiones
-	.card-options
+	.card-contexto-options
 		position: absolute
 		right: 20px
-		top: 20px
-		@include respond-to(xs)
-			right: 16px
-			top: 10px
+		top: 10px
+		// @include respond-to(xs)
+		// 	top: 10px
 		i,
-		.card-options-check
+		.card-contexto-options-check
 			vertical-align: middle
 		i
+			color: $white
 			cursor: pointer
 			font-size: 1.23em
 			background-color: #eee
@@ -52,53 +87,55 @@
 			border-radius: 50%
 			+transition(all 0.2s ease-in-out)
 			&:hover
-				background-color: #d5d5d5
-		.card-options-check
+				background-color: #e5e5e5
+		.card-contexto-options-check
 			// background-color: red
 			// display: inline-block
 			display: none
 			[type="checkbox"]+label
 				height: 15px
 				padding-left: 20px
-	// Optiones nav
-	.card-options-nav
-		background-color: rgba(red,.4)
-		border-top: 1px solid #EEE
-		padding: 20px 10px
-	// &:hover
-	// 	color: $header-menu-hover
+	// Tarjetas con color en especifico
 	// En contexto
 	&.card-contexto
-		p
-			color: $color-contexto
+		.card-contexto-options
+			i
+				background-color: $color-contexto
 	// A verdadazos
 	&.card-verdadazos
-		p
-			color: $color-verdadazos
+		.card-contexto-options
+			i
+				background-color: $color-verdadazos
 	// Sabias que
 	&.card-sabias-que
-		p
-			color: $color-sabias-que
+		.card-contexto-options
+			i
+				background-color: $color-sabias-que
 	// Espejo
 	&.card-espejo
-		p
-			color: $color-espejo
+		.card-contexto-options
+			i
+				background-color: $color-espejo
 	// Solo por hoy
 	&.card-solo-por-hoy
-		p
-			color: $color-solo-por-hoy
+		.card-contexto-options
+			i
+				background-color: $color-solo-por-hoy
 	// Alquimia
 	&.card-alquimia
-		p
-			color: $color-alquimia
+		.card-contexto-options
+			i
+				background-color: $color-alquimia
 	// Hoy pense
 	&.card-hoy-pense
-		p
-			color: $color-hoy-pense
+		.card-contexto-options
+			i
+				background-color: $color-hoy-pense
 	// Media
 	&.card-media
-		p
-			color: $color-media
+		.card-contexto-options
+			i
+				background-color: $color-media
 	// User
 	&.card-user
 		padding: 0
@@ -166,7 +203,7 @@
 		background-color: #F5F5F3
 		color: #AAAAA8
 		padding: 10px 50px
-		p
+		.card-status
 			font-size: 2.3em
 	.card-agenda-body
 		padding: 10px
@@ -189,7 +226,7 @@
 		h5
 			font-size: 1.3em
 			font-weight: 300
-		p
+		.card-status
 			font-size: 3em
 			font-weight: 500
 

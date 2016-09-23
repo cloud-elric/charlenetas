@@ -3,7 +3,11 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $classActive = $respuesta->isNewRecord?'':'active';
+?>
 
+<h4>Agregar <span>Espejo</span></h4>
+
+<?php
 $form = ActiveForm::begin ( [ 
 		'options' => [ 
 				'enctype' => 'multipart/form-data' 
@@ -29,8 +33,8 @@ $form = ActiveForm::begin ( [
 ?>
 	<div class='row'>
 
-		<?= $form->field($respuesta, 'fch_publicacion_respuesta')->textInput(["class"=>"datepicker", "style"=>"margin-top: 35px;"])?>
 		<?= $form->field($respuesta, 'txt_respuesta')->textarea(['class'=>'materialize-textarea'])?>
+		<?= $form->field($respuesta, 'fch_publicacion_respuesta')->textInput(["class"=>"datepicker", "style"=>"margin-top: 35px;"])?>
 
 	</div>
 

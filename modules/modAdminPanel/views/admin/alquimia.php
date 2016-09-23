@@ -4,7 +4,7 @@ use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 
-$this->title = '<i class="ion ion-card"></i> Alquimia';
+$this->title = '<i class="ion ion-ios-videocam"></i> Alquimia';
 ?>
 
 <!-- .page-cont -->
@@ -18,11 +18,19 @@ $this->title = '<i class="ion ion-card"></i> Alquimia';
 
 		<div class="col s12 m6 l4" id="card_<?=$postAlquimia->txt_token?>">
 			<div class="card card-alquimia" data-token="<?=$postAlquimia->txt_token?>">
-				<h3><?= $postAlquimia->txt_titulo ?></h3>
-				<p><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->count("id_post") ?> Comentario(s)</p>
+				
+				<div class="card-contexto-cont">
+					<h3 class="card-title"><?= $postAlquimia->txt_titulo ?></h3>
+				</div>
 
-				<div class="card-options">
-					<div class="card-options-check">
+				<div class="card-contexto-status">
+					<p class="card-contexto-status-comen">
+						<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->count("id_post") ?></span>
+					</p>
+				</div>
+
+				<div class="card-contexto-options">
+					<div class="card-contexto-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
 						<label for="filled-in-box1"></label>
 					</div>

@@ -622,7 +622,14 @@ hr {
 /*  Modal
 	@mixin =============================================== */
 .modal .modal-content h4 {
+  font-size: 1.6em;
+  font-weight: 800;
   margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.modal .modal-content h4 span {
+  font-weight: 300;
 }
 
 .modal .modal-content .input-calificacion {
@@ -638,12 +645,15 @@ hr {
 .modal .modal-content .input-calificacion .star-wrapper {
   display: block;
   position: relative;
-  margin-top: 20px;
+}
+
+.modal .modal-content .file-field .btn {
+  margin-left: 0;
 }
 
 .modal .modal-content .btn-submit {
   margin-left: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .modal .modal-content .btn-submit i {
@@ -1002,7 +1012,7 @@ hr {
   cursor: pointer;
   display: block;
   margin-bottom: 20px;
-  padding: 30px 37px 30px 20px;
+  padding: 40px 0 0;
   position: relative;
 }
 
@@ -1010,37 +1020,82 @@ hr {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.card h3 {
-  font-size: 1.4em;
-  font-weight: 300;
-  margin-bottom: 4px;
+.card .card-contexto-cont {
+  padding: 10px 20px;
 }
 
-.card p {
+.card .card-contexto-cont h3.card-title {
+  color: #345678;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.4em;
+  font-weight: 900;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.card .card-contexto-cont p.card-desc {
+  color: #253c54;
+  font-family: "Lato", sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.5em;
+  margin-bottom: 8px;
+  margin-top: 0;
+  text-align: justify;
+}
+
+.card .card-contexto-cont img {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.card .card-contexto-status {
+  background-color: #f6f6f6;
   color: #282828;
+  display: flex;
   font-weight: 400;
   letter-spacing: 1px;
+  padding: 0 20px;
 }
 
-.card .card-options {
+.card .card-contexto-status .card-contexto-status-likes,
+.card .card-contexto-status .card-contexto-status-susbs,
+.card .card-contexto-status .card-contexto-status-comen {
+  margin-right: 22px;
+}
+
+.card .card-contexto-status .card-contexto-status-likes i,
+.card .card-contexto-status .card-contexto-status-susbs i,
+.card .card-contexto-status .card-contexto-status-comen i {
+  font-size: 1.3rem;
+  margin-right: 4px;
+}
+
+.card .card-contexto-status .card-contexto-status-likes span,
+.card .card-contexto-status .card-contexto-status-susbs span,
+.card .card-contexto-status .card-contexto-status-comen span {
+  font-size: 1em;
+}
+
+.card .card-contexto-options {
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 10px;
 }
 
-@media screen and (max-width: 768px) {
-  .card .card-options {
-    right: 16px;
-    top: 10px;
-  }
-}
-
-.card .card-options i,
-.card .card-options .card-options-check {
+.card .card-contexto-options i,
+.card .card-contexto-options .card-contexto-options-check {
   vertical-align: middle;
 }
 
-.card .card-options i {
+.card .card-contexto-options i {
+  color: white;
   cursor: pointer;
   font-size: 1.23em;
   background-color: #eee;
@@ -1055,55 +1110,49 @@ hr {
   transition: all 0.2s ease-in-out;
 }
 
-.card .card-options i:hover {
-  background-color: #d5d5d5;
+.card .card-contexto-options i:hover {
+  background-color: #e5e5e5;
 }
 
-.card .card-options .card-options-check {
+.card .card-contexto-options .card-contexto-options-check {
   display: none;
 }
 
-.card .card-options .card-options-check [type="checkbox"] + label {
+.card .card-contexto-options .card-contexto-options-check [type="checkbox"] + label {
   height: 15px;
   padding-left: 20px;
 }
 
-.card .card-options-nav {
-  background-color: rgba(255, 0, 0, 0.4);
-  border-top: 1px solid #EEE;
-  padding: 20px 10px;
+.card.card-contexto .card-contexto-options i {
+  background-color: #DFF040;
 }
 
-.card.card-contexto p {
-  color: #DFF040;
+.card.card-verdadazos .card-contexto-options i {
+  background-color: #1940e3;
 }
 
-.card.card-verdadazos p {
-  color: #1940e3;
+.card.card-sabias-que .card-contexto-options i {
+  background-color: #EF3893;
 }
 
-.card.card-sabias-que p {
-  color: #EF3893;
+.card.card-espejo .card-contexto-options i {
+  background-color: #658BEA;
 }
 
-.card.card-espejo p {
-  color: #658BEA;
+.card.card-solo-por-hoy .card-contexto-options i {
+  background-color: #75F1F1;
 }
 
-.card.card-solo-por-hoy p {
-  color: #75F1F1;
+.card.card-alquimia .card-contexto-options i {
+  background-color: #F3B924;
 }
 
-.card.card-alquimia p {
-  color: #F3B924;
+.card.card-hoy-pense .card-contexto-options i {
+  background-color: #57ED5F;
 }
 
-.card.card-hoy-pense p {
-  color: #57ED5F;
-}
-
-.card.card-media p {
-  color: #0F2687;
+.card.card-media .card-contexto-options i {
+  background-color: #0F2687;
 }
 
 .card.card-user {
@@ -1212,7 +1261,7 @@ hr {
   padding: 10px 50px;
 }
 
-.card-agenda .card-agenda-header p {
+.card-agenda .card-agenda-header .card-status {
   font-size: 2.3em;
 }
 
@@ -1253,7 +1302,7 @@ hr {
   font-weight: 300;
 }
 
-.card-agenda.card-agenda-importancia p {
+.card-agenda.card-agenda-importancia .card-status {
   font-size: 3em;
   font-weight: 500;
 }
