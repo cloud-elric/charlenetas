@@ -37,15 +37,13 @@ use yii\web\View;
 
 			</div>
 		</div>
-<?php }?>
+	<?php }?>
 
-</div>
-
-
+	</div>
 
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
-			<i class="ion ion-wand"></i>
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
+			<i class="ion ion-wand"></i> 
 		</a>
 	</div>
 
@@ -70,12 +68,6 @@ use yii\web\View;
 //	echo "total comentarios= " . EntComentariosPosts::find()->where(['id_post'=>$postSabiasQue->id_tipo_post])->count("id_post");
 
 ?>
-
-	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
-			<i class="ion ion-wand"></i>
-		</a>
-	</div>
 
 <?php 	
 	$bundle = ModuleAsset::register ( Yii::$app->view );

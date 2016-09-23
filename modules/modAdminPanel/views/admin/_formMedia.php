@@ -1,7 +1,11 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+?>
 
+<h4>Agregar <span>Media</span></h4>
+
+<?php
 $form = ActiveForm::begin ( [
 		'options' => [
 				'enctype' => 'multipart/form-data'
@@ -18,17 +22,20 @@ $form = ActiveForm::begin ( [
 						'class' => 'mdl-textfield__label'
 				],
 				'options' => [
-						'class' => 'input-field col s6'
+						'class' => 'input-field col s12'
 				]
 		],
 		'errorCssClass' => 'invalid'
 ] );
 ?>
+	
+	<div class='row'>
 
-  	 <?= $form->field($media, 'txt_url', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true, 'onchange'=>'cargarImagenes($(this));'])?>
-   	<div id="js-contenedor-imagenes">
-   	
+		<?= $form->field($media, 'txt_url', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true, 'onchange'=>'cargarImagenes($(this));'])?>
+		<div id="js-contenedor-imagenes"></div>
+
    	</div>
+
      <?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
        
 <?php ActiveForm::end();

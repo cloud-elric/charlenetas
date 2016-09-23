@@ -1096,7 +1096,7 @@ hr {
 .card .card-contexto-options i {
   cursor: pointer;
   font-size: 1.23em;
-  background-color: #f6f6f6;
+  background-color: #eee;
   height: 27px;
   width: 27px;
   text-align: center;
@@ -1109,7 +1109,7 @@ hr {
 }
 
 .card .card-contexto-options i:hover {
-  background-color: #d5d5d5;
+  background-color: #e5e5e5;
 }
 
 .card .card-contexto-options .card-contexto-options-check {

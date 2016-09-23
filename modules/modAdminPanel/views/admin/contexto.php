@@ -45,11 +45,10 @@ use yii\web\View;
 
 	<div class="fixed-action-btn horizontal">
 		<a class="btn-floating btn-large waves-effect waves-light btn-check">
-			<!-- <i class="ion ion-wand"></i> --> <i
-			class="ion ion-ios-trash-outline"></i>
+			<i class="ion ion-ios-trash-outline"></i>
 		</a> <a
 			class="btn-floating btn-large waves-effect waves-light btn-agregar">
-			<i class="material-icons">add</i>
+			<i class="ion ion-wand"></i>
 		</a>
 	</div>
 

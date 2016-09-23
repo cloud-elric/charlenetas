@@ -40,7 +40,7 @@ use yii\web\View;
 	<?php }?>
 
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check modal-trigger" href="#js-modal-post">
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i>
 		</a>
 	</div>
