@@ -3,6 +3,8 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+
+$this->title = '<i class="ion ion-speakerphone"></i> Sabias que';
 ?>
 
 <!-- .page-cont -->

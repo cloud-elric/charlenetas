@@ -3,6 +3,8 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+
+$this->title = '<i class="ion ion-android-calendar"></i> Solo por hoy';
 ?>
 
 <!-- .page-cont -->
@@ -15,7 +17,6 @@ use yii\web\View;
 				
 
 				<div class="card-contexto-cont">
-					<h3 class="card-title">Título muy largo a este gran post</h3>
 					<p class="card-desc"><?=$postSoloPorHoy->txt_descripcion?></p>
 				</div>
 

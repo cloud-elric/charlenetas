@@ -3,13 +3,9 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
-?>
 
-<!-- .page-header -->
-<div class="page-header">
-	<h2 class="page-title"><i class="ion ion-crop"></i> Hoy Pense</h2>
-</div>
-<!-- end /.page-header -->
+$this->title = '<i class="ion ion-android-bulb"></i> Hoy Pense';
+?>
 
 <!-- .page-cont -->
 <div class="page-cont">
@@ -23,7 +19,6 @@ use yii\web\View;
 				
 				<div class="card-contexto-cont">
 					<h3 class="card-title"><?= $postHoyPense->txt_titulo ?></h3>
-					<p class="card-desc">Descripción</p>
 				</div>
 
 				<div class="card-contexto-status">

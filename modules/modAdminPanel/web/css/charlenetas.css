@@ -1029,7 +1029,7 @@ hr {
   font-family: "Raleway", sans-serif;
   font-size: 1.4em;
   font-weight: 900;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1042,7 +1042,8 @@ hr {
   font-size: 1em;
   font-weight: 300;
   line-height: 1.5em;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  margin-top: 0;
   text-align: justify;
 }
 
@@ -1094,6 +1095,7 @@ hr {
 }
 
 .card .card-contexto-options i {
+  color: white;
   cursor: pointer;
   font-size: 1.23em;
   background-color: #eee;
@@ -1121,36 +1123,36 @@ hr {
   padding-left: 20px;
 }
 
-.card.card-contexto .card-status {
-  color: #DFF040;
+.card.card-contexto .card-contexto-options i {
+  background-color: #DFF040;
 }
 
-.card.card-verdadazos .card-status {
-  color: #1940e3;
+.card.card-verdadazos .card-contexto-options i {
+  background-color: #1940e3;
 }
 
-.card.card-sabias-que .card-status {
-  color: #EF3893;
+.card.card-sabias-que .card-contexto-options i {
+  background-color: #EF3893;
 }
 
-.card.card-espejo .card-status {
-  color: #658BEA;
+.card.card-espejo .card-contexto-options i {
+  background-color: #658BEA;
 }
 
-.card.card-solo-por-hoy .card-status {
-  color: #75F1F1;
+.card.card-solo-por-hoy .card-contexto-options i {
+  background-color: #75F1F1;
 }
 
-.card.card-alquimia .card-status {
-  color: #F3B924;
+.card.card-alquimia .card-contexto-options i {
+  background-color: #F3B924;
 }
 
-.card.card-hoy-pense .card-status {
-  color: #57ED5F;
+.card.card-hoy-pense .card-contexto-options i {
+  background-color: #57ED5F;
 }
 
-.card.card-media .card-status {
-  color: #0F2687;
+.card.card-media .card-contexto-options i {
+  background-color: #0F2687;
 }
 
 .card.card-user {

@@ -4,6 +4,8 @@ use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 use app\modules\ModUsuarios\models\Utils;
+
+$this->title = '<i class="ion ion-images"></i> Media';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">

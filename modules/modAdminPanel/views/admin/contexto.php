@@ -3,6 +3,8 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+
+$this->title = '<i class="ion ion-android-share-alt"></i> Contextos';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">
@@ -14,7 +16,6 @@ use yii\web\View;
 				<div class="card card-contexto">
 					
 					<div class="card-contexto-cont">
-						<h3 class="card-title">Título muy largo a este gran post</h3>
 						<p class="card-desc"><?= $postContexto->txt_descripcion?></p>
 					</div>
 

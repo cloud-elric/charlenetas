@@ -4,7 +4,7 @@ use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 
-$this->title = '<i class="ion ion-card"></i> Alquimia';
+$this->title = '<i class="ion ion-ios-videocam"></i> Alquimia';
 ?>
 
 <!-- .page-cont -->
@@ -21,7 +21,6 @@ $this->title = '<i class="ion ion-card"></i> Alquimia';
 				
 				<div class="card-contexto-cont">
 					<h3 class="card-title"><?= $postAlquimia->txt_titulo ?></h3>
-					<p class="card-desc">Descripción</p>
 				</div>
 
 				<div class="card-contexto-status">

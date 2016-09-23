@@ -31,7 +31,7 @@
 			font-family: $f-secundary
 			font-size: 1.4em
 			font-weight: 900
-			margin-bottom: 4px
+			margin-bottom: 10px
 			overflow: hidden
 			text-overflow: ellipsis
 			white-space: nowrap
@@ -42,7 +42,8 @@
 			font-size: 1em
 			font-weight: 300
 			line-height: 1.5em
-			margin-bottom: 4px
+			margin-bottom: 8px
+			margin-top: 0
 			text-align: justify
 		img
 			+border-radius(3px)
@@ -75,6 +76,7 @@
 		.card-contexto-options-check
 			vertical-align: middle
 		i
+			color: $white
 			cursor: pointer
 			font-size: 1.23em
 			background-color: #eee
@@ -96,36 +98,44 @@
 	// Tarjetas con color en especifico
 	// En contexto
 	&.card-contexto
-		.card-status
-			color: $color-contexto
+		.card-contexto-options
+			i
+				background-color: $color-contexto
 	// A verdadazos
 	&.card-verdadazos
-		.card-status
-			color: $color-verdadazos
+		.card-contexto-options
+			i
+				background-color: $color-verdadazos
 	// Sabias que
 	&.card-sabias-que
-		.card-status
-			color: $color-sabias-que
+		.card-contexto-options
+			i
+				background-color: $color-sabias-que
 	// Espejo
 	&.card-espejo
-		.card-status
-			color: $color-espejo
+		.card-contexto-options
+			i
+				background-color: $color-espejo
 	// Solo por hoy
 	&.card-solo-por-hoy
-		.card-status
-			color: $color-solo-por-hoy
+		.card-contexto-options
+			i
+				background-color: $color-solo-por-hoy
 	// Alquimia
 	&.card-alquimia
-		.card-status
-			color: $color-alquimia
+		.card-contexto-options
+			i
+				background-color: $color-alquimia
 	// Hoy pense
 	&.card-hoy-pense
-		.card-status
-			color: $color-hoy-pense
+		.card-contexto-options
+			i
+				background-color: $color-hoy-pense
 	// Media
 	&.card-media
-		.card-status
-			color: $color-media
+		.card-contexto-options
+			i
+				background-color: $color-media
 	// User
 	&.card-user
 		padding: 0

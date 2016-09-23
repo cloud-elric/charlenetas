@@ -4,7 +4,7 @@ use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 
-$this->title = 'Espejos';
+$this->title = '<i class="ion ion-chatboxes"></i> Espejos';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">
@@ -21,7 +21,6 @@ $this->title = 'Espejos';
 			<div class="card card-espejo" data-token="<?=$postEspejo->txt_token?>">
 				
 				<div class="card-contexto-cont">
-					<h3 class="card-title">Título muy largo a este gran post</h3>
 					<p class="card-desc"><?=$postEspejo->txt_descripcion?></p>
 				</div>
 
