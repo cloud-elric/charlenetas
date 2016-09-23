@@ -38,9 +38,9 @@ $(document).ready(function(){
 	// Holder.run();
 
 	// Scroll (nav)
-    $('.nav').asScrollable();
-    // Scroll (nav)
-    $('.agenda').asScrollable();
+	$('.nav').asScrollable();
+	// Scroll (nav)
+	$('.agenda').asScrollable();
 
 });
 

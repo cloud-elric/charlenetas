@@ -1,4 +1,4 @@
-<!-- Modal Structure -->
+<!-- Modal Structure z -->
 <div id="js-modal-post-editar" class="modal modal-fixed-footer">
 	<div class="modal-content">
 		<div class='loader-center'>
