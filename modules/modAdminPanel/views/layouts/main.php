@@ -42,7 +42,7 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
 
 			<!-- .page-header -->
 			<div class="page-header">
-				<h2 class="page-title"><?=$this->title?></h2>
+				<h2 class="page-title"><?=$this->icon.' '.$this->title?></h2>
 			</div>
 			<!-- end /.page-header -->
 
