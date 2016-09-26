@@ -27,7 +27,7 @@ $this->icon = '<i class="ion ion-ios-videocam"></i>';
 				<div class="card-contexto-status">
 					<p class="card-contexto-status-comen">
 						<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->count("id_post") ?></span>
-					</p>
+					</p>	
 				</div>
 
 				<div class="card-contexto-options">
