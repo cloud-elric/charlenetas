@@ -108,6 +108,7 @@ class AdminController extends Controller {
 				"usuarios" => $usuarios 
 		] );
 	}
+	
 	public function actionEspejo($page = 0) {
 		$idPost = 1;
 		$postsEspejo = EntPosts::getPosts ( $page, $idPost );
@@ -116,6 +117,7 @@ class AdminController extends Controller {
 				"postsEspejo" => $postsEspejo 
 		] );
 	}
+	
 	public function actionAlquimia($page = 0) {
 		$idPost = 2;
 		$postsAlquimia = EntPosts::getPosts ( $page, $idPost );
@@ -124,6 +126,7 @@ class AdminController extends Controller {
 				"postsAlquimia" => $postsAlquimia 
 		] );
 	}
+	
 	public function actionVerdadazos($page = 0) {
 		$idPost = 3;
 		$postsVerdadazos = EntPosts::getPosts ( $page, $idPost );
@@ -132,6 +135,7 @@ class AdminController extends Controller {
 				"postsVerdadazos" => $postsVerdadazos 
 		] );
 	}
+	
 	public function actionHoyPense($page = 0) {
 		$idPost = 4;
 		$postsHoypense = EntPosts::getPosts ( $page, $idPost );
@@ -140,6 +144,7 @@ class AdminController extends Controller {
 				"postsHoyPense" => $postsHoypense 
 		] );
 	}
+	
 	public function actionMedia($page = 0) {
 		$idPost = 5;
 		$postsMedia = EntPosts::getPosts ( $page, $idPost );
@@ -148,6 +153,7 @@ class AdminController extends Controller {
 				"postsMedia" => $postsMedia 
 		] );
 	}
+	
 	public function actionContexto($page = 0) {
 		$idPost = 6;
 		$postsContexto = EntPosts::getPosts ( $page, $idPost );
@@ -156,6 +162,7 @@ class AdminController extends Controller {
 				"postsContexto" => $postsContexto 
 		] );
 	}
+	
 	public function actionSoloPorHoy($page = 0) {
 		$idPost = 7;
 		$postsSoloPorHoy = EntPosts::getPosts ( $page, $idPost );
@@ -164,6 +171,7 @@ class AdminController extends Controller {
 				"postsSoloPorHoy" => $postsSoloPorHoy 
 		] );
 	}
+	
 	public function actionSabiasQue($page = 0) {
 		$idPost = 8;
 		$postsSabiasQue = EntPosts::getPosts ( $page, $idPost );
@@ -172,12 +180,19 @@ class AdminController extends Controller {
 				"postsSabiasQue" => $postsSabiasQue 
 		] );
 	}
+	
 	public function actionNotificaciones() {
-		return $this->render ( 'Notificaciones' );
+		
+		$token_post = "com2fe4b8b63ae89b5d7661dee3f5151e9757eaa75c65b4d";
+		$usuario = EntComentariosPosts::find()->where(['txt_token'=>$token_post]);
+		
+		return $this->render ( 'Notificaciones', ["notificaciones"=>$usuario]);
 	}
+	
 	public function actionAgenda() {
 		return $this->render ( 'Agenda' );
 	}
+	
 	public function actionHabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc") {
 		$postHabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postHabilitar->b_habilitado = 1;
@@ -187,6 +202,7 @@ class AdminController extends Controller {
 		else
 			echo "ERROR";
 	}
+	
 	public function actionDeshabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc") {
 		$postDeshabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postDeshabilitar->b_habilitado = 0;

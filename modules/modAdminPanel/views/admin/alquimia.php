@@ -28,6 +28,7 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 					<p class="card-contexto-status-comen">
 						<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->andWhere(['is', 'id_comentario_padre',null])->count("id_post") ?></span>
 					</p>
+
 				</div>
 
 				<div class="card-contexto-options">

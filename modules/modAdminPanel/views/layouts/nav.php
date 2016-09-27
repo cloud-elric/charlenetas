@@ -22,7 +22,7 @@ use yii\helpers\Html;
 
 			<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Calendario" href="agenda.php"><i class="ion ion-ios-calendar-outline"></i></a>
 
-			<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Usuarios" href="users.php"><i class="ion ion-android-people"></i></a>
+			<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Usuarios" href="<?= yii::$app->homeUrl . "adminPanel/admin/usuarios"?>"><i class="ion ion-android-people"></i></a>
 
 		</div>
 	</div>
