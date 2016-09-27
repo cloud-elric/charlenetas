@@ -44,7 +44,17 @@ class AdminController extends Controller {
 								[ 
 										'actions' => [ 
 												'dashboard',
-												'alquimia' 
+												'alquimia',
+												'contexto',
+												'espejo',
+												'hoy-pense',
+												'media',
+												'sabias-que',
+												'solo-por-hoy',
+												'verdadazos'
+												
+												
+												
 										],
 										'allow' => true,
 										// Allow users, moderators and admins to create
