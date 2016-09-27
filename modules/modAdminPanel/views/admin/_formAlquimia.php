@@ -5,7 +5,7 @@ use yii\bootstrap\ActiveForm;
 $classActive = $post->isNewRecord?'':'active';
 ?>
 
-<h4><?=$post->isNewRecord?'Agregar':'Editar'?> <span>Alqumimia</span></h4>
+<h4><?=$post->isNewRecord?'Agregar':'Editar'?> <span>Alquimia</span></h4>
 
 <?php
 $form = ActiveForm::begin ( [ 

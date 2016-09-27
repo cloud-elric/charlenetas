@@ -65,7 +65,7 @@ $('body').on(
 					if (response.hasOwnProperty('status')
 							&& response.status == 'success') {
 						
-						$('#card_'+response.tk+' .card-espejo .respondido').text('Espejo respondido');
+						$('#card_'+response.tk+' .card-espejo .respondido span').text('Espejo respondido');
 						
 						if(!response.e){
 							$('#card_'+response.tk).clone().appendTo( "#js-contenedor-tarjetas" );

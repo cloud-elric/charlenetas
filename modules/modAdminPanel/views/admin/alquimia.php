@@ -14,6 +14,11 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 	<div class="row" id="js-contenedor-tarjetas">
 		
 		<?php
+		
+		if(count($postsAlquimia)==0){
+			echo '<h4>Sin alquimias</h4>';
+		}
+		
 		foreach ($postsAlquimia as $postAlquimia){
 		?>
 

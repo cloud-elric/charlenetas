@@ -47,7 +47,8 @@ class NetasController extends Controller {
 								'calificar-alquimia',
 								'get-calificacion-usuario',
 								'validar-respuesta',
-								'perfil-usuario' 
+								'perfil-usuario',
+								'agregar-espejo' 
 						],
 						'rules' => [
 								
@@ -63,7 +64,6 @@ class NetasController extends Controller {
 		];
 		// everything else is denied
 	}
-	
 	
 	/**
 	 * Obtenemos la calificacion del usuario logueado
@@ -158,7 +158,7 @@ class NetasController extends Controller {
 		// Tipos de post
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
 				'b_habilitado' => 1 
-		] )->orderBy('txt_nombre')->all ();
+		] )->orderBy ( 'txt_nombre' )->all ();
 		
 		// Pintar vista
 		return $this->render ( 'index', [ 
@@ -558,10 +558,9 @@ class NetasController extends Controller {
 	 */
 	public function actionValidarRespuesta($token) {
 		// busca el post necesario
-		$post = $this->getPostByToken($token);
+		$post = $this->getPostByToken ( $token );
 		
 		$sabiasQue = $post->entSabiasQue;
-		
 	}
 	
 	/**
@@ -674,5 +673,26 @@ class NetasController extends Controller {
 		echo Utils::generateToken ( $tk );
 	}
 	public function actionTest($url) {
+	}
+	
+	/**
+	 * Agrega espejo para el usuario en sesión
+	 */
+	public function actionAgregarEspejo() {
+		$post = new EntPosts ( [ 
+				'scenario' => 'agregarEspejo' 
+		] );
+		
+		if ($post->load ( Yii::$app->request->post () )) {
+			if($post->guardarEspejo($post)){
+				return 'success';
+			}else{
+				return 'error';
+			}
+		}
+		
+		return $this->renderAjax ( '//netas/include/_agregarEspejo', [ 
+				'post' => $post 
+		] );
 	}
 }

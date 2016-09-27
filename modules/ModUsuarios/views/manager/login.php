@@ -5,6 +5,7 @@
 /* @var $model app\models\LoginForm */
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = 'Login';
 $this->params ['breadcrumbs'] [] = $this->title;
@@ -129,7 +130,7 @@ window.fbAsyncInit = function() {
 				$form = ActiveForm::begin ( [ 
 						'enableAjaxValidation' => true,
 						'enableClientValidation' => true,
-						'validationUrl' => 'netas/validacion-usuario',
+						'validationUrl' => Url::base().'/netas/validacion-usuario',
 						'layout' => 'horizontal',
 						'id' => 'login-form',
 						'fieldConfig' => [ 

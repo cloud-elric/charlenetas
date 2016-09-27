@@ -73,9 +73,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 			
 			$query = EntPosts::find ()->where ( [ 
 					"id_tipo_post" => $post 
-			] )->joinWith('entEspejos ent_espejos')->orderBy('num_subscriptores desc');
-			
-			
+			] )->joinWith ( 'entEspejos ent_espejos' )->orderBy ( 'num_subscriptores desc' );
 		}
 		
 		// Carga el dataprovider
@@ -170,6 +168,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$rules = array_merge ( $rules, RulesContexto::rulesCrearContexto () );
 		$rules = array_merge ( $rules, RulesSoloPorHoy::rulesCrearSoloPorHoy () );
 		$rules = array_merge ( $rules, RulesSabiasQue::rulesCrearSabiasQue () );
+		$rules = array_merge ( $rules, RulesEspejo::rulesCrearEspejo () );
 		
 		return $rules;
 	}
@@ -274,7 +273,9 @@ class EntPosts extends \yii\db\ActiveRecord {
 	public function getEntEspejos() {
 		return $this->hasOne ( EntEspejos::className (), [ 
 				'id_post' => 'id_post' 
-		] )->orderBy(['ent_espejos.num_subscriptores'=>SORT_ASC]);
+		] )->orderBy ( [ 
+				'ent_espejos.num_subscriptores' => SORT_ASC 
+		] );
 	}
 	
 	/**
@@ -545,7 +546,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$media->fch_creacion = Utils::getFechaActual ();
 		$media->txt_token = Utils::generateToken ( 'post' );
 		$media->fch_publicacion = Utils::changeFormatDate ( $media->fch_publicacion );
-		//$media->txt_imagen = Utils::generateToken ( "img" ) . "." . $media->imagen->extension;
+		// $media->txt_imagen = Utils::generateToken ( "img" ) . "." . $media->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
@@ -702,13 +703,12 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
 		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
-		//$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
+		// $post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
 				$sabiasque->id_post = $post->id_post;
-			
 				
 				if ($sabiasque->save ()) {
 					
@@ -724,7 +724,6 @@ class EntPosts extends \yii\db\ActiveRecord {
 		}
 		return false;
 	}
-	
 	public function cargarImagen($post) {
 		$post->imagen->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_posts'] . $post->txt_imagen );
 		return true;
@@ -746,6 +745,41 @@ class EntPosts extends \yii\db\ActiveRecord {
 				$sabiasque->id_post = $post->id_post;
 				
 				if ($sabiasque->save ()) {
+					
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Guarda post de tipo espejo
+	 * 
+	 * @param unknown $post        	
+	 * @return \app\models\EntPosts|NULL
+	 */
+	public function guardarEspejo($post) {
+		$post->id_tipo_post = ConstantesWeb::POST_TYPE_ESPEJO;
+		$post->id_usuario = Yii::$app->user->identity->id_usuario;
+		$post->txt_token = Utils::generateToken ( 'post_' );
+		$post->fch_creacion = Utils::getFechaActual ();
+		$post->fch_publicacion = $post->fch_creacion;
+		
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+				$espejo = new EntEspejos ();
+				$espejo->id_post = $post->id_post;
+				$espejo->num_subscriptores = 0;
+				
+				if ($espejo->save ()) {
 					
 					$transaction->commit ();
 					return true;

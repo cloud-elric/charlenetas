@@ -38,7 +38,14 @@ class AdminController extends Controller {
 						],
 						'only' => [ 
 								'dashboard',
-								'alquimia' 
+												'alquimia',
+												'contexto',
+												'espejo',
+												'hoy-pense',
+												'media',
+												'sabias-que',
+												'solo-por-hoy',
+												'verdadazos'
 						],
 						'rules' => [ 
 								[ 

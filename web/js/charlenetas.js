@@ -6,12 +6,13 @@ var masonryOptions = {
 	gutter : 15,
 
 };
+var basePath = 'http://localhost/charlenetas/web/';
 
 // Carga mas pins de los post
 function cargarMasPosts() {
 
 	var contenedor = $('#js-contenedor-posts-tarjetas');
-	var url = 'netas/get-mas-posts?page=' + pages;
+	var url = basePath+'netas/get-mas-posts?page=' + pages;
 
 	$.ajax({
 		url : url,
@@ -51,7 +52,7 @@ $( ".js-filter-tipo-post" ).each(function( index ) {
 // pondran abajo
 function cargarComentarios(token, borrarAnteriores) {
 	var comentariosContenedor = $('#js-comments');
-	var urlComentarios = 'netas/cargar-comentarios?token=' + token + '&page='
+	var urlComentarios = basePath+'netas/cargar-comentarios?token=' + token + '&page='
 			+ pagesComentarios;
 
 	// Carga los comentarios via asincrona
@@ -72,7 +73,7 @@ function cargarComentarios(token, borrarAnteriores) {
 
 // Carga las respuestas de cada comentario
 function cargarRespuestas(token, pageRespuestas) {
-	var url = 'netas/cargar-respuestas?token=' + token + '&page='
+	var url = basePath+'netas/cargar-respuestas?token=' + token + '&page='
 			+ pageRespuestas;
 
 	$.ajax({
@@ -107,7 +108,7 @@ function cargarRespuestasPage(element) {
 function showPostFull(token) {
 	var background = $('#backScreen');
 	var content = $('#js-content');
-	var url = 'netas/cargar-post?token=' + token;
+	var url = basePath+'netas/cargar-post?token=' + token;
 
 	$('body').css('overflow', 'hidden');
 
@@ -123,7 +124,7 @@ function showPostFull(token) {
 function showPostAfterLogin(token) {
 	var background = $('#backScreen');
 	var content = $('#js-content');
-	var url = 'netas/cargar-post?token=' + token;
+	var url = basePath+'netas/cargar-post?token=' + token;
 
 	$('body').css('overflow', 'hidden');
 
@@ -147,7 +148,7 @@ function hidePostFull() {
 
 // Metodo para suscribirse a una pregunta espejo
 function suscribirseEspejo(token) {
-	var url = 'netas/suscripcion-espejo?token=' + token;
+	var url = basePath+'netas/suscripcion-espejo?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -219,7 +220,7 @@ function removeSubscriptores(token) {
  * Metodo para suscribirse a una pregunta espejo
  */
 function desSuscribirseEspejo(token) {
-	var url = 'netas/des-suscripcion-espejo?token=' + token;
+	var url = basePath+'netas/des-suscripcion-espejo?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -259,7 +260,7 @@ function desSuscribirseEspejo(token) {
  */
 function enviarComentario(token) {
 	var data = $('#js-comentario-form-' + token).serialize();
-	var url = 'netas/comentar-post?token=' + token;
+	var url = basePath+'netas/comentar-post?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -290,7 +291,7 @@ function enviarComentario(token) {
  * Guarda un comentario del usuario
  */
 function agregarFeedback(token, feed) {
-	var url = 'netas/agregar-feedback?token=' + token + '&feed=' + feed;
+	var url = basePath+'netas/agregar-feedback?token=' + token + '&feed=' + feed;
 
 	$.ajax({
 		url : url,
@@ -380,7 +381,7 @@ function encenderEstrellas(estrellasAEncender) {
  * Califica alquimia
  */
 function calificarAquimia(token, calificacion) {
-	var url = 'netas/calificar-alquimia?token=' + token + '&calificacion='
+	var url = basePath+'netas/calificar-alquimia?token=' + token + '&calificacion='
 			+ calificacion;
 	$.ajax({
 		url : url,
@@ -407,7 +408,7 @@ function calificarAquimia(token, calificacion) {
 function enviarRespuesta(token) {
 
 	var data = $('#js-comentario-form-' + token).serialize();
-	var url = 'netas/responder-comentario?token=' + token;
+	var url = basePath+'netas/responder-comentario?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -441,7 +442,7 @@ function enviarRespuesta(token) {
  * @param token
  */
 function likePost(token) {
-	var url = 'netas/like-post?token=' + token;
+	var url = basePath+'netas/like-post?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -513,7 +514,7 @@ function loadLada(element) {
 function loadLogin() {
 	// var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
 	// var url = 'http://localhost/charlenetas/web/login';
-	var url = 'http://localhost/charlenetas/web/login';
+	var url = basePath+'login';
 	var contentModal = $('#modal-login .modal-content');
 
 	$.ajax({
@@ -572,7 +573,7 @@ function cargarCalificacion() {
  * @param token
  */
 function cargarCalificacionUsuario(token) {
-	var url = 'netas/get-calificacion-usuario?token=' + token;
+	var url = basePath+'netas/get-calificacion-usuario?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -610,7 +611,7 @@ function cargarHabilidadLike() {
  */
 function cargarInputComentario() {
 	var comentarioNuevo = $('#new-comment');
-	var url = 'netas/cargar-input-comentario?token='
+	var url = basePath+'netas/cargar-input-comentario?token='
 			+ comentarioNuevo.data('token');
 
 	$.ajax({
@@ -629,7 +630,7 @@ function cargarInputComentario() {
 function cargarInputRespuestas() {
 	$('.js-reply-comentario').each(function() {
 		var reply = $(this);
-		var url = 'netas/cargar-input-respuesta?token=' + reply.data('token');
+		var url = basePath+'netas/cargar-input-respuesta?token=' + reply.data('token');
 
 		$.ajax({
 			url : url,

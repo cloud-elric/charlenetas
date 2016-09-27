@@ -1,12 +1,13 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 <div class="header">
 	<div class="">
 		<a href="#" class="disabled">Workshops</a> <a href="#" class="disabled">Tutoriales</a>
 	</div>
 	<div class="logo">
-		<img src="webAssets/images/logo-charlenetas.png" alt="Charlenetas.com" />
+		<img src="<?=Url::base()?>/webAssets/images/logo-charlenetas.png" alt="Charlenetas.com" />
 	</div>
 	<div class="">
 		<!-- <div class="btn btn-link ">Ingresar</div>
@@ -18,7 +19,9 @@ use yii\helpers\Html;
 		//  echo Yii::$app->user->identity->nombreCompleto.'<br>';
 		 echo Html::a('Cerrar sesión', ['site/logout']);
 		 }else{
-		 	echo Html::a('Ingresar', ['#'], ['onclick'=>'showModalLogin();']);
+		 	?>
+		 	<a onclick="showModalLogin();">Ingresar</a>
+		 	<?php 
 		 }
 ?>
 <!-- 		<a href="#">Mi perfil</a> -->

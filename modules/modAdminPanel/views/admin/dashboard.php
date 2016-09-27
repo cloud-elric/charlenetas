@@ -17,7 +17,7 @@
 					</div>
 				</div>
 				<div class="dashboard-card-foot">
-					<p><i class="ion ion-email"></i> <span><?=count($dash->entPosts)?> post</span></p>
+					<p><i class="ion ion-document"></i> <span><?=count($dash->entPosts)?> post</span></p>
 				</div>
 			</a>
 		</div>

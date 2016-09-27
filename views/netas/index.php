@@ -1,35 +1,37 @@
 <?php
 use yii\web\View;
+use yii\helpers\Url;
 ?>
-
-
 <?=$this->render('//layouts/header')?>
-
 <?=$this->render('//layouts/nav', ['tiposPost'=>$tiposPost])?>
 
-
 <div class=container-fluid>
- <div class="pins-grid-container">
-  <div class="grid" id="js-contenedor-posts-tarjetas">
-  
-  
-  
-    <?php
-    include 'masPosts.php';
-    ?>
+	<div class="pins-grid-container">
+		<div class="grid" id="js-contenedor-posts-tarjetas">
+
+			<div class="pin pin-agregar-espejo">
+				<div class="pin-header pin-header-agregar-espejo"></div>
+				<div class="image">
+					<img src="<?=Url::base()?>/webAssets/images/espejo.png">
+				</div>
+				<div class="pin-content-wrapper" lang="en">
+					<h3 class="pin-titulo">Agrega espejo (Corregir texto)</h3>
+					<p class="pin-descripcion">Descripción (Corregir texto)</p>
+
+				</div>
+			</div>
+			<?php
+			include 'masPosts.php';
+			?>
   </div>
- </div>
+	</div>
 </div>
 
-
-
-
-<div class="more-entries waves-effect waves-light btn" id="js-cargar-mas-posts"
-	onclick="cargarMasPosts();">Cargar mas entradas</div>
+<div class="more-entries waves-effect waves-light btn"
+	id="js-cargar-mas-posts" onclick="cargarMasPosts();">Cargar mas
+	entradas</div>
 
 <div id="js-tmp" style="display: none;"></div>
-
-
 
 <div id="backScreen">
 	<div id="wrapper">
@@ -37,8 +39,6 @@ use yii\web\View;
 		<div id="js-content" class="full-pin-content"></div>
 	</div>
 </div>
-
-
 <!-- Modal Structure -->
 <div id="modal-login" class="modal">
 	<div class="modal-content">
@@ -94,14 +94,14 @@ use yii\web\View;
 	</div>
 </div>
 
-<a class="waves-effect waves-light btn modal-trigger" href="#modal-login" style="display:none;"></a>
+<a class="waves-effect waves-light btn modal-trigger"
+	href="#modal-login" style="display: none;"></a>
 
 <?php
 if (Yii::$app->user->isGuest) {
-$this->registerJs("
+	$this->registerJs ( "
   loadLogin();
 
-  ", View::POS_END);
-
+  ", View::POS_END );
 }
 ?>

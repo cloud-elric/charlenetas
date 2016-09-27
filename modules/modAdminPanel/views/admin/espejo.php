@@ -29,7 +29,7 @@ $this->icon = '<i class="ion ion-eye"></i>';
 					<p class="card-contexto-status-susbs">
 						<i class="ion ion-person-stalker"></i> <span><?=empty($postEspejo->entEspejos)?0:$postEspejo->entEspejos->num_subscriptores?></span>
 					</p>
-					<p class="card-contexto-status-comen">
+					<p class="card-contexto-status-comen respondido">
 						<i class="ion icon icon-comment"></i> <span><?=$espejoContestado?'Espejo respondido':'Espejo no respondido'?></span>
 					</p>
 				</div>
