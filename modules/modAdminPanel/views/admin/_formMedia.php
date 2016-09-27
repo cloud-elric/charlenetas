@@ -1,9 +1,11 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
+$classActive = $media->isNewRecord?'':'active';
 ?>
 
-<h4>Agregar <span>Media</span></h4>
+<h4><?=$media->isNewRecord?'Agregar':'Editar'?> <span>Media</span></h4>
 
 <?php
 $form = ActiveForm::begin ( [
@@ -19,7 +21,7 @@ $form = ActiveForm::begin ( [
 						'error' => 'mdl-textfield__error'
 				],
 				'labelOptions' => [
-						'class' => 'mdl-textfield__label'
+						'class' => 'mdl-textfield__label '.$classActive 
 				],
 				'options' => [
 						'class' => 'input-field col s12'

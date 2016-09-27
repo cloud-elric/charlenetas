@@ -429,7 +429,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$verdadazo->id_tipo_post = ConstantesWeb::POST_TYPE_VERDADAZOS;
 		$verdadazo->fch_creacion = Utils::getFechaActual ();
 		$verdadazo->txt_token = Utils::generateToken ( 'post' );
-		$verdadazo->fch_publicacion = Utils::changeFormatDate ( $verdadazo->fch_publicacion );
+		$verdadazo->fch_publicacion = Utils::changeFormatDateInput ( $verdadazo->fch_publicacion );
 		$verdadazo->txt_imagen = Utils::generateToken ( "img" ) . "." . $verdadazo->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
@@ -636,7 +636,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_SOLO_POR_HOY;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
-		$post->fch_publicacion = Utils::changeFormatDate ( $post->fch_publicacion );
+		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
 		$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
@@ -701,13 +701,15 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_SABIAS_QUE;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
-		$post->fch_publicacion = Utils::changeFormatDate ( $post->fch_publicacion );
+		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
 		//$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
 				$sabiasque->id_post = $post->id_post;
+			
+				
 				if ($sabiasque->save ()) {
 					
 					$transaction->commit ();
@@ -738,7 +740,6 @@ class EntPosts extends \yii\db\ActiveRecord {
 	 */
 	public function editarSabiasQue($sabiasque, $post) {
 		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
-		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {

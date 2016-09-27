@@ -4,7 +4,8 @@ use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 
-$this->title = '<i class="ion ion-ios-paper"></i> Verdadazos';
+$this->title = 'Verdadazos';
+$this->icon = '<i class="ion ion-android-done-all"></i>';
 ?>
 
 <!-- .page-cont -->
@@ -22,15 +23,11 @@ $this->title = '<i class="ion ion-ios-paper"></i> Verdadazos';
 
 				<div class="card-contexto-status">
 					<p class="card-contexto-status-comen">
-						<i class="ion icon icon-comment"></i> <span><?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postVerdadazos->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
+						<i class="ion icon icon-comment"></i> <span><?=EntComentariosPosts::find ()->where ( [ 'id_post' => $postVerdadazos->id_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
 					</p>
 				</div>
 
 				<div class="card-contexto-options">
-					<div class="card-contexto-options-check">
-						<input type="checkbox" class="filled-in" id="filled-in-box1"
-							checked="checked" /> <label for="filled-in-box1"></label>
-					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarVerdadazos('<?=$postVerdadazos->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

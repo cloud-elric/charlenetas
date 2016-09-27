@@ -5,7 +5,8 @@ use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 use app\modules\ModUsuarios\models\Utils;
 
-$this->title = '<i class="ion ion-images"></i> Media';
+$this->title = 'Media';
+$this->icon = '<i class="ion ion-images"></i>';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">

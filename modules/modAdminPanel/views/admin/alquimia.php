@@ -5,7 +5,7 @@ use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 
 $this->title = 'Alquimia';
-$this->icon = '<i class="ion ion-ios-videocam"></i>';
+$this->icon = '<i class="ion ion-film-marker"></i>';
 ?>
 
 <!-- .page-cont -->
@@ -26,12 +26,12 @@ $this->icon = '<i class="ion ion-ios-videocam"></i>';
 
 				<div class="card-contexto-status">
 					<p class="card-contexto-status-comen">
-						<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->count("id_post") ?></span>
+						<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find()->where(['id_post'=>$postAlquimia->id_post])->andWhere(['is', 'id_comentario_padre',null])->count("id_post") ?></span>
 					</p>
 				</div>
 
 				<div class="card-contexto-options">
-					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postAlquimia->txt_token?>')" href="#js-modal-post-editar">
+					<a id="button_<?=$postAlquimia->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postAlquimia->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 					
@@ -47,7 +47,7 @@ $this->icon = '<i class="ion ion-ios-videocam"></i>';
 	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
 		<!-- Modal Trigger -->
-		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post" onclick='document.getElementById("form-alquimia").reset();'>
 			<i class="ion ion-wand"></i>
 		</a>
 	</div>

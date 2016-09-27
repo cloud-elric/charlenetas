@@ -30,7 +30,7 @@ class EntSabiasQue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_post', 'b_verdadero'], 'integer'],
+            [['id_post'], 'integer'],
             [['id_post'], 'exist', 'skipOnError' => true, 'targetClass' => EntPosts::className(), 'targetAttribute' => ['id_post' => 'id_post']],
         ];
     }
@@ -42,7 +42,7 @@ class EntSabiasQue extends \yii\db\ActiveRecord
     {
         return [
             'id_post' => 'Id Post',
-            'b_verdadero' => 'B Verdadero',
+            'b_verdadero' => 'Respuesta',
         ];
     }
 

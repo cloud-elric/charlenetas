@@ -4,7 +4,8 @@ use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 
-$this->title = '<i class="ion ion-chatboxes"></i> Espejos';
+$this->title = 'Espejo';
+$this->icon = '<i class="ion ion-eye"></i>';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">

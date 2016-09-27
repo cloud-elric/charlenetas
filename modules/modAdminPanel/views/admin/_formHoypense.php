@@ -1,9 +1,11 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
+$classActive = $hoyPense->isNewRecord?'':'active';
 ?>
 
-<h4>Agregar <span>Hoy pense</span></h4>
+<h4><?=$hoyPense->isNewRecord?'Agregar':'Editar'?> <span>Hoy pense</span></h4>
 
 <?php
 $form = ActiveForm::begin ( [
@@ -19,7 +21,7 @@ $form = ActiveForm::begin ( [
 						'error' => 'mdl-textfield__error'
 				],
 				'labelOptions' => [
-						'class' => 'mdl-textfield__label'
+						'class' => 'mdl-textfield__label '.$classActive 
 				],
 				'options' => [
 						'class' => 'input-field col s12 m6'
@@ -37,7 +39,7 @@ $form = ActiveForm::begin ( [
 
 		<?= $form->field($hoyPense, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
    	
-		<?= $form->field($hoyPense, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])?>
+		<?= $form->field($hoyPense, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textarea(['class'=>'materialize-textarea'])?>
 
 	</div>
 

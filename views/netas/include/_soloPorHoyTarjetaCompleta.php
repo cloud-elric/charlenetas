@@ -1,7 +1,10 @@
 <?php
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+use yii\helpers\Url;
 $usuario = $post->idUsuario;
+
+#$url = 'http://sms-tecnomovil.com/SvtSendSms?username=PIXERED&password=CARLOS&message=' . urlencode ($message) .'&numbers=' . $telefono;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
@@ -30,7 +33,7 @@ $usuario = $post->idUsuario;
 		<h3>...no violare la constitución</h3>
 
 		<div class="full-pin-body-content-img">
-			<img src="webAssets/images/<?=$post->txt_imagen?>" alt="Solo por hoy no violare la constitucion" />
+			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>" alt="Solo por hoy no violare la constitucion" />
 		</div>
 
 

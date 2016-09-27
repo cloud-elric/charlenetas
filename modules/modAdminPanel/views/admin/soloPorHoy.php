@@ -3,8 +3,8 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
-
-$this->title = '<i class="ion ion-android-calendar"></i> Solo por hoy';
+$this->title = 'Solo por hoy';
+$this->icon = '<i class="ion ion-android-warning"></i>';
 ?>
 
 <!-- .page-cont -->
@@ -28,10 +28,6 @@ $this->title = '<i class="ion ion-android-calendar"></i> Solo por hoy';
 				</div>
 
 				<div class="card-contexto-options">
-					<div class="card-contexto-options-check">
-						<input type="checkbox" class="filled-in" id="filled-in-box3"
-							checked="checked" /> <label for="filled-in-box3"></label>
-					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

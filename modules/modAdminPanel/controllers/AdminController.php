@@ -453,7 +453,6 @@ class AdminController extends Controller {
 		}
 		
 		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
-			
 			$usuario = Yii::$app->user->identity;
 			
 			$post->id_usuario = $usuario->id_usuario;
@@ -606,7 +605,7 @@ class AdminController extends Controller {
 			
 			return [ 
 					'status' => 'success',
-					't' => $verdadazo->txt_titulo,
+					't' => $verdadazo->txt_descripcion,
 					'tk' => $verdadazo->txt_token 
 			];
 		}
@@ -811,7 +810,7 @@ class AdminController extends Controller {
 			
 			return [ 
 					'status' => 'success',
-					't' => $post->txt_titulo,
+					't' => $post->txt_descripcion,
 					'tk' => $post->txt_token 
 			];
 		}

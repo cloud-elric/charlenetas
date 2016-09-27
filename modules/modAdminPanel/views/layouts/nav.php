@@ -1,5 +1,6 @@
 <?php 
 	use app\models\CatTiposPosts;
+use yii\helpers\Html;
 
 	$dashboard = new CatTiposPosts();
 	$posts = $dashboard->find()->orderBy('txt_nombre ASC')->all();
@@ -10,11 +11,12 @@
 <div class="nav" data-options='{"direction": "vertical", "contentSelector": ">", "containerSelector": ">"}'>
 	<div>
 		<div>
-			<a class="active tooltipped" data-position="right" data-delay="50" data-tooltip="Dashboard" href="<?= yii::$app->homeUrl . "adminPanel/admin/" . "dashboard"; ?>"><i class="ion ion-home"></i></a>
+			<a class="<?=$this->context->action->id=='dashboard'?'active':''?> tooltipped" data-position="right" data-delay="50" data-tooltip="Dashboard" href="<?= yii::$app->homeUrl . "adminPanel/admin/" . "dashboard"; ?>">
+			<i class="ion ion-home"></i></a>
 
 			<?php foreach($posts as $post): ?>
 			
-			<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="<?= $post->txt_nombre ?>" href="<?= yii::$app->homeUrl . "adminPanel/admin/" . $post->txt_action; ?>"><i class="ion <?= $post->txt_ico ?>"></i></a>
+			<a class="<?=$this->context->action->id==$post->txt_action?'active':''?> tooltipped" data-position="right" data-delay="50" data-tooltip="<?= $post->txt_nombre ?>" href="<?= yii::$app->homeUrl . "adminPanel/admin/" . $post->txt_action; ?>"><i class="ion <?= $post->txt_ico ?>"></i></a>
 			
 			<?php endforeach;?>
 

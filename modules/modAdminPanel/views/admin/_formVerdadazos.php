@@ -1,9 +1,10 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+$classActive = $verdadazo->isNewRecord?'':'active';
 ?>
 
-<h4>Agregar <span>Verdadazo</span></h4>
+<h4><?=$verdadazo->isNewRecord?'Agregar':'Editar'?> <span>Verdadazo</span></h4>
 
 <?php
 $form = ActiveForm::begin ( [
@@ -19,7 +20,7 @@ $form = ActiveForm::begin ( [
 						'error' => 'mdl-textfield__error'
 				],
 				'labelOptions' => [
-						'class' => 'mdl-textfield__label'
+						'class' => 'mdl-textfield__label '.$classActive 
 				],
 				'options' => [
 						'class' => 'input-field col s12 m6'
