@@ -1,5 +1,4 @@
 <?php
-use app\models\EntUsuariosSubscripciones;
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
 use app\models\ConstantesWeb;
@@ -7,35 +6,6 @@ use app\models\EntRespuestasEspejo;
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
-
-<p id='js-suscriptores-<?=$post->txt_token?>'><?=$post->entEspejos->num_subscriptores?></p>
-<br>
-<?php
-/**
- *
- * @todo Colocar al usuario correspondiente
- */
-
-if (! Yii::$app->user->isGuest) {
-	$usuarioIsSubscrito = EntUsuariosSubscripciones::findSubscripcion ( Yii::$app->user->identity->id_usuario, $post->id_post );
-	$onclick = 'suscribirseEspejo("' . $post->txt_token . '");';
-	$messageSub = 'Suscribir a la Pregunta';
-
-	// Validación de usuario ya se haya subscrito
-	if ($usuarioIsSubscrito) {
-		$onclick = 'desSuscribirseEspejo("' . $post->txt_token . '");';
-		$messageSub = 'Suscrito a la Pregunta';
-	}
-
-	?>
-<div id="js-btn-suscribirse-<?=$post->txt_token?>"
-	onclick='<?=$onclick?>' style="border: 1px solid black"><?=$messageSub?></div>
-<?php
-}
-
-?>
-
-
 <section class="full-pin-header">
 
 	<h2>El Espejo</h2>

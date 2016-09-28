@@ -130,7 +130,7 @@ class AdminController extends Controller {
 		$idPost = 2;
 		$postsAlquimia = EntPosts::getPosts ( $page, $idPost );
 		
-		return $this->render ( 'Alquimia', [ 
+		return $this->render ( 'alquimia', [ 
 				"postsAlquimia" => $postsAlquimia 
 		] );
 	}
@@ -139,7 +139,7 @@ class AdminController extends Controller {
 		$idPost = 3;
 		$postsVerdadazos = EntPosts::getPosts ( $page, $idPost );
 		
-		return $this->render ( 'Verdadazos', [ 
+		return $this->render ( 'verdadazos', [ 
 				"postsVerdadazos" => $postsVerdadazos 
 		] );
 	}
@@ -148,7 +148,7 @@ class AdminController extends Controller {
 		$idPost = 4;
 		$postsHoypense = EntPosts::getPosts ( $page, $idPost );
 		
-		return $this->render ( 'HoyPense', [ 
+		return $this->render ( 'hoyPense', [ 
 				"postsHoyPense" => $postsHoypense 
 		] );
 	}
@@ -157,7 +157,7 @@ class AdminController extends Controller {
 		$idPost = 5;
 		$postsMedia = EntPosts::getPosts ( $page, $idPost );
 		
-		return $this->render ( 'Media', [ 
+		return $this->render ( 'media', [ 
 				"postsMedia" => $postsMedia 
 		] );
 	}
@@ -166,7 +166,7 @@ class AdminController extends Controller {
 		$idPost = 6;
 		$postsContexto = EntPosts::getPosts ( $page, $idPost );
 		
-		return $this->render ( 'Contexto', [ 
+		return $this->render ( 'contexto', [ 
 				"postsContexto" => $postsContexto 
 		] );
 	}
@@ -175,7 +175,7 @@ class AdminController extends Controller {
 		$idPost = 7;
 		$postsSoloPorHoy = EntPosts::getPosts ( $page, $idPost );
 		
-		return $this->render ( 'SoloPorHoy', [ 
+		return $this->render ( 'soloPorHoy', [ 
 				"postsSoloPorHoy" => $postsSoloPorHoy 
 		] );
 	}
@@ -184,7 +184,7 @@ class AdminController extends Controller {
 		$idPost = 8;
 		$postsSabiasQue = EntPosts::getPosts ( $page, $idPost );
 		
-		return $this->render ( 'SabiasQue', [ 
+		return $this->render ( 'sabiasQue', [ 
 				"postsSabiasQue" => $postsSabiasQue 
 		] );
 	}
@@ -203,7 +203,7 @@ class AdminController extends Controller {
 	}
 	
 	public function actionAgenda() {
-		return $this->render ( 'Agenda' );
+		return $this->render ( 'agenda' );
 	}
 	
 	public function actionHabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc") {
@@ -301,7 +301,7 @@ class AdminController extends Controller {
 			
 			// usuario logueado
 			$usuario = Yii::$app->user->identity;
-			
+			$verdadazo->id_usuario = $usuario->id_usuario;
 			$verdadazo->imagen = UploadedFile::getInstance ( $verdadazo, 'imagen' );
 			$verdadazo->txt_imagen = Utils::generateToken ( "img" ) . "." . $verdadazo->imagen->extension;
 			$verdadazo->guardarVerdadazos ( $verdadazo );
@@ -451,7 +451,7 @@ class AdminController extends Controller {
 		if ($soloporhoy->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			
 			$usuario = Yii::$app->user->identity;
-			
+			$post->id_usuario = $usuario->id_usuario;
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 			$post->guardarSoloPorHoy ( $soloporhoy, $post );
@@ -738,7 +738,7 @@ class AdminController extends Controller {
 			
 			return [ 
 					'status' => 'success',
-					't' => $media->txt_titulo,
+					't' => "http://img.youtube.com/vi/".Utils::getIdVideoYoutube($media->txt_url)."/mqdefault.jpg",
 					'tk' => $media->txt_token 
 			];
 		}

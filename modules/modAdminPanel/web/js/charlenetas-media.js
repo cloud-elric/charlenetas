@@ -41,16 +41,14 @@ function abrirModalEditarMedia(token){
 function agregarTarjetaNueva(json) {
 	var template = '<div class="col s12 m6 l4" id="card_'+json.tk+'">'
 			+ '<div class="card card-media" data-token="'+json.tk+'" onclick="showPostFull(\''+json.tk+'\')">'
-			+ '<h3>'+json.t+'</h3>'
-			+ '<p>0 Comentario(s)</p>'
-			+ '<div class="card-options">'
-			+ '<div class="card-options-check">'
-			+ '<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />'
-			+ '<label for="filled-in-box1"></label>' + '</div>'
+			+ '<h3><img'
+			+ ' src="'+json.t+'"></h3>'
+			
+			+ '<div class="card-contexto-options">'
 			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarMedia(\''+json.tk+'\')" href="#js-modal-post-editar">'
 			+'<i class="ion ion-android-more-vertical card-edit"></i>'
 			+'</a>'
-			+ '</div>' + '</div>' + '</div>';
+			+ '</div>'  + '</div>';
 	var contenedor = $('#js-contenedor-tarjetas');
 	
 	contenedor.prepend(template);
@@ -126,8 +124,9 @@ $('body').on(
 						// Cierra el modal
 						$('#js-modal-post-editar').closeModal();
 						
-						$('#js-modal-post-editar .modal-content').html(loading);
+						$('#js-modal-post-editar  .modal-content').html(loading);
 						
+						$('#card_'+response.tk+' img').attr('src',response.t);
 					} else {
 						// Muestra los errores
 						$('#editar-media').yiiActiveForm('updateMessages',

@@ -7,6 +7,8 @@ var masonryOptions = {
 
 };
 var basePath = 'http://localhost/charlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+
 
 // Carga mas pins de los post
 function cargarMasPosts() {
@@ -156,15 +158,17 @@ function suscribirseEspejo(token) {
 		beforeSend : function() {
 			// Colocar un loading o algo asi
 
-			$('#js-btn-suscribirse-' + token).attr('onclick', ' ');
+			$('#js-subs-like-' + token).attr('onclick', ' ');
+			addSubscriptores(token);
 		},
 		success : function(res) {
 
 			if (res === 'subscrito') {
-				// Colocar un mensaje de que usuario ya esta inscrito
+				// Colocar un mensaje de que usuario ya esta inscrito desSuscribirseEspejo(
 				removeSubscriptores(token);
+				$('#js-subs-like-' + token).attr('onclick', 'suscribirseEspejo("'+token+'")');
 			} else {
-				addSubscriptores(token);
+				$('#js-subs-like-' + token).attr('onclick', 'desSuscribirseEspejo("'+token+'")');
 			}
 
 		},
@@ -189,31 +193,23 @@ function suscribirseEspejo(token) {
  * Agrega el botón para agregar subscritores
  */
 function addSubscriptores(token) {
-	var btnDesSuscribirse = '<div id="js-btn-suscribirse-'
-			+ token
-			+ '"onclick=\'desSuscribirseEspejo("'
-			+ token
-			+ '");\' style="border: 1px solid black">No me interesa la pregunta</div>';
+	
 	var subs = $('#js-suscriptores-' + token).text();
 
 	$('#js-suscriptores-' + token).text(parseInt(subs) + 1);
-
-	$('#js-btn-suscribirse-' + token).replaceWith(btnDesSuscribirse);
+	$('#js-subs-like-'+token).addClass('did-usr-interact');
+	
 }
 
 /**
  * Remueve el botón para eliminar subscritores
  */
 function removeSubscriptores(token) {
-	var btnSuscribirse = '<div id="js-btn-suscribirse-'
-			+ token
-			+ '"onclick=\'suscribirseEspejo("'
-			+ token
-			+ '");\' style="border: 1px solid black">Me interesa la pregunta</div>';
+	
 	var subs = $('#js-suscriptores-' + token).text();
 
 	$('#js-suscriptores-' + token).text(parseInt(subs) - 1);
-	$('#js-btn-suscribirse-' + token).replaceWith(btnSuscribirse);
+	$('#js-subs-like-'+token).removeClass('did-usr-interact');
 }
 
 /**
@@ -228,14 +224,16 @@ function desSuscribirseEspejo(token) {
 		beforeSend : function() {
 			// Colocar un loading o algo asi
 
-			$('#js-btn-suscribirse-' + token).attr('onclick', ' ');
+			$('#js-subs-like-' + token).attr('onclick', ' ');
+			removeSubscriptores(token);
 		},
 		success : function(res) {
 
 			if (res === 'sinSubscripcion') {
 				addSubscriptores(token);
+				$('#js-subs-like-' + token).attr('onclick', 'desSuscribirseEspejo("'+token+'")');
 			} else {
-				removeSubscriptores(token);
+				$('#js-subs-like-' + token).attr('onclick', 'suscribirseEspejo("'+token+'")');
 			}
 
 		},

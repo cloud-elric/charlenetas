@@ -23,10 +23,6 @@ $this->icon = '<i class="ion ion-images"></i>';
 				</h3>
 
 				<div class="card-contexto-options">
-					<div class="card-contexto-options-check">
-						<input type="checkbox" class="filled-in" id="filled-in-box6"
-							checked="checked" /> <label for="filled-in-box6"></label>
-					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarMedia('<?=$postMedia->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

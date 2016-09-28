@@ -51,5 +51,5 @@ $form = ActiveForm::begin ( [
 
 ActiveForm::end ();
 
-include '/templates/formato-fecha.php';
+include 'templates/formato-fecha.php';
 

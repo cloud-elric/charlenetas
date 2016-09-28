@@ -65,7 +65,7 @@ $form = ActiveForm::begin ( [
 		
 		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
 		
-		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])?>
+		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
 	
 	</div>
 
@@ -75,4 +75,4 @@ $form = ActiveForm::begin ( [
 
 ActiveForm::end ();
 
-include '/templates/formato-fecha.php';
+include 'templates/formato-fecha.php';

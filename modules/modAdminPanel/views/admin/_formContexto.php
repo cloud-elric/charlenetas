@@ -28,4 +28,4 @@ $form = ActiveForm::begin ( [
        
 <?php ActiveForm::end();
 
-include '/templates/formato-fecha.php';
+include 'templates/formato-fecha.php';

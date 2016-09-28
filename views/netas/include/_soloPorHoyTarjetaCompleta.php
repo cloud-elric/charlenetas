@@ -42,7 +42,9 @@ $usuario = $post->idUsuario;
 			<p>
 				<?=Html::encode($post->txt_descripcion)?>
 			</p>
-			http:://constitucion.com.mx<?=$post->entSoloPorHoys->num_articulo?>
+			<a target="_blank" href="http://www.ordenjuridico.gob.mx/Constitucion/articulos/<?=$post->entSoloPorHoys->num_articulo?>.pdf">
+			Ver articulo
+			</a>
 		</div>
 	</div>
 

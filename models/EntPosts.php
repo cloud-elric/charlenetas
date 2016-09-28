@@ -73,7 +73,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 			
 			$query = EntPosts::find ()->where ( [ 
 					"id_tipo_post" => $post 
-			] )->joinWith ( 'entEspejos ent_espejos' )->orderBy ( 'num_subscriptores desc' );
+			] )->joinWith ( 'entEspejos ent_espejos' )->joinWith ( 'entRespuestasEspejo ent_respuestas_espejo' )->orderBy ( 'num_subscriptores desc, ent_respuestas_espejo.fch_publicacion_respuesta' );
 		}
 		
 		// Carga el dataprovider
@@ -545,7 +545,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$media->id_tipo_post = ConstantesWeb::POST_TYPE_MEDIA;
 		$media->fch_creacion = Utils::getFechaActual ();
 		$media->txt_token = Utils::generateToken ( 'post' );
-		$media->fch_publicacion = Utils::changeFormatDate ( $media->fch_publicacion );
+		$media->fch_publicacion = Utils::changeFormatDateInput( $media->fch_publicacion );
 		// $media->txt_imagen = Utils::generateToken ( "img" ) . "." . $media->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
@@ -761,7 +761,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 	
 	/**
 	 * Guarda post de tipo espejo
-	 * 
+	 *
 	 * @param unknown $post        	
 	 * @return \app\models\EntPosts|NULL
 	 */

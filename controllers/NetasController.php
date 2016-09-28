@@ -296,7 +296,6 @@ class NetasController extends Controller {
 		$this->layout = false;
 		
 		$idUsuario = Yii::$app->user->identity->id_usuario;
-		;
 		
 		// Obtenemos el post
 		$post = $this->getPostByToken ( $token );
