@@ -23,6 +23,7 @@ use app\models\CatTiposPosts;
 use app\models\ConstantesWeb;
 use app\models\EntPosts;
 use app\models\EntAlquimias;
+use app\models\EntNotificaciones;
 
 class NetasController extends Controller {
 	
@@ -519,6 +520,12 @@ class NetasController extends Controller {
 		$respuesta->id_comentario_padre = $comentario->id_comentario_post;
 		
 		if ($respuesta->guardarComentarioUsuario ( $idUsuario, $comentario->id_post )) {
+			
+			//$comentarios = new EntComentariosPosts();
+			$notificaciones = new EntNotificaciones();
+			
+			$notificaciones->guardarNotificacion($comentario, $notificaciones);
+			
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			

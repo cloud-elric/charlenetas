@@ -32,7 +32,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_notificacion', 'id_usuario', 'txt_titulo', 'txt_token_objeto', 'txt_descripcion'], 'required'],
+            [['id_usuario', 'txt_titulo', 'txt_token_objeto', 'txt_descripcion'], 'required'],
             [['id_notificacion', 'id_usuario', 'b_leido'], 'integer'],
             [['txt_titulo'], 'string', 'max' => 50],
             [['txt_token_objeto'], 'string', 'max' => 60],
@@ -66,23 +66,27 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     
     /**
      * 
-     * @param unknown $id_usuario
-     * @param unknown $token_post
+     * @param unknown $comentario
+     * @throws Exception
+     * @return boolean
      */
-    public function respuestarPosts($id_usuario, $token_post){
-	    	
-    	$notificaciones = EntNotificaciones();
+    public function guardarNotificacion($comentario, $notificaciones){
     	
-    	$notificaciones->id_usuario = $id_usuario;
-    	$notificaciones->txt_token_objeto = $token_post;
+    	$notificaciones->id_usuario = $comentario->id_usuario;
+    	$notificaciones->txt_token_objeto = $comentario->txt_token;
+    	$notificaciones->txt_descripcion = "te han respondido";
+    	$notificaciones->txt_titulo = "te han respondido";
     	
-    	$transaction = EntNotificaciones::getDb ()->beginTransaction ();
+    	
+    	$transaction = EntNotificaciones::getDb()->beginTransaction ();
     	try {
-    		if ($notificaciones->save ()) {
+    		if ($notificaciones->save()) {
     	
-    			$transaction->commit ();
+    			$transaction->commit();
     			return true;
     		}
+    		//print_r($notificaciones->errors);
+    		//exit();
     		$transaction->rollBack ();
     	} catch ( \Exception $e ) {
     		$transaction->rollBack ();

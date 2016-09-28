@@ -20,6 +20,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use app\models\EntPostsExtend;
 use app\models\EntRespuestasEspejo;
+use app\models\EntNotificaciones;
 
 /**
  * Default controller for the `adminPanel` module
@@ -190,10 +191,15 @@ class AdminController extends Controller {
 	
 	public function actionNotificaciones() {
 		
-		$token_post = "com2fe4b8b63ae89b5d7661dee3f5151e9757eaa75c65b4d";
-		$usuario = EntComentariosPosts::find()->where(['txt_token'=>$token_post]);
+		/*$token_post = "com2fe4b8b63ae89b5d7661dee3f5151e9757eaa75c65b4d";
+		$comentario = new EntComentariosPosts();
+		$notificaciones = new EntNotificaciones();
+		$usuario = $comentario->find()->where(['txt_token'=>$token_post])->one();
 		
-		return $this->render ( 'Notificaciones', ["notificaciones"=>$usuario]);
+		$notificaciones->guardarNotificacion($usuario, $notificaciones);*/
+			
+		return $this->render ( 'Notificaciones'/*, ["notificaciones"=>$usuario]*/);
+		
 	}
 	
 	public function actionAgenda() {
