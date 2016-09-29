@@ -5,6 +5,7 @@
 /* @var $model app\models\LoginForm */
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = 'Login';
 $this->params ['breadcrumbs'] [] = $this->title;
@@ -29,7 +30,7 @@ logInWithFacebook = function() {
 };
 
 function statusChangeCallback(response) {
-
+	//empresasunitec@outlook.com
 	// The response object is returned with a status field that lets the
 	// app know the current login status of the person.
 	// Full docs on the response object can be found in the documentation
@@ -68,26 +69,6 @@ function statusChangeCallback(response) {
 }
 
 function checkLoginState() {
-
-	// FB.api('/me/permissions', function(response) {
-	// var declined = [];
-	// for (i = 0; i < response.data.length; i++) {
-	// if (response.data[i].status == 'declined') {
-	// declined.push(response.data[i].permission)
-	// }
-	// }
-	// alert(declined.toString())
-	// });
-	// FB.login(
-	// function(response) {
-	// console.log(response);
-	// statusChangeCallback(response);
-	// },
-	// {
-	// scope: 'email',
-	// auth_type: 'rerequest'
-	// }
-	// );
 
 	FB.getLoginStatus(function(response) {
 		statusChangeCallback(response);
@@ -129,7 +110,7 @@ window.fbAsyncInit = function() {
 				$form = ActiveForm::begin ( [ 
 						'enableAjaxValidation' => true,
 						'enableClientValidation' => true,
-						'validationUrl' => 'netas/validacion-usuario',
+						'validationUrl' => Url::base().'/netas/validacion-usuario',
 						'layout' => 'horizontal',
 						'id' => 'login-form',
 						'fieldConfig' => [ 

@@ -48,6 +48,15 @@ class Utils {
 	}
 	
 	/**
+	 * Cambia el formato de la fecha del input al adecuado para la base de datos
+	 * @param unknown $string
+	 */
+	public static function changeFormatDateInput($string){
+		$date = date_create ($string );
+		return date_format ( $date, "Y-m-d H:i:s" );
+	}
+	
+	/**
 	 * Obtenemos la fecha actual para almacenarla
 	 *
 	 * @return string

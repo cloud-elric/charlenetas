@@ -35,7 +35,7 @@ body
 a
 	color: $header-menu
 	font:
-		family: $f-base
+		family: $f-secundary
 		size: 16px
 		weight: 400
 	text-decoration: none
@@ -63,7 +63,7 @@ h6,
 .h5,
 .h6
 	font:
-		family: $f-base
+		family: $f-secundary
 		weight: 400
 	margin: 0
 	padding: 0
@@ -119,6 +119,13 @@ hr
 	width: 100%
 	z-index: 999
 
+.loader-center
+	align-items: center
+	display: flex
+	justify-content: center
+	height: 100%
+	width: 100%
+
 /*  Cortar texto y colocar tres puntos
 	================================================ */
 .ellipsis
@@ -136,3 +143,10 @@ hr
 // @include respond-to(xs)
 // Extra mobile
 // @include respond-to(xx)
+
+/*  Form (input,email,file,textarea,btn)
+	================================================ */
+.file-field
+	.btn,
+	.btn-large
+		line-height: 2.3rem

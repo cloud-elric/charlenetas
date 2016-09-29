@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+use yii\helpers\Url;
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
@@ -27,11 +28,11 @@ $usuario = $post->idUsuario;
 	<p>
 		<?=$post->txt_descripcion?>
 	</p>
-	<img src="webAssets/images/<?=$post->txt_imagen?>"
+	<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
 		alt="Verdadazos - Netas bien duras" />
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
-			<div class="feedback did-usr-interact">
+			<div class="feedback did-usr-interact" onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
 			<div class="feedback">

@@ -22,7 +22,7 @@
 			# Footer
 	3.0 - Login
 	4.0 - Dashboard
-	5.0 - Contexto
+	5.0 - Tarjetas
 	--------------------------------------------------------
 	*/
 /*!
@@ -37,21 +37,107 @@
 			# Roboto
 
 	----------------------------------------------------------------------------- */
-/* Exo */
-@import url(https://fonts.googleapis.com/css?family=Exo:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
-/* Exo 2 */
-@import url(https://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 /* Lato */
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic);
-/* Montserrat */
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-/* Open Sans */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 /* Raleway */
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
-/*  */
-/* Roboto */
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100italic,100,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+@font-face {
+  font-family: 'fontello';
+  src: url("../icon-fonts/fontello.eot?46511897");
+  src: url("../icon-fonts/fontello.eot?46511897#iefix") format("embedded-opentype"), url("../icon-fonts/fontello.woff2?46511897") format("woff2"), url("../icon-fonts/fontello.woff?46511897") format("woff"), url("../icon-fonts/fontello.ttf?46511897") format("truetype"), url("../icon-fonts/fontello.svg?46511897#fontello") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+}
+
+.icon-heart-full:before {
+  content: '\e800';
+}
+
+.icon-heart:before {
+  content: '\e801';
+}
+
+.icon-thumbs-up:before {
+  content: '\e802';
+}
+
+.icon-thumbs-down:before {
+  content: '\e803';
+}
+
+.icon-fire:before {
+  content: '\e804';
+}
+
+.icon-cancel:before {
+  content: '\e805';
+}
+
+.icon-checkbox:before {
+  content: '\e806';
+}
+
+.icon-star:before {
+  content: '\e807';
+}
+
+.icon-star-empty:before {
+  content: '\e808';
+}
+
+.icon-close:before {
+  content: '\e809';
+}
+
+.icon-trollface:before {
+  content: '\e80a';
+}
+
+.icon-check:before {
+  content: '\e80b';
+}
+
+.icon-comment:before {
+  content: '\e80c';
+}
+
+.icon-spin6:before {
+  content: '\e839';
+}
+
+.icon-checkbox-empty:before {
+  content: '\f096';
+}
+
+.icon-star-half:before {
+  content: '\f123';
+}
+
+.icon-twitter:before {
+  content: '\f309';
+}
+
+.icon-facebook:before {
+  content: '\f30c';
+}
+
 /*!
 	-----------------------------------------------------------------------------
 
@@ -89,7 +175,7 @@ body {
 /* a */
 a {
   color: #345678;
-  font-family: "Lato", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 16px;
   font-weight: 400;
   text-decoration: none;
@@ -129,7 +215,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Lato", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 400;
   margin: 0;
   padding: 0;
@@ -202,12 +288,27 @@ hr {
   z-index: 999;
 }
 
+.loader-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
 /*  Cortar texto y colocar tres puntos
 	@mixin =============================================== */
 .ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/*  Form (input,email,file,textarea,btn)
+	@mixin =============================================== */
+.file-field .btn,
+.file-field .btn-large {
+  line-height: 2.3rem;
 }
 
 /*!
@@ -243,6 +344,12 @@ hr {
   width: 90px;
 }
 
+@media screen and (max-width: 768px) {
+  .header .logo {
+    width: 60px;
+  }
+}
+
 .header .header-cont {
   align-items: center;
   background-color: white;
@@ -254,6 +361,13 @@ hr {
   padding: 0 15px;
   position: relative;
   width: calc(100% - 90px);
+}
+
+@media screen and (max-width: 768px) {
+  .header .header-cont {
+    padding: 0;
+    width: calc(100% - 60px);
+  }
 }
 
 .header .header-cont .toolbar {
@@ -345,6 +459,12 @@ hr {
   top: 66px;
   width: 90px;
   z-index: 9;
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    width: 60px;
+  }
 }
 
 .nav a {
@@ -455,10 +575,23 @@ hr {
   z-index: 2;
 }
 
+@media screen and (max-width: 768px) {
+  .page {
+    margin-left: 60px;
+  }
+}
+
 .page .page-header {
   padding-top: 30px;
   padding-left: calc(0.75rem + 30px);
   padding-right: calc(0.75rem + 30px);
+}
+
+@media screen and (max-width: 768px) {
+  .page .page-header {
+    padding-left: calc(0.75rem + 16px);
+    padding-right: calc(0.75rem + 16px);
+  }
 }
 
 .page .page-header .page-title {
@@ -474,6 +607,12 @@ hr {
   padding: 30px;
 }
 
+@media screen and (max-width: 768px) {
+  .page .page-cont {
+    padding: 30px 16px;
+  }
+}
+
 /*  Page Agenda
 	@mixin =============================================== */
 .page-agenda {
@@ -482,26 +621,57 @@ hr {
 
 /*  Modal
 	@mixin =============================================== */
-.modal-form .modal-content h4 {
+.modal .modal-content h4 {
+  font-size: 1.6em;
+  font-weight: 800;
   margin-bottom: 20px;
+  padding-left: 10px;
 }
 
-.modal-form .modal-footer button {
-  background-color: transparent;
-  box-shadow: none;
-  color: #345678;
-  font-weight: 400;
-  padding: 0 1rem;
+.modal .modal-content h4 span {
+  font-weight: 300;
 }
 
-.modal-form .modal-footer button i {
+.modal .modal-content .input-calificacion {
+  height: 70px;
+}
+
+.modal .modal-content .input-calificacion label {
+  display: block;
+  position: relative;
+  left: 0;
+}
+
+.modal .modal-content .input-calificacion .star-wrapper {
+  display: block;
+  position: relative;
+}
+
+.modal .modal-content .file-field .btn {
+  margin-left: 0;
+}
+
+.modal .modal-content .btn-submit {
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.modal .modal-content .btn-submit i {
   font-size: 1.3em;
 }
 
 .modal.modal-fixed-footer {
-  height: 90%;
   max-height: 90%;
   top: 6%;
+}
+
+.modal.modal-fixed-footer .modal-content {
+  height: 100%;
+}
+
+.modal.modal-small-height {
+  height: 46%;
+  top: 20% !important;
 }
 
 .picker--opened .picker__frame {
@@ -550,11 +720,23 @@ hr {
   position: relative;
 }
 
+@media screen and (max-width: 768px) {
+  .footer {
+    margin-left: 60px;
+  }
+}
+
 .footer .footer-cont {
   border-top: 1px solid #c8d3e6;
   display: flex;
   justify-content: space-between;
-  padding: 30px 0;
+  padding: 20px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .footer .footer-cont {
+    flex-direction: column;
+  }
 }
 
 .footer .footer-cont p {
@@ -811,8 +993,10 @@ hr {
 /*!
 	-----------------------------------------------------------------------------
 
-	5.0 - Contexto
+	5.0 - Tarjetas
 			# Card
+			# Card Agenda
+			# Btn - Agregar
 
 	-----------------------------------------------------------------------------
 	*/
@@ -825,36 +1009,93 @@ hr {
   -ms-border-radius: 4px;
   border-radius: 4px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   display: block;
   margin-bottom: 20px;
-  padding: 30px 37px 30px 20px;
+  padding: 40px 0 0;
   position: relative;
 }
 
-.card h3 {
-  font-size: 1.4em;
-  font-weight: 300;
-  margin-bottom: 4px;
+.card:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.card p {
+.card .card-contexto-cont {
+  padding: 10px 20px;
+}
+
+.card .card-contexto-cont h3.card-title {
+  color: #345678;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.4em;
+  font-weight: 900;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.card .card-contexto-cont p.card-desc {
+  color: #253c54;
+  font-family: "Lato", sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.5em;
+  margin-bottom: 8px;
+  margin-top: 0;
+  text-align: justify;
+}
+
+.card .card-contexto-cont img {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.card .card-contexto-status {
+  background-color: #f6f6f6;
   color: #282828;
+  display: flex;
   font-weight: 400;
   letter-spacing: 1px;
+  padding: 0 20px;
 }
 
-.card .card-options {
+.card .card-contexto-status .card-contexto-status-likes,
+.card .card-contexto-status .card-contexto-status-susbs,
+.card .card-contexto-status .card-contexto-status-comen {
+  margin-right: 22px;
+}
+
+.card .card-contexto-status .card-contexto-status-likes i,
+.card .card-contexto-status .card-contexto-status-susbs i,
+.card .card-contexto-status .card-contexto-status-comen i {
+  font-size: 1.3rem;
+  margin-right: 4px;
+}
+
+.card .card-contexto-status .card-contexto-status-likes span,
+.card .card-contexto-status .card-contexto-status-susbs span,
+.card .card-contexto-status .card-contexto-status-comen span {
+  font-size: 1em;
+}
+
+.card .card-contexto-options {
   position: absolute;
-  right: 30px;
-  top: 20px;
+  right: 20px;
+  top: 10px;
 }
 
-.card .card-options i,
-.card .card-options .card-options-check {
+.card .card-contexto-options i,
+.card .card-contexto-options .card-contexto-options-check {
   vertical-align: middle;
 }
 
-.card .card-options i {
+.card .card-contexto-options i {
+  color: white;
   cursor: pointer;
   font-size: 1.23em;
   background-color: #eee;
@@ -869,49 +1110,49 @@ hr {
   transition: all 0.2s ease-in-out;
 }
 
-.card .card-options i:hover {
-  background-color: #e6e6e6;
+.card .card-contexto-options i:hover {
+  background-color: #e5e5e5;
 }
 
-.card .card-options .card-options-check {
+.card .card-contexto-options .card-contexto-options-check {
   display: none;
 }
 
-.card .card-options .card-options-check [type="checkbox"] + label {
+.card .card-contexto-options .card-contexto-options-check [type="checkbox"] + label {
   height: 15px;
   padding-left: 20px;
 }
 
-.card.card-contexto p {
-  color: #DFF040;
+.card.card-contexto .card-contexto-options i {
+  background-color: #DFF040;
 }
 
-.card.card-verdadazos p {
-  color: #1940e3;
+.card.card-verdadazos .card-contexto-options i {
+  background-color: #1940e3;
 }
 
-.card.card-sabias-que p {
-  color: #EF3893;
+.card.card-sabias-que .card-contexto-options i {
+  background-color: #EF3893;
 }
 
-.card.card-espejo p {
-  color: #658BEA;
+.card.card-espejo .card-contexto-options i {
+  background-color: #658BEA;
 }
 
-.card.card-solo-por-hoy p {
-  color: #75F1F1;
+.card.card-solo-por-hoy .card-contexto-options i {
+  background-color: #75F1F1;
 }
 
-.card.card-alquimia p {
-  color: #F3B924;
+.card.card-alquimia .card-contexto-options i {
+  background-color: #F3B924;
 }
 
-.card.card-hoy-pense p {
-  color: #57ED5F;
+.card.card-hoy-pense .card-contexto-options i {
+  background-color: #57ED5F;
 }
 
-.card.card-media p {
-  color: #0F2687;
+.card.card-media .card-contexto-options i {
+  background-color: #0F2687;
 }
 
 .card.card-user {
@@ -998,6 +1239,8 @@ hr {
   margin-right: 4px;
 }
 
+/*  Card - Agenda
+	@mixin =============================================== */
 .card-agenda {
   background-color: white;
   -webkit-border-radius: 4px;
@@ -1018,7 +1261,7 @@ hr {
   padding: 10px 50px;
 }
 
-.card-agenda .card-agenda-header p {
+.card-agenda .card-agenda-header .card-status {
   font-size: 2.3em;
 }
 
@@ -1059,7 +1302,7 @@ hr {
   font-weight: 300;
 }
 
-.card-agenda.card-agenda-importancia p {
+.card-agenda.card-agenda-importancia .card-status {
   font-size: 3em;
   font-weight: 500;
 }

@@ -28,7 +28,6 @@ class EntSoloPorHoys extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_post'], 'required'],
             [['id_post', 'num_articulo'], 'integer'],
             [['id_post'], 'exist', 'skipOnError' => true, 'targetClass' => EntPosts::className(), 'targetAttribute' => ['id_post' => 'id_post']],
         ];

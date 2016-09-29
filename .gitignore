@@ -36,3 +36,6 @@ phpunit.phar
 
 #Carpetas Espeficales de yii
 /web/assets/
+
+#Archivo prepos
+/modules/modAdminPanel/web/prepros.cfg

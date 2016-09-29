@@ -1,25 +1,45 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\web\View;
+use yii\bootstrap\ActiveForm;
 
+$classActive = $media->isNewRecord?'':'active';
+?>
+
+<h4><?=$media->isNewRecord?'Agregar':'Editar'?> <span>Media</span></h4>
+
+<?php
 $form = ActiveForm::begin ( [
 		'options' => [
 				'enctype' => 'multipart/form-data'
-		]
+		],
+		
+		'layout' => 'horizontal',
+		'id' => $media->isNewRecord?'form-media':'editar-media',
+		'fieldConfig' => [
+				'template' => "{input}\n{label}\n{error}",
+				'horizontalCssClasses' => [
+						'error' => 'mdl-textfield__error'
+				],
+				'labelOptions' => [
+						'class' => 'mdl-textfield__label '.$classActive 
+				],
+				'options' => [
+						'class' => 'input-field col s12'
+				]
+		],
+		'errorCssClass' => 'invalid'
 ] );
 ?>
+	
+	<div class='row'>
 
-    <?= $form->field($media, 'txt_titulo')->textInput(['maxlength' => true])?>
+		<?= $form->field($media, 'txt_url', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true, 'onchange'=>'cargarImagenes($(this));'])?>
+		<div id="js-contenedor-imagenes"></div>
 
-    <?= $form->field($media, 'txt_descripcion')->textInput(['maxlength' => true])?>
+   	</div>
 
-  	 <?= $form->field($media, 'txt_url')->fileInput()?>
-  	 
-  	 <?= $form->field($media, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
-   
-     <?= Html::submitButton('Crear')?>
+     <?= Html::submitButton('Crear <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
        
 <?php ActiveForm::end();
 
-include '/templates/formato-fecha.php';
+include 'templates/formato-fecha.php';

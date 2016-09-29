@@ -23,6 +23,7 @@ use app\models\CatTiposPosts;
 use app\models\ConstantesWeb;
 use app\models\EntPosts;
 use app\models\EntAlquimias;
+use app\models\EntNotificaciones;
 
 class NetasController extends Controller {
 	
@@ -47,7 +48,8 @@ class NetasController extends Controller {
 								'calificar-alquimia',
 								'get-calificacion-usuario',
 								'validar-respuesta',
-								'perfil-usuario' 
+								'perfil-usuario',
+								'agregar-espejo' 
 						],
 						'rules' => [
 								
@@ -63,7 +65,6 @@ class NetasController extends Controller {
 		];
 		// everything else is denied
 	}
-	
 	
 	/**
 	 * Obtenemos la calificacion del usuario logueado
@@ -150,7 +151,11 @@ class NetasController extends Controller {
 	/**
 	 * Busca todos los post por orden de fecha de publicacion
 	 */
-	public function actionIndex() {
+	public function actionIndex($token=null) {
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
+		}
 		
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
@@ -158,12 +163,13 @@ class NetasController extends Controller {
 		// Tipos de post
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
 				'b_habilitado' => 1 
-		] )->all ();
+		] )->orderBy ( 'txt_nombre' )->all ();
 		
 		// Pintar vista
 		return $this->render ( 'index', [ 
 				'listaPost' => $listaPost,
-				'tiposPost' => $tiposPost 
+				'tiposPost' => $tiposPost,
+				'token'=>$token
 		] );
 	}
 	
@@ -295,7 +301,6 @@ class NetasController extends Controller {
 		$this->layout = false;
 		
 		$idUsuario = Yii::$app->user->identity->id_usuario;
-		;
 		
 		// Obtenemos el post
 		$post = $this->getPostByToken ( $token );
@@ -329,6 +334,7 @@ class NetasController extends Controller {
 		$comentario->load ( Yii::$app->request->post () );
 		
 		if ($comentario->guardarComentarioUsuario ( $idUsuario, $post->id_post )) {
+			
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			
@@ -519,6 +525,15 @@ class NetasController extends Controller {
 		$respuesta->id_comentario_padre = $comentario->id_comentario_post;
 		
 		if ($respuesta->guardarComentarioUsuario ( $idUsuario, $comentario->id_post )) {
+			
+			//que se un usuario diferente
+			if($idUsuario != $comentario->id_usuario){
+			
+				$notificaciones = new EntNotificaciones();
+			
+				$notificaciones->guardarNotificacion($comentario, $notificaciones);
+			}
+				
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			
@@ -558,10 +573,9 @@ class NetasController extends Controller {
 	 */
 	public function actionValidarRespuesta($token) {
 		// busca el post necesario
-		$post = $this->getPostByToken($token);
+		$post = $this->getPostByToken ( $token );
 		
 		$sabiasQue = $post->entSabiasQue;
-		
 	}
 	
 	/**
@@ -674,5 +688,31 @@ class NetasController extends Controller {
 		echo Utils::generateToken ( $tk );
 	}
 	public function actionTest($url) {
+	}
+	
+	/**
+	 * Agrega espejo para el usuario en sesión
+	 */
+	public function actionAgregarEspejo() {
+		$post = new EntPosts ( [ 
+				'scenario' => 'agregarEspejo' 
+		] );
+		
+		if ($post->load ( Yii::$app->request->post () )) {
+			if($postGuardado = $post->guardarEspejo($post)){
+						
+				$notificaciones = new EntNotificaciones();
+					
+				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+				
+				return 'success';
+			}else{
+				return 'error';
+			}
+		}
+		
+		return $this->renderAjax ( '//netas/include/_agregarEspejo', [ 
+				'post' => $post 
+		] );
 	}
 }

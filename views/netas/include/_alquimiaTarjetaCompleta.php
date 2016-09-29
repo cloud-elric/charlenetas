@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+use yii\helpers\Url;
 $usuario = $post->idUsuario;
 $alquimia = $post->entAlquimias;
 ?>
@@ -26,7 +27,7 @@ $alquimia = $post->entAlquimias;
 	<div class="full-pin-body-content">
 
 		<div class="full-pin-body-content-img">
-			<img src="webAssets/images/<?=Html::encode($post->txt_imagen)?>"
+			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
 				alt="Alquimia - Películas que transforman" />
 		</div>
 
@@ -44,7 +45,7 @@ $alquimia = $post->entAlquimias;
 
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
-			<div class="feedback did-usr-interact">
+			<div class="feedback did-usr-interact" onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
 			<div class="feedback">

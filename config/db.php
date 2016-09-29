@@ -11,9 +11,9 @@ if (YII_ENV_DEV) {
 } else {
 	$dataBase = [
 			'class' => 'yii\db\Connection',
-			'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-			'username' => 'root',
-			'password' => '',
+			'dsn' => 'mysql:host=mysql1003.mochahost.com;dbname=beto2gom_charlenetas',
+			'username' => 'beto2gom_c-netas',
+			'password' => 'b4n4n4M0nk3y!',
 			'charset' => 'utf8'
 	];
 }

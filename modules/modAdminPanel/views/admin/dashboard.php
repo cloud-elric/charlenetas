@@ -1,17 +1,32 @@
-<?php
-use yii\helpers\Html;
-?>
 
-	<?= Html::a('Alquimia', ['/adminPanel/admin/alquimia']) ?>
+<!-- .page-cont -->
+<div class="page-cont dashboard">
+
+	<div class="row">
+	<?php foreach($dashboard as $dash): ?>
+		<div class="col s12 m6 l4">
+			<a class="dashboard-card <?= $dash->txt_clase_css ?>" href="<?= yii::$app->homeUrl . "adminPanel/admin/" . $dash->txt_action; ?>">
+				<div class="dashboard-card-cont">
+					<div class="row">
+						<div class="col s10">
+							<h3><?= $dash->txt_nombre; ?></h3>
+						</div>
+						<div class="col s2 text-center">
+							<i class="ion <?= $dash->txt_ico ?>"></i>
+						</div>
+					</div>
+				</div>
+				<div class="dashboard-card-foot">
+					<p><i class="ion ion-document"></i> <span><?=count($dash->entPosts)?> post</span></p>
+				</div>
+			</a>
+		</div>
+	  
+		<?php endforeach;?>
 	
-	<?= Html::a('Verdadazos', ['/adminPanel/admin/verdadazos']) ?>
-	
-	<?= Html::a('Hoy pense', ['/adminPanel/admin/hoy-pense']) ?>
-	
-	<?= Html::a('Media', ['/adminPanel/admin/media']) ?>
-	
-	<?= Html::a('Contexto', ['/adminPanel/admin/contexto']) ?>
-	
-	<?= Html::a('Solo por hoy', ['/adminPanel/admin/solo-por-hoy']) ?>
-	
-	<?= Html::a('Sabias que', ['/adminPanel/admin/sabias-que']) ?>
+	</div>
+
+</div>
+<!-- end /.page-cont -->
+
+

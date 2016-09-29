@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\modules\ModUsuarios\models\EntUsuarios;
+use app\modules\ModUsuarios\models\Utils;
 
 /**
 * This is the model class for table "ent_respuestas_espejo".
@@ -34,7 +35,7 @@ class EntRespuestasEspejo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_post', 'txt_respuesta'], 'required'],
+            [['id_post', 'txt_respuesta', 'fch_publicacion_respuesta'], 'required'],
             [['id_post', 'b_de_acuerdo'], 'integer'],
             [['txt_respuesta'], 'string'],
             [['fch_respuesta', 'fch_publicacion_respuesta'], 'safe'],
@@ -49,9 +50,9 @@ class EntRespuestasEspejo extends \yii\db\ActiveRecord
     {
         return [
             'id_post' => 'Id Post',
-            'txt_respuesta' => 'Txt Respuesta',
+            'txt_respuesta' => 'Respuesta',
             'fch_respuesta' => 'Fch Respuesta',
-            'fch_publicacion_respuesta' => 'Fch Publicacion Respuesta',
+            'fch_publicacion_respuesta' => 'Fecha de publicación Respuesta',
             'b_de_acuerdo' => 'B De Acuerdo',
         ];
     }
@@ -70,5 +71,19 @@ class EntRespuestasEspejo extends \yii\db\ActiveRecord
     public function getIdUsuarioAdmin()
     {
     	return $this->hasOne(EntUsuarios::className(), ['id_usuario' => 'id_usuario_admin']);
+    }
+    
+    /**
+     * Guarda la respuesta
+     * @param EntRespuestasEspejo $respuesta
+     * @return \app\models\EntRespuestasEspejo|NULL
+     */
+    public function guardarRespuesta($respuesta){
+    	// usuario logueado
+    	$respuesta->id_usuario_admin = Yii::$app->user->identity->id_usuario;
+    	$respuesta->fch_respuesta = Utils::getFechaActual();
+    	$respuesta->fch_publicacion_respuesta = Utils::changeFormatDateInput($respuesta->fch_publicacion_respuesta);
+    	
+    	return $this->save()?$this:null;
     }
 }

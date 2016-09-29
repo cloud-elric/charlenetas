@@ -20,10 +20,15 @@
 	min-height: calc(100vh - 152px)
 	position: relative
 	z-index: 2
+	@include respond-to(xs)
+		margin-left: 60px
 	.page-header
 		padding-top: 30px
 		padding-left: calc(0.75rem + 30px)
 		padding-right: calc(0.75rem + 30px)
+		@include respond-to(xs)
+			padding-left: calc(0.75rem + 16px)
+			padding-right: calc(0.75rem + 16px)
 		.page-title
 			font-size: 1.85em
 			text-shadow: rgba(0,0,0,.15) 0 0 1px
@@ -31,6 +36,8 @@
 				margin-right: 6px
 	.page-cont
 		padding: 30px
+		@include respond-to(xs)
+			padding: 30px 16px
 
 /*  Page Agenda
 	================================================ */
@@ -39,24 +46,47 @@
 
 /*  Modal
 	================================================ */
-.modal-form
+.modal
 	.modal-content
 		h4
-			// background-color: rgba(red,.4)
+			font-size: 1.6em
+			font-weight: 800
 			margin-bottom: 20px
-	.modal-footer
-		button
-			background-color: transparent
-			box-shadow: none
-			color: $header-menu
-			font-weight: 400
-			padding: 0 1rem
+			padding-left: 10px
+			span
+				font-weight: 300
+		// Calificación
+		.input-calificacion
+			height: 70px
+			label
+				display: block
+				position: relative
+				left: 0
+			.star-wrapper 
+				display: block
+				position: relative
+		// File Btn
+		.file-field
+			.btn
+				margin-left: 0
+		// Btn Submit
+		.btn-submit
+			margin-left: 10px
+			margin-top: 20px
 			i
 				font-size: 1.3em
+// Modal fixed footer
 .modal.modal-fixed-footer
-	height: 90%
+	// height: 60%
 	max-height: 90%
 	top: 6%
+	.modal-content
+		height: 100%
+
+// Modal small height
+.modal.modal-small-height
+	height: 46%
+	top: 20% !important
 
 // .picker--opened
 // 	.picker__holder
