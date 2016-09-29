@@ -594,6 +594,12 @@ class AdminController extends Controller {
 			
 			$respuesta->guardarRespuesta ( $respuesta );
 			
+			if($post->id_usuario != Yii::$app->user->identity->id_usuario){
+				//Guardar la notificacion
+				$notificaciones = new EntNotificaciones();	
+				$notificaciones->guardarNotificacionRespuestasAdmin($post, $notificaciones);
+			}
+				
 			return [ 
 					'status' => 'success',
 					'tk' => $post->txt_token,

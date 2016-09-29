@@ -782,7 +782,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 				if ($espejo->save ()) {
 					
 					$transaction->commit ();
-					return true;
+					return $post;
 				}
 			}
 			$transaction->rollBack ();

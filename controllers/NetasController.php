@@ -329,6 +329,7 @@ class NetasController extends Controller {
 		$comentario->load ( Yii::$app->request->post () );
 		
 		if ($comentario->guardarComentarioUsuario ( $idUsuario, $post->id_post )) {
+			
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			
@@ -520,11 +521,14 @@ class NetasController extends Controller {
 		
 		if ($respuesta->guardarComentarioUsuario ( $idUsuario, $comentario->id_post )) {
 			
-			//$comentarios = new EntComentariosPosts();
-			$notificaciones = new EntNotificaciones();
+			//que se un usuario diferente
+			if($idUsuario != $comentario->id_usuario){
 			
-			$notificaciones->guardarNotificacion($comentario, $notificaciones);
+				$notificaciones = new EntNotificaciones();
 			
+				$notificaciones->guardarNotificacion($comentario, $notificaciones);
+			}
+				
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			
@@ -690,7 +694,12 @@ class NetasController extends Controller {
 		] );
 		
 		if ($post->load ( Yii::$app->request->post () )) {
-			if($post->guardarEspejo($post)){
+			if($postGuardado = $post->guardarEspejo($post)){
+						
+				$notificaciones = new EntNotificaciones();
+					
+				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+				
 				return 'success';
 			}else{
 				return 'error';

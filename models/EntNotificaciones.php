@@ -65,7 +65,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     }
     
     /**
-     * 
+     * Guarda las notificaciones de las respuestas de los comentario en los posts
      * @param unknown $comentario
      * @throws Exception
      * @return boolean
@@ -93,6 +93,72 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     		throw $e;
     	}
     	
+    	return false;
+    }
+    
+    /**
+     * Nofificaciones al admin al hacerle una pregunta espejo
+     * @param unknown $post   EntPosts
+     * @param unknown $notificaciones  EntNotificaciones
+     * @throws Exception
+     * @return boolean
+     */
+    public function guardarNotificacionPreguntas($post, $notificaciones){
+    	 
+    	$notificaciones->id_usuario = 25;
+    	$notificaciones->txt_token_objeto = $post->txt_token;
+    	$notificaciones->txt_descripcion = "te han una pregunta";
+    	$notificaciones->txt_titulo = "te han una pregunta";
+    	 
+    	 
+    	$transaction = EntNotificaciones::getDb()->beginTransaction ();
+    	try {
+    		if ($notificaciones->save()) {
+    			 
+    			$transaction->commit();
+    			return true;
+    		}
+    		//print_r($notificaciones->errors);
+    		//exit();
+    		$transaction->rollBack ();
+    	} catch ( \Exception $e ) {
+    		$transaction->rollBack ();
+    		throw $e;
+    	}
+    	 
+    	return false;
+    }
+    
+    /**
+     * Notificaciones a los usuarios al responder un espejo
+     * @param unknown $post
+     * @param unknown $notificaciones
+     * @throws Exception
+     * @return boolean
+     */
+    public function guardarNotificacionRespuestasAdmin($post, $notificaciones){
+    
+    	$notificaciones->id_usuario = $post->id_usuario;
+    	$notificaciones->txt_token_objeto = $post->txt_token;
+    	$notificaciones->txt_descripcion = "te han respondido tu pregunta";
+    	$notificaciones->txt_titulo = "te han respondido tu pregunta";
+    
+    
+    	$transaction = EntNotificaciones::getDb()->beginTransaction ();
+    	try {
+    		if ($notificaciones->save()) {
+    
+    			$transaction->commit();
+    			return true;
+    		}
+    		//print_r($notificaciones->errors);
+    		//exit();
+    		$transaction->rollBack ();
+    	} catch ( \Exception $e ) {
+    		$transaction->rollBack ();
+    		throw $e;
+    	}
+    
     	return false;
     }
 }
