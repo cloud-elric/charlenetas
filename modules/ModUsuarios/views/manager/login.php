@@ -30,7 +30,7 @@ logInWithFacebook = function() {
 };
 
 function statusChangeCallback(response) {
-
+	//empresasunitec@outlook.com
 	// The response object is returned with a status field that lets the
 	// app know the current login status of the person.
 	// Full docs on the response object can be found in the documentation
@@ -69,26 +69,6 @@ function statusChangeCallback(response) {
 }
 
 function checkLoginState() {
-
-	// FB.api('/me/permissions', function(response) {
-	// var declined = [];
-	// for (i = 0; i < response.data.length; i++) {
-	// if (response.data[i].status == 'declined') {
-	// declined.push(response.data[i].permission)
-	// }
-	// }
-	// alert(declined.toString())
-	// });
-	// FB.login(
-	// function(response) {
-	// console.log(response);
-	// statusChangeCallback(response);
-	// },
-	// {
-	// scope: 'email',
-	// auth_type: 'rerequest'
-	// }
-	// );
 
 	FB.getLoginStatus(function(response) {
 		statusChangeCallback(response);

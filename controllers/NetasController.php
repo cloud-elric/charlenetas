@@ -151,7 +151,11 @@ class NetasController extends Controller {
 	/**
 	 * Busca todos los post por orden de fecha de publicacion
 	 */
-	public function actionIndex() {
+	public function actionIndex($token=null) {
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
+		}
 		
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
@@ -164,7 +168,8 @@ class NetasController extends Controller {
 		// Pintar vista
 		return $this->render ( 'index', [ 
 				'listaPost' => $listaPost,
-				'tiposPost' => $tiposPost 
+				'tiposPost' => $tiposPost,
+				'token'=>$token
 		] );
 	}
 	

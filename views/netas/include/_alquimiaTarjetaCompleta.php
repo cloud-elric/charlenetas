@@ -45,7 +45,7 @@ $alquimia = $post->entAlquimias;
 
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
-			<div class="feedback did-usr-interact">
+			<div class="feedback did-usr-interact" onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
 			<div class="feedback">

@@ -6,9 +6,9 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-var basePath = 'http://localhost/charlenetas/web/';
-//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
-
+//var basePath = 'http://localhost/charlenetas/web/';
+var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
 function cargarMasPosts() {
@@ -784,19 +784,35 @@ $('.filters-toggle').on('click', function() {
 	$('nav').toggleClass('mobile');
 });
 
-// Codigo para implementacion de codrops
-// new AnimOnScroll( document.getElementById( 'grid' ), {
-// minDuration : 0.4,
-// maxDuration : 0.7,
-// viewportFactor : 0.2
-// } );
+function  compartirFacebook(token){
 
-// new Masonry( self.el, {
-// itemSelector: 'li',
-// transitionDuration : 0
-// } );
+	var image = $('.full-pin-body-content-img img').attr('src');
+	var description =  $(".full-pin-body-content-text h3").text()+$(".full-pin-body-content-text p").text();
+	var title = $('.full-pin-header h2').text();
+	console.log(image);
+FB.ui({
+    method: 'feed',
+    name: title,
+    link: basePath+'netas/index?token='+token,
+    picture: basePathFace+image,
+    caption: 'Charlenetas',
+    description: description
 
-//
-// var msnry = new Masonry( '.grid', {
-// itemSelector: 'li'
-// });
+}, function(response) {
+    if(response && response.post_id){}
+    else{}
+});
+}
+
+window.fbAsyncInit = function() {
+	FB.init({
+		//appId : '1029875693761281',
+		appId:'1754524001428992',
+		cookie : true, // enable cookies to allow the server to access
+		// the session
+		xfbml : true, // parse social plugins on this page
+		version : 'v2.6' // use any version
+	});
+
+};
+
