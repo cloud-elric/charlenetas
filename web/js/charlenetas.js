@@ -6,8 +6,8 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-//var basePath = 'http://localhost/charlenetas/web/';
-var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+var basePath = 'http://localhost/charlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
@@ -148,6 +148,23 @@ function hidePostFull() {
 	$('#js-content').html();
 }
 
+/**
+ * Carga todas notificaciones para que las vizualisen los ususarios y 
+ */
+function cargarNotificaciones(){
+	var url = basePath + 'netas/notificaciones';
+	
+	$.ajax({
+		url : url,
+		dataType : 'html',
+		succes : function(res){
+			
+		}
+	});
+}
+
+//setInterval(cargarNotificaciones, 1000);
+
 // Metodo para suscribirse a una pregunta espejo
 function suscribirseEspejo(token) {
 	var url = basePath+'netas/suscripcion-espejo?token=' + token;
@@ -245,6 +262,33 @@ function desSuscribirseEspejo(token) {
 				// Colocar un mensaje de que no se pudo subscribir
 				removeSubscriptores(token);
 			},
+			500 : function() {
+				// Colocar un mensaje de que no se pudo subscribir
+				removeSubscriptores(token);
+			}
+		}
+	});
+}
+
+/**
+ * Guarda si al usuario le gusto o no la respuesta del admin
+ * en b_de_acuerdo de la tabla ent_espuestas_espejo 
+ */
+function agregarAcuerdo(token, feed) {
+	var url = basePath+'netas/agregar-acuerdo?token=' + token + '&feed=' + feed;
+
+	$.ajax({
+		url : url,
+		dataType : 'html',
+		method : 'GET',
+		success : function(res) {
+
+		},
+		statusCode : {
+			403 : function() {
+				showModalLogin();
+			},
+
 			500 : function() {
 				// Colocar un mensaje de que no se pudo subscribir
 				removeSubscriptores(token);
@@ -815,4 +859,6 @@ window.fbAsyncInit = function() {
 	});
 
 };
+
+
 
