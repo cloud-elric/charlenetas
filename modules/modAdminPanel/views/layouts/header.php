@@ -24,7 +24,7 @@ use app\models\EntNotificaciones;
 			<!-- Notificaciones -->
 			<?php 
 				$notificaciones = new EntNotificaciones();
-				$admin = $notificaciones->find()->where(['id_usuario'=>25])->andWhere(['b_leido'=>0])->count('id_usuario');
+				$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->count('id_usuario');
 			?>
 			<a href="<?= yii::$app->homeUrl . "adminPanel/admin/notificaciones" ?>">
 				<i class="ion ion-ios-bell-outline"></i>

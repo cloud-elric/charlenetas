@@ -192,9 +192,9 @@ class AdminController extends Controller {
 	public function actionNotificaciones() {
 		
 		$notificaciones = new EntNotificaciones();
-		$admin = $notificaciones->find()->where(['id_usuario'=>25])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
+		$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(15)->all();
 			
-		return $this->renderAjax( 'notificaciones', ['notificaciones'=>$admin]);
+		return $this->render( 'notificaciones', ['notificaciones'=>$admin]);
 		
 	}
 	

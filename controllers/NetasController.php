@@ -25,6 +25,7 @@ use app\models\EntPosts;
 use app\models\EntAlquimias;
 use app\models\EntNotificaciones;
 use app\models\EntRespuestasEspejo;
+use app\models\EntCitas;
 
 class NetasController extends Controller {
 	
@@ -198,9 +199,9 @@ class NetasController extends Controller {
 	public function actionNotificaciones() {
 	
 		$notificaciones = new EntNotificaciones();
-		$usuario = $notificaciones->find()->where(['id_usuario'=>26])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
+		$usuario = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
 			
-		return $this->renderAjax( 'notificaciones', ['notificaciones'=>$usuario]);
+		return $this->render( 'notificaciones', ['notificaciones'=>$usuario]);
 	
 	}
 	
@@ -755,5 +756,28 @@ class NetasController extends Controller {
 	
 		else 
 			echo "error";
+	}
+	
+	/**
+	 * crear cita para el usuario en sesión
+	 */
+	public function actionCrearCita() {
+		$cita = new EntCitas();
+	
+		
+		/*if($citaGuardada = $cita->guardarCitas($cita)){
+	
+			$notificaciones = new EntNotificaciones();
+					
+			$notificaciones->guardarNotificacionPreguntas($citaGuardada, $notificaciones);
+	
+			return 'success';
+		} else{
+			return 'error';
+		}*/
+	
+		return $this->renderAjax ( '//netas/include/_crearCitas', [
+				'cita' => $cita
+		] );
 	}
 }

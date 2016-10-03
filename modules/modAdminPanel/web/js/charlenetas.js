@@ -133,7 +133,7 @@ function cargarNotificaciones(){
 	});
 }
 
-//setInterval(cargarNotificaciones, 1000);
+//setInterval(cargarNotificaciones, 10000);
 
 /**
  * Guarda si al usuario le gusto o no la respuesta del admin
