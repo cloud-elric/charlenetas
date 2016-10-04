@@ -14,6 +14,7 @@ use app\modules\ModUsuarios\models\EntUsuariosFacebook;
 use yii\web\UploadedFile;
 use yii\base\Response;
 use app\models\ConstantesWeb;
+use yii\widgets\ActiveForm;
 
 /**
  * Default controller for the `musuarios` module
@@ -179,10 +180,17 @@ class ManagerController extends Controller {
 		
 		$model = new LoginForm ();
 		$model->scenario = 'login';
+		
+		// Validacion de los modelos
+		if ($validacion = $this->validarUsuario ( $model)) {
+			return $validacion;
+		}
+		
 		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {
 			if (Yii::$app->request->isAjax) {
-				echo "success";
-				return;
+				return [ 
+						'status' => 'success',
+				];
 			}
 			
 			if (Yii::$app->user->identity->id_tipo_usuario == ConstantesWeb::USUARIO_ADMINISTRADOR) {
@@ -200,6 +208,20 @@ class ManagerController extends Controller {
 		return $this->render ( '@app/modules/modAdminPanel/views/admin/login', [ 
 				'model' => $model 
 		] );
+	}
+	
+	/**
+	 * Metodo para la validacion del usuario
+	 *
+	 * @param EntUsuarios $model
+	 * @return array
+	 */
+	public function validarUsuario($model) {
+		if (Yii::$app->request->isAjax && $model->load ( Yii::$app->request->post () )) {
+			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+				
+			return ActiveForm::validate ( $model );
+		}
 	}
 	
 	/**

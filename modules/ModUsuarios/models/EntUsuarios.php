@@ -251,7 +251,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		return [ 
 				'id_usuario' => 'Id Usuario',
 				'txt_token' => 'Txt Token',
-				'txt_username' => 'Txt Username',
+				'txt_username' => 'Email',
 				'txt_apellido_paterno' => 'Txt Apellido Paterno',
 				'txt_apellido_materno' => 'Txt Apellido Materno',
 				'txt_auth_key' => 'Txt Auth Key',

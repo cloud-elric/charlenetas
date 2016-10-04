@@ -79,7 +79,7 @@ function checkLoginState() {
 window.fbAsyncInit = function() {
 	FB.init({
 		//appId : '1029875693761281',
-		appId:'1754524001428992',
+		appId:'1779986862262300',
 		cookie : true, // enable cookies to allow the server to access
 		// the session
 		xfbml : true, // parse social plugins on this page
@@ -108,9 +108,9 @@ window.fbAsyncInit = function() {
 
     <?php
 				$form = ActiveForm::begin ( [ 
-						'enableAjaxValidation' => true,
+					//	'enableAjaxValidation' => true,
 						'enableClientValidation' => true,
-						'validationUrl' => Url::base().'/netas/validacion-usuario',
+						//'validationUrl' => Url::base().'/netas/validacion-usuario',
 						'layout' => 'horizontal',
 						'id' => 'login-form',
 						'fieldConfig' => [ 
@@ -134,7 +134,7 @@ window.fbAsyncInit = function() {
 	<?= $form->field($model, 'password')->passwordInput()?>
 
 <div class="center">
-	<?= Html::submitButton('Login <i class="material-icons right">send</i>',['class'=>'btn waves-effect waves-light center', 'name' => 'login-button', 'data-style'=>'"zoom-in'])?>
+	<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
 </div>
 
 	<?php ActiveForm::end(); ?>

@@ -132,11 +132,17 @@ function showPostAfterLogin(token) {
 
 	content.html('');
 
-	content.load(url, function() {
-		cargarComentarios(token, true);
+	if(token){
+		content.load(url, function() {
+			cargarComentarios(token, true);
+			$('#modal-login').closeModal();
+			$('body').css('overflow', 'hidden');
+		});
+	}else{
 		$('#modal-login').closeModal();
-		$('body').css('overflow', 'hidden');
-	});
+	}
+	
+	
 }
 
 // Cierra el post con toda su información
@@ -704,6 +710,7 @@ function ocultarTipoPost(tipoPost, opacity) {
 var grid;
 
 $(document).ready(function() {
+	
 
 	grid = $('.grid').masonry(masonryOptions);
 
@@ -762,23 +769,43 @@ $('body').on('beforeSubmit', '#login-form', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	
+	var button = document.getElementById('js-login-submit');
+	var l = Ladda.create(button);
+ 	l.start();
 	// submit form
 	$.ajax({
 		url : form.attr('action'),
 		type : 'post',
 		data : form.serialize(),
 		success : function(response) {
-			if (response == 'success') {
-
+			
+			// Si la respuesta contiene la propiedad status y es success
+			if (response.hasOwnProperty('status')
+					&& response.status == 'success') {
 				var token = $('#js-token-post').val();
 				showPostAfterLogin(token);
-				// cargarHabilidadesUsuario();
-
+				cargarCerrarSesion();
+			} else {
+				// Muestra los errores
+				$('#login-form').yiiActiveForm('updateMessages',
+						response, true);
 			}
+			
+			l.stop();
+		},
+		error:function(){
+			l.stop();
 		}
 	});
 	return false;
 });
+
+
+function cargarCerrarSesion(){
+	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="'+basePath+'site/logout">Cerrar sesión</a>';
+	$("#js-ingresar-cerrar-sesion").replaceWith(cerrarSesion);
+}
 
 $('.filters-toggle').on('click', function() {
 	$('nav').toggleClass('mobile');
@@ -807,7 +834,7 @@ FB.ui({
 window.fbAsyncInit = function() {
 	FB.init({
 		//appId : '1029875693761281',
-		appId:'1754524001428992',
+		appId:'1779986862262300',
 		cookie : true, // enable cookies to allow the server to access
 		// the session
 		xfbml : true, // parse social plugins on this page

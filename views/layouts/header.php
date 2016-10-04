@@ -20,7 +20,7 @@ use yii\helpers\Url;
 		 echo Html::a('Cerrar sesión', ['site/logout']);
 		 }else{
 		 	?>
-		 	<a onclick="showModalLogin();">Ingresar</a>
+		 	<a id="js-ingresar-cerrar-sesion" onclick="showModalLogin();">Ingresar</a>
 		 	<?php 
 		 }
 ?>
