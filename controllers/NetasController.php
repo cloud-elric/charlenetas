@@ -24,6 +24,8 @@ use app\models\ConstantesWeb;
 use app\models\EntPosts;
 use app\models\EntAlquimias;
 use app\models\EntNotificaciones;
+use app\models\EntRespuestasEspejo;
+use app\models\EntCitas;
 
 class NetasController extends Controller {
 	
@@ -188,6 +190,19 @@ class NetasController extends Controller {
 		return $this->render ( 'masPosts', [ 
 				'listaPost' => $listaPost 
 		] );
+	}
+	
+	/**
+	 * Mostrar notificaciones al usuario
+	 * @return string
+	 */
+	public function actionNotificaciones() {
+	
+		$notificaciones = new EntNotificaciones();
+		$usuario = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
+			
+		return $this->render( 'notificaciones', ['notificaciones'=>$usuario]);
+	
 	}
 	
 	/**
@@ -713,6 +728,56 @@ class NetasController extends Controller {
 		
 		return $this->renderAjax ( '//netas/include/_agregarEspejo', [ 
 				'post' => $post 
+		] );
+	}
+	
+	/**
+	 * Guarda si al usuario le gusto o no la respuesta del admin
+ 	 * en b_de_acuerdo de la tabla ent_espuestas_espejo
+	 * @param unknown $token
+	 * @param unknown $feed
+	 */
+	public function actionAgregarAcuerdo($token, $feed) {
+		$this->layout = false;
+	
+		$acuerdo = new EntRespuestasEspejo();
+		$posts = new EntPosts();
+		$post = $posts->find()->where(['txt_token'=>$token])->one();
+		
+		$respuesta = $acuerdo->find()->where(['id_post'=>$post->id_post])->one();
+		
+		$respuesta->b_de_acuerdo = $feed;
+		
+		$notificacion = new EntNotificaciones();
+		$notificacion->guardarNotificacionAcuerdo($post,$notificacion);
+	
+		if($respuesta->save ())
+			echo "success";
+	
+		else 
+			echo "error";
+	}
+	
+	/**
+	 * crear cita para el usuario en sesión
+	 */
+	public function actionCrearCita() {
+		$cita = new EntCitas();
+	
+		
+		/*if($citaGuardada = $cita->guardarCitas($cita)){
+	
+			$notificaciones = new EntNotificaciones();
+					
+			$notificaciones->guardarNotificacionPreguntas($citaGuardada, $notificaciones);
+	
+			return 'success';
+		} else{
+			return 'error';
+		}*/
+	
+		return $this->renderAjax ( '//netas/include/_crearCitas', [
+				'cita' => $cita
 		] );
 	}
 }

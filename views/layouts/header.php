@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\models\EntNotificaciones;
 ?>
 <div class="header">
 	<div class="">
@@ -19,11 +20,23 @@ use yii\helpers\Url;
 		//  echo Yii::$app->user->identity->nombreCompleto.'<br>';
 		 echo Html::a('Cerrar sesión', ['site/logout']);
 		 }else{
+
 		 	?>
 		 	<a id="js-ingresar-cerrar-sesion" onclick="showModalLogin();">Ingresar</a>
 		 	<?php 
 		 }
-?>
+		 ?>
+		 
+		 <!-- Notificaciones -->
+			<?php 
+				$notificaciones = new EntNotificaciones();
+				$user = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->count('id_usuario');
+			?>
+			<div onClick="cargarNotificaciones()">
+				<input type="button" value="Notificaciones"/>
+				<span class="badge badge-warning"><?= $user ?></span>
+			</div>
+		 
 <!-- 		<a href="#">Mi perfil</a> -->
 		<a href="#" class="filters-toggle"><i class="material-icons">menu</i></a>
 	</div>
