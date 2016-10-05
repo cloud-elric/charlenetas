@@ -31,18 +31,13 @@ $form = ActiveForm::begin ([
 ActiveForm::end ();
 ?>
 
+
 <div id='calendar'></div>
 <br/>
 
 <script type="text/javascript">
 	$('#calendar').fullCalendar({
         // put your options and callbacks here
-        //events: {
-        //    url: 'http://localhost/charlenetas/web/netas/anadir-citas',
-        //    type: 'POST', // Send post data
-        //    error: function() {
-        //        alert('There was an error while fetching events.');
-        //    }
-        //}
+        events: 'http://localhost/charlenetas/web/netas/anadir-citas'
     });
 	</script>

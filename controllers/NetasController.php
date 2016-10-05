@@ -787,18 +787,11 @@ class NetasController extends Controller {
 	 */
 	public function actionAnadirCitas(){
 		
-		$events = [];
-		$lists = Events::find()->all();
-		foreach($lists as $list)
-		{
-			$event        = new \yii2fullcalendar\models\Event();
-			$event->id    = $list->event_id;
-			$event->title = $list->event_name;
-			$event->start = $list->date;
-			$events[]     = $event;
-		}
-		return $this->render('anadirCitas', [
-				'events' => $events
+		$tabla = new EntCitas();
+		$citas = $tabla->find()->all();
+		
+		return $this->render('//netas/include/anadirCitas', [
+				'citas' => $citas
 		]);
 		
 	}

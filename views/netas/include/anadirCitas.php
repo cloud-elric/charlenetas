@@ -1,20 +1,9 @@
-
-<?= \yii2fullcalendar\yii2fullcalendar::widget(array(
-            'events' => $events,
-            'id' => 'calendar',
-        ));
+<?php 
+	foreach($citas as $cita){
+		echo $cita->id_cita;
+		echo $cita->fch_cita;
+		echo $cita->hra_cita;
+		echo "<br/>";
+		
+	}
 ?>
- 
-   <!--?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
- 
-            'event_id',
-            'event_name',
-            'date',
- 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-   ]); ?-->
