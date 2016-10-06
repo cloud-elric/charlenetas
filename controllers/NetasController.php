@@ -764,20 +764,36 @@ class NetasController extends Controller {
 	public function actionCrearCita() {
 		$cita = new EntCitas();
 	
-		
-		/*if($citaGuardada = $cita->guardarCitas($cita)){
+		if ($cita->load ( Yii::$app->request->post () )) {
+			if($citaGuardada = $cita->guardarCitas($cita)){
 	
-			$notificaciones = new EntNotificaciones();
+				$notificaciones = new EntNotificaciones();
 					
-			$notificaciones->guardarNotificacionPreguntas($citaGuardada, $notificaciones);
+				$notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones);
 	
-			return 'success';
-		} else{
-			return 'error';
-		}*/
+				return 'success';
+			} else{
+				return 'error';
+			}
+		}
 	
 		return $this->renderAjax ( '//netas/include/_crearCitas', [
 				'cita' => $cita
 		] );
 	}
+	
+	/**
+	 * Añadir las citas al calendario
+	 */
+	public function actionAnadirCitas(){
+		
+		$tabla = new EntCitas();
+		$citas = $tabla->find()->all();
+		
+		return $this->render('//netas/include/anadirCitas', [
+				'citas' => $citas
+		]);
+		
+	}
+
 }
