@@ -10,9 +10,9 @@ if (YII_ENV_DEV) {
 					'pathImageDefault'=>'uploads/profiles/imgDefault.png',
 					'facebook' => [ 
 							'usarLoginFacebook' => true,
-							'APP_ID' => '1754524001428992', // Identificador de la aplicación
-							'APP_SECRET' => '739c88b9290adb41a040bde473c1d54d', // Clave secreta de la aplicación
-							'CALLBACK_URL' => 'http://notei.com.mx/test/wwwLogin/web/callback-facebook',
+							'APP_ID' => '1779986862262300', // Identificador de la aplicación
+							'APP_SECRET' => 'b00ca2920c357bf845b8f23aab5eae6e', // Clave secreta de la aplicación
+							'CALLBACK_URL' => 'http://notei.com.mx/test/wwwCharlenetas/web/callback-facebook',
 							'dataBasic' => true, // Obtiene datos basicos del usuario como nombre, imagen, apellido, email
 							'friends' => true, // Visualiza a los amigos que esten usuando la aplicacion
 							'permisosForzosos' => 'email, user_friends',

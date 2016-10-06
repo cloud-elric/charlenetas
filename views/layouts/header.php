@@ -32,10 +32,10 @@ use app\models\EntNotificaciones;
 				$notificaciones = new EntNotificaciones();
 				$user = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->count('id_usuario');
 			?>
-			<div onClick="cargarNotificaciones()">
+		<!-- 	<div onClick="cargarNotificaciones()">
 				<input type="button" value="Notificaciones"/>
 				<span class="badge badge-warning"><?= $user ?></span>
-			</div>
+			</div> -->
 		 
 <!-- 		<a href="#">Mi perfil</a> -->
 		<a href="#" class="filters-toggle"><i class="material-icons">menu</i></a>

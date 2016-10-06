@@ -42,55 +42,17 @@ use yii\helpers\Url;
 <!-- Modal Structure -->
 <div id="modal-login" class="modal">
 	<div class="modal-content">
-		<div class="preloader-wrapper big active">
-			<div class="spinner-layer spinner-blue">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
+		
+		<ul class="tabs">
+			<li class="tab col s3"><a class="active" href="#js-contenedor-login">Iniciar sesión</a></li>
+			<li class="tab col s3"><a href="#js-contenedor-crear-cuenta">Registrarse</a></li>
+		</ul>
+		
+			<div id="js-contenedor-login">
 			</div>
-
-			<div class="spinner-layer spinner-red">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
+			<div id="js-contenedor-crear-cuenta">
+			:D
 			</div>
-
-			<div class="spinner-layer spinner-yellow">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-			</div>
-
-			<div class="spinner-layer spinner-green">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -101,6 +63,8 @@ use yii\helpers\Url;
 if (Yii::$app->user->isGuest) {
 	$this->registerJs ( "
   loadLogin();
+loadSign();
+$('ul.tabs').tabs();
 
   ", View::POS_END );
 }

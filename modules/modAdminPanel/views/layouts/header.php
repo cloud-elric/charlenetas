@@ -32,7 +32,7 @@ use app\models\EntNotificaciones;
 			</a>
 
 			<!-- .dropdown-button (btn) -->
-			<a class='dropdown-button' href='#' data-activates='dropdown-user'>Juan <i class="ion ion-ios-arrow-down"></i></a>
+			<a class='dropdown-button' href='#' data-activates='dropdown-user'><?=Yii::$app->user->identity->nombreCompleto?> <i class="ion ion-ios-arrow-down"></i></a>
 
 			<!-- .dropdown-content (dropdown) -->
 			<ul id='dropdown-user' class='dropdown-content'>

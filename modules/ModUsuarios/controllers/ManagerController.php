@@ -31,6 +31,11 @@ class ManagerController extends Controller {
 		
 		if ($model->load ( Yii::$app->request->post () )) {
 			
+			// Validacion de los modelos
+			if ($validacion = $this->validarUsuario ( $model )) {
+				return $validacion;
+			}
+			
 			// Obtiene la imagen de perfil para le usuario
 			$model->imageProfile = UploadedFile::getInstance ( $model, 'imageProfile' );
 			$nombreImagen = Utils::generateToken ( 'ava' ) . '.' . $model->imageProfile->extension;
@@ -56,9 +61,12 @@ class ManagerController extends Controller {
 					
 					// Envio de correo electronico
 					$utils->sendEmailActivacion ( $user->txt_email, $parametrosEmail );
-					$this->redirect ( [ 
-							'login' 
-					] );
+					// $this->redirect ( [
+					// 'login'
+					// ] );
+					return [ 
+							'status' => 'success' 
+					];
 				} else {
 					
 					if (Yii::$app->getUser ()->login ( $user )) {
@@ -69,7 +77,7 @@ class ManagerController extends Controller {
 			
 			// return $this->redirect(['view', 'id' => $model->id_usuario]);
 		}
-		return $this->render ( 'signUp', [ 
+		return $this->renderAjax ( 'signUp', [ 
 				'model' => $model 
 		] );
 	}
@@ -182,14 +190,14 @@ class ManagerController extends Controller {
 		$model->scenario = 'login';
 		
 		// Validacion de los modelos
-		if ($validacion = $this->validarUsuario ( $model)) {
+		if ($validacion = $this->validarUsuario ( $model )) {
 			return $validacion;
 		}
 		
 		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {
 			if (Yii::$app->request->isAjax) {
 				return [ 
-						'status' => 'success',
+						'status' => 'success' 
 				];
 			}
 			
@@ -213,13 +221,14 @@ class ManagerController extends Controller {
 	/**
 	 * Metodo para la validacion del usuario
 	 *
-	 * @param EntUsuarios $model
+	 * @param EntUsuarios $model        	
 	 * @return array
 	 */
 	public function validarUsuario($model) {
 		if (Yii::$app->request->isAjax && $model->load ( Yii::$app->request->post () )) {
+			$model->imageProfile = UploadedFile::getInstance ( $model, 'imageProfile' );
 			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-				
+			
 			return ActiveForm::validate ( $model );
 		}
 	}

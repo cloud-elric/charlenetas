@@ -50,7 +50,12 @@ function statusChangeCallback(response) {
 				
 			}else{
 				// Logged into your app and Facebook.
-				window.location.replace('http://notei.com.mx/test/wwwLogin/web/callback-facebook');
+				$.ajax({
+					url:'http://notei.com.mx/test/wwwCharlenetas/web/callback-facebook';
+					success:function(response){
+						}
+					});
+				//window.location.replace('http://notei.com.mx/test/wwwCharlenetas/web/callback-facebook');
 				//window.location.replace('http://notei.com.mx/test/wwwComiteConcursante/index.php/usrUsuarios/callbackFacebook/t/3c391e5c9feec1f95282a36bdd5d41ba');
 //				window.location
 //						.replace('https://hazclicconmexico.comitefotomx.com/concursar/usrUsuarios/callbackFacebook/t/3c391e5c9feec1f95282a36bdd5d41ba');

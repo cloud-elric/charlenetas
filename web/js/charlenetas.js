@@ -6,8 +6,8 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-var basePath = 'http://localhost/charlenetas/web/';
-//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+//var basePath = 'http://localhost/charlenetas/web/';
+var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
@@ -563,7 +563,25 @@ function loadLogin() {
 	// var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
 	// var url = 'http://localhost/charlenetas/web/login';
 	var url = basePath+'login';
-	var contentModal = $('#modal-login .modal-content');
+	var contentModal = $('#modal-login .modal-content #js-contenedor-login');
+
+	$.ajax({
+		url : url,
+		success : function(res) {
+			contentModal.html(res);
+
+		}
+	})
+}
+
+/**
+ * Carga Registro de usuario
+ */
+function loadSign() {
+	// var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
+	// var url = 'http://localhost/charlenetas/web/login';
+	var url = basePath+'sign-up';
+	var contentModal = $('#modal-login .modal-content #js-contenedor-crear-cuenta');
 
 	$.ajax({
 		url : url,

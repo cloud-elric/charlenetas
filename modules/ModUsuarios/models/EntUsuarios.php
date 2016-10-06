@@ -123,10 +123,11 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						'on' => 'registerInput' 
 				],
 				[ 
-						'password',
+						'repeatPassword',
 						'compare',
-						'compareAttribute' => 'repeatPassword',
-						'on' => 'registerInput' 
+						'compareAttribute' => 'password',
+						'on' => 'registerInput',
+						'message'=>'La contraseña no coincide'
 				],
 				[ 
 						'txt_email',
@@ -149,7 +150,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'txt_email' 
 						],
 						'required',
-						'on' => 'registerInput' 
+						'on' => 'registerInput',
+						'message'=>'Campo requerido'
 				],
 				[ 
 						[ 
@@ -170,7 +172,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'repeatPassword' 
 						],
 						'required',
-						'on' => 'registerInput' 
+						'on' => 'registerInput',
+						'message'=>'Campo requerido'
 				],
 				[ 
 						[ 
@@ -216,7 +219,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						[ 
 								'txt_email' 
 						],
-						'unique' 
+						'unique',
+						'message'=>'Email ya se encuentra registrado'
 				],
 				[ 
 						[ 
@@ -251,16 +255,19 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		return [ 
 				'id_usuario' => 'Id Usuario',
 				'txt_token' => 'Txt Token',
-				'txt_username' => 'Email',
-				'txt_apellido_paterno' => 'Txt Apellido Paterno',
-				'txt_apellido_materno' => 'Txt Apellido Materno',
+				'txt_username' => 'Nombre',
+				'txt_apellido_paterno' => 'Apellido paterno',
+				'txt_apellido_materno' => 'Apellido materno',
 				'txt_auth_key' => 'Txt Auth Key',
 				'txt_password_hash' => 'Txt Password Hash',
 				'txt_password_reset_token' => 'Txt Password Reset Token',
-				'txt_email' => 'Txt Email',
+				'txt_email' => 'Email',
+				'password'=>'Contraseña',
+				'repeatPassword'=>'Repetir contraseña',
 				'fch_creacion' => 'Fch Creacion',
 				'fch_actualizacion' => 'Fch Actualizacion',
-				'id_status' => 'Id Status' 
+				'id_status' => 'Id Status',
+				'imageProfile'=>'Imagen de perfil'
 		];
 	}
 	
