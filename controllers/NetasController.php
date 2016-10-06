@@ -26,6 +26,7 @@ use app\models\EntAlquimias;
 use app\models\EntNotificaciones;
 use app\models\EntRespuestasEspejo;
 use app\models\EntCitas;
+use yii\db\mssql\PDO;
 
 class NetasController extends Controller {
 	
@@ -787,12 +788,26 @@ class NetasController extends Controller {
 	 */
 	public function actionAnadirCitas(){
 		
-		$tabla = new EntCitas();
+		$json = array();
+ 
+ 		$requete = "SELECT * FROM evento ORDER BY id";
+ 	
+ 		try {
+ 			$bdd = new PDO('mysql:host=localhost;dbname=calendario', 'root', 'root');
+ 		} catch(Exception $e) {
+ 			exit('Imposible conectar a la base de datos.');
+ 		}
+ 
+ 		$resultat = $bdd->query($requete) or die(print_r($bdd->errorInfo()));
+ 
+ 		echo json_encode($resultat->fetchAll(PDO::FETCH_ASSOC));
+		
+ 		/*$tabla = new EntCitas();
 		$citas = $tabla->find()->all();
 		
 		return $this->render('//netas/include/anadirCitas', [
 				'citas' => $citas
-		]);
+		]);*/
 		
 	}
 

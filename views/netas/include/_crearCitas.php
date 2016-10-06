@@ -36,8 +36,44 @@ ActiveForm::end ();
 <br/>
 
 <script type="text/javascript">
+
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+
 	$('#calendar').fullCalendar({
         // put your options and callbacks here
-        events: 'http://localhost/charlenetas/web/netas/anadir-citas'
+        editable: true,
+		eventLimit: true,
+        events: 'http://localhost/charlenetas/web/netas/anadir-citas',
+        selectable: true,
+		selectHelper: true,
+
+		select: function(start, end, allDay) {
+			 var title = prompt('Event Title:');
+			 if (title) {
+			 	start = $.fullCalendar.moment(event.start).format("YYYY-MM-DD HH:mm:ss");
+			 	end = $.fullCalendar.moment(event.end).format("YYYY-MM-DD HH:mm:ss");
+			 	$.ajax({
+			 		url: 'http://localhost/fullcalendar/add_events.php',
+			 		data: 'title='+ title+'&start='+ start +'&end='+ end ,
+			 		type: "POST",
+			 		success: function(json) {
+			 			alert('OK');
+			 		}
+			 	});
+			 	calendar.fullCalendar('renderEvent',
+			 	{
+			 		title: title,
+			 		start: start,
+			 		end: end,
+			 		allDay: allDay
+			 	},
+			 	true // make the event "stick"
+			 	);
+			 }
+			 calendar.fullCalendar('unselect');
+	    }
     });
 	</script>
