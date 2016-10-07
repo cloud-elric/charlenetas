@@ -8,11 +8,12 @@ use app\modules\ModUsuarios\models\Utils;
 /**
  * This is the model class for table "ent_citas".
  *
- * @property string $id_cita
+ * @property integer $id
+ * @property string $title
+ * @property string $start
+ * @property string $end
  * @property string $id_usuario
  * @property string $txt_token
- * @property string $fch_cita
- * @property string $hra_cita
  * @property string $b_habilitado
  */
 class EntCitas extends \yii\db\ActiveRecord
@@ -20,7 +21,7 @@ class EntCitas extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+public static function tableName()
     {
         return 'ent_citas';
     }
@@ -31,10 +32,10 @@ class EntCitas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_usuario', 'txt_token'], 'required'],
-            [['id_usuario', 'b_habilitado'], 'integer'],
-            [['fch_cita', 'hra_cita'], 'safe'],
-            [['txt_token'], 'string', 'max' => 60],
+            [['id', 'title', 'id_usuario', 'txt_token'], 'required'],
+            [['id', 'id_usuario', 'b_habilitado'], 'integer'],
+            [['start', 'end'], 'safe'],
+            [['title', 'txt_token'], 'string', 'max' => 60],
         ];
     }
 
@@ -44,11 +45,12 @@ class EntCitas extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_cita' => 'Id Cita',
+            'id' => 'ID',
+            'title' => 'Title',
+            'start' => 'Start',
+            'end' => 'End',
             'id_usuario' => 'Id Usuario',
             'txt_token' => 'Txt Token',
-            'fch_cita' => 'Fch Cita',
-            'hra_cita' => 'Hra Cita',
             'b_habilitado' => 'B Habilitado',
         ];
     }

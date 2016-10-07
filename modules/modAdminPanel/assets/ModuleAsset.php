@@ -13,14 +13,17 @@ class ModuleAsset extends AssetBundle {
 			'css/ionicons.min.css',
 			'css/asScrollable.min.css',
 			'css/charlenetas.css',
-			'css/temporal.css'
+			'css/temporal.css',
+			'fullcalendar-3.0.1/fullcalendar.css'
 	];
 	public $js = [ 
 			//'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js',
 			'materialize/js/materialize.min.js',
 			'js/jquery.mousewheel.min.js',
 			'js/jquery-asScrollable.min.js',
-			'js/charlenetas.js'
+			'js/charlenetas.js',
+			'fullcalendar-3.0.1/lib/moment.min.js',
+			'fullcalendar-3.0.1/fullcalendar.js'
 	];
 	
 	public $depends = [ 
