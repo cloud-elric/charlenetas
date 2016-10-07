@@ -7,7 +7,7 @@ var masonryOptions = {
 
 };
 var basePath = 'http://localhost/charlenetas/web/';
-//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+// var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post

@@ -94,7 +94,7 @@
 	color: #E8716D;
 	font-size: 1.1em;
 	letter-spacing: 2px;
-	margin-bottom: 40px;
+	margin-bottom: 12px;
 	text-transform: uppercase;
 }
 .modal-login-register .section .anim-account .account-singup {
@@ -118,4 +118,65 @@
 .modal-login-register .delay-4 {
 	-webkit-animation-delay: 1.3s;
 	animation-delay: 0.45s;
+}
+
+/** Account **/
+.account-singup .input-field{
+	height: 100px;
+}
+.account-singup .input-field .row{
+	margin: 0;
+}
+
+.account-singup .input-field .btn{
+	line-height: 2.3rem;
+	width: 100%;
+}
+.account-singup .input-field .file-path-wrapper{
+	display: none;
+}
+.account-singup input[type="email"],
+.account-singup input[type="password"],
+.account-singup input[type="text"]{
+	margin-bottom: 6px;
+}
+.account-singup .help-block-error{
+	margin-top: 0;
+}
+.account-singup .btn-success{
+	width: 100%;
+}
+
+/** Login **/
+.account-login #js-login-submit,
+.account-login .btn-facebook{
+	width: 100%;
+}
+
+.account-login .btn-facebook{
+	background-color: #3b5998;
+}
+.account-login .btn-facebook:hover{
+	background-color: transparent;
+	border: 1px solid #3b5998;
+	color: #3b5998;
+}
+
+.account-login input[type="email"],
+.account-login input[type="password"],
+.account-login input[type="text"]{
+	margin-bottom: 6px;
+}
+.account-login .help-block-error{
+	margin-top: 0;
+}
+.account-login .help-block-error:last-child{
+	margin-bottom: 20px;
+}
+.account-login .input-field{ margin-top: 0; }
+.account-login .input-field .row{
+	margin: 0;
+}
+body .wrap .section .anim-account .account-login h4{
+	margin-bottom: 40px;
 }
