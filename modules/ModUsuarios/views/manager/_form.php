@@ -1,39 +1,62 @@
 <?php
-
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EntUsuarios */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="ent-usuarios-form">
+<h4 class="animated">Registrarse</h4>
 
-    <?php $form = ActiveForm::begin(['id'=>'sign-form','options' => ['enctype' => 'multipart/form-data']]); ?>
+<div class="row">
 
-    <?= $form->field($model, 'txt_username')->textInput(['maxlength' => true]) ?>
+    <?php
+				
+$form = ActiveForm::begin ( [ 
+						'id' => 'sign-form',
+						'class' => 'col s12',
+						'fieldConfig' => [ 
+								'template' => "<div class='row'>{input}\n{label}\n{error}</div>",
+								'horizontalCssClasses' => [ 
+										'error' => 'mdl-textfield__error' 
+								],
+								'labelOptions' => [ 
+										'class' => 'mdl-textfield__label' 
+								],
+								'options' => [ 
+										'class' => 'input-field col s6 animated' 
+								] 
+						]
+						,
+						'errorCssClass' => 'invalid',
+						'options' => [ 
+								'enctype' => 'multipart/form-data' 
+						] 
+				] );
+				?>
+<div class="row">
+    <?= $form->field($model, 'txt_username')->textInput(['maxlength' => true])?>
 
-    <?= $form->field($model, 'txt_apellido_paterno')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'txt_apellido_paterno')->textInput(['maxlength' => true])?>
 
-    <?= $form->field($model, 'txt_apellido_materno')->textInput(['maxlength' => true]) ?>
+    <?php $form->field($model, 'txt_apellido_materno')->textInput(['maxlength' => true])?>
 
-    <?= $form->field($model, 'txt_email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'txt_email')->textInput(['maxlength' => true])?>
     
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])?>
     
-    <?= $form->field($model, 'repeatPassword')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'repeatPassword')->passwordInput(['maxlength' => true])?>
     
-  	 <?= $form->field($model, 'imageProfile')->fileInput() ?>
+  	 <?= $form->field($model, 'imageProfile')->fileInput()?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['id'=>'js-registrase-btn','class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+<div class="form-group">
+        <?= Html::submitButton('<span class="ladda-label">'.($model->isNewRecord ? 'Create' : 'Update').'</span>', ['id'=>'js-registrase-btn','class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-primary').' ladda-button', 'data-style'=>'zoom-in'])?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+	</div>
+<?php ActiveForm::end(); ?>
 </div>
+
 
 <script>
 $(document).ready(function(){

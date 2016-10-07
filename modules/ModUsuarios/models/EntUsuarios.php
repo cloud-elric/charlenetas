@@ -220,7 +220,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'txt_email' 
 						],
 						'unique',
-						'message'=>'Email ya se encuentra registrado'
+						'message'=>'Email ya se encuentra registrado',
+						'on' => 'registerInput',
 				],
 				[ 
 						[ 
@@ -517,6 +518,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	 * @return EntUsuarios|null
 	 */
 	public static function findByEmail($username) {
+
+		
 		return static::findOne ( [ 
 				'txt_email' => $username,
 				'id_status' => self::STATUS_ACTIVED 
@@ -649,6 +652,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		$this->txt_username = $dataUsuario ['profile'] ['first_name'];
 		$this->txt_apellido_paterno = $dataUsuario ['profile'] ['last_name'];
 		$this->txt_email = $dataUsuario ['profile'] ['email'];
+		$this->id_status = self::STATUS_ACTIVED;
 		
 		return $this;
 	}

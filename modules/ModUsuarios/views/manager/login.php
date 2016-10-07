@@ -51,8 +51,12 @@ function statusChangeCallback(response) {
 			}else{
 				// Logged into your app and Facebook.
 				$.ajax({
-					url:'http://notei.com.mx/test/wwwCharlenetas/web/callback-facebook';
+					url:'http://notei.com.mx/test/wwwCharlenetas/web/callback-facebook',
 					success:function(response){
+
+						if(response.status=="success"){
+							alert('Logueado');
+							}
 						}
 					});
 				//window.location.replace('http://notei.com.mx/test/wwwCharlenetas/web/callback-facebook');
@@ -108,50 +112,45 @@ window.fbAsyncInit = function() {
 
 <?php }?>
 
-<div class="site-login">
-	<h1><?= Html::encode($this->title) ?></h1>
+<h4 class="animated">Login</h4>
 
-    <?php
-				$form = ActiveForm::begin ( [ 
-					//	'enableAjaxValidation' => true,
-						'enableClientValidation' => true,
-						//'validationUrl' => Url::base().'/netas/validacion-usuario',
-						'layout' => 'horizontal',
-						'id' => 'login-form',
-						'fieldConfig' => [ 
-								'template' => "<div class='row'>{input}\n{label}\n{error}</div>",
-								'horizontalCssClasses' => [ 
-										'error' => 'mdl-textfield__error' 
-								],
-								'labelOptions' => [ 
-										'class' => 'mdl-textfield__label' 
-								],
-								'options' => [ 
-										'class' => 'input-field col s12' 
-								] 
-						],
-						'errorCssClass' => 'invalid' 
-				] );
-				?>
+<div class="row">
+	<?php
+	$form = ActiveForm::begin ( [
+			// 'enableAjaxValidation' => true,
+			'enableClientValidation' => true,
+			// 'validationUrl' => Url::base().'/netas/validacion-usuario',
+			'layout' => 'horizontal',
+			'id' => 'login-form',
+			'class' => 'col s12',
+			'fieldConfig' => [ 
+					'template' => "<div class='row'>{input}\n{label}\n{error}</div>",
+					'horizontalCssClasses' => [ 
+							'error' => 'mdl-textfield__error' 
+					],
+					'labelOptions' => [ 
+							'class' => 'mdl-textfield__label' 
+					],
+					'options' => [ 
+							'class' => 'input-field col s12 animated' 
+					] 
+			],
+			'errorCssClass' => 'invalid' 
+	] );
+	?>
+	<div class="row">
+		<?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
+		<?= $form->field($model, 'password')->passwordInput()?>
+		<div class="center">
+			<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
+		</div>
+	</div>
+<?php ActiveForm::end(); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
-
-	<?= $form->field($model, 'password')->passwordInput()?>
-
-<div class="center">
-	<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
-</div>
-
-	<?php ActiveForm::end(); ?>
-
-	<?php if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){?>
-
-<button type="button" onClick="logInWithFacebook()"
+<?php if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){?>
+	<button type="button" onClick="logInWithFacebook()"
 		scope="<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisos']?>">
 		<i></i> Ingresar con Facebook
 	</button>
 <?php }?>
-</div>
-
-</div>
 </div>

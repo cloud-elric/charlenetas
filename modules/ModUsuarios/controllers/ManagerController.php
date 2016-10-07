@@ -190,7 +190,7 @@ class ManagerController extends Controller {
 		$model->scenario = 'login';
 		
 		// Validacion de los modelos
-		if ($validacion = $this->validarUsuario ( $model )) {
+		if ($validacion = $this->validarLogin ( $model )) {
 			return $validacion;
 		}
 		
@@ -234,6 +234,20 @@ class ManagerController extends Controller {
 	}
 	
 	/**
+	 * Metodo para la validacion del usuario
+	 *
+	 * @param EntUsuarios $model
+	 * @return array
+	 */
+	public function validarLogin($model) {
+		if (Yii::$app->request->isAjax && $model->load ( Yii::$app->request->post () )) {
+			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+				
+			return ActiveForm::validate ( $model );
+		}
+	}
+	
+	/**
 	 * Callback para facebook
 	 */
 	public function actionCallbackFacebook() {
@@ -251,15 +265,15 @@ class ManagerController extends Controller {
 			}
 		}
 		
+		
 		// asi podemos obtener sus datos de los amigos
-		foreach ( $data ['friendsInApp'] as $key => $value ) {
-			$value->id;
-			$value->name;
-		}
+// 		foreach ( $data ['friendsInApp'] as $key => $value ) {
+// 			$value->id;
+// 			$value->name;
+// 		}
 		
 		// Buscamos al usuario por email
 		$existUsuario = EntUsuarios::findByEmail ( $data ['profile'] ['email'] );
-		
 		// Si no existe creamos su cuenta
 		if (! $existUsuario) {
 			$entUsuario = new EntUsuarios ();
@@ -275,12 +289,17 @@ class ManagerController extends Controller {
 		if (! $existUsuarioFacebook) {
 			$existUsuarioFacebook = new EntUsuariosFacebook ();
 		}
+		
 		$existUsuarioFacebook->id_usuario = $existUsuario->id_usuario;
 		$usuarioGuardado = $existUsuarioFacebook->saveDataFacebook ( $data );
 		
 		if (Yii::$app->getUser ()->login ( $existUsuario )) {
-			return $this->goHome ();
+			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+			
+			return ['status'=>'success'];
 		}
+		
+		return ['status'=>'error'];
 	}
 	public function actionTest() {
 		$utils = new Utils ();

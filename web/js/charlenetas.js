@@ -798,9 +798,8 @@ $(document).ready(function() {
 	});
 
 	$('.modal-trigger').leanModal({
-
 		complete : function() {
-			$('body').css('overflow', 'hidden');
+			//$('body').css('overflow', 'hidden');
 		} // Callback for Modal close
 	});
 
