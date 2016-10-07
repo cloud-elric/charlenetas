@@ -51,7 +51,7 @@ $form = ActiveForm::begin ( [
   	 <?= $form->field($model, 'imageProfile')->fileInput()?>
 
 <div class="form-group">
-        <?= Html::submitButton('<span class="ladda-label">'.($model->isNewRecord ? 'Create' : 'Update').'</span>', ['id'=>'js-registrase-btn','class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-primary').' ladda-button', 'data-style'=>'zoom-in'])?>
+        <?= Html::submitButton('<span class="ladda-label">'.($model->isNewRecord ? 'Registrarse' : 'Actualizar datos').'</span>', ['id'=>'js-registrase-btn','class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-primary').' ladda-button', 'data-style'=>'zoom-in'])?>
     </div>
 	</div>
 <?php ActiveForm::end(); ?>

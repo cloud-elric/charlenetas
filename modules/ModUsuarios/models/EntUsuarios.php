@@ -60,10 +60,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	const STATUS_PENDIENTED = 1;
 	const STATUS_ACTIVED = 2;
 	const STATUS_BLOCKED = 3;
-	
 	const ROLE_ADMIN = 2;
 	const ROLE_CHARLENAUTA = 1;
-	
 	public $password;
 	public $repeatPassword;
 	public $imageProfile;
@@ -77,32 +75,41 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	
 	/**
 	 * USUARIOS_MOSTRAR es constante tiene un valor de 1
-	 * @param number $page=0
-	 * @param string $usuario
-	 * @param unknown $pageSize
+	 *
+	 * @param number $page=0        	
+	 * @param string $usuario        	
+	 * @param unknown $pageSize        	
 	 */
-	public static function getUsuarios($page = 0, $usuario = '', $pageSize = ConstantesWeb::USUARIOS_MOSTRAR){
-	
+	public static function getUsuarios($page = 0, $usuario = '', $pageSize = ConstantesWeb::USUARIOS_MOSTRAR) {
+		
 		/**
 		 * Busca en la base de datos EntUsuarios donde txt_username o txt_email contenga el string $usuario
-		 * y muestra 1 por que const USUARIOS_MOSTRAR es igual a 1 
+		 * y muestra 1 por que const USUARIOS_MOSTRAR es igual a 1
+		 *
 		 * @var \yii\db\ActiveQuery $query
 		 */
-		$query = EntUsuarios::find()->where(["like","txt_username",$usuario])->orWhere(["like","txt_email",$usuario]);
-	
+		$query = EntUsuarios::find ()->where ( [ 
+				"like",
+				"txt_username",
+				$usuario 
+		] )->orWhere ( [ 
+				"like",
+				"txt_email",
+				$usuario 
+		] );
+		
 		// Carga el dataprovider
-		$dataProvider = new ActiveDataProvider([
+		$dataProvider = new ActiveDataProvider ( [ 
 				'query' => $query,
-				//'sort'=> ['defaultOrder' => ['fch_publicacion'=>'asc']],
-				'pagination' => [
+				// 'sort'=> ['defaultOrder' => ['fch_publicacion'=>'asc']],
+				'pagination' => [ 
 						'pageSize' => $pageSize,
-						'page' => $page
-				]
-		]);
-	
-		return $dataProvider->getModels();
+						'page' => $page 
+				] 
+		] );
+		
+		return $dataProvider->getModels ();
 	}
-	
 	
 	/**
 	 * @inheritdoc
@@ -114,7 +121,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'imageProfile' 
 						],
 						'image',
-						'skipOnEmpty' => false,
+						'skipOnEmpty' => true,
 						'extensions' => 'png, jpg',
 						'minWidth' => 300,
 						'maxWidth' => 300,
@@ -127,7 +134,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						'compare',
 						'compareAttribute' => 'password',
 						'on' => 'registerInput',
-						'message'=>'La contraseña no coincide'
+						'message' => 'La contraseña no coincide' 
 				],
 				[ 
 						'txt_email',
@@ -151,7 +158,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						],
 						'required',
 						'on' => 'registerInput',
-						'message'=>'Campo requerido'
+						'message' => 'Campo requerido' 
 				],
 				[ 
 						[ 
@@ -173,7 +180,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						],
 						'required',
 						'on' => 'registerInput',
-						'message'=>'Campo requerido'
+						'message' => 'Campo requerido' 
 				],
 				[ 
 						[ 
@@ -220,8 +227,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'txt_email' 
 						],
 						'unique',
-						'message'=>'Email ya se encuentra registrado',
-						'on' => 'registerInput',
+						'message' => 'Email ya se encuentra registrado',
+						'on' => 'registerInput' 
 				],
 				[ 
 						[ 
@@ -263,12 +270,12 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 				'txt_password_hash' => 'Txt Password Hash',
 				'txt_password_reset_token' => 'Txt Password Reset Token',
 				'txt_email' => 'Email',
-				'password'=>'Contraseña',
-				'repeatPassword'=>'Repetir contraseña',
+				'password' => 'Contraseña',
+				'repeatPassword' => 'Repetir contraseña',
 				'fch_creacion' => 'Fch Creacion',
 				'fch_actualizacion' => 'Fch Actualizacion',
 				'id_status' => 'Id Status',
-				'imageProfile'=>'Imagen de perfil'
+				'imageProfile' => 'Imagen de perfil' 
 		];
 	}
 	
@@ -295,11 +302,13 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	}
 	
 	/**
+	 *
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getEntComentariosPosts()
-	{
-		return $this->hasMany(EntComentariosPosts::className(), ['id_usuario' => 'id_usuario']);
+	public function getEntComentariosPosts() {
+		return $this->hasMany ( EntComentariosPosts::className (), [ 
+				'id_usuario' => 'id_usuario' 
+		] );
 	}
 	
 	/**
@@ -470,8 +479,6 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		] );
 	}
 	
-	
-	
 	/**
 	 * INCLUDE USER LOGIN VALIDATION FUNCTIONS*
 	 */
@@ -518,8 +525,6 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	 * @return EntUsuarios|null
 	 */
 	public static function findByEmail($username) {
-
-		
 		return static::findOne ( [ 
 				'txt_email' => $username,
 				'id_status' => self::STATUS_ACTIVED 
@@ -617,7 +622,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	 *
 	 * @return EntUsuarios
 	 */
-	public function signup() {
+	public function signup($isFacebook = false) {
 		if (! $this->validate ()) {
 			return null;
 		}
@@ -634,7 +639,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		$user->fch_creacion = Utils::getFechaActual ();
 		
 		// Si esta activada la opcion de mandar correo de activación el usuario estara en status pendiente
-		if (Yii::$app->params ['modUsuarios'] ['mandarCorreoActivacion']) {
+		if (Yii::$app->params ['modUsuarios'] ['mandarCorreoActivacion'] && !$isFacebook) {
 			$user->id_status = self::STATUS_PENDIENTED;
 		} else {
 			$user->id_status = self::STATUS_ACTIVED;
@@ -698,17 +703,23 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	
 	/**
 	 * Si la imagen esta vacia mandamos una por default
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getImageProfile() {
 		$basePath = Yii::getAlias ( '@web' );
 		
-		if ($this->txt_imagen) {
-			return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $this->txt_imagen;
+		$usuarioFacebook = $this->entUsuariosFacebook;
+		
+		if(empty($usuarioFacebook)){
+			if ($this->txt_imagen) {
+				return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $this->txt_imagen;
+			}
+			
+			return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageDefault'];
 		}
 		
-		return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageDefault'];
+		return $usuarioFacebook->txt_url_photo;
+		
 	}
-	
 }

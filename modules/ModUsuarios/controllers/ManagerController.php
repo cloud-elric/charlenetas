@@ -279,7 +279,7 @@ class ManagerController extends Controller {
 			$entUsuario = new EntUsuarios ();
 			$entUsuario->addDataFromFaceBook ( $data );
 			
-			$existUsuario = $entUsuario->signup ();
+			$existUsuario = $entUsuario->signup (true);
 		}
 		
 		// Buscamos si existe la cuenta de facebook en la base de datos
