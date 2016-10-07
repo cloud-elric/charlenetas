@@ -15,9 +15,8 @@ use yii\helpers\Url;
 					<img src="<?=Url::base()?>/webAssets/images/espejo.png">
 				</div>
 				<div class="pin-content-wrapper" lang="en">
-					<h3 class="pin-titulo">Agrega espejo (Corregir texto)</h3>
-					<p class="pin-descripcion">Descripción (Corregir texto)</p>
-
+					<a href="#modal-pregunta-espejo" class="btn pin-titulo"
+						id="js-preguntar-espejo">Pregunta al espejo</a>
 				</div>
 			</div>
 			<?php
@@ -42,95 +41,64 @@ use yii\helpers\Url;
 <!-- Modal Structure -->
 <div id="modal-login" class="modal modal-login-register">
 	<div class="modal-content">
-		
-<!-- 		<ul class="tabs"> -->
-<!-- 			<li class="tab col s3"><a class="active" href="#js-contenedor-login">Iniciar sesión</a></li> -->
-<!-- 			<li class="tab col s3"><a href="#js-contenedor-crear-cuenta">Registrarse</a></li> -->
-<!-- 		</ul> -->
-		
-<!-- 			<div id="js-contenedor-login"> -->
-<!-- 			</div> -->
-<!-- 			<div id="js-contenedor-crear-cuenta"> -->
-<!-- 			:D -->
-<!-- 			</div> -->
 
-<section class="wrap">
+		<section class="wrap">
 
 			<!-- .section -->
 			<section class="section">
+				
 				<div class="sing-up">
-					<h4>¿No tienes una cuenta?</h4>
-					<p>
-						Registrate es gratis ahora y siempre.
-					</p>
-					<div class="btn btn-login-register" data-account="singup">Sing Up</div>
+					<h4>¿Ya tienes una cuenta?</h4>
+
+					<p>Logueate usando tu Email y contraseña con la cual te
+						registraste.</p>
+					<div class="btn btn-login-register" data-account="singup">Login</div>
 				</div>
 				<div class="login">
-					<h4>¿Ya tienes una cuenta?</h4>
-					<p>
-						Logueate usando tu Email y contraseña con la cual te registraste.
-					</p>
-					<div class="btn btn-login-register" data-account="login">Login</div>
+					<h4>¿No tienes una cuenta?</h4>
+					<p>Registrate es gratis ahora y siempre.</p>
+					<div class="btn btn-login-register" data-account="login">Sing Up</div>
 				</div>
 
 				<div class="anim-account">
-					<div class="account-singup" id="js-contenedor-crear-cuenta"> 
-<!-- 						<h4 class="animated">Registrarse</h4> -->
-<!-- 						<div class="row"> -->
-<!-- 							<form class="col s12"> -->
-<!-- 								<div class="row"> -->
-
-<!-- 									<div class="input-field col s12 animated"> -->
-<!-- 										<input id="name" type="text" class="validate"> -->
-<!-- 										<label for="name">Name</label> -->
-<!-- 									</div> -->
-
-<!-- 									<div class="input-field col s12 animated"> -->
-<!-- 										<input id="username" type="text" class="validate"> -->
-<!-- 										<label for="username">Username</label> -->
-<!-- 									</div> -->
-
-<!-- 									<div class="input-field col s12 animated"> -->
-<!-- 										<input id="password" type="password" class="validate"> -->
-<!-- 										<label for="password">Password</label> -->
-<!-- 									</div> -->
-
-<!-- 								</div> -->
-<!-- 							</form> -->
-<!--  						</div>  -->
-					</div>
-					<div class="account-login" id="js-contenedor-login">
-<!-- 						<h4 class="animated">Login</h4> -->
-
-<!-- 						<div class="row"> -->
-<!-- 							<form class="col s12"> -->
-<!-- 								<div class="row"> -->
-
-<!-- 									<div class="input-field col s12 animated"> -->
-<!-- 										<input id="username" type="text" class="validate"> -->
-<!-- 										<label for="username">Username</label> -->
-<!-- 									</div> -->
-
-<!-- 									<div class="input-field col s12 animated"> -->
-<!-- 										<input id="password" type="password" class="validate"> -->
-<!-- 										<label for="password">Password</label> -->
-<!-- 									</div> -->
-
-<!-- 								</div> -->
-<!-- 							</form> -->
-<!-- 						</div> -->
-					</div>
+				<div class="green darken-1" id="js-message-sign-up" style="
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 40px 30px;
+    color:white;
+    display:none;                              
+">
+  <h1>Activa tu cuenta.</h1><p style="color:white;">Para activar tu cuenta se ha enviado un correo electronico a la dirección proporcionada.</p>
+</div>
+					<div class="account-singup" id="js-contenedor-crear-cuenta"></div>
+					<div class="account-login" id="js-contenedor-login"></div>
 				</div>
 			</section>
 			<!-- end / .section -->
-			</section>
+		</section>
 	</div>
 </div>
+
+<!-- <!-- Modal para pregunta en el espejo -->
+-->
+<!-- <div id="modal-pregunta-espejo" class="modal"> -->
+<!-- 	<div class="modal-content"> -->
+
+<!-- 	</div> -->
+<!-- </div> -->
 
 <a class="waves-effect waves-light btn modal-trigger"
 	href="#modal-login" style="display: none;"></a>
 
 <?php
+
+$this->registerJs ( "
+//loadEspejoPreguntar();
+  ", View::POS_END, 'espejo' );
+
 if (Yii::$app->user->isGuest) {
 	$this->registerJs ( "
   loadLogin();
@@ -140,18 +108,18 @@ $('ul.tabs').tabs();
   ", View::POS_END );
 }
 
-if(!empty($token)){
+if (! empty ( $token )) {
 	?>
-	<script>
+<script>
   		showPostFull('".$token."');
   </script>
-  <?php 
+<?php
 }
 ?>
 
 <!-- Load Facebook SDK for JavaScript -->
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
 	  if (d.getElementById(id)) return;
 	  js = d.createElement(s); js.id = id;

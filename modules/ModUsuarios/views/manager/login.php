@@ -55,7 +55,10 @@ function statusChangeCallback(response) {
 					success:function(response){
 
 						if(response.status=="success"){
-							alert('Logueado');
+							var token = $('#js-token-post').val();
+							showPostAfterLogin(token);
+							cargarCerrarSesion();
+							loadEspejoPreguntar();
 							}
 						}
 					});

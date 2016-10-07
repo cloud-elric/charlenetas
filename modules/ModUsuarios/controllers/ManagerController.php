@@ -38,14 +38,16 @@ class ManagerController extends Controller {
 			
 			// Obtiene la imagen de perfil para le usuario
 			$model->imageProfile = UploadedFile::getInstance ( $model, 'imageProfile' );
-			$nombreImagen = Utils::generateToken ( 'ava' ) . '.' . $model->imageProfile->extension;
-			$model->txt_imagen = $nombreImagen;
-			
+			if (!empty ( $model->imageProfile )) {
+				$nombreImagen = Utils::generateToken ( 'ava' ) . '.' . $model->imageProfile->extension;
+				$model->txt_imagen = $nombreImagen;
+			}
 			if ($user = $model->signup ()) {
 				
-				// Guarda la imagen de usuario
-				$model->upload ( $nombreImagen );
-				
+				if (!empty ( $model->imageProfile )) {
+					// Guarda la imagen de usuario
+					$model->upload ( $nombreImagen );
+				}
 				if (Yii::$app->params ['modUsuarios'] ['mandarCorreoActivacion']) {
 					
 					$activacion = new EntUsuariosActivacion ();
@@ -236,13 +238,13 @@ class ManagerController extends Controller {
 	/**
 	 * Metodo para la validacion del usuario
 	 *
-	 * @param EntUsuarios $model
+	 * @param EntUsuarios $model        	
 	 * @return array
 	 */
 	public function validarLogin($model) {
 		if (Yii::$app->request->isAjax && $model->load ( Yii::$app->request->post () )) {
 			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-				
+			
 			return ActiveForm::validate ( $model );
 		}
 	}
@@ -265,12 +267,11 @@ class ManagerController extends Controller {
 			}
 		}
 		
-		
 		// asi podemos obtener sus datos de los amigos
-// 		foreach ( $data ['friendsInApp'] as $key => $value ) {
-// 			$value->id;
-// 			$value->name;
-// 		}
+		// foreach ( $data ['friendsInApp'] as $key => $value ) {
+		// $value->id;
+		// $value->name;
+		// }
 		
 		// Buscamos al usuario por email
 		$existUsuario = EntUsuarios::findByEmail ( $data ['profile'] ['email'] );
@@ -279,7 +280,7 @@ class ManagerController extends Controller {
 			$entUsuario = new EntUsuarios ();
 			$entUsuario->addDataFromFaceBook ( $data );
 			
-			$existUsuario = $entUsuario->signup (true);
+			$existUsuario = $entUsuario->signup ( true );
 		}
 		
 		// Buscamos si existe la cuenta de facebook en la base de datos
@@ -296,10 +297,14 @@ class ManagerController extends Controller {
 		if (Yii::$app->getUser ()->login ( $existUsuario )) {
 			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 			
-			return ['status'=>'success'];
+			return [ 
+					'status' => 'success' 
+			];
 		}
 		
-		return ['status'=>'error'];
+		return [ 
+				'status' => 'error' 
+		];
 	}
 	public function actionTest() {
 		$utils = new Utils ();

@@ -6,8 +6,8 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-//var basePath = 'http://localhost/charlenetas/web/';
-var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+var basePath = 'http://localhost/charlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
@@ -596,6 +596,11 @@ function loadSign() {
 function showModalLogin() {
 
 	$('.modal-trigger').trigger('click');
+	
+	$('#js-contenedor-crear-cuenta').show();
+	$('#js-message-sign-up').hide();
+	
+	document.getElementById("sign-form").reset();
 
 }
 
@@ -722,6 +727,20 @@ function cambiarClassPin(elemento, opacity) {
 }
 
 /**
+ * Carga el espejo para preguntar
+ */
+function loadEspejoPreguntar(){
+	var url = basePath+'netas/agregar-espejo';
+	var contenedor = $('#modal-pregunta-espejo .modal-content');
+	$.ajax({
+		url : url,
+		success : function(res) {
+			contenedor.html(res);
+		}
+	});
+}
+
+/**
  * Oculta o aparece a los tipo post
  * 
  * @param idTipoPost
@@ -773,7 +792,10 @@ var grid;
 
 $(document).ready(function() {
 	
-
+	$("#js-ingresar-cerrar-sesion").on("click", function(e){
+		e.preventDefault();
+	});
+	
 	grid = $('.grid').masonry(masonryOptions);
 
 	setInterval(function() {

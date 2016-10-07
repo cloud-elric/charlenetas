@@ -5,6 +5,7 @@ $(".btn-login-register").click(function() {
 	var item = $(this).data("account");
 	if(item === "singup"){
 		$(".account-singup").hide();
+		$('.anim-account').removeClass('green darken-1');
 		$('.anim-account').animate({left: '-1%'}, 300, function() {
 			$(".account-login .animated").animate({ "opacity": "0" }, 0 );
 			$(".anim-account").animate({ "left": "2%" }, 350 );

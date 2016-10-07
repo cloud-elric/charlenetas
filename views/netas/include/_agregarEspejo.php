@@ -42,3 +42,50 @@ $form = ActiveForm::begin ( [
 
 ActiveForm::end ();
 
+?>
+
+<script>
+$(document).ready(function(){
+	$('body').on('beforeSubmit', '#form-espejo', function() {
+		var form = $(this);
+		// return false if form still have some validation errors
+		if (form.find('.has-error').length) {
+			return false;
+		}
+		
+		var button = document.getElementById('js-registrase-btn');
+		var l = Ladda.create(button);
+	 	l.start();
+		// submit form
+			$.ajax({
+				url : form.attr('action'),// url para peticion
+				type : 'post', // Metodo en el que se enviara la informacion
+				success : function(response) { 
+
+					// Si la respuesta contiene la propiedad status y es success
+					if (response.hasOwnProperty('status')
+							&& response.status == 'success') {
+						var token = $('#js-token-post').val();
+						showPostAfterLogin(token);
+						cargarCerrarSesion();
+						loadEspejoPreguntar();
+					} else {
+						// Muestra los errores
+						$('#form-espejo').yiiActiveForm('updateMessages',
+								response, true);
+					}
+					
+					l.stop();
+				},
+				statusCode: {
+				    404: function() {
+				      alert( "page not found" );
+				    }
+				  }
+
+			});
+		return false;
+	});
+});
+
+</script>

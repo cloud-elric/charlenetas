@@ -136,6 +136,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						'on' => 'registerInput',
 						'message' => 'La contraseña no coincide' 
 				],
+				['txt_email','email','message'=>'Ingrese una dirección de correo valida'],
 				[ 
 						'txt_email',
 						'trim' 
@@ -160,19 +161,19 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						'on' => 'registerInput',
 						'message' => 'Campo requerido' 
 				],
-				[ 
-						[ 
-								'password' 
-						],
-						StrengthValidator::className (),
-						'min' => 10,
-						'digit' => 2,
-						'special' => 2,
-						'upper' => 2,
-						'lower' => 2,
-						'special' => 2,
-						'hasUser' => false 
-				],
+// 				[ 
+// 						[ 
+// 								'password' 
+// 						],
+// 						StrengthValidator::className (),
+// 						'min' => 10,
+// 						'digit' => 2,
+// 						'special' => 2,
+// 						'upper' => 2,
+// 						'lower' => 2,
+// 						'special' => 2,
+// 						'hasUser' => false 
+// 				],
 				[ 
 						[ 
 								'password',

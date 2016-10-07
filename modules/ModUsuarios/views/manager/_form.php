@@ -85,9 +85,11 @@ $(document).ready(function(){
 					// Si la respuesta contiene la propiedad status y es success
 					if (response.hasOwnProperty('status')
 							&& response.status == 'success') {
-						var token = $('#js-token-post').val();
-						showPostAfterLogin(token);
-						cargarCerrarSesion();
+						
+						$('#js-contenedor-crear-cuenta').hide();
+						$('#js-message-sign-up').show();
+						
+						document.getElementById("sign-form").reset();
 					} else {
 						// Muestra los errores
 						$('#sign-form').yiiActiveForm('updateMessages',
@@ -99,7 +101,10 @@ $(document).ready(function(){
 				statusCode: {
 				    404: function() {
 				      alert( "page not found" );
-				    }
+				    },
+				    500:function(){
+				    	l.stop();
+					    }
 				  }
 
 			});
