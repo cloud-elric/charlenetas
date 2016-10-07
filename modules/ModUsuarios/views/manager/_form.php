@@ -47,9 +47,19 @@ $form = ActiveForm::begin ( [
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])?>
     
     <?= $form->field($model, 'repeatPassword')->passwordInput(['maxlength' => true])?>
-    
-  	 <?= $form->field($model, 'imageProfile')->fileInput()?>
 
+	<?= $form->field($model, 'imageProfile', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
+<!-- 
+<div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+ -->
 <div class="form-group">
         <?= Html::submitButton('<span class="ladda-label">'.($model->isNewRecord ? 'Registrarse' : 'Actualizar datos').'</span>', ['id'=>'js-registrase-btn','class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-primary').' ladda-button', 'data-style'=>'zoom-in'])?>
     </div>
