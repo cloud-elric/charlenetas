@@ -191,14 +191,10 @@ class AdminController extends Controller {
 	
 	public function actionNotificaciones() {
 		
-		/*$token_post = "com2fe4b8b63ae89b5d7661dee3f5151e9757eaa75c65b4d";
-		$comentario = new EntComentariosPosts();
 		$notificaciones = new EntNotificaciones();
-		$usuario = $comentario->find()->where(['txt_token'=>$token_post])->one();
-		
-		$notificaciones->guardarNotificacion($usuario, $notificaciones);*/
+		$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(15)->all();
 			
-		return $this->render ( 'Notificaciones'/*, ["notificaciones"=>$usuario]*/);
+		return $this->render( 'notificaciones', ['notificaciones'=>$admin]);
 		
 	}
 	

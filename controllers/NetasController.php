@@ -24,6 +24,9 @@ use app\models\ConstantesWeb;
 use app\models\EntPosts;
 use app\models\EntAlquimias;
 use app\models\EntNotificaciones;
+use app\models\EntRespuestasEspejo;
+use app\models\EntCitas;
+use yii\db\mssql\PDO;
 
 class NetasController extends Controller {
 	
@@ -188,6 +191,19 @@ class NetasController extends Controller {
 		return $this->render ( 'masPosts', [ 
 				'listaPost' => $listaPost 
 		] );
+	}
+	
+	/**
+	 * Mostrar notificaciones al usuario
+	 * @return string
+	 */
+	public function actionNotificaciones() {
+	
+		$notificaciones = new EntNotificaciones();
+		$usuario = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
+			
+		return $this->render( 'notificaciones', ['notificaciones'=>$usuario]);
+	
 	}
 	
 	/**
@@ -715,4 +731,84 @@ class NetasController extends Controller {
 				'post' => $post 
 		] );
 	}
+	
+	/**
+	 * Guarda si al usuario le gusto o no la respuesta del admin
+ 	 * en b_de_acuerdo de la tabla ent_espuestas_espejo
+	 * @param unknown $token
+	 * @param unknown $feed
+	 */
+	public function actionAgregarAcuerdo($token, $feed) {
+		$this->layout = false;
+	
+		$acuerdo = new EntRespuestasEspejo();
+		$posts = new EntPosts();
+		$post = $posts->find()->where(['txt_token'=>$token])->one();
+		
+		$respuesta = $acuerdo->find()->where(['id_post'=>$post->id_post])->one();
+		
+		$respuesta->b_de_acuerdo = $feed;
+		
+		$notificacion = new EntNotificaciones();
+		$notificacion->guardarNotificacionAcuerdo($post,$notificacion);
+	
+		if($respuesta->save ())
+			echo "success";
+	
+		else 
+			echo "error";
+	}
+	
+	/**
+	 * crear cita para el usuario en sesiÃ³n
+	 */
+	public function actionCrearCita() {
+		$cita = new EntCitas();
+	
+		if ($cita->load ( Yii::$app->request->post () )) {
+			if($citaGuardada = $cita->guardarCitas($cita)){
+	
+				$notificaciones = new EntNotificaciones();
+					
+				$notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones);
+	
+				return 'success';
+			} else{
+				return 'error';
+			}
+		}
+	
+		return $this->renderAjax ( '//netas/include/_crearCitas', [
+				'cita' => $cita
+		] );
+	}
+	
+	/**
+	 * Añadir las citas al calendario
+	 */
+	public function actionAnadirCitas(){
+		
+		$json = array();
+ 
+ 		$requete = "SELECT * FROM evento ORDER BY id";
+ 	
+ 		try {
+ 			$bdd = new PDO('mysql:host=localhost;dbname=calendario', 'root', 'root');
+ 		} catch(Exception $e) {
+ 			exit('Imposible conectar a la base de datos.');
+ 		}
+ 
+ 		$resultat = $bdd->query($requete) or die(print_r($bdd->errorInfo()));
+ 
+ 		echo json_encode($resultat->fetchAll(PDO::FETCH_ASSOC));
+		
+ 		/*$tabla = new EntCitas();
+		$citas = $tabla->find()->all();
+		
+		return $this->render('//netas/include/anadirCitas', [
+				'citas' => $citas
+		]);*/
+		
+	}
+
 }

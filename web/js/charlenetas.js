@@ -6,8 +6,8 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-//var basePath = 'http://localhost/charlenetas/web/';
-var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+var basePath = 'http://localhost/charlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
@@ -132,11 +132,17 @@ function showPostAfterLogin(token) {
 
 	content.html('');
 
-	content.load(url, function() {
-		cargarComentarios(token, true);
+	if(token){
+		content.load(url, function() {
+			cargarComentarios(token, true);
+			$('#modal-login').closeModal();
+			$('body').css('overflow', 'hidden');
+		});
+	}else{
 		$('#modal-login').closeModal();
-		$('body').css('overflow', 'hidden');
-	});
+	}
+	
+	
 }
 
 // Cierra el post con toda su información
@@ -147,6 +153,23 @@ function hidePostFull() {
 	pagesComentarios = 0;
 	$('#js-content').html();
 }
+
+/**
+ * Carga todas notificaciones para que las vizualisen los ususarios y 
+ */
+function cargarNotificaciones(){
+	var url = basePath + 'netas/notificaciones';
+	
+	$.ajax({
+		url : url,
+		dataType : 'html',
+		succes : function(res){
+			
+		}
+	});
+}
+
+//setInterval(cargarNotificaciones, 1000);
 
 // Metodo para suscribirse a una pregunta espejo
 function suscribirseEspejo(token) {
@@ -245,6 +268,33 @@ function desSuscribirseEspejo(token) {
 				// Colocar un mensaje de que no se pudo subscribir
 				removeSubscriptores(token);
 			},
+			500 : function() {
+				// Colocar un mensaje de que no se pudo subscribir
+				removeSubscriptores(token);
+			}
+		}
+	});
+}
+
+/**
+ * Guarda si al usuario le gusto o no la respuesta del admin
+ * en b_de_acuerdo de la tabla ent_espuestas_espejo 
+ */
+function agregarAcuerdo(token, feed) {
+	var url = basePath+'netas/agregar-acuerdo?token=' + token + '&feed=' + feed;
+
+	$.ajax({
+		url : url,
+		dataType : 'html',
+		method : 'GET',
+		success : function(res) {
+
+		},
+		statusCode : {
+			403 : function() {
+				showModalLogin();
+			},
+
 			500 : function() {
 				// Colocar un mensaje de que no se pudo subscribir
 				removeSubscriptores(token);
@@ -513,7 +563,25 @@ function loadLogin() {
 	// var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
 	// var url = 'http://localhost/charlenetas/web/login';
 	var url = basePath+'login';
-	var contentModal = $('#modal-login .modal-content');
+	var contentModal = $('#modal-login .modal-content #js-contenedor-login');
+
+	$.ajax({
+		url : url,
+		success : function(res) {
+			contentModal.html(res);
+
+		}
+	})
+}
+
+/**
+ * Carga Registro de usuario
+ */
+function loadSign() {
+	// var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
+	// var url = 'http://localhost/charlenetas/web/login';
+	var url = basePath+'sign-up';
+	var contentModal = $('#modal-login .modal-content #js-contenedor-crear-cuenta');
 
 	$.ajax({
 		url : url,
@@ -704,6 +772,7 @@ function ocultarTipoPost(tipoPost, opacity) {
 var grid;
 
 $(document).ready(function() {
+	
 
 	grid = $('.grid').masonry(masonryOptions);
 
@@ -729,9 +798,8 @@ $(document).ready(function() {
 	});
 
 	$('.modal-trigger').leanModal({
-
 		complete : function() {
-			$('body').css('overflow', 'hidden');
+			//$('body').css('overflow', 'hidden');
 		} // Callback for Modal close
 	});
 
@@ -762,23 +830,43 @@ $('body').on('beforeSubmit', '#login-form', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	
+	var button = document.getElementById('js-login-submit');
+	var l = Ladda.create(button);
+ 	l.start();
 	// submit form
 	$.ajax({
 		url : form.attr('action'),
 		type : 'post',
 		data : form.serialize(),
 		success : function(response) {
-			if (response == 'success') {
-
+			
+			// Si la respuesta contiene la propiedad status y es success
+			if (response.hasOwnProperty('status')
+					&& response.status == 'success') {
 				var token = $('#js-token-post').val();
 				showPostAfterLogin(token);
-				// cargarHabilidadesUsuario();
-
+				cargarCerrarSesion();
+			} else {
+				// Muestra los errores
+				$('#login-form').yiiActiveForm('updateMessages',
+						response, true);
 			}
+			
+			l.stop();
+		},
+		error:function(){
+			l.stop();
 		}
 	});
 	return false;
 });
+
+
+function cargarCerrarSesion(){
+	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="'+basePath+'site/logout">Cerrar sesión</a>';
+	$("#js-ingresar-cerrar-sesion").replaceWith(cerrarSesion);
+}
 
 $('.filters-toggle').on('click', function() {
 	$('nav').toggleClass('mobile');
@@ -807,7 +895,7 @@ FB.ui({
 window.fbAsyncInit = function() {
 	FB.init({
 		//appId : '1029875693761281',
-		appId:'1754524001428992',
+		appId:'1779986862262300',
 		cookie : true, // enable cookies to allow the server to access
 		// the session
 		xfbml : true, // parse social plugins on this page
@@ -815,4 +903,6 @@ window.fbAsyncInit = function() {
 	});
 
 };
+
+
 

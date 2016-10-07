@@ -119,6 +119,50 @@ function cargarRespuestas(token, pageRespuestas) {
 }
 
 /**
+ * Carga todas notificaciones para que las vizualisen los ususarios y 
+ */
+function cargarNotificaciones(){
+	var url = basePath + 'adminPanel/admin/notificaciones';
+	
+	$.ajax({
+		url : url,
+		dataType : 'html',
+		succes : function(res){
+			
+		}
+	});
+}
+
+//setInterval(cargarNotificaciones, 10000);
+
+/**
+ * Guarda si al usuario le gusto o no la respuesta del admin
+ * en b_de_acuerdo de la tabla ent_espuestas_espejo 
+ */
+function agregarAcuerdo(token, feed) {
+	var url = basePath+'netas/agregar-acuerdo?token=' + token + '&feed=' + feed;
+
+	$.ajax({
+		url : url,
+		dataType : 'html',
+		method : 'GET',
+		success : function(res) {
+
+		},
+		statusCode : {
+			403 : function() {
+				showModalLogin();
+			},
+
+			500 : function() {
+				// Colocar un mensaje de que no se pudo subscribir
+				removeSubscriptores(token);
+			}
+		}
+	});
+}
+
+/**
  * Carga las siguientes respuestas por token
  *
  * @param element

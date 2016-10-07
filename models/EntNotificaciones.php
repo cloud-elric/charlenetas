@@ -105,10 +105,10 @@ class EntNotificaciones extends \yii\db\ActiveRecord
      */
     public function guardarNotificacionPreguntas($post, $notificaciones){
     	 
-    	$notificaciones->id_usuario = 25;
+    	$notificaciones->id_usuario = Yii::$app->user->identity;
     	$notificaciones->txt_token_objeto = $post->txt_token;
-    	$notificaciones->txt_descripcion = "te han una pregunta";
-    	$notificaciones->txt_titulo = "te han una pregunta";
+    	$notificaciones->txt_descripcion = "te han hecho una pregunta";
+    	$notificaciones->txt_titulo = "te han una hecho pregunta";
     	 
     	 
     	$transaction = EntNotificaciones::getDb()->beginTransaction ();
@@ -142,6 +142,72 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     	$notificaciones->txt_token_objeto = $post->txt_token;
     	$notificaciones->txt_descripcion = "te han respondido tu pregunta";
     	$notificaciones->txt_titulo = "te han respondido tu pregunta";
+    
+    
+    	$transaction = EntNotificaciones::getDb()->beginTransaction ();
+    	try {
+    		if ($notificaciones->save()) {
+    
+    			$transaction->commit();
+    			return true;
+    		}
+    		//print_r($notificaciones->errors);
+    		//exit();
+    		$transaction->rollBack ();
+    	} catch ( \Exception $e ) {
+    		$transaction->rollBack ();
+    		throw $e;
+    	}
+    
+    	return false;
+    }
+    
+    /**
+     * Notificaciones al admin, si al usuario le gusto la respuesta del admin en espejo
+     * @param unknown $post
+     * @param unknown $notificaciones
+     * @throws Exception
+     * @return boolean
+     */
+    public function guardarNotificacionAcuerdo($post, $notificaciones){
+    
+    	$notificaciones->id_usuario = 25;
+    	$notificaciones->txt_token_objeto = $post->txt_token;
+    	$notificaciones->txt_descripcion = "Al usuario le gusto o no tu respuesta";
+    	$notificaciones->txt_titulo = "Al usuario le gusto o no tu respuesta";
+    
+    
+    	$transaction = EntNotificaciones::getDb()->beginTransaction ();
+    	try {
+    		if ($notificaciones->save()) {
+    
+    			$transaction->commit();
+    			return true;
+    		}
+    		//print_r($notificaciones->errors);
+    		//exit();
+    		$transaction->rollBack ();
+    	} catch ( \Exception $e ) {
+    		$transaction->rollBack ();
+    		throw $e;
+    	}
+    
+    	return false;
+    }
+    
+    /**
+     * Nofificaciones al admin al hacer una cita
+     * @param unknown $cita EntCitas
+     * @param unknown $notificaciones  EntNotificaciones
+     * @throws Exception
+     * @return boolean
+     */
+    public function guardarNotificacionCitas($cita, $notificaciones){
+    
+    	$notificaciones->id_usuario = 25;
+    	$notificaciones->txt_token_objeto = $cita->txt_token;
+    	$notificaciones->txt_descripcion = "han hecho una cita";
+    	$notificaciones->txt_titulo = "Cita";
     
     
     	$transaction = EntNotificaciones::getDb()->beginTransaction ();

@@ -40,57 +40,90 @@ use yii\helpers\Url;
 	</div>
 </div>
 <!-- Modal Structure -->
-<div id="modal-login" class="modal">
+<div id="modal-login" class="modal modal-login-register">
 	<div class="modal-content">
-		<div class="preloader-wrapper big active">
-			<div class="spinner-layer spinner-blue">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-			</div>
+		
+<!-- 		<ul class="tabs"> -->
+<!-- 			<li class="tab col s3"><a class="active" href="#js-contenedor-login">Iniciar sesión</a></li> -->
+<!-- 			<li class="tab col s3"><a href="#js-contenedor-crear-cuenta">Registrarse</a></li> -->
+<!-- 		</ul> -->
+		
+<!-- 			<div id="js-contenedor-login"> -->
+<!-- 			</div> -->
+<!-- 			<div id="js-contenedor-crear-cuenta"> -->
+<!-- 			:D -->
+<!-- 			</div> -->
 
-			<div class="spinner-layer spinner-red">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-			</div>
+<section class="wrap">
 
-			<div class="spinner-layer spinner-yellow">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
+			<!-- .section -->
+			<section class="section">
+				<div class="sing-up">
+					<h4>¿No tienes una cuenta?</h4>
+					<p>
+						Registrate es gratis ahora y siempre.
+					</p>
+					<div class="btn btn-login-register" data-account="singup">Sing Up</div>
 				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
+				<div class="login">
+					<h4>¿Ya tienes una cuenta?</h4>
+					<p>
+						Logueate usando tu Email y contraseña con la cual te registraste.
+					</p>
+					<div class="btn btn-login-register" data-account="login">Login</div>
 				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-			</div>
 
-			<div class="spinner-layer spinner-green">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
+				<div class="anim-account">
+					<div class="account-singup" id="js-contenedor-crear-cuenta"> 
+<!-- 						<h4 class="animated">Registrarse</h4> -->
+<!-- 						<div class="row"> -->
+<!-- 							<form class="col s12"> -->
+<!-- 								<div class="row"> -->
+
+<!-- 									<div class="input-field col s12 animated"> -->
+<!-- 										<input id="name" type="text" class="validate"> -->
+<!-- 										<label for="name">Name</label> -->
+<!-- 									</div> -->
+
+<!-- 									<div class="input-field col s12 animated"> -->
+<!-- 										<input id="username" type="text" class="validate"> -->
+<!-- 										<label for="username">Username</label> -->
+<!-- 									</div> -->
+
+<!-- 									<div class="input-field col s12 animated"> -->
+<!-- 										<input id="password" type="password" class="validate"> -->
+<!-- 										<label for="password">Password</label> -->
+<!-- 									</div> -->
+
+<!-- 								</div> -->
+<!-- 							</form> -->
+<!--  						</div>  -->
+					</div>
+					<div class="account-login" id="js-contenedor-login">
+<!-- 						<h4 class="animated">Login</h4> -->
+
+<!-- 						<div class="row"> -->
+<!-- 							<form class="col s12"> -->
+<!-- 								<div class="row"> -->
+
+<!-- 									<div class="input-field col s12 animated"> -->
+<!-- 										<input id="username" type="text" class="validate"> -->
+<!-- 										<label for="username">Username</label> -->
+<!-- 									</div> -->
+
+<!-- 									<div class="input-field col s12 animated"> -->
+<!-- 										<input id="password" type="password" class="validate"> -->
+<!-- 										<label for="password">Password</label> -->
+<!-- 									</div> -->
+
+<!-- 								</div> -->
+<!-- 							</form> -->
+<!-- 						</div> -->
+					</div>
 				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-			</div>
-		</div>
+			</section>
+			<!-- end / .section -->
+			</section>
 	</div>
 </div>
 
@@ -101,6 +134,8 @@ use yii\helpers\Url;
 if (Yii::$app->user->isGuest) {
 	$this->registerJs ( "
   loadLogin();
+loadSign();
+$('ul.tabs').tabs();
 
   ", View::POS_END );
 }

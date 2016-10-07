@@ -1,0 +1,121 @@
+.modal-login-register .wrap{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+}
+.modal-login-register .modal-content{
+	position: relative;
+    height: 100%;
+}
+.modal-login-register {
+  background-color: transparent;
+  background-image: url(../webAssets/images/background.jpg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  }
+ .modal-login-register .section {
+	background-color: rgba(34, 34, 34, 0.85);
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	border-radius: 2px;
+	padding: 50px 100px;
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+	width: 80%;
+	height: 400px;
+}
+.modal-login-register .section .sing-up {
+	margin-right: 19%;
+}
+.modal-login-register .section .sing-up, body .wrap .section .login {
+	color: #FFF;
+	display: inline-block;
+	padding-top: 50px;
+	position: relative;
+	text-align: left;
+	width: 40%;
+}
+.modal-login-register .section .sing-up h4, body .wrap .section .sing-up p, body .wrap .section .sing-up .btn, body .wrap .section .login h4, body .wrap .section .login p, body .wrap .section .login .btn {
+	color: #CCC;
+}
+.modal-login-register .section .sing-up h4, body .wrap .section .login h4 {
+	font-size: 1.8em;
+	text-align: left;
+}
+.modal-login-register .section .sing-up p, body .wrap .section .login p {
+	font-size: 0.95em;
+	margin: 6px 0 30px;
+}
+.modal-login-register .section .sing-up .btn, body .wrap .section .login .btn {
+	background-color: transparent;
+	border: 1px solid #CCC;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+	display: inline-block;
+	line-height: 22px;
+	padding: 6px 14px;
+	text-align: center;
+}
+.modal-login-register .section .sing-up .btn:hover, body .wrap .section .login .btn:hover {
+	background-color: #CCC;
+	color: #3a3a3a;
+}
+.modal-login-register .section .anim-account {
+	background-color: #FFF;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	border-radius: 2px;
+	height: 480px;
+	left: 48%;
+	/*left:0%;*/
+	padding: 40px 30px;
+	position: absolute;
+	top: -10%;
+	width: 40%;
+	/*margin-left: 100px;*/
+	margin-left:2%;
+}
+.modal-login-register .section .anim-account .account-singup, body .wrap .section .anim-account .account-login {
+	display: none;
+	height: 350px;
+	text-align: left;
+	width: 100%;
+}
+.modal-login-register .section .anim-account .account-singup h4, body .wrap .section .anim-account .account-login h4 {
+	color: #E8716D;
+	font-size: 1.1em;
+	letter-spacing: 2px;
+	margin-bottom: 40px;
+	text-transform: uppercase;
+}
+.modal-login-register .section .anim-account .account-singup {
+	display: block;
+}
+.modal-login-register .section .anim-account .account-login .animated {
+	opacity: 0;
+}
+.modal-login-register .delay-1 {
+	-webkit-animation-delay: 0.15s;
+	animation-delay: 0.15s;
+}
+.modal-login-register .delay-2 {
+	-webkit-animation-delay: 0.2s;
+	animation-delay: 0.25s;
+}
+.modal-login-register .delay-3 {
+	-webkit-animation-delay: 0.25s;
+	animation-delay: 0.35s;
+}
+.modal-login-register .delay-4 {
+	-webkit-animation-delay: 1.3s;
+	animation-delay: 0.45s;
+}

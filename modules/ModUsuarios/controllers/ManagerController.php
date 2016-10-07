@@ -14,6 +14,7 @@ use app\modules\ModUsuarios\models\EntUsuariosFacebook;
 use yii\web\UploadedFile;
 use yii\base\Response;
 use app\models\ConstantesWeb;
+use yii\widgets\ActiveForm;
 
 /**
  * Default controller for the `musuarios` module
@@ -29,6 +30,11 @@ class ManagerController extends Controller {
 		] );
 		
 		if ($model->load ( Yii::$app->request->post () )) {
+			
+			// Validacion de los modelos
+			if ($validacion = $this->validarUsuario ( $model )) {
+				return $validacion;
+			}
 			
 			// Obtiene la imagen de perfil para le usuario
 			$model->imageProfile = UploadedFile::getInstance ( $model, 'imageProfile' );
@@ -55,9 +61,12 @@ class ManagerController extends Controller {
 					
 					// Envio de correo electronico
 					$utils->sendEmailActivacion ( $user->txt_email, $parametrosEmail );
-					$this->redirect ( [ 
-							'login' 
-					] );
+					// $this->redirect ( [
+					// 'login'
+					// ] );
+					return [ 
+							'status' => 'success' 
+					];
 				} else {
 					
 					if (Yii::$app->getUser ()->login ( $user )) {
@@ -68,7 +77,7 @@ class ManagerController extends Controller {
 			
 			// return $this->redirect(['view', 'id' => $model->id_usuario]);
 		}
-		return $this->render ( 'signUp', [ 
+		return $this->renderAjax ( 'signUp', [ 
 				'model' => $model 
 		] );
 	}
@@ -179,10 +188,17 @@ class ManagerController extends Controller {
 		
 		$model = new LoginForm ();
 		$model->scenario = 'login';
+		
+		// Validacion de los modelos
+		if ($validacion = $this->validarLogin ( $model )) {
+			return $validacion;
+		}
+		
 		if ($model->load ( Yii::$app->request->post () ) && $model->login ()) {
 			if (Yii::$app->request->isAjax) {
-				echo "success";
-				return;
+				return [ 
+						'status' => 'success' 
+				];
 			}
 			
 			if (Yii::$app->user->identity->id_tipo_usuario == ConstantesWeb::USUARIO_ADMINISTRADOR) {
@@ -203,6 +219,35 @@ class ManagerController extends Controller {
 	}
 	
 	/**
+	 * Metodo para la validacion del usuario
+	 *
+	 * @param EntUsuarios $model        	
+	 * @return array
+	 */
+	public function validarUsuario($model) {
+		if (Yii::$app->request->isAjax && $model->load ( Yii::$app->request->post () )) {
+			$model->imageProfile = UploadedFile::getInstance ( $model, 'imageProfile' );
+			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+			
+			return ActiveForm::validate ( $model );
+		}
+	}
+	
+	/**
+	 * Metodo para la validacion del usuario
+	 *
+	 * @param EntUsuarios $model
+	 * @return array
+	 */
+	public function validarLogin($model) {
+		if (Yii::$app->request->isAjax && $model->load ( Yii::$app->request->post () )) {
+			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+				
+			return ActiveForm::validate ( $model );
+		}
+	}
+	
+	/**
 	 * Callback para facebook
 	 */
 	public function actionCallbackFacebook() {
@@ -220,21 +265,21 @@ class ManagerController extends Controller {
 			}
 		}
 		
+		
 		// asi podemos obtener sus datos de los amigos
-		foreach ( $data ['friendsInApp'] as $key => $value ) {
-			$value->id;
-			$value->name;
-		}
+// 		foreach ( $data ['friendsInApp'] as $key => $value ) {
+// 			$value->id;
+// 			$value->name;
+// 		}
 		
 		// Buscamos al usuario por email
 		$existUsuario = EntUsuarios::findByEmail ( $data ['profile'] ['email'] );
-		
 		// Si no existe creamos su cuenta
 		if (! $existUsuario) {
 			$entUsuario = new EntUsuarios ();
 			$entUsuario->addDataFromFaceBook ( $data );
 			
-			$existUsuario = $entUsuario->signup ();
+			$existUsuario = $entUsuario->signup (true);
 		}
 		
 		// Buscamos si existe la cuenta de facebook en la base de datos
@@ -244,12 +289,17 @@ class ManagerController extends Controller {
 		if (! $existUsuarioFacebook) {
 			$existUsuarioFacebook = new EntUsuariosFacebook ();
 		}
+		
 		$existUsuarioFacebook->id_usuario = $existUsuario->id_usuario;
 		$usuarioGuardado = $existUsuarioFacebook->saveDataFacebook ( $data );
 		
 		if (Yii::$app->getUser ()->login ( $existUsuario )) {
-			return $this->goHome ();
+			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+			
+			return ['status'=>'success'];
 		}
+		
+		return ['status'=>'error'];
 	}
 	public function actionTest() {
 		$utils = new Utils ();

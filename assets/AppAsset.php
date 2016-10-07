@@ -25,7 +25,10 @@ class AppAsset extends AssetBundle {
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css',
 			'https://fonts.googleapis.com/icon?family=Material+Icons',
 			'webAssets/css/web-styles.css',
-			'plugins/ladda-bootstrap/dist/ladda-themeless.min.css'
+			'plugins/ladda-bootstrap/dist/ladda-themeless.min.css',
+			'css/temporal.css',
+			'css/animate.css',
+			'css/login.css'
 	];
 	public $js = [
 			// 'js/codrops-js/modernizr.custom.js',
@@ -39,7 +42,8 @@ class AppAsset extends AssetBundle {
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js',
 			'http://masonry.desandro.com/masonry.pkgd.js',
 			'plugins/ladda-bootstrap/dist/spin.min.js',
-			'plugins/ladda-bootstrap/dist/ladda.min.js'
+			'plugins/ladda-bootstrap/dist/ladda.min.js',
+			'js/login.js'
 
 	]
 	;

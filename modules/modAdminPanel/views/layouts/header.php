@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use app\models\EntNotificaciones;
 ?>
 <!-- .header -->
 <div class="header">
@@ -21,13 +22,17 @@ use yii\helpers\Html;
 			</a>
 
 			<!-- Notificaciones -->
-			<a href="">
+			<?php 
+				$notificaciones = new EntNotificaciones();
+				$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->count('id_usuario');
+			?>
+			<a href="<?= yii::$app->homeUrl . "adminPanel/admin/notificaciones" ?>">
 				<i class="ion ion-ios-bell-outline"></i>
-				<span class="badge badge-warning">8</span>
+				<span class="badge badge-warning"><?= $admin ?></span>
 			</a>
 
 			<!-- .dropdown-button (btn) -->
-			<a class='dropdown-button' href='#' data-activates='dropdown-user'>Juan <i class="ion ion-ios-arrow-down"></i></a>
+			<a class='dropdown-button' href='#' data-activates='dropdown-user'><?=Yii::$app->user->identity->nombreCompleto?> <i class="ion ion-ios-arrow-down"></i></a>
 
 			<!-- .dropdown-content (dropdown) -->
 			<ul id='dropdown-user' class='dropdown-content'>
