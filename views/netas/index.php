@@ -46,7 +46,7 @@ use yii\helpers\Url;
 
 			<!-- .section -->
 			<section class="section">
-				
+
 				<div class="sing-up">
 					<h4>¿Ya tienes una cuenta?</h4>
 
@@ -61,18 +61,12 @@ use yii\helpers\Url;
 				</div>
 
 				<div class="anim-account">
-				<div class="green darken-1" id="js-message-sign-up" style="
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    padding: 40px 30px;
-    color:white;
-    display:none;                              
-">
-  <h1>Activa tu cuenta.</h1><p style="color:white;">Para activar tu cuenta se ha enviado un correo electronico a la dirección proporcionada.</p>
-</div>
+					<div class="green darken-1" id="js-message-sign-up"
+						style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; padding: 40px 30px; color: white; display: none;">
+						<h1>Activa tu cuenta.</h1>
+						<p style="color: white;">Para activar tu cuenta se ha enviado un
+							correo electronico a la dirección proporcionada.</p>
+					</div>
 					<div class="account-singup" id="js-contenedor-crear-cuenta"></div>
 					<div class="account-login" id="js-contenedor-login"></div>
 				</div>
@@ -114,6 +108,14 @@ if (! empty ( $token )) {
   		showPostFull('".$token."');
   </script>
 <?php
+}
+?>
+
+<?php
+if (! empty ( Yii::$app->session->getFlash ( 'cuentaActivada' ) )) {
+	$this->registerJs ( "
+  		mensajeCuentaActivada('".Yii::$app->session->getFlash ( 'cuentaActivada' )."');
+	", View::POS_END, 'cuentaActivada' );
 }
 ?>
 

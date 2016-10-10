@@ -7,7 +7,7 @@ var masonryOptions = {
 
 };
 var basePath = 'http://localhost/charlenetas/web/';
-// var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
@@ -222,6 +222,33 @@ function addSubscriptores(token) {
 	$('#js-suscriptores-' + token).text(parseInt(subs) + 1);
 	$('#js-subs-like-'+token).addClass('did-usr-interact');
 	
+}
+
+/**
+ * Muestra mensaje de cuenta activada
+ * @param $mensaje
+ */
+function mensajeCuentaActivada($mensaje){
+	toastr.options = {
+			  
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": false,
+			  "positionClass": "toast-top-full-width",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+	
+	// Display an info toast with no title
+	toastr.success($mensaje)
 }
 
 /**

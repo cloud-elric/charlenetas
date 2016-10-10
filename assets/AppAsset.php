@@ -28,7 +28,8 @@ class AppAsset extends AssetBundle {
 			'plugins/ladda-bootstrap/dist/ladda-themeless.min.css',
 			'css/temporal.css',
 			'css/animate.css',
-			'css/login.css'
+			'css/login.css',
+			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'
 	];
 	public $js = [
 			// 'js/codrops-js/modernizr.custom.js',
@@ -43,7 +44,8 @@ class AppAsset extends AssetBundle {
 			'http://masonry.desandro.com/masonry.pkgd.js',
 			'plugins/ladda-bootstrap/dist/spin.min.js',
 			'plugins/ladda-bootstrap/dist/ladda.min.js',
-			'js/login.js'
+			'js/login.js',
+			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'
 
 	]
 	;

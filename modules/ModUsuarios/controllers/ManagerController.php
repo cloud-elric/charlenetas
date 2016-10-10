@@ -169,6 +169,7 @@ class ManagerController extends Controller {
 		$activacion->actualizaActivacion ();
 		
 		if (Yii::$app->getUser ()->login ( $usuario )) {
+			Yii::$app->getSession()->setFlash('cuentaActivada', 'Bienvenido. Tu cuenta ha sido activada');
 			return $this->goHome ();
 		}
 	}
