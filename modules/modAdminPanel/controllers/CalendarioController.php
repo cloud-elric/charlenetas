@@ -4,6 +4,7 @@ namespace app\modules\modAdminPanel\controllers;
 
 use yii\web\Controller;
 use yii\db\mssql\PDO;
+use app\modules\ModUsuarios\models\Utils;
 
 /**
  * Calendario controller for the `adminPanel` module
@@ -31,6 +32,7 @@ class CalendarioController extends Controller
      * conecta a la bese de datos para mostrar las citas
      */
     public function actionAnadirCitas(){
+    	
     	$json = array();
     	 
     	$requete = "SELECT * FROM ent_citas ORDER BY id";
@@ -76,6 +78,8 @@ class CalendarioController extends Controller
     	$title=$_POST['title'];
     	$start=$_POST['start'];
     	$end=$_POST['end'];
+    	$id_usuario = 25;//Yii::$app->user->identity;
+    	$txt_token = Utils::generateToken ( 'cita_' );
     	
     	try {
     		$bdd = new PDO('mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root');
@@ -83,9 +87,14 @@ class CalendarioController extends Controller
     		exit('Imposible conectar a la base de datos.');
     	}
     	
-    	$sql = "INSERT INTO ent_citas (title, start, end) VALUES (:title, :start, :end)";
-    	$q = $bdd->prepare($sql);
-    	$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end));
-    
+    	//$citas = new EntCitas();
+    	//$comparar = $citas->find()->where(['start'=>$cita->start])->one();
+    	
+    	//if($comparar == false){
+	    	$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
+    		$q = $bdd->prepare($sql);
+    		$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end, ':id_usuario'=>$id_usuario, ':txt_token'=>$txt_token));
+    	//}else 
+    		//echo "Ya hay una cita a esa hora  ";
     }
 }

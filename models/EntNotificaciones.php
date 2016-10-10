@@ -202,12 +202,12 @@ class EntNotificaciones extends \yii\db\ActiveRecord
      * @throws Exception
      * @return boolean
      */
-    public function guardarNotificacionCitas($cita, $notificaciones){
+    public function guardarNotificacionCitas($notificaciones, $title, $txt_token){
     
     	$notificaciones->id_usuario = 25;
-    	$notificaciones->txt_token_objeto = $cita->txt_token;
+    	$notificaciones->txt_token_objeto = $txt_token;
     	$notificaciones->txt_descripcion = "han hecho una cita";
-    	$notificaciones->txt_titulo = "Cita";
+    	$notificaciones->txt_titulo = $title;
     
     
     	$transaction = EntNotificaciones::getDb()->beginTransaction ();
@@ -227,4 +227,6 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     
     	return false;
     }
+    
+    
 }

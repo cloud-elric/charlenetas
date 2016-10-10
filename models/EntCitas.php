@@ -58,14 +58,18 @@ public static function tableName()
     /**
      * Guarda las citas que crea el usuario
      * @param unknown $cita EntCitas
-     */
-    public function guardarCitas($cita){
+    
+    public function guardarCitas($title, $start, $end){
+    	$cita = new EntCitas();
     	
+    	$cita->title = $title;
+    	$cita->start = $start;
+    	$ciya->end = $end;
     	$cita->id_usuario = 26;//Yii::$app->user->identity;
     	$cita->txt_token = Utils::generateToken ( 'cita_' );
     	
     	$citas = new EntCitas();
-    	$comparar = $citas->find()->where(['hra_cita'=>$cita->hra_cita])->andWhere(['fch_cita'=>$cita->fch_cita])->one();
+    	$comparar = $citas->find()->where(['start'=>$cita->start])->one();
     	
     	$transaction = EntNotificaciones::getDb()->beginTransaction ();
     	
@@ -88,5 +92,5 @@ public static function tableName()
     	}
     	 
     	return false;
-    }
+    } */
 }

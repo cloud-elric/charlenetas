@@ -27,6 +27,7 @@ use app\models\EntNotificaciones;
 use app\models\EntRespuestasEspejo;
 use app\models\EntCitas;
 use yii\db\mssql\PDO;
+use yii\behaviors\TimestampBehavior;
 
 class NetasController extends Controller {
 	
@@ -763,7 +764,7 @@ class NetasController extends Controller {
 	 * crear cita para el usuario en sesión
 	 */
 	public function actionCrearCita() {
-		$cita = new EntCitas();
+		/*$cita = new EntCitas();
 	
 		if ($cita->load ( Yii::$app->request->post () )) {
 			if($citaGuardada = $cita->guardarCitas($cita)){
@@ -776,11 +777,11 @@ class NetasController extends Controller {
 			} else{
 				return 'error';
 			}
-		}
+		}*/
 	
-		return $this->renderAjax ( '//netas/include/_crearCitas', [
+		return $this->renderAjax ( '//netas/include/_crearCitas' ); /*, [
 				'cita' => $cita
-		] );
+		] );*/
 	}
 	
 	/**
@@ -790,10 +791,10 @@ class NetasController extends Controller {
 		
 		$json = array();
  
- 		$requete = "SELECT * FROM evento ORDER BY id";
+ 		$requete = "SELECT * FROM ent_citas ORDER BY id";
  	
  		try {
- 			$bdd = new PDO('mysql:host=localhost;dbname=calendario', 'root', 'root');
+ 			$bdd = new PDO('mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root');
  		} catch(Exception $e) {
  			exit('Imposible conectar a la base de datos.');
  		}
@@ -802,13 +803,37 @@ class NetasController extends Controller {
  
  		echo json_encode($resultat->fetchAll(PDO::FETCH_ASSOC));
 		
- 		/*$tabla = new EntCitas();
-		$citas = $tabla->find()->all();
+	}
+	
+	/**
+	 * Agregar citas a la base de datos
+	 */
+	public function actionAgregarCitas(){
+		 
+		$title=$_POST['title'];
+		$start=$_POST['start'];
+		$end=$_POST['end'];
+		$id_usuario = 26;//Yii::$app->user->identity;
+		$txt_token = Utils::generateToken ( 'cita_' );
+		 
+		try {
+			$bdd = new PDO('mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root');
+		} catch(Exception $e) {
+			exit('Imposible conectar a la base de datos.');
+		}
+		 
+		$notificaciones = new EntNotificaciones();
+		$notificacion = $notificaciones->guardarNotificacionCitas($notificaciones, $title, $txt_token);
+		if($notificacion)
+			echo "SUCCESS";
+		else 
+			echo "ERROR";
 		
-		return $this->render('//netas/include/anadirCitas', [
-				'citas' => $citas
-		]);*/
+		$end = date('Y-M-d H:i:s', strtotime("'$end' + 1 hour"));
 		
+		$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
+		$q = $bdd->prepare($sql);
+		$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end, ':id_usuario'=>$id_usuario, ':txt_token'=>$txt_token));
 	}
 
 }
