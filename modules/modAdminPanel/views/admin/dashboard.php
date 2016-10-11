@@ -42,9 +42,11 @@
 			</a>
 		</div>
 		
-		<!-- <div onClick="cargarNotificaciones()">
-			<input type="button" value="Notificaciones" />
-		</div> -->
+
+<!-- 		<div onClick="cargarNotificaciones()">
+			<input type="button" value="Notificaciones" /> -->
+<!-- 		</div> -->
+
 	
 	</div>
 
