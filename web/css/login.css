@@ -10,15 +10,19 @@
     height: 100%;
 }
 .modal-login-register {
+  background-color: #FCFFF6;
+  background-color: rgb(120,99,217);
   background-color: transparent;
-  background-image: url(../webAssets/images/background.jpg);
+  box-shadow: none;
+  /*background-image: url(../webAssets/images/background.jpg);
   background-position: 50%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover;*/
   
   }
  .modal-login-register .section {
-	background-color: rgba(34, 34, 34, 0.85);
+	background-color: rgba(120,99,217,0.9);
+	background-color: rgba(52, 86, 120, 0.89);
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	-ms-border-radius: 2px;
@@ -83,6 +87,7 @@
 	width: 40%;
 	/*margin-left: 100px;*/
 	margin-left:2%;
+	box-shadow: 0 2px 10px 0 rgba(0,0,0,0.32),0 10px 10px 0 rgba(0,0,0,0.31);
 }
 .modal-login-register .section .anim-account .account-singup, body .wrap .section .anim-account .account-login {
 	display: none;
@@ -124,13 +129,28 @@
 .account-singup .input-field{
 	height: 100px;
 }
+.account-singup .field-entusuarios-imageprofile{
+	height: auto;
+}
 .account-singup .input-field .row{
 	margin: 0;
 }
 
 .account-singup .input-field .btn{
+	cursor: pointer;
 	line-height: 2.3rem;
+	padding-right: 6px;
+	padding-left: 6px;
 	width: 100%;
+}
+.account-singup .input-field .btn span{
+	font-size: .9em
+}
+.account-singup .file-field input[type=file]
+.account-singup .file-field input[type=file]:hover,
+.file-field input[type=file],
+.file-field input[type=file]:hover{
+	cursor: pointer
 }
 .account-singup .input-field .file-path-wrapper{
 	display: none;
@@ -179,4 +199,9 @@
 }
 body .wrap .section .anim-account .account-login h4{
 	margin-bottom: 40px;
+}
+
+.lean-overlay{
+	background: #FCFFF6;
+	opacity: .9 !important;
 }

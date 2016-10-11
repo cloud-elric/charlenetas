@@ -48,7 +48,7 @@ $form = ActiveForm::begin ( [
     
     <?= $form->field($model, 'repeatPassword')->passwordInput(['maxlength' => true])?>
 
-	<?= $form->field($model, 'imageProfile', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
+	<?= $form->field($model, 'imageProfile', ['template'=>'<div class="btn"><span>Cargar Avatar</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6 animated delay-3']])->fileInput()?>
 <!-- 
 <div class="file-field input-field">
       <div class="btn">
@@ -61,7 +61,7 @@ $form = ActiveForm::begin ( [
     </div>
  -->
 <div class="form-group">
-        <?= Html::submitButton('<span class="ladda-label">'.($model->isNewRecord ? 'Registrarse' : 'Actualizar datos').'</span>', ['id'=>'js-registrase-btn','class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-primary').' ladda-button', 'data-style'=>'zoom-in'])?>
+        <?= Html::submitButton('<span class="ladda-label">'.($model->isNewRecord ? 'Registrarse' : 'Actualizar datos').'</span>', ['id'=>'js-registrase-btn','class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-primary').' ladda-button animated delay-4', 'data-style'=>'zoom-in'])?>
     </div>
 	</div>
 <?php ActiveForm::end(); ?>
