@@ -23,10 +23,28 @@
 		</div>
 	  
 		<?php endforeach;?>
-		
-		<div onClick="cargarNotificaciones()">
-			<input type="button" value="Notificaciones" />
+
+		<div class="col s12 m6 l4" onClick="cargarNotificaciones()">
+			<a class="dashboard-card card-notificaciones" href="#">
+				<div class="dashboard-card-cont">
+					<div class="row">
+						<div class="col s10">
+							<h3>Notificaciones</h3>
+						</div>
+						<div class="col s2 text-center">
+							<i class="ion ion-ios-bell-outline"></i>
+						</div>
+					</div>
+				</div>
+				<div class="dashboard-card-foot">
+					<p><i class="ion ion-document"></i> <span>8 post</span></p>
+				</div>
+			</a>
 		</div>
+		
+		<!-- <div onClick="cargarNotificaciones()">
+			<input type="button" value="Notificaciones" />
+		</div> -->
 	
 	</div>
 

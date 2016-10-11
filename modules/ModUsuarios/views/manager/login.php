@@ -145,13 +145,13 @@ window.fbAsyncInit = function() {
 		<?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
 		<?= $form->field($model, 'password')->passwordInput()?>
 		<div class="center">
-			<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
+			<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button animated delay-3', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
 		</div>
 	</div>
 <?php ActiveForm::end(); ?>
 
 <?php if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){?>
-	<button type="button" class="btn btn-facebook" onClick="logInWithFacebook()"
+	<button type="button" class="btn btn-facebook animated delay-4" onClick="logInWithFacebook()"
 		scope="<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisos']?>">
 		<i></i> Ingresar con Facebook
 	</button>

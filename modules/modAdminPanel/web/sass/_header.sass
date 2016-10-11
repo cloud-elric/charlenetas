@@ -65,6 +65,15 @@
 					font-size: 1.3em
 				&:hover
 					background-color: rgba($white,.3)
+				// span
+				span.toolbar-span
+					display: block
+					max-width: 150px
+					overflow: hidden
+					text-overflow: ellipsis
+					white-space: nowrap
+					width: 100%
+				// Badge
 				.badge
 					display: inline-block
 					width: 20px
@@ -86,20 +95,20 @@
 					+border-radius(50%)
 					&.badge-danger
 						color: #fff
-						background-color: #f44336
+						background-color: $error
 					&.badge-warning
 						color: #fff
-						background-color: #ff9800
+						background-color: $warning
 				&.dropdown-button
-					i
+					i.dropdown-user-ion
 						margin-left: 8px
 			.dropdown-content
 				// background-color: red
 				position: absolute
 				// right: 0
 				top: 66px !important
-				width: 94px
-				width: 140px !important
+				// width: 94px
+				// width: 140px !important
 				li
 					a
 						// background-color: green
@@ -108,6 +117,12 @@
 						&:hover
 							background-color: rgba(33,33,33,.02)
 							color: #303030
+				&.dropdown-content-user
+					width: 140px !important
+				&.dropdown-content-notificaciones
+					width: 240px !important
+				&.dropdown-content-agenda
+					width: 260px !important
 
 /*  Nav
 	================================================ */
