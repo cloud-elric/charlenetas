@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use app\models\EntNotificaciones;
+use app\models\EntCitas;
 ?>
 <!-- .header -->
 <div class="header">
@@ -16,9 +17,16 @@ use app\models\EntNotificaciones;
 		<div class="toolbar">
 
 			<!-- Agenda -->
-			<a href="">
+			<?php 
+				$citas = new EntCitas();
+				$hoy = date("Y-m-d 00:00:00");
+				$maniana = date("Y-m-d 00:00:00");
+				$maniana = date("Y-m-d 00:00:00", strtotime($maniana . '+1 day'));
+				$agenda = $citas->find()->where(['>=', 'start', $hoy])->andWhere(['<=', 'start', $maniana])->count('id_usuario');
+			?>
+			<a href="<?= yii::$app->homeUrl . "adminPanel/calendario/calendario" ?>">
 				<i class="ion ion-ios-calendar-outline"></i>
-				<span class="badge badge-danger">8</span>
+				<span class="badge badge-danger"><?= $agenda ?></span>
 			</a>
 
 			<!-- Notificaciones -->

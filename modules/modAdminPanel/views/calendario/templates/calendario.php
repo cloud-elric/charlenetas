@@ -1,33 +1,8 @@
+<?php
+use yii\web\View;
 
-<head>
-	<link rel='stylesheet' href='/fullcalendar-3.0.1/fullcalendar.css' />
-	<script src='/fullcalendar-3.0.1/lib/jquery.min.js'></script>
-	<script src='/fullcalendar-3.0.1/lib/moment.min.js'></script>
-	<script src='/fullcalendar-3.0.1/fullcalendar.js'></script>
+$this->registerJs ( "
 	
-	<style>
-
-		body {
-			margin: 40px 10px;
-			padding: 0;
-			font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-			font-size: 14px;
-		}
-
-		#calendar {
-			max-width: 900px;
-			margin: 0 auto;
-		}
-
-	</style>
-</head>
-
-<h4><span>Agenda</span></h4>
-
-<div id='calendar'></div>
-<br/>
-
-<script>
 	var date = new Date();
 	var d = date.getDate();
 	var m = date.getMonth();
@@ -109,24 +84,12 @@
 			}
 		},
 		eventRender: function(event, element) {
-	    	element.append( "<span class='closeon'>X</span>" );
-	    	element.find('.closeon').click(function(calEvent, jsEvent, view) {
-	     	  	$.ajax({
-	        	   url: 'eliminar-citas',
-	        	   data: 'id=' + event.id,
-	   	    	   type: "POST",
-	   	    	   success: function () {
-	   	    			var aceptar = confirm("Quiere eliminar este evento?");
-	   	    			if (aceptar == true) {
-	   	    				calendar.fullCalendar('removeEvents',event.id);
-	 	   			   	    alert("Acaba de eliminar la cita del calendario");
-	   	    			} 
-	        	   }
-	        	});
-	    	});
-		}
+            element.append( '<span class='closeon'>X</span>' );
+            element.find('.closeon').click(function() {
+            	calendar.fullCalendar('removeEvents',event.id);
+            });
+        }
 	});
 });
-</script>
-
-<?php //include 'templates/calendario.php'; ?>
+", View::POS_END );
+?>

@@ -29,13 +29,13 @@ class CalendarioController extends Controller
     }
     
     /**
-     * conecta a la bese de datos para mostrar las citas
+     * conecta a la base de datos para mostrar las citas en el calendario
      */
     public function actionAnadirCitas(){
     	
     	$json = array();
     	 
-    	$requete = "SELECT * FROM ent_citas ORDER BY id";
+    	$requete = "SELECT * FROM ent_citas where b_habilitado = 1 ORDER BY id";
     	 
     	try {
     		$bdd = new PDO('mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root');
@@ -96,5 +96,21 @@ class CalendarioController extends Controller
     		$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end, ':id_usuario'=>$id_usuario, ':txt_token'=>$txt_token));
     	//}else 
     		//echo "Ya hay una cita a esa hora  ";
+    }
+    
+    /**
+     * Eliminar citas de la base de datos
+     */
+    public function actionEliminarCitas(){
+    	$id = $_POST['id'];
+    	
+    	$ligacao = mysqli_connect("localhost", "root", "root", "charlenetas_geekdb");
+    	if (mysqli_connect_errno()) {
+    		echo "Can't connect to database: " . mysqli_connect_error();
+    	}
+    	
+    	$sql = "update ent_citas set b_habilitado = 0 WHERE id= '$id'";
+    	$resultado = mysqli_query($ligacao, $sql);
+    	mysqli_close($ligacao);
     }
 }

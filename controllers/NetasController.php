@@ -829,7 +829,7 @@ class NetasController extends Controller {
 		else 
 			echo "ERROR";
 		
-		$end = date('Y-M-d H:i:s', strtotime("'$end' + 1 hour"));
+		$end = date($end, strtotime("+1 hours") ) ;
 		
 		$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
 		$q = $bdd->prepare($sql);
