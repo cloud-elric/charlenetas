@@ -47,17 +47,17 @@ use yii\helpers\Url;
 			<!-- .section -->
 			<section class="section">
 
-				<div class="sing-up">
+				<div class="sing-up"><h4>¿No tienes una cuenta?</h4>
+					<p>Registrate es gratis ahora y siempre.</p>
+					
+					<div class="btn btn-login-register" data-account="singup">Login</div>
+				</div>
+				<div class="login">
 					<h4>¿Ya tienes una cuenta?</h4>
 
 					<p>Logueate usando tu Email y contraseña con la cual te
 						registraste.</p>
-					<div class="btn btn-login-register" data-account="singup">Login</div>
-				</div>
-				<div class="login">
-					<h4>¿No tienes una cuenta?</h4>
-					<p>Registrate es gratis ahora y siempre.</p>
-					<div class="btn btn-login-register" data-account="login">Sing Up</div>
+					<div class="btn btn-login-register" data-account="login">Registrarse</div>
 				</div>
 
 				<div class="anim-account">

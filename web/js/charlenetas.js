@@ -251,6 +251,29 @@ function mensajeCuentaActivada($mensaje){
 	toastr.success($mensaje)
 }
 
+function mensajeError(mensaje){
+	toastr.options = {
+			  
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": false,
+			  "positionClass": "toast-top-full-width",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+	
+	// Display an info toast with no title
+	toastr.error(mensaje)
+}
+
 /**
  * Remueve el botón para eliminar subscritores
  */
@@ -621,11 +644,17 @@ function loadSign() {
 
 // Muestra el login en un modal
 function showModalLogin() {
+	
+	$(".account-singup").hide();
+	$('#js-message-sign-up').hide();
+	$('.anim-account').animate({left: '-1%'}, 300, function() {
+		$(".account-login .animated").animate({ "opacity": "0" }, 0 );
+		$(".anim-account").animate({ "left": "2%" }, 350 );
+		$(".account-login").show();
+		$(".account-login .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
+	});
 
 	$('.modal-trigger').trigger('click');
-	
-	$('#js-contenedor-crear-cuenta').show();
-	$('#js-message-sign-up').hide();
 	
 	document.getElementById("sign-form").reset();
 
