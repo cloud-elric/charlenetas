@@ -4,19 +4,20 @@ use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 
-$this->title = '<i class="ion ion-android-share-alt"></i> Contextos';
+$this->title = 'Contexto';
+$this->icon = '<i class="ion ion-network"></i>';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">
 
-	<div class="row">
+	<div class="row" id="js-contenedor-tarjetas">
 		
 		<?php foreach ( $postsContexto as $postContexto ) {?>
 			<div class="col s12 m6 l4">
-				<div class="card card-contexto">
+				<div class="card card-contexto" data-token="<?=$postContexto->txt_token?>">
 					
-					<div class="card-contexto-cont">
-						<p class="card-desc"><?= $postContexto->txt_descripcion?></p>
+					<div class="card-contexto-cont" id="card_<?=$postContexto->txt_token?>">
+						<h3 class="card-title"><?= $postContexto->txt_descripcion?></h3>
 					</div>
 
 					<div class="card-contexto-status">
@@ -26,11 +27,10 @@ $this->title = '<i class="ion ion-android-share-alt"></i> Contextos';
 					</div>
 
 					<div class="card-contexto-options">
-						<div class="card-contexto-options-check">
-							<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
-							<label for="filled-in-box1"></label>
-						</div>
+						
+						<a id="button_<?=$postContexto->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postContexto->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
+					</a>
 					</div>
 
 				</div>
@@ -39,48 +39,29 @@ $this->title = '<i class="ion ion-android-share-alt"></i> Contextos';
 		<?php }?>
 
 	</div>
-
-	<!-- <div class="col s12">
-		<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
-	</div> -->
-
+	
+	
+	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check">
-			<i class="ion ion-ios-trash-outline"></i>
-		</a> <a
-			class="btn-floating btn-large waves-effect waves-light btn-agregar">
+		<!-- Modal Trigger -->
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post" onclick='document.getElementById("form-contexto").reset();'>
 			<i class="ion ion-wand"></i>
 		</a>
 	</div>
+	<!-- end /.fixed-action-btn -->
 
 
 </div>
 <!-- end /.page-cont -->
 <?php
-// foreach ( $postsContexto as $postContexto ) {
-// 	echo $postContexto->txt_descripcion . "   ";
-// 	echo $postContexto->txt_imagen . "   ";
-// 	// echo $postContexto->entContextos->id_contexto_padre . " ";
-// 	echo $postContexto->txt_url . "   ";
-// 	echo $postContexto->fch_creacion . "   ";
-// 	echo $postContexto->fch_publicacion . "   ";
-	
-// 	echo "</br>";
-// 	echo "</br>";
-// }
-// echo "total= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postContexto->id_tipo_post 
-// ] )->count ( "id_tipo_post" . "   " );
-// echo "total likes= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postContexto->id_tipo_post 
-// ] )->sum ( "num_likes" );
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-contexto.js'; // dynamic file added
 // $bundle->css [] = 'css/lenetas.css';
 
-include 'templates/modalPost.php';
-
 $this->registerJs ( "
 		cargarFormulario();
+		$(document).ready(function(){
+    	$('.modal-trigger').leanModal();
+  });
     ", View::POS_END );
