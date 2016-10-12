@@ -68,5 +68,9 @@ $alquimia = $post->entAlquimias;
 		include 'elementos/comentarios.php';
 		?>
 	</div>
-	<div id="js-cargar-comentarios" onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">Cargar más comentarios</div>
+	<div id="js-cargar-comentarios" class="comentarios-cargar-comentarios" onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">
+		<p>
+			<span>Cargar más comentarios...</span><i class="icon icon icon-comment"></i>
+		</p>
+	</div>
 </section>

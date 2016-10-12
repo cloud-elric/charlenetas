@@ -15,6 +15,11 @@ if (Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']) {
 <script>
 
 logInWithFacebook = function() {
+
+	var boton = document.getElementById("btn-facebook");
+	var l = Ladda.create(boton);
+ 	l.start();
+	
 	FB.login(function(response) {
 		if (response.authResponse) {
 
@@ -22,10 +27,12 @@ logInWithFacebook = function() {
 			// a PHP script that grabs the signed request from the cookie.
 		}
 		checkLoginState();
+		l.stop();
 	}, {
 		scope : '<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisosForzosos']?>',
 		auth_type : 'rerequest'
 	});
+	
 	return false;
 };
 
@@ -46,7 +53,7 @@ function statusChangeCallback(response) {
 			}
 			if(declined.toString()=="email"){
 				
-				alert("Parece que no aceptaste la solicitud de Facebook o no nos compartiste tu correo electrónico.");
+				mostrarMensaje("Parece que no aceptaste la solicitud de Facebook o no nos compartiste tu correo electrónico.");
 				
 			}else{
 				// Logged into your app and Facebook.
@@ -145,15 +152,15 @@ window.fbAsyncInit = function() {
 		<?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
 		<?= $form->field($model, 'password')->passwordInput()?>
 		<div class="center">
-			<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
+			<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button animated delay-3', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
 		</div>
 	</div>
 <?php ActiveForm::end(); ?>
 
 <?php if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){?>
-	<button type="button" class="btn btn-facebook" onClick="logInWithFacebook()"
+	<button id="btn-facebook" type="button" class="btn btn-facebook animated delay-4 ladda-button" data-style="zoom-in" onClick="logInWithFacebook()"
 		scope="<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisos']?>">
-		<i></i> Ingresar con Facebook
+		<i></i> <span class="ladda-label">Ingresar con Facebook</span>
 	</button>
 <?php }?>
 </div>
