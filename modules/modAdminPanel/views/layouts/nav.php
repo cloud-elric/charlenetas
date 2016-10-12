@@ -20,7 +20,7 @@ use yii\helpers\Html;
 			
 			<?php endforeach;?>
 
-			<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Calendario" href="agenda.php"><i class="ion ion-ios-calendar-outline"></i></a>
+			<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Calendario" href="<?= yii::$app->homeUrl . "adminPanel/calendario/calendario" ?>"><i class="ion ion-ios-calendar-outline"></i></a>
 
 			<a class="tooltipped" data-position="right" data-delay="50" data-tooltip="Usuarios" href="<?= yii::$app->homeUrl . "adminPanel/admin/usuarios"?>"><i class="ion ion-android-people"></i></a>
 
