@@ -87,15 +87,10 @@ class CalendarioController extends Controller
     		exit('Imposible conectar a la base de datos.');
     	}
     	
-    	//$citas = new EntCitas();
-    	//$comparar = $citas->find()->where(['start'=>$cita->start])->one();
-    	
-    	//if($comparar == false){
-	    	$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
-    		$q = $bdd->prepare($sql);
-    		$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end, ':id_usuario'=>$id_usuario, ':txt_token'=>$txt_token));
-    	//}else 
-    		//echo "Ya hay una cita a esa hora  ";
+	    $sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
+    	$q = $bdd->prepare($sql);
+    	$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end, ':id_usuario'=>$id_usuario, ':txt_token'=>$txt_token));
+   
     }
     
     /**

@@ -896,6 +896,10 @@ class AdminController extends Controller {
 	}
 	
 	public function actionLeerNotificacion($token){
+		$notificaciones = new EntNotificaciones();
+		$notificacion = $notificaciones->find()->where(['txt_token_objeto'=>$token])->one();
 		
+		$notificacion->b_leido = 1;
+		$notificacion->save();
 	}
 }

@@ -33,7 +33,7 @@ use app\models\EntCitas;
 				$contador = 0;
 				
 			?>
-			<a class='dropdown-button' data-activates='dropdown-agenda' href="#">
+			<a  class='dropdown-button' data-activates='dropdown-agenda' href="#">
 				<i class="ion ion-ios-calendar-outline"></i>
 				
 				<?php foreach($mostrarAgenda as $mostrarCita){
@@ -51,8 +51,6 @@ use app\models\EntCitas;
 						}
 				 	  } 
 				 ?>
-				
-				
 			</a>
 
 			<!-- .dropdown-content AGENDA (dropdown) -->
@@ -79,7 +77,7 @@ use app\models\EntCitas;
 				
 				$cont = 0;
 			?>
-			<a class='dropdown-button' data-activates='dropdown-notificaciones' href="#">
+			<a id="js-mostrar-notificaciones" class='dropdown-button' data-activates='dropdown-notificaciones' href="#" >
 			<!-- <a data-activates='dropdown-notificaciones' href="<?= yii::$app->homeUrl . "adminPanel/admin/notificaciones" ?>"> -->
 				<i class="ion ion-ios-bell-outline"></i>
 				
@@ -113,9 +111,9 @@ use app\models\EntCitas;
 					
 						if($comparar === false){
 				?>
-							<li><a href="#!"><?= $mostrarNotificacion->txt_titulo ?></a></li>
-							
+							<li class="js-notificacion-item" data-token="<?= $mostrarNotificacion->txt_token_objeto?>"><a href="#!"><?= $mostrarNotificacion->txt_titulo ?></a></li>
 				<?php 
+							
 							//$mostrarNotificacion->b_leido = 1;
 							//$mostrarNotificacion->save();
 
