@@ -920,4 +920,14 @@ class AdminController extends Controller {
 		$notificacion->b_leido = 1;
 		$notificacion->save();
 	}
+	
+	/**
+	 * Asocia un contexto con otro
+	 * @param unknown $token1
+	 * @param unknown $token2
+	 */
+	public function actionAsociarContexto($token1, $token2){
+		
+		
+	}
 }

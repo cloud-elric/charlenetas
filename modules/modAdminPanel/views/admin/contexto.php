@@ -59,7 +59,7 @@ include 'templates/formato-fecha.php';
 					<div class="card-contexto-status">
 						<p class="card-contexto-status-comen">
 							<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
-							<button class="btn" onclick="asociar();" data-token=<?=$postContexto->txt_token?>>Asociar</button>
+							<button class="btn btn-sin-asociar" onclick="seleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Asociar</button>
 						</p>
 					</div>
 
