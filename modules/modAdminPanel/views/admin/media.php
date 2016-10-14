@@ -26,11 +26,6 @@ $this->icon = '<i class="ion ion-images"></i>';
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>
-				<div>
-					<?=$postMedia->fch_publicacion?>
-					<br/>
-					<?=$postMedia->txt_descripcion?>
-				</div>
 			</div>
 	</div>
 		<?php }?>

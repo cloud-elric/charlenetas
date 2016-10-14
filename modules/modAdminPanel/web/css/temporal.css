@@ -336,7 +336,7 @@ p{
     align-items:center;display:flex;justify-content:flex-end
     }
     .comentarios-cargar-comentarios p{
-        font-weight:400;text-decoration:underline
+        cursor:pointer;font-weight:400;text-decoration:underline
         }
         @media screen and (max-width: 768px){
             .comentarios-cargar-comentarios p{
