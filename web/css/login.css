@@ -21,11 +21,9 @@
 }
 
 body {
-  background-color: #edf0f5;
   font-family: "Raleway", sans-serif;
   font-size: 16px;
   font-weight: 300;
-  color: #3a3a3a;
 }
 
 /* a */
@@ -367,6 +365,18 @@ button:focus{
 	color: #3b5998;
 }
 
+.account-login .link-olvide-password{
+	color: #345678;
+	cursor: pointer;
+	font-size: .95em;
+	margin-top: 10px;
+	text-align: right;
+	text-decoration: underline;
+}
+.account-login .link-olvide-password:hover{
+	color: rgba(52, 86, 120, 0.79);
+}
+
 .account-login input[type="email"],
 .account-login input[type="password"],
 .account-login input[type="text"]{
@@ -389,4 +399,34 @@ body .wrap .section .anim-account .account-login h4{
 .lean-overlay{
 	background: #FCFFF6;
 	opacity: .9 !important;
+}
+
+/* Toast */
+#toast-container{
+	left: 0 !important;
+	max-width: 100% !important;
+	right: 0 !important;
+	top: 0 !important;
+	width: 100%;
+}
+#toast-container .toast.toast-success{
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+#toast-container>.toast-success{
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==)!important;
+	background-image: none !important;
+}
+.toast-success{
+	background-color: #2ECC71 !important;
+	opacity: .95 !important;
+}
+#toast-container .toast.toast-success .toast-message{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#toast-container .toast.toast-success .toast-message i{
+    margin-right: 10px;
 }
