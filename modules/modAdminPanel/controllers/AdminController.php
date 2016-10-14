@@ -40,14 +40,14 @@ class AdminController extends Controller {
 						],
 						'only' => [ 
 								'dashboard',
-												'alquimia',
-												'contexto',
-												'espejo',
-												'hoy-pense',
-												'media',
-												'sabias-que',
-												'solo-por-hoy',
-												'verdadazos'
+								'alquimia',
+								'contexto',
+								'espejo',
+								'hoy-pense',
+								'media',
+								'sabias-que',
+								'solo-por-hoy',
+								'verdadazos' 
 						],
 						'rules' => [ 
 								[ 
@@ -60,11 +60,9 @@ class AdminController extends Controller {
 												'media',
 												'sabias-que',
 												'solo-por-hoy',
-												'verdadazos'
-												
-												
-												
-										],
+												'verdadazos' 
+										]
+										,
 										'allow' => true,
 										// Allow users, moderators and admins to create
 										'roles' => [ 
@@ -117,7 +115,6 @@ class AdminController extends Controller {
 				"usuarios" => $usuarios 
 		] );
 	}
-	
 	public function actionEspejo($page = 0) {
 		$idPost = 1;
 		$postsEspejo = EntPosts::getPosts ( $page, $idPost );
@@ -126,7 +123,6 @@ class AdminController extends Controller {
 				"postsEspejo" => $postsEspejo 
 		] );
 	}
-	
 	public function actionAlquimia($page = 0) {
 		$idPost = 2;
 		$postsAlquimia = EntPosts::getPosts ( $page, $idPost );
@@ -135,7 +131,6 @@ class AdminController extends Controller {
 				"postsAlquimia" => $postsAlquimia 
 		] );
 	}
-	
 	public function actionVerdadazos($page = 0) {
 		$idPost = 3;
 		$postsVerdadazos = EntPosts::getPosts ( $page, $idPost );
@@ -144,7 +139,6 @@ class AdminController extends Controller {
 				"postsVerdadazos" => $postsVerdadazos 
 		] );
 	}
-	
 	public function actionHoyPense($page = 0) {
 		$idPost = 4;
 		$postsHoypense = EntPosts::getPosts ( $page, $idPost );
@@ -153,7 +147,6 @@ class AdminController extends Controller {
 				"postsHoyPense" => $postsHoypense 
 		] );
 	}
-	
 	public function actionMedia($page = 0) {
 		$idPost = 5;
 		$postsMedia = EntPosts::getPosts ( $page, $idPost );
@@ -162,16 +155,14 @@ class AdminController extends Controller {
 				"postsMedia" => $postsMedia 
 		] );
 	}
-	
 	public function actionContexto($searchTags = null, $page = 0) {
 		$idPost = 6;
-		$postsContexto = EntPosts::getPosts ( $page, $idPost,ConstantesWeb::POSTS_MOSTRAR,$searchTags );
+		$postsContexto = EntPosts::getPosts ( $page, $idPost, ConstantesWeb::POSTS_MOSTRAR, $searchTags );
 		
 		return $this->render ( 'contexto', [ 
 				"postsContexto" => $postsContexto 
 		] );
 	}
-	
 	public function actionSoloPorHoy($page = 0) {
 		$idPost = 7;
 		$postsSoloPorHoy = EntPosts::getPosts ( $page, $idPost );
@@ -180,7 +171,6 @@ class AdminController extends Controller {
 				"postsSoloPorHoy" => $postsSoloPorHoy 
 		] );
 	}
-	
 	public function actionSabiasQue($page = 0) {
 		$idPost = 8;
 		$postsSabiasQue = EntPosts::getPosts ( $page, $idPost );
@@ -189,20 +179,21 @@ class AdminController extends Controller {
 				"postsSabiasQue" => $postsSabiasQue 
 		] );
 	}
-	
 	public function actionNotificaciones() {
+		$notificaciones = new EntNotificaciones ();
+		$admin = $notificaciones->find ()->where ( [ 
+				'id_usuario' => Yii::$app->user->identity 
+		] )->andWhere ( [ 
+				'b_leido' => 0 
+		] )->orderBy ( 'fch_creacion ASC' )->limit ( 15 )->all ();
 		
-		$notificaciones = new EntNotificaciones();
-		$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(15)->all();
-			
-		return $this->render( 'notificaciones', ['notificaciones'=>$admin]);
-		
+		return $this->render ( 'notificaciones', [ 
+				'notificaciones' => $admin 
+		] );
 	}
-	
 	public function actionAgenda() {
 		return $this->render ( 'agenda' );
 	}
-	
 	public function actionHabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc") {
 		$postHabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postHabilitar->b_habilitado = 1;
@@ -212,7 +203,6 @@ class AdminController extends Controller {
 		else
 			echo "ERROR";
 	}
-	
 	public function actionDeshabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc") {
 		$postDeshabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postDeshabilitar->b_habilitado = 0;
@@ -304,8 +294,12 @@ class AdminController extends Controller {
 			$verdadazo->guardarVerdadazos ( $verdadazo );
 			
 			if ($verdadazo->cargarImagen ( $verdadazo )) {
-
-				return ['status'=>'success', 't'=>$verdadazo->txt_descripcion,'tk'=>$verdadazo->txt_token];
+				
+				return [ 
+						'status' => 'success',
+						't' => $verdadazo->txt_descripcion,
+						'tk' => $verdadazo->txt_token 
+				];
 			}
 		}
 		
@@ -384,12 +378,14 @@ class AdminController extends Controller {
 			
 			$usuario = Yii::$app->user->identity;
 			
-			$media->id_usuario = $usuario->id_usuario;	
+			$media->id_usuario = $usuario->id_usuario;
 			$media->guardarMedia ( $media );
 			
-
-			
-				return ['status'=>'success', 't'=>"http://img.youtube.com/vi/".Utils::getIdVideoYoutube($media->txt_url)."/mqdefault.jpg",'tk'=>$media->txt_token];
+			return [ 
+					'status' => 'success',
+					't' => "http://img.youtube.com/vi/" . Utils::getIdVideoYoutube ( $media->txt_url ) . "/mqdefault.jpg",
+					'tk' => $media->txt_token 
+			];
 		}
 		
 		return $this->renderAjax ( 'crearMedia', [ 
@@ -416,16 +412,25 @@ class AdminController extends Controller {
 				'scenario' => 'crearContexto' 
 		] );
 		
-		if ($validacion = $this->validarContexto($post, $contexto )) {
+		// usuario logueado
+		$usuario = Yii::$app->user->identity;
+		
+		if ($validacion = $this->validarContexto ( $post, $contexto )) {
 			return $validacion;
 		}
 		
+		
 		if ($contexto->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			$post->id_usuario = $usuario->id_usuario;
 			$post->guardarContexto ( $contexto, $post );
 			
 			if ($post->cargarImagen ( $post )) {
-				return ['status'=>'success', 't'=>$post->txt_descripcion,'tk'=>$post->txt_token];
+				return [ 
+						'status' => 'success',
+						't' => $post->txt_descripcion,
+						'tk' => $post->txt_token 
+				];
 			}
 		}
 		
@@ -438,13 +443,13 @@ class AdminController extends Controller {
 	/**
 	 * Valida contexto
 	 */
-	public function validarContexto($post, $contexto){
-		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )&& $contexto->load ( Yii::$app->request->post () )) {
-				
+	public function validarContexto($post, $contexto) {
+		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () ) && $contexto->load ( Yii::$app->request->post () )) {
+			
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
-				
-			return array_merge ( ActiveForm::validate ( $post ),ActiveForm::validate ( $contexto ) );
+			
+			return array_merge ( ActiveForm::validate ( $post ), ActiveForm::validate ( $contexto ) );
 		}
 	}
 	
@@ -471,9 +476,12 @@ class AdminController extends Controller {
 			$post->guardarSoloPorHoy ( $soloporhoy, $post );
 			
 			if ($post->cargarImagen ( $post )) {
-
-				return ['status'=>'success', 't'=>$post->txt_descripcion,'tk'=>$post->txt_token];
-
+				
+				return [ 
+						'status' => 'success',
+						't' => $post->txt_descripcion,
+						'tk' => $post->txt_token 
+				];
 			}
 		}
 		
@@ -511,9 +519,12 @@ class AdminController extends Controller {
 			$post->id_usuario = $usuario->id_usuario;
 			$post->guardarSabiasQue ( $sabiasque, $post );
 			
-
-				return ['status'=>'success', 't'=>$post->txt_descripcion,'tk'=>$post->txt_token];;
-
+			return [ 
+					'status' => 'success',
+					't' => $post->txt_descripcion,
+					'tk' => $post->txt_token 
+			];
+			;
 		}
 		
 		return $this->renderAjax ( 'crearSabiasQue', [ 
@@ -523,7 +534,7 @@ class AdminController extends Controller {
 	}
 	public function validarSabiasQue($post, $sabiasque) {
 		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () ) && $sabiasque->load ( Yii::$app->request->post () )) {
-			//$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			// $post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			Yii::$app->response->format = Response::FORMAT_JSON;
 			
 			return array_merge ( ActiveForm::validate ( $post ), ActiveForm::validate ( $sabiasque ) );
@@ -608,12 +619,12 @@ class AdminController extends Controller {
 			
 			$respuesta->guardarRespuesta ( $respuesta );
 			
-			if($post->id_usuario != Yii::$app->user->identity->id_usuario){
-				//Guardar la notificacion
-				$notificaciones = new EntNotificaciones();	
-				$notificaciones->guardarNotificacionRespuestasAdmin($post, $notificaciones);
+			if ($post->id_usuario != Yii::$app->user->identity->id_usuario) {
+				// Guardar la notificacion
+				$notificaciones = new EntNotificaciones ();
+				$notificaciones->guardarNotificacionRespuestasAdmin ( $post, $notificaciones );
 			}
-				
+			
 			return [ 
 					'status' => 'success',
 					'tk' => $post->txt_token,
@@ -623,13 +634,12 @@ class AdminController extends Controller {
 		
 		return $this->renderAjax ( '_formRespuestaEspejo', [ 
 				'respuesta' => $respuesta 
-		]
-		 );
+		] );
 	}
 	
 	/**
 	 * Editar verdadazos
-	 * 
+	 *
 	 * @param string $token        	
 	 */
 	public function actionEditarVerdadazos($token = null) {
@@ -676,7 +686,7 @@ class AdminController extends Controller {
 	
 	/**
 	 * Editar hoy pense
-	 * 
+	 *
 	 * @param string $token        	
 	 */
 	public function actionEditarHoyPense($token = null) {
@@ -723,7 +733,7 @@ class AdminController extends Controller {
 	
 	/**
 	 * Editar Media
-	 * 
+	 *
 	 * @param string $token        	
 	 */
 	public function actionEditarMedia($token = null) {
@@ -758,7 +768,7 @@ class AdminController extends Controller {
 			
 			return [ 
 					'status' => 'success',
-					't' => "http://img.youtube.com/vi/".Utils::getIdVideoYoutube($media->txt_url)."/mqdefault.jpg",
+					't' => "http://img.youtube.com/vi/" . Utils::getIdVideoYoutube ( $media->txt_url ) . "/mqdefault.jpg",
 					'tk' => $media->txt_token 
 			];
 		}
@@ -770,7 +780,7 @@ class AdminController extends Controller {
 	
 	/**
 	 * Editar Solo Por Hoy
-	 * 
+	 *
 	 * @param string $token        	
 	 */
 	public function actionEditarSoloPorHoy($token = null) {
@@ -815,8 +825,7 @@ class AdminController extends Controller {
 		return $this->renderAjax ( '_formSoloporhoy', [ 
 				'soloporhoy' => $soloporhoy,
 				'post' => $post 
-		]
-		 );
+		] );
 	}
 	
 	/**
@@ -832,7 +841,7 @@ class AdminController extends Controller {
 	}
 	/**
 	 * Editar Sabias Que
-	 * 
+	 *
 	 * @param string $token        	
 	 */
 	public function actionEditarSabiasQue($token = null) {
@@ -891,7 +900,7 @@ class AdminController extends Controller {
 			$idVideo = Utils::getIdVideoYoutube ( $url );
 			
 			return $this->renderAjax ( '_cargaImagenes', [ 
-					'idVideo'=>$idVideo,
+					'idVideo' => $idVideo 
 			] );
 		} else {
 			echo 'error';
@@ -912,28 +921,70 @@ class AdminController extends Controller {
 			throw new NotFoundHttpException ( 'The requested page does not exist.' );
 		}
 	}
-	
-	public function actionLeerNotificacion($token){
-		$notificaciones = new EntNotificaciones();
-		$notificacion = $notificaciones->find()->where(['txt_token_objeto'=>$token])->one();
+	public function actionLeerNotificacion($token) {
+		$notificaciones = new EntNotificaciones ();
+		$notificacion = $notificaciones->find ()->where ( [ 
+				'txt_token_objeto' => $token 
+		] )->one ();
 		
 		$notificacion->b_leido = 1;
-		$notificacion->save();
+		$notificacion->save ();
 	}
 	
 	/**
 	 * Asocia un contexto con otro
-	 * @param unknown $token1
-	 * @param unknown $token2
+	 * 
+	 * @param unknown $token1        	
+	 * @param unknown $token2        	
 	 */
-	public function actionAsociarContexto($token1, $token2){
+	public function actionAsociarContexto($token1, $token2) {
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		$post = $this->getPostByToken ( $token1 );
 		
-		$post = $this->getPostByToken($token1);
+		// padre
+		$post2 = $this->getPostByToken ( $token2 );
 		
-		$post2 = $this->getPostByToken($token2);
+		$contexto = $post->entContextos;
 		
-		if($post2->entContextos->idContextoPadre){
-			
+		if ($post2->entContextos->idContextoPadre) {
+			$contexto->id_contexto_padre = $post2->entContextos->idContextoPadre->id_post;
+		} else {
+			$contexto->id_contexto_padre = $post2->id_post;
 		}
+		
+		if ($contexto->save ()) {
+			
+			return [ 
+					'status' => 'success' 
+			];
+		}
+		
+		return [ 
+				'status' => 'error' 
+		];
+	}
+	
+	/**
+	 *
+	 * @param unknown $token        	
+	 */
+	public function actionDesasociarContexto($token) {
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		$post = $this->getPostByToken ( $token );
+		
+		$contexto = $post->entContextos;
+		
+		$contexto->id_contexto_padre = null;
+		
+		if ($contexto->save ()) {
+			
+			return [ 
+					'status' => 'success' 
+			];
+		}
+		
+		return [ 
+				'status' => 'error' 
+		];
 	}
 }

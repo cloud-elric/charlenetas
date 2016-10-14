@@ -73,8 +73,8 @@ function stopEvent(ev) {
 	}
 
 $(document).ready(function(){
-	$('.card-alquimia').on('click', function(e) {
-		
+	$('.card-contexto').on('click', function(e) {
+		console.log(e.target);
 		if (e.target.localName == 'i') {
 			e.stopPropagation();
 			return;
@@ -181,9 +181,9 @@ $('body').on(
 function seleccionarAsociar(elemento){
 	elemento.hide();
 	$('.btn-sin-asociar').each(function(index){
-		var token = $(this).data('token');
-		
-		if(token!=elemento.data('token')){
+		var token = elemento.data('token');
+		var tokenA = $(this).data('token');
+		if(token!=tokenA){
 			$(this).text('Asociar con este contexto');
 			$(this).attr('onclick', 'asociar($(this),"'+token+'")');
 		}
@@ -197,6 +197,17 @@ function asociar(elementoSeleccionado, tokenAs){
 	
 	$.ajax({
 		url:basePath+'/adminPanel/admin/asociar-contexto?token1='+tokenAs+'&token2='+token,
+		success:function(response){
+			
+		}
+	});
+}
+
+function deseleccionarAsociar(elemento){
+var token = elemento.data('token');
+	
+	$.ajax({
+		url:basePath+'/adminPanel/admin/desasociar-contexto?token='+token,
 		success:function(response){
 			alert(response);
 			

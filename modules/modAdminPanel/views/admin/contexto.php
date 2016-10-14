@@ -65,20 +65,31 @@ include 'templates/formato-fecha.php';
 						<p class="card-contexto-status-comen">
 							<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
 						</p>
-						<button class="btn" onclick="asociar();" data-token=<?=$postContexto->txt_token?>>Asociar</button>
+						<?php 
+						if($postContexto->entContextos->idContextoPadre){
+						?>
+							<button class="btn btn-sin-asociar" onclick="deseleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Desasociar</button>
+						<?php 
+							}else{
+								?>
+							<button class="btn btn-sin-asociar" onclick="seleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Asociar</button>	
+						<?php 		
+							}
+						?>
 					</div>
 
 					<div class="card-contexto-options">
 						<?php 
 						if($postContexto->entContextos->idContextoPadre){
-							$contextoPadre = $postContexto->entContextos->idContextoPadre;
+							$contextoPadre = $postContexto->entContextos->idContextoPadre->idPost;
 						?>
-							<i class="ion ion-network tooltipped" data-position="top" data-delay="50" data-tooltip="<?=$contextoPadre->txt_titulo?>"></i>
+						
+						<a class="card-contexto-options-extra" href="">
+						<i class="ion ion-network tooltipped" data-position="top" data-delay="50" data-tooltip="<?=$contextoPadre->txt_titulo?>"></i></a>
 						<?php
 						}
 						?>
-						<a class="card-contexto-options-extra" href="">
-						<i class="ion ion-network tooltipped" data-position="top" data-delay="50" data-tooltip="sd"></i></a>
+						
 						<a id="button_<?=$postContexto->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postContexto->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

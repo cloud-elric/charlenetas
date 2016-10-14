@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+use yii\helpers\Url;
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
@@ -50,7 +51,7 @@ $usuario = $post->idUsuario;
 
 			<div class="full-pin-body-content">
 				<div class="full-pin-body-content-img">
-					<img src="webAssets/images/<?=$post->txt_imagen?>"
+					<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=$post->txt_imagen?>"
 						alt="<?=$post->txt_titulo?>" />
 				</div>
 				<div class="full-pin-body-content-text">
@@ -72,7 +73,7 @@ $usuario = $post->idUsuario;
 
 			<div class="full-pin-body-content">
 				<div class="full-pin-body-content-img">
-					<img src="webAssets/images/<?=$hijo->txt_imagen?>"
+					<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=$hijo->txt_imagen?>"
 						alt="<?=$hijo->txt_titulo?>" />
 				</div>
 				<div class="full-pin-body-content-text">
