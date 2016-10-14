@@ -33,9 +33,31 @@ use yii\helpers\Url;
 <div id="js-tmp" style="display: none;"></div>
 
 <div id="backScreen">
-	<div id="wrapper">
+	<div id="wrapper" style="height:100%">
 		<i onclick="hidePostFull()" class="icon-close"></i>
-		<div id="js-content" class="full-pin-content"></div>
+		<div id="js-content" class="full-pin-content">
+			<div style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+">
+<div class="preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+		
+		</div>
 	</div>
 </div>
 <!-- Modal Structure -->
@@ -112,7 +134,8 @@ if (! empty ( $token )) {
 ?>
 
 <?php
-if (! empty ( Yii::$app->session->getFlash ( 'cuentaActivada' ) )) {
+$isCuentaActivada = Yii::$app->session->getFlash ( 'cuentaActivada' );
+if (! empty ($isCuentaActivada)) {
 	$this->registerJs ( "
   		mensajeCuentaActivada('".Yii::$app->session->getFlash ( 'cuentaActivada' )."');
 	", View::POS_END, 'cuentaActivada' );

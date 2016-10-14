@@ -30,7 +30,7 @@ use app\modules\ModUsuarios\models\Utils;
 
 <div class="respuesta-footer">
 
-	<?php if($respuesta->idPost->idPost->id_usuario == Yii::$app->user->identity->id_usuario){?>
+	<?php if(!Yii::$app->user->isGuest && $respuesta->idPost->idPost->id_usuario == Yii::$app->user->identity->id_usuario){?>
 	
 		<div class="me-gusta" onclick='agregarAcuerdo("<?=$respuesta->idPost->idPost->txt_token?>",1)'>
 			<input type="button" value="Me gusta"/>

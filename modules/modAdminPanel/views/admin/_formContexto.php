@@ -40,7 +40,7 @@ $form = ActiveForm::begin ( [
   	 
   	 <?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
   	 
-  	 <?= $form->field($contexto, 'txt_tags',  ['template'=>'{error}{input}', 'options'=>['class'=>'input-field col s12']])->dropdownList(['tags'=>'tags'],['class'=>'js-example-tags'])->label(false)?>
+  	 <?= $form->field($contexto, 'txt_tags',  ['template'=>'{error}{input}', 'options'=>['class'=>'input-field col s12']])->textInput(['class'=>'js-example-tags'])->label(false)?>
   	 
   	  <?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
    </div>
@@ -54,8 +54,6 @@ include 'templates/formato-fecha.php';
 
 <script>
 
-$(".js-example-tags").select2({
-	  tags: 'true'
-	})
+$(".js-example-tags").tagsInput({'defaultText':'','delimiter': [',', ';'],});
 
 </script>

@@ -115,9 +115,8 @@ function showPostFull(token) {
 	$('body').css('overflow', 'hidden');
 
 	background.toggle();
-	content.html('');
-
 	content.load(url, function() {
+		//content.html('');
 		cargarComentarios(token, true);
 	});
 }
@@ -147,6 +146,20 @@ function showPostAfterLogin(token) {
 
 // Cierra el post con toda su información
 function hidePostFull() {
+	var content = $('#js-content');
+	content.html('<div style="display: flex;align-items: center;justify-content: center;height: 100%;position: relative;">'+
+					'<div class="preloader-wrapper big active">'+
+					    '<div class="spinner-layer spinner-blue-only">'+
+					      '<div class="circle-clipper left">'+
+					        '<div class="circle"></div>'+
+					      '</div><div class="gap-patch">'+
+					        '<div class="circle"></div>'+
+					      '</div><div class="circle-clipper right">'+
+					        '<div class="circle"></div>'+
+					      '</div>'+
+					    '</div>'+
+				  '</div>'+
+				 '</div>');
 	var background = $('#backScreen');
 	background.toggle();
 	$('body').css('overflow', 'auto');
@@ -848,6 +861,14 @@ var grid;
 
 $(document).ready(function() {
 	
+	$('.modal-content .wrap').on('click', function(e){
+		e.preventDefault();
+		
+		if (e.target.className == 'wrap') {
+			$('.lean-overlay').trigger('click');
+		}
+	})
+	
 	$("#js-ingresar-cerrar-sesion").on("click", function(e){
 		e.preventDefault();
 	});
@@ -862,7 +883,7 @@ $(document).ready(function() {
 	$('#js-login').on('click', function(e) {
 		e.preventDefault();
 	});
-
+	
 	$('.btn').on('click', function(e) {
 		e.preventDefault();
 	});
@@ -902,44 +923,6 @@ $(document).ready(function() {
 
 });
 
-$('body').on('beforeSubmit', '#login-form', function() {
-	var form = $(this);
-	// return false if form still have some validation errors
-	if (form.find('.has-error').length) {
-		return false;
-	}
-	
-	var button = document.getElementById('js-login-submit');
-	var l = Ladda.create(button);
- 	l.start();
-	// submit form
-	$.ajax({
-		url : form.attr('action'),
-		type : 'post',
-		data : form.serialize(),
-		success : function(response) {
-			
-			// Si la respuesta contiene la propiedad status y es success
-			if (response.hasOwnProperty('status')
-					&& response.status == 'success') {
-				var token = $('#js-token-post').val();
-				showPostAfterLogin(token);
-				cargarCerrarSesion();
-			} else {
-				// Muestra los errores
-				$('#login-form').yiiActiveForm('updateMessages',
-						response, true);
-			}
-			
-			l.stop();
-		},
-		error:function(){
-			l.stop();
-		}
-	});
-	return false;
-});
-
 
 function cargarCerrarSesion(){
 	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="'+basePath+'site/logout">Cerrar sesión</a>';
@@ -970,14 +953,14 @@ FB.ui({
 });
 }
 
-window.fbAsyncInit = function() {
-	FB.init({
-		//appId : '1029875693761281',
-		appId:'1779986862262300',
-		cookie : true, // enable cookies to allow the server to access
-		// the session
-		xfbml : true, // parse social plugins on this page
-		version : 'v2.6' // use any version
-	});
-
-};
+//window.fbAsyncInit = function() {
+//	FB.init({
+//		//appId : '1029875693761281',
+//		appId:'1779986862262300',
+//		cookie : true, // enable cookies to allow the server to access
+//		// the session
+//		xfbml : true, // parse social plugins on this page
+//		version : 'v2.6' // use any version
+//	});
+//
+//};

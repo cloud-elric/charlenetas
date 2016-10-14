@@ -54,7 +54,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 	 *        	numero del tipo de post
 	 * @param unknown $pageSize        	
 	 */
-	public static function getPosts($page = 0, $post, $pageSize = ConstantesWeb::POSTS_MOSTRAR) {
+	public static function getPosts($page = 0, $post, $pageSize = ConstantesWeb::POSTS_MOSTRAR,$params=null) {
 		
 		/**
 		 * Busca en la base de datos EntPost donde id_tipo_post sea igual al valor de $post
@@ -68,6 +68,13 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$order = [ 
 				'fch_creacion' => 'asc' 
 		];
+		
+		if($post==ConstantesWeb::POST_TYPE_CONTEXTO){
+			if($params){
+				$params = '#'.$params.";";
+				$query->joinWith('entContextos ent_contextos')->andFilterWhere(['like', 'ent_contextos.txt_tags',$params]);
+			}
+		}
 		
 		if ($post == ConstantesWeb::POST_TYPE_ESPEJO) {
 			
@@ -594,7 +601,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 	/**
 	 * Guarda el contexto y el post
 	 *
-	 * @param EntContexto $contexto        	
+	 * @param EntContextos $contexto        	
 	 * @param EntPosts $post        	
 	 * @throws Exception
 	 * @return boolean
@@ -603,13 +610,20 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_CONTEXTO;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
-		$post->fch_publicacion = Utils::changeFormatDate ( $post->fch_publicacion );
+		$post->fch_publicacion = Utils::changeFormatDateInput( $post->fch_publicacion );
 		$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {
 			if ($post->save ()) {
 				$contexto->id_post = $post->id_post;
+				
+				$tags  = explode(",,;", $contexto->txt_tags);
+				$contexto->txt_tags ='';
+				foreach($tags as $tag){
+					$contexto->txt_tags.='#'.$tag.';'; 
+				}
+				
 				if ($contexto->save ()) {
 					
 					$transaction->commit ();
