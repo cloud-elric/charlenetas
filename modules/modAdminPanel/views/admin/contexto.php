@@ -68,11 +68,11 @@ include 'templates/formato-fecha.php';
 						<?php 
 						if($postContexto->entContextos->idContextoPadre){
 						?>
-							<button class="btn btn-sin-asociar" onclick="deseleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Desasociar</button>
+							<button  id="btn-aso-<?=$postContexto->txt_token?>" class="btn btn-sin-asociar" onclick="deseleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Desasociar</button>
 						<?php 
 							}else{
 								?>
-							<button class="btn btn-sin-asociar" onclick="seleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Asociar</button>	
+							<button id="btn-aso-<?=$postContexto->txt_token?>" class="btn btn-sin-asociar" onclick="seleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Asociar</button>	
 						<?php 		
 							}
 						?>

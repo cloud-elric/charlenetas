@@ -16,7 +16,7 @@ use yii\helpers\Url;
 				</div>
 				<div class="pin-content-wrapper" lang="en">
 					<a href="#modal-pregunta-espejo" class="btn pin-titulo"
-						id="js-preguntar-espejo">Pregunta al espejo</a>
+						id="js-preguntar-espejo" <?=Yii::$app->user->isGuest?'onclick="showModalLogin();"':''?>>Pregunta al espejo</a>
 				</div>
 			</div>
 			<?php
@@ -98,22 +98,21 @@ use yii\helpers\Url;
 	</div>
 </div>
 
-<!-- <!-- Modal para pregunta en el espejo -->
--->
-<!-- <div id="modal-pregunta-espejo" class="modal"> -->
-<!-- 	<div class="modal-content"> -->
+<!-- Modal para pregunta en el espejo-->
 
-<!-- 	</div> -->
-<!-- </div> -->
+<div id="modal-pregunta-espejo" class="modal">
+	<div class="modal-content">
+
+	</div>
+</div>
 
 <a class="waves-effect waves-light btn modal-trigger"
 	href="#modal-login" style="display: none;"></a>
 
-<?php
 
-$this->registerJs ( "
-//loadEspejoPreguntar();
-  ", View::POS_END, 'espejo' );
+<a class="waves-effect waves-light btn modal-trigger"
+	href="#modal-pregunta-espejo" style="display: none;" id="js-modal-espejo"></a>
+<?php
 
 if (Yii::$app->user->isGuest) {
 	$this->registerJs ( "
@@ -122,6 +121,12 @@ loadSign();
 $('ul.tabs').tabs();
 
   ", View::POS_END );
+}else{
+	$this->registerJs ( "
+  loadEspejoPreguntar()
+$('ul.tabs').tabs();	
+  ", View::POS_END );
+	
 }
 
 if (! empty ( $token )) {
