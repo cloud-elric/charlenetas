@@ -964,6 +964,3 @@ window.fbAsyncInit = function() {
 	});
 
 };
-
-
-
