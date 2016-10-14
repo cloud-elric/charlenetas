@@ -11,11 +11,14 @@ $this->icon = '<i class="ion ion-network"></i>';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">
-
+	
+	<!-- .contexto-search -->
+	<div class="contexto-search">
 	<?php
 $form = ActiveForm::begin ( [ 
 		'options' => [ 
-				'enctype' => 'multipart/form-data' 
+				'enctype' => 'multipart/form-data',
+				'class' => 'contexto-search-form'
 		],
  		'method'=>'get',
 		'layout' => 'horizontal',
@@ -45,6 +48,8 @@ $form = ActiveForm::begin ( [
 include 'templates/formato-fecha.php';
 
 ?>
+	</div>
+	<!-- end - .contexto-search -->
 
 	<div class="row" id="js-contenedor-tarjetas">
 		
@@ -59,8 +64,8 @@ include 'templates/formato-fecha.php';
 					<div class="card-contexto-status">
 						<p class="card-contexto-status-comen">
 							<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
-							<button class="btn" onclick="asociar();" data-token=<?=$postContexto->txt_token?>>Asociar</button>
 						</p>
+						<button class="btn" onclick="asociar();" data-token=<?=$postContexto->txt_token?>>Asociar</button>
 					</div>
 
 					<div class="card-contexto-options">
@@ -72,6 +77,8 @@ include 'templates/formato-fecha.php';
 						<?php
 						}
 						?>
+						<a class="card-contexto-options-extra" href="">
+						<i class="ion ion-network tooltipped" data-position="top" data-delay="50" data-tooltip="sd"></i></a>
 						<a id="button_<?=$postContexto->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postContexto->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

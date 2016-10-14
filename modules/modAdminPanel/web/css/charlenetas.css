@@ -23,6 +23,7 @@
 	3.0 - Login
 	4.0 - Dashboard
 	5.0 - Tarjetas
+	6.0 - Contexto
 	--------------------------------------------------------
 	*/
 /*!
@@ -1318,8 +1319,21 @@ button.picker__close:focus {
   padding-left: 20px;
 }
 
+.card .card-contexto-options .card-contexto-options-extra i {
+  background-color: #345678;
+}
+
+.card.card-contexto .card-contexto-status {
+  align-items: center;
+  justify-content: space-between;
+}
+
 .card.card-contexto .card-contexto-options i {
   background-color: #DFF040;
+}
+
+.card.card-contexto .card-contexto-options .card-contexto-options-extra i {
+  background-color: #345678;
 }
 
 .card.card-verdadazos .card-contexto-options i {
@@ -1550,4 +1564,18 @@ button.picker__close:focus {
 
 .fixed-action-btn a i.material-icons {
   font-size: 2em;
+}
+
+/*!
+	-----------------------------------------------------------------------------
+
+	6.0 - Contexto
+			# extra
+
+	-----------------------------------------------------------------------------
+	*/
+/*  Contexto
+	@mixin =============================================== */
+.contexto-search {
+  margin-bottom: 40px;
 }

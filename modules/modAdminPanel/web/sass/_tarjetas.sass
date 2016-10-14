@@ -95,12 +95,21 @@
 			[type="checkbox"]+label
 				height: 15px
 				padding-left: 20px
+		.card-contexto-options-extra
+			i
+				background-color: $header-menu
 	// Tarjetas con color en especifico
 	// En contexto
 	&.card-contexto
+		.card-contexto-status
+			align-items: center
+			justify-content: space-between
 		.card-contexto-options
 			i
 				background-color: $color-contexto
+			.card-contexto-options-extra
+				i
+					background-color: $header-menu
 	// A verdadazos
 	&.card-verdadazos
 		.card-contexto-options
