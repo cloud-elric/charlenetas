@@ -31,6 +31,24 @@ $(document).ready(function(){
 			});
 			
 		});
+		//console.log(arrayToken);
+	});
+	
+	$('#js-mostrar-agenda').on('click',function(e){
+		e.preventDefault();
+		var arrayToken = [];
+		$('.js-agenda-item').each(function(index){
+			var item = $(this);
+			arrayToken[index] = item.data("token");
+			$.ajax({
+				url : 'http://localhost/charlenetas/web/adminPanel/admin/leer-notificacion?token='+arrayToken[index],
+				type : 'GET',
+				success: function(){
+					
+				}
+			});
+			
+		});
 		console.log(arrayToken);
 	});
 	

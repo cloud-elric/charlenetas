@@ -23,6 +23,38 @@ function cargarFormulario(){
 	});
 }
 
+/*$(".boton-media").on("click", function(e){
+	e.preventDefault();
+		
+	var media = $("#entpost-txt_url").val(),
+	sendDate = true,
+	toastError = $('<span class="toast-error">Error</span>'),
+	toastSuccess = $('<span class="toast-success">Success</span>');
+		
+	if(sendDate == true){
+		Materialize.toast(toastSuccess, 40000); // 4000 is the duration of the toast
+		window.location.href = "http://localhost/2gom/charlenetas/dashboard.php";
+	}
+});
+
+function loadLada(element) {
+	var l = Ladda.create(element);
+	l.start();
+	showModalLogin();
+}
+
+function showModalLogin() {
+	
+	$(".account-singup").hide();
+	$('#js-message-sign-up').hide();
+	$('.anim-account').animate({left: '-1%'}, 300, function() {
+		$(".account-login .animated").animate({ "opacity": "0" }, 0 );
+		$(".anim-account").animate({ "left": "2%" }, 350 );
+		$(".account-login").show();
+		$(".account-login .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
+	});
+}*/
+
 /**
  * Abrir modal para editar
  * @param token
@@ -70,6 +102,9 @@ $('body').on('beforeSubmit', '#form-media', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	var button = document.getElementById('js-crear-submit');
+	var l = Ladda.create(button);
+ 	l.start();
 	// submit form
 	$.ajax({
 		url : form.attr('action'),
@@ -94,43 +129,42 @@ $('body').on('beforeSubmit', '#form-media', function() {
 				$('#form-media').yiiActiveForm('updateMessages',
 						response, true);
 			}
+			l.stop();
+		},
+		error: function(){
+			l.stop();
 		}
 	});
 	return false;
 });
 
-$('body').on(
-		'beforeSubmit',
-		'#editar-media',
-		function() {
-			var form = $(this);
-			// return false if form still have some validation errors
-			if (form.find('.has-error').length) {
-				return false;
-			}
-			// submit form
-			$.ajax({
-				url : form.attr('action'),// url para peticion
-				type : 'post', // Metodo en el que se enviara la informacion
-				data : new FormData(this), // La informacion a mandar
-				dataType: 'json',  // Tipo de respuesta
-				cache : false, // sin cache
-				contentType : false,
-				processData : false,
-				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
-					// Si la respuesta contiene la propiedad status y es success
-					if (response.hasOwnProperty('status')
-							&& response.status == 'success') {
-						// Cierra el modal
-						$('#js-modal-post-editar').closeModal();
+$('body').on('beforeSubmit', '#editar-media', function() {
+	var form = $(this);
+	// return false if form still have some validation errors
+	if (form.find('.has-error').length) {
+		return false;
+	}
+	// submit form
+	$.ajax({
+		url : form.attr('action'),// url para peticion
+		type : 'post', // Metodo en el que se enviara la informacion
+		data : new FormData(this), // La informacion a mandar
+		dataType: 'json',  // Tipo de respuesta
+		cache : false, // sin cache
+		contentType : false,
+		processData : false,
+		success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
+			// Si la respuesta contiene la propiedad status y es success
+			if (response.hasOwnProperty('status') && response.status == 'success') {
+				// Cierra el modal
+				$('#js-modal-post-editar').closeModal();
 						
-						$('#js-modal-post-editar  .modal-content').html(loading);
+				$('#js-modal-post-editar  .modal-content').html(loading);
 						
-						$('#card_'+response.tk+' img').attr('src',response.t);
-					} else {
-						// Muestra los errores
-						$('#editar-media').yiiActiveForm('updateMessages',
-								response, true);
+				$('#card_'+response.tk+' img').attr('src',response.t);
+				} else {
+					// Muestra los errores
+					$('#editar-media').yiiActiveForm('updateMessages', response, true);
 					}
 				},
 				statusCode: {
@@ -156,3 +190,4 @@ function cargarImagenes(elemento){
 		}
 	});
 }
+

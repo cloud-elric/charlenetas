@@ -87,6 +87,9 @@
 				if (title) {
 					start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
 					end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+					m = moment(date);
+					m.add(1,'hours').hours();
+					end = moment(m).format('YYYY-MM-DD HH:mm:ss');
 					$.ajax({
 						url: 'agregar-citas',
 						data: 'title='+ title+'&start='+ start +'&end='+ end ,

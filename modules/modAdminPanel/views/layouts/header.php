@@ -21,8 +21,8 @@ use app\models\EntCitas;
 				$citas = new EntCitas();
 				
 				$hoy = date("Y-m-d 00:00:00");
-				$maniana = date("Y-m-d 00:00:00");
-				$maniana = date("Y-m-d 00:00:00", strtotime($maniana . '+1 day'));
+				//$maniana = date("Y-m-d 00:00:00");
+				$maniana = date("Y-m-d 00:00:00", strtotime($hoy . '+1 day'));
 				
 				//$agenda = $citas->find()->where(['>=', 'start', $hoy])->andWhere(['<=', 'start', $maniana])->count('id_usuario');
 				$mostrarAgenda = $citas->find()->where(['>=', 'start', $hoy])->andWhere(['<=', 'start', $maniana])->all();
@@ -33,7 +33,7 @@ use app\models\EntCitas;
 				$contador = 0;
 				
 			?>
-			<a  class='dropdown-button' data-activates='dropdown-agenda' href="#">
+			<a id="js-mostrar-agenda" class='dropdown-button' data-activates='dropdown-agenda' href="#">
 				<i class="ion ion-ios-calendar-outline"></i>
 				
 				<?php foreach($mostrarAgenda as $mostrarCita){
@@ -57,12 +57,10 @@ use app\models\EntCitas;
 			<ul id='dropdown-agenda' class='dropdown-content dropdown-content-agenda'>
 				<?php foreach($mostrarAgenda as $mostrarCita){
 					 	foreach($notiCitas as $notiCita){ 
-						  if($mostrarCita->txt_token === $notiCita->txt_token_objeto){
+						  if($mostrarCita->txt_token === $notiCita->txt_token_objeto && $mostrarCita->b_habilitado == 1){
 				?>
-							<li><a href="#!"><?= $mostrarCita->title?></a></li>
+							<li class="js-agenda-item" data-token="<?= $notiCita->txt_token_objeto?>"><a href="#!"><?= $mostrarCita->title?></a></li>
 				<?php	
-							//$notiCita->b_leido = 1;
-							//$notiCita->save();
 						  }
 						}
 				 	  } 
@@ -113,10 +111,6 @@ use app\models\EntCitas;
 				?>
 							<li class="js-notificacion-item" data-token="<?= $mostrarNotificacion->txt_token_objeto?>"><a href="#!"><?= $mostrarNotificacion->txt_titulo ?></a></li>
 				<?php 
-							
-							//$mostrarNotificacion->b_leido = 1;
-							//$mostrarNotificacion->save();
-
 						}
 					}
 				?>

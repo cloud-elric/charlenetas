@@ -791,7 +791,7 @@ class NetasController extends Controller {
 		
 		$json = array();
  
- 		$requete = "SELECT * FROM ent_citas ORDER BY id";
+ 		$requete = "SELECT * FROM ent_citas where b_habilitado = 1 ORDER BY id ";
  	
  		try {
  			$bdd = new PDO('mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root');
@@ -828,8 +828,6 @@ class NetasController extends Controller {
 			echo "SUCCESS";
 		else 
 			echo "ERROR";
-		
-		$end = date($end, strtotime("+1 hours") ) ;
 		
 		$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
 		$q = $bdd->prepare($sql);
