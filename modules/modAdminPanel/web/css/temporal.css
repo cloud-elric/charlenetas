@@ -1,3 +1,4 @@
+h1,h2,h3,h4,h5,h6{font-weight: 900;}
 .btn, .btn-primary, .btn-secondary{
     padding: 5px 20px;
     border: 1px solid #345678;
@@ -99,6 +100,7 @@ p{
 }
 
 .full-pin-content .full-pin-header .post-publisher-data .post-publisher h6, .full-pin-content .respuesta-header .post-publisher-data .post-publisher h6 {
+    font-weight: 900;
     font-size: 0.8em;
     color: #253c54;
     text-align: right;
@@ -329,4 +331,18 @@ p{
 }
 
 
-
+/* Cargar comentarios */
+.comentarios-cargar-comentarios{
+    align-items:center;display:flex;justify-content:flex-end
+    }
+    .comentarios-cargar-comentarios p{
+        font-weight:400;text-decoration:underline
+        }
+        @media screen and (max-width: 768px){
+            .comentarios-cargar-comentarios p{
+                font-size:.85em;
+            }
+        }
+        .comentarios-cargar-comentarios p span{
+            margin-right:10px
+        }
