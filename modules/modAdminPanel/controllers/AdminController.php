@@ -928,6 +928,12 @@ class AdminController extends Controller {
 	 */
 	public function actionAsociarContexto($token1, $token2){
 		
+		$post = $this->getPostByToken($token1);
 		
+		$post2 = $this->getPostByToken($token2);
+		
+		if($post2->entContextos->idContextoPadre){
+			
+		}
 	}
 }
