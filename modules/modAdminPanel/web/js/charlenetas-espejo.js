@@ -91,3 +91,17 @@ $('body').on(
 			});
 			return false;
 		});
+
+$(document).ready(function(){
+	$('.card-espejo').on('click', function(e) {
+		console.log(e);
+		
+		if (e.target.localName == 'i') {
+			return;
+		}
+		var token = $(this).data('token');
+		showPostFull(token)
+	});
+	
+	
+});
