@@ -694,6 +694,9 @@ class NetasController extends Controller {
 			case 7 : // Solo por hoy
 				$render = '//netas/include/_soloPorHoyTarjetaCompleta';
 				break;
+			case 8 : // Sabias que
+				$render = '//netas/include/_sabiasQueTarjetaCompleta';
+				break;
 			default :
 				$render = '//netas/include/_alquimiaTarjetaCompleta';
 				break;

@@ -71,6 +71,9 @@ $('body').on('beforeSubmit', '#form-sabiasque', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	var button = document.getElementById('js-crear-submit');
+	var l = Ladda.create(button);
+ 	l.start();
 	// submit form
 	$.ajax({
 		url : form.attr('action'),
@@ -87,7 +90,7 @@ $('body').on('beforeSubmit', '#form-sabiasque', function() {
 				$('#js-modal-post').closeModal();
 				// Se agrega una nueva tarjeta a la vista
 				agregarTarjetaNueva(response);
-				
+				l.stop();
 				$('.modal-trigger').leanModal();
 				// Reseteamos el modal
 				document.getElementById("form-sabiasque").reset();
@@ -112,6 +115,9 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			var button = document.getElementById('js-editar-submit');
+			var l = Ladda.create(button);
+		 	l.start();
 			// submit form
 			$.ajax({
 				url : form.attr('action'),// url para peticion
@@ -152,7 +158,7 @@ $(document).ready(function(){
 	$('.card-sabias-que').on('click', function(e) {
 		console.log(e);
 		
-		if (e.target.className !== '') {
+		if (e.target.className == 'i') {
 			return;
 		}
 		var token = $(this).data('token');

@@ -23,38 +23,6 @@ function cargarFormulario(){
 	});
 }
 
-/*$(".boton-media").on("click", function(e){
-	e.preventDefault();
-		
-	var media = $("#entpost-txt_url").val(),
-	sendDate = true,
-	toastError = $('<span class="toast-error">Error</span>'),
-	toastSuccess = $('<span class="toast-success">Success</span>');
-		
-	if(sendDate == true){
-		Materialize.toast(toastSuccess, 40000); // 4000 is the duration of the toast
-		window.location.href = "http://localhost/2gom/charlenetas/dashboard.php";
-	}
-});
-
-function loadLada(element) {
-	var l = Ladda.create(element);
-	l.start();
-	showModalLogin();
-}
-
-function showModalLogin() {
-	
-	$(".account-singup").hide();
-	$('#js-message-sign-up').hide();
-	$('.anim-account').animate({left: '-1%'}, 300, function() {
-		$(".account-login .animated").animate({ "opacity": "0" }, 0 );
-		$(".anim-account").animate({ "left": "2%" }, 350 );
-		$(".account-login").show();
-		$(".account-login .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
-	});
-}*/
-
 /**
  * Abrir modal para editar
  * @param token
@@ -118,6 +86,7 @@ $('body').on('beforeSubmit', '#form-media', function() {
 					&& response.status == 'success') {
 				// Cierra el modal
 				$('#js-modal-post').closeModal();
+				l.stop();
 				// Se agrega una nueva tarjeta a la vista
 				agregarTarjetaNueva(response);
 				$('.modal-trigger').leanModal();
@@ -129,7 +98,6 @@ $('body').on('beforeSubmit', '#form-media', function() {
 				$('#form-media').yiiActiveForm('updateMessages',
 						response, true);
 			}
-			l.stop();
 		},
 		error: function(){
 			l.stop();
@@ -144,6 +112,9 @@ $('body').on('beforeSubmit', '#editar-media', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	var button = document.getElementById('js-editar-submit');
+	var l = Ladda.create(button);
+ 	l.start();
 	// submit form
 	$.ajax({
 		url : form.attr('action'),// url para peticion
@@ -162,16 +133,20 @@ $('body').on('beforeSubmit', '#editar-media', function() {
 				$('#js-modal-post-editar  .modal-content').html(loading);
 						
 				$('#card_'+response.tk+' img').attr('src',response.t);
-				} else {
+			} else {
 					// Muestra los errores
 					$('#editar-media').yiiActiveForm('updateMessages', response, true);
-					}
-				},
-				statusCode: {
-				    404: function() {
-				      alert( "page not found" );
-				    }
-				  }
+			}
+			l.stop();
+		},
+		error: function(){
+			l.stop();
+		},
+		statusCode: {
+		    404: function() {
+		    	alert( "page not found" );
+		    }
+		}
 
 			});
 			return false;
