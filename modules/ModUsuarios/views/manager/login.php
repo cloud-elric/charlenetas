@@ -163,5 +163,5 @@ window.fbAsyncInit = function() {
 		<i></i> <span class="ladda-label">Ingresar con Facebook</span>
 	</button>
 <?php }?>
-	<p class="link-olvide-password animated">¿Olvidaste tu contraseña?</p>
+	<!-- <p class="link-olvide-password animated">¿Olvidaste tu contraseña?</p> -->
 </div>
