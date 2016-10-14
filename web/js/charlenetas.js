@@ -6,8 +6,8 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-//var basePath = 'http://localhost/charlenetas/web/';
-var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+var basePath = 'http://localhost/charlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
@@ -953,14 +953,14 @@ FB.ui({
 });
 }
 
-window.fbAsyncInit = function() {
-	FB.init({
-		//appId : '1029875693761281',
-		appId:'1779986862262300',
-		cookie : true, // enable cookies to allow the server to access
-		// the session
-		xfbml : true, // parse social plugins on this page
-		version : 'v2.6' // use any version
-	});
-
-};
+//window.fbAsyncInit = function() {
+//	FB.init({
+//		//appId : '1029875693761281',
+//		appId:'1779986862262300',
+//		cookie : true, // enable cookies to allow the server to access
+//		// the session
+//		xfbml : true, // parse social plugins on this page
+//		version : 'v2.6' // use any version
+//	});
+//
+//};

@@ -73,8 +73,8 @@ $(window).load(function(){
 /**
  * Variables
  */
-//var basePath = 'http://localhost/charlenetas/web/';
-var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+var basePath = 'http://localhost/charlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var pagesComentarios = 0;
 
 //Muestra un post con toda su información

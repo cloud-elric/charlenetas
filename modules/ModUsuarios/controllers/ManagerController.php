@@ -67,7 +67,8 @@ class ManagerController extends Controller {
 					// 'login'
 					// ] );
 					return [ 
-							'status' => 'success' 
+							'status' => 'success',
+							'message'=>$model->nombreCompleto,
 					];
 				} else {
 					

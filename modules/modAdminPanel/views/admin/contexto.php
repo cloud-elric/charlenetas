@@ -59,11 +59,19 @@ include 'templates/formato-fecha.php';
 					<div class="card-contexto-status">
 						<p class="card-contexto-status-comen">
 							<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
+							<button class="btn" onclick="asociar();" data-token=<?=$postContexto->txt_token?>>Asociar</button>
 						</p>
 					</div>
 
 					<div class="card-contexto-options">
-						<i class="ion ion-android-more-vertical"></i>
+						<?php 
+						if($postContexto->entContextos->idContextoPadre){
+							$contextoPadre = $postContexto->entContextos->idContextoPadre;
+						?>
+							<i class="ion ion-network tooltipped" data-position="top" data-delay="50" data-tooltip="<?=$contextoPadre->txt_titulo?>"></i>
+						<?php
+						}
+						?>
 						<a id="button_<?=$postContexto->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postContexto->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
