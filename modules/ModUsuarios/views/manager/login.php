@@ -164,3 +164,53 @@ window.fbAsyncInit = function() {
 	</button>
 <?php }?>
 </div>
+
+<script>
+
+$(document).ready(function(){
+	$('#js-login-submit').on('click', function(e){
+		e.preventDefault();
+		$('#login-form').submit();
+	})
+
+	$('body').on('beforeSubmit', '#login-form', function() {
+		var form = $(this);
+		// return false if form still have some validation errors
+		if (form.find('.has-error').length) {
+			return false;
+		}
+		
+		var button = document.getElementById('js-login-submit');
+		var l = Ladda.create(button);
+	 	l.start();
+		// submit form
+		$.ajax({
+			url : form.attr('action'),
+			type : 'post',
+			data : form.serialize(),
+			success : function(response) {
+				
+				// Si la respuesta contiene la propiedad status y es success
+				if (response.hasOwnProperty('status')
+						&& response.status == 'success') {
+					var token = $('#js-token-post').val();
+					showPostAfterLogin(token);
+					cargarCerrarSesion();
+					mensajeCuentaActivada("Bienvenido de nuevo");
+				} else {
+					// Muestra los errores
+					$('#login-form').yiiActiveForm('updateMessages',
+							response, true);
+				}
+				
+				l.stop();
+			},
+			error:function(){
+				l.stop();
+			}
+		});
+		return false;
+	});
+});
+
+</script>

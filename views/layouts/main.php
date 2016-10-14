@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+<div class="animsition">
 <?php $this->beginBody() ?>
 
 
@@ -29,6 +30,17 @@ AppAsset::register($this);
 
 
 <?php $this->endBody() ?>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('.animsition').animsition();
+  });
+
+  window.onbeforeunload=function(){
+	  $('.animsition').animsition('out' , $('.animsition'), '');
+	}
+  </script>
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -15,7 +15,8 @@ class ModuleAsset extends AssetBundle {
 			'css/charlenetas.css',
 			'css/temporal.css',
 			'fullcalendar-3.0.1/fullcalendar.css',
-			'//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css'
+			'plugins/ladda-bootstrap/ladda-themeless.min.css',
+			'plugins/tags-input/jquery.tagsinput.min.css'
 	];
 	public $js = [ 
 			//'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js',
@@ -25,7 +26,10 @@ class ModuleAsset extends AssetBundle {
 			'js/charlenetas.js',
 			'fullcalendar-3.0.1/lib/moment.min.js',
 			'fullcalendar-3.0.1/fullcalendar.js',
-			'//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'
+			
+			'plugins/ladda-bootstrap/spin.min.js',
+			'plugins/ladda-bootstrap/ladda.min.js',
+			'plugins/tags-input/jquery.tagsinput.min.js'
 	];
 	
 	public $depends = [ 
