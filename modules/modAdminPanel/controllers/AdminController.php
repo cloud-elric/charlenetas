@@ -21,6 +21,7 @@ use yii\widgets\ActiveForm;
 use app\models\EntPostsExtend;
 use app\models\EntRespuestasEspejo;
 use app\models\EntNotificaciones;
+use app\models\ConstantesWeb;
 
 /**
  * Default controller for the `adminPanel` module
@@ -162,9 +163,9 @@ class AdminController extends Controller {
 		] );
 	}
 	
-	public function actionContexto($page = 0) {
+	public function actionContexto($searchTags = null, $page = 0) {
 		$idPost = 6;
-		$postsContexto = EntPosts::getPosts ( $page, $idPost );
+		$postsContexto = EntPosts::getPosts ( $page, $idPost,ConstantesWeb::POSTS_MOSTRAR,$searchTags );
 		
 		return $this->render ( 'contexto', [ 
 				"postsContexto" => $postsContexto 
@@ -412,15 +413,19 @@ class AdminController extends Controller {
 		// Declaracion de modelos
 		$contexto = new EntContextos ();
 		$post = new EntPosts ( [ 
-				'scenario' => 'crear' 
+				'scenario' => 'crearContexto' 
 		] );
+		
+		if ($validacion = $this->validarContexto($post, $contexto )) {
+			return $validacion;
+		}
 		
 		if ($contexto->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
 			$post->guardarContexto ( $contexto, $post );
 			
 			if ($post->cargarImagen ( $post )) {
-				return;
+				return ['status'=>'success', 't'=>$post->txt_descripcion,'tk'=>$post->txt_token];
 			}
 		}
 		
@@ -428,6 +433,19 @@ class AdminController extends Controller {
 				'contexto' => $contexto,
 				'post' => $post 
 		] );
+	}
+	
+	/**
+	 * Valida contexto
+	 */
+	public function validarContexto($post, $contexto){
+		if (Yii::$app->request->isAjax && $post->load ( Yii::$app->request->post () )&& $contexto->load ( Yii::$app->request->post () )) {
+				
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+			Yii::$app->response->format = Response::FORMAT_JSON;
+				
+			return array_merge ( ActiveForm::validate ( $post ),ActiveForm::validate ( $contexto ) );
+		}
 	}
 	
 	/**

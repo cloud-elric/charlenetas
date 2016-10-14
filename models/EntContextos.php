@@ -31,7 +31,7 @@ class EntContextos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_post', 'txt_tags'], 'required'],
+            [['txt_tags'], 'required'],
             [['id_post', 'id_contexto_padre'], 'integer'],
             [['id_contexto_padre'], 'exist', 'skipOnError' => true, 'targetClass' => EntContextos::className(), 'targetAttribute' => ['id_contexto_padre' => 'id_post']],
             [['id_post'], 'exist', 'skipOnError' => true, 'targetClass' => EntPosts::className(), 'targetAttribute' => ['id_post' => 'id_post']],

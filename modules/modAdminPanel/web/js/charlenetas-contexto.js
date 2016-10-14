@@ -38,6 +38,7 @@ $('body').on(
 						// Reseteamos el modal
 						document.getElementById("form-contexto").reset();
 						
+						$(".js-example-tags").importTags('');
 						
 					} else {
 						// Muestra los errores

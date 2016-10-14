@@ -3,12 +3,48 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'Contexto';
 $this->icon = '<i class="ion ion-network"></i>';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">
+
+	<?php
+$form = ActiveForm::begin ( [ 
+		'options' => [ 
+				'enctype' => 'multipart/form-data' 
+		],
+ 		'method'=>'get',
+		'layout' => 'horizontal',
+		'id' => 'form-search',
+		'fieldConfig' => [ 
+				'template' => "{input}\n{label}\n{error}",
+				'horizontalCssClasses' => [ 
+						'error' => 'mdl-textfield__error' 
+				],
+				'labelOptions' => [ 
+						'class' => 'mdl-textfield__label ' 
+				],
+				'options' => [ 
+						'class' => 'input-field col s6 m3' 
+				] 
+		],
+		'errorCssClass' => 'invalid' 
+] );
+?>
+
+<?=Html::input('text', 'searchTags','',['placeholder'=>'Buscar por tag'])?>
+
+<?= Html::submitButton('Buscar tag<i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
+
+<?php ActiveForm::end();
+
+include 'templates/formato-fecha.php';
+
+?>
 
 	<div class="row" id="js-contenedor-tarjetas">
 		
@@ -27,7 +63,7 @@ $this->icon = '<i class="ion ion-network"></i>';
 					</div>
 
 					<div class="card-contexto-options">
-						
+						<i class="ion ion-android-more-vertical"></i>
 						<a id="button_<?=$postContexto->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postContexto->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

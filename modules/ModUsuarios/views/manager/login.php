@@ -197,6 +197,7 @@ $(document).ready(function(){
 					showPostAfterLogin(token);
 					cargarCerrarSesion();
 					mensajeCuentaActivada("Bienvenido de nuevo");
+					
 				} else {
 					// Muestra los errores
 					$('#login-form').yiiActiveForm('updateMessages',
