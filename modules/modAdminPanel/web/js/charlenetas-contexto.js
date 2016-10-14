@@ -176,3 +176,30 @@ $('body').on(
 			});
 			return false;
 		});
+
+
+function seleccionarAsociar(elemento){
+	elemento.hide();
+	$('.btn-sin-asociar').each(function(index){
+		var token = $(this).data('token');
+		
+		if(token!=elemento.data('token')){
+			$(this).text('Asociar con este contexto');
+			$(this).attr('onclick', 'asociar($(this),"'+token+'")');
+		}
+		
+	});
+}
+
+
+function asociar(elementoSeleccionado, tokenAs){
+	var token = elementoSeleccionado.data('token');
+	
+	$.ajax({
+		url:basePath+'/adminPanel/admin/asociar-contexto?token1='+tokenAs+'&token2='+token,
+		success:function(response){
+			alert(response);
+			
+		}
+	});
+}

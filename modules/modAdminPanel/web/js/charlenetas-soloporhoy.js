@@ -153,6 +153,12 @@ $('body').on(
 			return false;
 		});
 
+function stopEvent(ev) {
+	  // this ought to keep t-daddy from getting the click.
+	  ev.stopPropagation();
+	 
+	}
+
 $(document).ready(function(){
 	$('.card-solo-por-hoy').on('click', function(e) {
 		console.log(e);
