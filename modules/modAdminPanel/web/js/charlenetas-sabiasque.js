@@ -158,7 +158,7 @@ $(document).ready(function(){
 	$('.card-sabias-que').on('click', function(e) {
 		console.log(e);
 		
-		if (e.target.className == 'i') {
+		if (e.target.localName == 'i') {
 			return;
 		}
 		var token = $(this).data('token');

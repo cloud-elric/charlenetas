@@ -33,7 +33,7 @@ $usuario = $post->idUsuario;
 		<h3><?= $post->txt_descripcion ?></h3>
 
 		<div class="full-pin-body-content-img">
-			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>" alt="Solo por hoy no violare la constitucion" />
+			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>" alt="" />
 		</div>
 
 

@@ -92,6 +92,7 @@ $('body').on('beforeSubmit', '#form-hoypense', function() {
 					&& response.status == 'success') {
 				// Cierra el modal
 				$('#js-modal-post').closeModal();
+				l.stop();
 				// Se agrega una nueva tarjeta a la vista
 				agregarTarjetaNueva(response);
 				
@@ -105,7 +106,7 @@ $('body').on('beforeSubmit', '#form-hoypense', function() {
 				$('#form-hoypense').yiiActiveForm('updateMessages',
 						response, true);
 			}
-			l.stop();
+			
 		}
 	});
 	return false;
