@@ -248,7 +248,7 @@ function mensajeCuentaActivada($mensaje){
 			}
 	
 	// Display an info toast with no title
-	toastr.success($mensaje)
+	toastr.success('<i class="material-icons">done</i>' + $mensaje)
 }
 
 function mensajeError(mensaje){

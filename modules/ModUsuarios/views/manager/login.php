@@ -152,15 +152,16 @@ window.fbAsyncInit = function() {
 		<?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
 		<?= $form->field($model, 'password')->passwordInput()?>
 		<div class="center">
-			<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button animated delay-3', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
+			<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button animated', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
 		</div>
 	</div>
 <?php ActiveForm::end(); ?>
 
 <?php if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){?>
-	<button id="btn-facebook" type="button" class="btn btn-facebook animated delay-4 ladda-button" data-style="zoom-in" onClick="logInWithFacebook()"
+	<button id="btn-facebook" type="button" class="btn btn-facebook animated ladda-button" data-style="zoom-in" onClick="logInWithFacebook()"
 		scope="<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisos']?>">
 		<i></i> <span class="ladda-label">Ingresar con Facebook</span>
 	</button>
 <?php }?>
+	<p class="link-olvide-password animated">¿Olvidaste tu contraseña?</p>
 </div>

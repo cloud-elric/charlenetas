@@ -26,10 +26,10 @@ class AppAsset extends AssetBundle {
 			'https://fonts.googleapis.com/icon?family=Material+Icons',
 			'webAssets/css/web-styles.css',
 			'plugins/ladda-bootstrap/dist/ladda-themeless.min.css',
+			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css',
 			'css/temporal.css',
 			'css/animate.css',
 			'css/login.css',
-			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'
 	];
 	public $js = [
 			// 'js/codrops-js/modernizr.custom.js',
