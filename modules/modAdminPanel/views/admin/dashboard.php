@@ -24,7 +24,7 @@
 	  
 		<?php endforeach;?>
 
-		<div class="col s12 m6 l4" onClick="cargarNotificaciones()">
+		<!-- <div class="col s12 m6 l4" onClick="cargarNotificaciones()">
 			<a class="dashboard-card card-notificaciones" href="#">
 				<div class="dashboard-card-cont">
 					<div class="row">
@@ -40,7 +40,7 @@
 					<p><i class="ion ion-document"></i> <span>8 post</span></p>
 				</div>
 			</a>
-		</div>
+		</div> -->
 		
 
 <!-- 		<div onClick="cargarNotificaciones()">
