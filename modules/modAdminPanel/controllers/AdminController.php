@@ -732,6 +732,55 @@ class AdminController extends Controller {
 	}
 	
 	/**
+	 * Editar contexto
+	 *
+	 * @param string $token
+	 */
+	public function actionEditarContexto($token = null) {
+		// Busca el post por el token
+		$post = $this->getPostByToken ( $token );
+		$post->scenario = 'editarHoyPense';
+		$post->fch_publicacion = Utils::changeFormatDate ( $post->fch_publicacion );
+	
+		$contexto = $post->entContextos;
+		// Validacion de los modelos
+		if ($validacion = $this->validarContexto( $post, $contexto )) {
+			return $validacion;
+		}
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($post->load ( Yii::$app->request->post () )) {
+				
+			// usuario logueado
+			$usuario = Yii::$app->user->identity;
+				
+			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
+				
+			if (! empty ( $post->imagen )) {
+				$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
+			}
+				
+			$post->id_usuario = $usuario->id_usuario;
+			$post->editarContexto ( $post, $contexto );
+				
+			if (! empty ( $post->imagen )) {
+				$post->cargarImagen ( $post );
+			}
+				
+			return [
+					'status' => 'success',
+					't' => $post->txt_titulo,
+					'tk' => $post->txt_token
+			];
+		}
+	
+		return $this->renderAjax ( '_formContexto', [
+				'post' => $post,
+				'contexto'=>$contexto
+		] );
+	}
+	
+	/**
 	 * Editar Media
 	 *
 	 * @param string $token        	

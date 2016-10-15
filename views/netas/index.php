@@ -12,11 +12,11 @@ use yii\helpers\Url;
 			<div class="pin pin-agregar-espejo">
 				<div class="pin-header pin-header-agregar-espejo"></div>
 				<div class="image">
-					<img src="<?=Url::base()?>/webAssets/images/espejo.png">
+					<img src="<?=Url::base()?>/webAssets/images/espejo.jpg">
 				</div>
 				<div class="pin-content-wrapper" lang="en">
 					<a href="#modal-pregunta-espejo" class="btn pin-titulo"
-						id="js-preguntar-espejo" <?=Yii::$app->user->isGuest?'onclick="showModalLogin();"':''?>>Pregunta al espejo</a>
+						id="js-preguntar-espejo" <?=Yii::$app->user->isGuest?'onclick="showModalLogin();"':'onclick="agregarPregunta();"'?>>Pregunta al espejo</a>
 				</div>
 			</div>
 			<?php
@@ -69,16 +69,16 @@ use yii\helpers\Url;
 			<!-- .section -->
 			<section class="section">
 
-				<div class="sing-up"><h4>¿No tienes una cuenta?</h4>
-					<p>Registrate es gratis ahora y siempre.</p>
+				<div class="sing-up"><h4>¿Ya tienes una cuenta?</h4>
+
+					<p>Logueate usando tu Email y contraseña con la cual te
+						registraste.</p>
 					
 					<div class="btn btn-login-register" data-account="singup">Login</div>
 				</div>
 				<div class="login">
-					<h4>¿Ya tienes una cuenta?</h4>
-
-					<p>Logueate usando tu Email y contraseña con la cual te
-						registraste.</p>
+				<h4>¿No tienes una cuenta?</h4>
+					<p>Registrate es gratis ahora y siempre.</p>
 					<div class="btn btn-login-register" data-account="login">Registrarse</div>
 				</div>
 
@@ -107,7 +107,7 @@ use yii\helpers\Url;
 </div>
 
 <a class="waves-effect waves-light btn modal-trigger"
-	href="#modal-login" style="display: none;"></a>
+	href="#modal-login" style="display: none;" id="js-modal-lgoin-con"></a>
 
 
 <a class="waves-effect waves-light btn modal-trigger"

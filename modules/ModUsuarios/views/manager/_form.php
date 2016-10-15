@@ -27,8 +27,7 @@ $form = ActiveForm::begin ( [
 								'options' => [ 
 										'class' => 'input-field col s6 animated' 
 								] 
-						]
-						,
+						],
 						'errorCssClass' => 'invalid',
 						'options' => [ 
 								'enctype' => 'multipart/form-data' 
@@ -71,6 +70,8 @@ $form = ActiveForm::begin ( [
 <script>
 $(document).ready(function(){
 	$('body').on('beforeSubmit', '#sign-form', function() {
+
+		
 		var form = $(this);
 		// return false if form still have some validation errors
 		if (form.find('.has-error').length) {

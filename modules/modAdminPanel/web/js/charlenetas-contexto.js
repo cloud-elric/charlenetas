@@ -54,7 +54,7 @@ function agregarTarjetaNueva(json) {
 			
 			
 			+ '<div class="card-contexto-options">'
-			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia(\''+json.tk+'\')" href="#js-modal-post-editar">'
+			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarContexto(\''+json.tk+'\')" href="#js-modal-post-editar">'
 			+'<i class="ion ion-android-more-vertical card-edit"></i>'
 			+'</a>'
 			+ '</div>' +  '</div>';
