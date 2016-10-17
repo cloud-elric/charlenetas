@@ -467,6 +467,28 @@ button.picker__close:focus {
   background-color: #345678;
 }
 
+.field-entposts-imagen {
+  position: relative;
+}
+
+.field-entposts-imagen .file-bg {
+  background-color: #EEE;
+  background-image: url(../imgs/bg.jpg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  bottom: -20px;
+  left: 10px;
+  position: absolute;
+  right: 10px;
+  top: -20px;
+  z-index: 9999;
+}
+
 /*!
 	-----------------------------------------------------------------------------
 
@@ -809,6 +831,7 @@ button.picker__close:focus {
 
 .modal .modal-content .input-calificacion {
   height: 70px;
+  height: 100px;
 }
 
 .modal .modal-content .input-calificacion label {

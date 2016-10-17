@@ -47,6 +47,8 @@ $form = ActiveForm::begin ( [
 
 	<?= Html::submitButton('<span class="ladda-label">Crear</span>',['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name'=>'boton-alquimia', 'data-style'=>'zoom-in'])?>
 
+
+
 <?php
 
 ActiveForm::end ();
