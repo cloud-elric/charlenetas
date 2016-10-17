@@ -7,7 +7,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<h4 class="animated">Registrarse</h4>
+<!-- <h4 class="animated">Registrarse</h4> -->
 
 <div class="row">
 
@@ -25,7 +25,7 @@ $form = ActiveForm::begin ( [
 										'class' => 'mdl-textfield__label' 
 								],
 								'options' => [ 
-										'class' => 'input-field col s6 animated' 
+										'class' => 'input-field col s12 m6 animated' 
 								] 
 						],
 						'errorCssClass' => 'invalid',
