@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
 use yii\helpers\Url;
+
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />

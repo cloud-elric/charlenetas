@@ -39,18 +39,12 @@ use app\models\EntCitas;
 				<?php foreach($mostrarAgenda as $mostrarCita){
 					 	foreach($notiCitas as $notiCita){ 
 						  if($mostrarCita->txt_token === $notiCita->txt_token_objeto && $notiCita->b_leido == 0){
-						  	$contador++;
-				?>
-							<span class="badge badge-danger"><?= $contador ?></span>
-				<?php	
-						  }else{
-			    ?>
-			    			<span class="badge badge-danger"><?= $contador ?></span>
-			    <?php
+						  	$contador++;	
 						  }
 						}
 				 	  } 
 				 ?>
+				 <span class="badge badge-danger"><?= $contador ?></span>
 			</a>
 
 			<!-- .dropdown-content AGENDA (dropdown) -->
@@ -85,18 +79,11 @@ use app\models\EntCitas;
 						$cadena1 = "cita";
 						$comparar1 = strpos($mostrarNotificacion->txt_token_objeto, $cadena1);
 					
-						if($comparar1 === false){
+						if($comparar1 === false)
 							$cont++;
-				?>
-							<span class="badge badge-warning"><?= $cont ?></span>
-				<?php 
-						}else{
-				?>
-							<span class="badge badge-warning"><?= $cont ?></span>
-				<?php 
-						}
 					}
 				?>
+				<span class="badge badge-warning"><?= $cont ?></span>
 			</a>
 			
 			<!-- .dropdown-content NOTIFICACIONES (dropdown) -->
