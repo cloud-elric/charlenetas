@@ -33,9 +33,9 @@ $postTotales = EntPosts::find()->count("id_post");
 if($postTotales>=ConstantesWeb::PINS_A_MOSTRAR){
 ?>
 
-<div class="more-entries waves-effect waves-light btn"
-	id="js-cargar-mas-posts" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::PINS_A_MOSTRAR?>);">Cargar mas
-	entradas...<span>(<?=$postTotales - ConstantesWeb::PINS_A_MOSTRAR?>)</span></div>
+<div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
+	id="js-cargar-mas-posts" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::PINS_A_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	entradas...<label>(<?=$postTotales - ConstantesWeb::PINS_A_MOSTRAR?>)</label></span></div>
 
 <?php
 }

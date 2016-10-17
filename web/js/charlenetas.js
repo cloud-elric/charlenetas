@@ -18,7 +18,9 @@ var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
 function cargarMasPosts(postTotales, numeroPostMostrar) {
-
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
+ 	l.start();
+	
 	totalPostMostrados = (pages+1)*5;
 	totalPost = postTotales - totalPostMostrados;
 	
@@ -41,8 +43,10 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 			if(totalPost<=0){
 				$("#js-cargar-mas-posts").remove();
 			}else{
-				$("#js-cargar-mas-posts span").text('('+totalPost+')');
+				$("#js-cargar-mas-posts label").text('('+totalPost+')');
 			}
+			
+			l.stop();
 		}
 	});
 
