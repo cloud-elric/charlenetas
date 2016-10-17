@@ -40,11 +40,11 @@ use app\modules\ModUsuarios\models\Utils;
 		</div>
 	<?php }?>
 		
-	<div class="respuesta-feedbacks">
-		<div class="feedback">
-			<i class="icon icon-thumbs-up"></i> <span>345</span>
-		</div>
-	</div>
+<!-- 	<div class="respuesta-feedbacks"> -->
+<!-- 		<div class="feedback"> -->
+<!-- 			<i class="icon icon-thumbs-up"></i> <span>345</span> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
 </div>
 

@@ -694,6 +694,9 @@ class NetasController extends Controller {
 			case 7 : // Solo por hoy
 				$render = '//netas/include/_soloPorHoyTarjetaCompleta';
 				break;
+			case 8 : // Sabias que
+				$render = '//netas/include/_sabiasQueTarjetaCompleta';
+				break;
 			default :
 				$render = '//netas/include/_alquimiaTarjetaCompleta';
 				break;
@@ -716,15 +719,16 @@ class NetasController extends Controller {
 		] );
 		
 		if ($post->load ( Yii::$app->request->post () )) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
 			if($postGuardado = $post->guardarEspejo($post)){
 						
 				$notificaciones = new EntNotificaciones();
 					
 				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
 				
-				return 'success';
+				return ['status'=>'success'];
 			}else{
-				return 'error';
+				return ['status'=>'error'];
 			}
 		}
 		
@@ -785,7 +789,7 @@ class NetasController extends Controller {
 	}
 	
 	/**
-	 * Añadir las citas al calendario
+	 * Aï¿½adir las citas al calendario
 	 */
 	public function actionAnadirCitas(){
 		

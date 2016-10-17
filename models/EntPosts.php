@@ -426,6 +426,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		return false;
 	}
 	
+	
 	/**
 	 * Guarda post de Verdadazo
 	 *
@@ -639,6 +640,36 @@ class EntPosts extends \yii\db\ActiveRecord {
 		return false;
 	}
 	
+	
+	public function editarContexto($post, $contexto){
+		$post->fch_publicacion = Utils::changeFormatDateInput ( $post->fch_publicacion );
+	
+		$transaction = EntPosts::getDb ()->beginTransaction ();
+		try {
+			if ($post->save ()) {
+			$contexto->id_post = $post->id_post;
+				
+				$tags  = explode(",,;", $contexto->txt_tags);
+				$contexto->txt_tags ='';
+				foreach($tags as $tag){
+					$contexto->txt_tags.='#'.$tag.';'; 
+				}
+	
+				if ($contexto->save ()) {
+	
+					$transaction->commit ();
+					return true;
+				}
+			}
+			$transaction->rollBack ();
+		} catch ( \Exception $e ) {
+			$transaction->rollBack ();
+			throw $e;
+		}
+	
+		return false;
+	}
+	
 	/**
 	 * Guarda el solo por hoy y el post
 	 *
@@ -799,6 +830,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 					return $post;
 				}
 			}
+			
 			$transaction->rollBack ();
 		} catch ( \Exception $e ) {
 			$transaction->rollBack ();

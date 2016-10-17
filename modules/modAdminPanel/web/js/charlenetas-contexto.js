@@ -47,13 +47,14 @@ function agregarTarjetaNueva(json) {
 			+ '<div class="card-contexto-status">'
 			+ '<p class="card-contexto-status-comen">'
 			+ '	<i class="ion icon icon-comment"></i> <span>0</span>'
-			+'<button class="btn">Asociar</button>'
+			
 			+ '</p>'
+			+'<button id="btn-aso-'+json.tk+'" class="btn btn-sin-asociar" onclick="seleccionarAsociar($(this));" data-token="'+json.tk+'">Asociar</button>' 
 			+ '</div>'
 			
 			
 			+ '<div class="card-contexto-options">'
-			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia(\''+json.tk+'\')" href="#js-modal-post-editar">'
+			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarContexto(\''+json.tk+'\')" href="#js-modal-post-editar">'
 			+'<i class="ion ion-android-more-vertical card-edit"></i>'
 			+'</a>'
 			+ '</div>' +  '</div>';
@@ -62,8 +63,12 @@ function agregarTarjetaNueva(json) {
 	contenedor.prepend(template);
 	
 	var element = document.getElementById("button_"+json.tk);
-	console.log(element);
 	element.addEventListener("click", stopEvent, false);
+	
+	var elementbtn = document.getElementById("btn-aso-"+json.tk);
+	elementbtn.addEventListener("click", stopEvent, false);
+	
+	
 }
 
 function stopEvent(ev) {
@@ -73,9 +78,9 @@ function stopEvent(ev) {
 	}
 
 $(document).ready(function(){
-	$('.card-alquimia').on('click', function(e) {
-		
-		if (e.target.localName == 'i') {
+	$('.card-contexto').on('click', function(e) {
+		console.log(e.target);
+		if (e.target.localName == 'i' || e.target.localName == 'button') {
 			e.stopPropagation();
 			return;
 		}
@@ -179,14 +184,26 @@ $('body').on(
 
 
 function seleccionarAsociar(elemento){
-	elemento.hide();
+	elemento.text('Cancelar');
+	elemento.attr('onclick','cancelarAsociacion($(this));');
+	
+	
 	$('.btn-sin-asociar').each(function(index){
-		var token = $(this).data('token');
-		
-		if(token!=elemento.data('token')){
+		var token = elemento.data('token');
+		var tokenA = $(this).data('token');
+		if(token!=tokenA){
 			$(this).text('Asociar con este contexto');
 			$(this).attr('onclick', 'asociar($(this),"'+token+'")');
 		}
+		
+	});
+}
+
+function cancelarAsociacion(elemento){
+	$('.btn-sin-asociar').each(function(index){
+
+			$(this).text('Asociar');
+			$(this).attr('onclick', 'seleccionarAsociar($(this))');
 		
 	});
 }
@@ -195,10 +212,31 @@ function seleccionarAsociar(elemento){
 function asociar(elementoSeleccionado, tokenAs){
 	var token = elementoSeleccionado.data('token');
 	
+	cancelarAsociacion(elementoSeleccionado);
+	
+	$("#btn-aso-"+tokenAs).text('Desasociar');
+	$("#btn-aso-"+tokenAs).attr('onclick', 'deseleccionarAsociar($(this));');
+	
+	
+	
 	$.ajax({
 		url:basePath+'/adminPanel/admin/asociar-contexto?token1='+tokenAs+'&token2='+token,
 		success:function(response){
-			alert(response);
+			
+		}
+	});
+}
+
+function deseleccionarAsociar(elemento){
+var token = elemento.data('token');
+	
+elemento.text('Asociar');
+elemento.attr('onclick', 'seleccionarAsociar($(this))');
+
+	$.ajax({
+		url:basePath+'/adminPanel/admin/desasociar-contexto?token='+token,
+		success:function(response){
+			
 			
 		}
 	});

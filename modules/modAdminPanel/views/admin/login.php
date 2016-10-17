@@ -62,7 +62,7 @@ $bundle->js [] = 'js/login.js'; // dynamic file added
 						<?php ActiveForm::end(); ?>
 						<!-- <p class="datos"><a href="" class="crear-cuenta">Crear cuenta</a></p> -->
 			<p class="datos">
-				<a href="" class="olvide-pass">Olvide contraseña</a>
+<!-- 				<a href="" class="olvide-pass">Olvide contraseña</a> -->
 			</p>
 		</div>
 		<!-- <div class="login-foter"><img src="assets/imgs/power-by-2geeks.png"></div> -->

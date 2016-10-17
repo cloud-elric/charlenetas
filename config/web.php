@@ -98,6 +98,7 @@ $config = [
 								'callback-facebook' => 'modUsuarios/manager/callback-facebook',
 								'/' => 'netas/index',
 								//modulo de administrador
+								"adminPanel/"=>"adminPanel/admin/dashboard",
 								"adminPanel"=>"adminPanel/admin/dashboard"
 						] 
 				] 

@@ -92,6 +92,9 @@ $(document).ready(function(){
 					showPostAfterLogin(token);
 					cargarCerrarSesion();
 					mensajeCuentaActivada("Bienvenido de nuevo charlenauta");
+					loadEspejoPreguntar();
+					
+					$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
 					
 				} else {
 					// Muestra los errores

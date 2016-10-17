@@ -72,6 +72,9 @@ $('body').on('beforeSubmit', '#form-verdadazos', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	var button = document.getElementById('js-crear-submit');
+	var l = Ladda.create(button);
+ 	l.start();
 	// submit form
 	$.ajax({
 		url : form.attr('action'),
@@ -86,6 +89,7 @@ $('body').on('beforeSubmit', '#form-verdadazos', function() {
 					&& response.status == 'success') {
 				// Cierra el modal
 				$('#js-modal-post').closeModal();
+				l.stop();
 				// Se agrega una nueva tarjeta a la vista
 				agregarTarjetaNueva(response);
 				$('.modal-trigger').leanModal();
@@ -110,6 +114,9 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			var button = document.getElementById('js-editar-submit');
+			var l = Ladda.create(button);
+		 	l.start();
 			// submit form
 			$.ajax({
 				url : form.attr('action'),// url para peticion
@@ -125,7 +132,7 @@ $('body').on(
 							&& response.status == 'success') {
 						// Cierra el modal
 						$('#js-modal-post-editar').closeModal();
-						
+						l.stop();
 						$('#js-modal-post-editar .modal-content').html(loading);
 						
 						$('#card_'+response.tk+' .card-desc').text(response.t);

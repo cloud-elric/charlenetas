@@ -77,6 +77,9 @@ function statusChangeCallback(response) {
 							cargarCerrarSesion();
 							loadEspejoPreguntar();
 							mensajeCuentaActivada("Bienvenido charlenauta");
+							loadEspejoPreguntar();
+							
+							$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
 							}
 						}
 					});

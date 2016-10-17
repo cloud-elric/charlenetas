@@ -75,6 +75,9 @@ $('body').on('beforeSubmit', '#form-hoypense', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	var button = document.getElementById('js-crear-submit');
+	var l = Ladda.create(button);
+ 	l.start();
 	// submit form
 	$.ajax({
 		url : form.attr('action'),
@@ -89,6 +92,7 @@ $('body').on('beforeSubmit', '#form-hoypense', function() {
 					&& response.status == 'success') {
 				// Cierra el modal
 				$('#js-modal-post').closeModal();
+				l.stop();
 				// Se agrega una nueva tarjeta a la vista
 				agregarTarjetaNueva(response);
 				
@@ -102,6 +106,7 @@ $('body').on('beforeSubmit', '#form-hoypense', function() {
 				$('#form-hoypense').yiiActiveForm('updateMessages',
 						response, true);
 			}
+			
 		}
 	});
 	return false;
@@ -116,6 +121,9 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			var button = document.getElementById('js-editar-submit');
+			var l = Ladda.create(button);
+		 	l.start();
 			// submit form
 			$.ajax({
 				url : form.attr('action'),// url para peticion
@@ -141,6 +149,7 @@ $('body').on(
 						$('#editar-hoy-pense').yiiActiveForm('updateMessages',
 								response, true);
 					}
+					l.stop();
 				},
 				statusCode: {
 				    404: function() {

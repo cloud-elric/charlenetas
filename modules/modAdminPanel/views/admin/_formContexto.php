@@ -6,6 +6,28 @@ use yii\web\View;
 $classActive = $post->isNewRecord?'':'active';
 ?>
 
+
+<?php 
+if(!$post->isNewRecord){
+	$contexto->txt_tags = str_replace('#', '', $contexto->txt_tags);
+	$contexto->txt_tags = str_replace(';', ',', $contexto->txt_tags);
+	$contexto->txt_tags = explode(',', $contexto->txt_tags);
+?>
+<script>
+$(document).ready(function(){
+	<?php foreach($contexto->txt_tags as $tag){?>
+	$(".js-example-tags").addTag('<?=$tag?>');	
+	<?php }?>
+});
+
+
+</script>
+<?php
+
+$contexto->txt_tags = '';
+}
+?>
+
 <h4><?=$post->isNewRecord?'Agregar':'Editar'?> <span>Contexto</span></h4>
 
 <?php
@@ -57,3 +79,4 @@ include 'templates/formato-fecha.php';
 $(".js-example-tags").tagsInput({'defaultText':'','delimiter': [',', ';'],});
 
 </script>
+

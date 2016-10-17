@@ -6,8 +6,8 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-var basePath = 'http://localhost/charlenetas/web/';
-//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+//var basePath = 'http://localhost/charlenetas/web/';
+var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
@@ -667,7 +667,7 @@ function showModalLogin() {
 		$(".account-login .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
 	});
 
-	$('.modal-trigger').trigger('click');
+	$('#js-modal-lgoin-con').trigger('click');
 	
 	document.getElementById("sign-form").reset();
 
@@ -680,6 +680,13 @@ function cargarHabilidadesUsuario() {
 	cargarInputComentario();
 	cargarInputRespuestas();
 	cargarHabilidadLike();
+	loadEspejoPreguntar();
+	
+	$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
+}
+
+function agregarPregunta(){
+	$('#js-modal-espejo').trigger('click');
 }
 
 // Carga la habilidad para los feedback
@@ -862,11 +869,14 @@ var grid;
 $(document).ready(function() {
 	
 	$('.modal-content .wrap').on('click', function(e){
-		e.preventDefault();
+		
 		
 		if (e.target.className == 'wrap') {
+			e.preventDefault();
 			$('.lean-overlay').trigger('click');
+			
 		}
+		
 	})
 	
 	$("#js-ingresar-cerrar-sesion").on("click", function(e){
@@ -884,9 +894,9 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 	
-	$('.btn').on('click', function(e) {
-		e.preventDefault();
-	});
+//	$('.btn').on('click', function(e) {
+//		e.preventDefault();
+//	});
 
 	$('#backScreen').on('click', function(e) {
 		if (e.target !== this) {
