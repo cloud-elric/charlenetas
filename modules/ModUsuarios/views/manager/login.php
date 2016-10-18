@@ -16,7 +16,7 @@ if (Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']) {
 
 <?php }?>
 
-<!-- <h4 class="animated">Login</h4> -->
+<h4 class="animated">Login</h4>
 
 <div class="row">
 	<?php

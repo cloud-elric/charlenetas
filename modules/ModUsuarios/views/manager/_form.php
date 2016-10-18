@@ -7,7 +7,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<!-- <h4 class="animated">Registrarse</h4> -->
+<h4 class="animated">Registrarse</h4>
 
 <div class="row">
 

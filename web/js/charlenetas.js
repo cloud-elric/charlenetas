@@ -660,10 +660,10 @@ function showModalLogin() {
 	
 	$(".account-singup").hide();
 	$('#js-message-sign-up').hide();
-	// $('.anim-account').animate({left: '-1%'}, 300, function() {
-	$(".account-login .animated").animate({ "opacity": "0" }, 0, function() {
-		// $(".account-login .animated").animate({ "opacity": "0" }, 0 );
-		// $(".anim-account").animate({ "left": "2%" }, 350 );
+	$('.anim-account').animate({left: '-1%'}, 300, function() {
+	// $(".account-login .animated").animate({ "opacity": "0" }, 0, function() {
+		$(".account-login .animated").animate({ "opacity": "0" }, 0 );
+		$(".anim-account").animate({ "left": "2%" }, 350 );
 		$(".account-login").show();
 		$(".account-login .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
 	});
