@@ -1,5 +1,11 @@
 var pages = 1;
 var pagesComentarios = 0;
+var numComentarios = 0;
+var comentariosShow = 0;
+var comentariosRestantes = 0;
+var totalPostMostrados = 0;
+var totalPost = 0;
+
 var masonryOptions = {
 	itemSelector : '.pin',
 	columnWidth : 250,
@@ -11,8 +17,13 @@ var basePath = 'http://localhost/charlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
-function cargarMasPosts() {
-
+function cargarMasPosts(postTotales, numeroPostMostrar) {
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
+ 	l.start();
+	
+	totalPostMostrados = (pages+1)*5;
+	totalPost = postTotales - totalPostMostrados;
+	
 	var contenedor = $('#js-contenedor-posts-tarjetas');
 	var url = basePath+'netas/get-mas-posts?page=' + pages;
 
@@ -28,6 +39,14 @@ function cargarMasPosts() {
 			pages++;
 
 			filtrarPost();
+			
+			if(totalPost<=0){
+				$("#js-cargar-mas-posts").remove();
+			}else{
+				$("#js-cargar-mas-posts label").text('('+totalPost+')');
+			}
+			
+			l.stop();
 		}
 	});
 
@@ -67,10 +86,23 @@ function cargarComentarios(token, borrarAnteriores) {
 		}
 	})
 
-	// $('#js-comments').append('<div id="js-cargar-comentarios"
-	// onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
+	calcularComentarios();
+
 	pagesComentarios++;
 
+}
+
+function calcularComentarios(){
+	
+	comentariosRestantes = numComentarios-comentariosShow;
+	
+	if(comentariosRestantes < 1){
+		$('#js-cargar-comentarios').remove();
+	}else{
+		$('#js-cargar-comentarios span label').text('('+comentariosRestantes+')');
+	}
+	
+	numComentarios = comentariosRestantes;
 }
 
 // Carga las respuestas de cada comentario
@@ -164,6 +196,9 @@ function hidePostFull() {
 	background.toggle();
 	$('body').css('overflow', 'auto');
 	pagesComentarios = 0;
+	numComentarios = 0;
+	comentariosShow = 0;
+	comentariosRestantes = 0;
 	$('#js-content').html();
 }
 
