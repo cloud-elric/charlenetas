@@ -58,12 +58,12 @@ $this->icon = '<i class="ion ion-eye"></i>';
 <!-- end /.page-cont -->
 
 <?php
-$postTotales = EntPosts::find()->count("id_post"); 
-if($postTotales>=ConstantesWeb::PINS_A_MOSTRAR){
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_ESPEJO])->count('id_usuario'); 
+if($postTotales>=ConstantesWeb::POSTS_MOSTRAR){
 ?>
 
 <div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
-	id="js-cargar-mas-posts" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::PINS_A_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	id="js-cargar-mas-posts" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
 	entradas...</span></div>
 
 <?php

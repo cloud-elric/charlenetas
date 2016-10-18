@@ -1036,4 +1036,38 @@ class AdminController extends Controller {
 				'status' => 'error' 
 		];
 	}
+	
+	/**
+	 * Obtiene los post por paginacion
+	 */
+	public function actionGetMasPosts($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+	
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPostPorPaginacion( $page );
+	
+		// Pintar vista
+		return $this->render ( 'espejo', [
+				'postsEspejo' => $listaPost
+		] );
+	}
+	
+	/**
+	 * Obtiene los post por paginacion
+	 */
+	public function actionGetMasPostsMedia($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+	
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPostPorPaginacion( $page );
+	
+		// Pintar vista
+		return $this->render ( 'media', [
+				'postsMedia' => $listaPost
+		] );
+	}
 }
