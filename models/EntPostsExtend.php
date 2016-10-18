@@ -31,6 +31,29 @@ class EntPostsExtend extends EntPosts
 		return $dataProvider->getModels();
 	}
 	
+	/**
+	 * Obtiene post indicados por paginacion y cantidad por pagina
+	 *
+	 * @param integer $page
+	 * @param integer $pageSize
+	 */
+	public static function getPostPorPaginacion($page = 0, $pageSize=ConstantesWeb::POSTS_MOSTRAR){
+	
+		$query = EntPosts::find('fch_publicacion <=NOW() AND b_habilitado=1');
+	
+		// Carga el dataprovider
+		$dataProvider = new ActiveDataProvider([
+				'query' => $query,
+				'sort'=> ['defaultOrder' => ['fch_publicacion'=>'asc']],
+				'pagination' => [
+						'pageSize' => $pageSize,
+						'page' => $page
+				]
+		]);
+	
+		return $dataProvider->getModels();
+	}
+	
 	
 
 	/**
