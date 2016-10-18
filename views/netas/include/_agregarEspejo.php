@@ -64,6 +64,8 @@ $(document).ready(function(){
 				data: form.serialize(),
 				success : function(response) { 
 
+					console.log(response); 
+
 					// Si la respuesta contiene la propiedad status y es success
 					if (response.hasOwnProperty('status')
 							&& response.status == 'success') {

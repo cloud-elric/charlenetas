@@ -3,6 +3,7 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+use app\models\ConstantesWeb;
 
 $this->title = 'Espejo';
 $this->icon = '<i class="ion ion-eye"></i>';
@@ -55,6 +56,19 @@ $this->icon = '<i class="ion ion-eye"></i>';
 
 </div>
 <!-- end /.page-cont -->
+
+<?php
+$postTotales = EntPosts::find()->count("id_post"); 
+if($postTotales>=ConstantesWeb::PINS_A_MOSTRAR){
+?>
+
+<div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
+	id="js-cargar-mas-posts" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::PINS_A_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	entradas...</span></div>
+
+<?php
+}
+?>
 
 <?php
 $bundle = ModuleAsset::register ( Yii::$app->view );

@@ -340,7 +340,7 @@ class NetasController extends Controller {
 	 *
 	 * @param unknown $token        	
 	 */
-	public function actionComentarPost($token = null) {
+	public function actionComentarPost($token) {
 		$this->layout = false;
 		$idUsuario = Yii::$app->user->identity->id_usuario;
 		

@@ -105,7 +105,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
      */
     public function guardarNotificacionPreguntas($post, $notificaciones){
     	 
-    	$notificaciones->id_usuario = Yii::$app->user->identity;
+    	$notificaciones->id_usuario = 25;//Yii::$app->user->identity->id_usuario;
     	$notificaciones->txt_token_objeto = $post->txt_token;
     	$notificaciones->txt_descripcion = "te han hecho una pregunta";
     	$notificaciones->txt_titulo = "te han una hecho pregunta";

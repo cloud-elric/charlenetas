@@ -49,15 +49,17 @@ use app\models\EntCitas;
 
 			<!-- .dropdown-content AGENDA (dropdown) -->
 			<ul id='dropdown-agenda' class='dropdown-content dropdown-content-agenda'>
-				<?php foreach($mostrarAgenda as $mostrarCita){
-					 	foreach($notiCitas as $notiCita){ 
-						  if($mostrarCita->txt_token === $notiCita->txt_token_objeto && $mostrarCita->b_habilitado == 1){
+				<?php if($contador > 0){
+						 foreach($mostrarAgenda as $mostrarCita){
+					 		foreach($notiCitas as $notiCita){ 
+						  		if($mostrarCita->txt_token === $notiCita->txt_token_objeto && $mostrarCita->b_habilitado == 1){
 				?>
-							<li class="js-agenda-item" data-token="<?= $notiCita->txt_token_objeto?>"><a href="#!"><?= $mostrarCita->title?></a></li>
+									<li class="js-agenda-item" data-token="<?= $notiCita->txt_token_objeto?>"><a href="http://localhost/charlenetas/web/adminPanel/calendario/calendario"><?= $mostrarCita->title?></a></li>
 				<?php	
-						  }
-						}
-				 	  } 
+						  		}
+						    }
+				 	     }
+					  }
 				 ?>
 			</ul>
 
@@ -65,9 +67,10 @@ use app\models\EntCitas;
 			<?php 
 				$notificaciones = new EntNotificaciones();
 				//$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(15)->count('id_usuario');
-				$mostrarNotificaciones = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
+				$mostrarNotificaciones = $notificaciones->find()->where(['id_usuario'=>25/*Yii::$app->user->identity->id_usuario*/])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->all();
 				
 				$cont = 0;
+				$cadena1 = "cita";
 			?>
 			<a id="js-mostrar-notificaciones" class='dropdown-button' data-activates='dropdown-notificaciones' href="#" >
 			<!-- <a data-activates='dropdown-notificaciones' href="<?= yii::$app->homeUrl . "adminPanel/admin/notificaciones" ?>"> -->
@@ -76,7 +79,6 @@ use app\models\EntCitas;
 				<?php foreach($mostrarNotificaciones as $mostrarNotificacion){ 
 						
 						//Comparar si es cita o es otra notificacion
-						$cadena1 = "cita";
 						$comparar1 = strpos($mostrarNotificacion->txt_token_objeto, $cadena1);
 					
 						if($comparar1 === false)
