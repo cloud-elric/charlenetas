@@ -5,7 +5,7 @@
 		?>
 		<li>
 			<a href="#" class="filter-active js-filter-tipo-post" data-value="<?=$tipoPost->id_tipo_post?>">
-				<span class="color-solo-por-hoy"></span>
+				<span class="<?=$tipoPost->txt_color?>"></span>
 				<p><?=$tipoPost->txt_nombre?></p>
 			</a>
 		</li>
