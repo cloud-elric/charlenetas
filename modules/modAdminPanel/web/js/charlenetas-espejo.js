@@ -28,17 +28,20 @@ $(document).ready(function(){
 });
 
 var pages = 1;
+var totalPostMostrados = 0;
+var totalPost = 0;
+
 //Carga mas pins de los post
 function cargarMasPosts(postTotales, numeroPostMostrar) {
-	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-espejo'));
  	l.start();
 	 	
 	totalPostMostrados = (pages+1)*10;
 	totalPost = postTotales - totalPostMostrados;
 	
 	var contenedor = $('#js-contenedor-tarjetas');
-	var url = basePath+'adminPanel/admin/get-mas-posts?page=' + pages;
-
+	var url = basePath+'adminPanel/admin/get-mas-posts-espejo?page=' + pages;
+	
 	$.ajax({
 		url : url,
 		success : function(res) {
@@ -52,8 +55,9 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 
 			//filtrarPost();
 			
-			if(totalPost<=0){
-				$("#js-cargar-mas-posts").remove();
+			if(totalPost <= 0){
+				console.log(totalPost);
+				$("#js-cargar-mas-posts-espejo").remove();
 			}else{
 				$("#js-cargar-mas-posts label").text('('+totalPost+')');
 			}

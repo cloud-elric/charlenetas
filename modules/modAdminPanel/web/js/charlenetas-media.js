@@ -26,7 +26,7 @@ function cargarFormulario(){
 var pages = 1;
 //Carga mas pins de los post
 function cargarMasPosts(postTotales, numeroPostMostrar) {
-	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-media'));
 	l.start();
 	 	
 	totalPostMostrados = (pages+1)*10;
@@ -49,7 +49,7 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 			//filtrarPost();
 			
 			if(totalPost<=0){
-				$("#js-cargar-mas-posts").remove();
+				$("#js-cargar-mas-posts-media").remove();
 			}else{
 				$("#js-cargar-mas-posts label").text('('+totalPost+')');
 			}

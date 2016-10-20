@@ -23,6 +23,44 @@ function cargarFormulario(){
 	});
 }
 
+var pages = 1;
+//Carga mas pins de los post
+function cargarMasPosts(postTotales, numeroPostMostrar) {
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-hoy-pense'));
+ 	l.start();
+	 	
+	totalPostMostrados = (pages+1)*10;
+	totalPost = postTotales - totalPostMostrados;
+	
+	var contenedor = $('#js-contenedor-tarjetas');
+	var url = basePath+'adminPanel/admin/get-mas-posts-hoy-pense?page=' + pages;
+	
+	$.ajax({
+		url : url,
+		success : function(res) {
+
+			var $items = $(res);
+
+			contenedor.append($items);
+			//contenedor.masonry('appended', $items);
+
+			pages++;
+
+			//filtrarPost();
+			
+			if(totalPost <= 0){
+				console.log(totalPost);
+				$("#js-cargar-mas-posts-hoy-pense").remove();
+			}else{
+				$("#js-cargar-mas-posts label").text('('+totalPost+')');
+			}
+			
+			l.stop();
+		}
+	});
+
+}
+
 /**
  * Abrir modal para editar
  * @param token

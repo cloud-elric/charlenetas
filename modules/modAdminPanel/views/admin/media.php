@@ -52,7 +52,7 @@ if($postTotales>=ConstantesWeb::POSTS_MOSTRAR){
 ?>
 
 <div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
-	id="js-cargar-mas-posts" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	id="js-cargar-mas-posts-media" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
 	entradas...</span></div>
 
 <?php
