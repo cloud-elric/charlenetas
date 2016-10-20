@@ -1,17 +1,4 @@
 <?php
-use app\models\EntPosts;
-use app\models\EntComentariosPosts;
-use app\modules\modAdminPanel\assets\ModuleAsset;
-use yii\web\View;
-use app\models\ConstantesWeb;
-
-$this->title = 'Espejo';
-$this->icon = '<i class="ion ion-eye"></i>';
-?>
-<!-- .page-cont -->
-<div class="page-cont">
-	<div class="row" id="js-contenedor-tarjetas">
-	<?php
 	foreach ( $postsEspejo as $postEspejo ) {
 		$espejo = $postEspejo->entEspejos;
 		$espejoContestado = false;
@@ -50,36 +37,3 @@ $this->icon = '<i class="ion ion-eye"></i>';
 
 
 		<?php } ?>
-		
-	</div>
-	<!-- end /.row -->
-
-</div>
-<!-- end /.page-cont -->
-
-<?php
-$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_ESPEJO])->count('id_usuario'); 
-if($postTotales>=ConstantesWeb::POSTS_MOSTRAR){
-//echo "Total de  posts: ". $postTotales;
-?>
-
-<div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
-	id="js-cargar-mas-posts-espejo" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
-	entradas...<label>(<?=$postTotales - ConstantesWeb::POSTS_MOSTRAR?>)</label></span></div>
-
-<?php
-//$postTotales -= ConstantesWeb::POSTS_MOSTRAR;
-}
-?>
-
-<?php
-$bundle = ModuleAsset::register ( Yii::$app->view );
-$bundle->js [] = 'js/charlenetas-espejo.js'; // dynamic file added
-
-$this->registerJs ( "
-		$(document).ready(function(){
-   			 $('.modal-trigger').leanModal();
-		
-  });
-
-", View::POS_END );

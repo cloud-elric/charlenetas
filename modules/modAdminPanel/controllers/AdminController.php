@@ -1040,16 +1040,17 @@ class AdminController extends Controller {
 	/**
 	 * Obtiene los post por paginacion
 	 */
-	public function actionGetMasPosts($page = 1) {
+	public function actionGetMasPostsEspejo($page = 1) {
 	
 		// Layout que usara la vista
 		$this->layout = false;
+		$tipoPost = ConstantesWeb::POST_TYPE_ESPEJO;
 	
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPostPorPaginacion( $page );
+		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
 	
 		// Pintar vista
-		return $this->render ( 'espejo', [
+		return $this->renderAjax ( 'itemsEspejo', [
 				'postsEspejo' => $listaPost
 		] );
 	}
@@ -1061,13 +1062,49 @@ class AdminController extends Controller {
 	
 		// Layout que usara la vista
 		$this->layout = false;
+		$tipoPost = ConstantesWeb::POST_TYPE_MEDIA; 
 	
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPostPorPaginacion( $page );
+		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
 	
 		// Pintar vista
-		return $this->render ( 'media', [
+		return $this->renderAjax ( 'itemsMedia', [
 				'postsMedia' => $listaPost
+		] );
+	}
+	/**
+	 * Obtiene los post por paginacion
+	 */
+	public function actionGetMasPostsAlquimia($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+		$tipoPost = ConstantesWeb::POST_TYPE_ALQUIMIA;
+	
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
+	
+		// Pintar vista
+		return $this->renderAjax ( 'itemsAlquimia', [
+				'postsEspejo' => $listaPost
+		] );
+	}
+	
+	/**
+	 * Obtiene los post por paginacion
+	 */
+	public function actionGetMasPostsKoyPense($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+		$tipoPost = ConstantesWeb::POST_TYPE_HOY_PENSE;
+	
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
+	
+		// Pintar vista
+		return $this->renderAjax ( 'itemsHoyPense', [
+				'postsEspejo' => $listaPost
 		] );
 	}
 }
