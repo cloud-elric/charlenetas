@@ -8,7 +8,7 @@ $alquimia = $post->entAlquimias;
 ?>
 <?=$alquimia->contenedorEstrellas(Html::encode($alquimia->num_calificacion_admin))?>
 
-<span>Calificación de netanautas</span>
+<span>Calificación netanautas</span>
 <?=$alquimia->contenedorEstrellas(Html::encode($alquimia->num_calificacion_usuario))?>
 
 
