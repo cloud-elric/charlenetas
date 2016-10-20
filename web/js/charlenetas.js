@@ -340,9 +340,11 @@ function mensajeWarning(mensaje){
 			  "showMethod": "fadeIn",
 			  "hideMethod": "fadeOut"
 			}
+			
 	
 	// Display an info toast with no title
-	toastr.warning(mensaje)
+	// toastr.warning(mensaje)
+	toastr.warning('<i class="material-icons">report_problem</i>' + mensaje)
 }
 
 /**

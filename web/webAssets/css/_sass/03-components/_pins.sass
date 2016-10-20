@@ -90,7 +90,6 @@
           margin-right: 20px
 
 
-
 //	========================
 //  Alquimia
 //	========================
@@ -138,7 +137,43 @@
       line-height: 2.2em
       font-weight: 900
       font-family: $links
+  // Switch
+  .pin-content-wrapper-switch
+    align-items: center
+    // background-color: red
+    display: flex
+    justify-content: center
+    margin-bottom: 20px
+    label
+      color: $header-menu
+      font-size: .84em
+  .switch
+    // background-color: yellow
+    label
+      input[type=checkbox]:checked+.lever:after
+        background-color: $header-menu
 
+//  ========================
+// Sabias que
+//  ========================
+.pin-sabias-que
+  // Switch
+  .pin-content-wrapper-switch
+    align-items: center
+    // background-color: red
+    display: flex
+    justify-content: center
+    margin: 24px auto
+    label
+      color: $header-menu
+      font-size: .84em
+  .switch
+    // background-color: yellow
+    label
+      input[type=checkbox]:checked+.lever:after
+        background-color: $header-menu
+      input[type=checkbox]:checked+.lever
+        background-color: $header-menu
 
 //	========================
 // Media
