@@ -18,7 +18,7 @@ class ConstantesWeb {
 	const MAX_CALIFICACION_ALQUIMIA = 5;
 
 	// Número de pines a mostrar
-	const PINS_A_MOSTRAR = 5;
+	const PINS_A_MOSTRAR = 30;
 
 	// Número de comentarios a mostrar
 	const COMENTARIOS_A_MOSTRAR = 5;

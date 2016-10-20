@@ -12,8 +12,8 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-//var basePath = 'http://localhost/charlenetas/web/';
- var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+var basePath = 'http://localhost/charlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var basePathFace = 'http://notei.com.mx/';
 
 // Carga mas pins de los post
@@ -320,6 +320,29 @@ function mensajeError(mensaje){
 	
 	// Display an info toast with no title
 	toastr.error(mensaje)
+}
+
+function mensajeWarning(mensaje){
+	toastr.options = {
+			  
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": false,
+			  "positionClass": "toast-top-full-width",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+	
+	// Display an info toast with no title
+	toastr.warning(mensaje)
 }
 
 /**
@@ -969,6 +992,27 @@ $(document).ready(function() {
 
 });
 
+function validarRespuesta(element){
+	
+	var valor = element.prop("checked");
+	var token = element.data("token");
+	var url = basePath+'netas/validar-respuesta?respuesta='+valor+'&token='+token;
+	
+	$.ajax({
+		url:url,
+		dataType:'json',
+		success:function(resp){
+			if(resp.status=="noLogin"){
+				showModalLogin();
+			}else if(resp.status=="success"){
+				mensajeCuentaActivada('Respuesta correcta');
+			}else{
+				mensajeWarning('Respuesta incorrecta');
+			}
+		}
+	
+	});
+}
 
 function cargarCerrarSesion(){
 	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="'+basePath+'site/logout">Cerrar sesión</a>';
