@@ -28,6 +28,10 @@ use app\models\EntRespuestasEspejo;
 use app\models\EntCitas;
 use yii\db\mssql\PDO;
 use yii\behaviors\TimestampBehavior;
+use app\models\EntUsuariosCreditos;
+use app\models\CatTipoCreditos;
+use app\models\EntUsuariosCreditosGastados;
+use app\models\VistaTotalCreditos;
 
 class NetasController extends Controller {
 	
@@ -804,8 +808,12 @@ class NetasController extends Controller {
 	 * crear cita para el usuario en sesión
 	 */
 	public function actionCrearCita() {
+		/*$creditosUsuarios = new EntUsuariosCreditos();
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
+		$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$idUsuario])->one();*/
 	
-		return $this->render ( '//netas/include/_crearCitas' ); 
+		return $this->render ( '//netas/include/_crearCitas'/*, ['creditos'=>$creditos]*/); 
 	}
 	
 	/**
@@ -834,30 +842,48 @@ class NetasController extends Controller {
 		$title = $_POST ['title'];
 		$start = $_POST ['start'];
 		$end = $_POST ['end'];
-		$id_usuario = 26; // Yii::$app->user->identity;
+		$id_usuario = Yii::$app->user->identity->id_usuario;
 		$txt_token = Utils::generateToken ( 'cita_' );
+		Yii::$app->response->format = Response::FORMAT_JSON;
 		
-		try {
-			$bdd = new PDO ( 'mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root' );
-		} catch ( Exception $e ) {
-			exit ( 'Imposible conectar a la base de datos.' );
-		}
+		//buscar los creditos del usuario, si tienen los sufucientes para hacer la cita.
+		//$creditosUsuarios = new EntUsuariosCreditos();
+		$tipoCredito = new CatTipoCreditos();
 		
-		$notificaciones = new EntNotificaciones ();
-		$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
-		if ($notificacion)
-			echo "SUCCESS";
-		else
-			echo "ERROR";
+		$costo = $tipoCredito->find()->where(['nombre'=>"Cita"])->one();
+		//$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$id_usuario])->one();
 		
-		$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
-		$q = $bdd->prepare ( $sql );
-		$q->execute ( array (
+		$vistaCreditos = new VistaTotalCreditos();
+		$vistaCredito = $vistaCreditos->find()->where(['USUARIO'=>$id_usuario])->one();
+	
+		if($vistaCreditos->TOTAL >= $costo->costo){
+			try {
+				$bdd = new PDO ( 'mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root' );
+			} catch ( Exception $e ) {
+				exit ( 'Imposible conectar a la base de datos.' );
+			}
+		
+			$notificaciones = new EntNotificaciones ();
+			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
+			
+			$creditosGastados = new EntUsuariosCreditosGastados();
+			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $id_usuario, $costo->costo);
+		
+			$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
+			$q = $bdd->prepare ( $sql );
+			$q->execute ( array (
 				':title' => $title,
 				':start' => $start,
 				':end' => $end,
 				':id_usuario' => $id_usuario,
 				':txt_token' => $txt_token 
-		) );
+			) );
+			$success = "creditosSuficientes";
+			return ["status"=>$success];
+		}
+		else{ 
+		 	$error = "creditosInsuficientes";
+			return ["status"=>$error] ;
+		}
 	}
 }
