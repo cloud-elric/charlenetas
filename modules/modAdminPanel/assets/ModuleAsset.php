@@ -14,7 +14,7 @@ class ModuleAsset extends AssetBundle {
 			'css/asScrollable.min.css',
 			'css/charlenetas.css',
 			'css/temporal.css',
-			'fullcalendar-3.0.1/fullcalendar.css',
+			'css/fullcalendar.css',
 			'plugins/ladda-bootstrap/ladda-themeless.min.css',
 			'plugins/tags-input/jquery.tagsinput.min.css'
 	];
@@ -24,8 +24,9 @@ class ModuleAsset extends AssetBundle {
 			'js/jquery.mousewheel.min.js',
 			'js/jquery-asScrollable.min.js',
 			'js/charlenetas.js',
-			'fullcalendar-3.0.1/lib/moment.min.js',
-			'fullcalendar-3.0.1/fullcalendar.js',
+			'js/moment.min.js',
+			'js/fullcalendar.js',
+			'js/charlenetas-calendario.js',
 			
 			'plugins/ladda-bootstrap/spin.min.js',
 			'plugins/ladda-bootstrap/ladda.min.js',

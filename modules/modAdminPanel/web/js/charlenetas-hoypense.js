@@ -52,7 +52,7 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 				console.log(totalPost);
 				$("#js-cargar-mas-posts-hoy-pense").remove();
 			}else{
-				$("#js-cargar-mas-posts label").text('('+totalPost+')');
+				$("#js-cargar-mas-posts-hoy-pense label").text('('+totalPost+')');
 			}
 			
 			l.stop();

@@ -28,7 +28,8 @@ class AppAsset extends AssetBundle {
 			'css/temporal.css',
 			'css/animate.css',
 			'css/login.css',
-			'plugins/animsition/css/animsition.min.css'
+			'plugins/animsition/css/animsition.min.css',
+			'css/fullcalendar.css'
 
 	];
 	public $js = [
@@ -41,7 +42,10 @@ class AppAsset extends AssetBundle {
 			'plugins/ladda-bootstrap/dist/ladda.min.js',
 			'js/login.js',
 			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
-			'plugins/animsition/js/animsition.min.js'
+			'plugins/animsition/js/animsition.min.js',
+			'js/moment.min.js',
+			'js/fullcalendar.js',
+			'js/calendario.js'
 
 	]
 	;

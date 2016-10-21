@@ -804,27 +804,8 @@ class NetasController extends Controller {
 	 * crear cita para el usuario en sesión
 	 */
 	public function actionCrearCita() {
-		/*
-		 * $cita = new EntCitas();
-		 *
-		 * if ($cita->load ( Yii::$app->request->post () )) {
-		 * if($citaGuardada = $cita->guardarCitas($cita)){
-		 *
-		 * $notificaciones = new EntNotificaciones();
-		 *
-		 * $notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones);
-		 *
-		 * return 'success';
-		 * } else{
-		 * return 'error';
-		 * }
-		 * }
-		 */
-		return $this->renderAjax ( '//netas/include/_crearCitas' ); /*
-		                                                             * , [
-		                                                             * 'cita' => $cita
-		                                                             * ] );
-		                                                             */
+	
+		return $this->render ( '//netas/include/_crearCitas' ); 
 	}
 	
 	/**

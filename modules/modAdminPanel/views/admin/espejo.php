@@ -59,7 +59,7 @@ $this->icon = '<i class="ion ion-eye"></i>';
 
 <?php
 $postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_ESPEJO])->count('id_usuario'); 
-if($postTotales>=ConstantesWeb::POSTS_MOSTRAR){
+if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 //echo "Total de  posts: ". $postTotales;
 ?>
 

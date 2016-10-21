@@ -11,6 +11,7 @@ use app\modules\ModUsuarios\models\Utils;
  */
 class CalendarioController extends Controller
 {
+	public $layout = 'main';
     /**
      * Renders the index view for the module
      * @return string
@@ -25,7 +26,7 @@ class CalendarioController extends Controller
      */
     public function actionCalendario(){
     	
-    	return $this->renderAjax ( '_crearCitas');
+    	return $this->render ( '_crearCitas');
     }
     
     /**
