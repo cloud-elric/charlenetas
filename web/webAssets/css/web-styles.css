@@ -991,6 +991,10 @@ h6 {
   top: -1px;
 }
 
+.pin-agregar-espejo .pin-content-wrapper {
+  text-align: center;
+}
+
 .header {
   display: flex;
   align-items: center;
