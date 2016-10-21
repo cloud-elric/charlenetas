@@ -14,8 +14,7 @@ use app\modules\ModUsuarios\models\Utils;
 	</div>
 	<div class="pin-content-wrapper" lang="en">
 		<p class="pin-descripcion">
-			<?php # $post->txt_descripcion?>
-			Atando Cabos - Los Seguros - La especialista en seguros Arandi Torres nos cuenta los mitos y las realidades de contratar un seguro, las letras chiquitas y las cosas que se deben tomar en cuenta al contratar los servicios de una compañía aseguradora.
+			<?= $post->txt_descripcion?>
 		</p>
 	</div>
 </a>
