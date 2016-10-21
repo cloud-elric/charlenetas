@@ -911,7 +911,7 @@ h6 {
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100%;
+  height: 152px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -930,6 +930,16 @@ h6 {
 
 .pin-media .pin-video-icon:hover i {
   transform: scale(1.4);
+}
+
+.pin-media .pin-content-wrapper p.pin-descripcion {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: left;
+  letter-spacing: 1px;
+  max-height: 500px;
+  overflow: hidden;
 }
 
 .pin-espejo .image img {

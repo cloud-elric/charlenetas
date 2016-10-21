@@ -179,6 +179,7 @@
 // Media
 //	========================
 .pin-media
+  // background-color: red
   .pin-video-icon
     position: absolute
     top: 0%
@@ -186,7 +187,8 @@
     padding: 0
     margin: 0
     width: 100%
-    height: 100%
+    // height: 100%
+    height: 152px
     display: flex
     align-items: center
     justify-content: center
@@ -199,6 +201,17 @@
       background-color: $dark-overlay
       i
         transform: scale(1.4)
+  .pin-content-wrapper
+    // background-color: yellow
+    p.pin-descripcion
+      font-family:$body-main
+      font-size: 1rem
+      font-weight: 400
+      text-align: left
+      letter-spacing: 1px
+      max-height: 500px
+      overflow: hidden
+
 
 
 
