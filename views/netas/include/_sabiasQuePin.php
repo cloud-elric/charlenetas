@@ -17,7 +17,7 @@
 	<div class="switch pin-content-wrapper-switch">
 		<label>
 		Falso
-		<input data-token="<?=$post->txt_token?>" type="checkbox" onchange="validarRespuesta($(this));">
+		<input data-token="<?=$post->txt_token?>" type="checkbox" class="js-respuesta-check" onchange="validarRespuesta($(this));">
 		<span class="lever"></span>
 		Verdadero
 		</label>
