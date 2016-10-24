@@ -32,6 +32,7 @@ use app\models\EntUsuariosCreditos;
 use app\models\CatTipoCreditos;
 use app\models\EntUsuariosCreditosGastados;
 use app\models\VistaTotalCreditos;
+use app\models\EntUsuariosRespuestasSabiasQue;
 
 class NetasController extends Controller {
 	
@@ -607,22 +608,50 @@ class NetasController extends Controller {
 		
 		// busca el post necesario
 		$post = $this->getPostByToken ( $token );
+		$idUsuario = Yii::$app->user->identity->id_usuario;
 		
 		$sabiasQue = $post->entSabiasQue;
-
-		$boolRes = 'false';
-		if($sabiasQue->b_verdadero){
-			$boolRes = 'true';
-		}
 		
-		if ($boolRes == $respuesta) {
-			return [ 
-					'status' => 'success' 
+		$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
+		$buscarRespuesta = $respuestaSabiasQue->find()->where(['id_post'=>$sabiasQue->id_post])->andWhere(['id_usuario'=>$idUsuario])->one();  
+
+		if($buscarRespuesta){
+			return [
+					'status' => 'respondido'
 			];
+		
 		} else {
-			return [ 
-					'status' => 'error' 
-			];
+			$boolRes = 'false';
+			
+			if($sabiasQue->b_verdadero){
+				$boolRes = 'true';
+			}
+			
+			if ($boolRes == $respuesta) {
+				//$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
+					
+				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
+				$respuestaSabiasQue->id_usuario = $idUsuario;
+				$respuestaSabiasQue->b_respuesta = 1;
+				$respuestaSabiasQue->save();
+				
+				$cat = new CatTipoCreditos();
+				$contestar = $cat->find()->where(['nombre'=>"Contestar"])->one();
+				
+				$creditos = new EntUsuariosCreditos();
+				$creditos->id_usuario = $idUsuario;
+				$creditos->numero_creditos = $contestar->costo;
+				$creditos->txt_descripcion = "Contestar pregunta";
+				$creditos->save();
+					
+				return [
+						'status' => 'success'
+				];
+			} else {
+				return [
+						'status' => 'error'
+				];
+			}
 		}
 	}
 	
@@ -850,13 +879,13 @@ class NetasController extends Controller {
 		//$creditosUsuarios = new EntUsuariosCreditos();
 		$tipoCredito = new CatTipoCreditos();
 		
-		$costo = $tipoCredito->find()->where(['nombre'=>"Cita"])->one();
+		$costo = $tipoCredito->find()->where(['nombre'=>'Cita'])->one();
 		//$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$id_usuario])->one();
 		
 		$vistaCreditos = new VistaTotalCreditos();
 		$vistaCredito = $vistaCreditos->find()->where(['USUARIO'=>$id_usuario])->one();
 	
-		if($vistaCreditos->TOTAL >= $costo->costo){
+		if($vistaCredito->TOTAL >= $costo->costo){
 			try {
 				$bdd = new PDO ( 'mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root' );
 			} catch ( Exception $e ) {

@@ -61,17 +61,16 @@ $(document).ready(function(){
 						type: 'POST',
 						success: function(json) {
 							alert('OK');
+							calendar.fullCalendar('renderEvent',
+							{
+								title: title,
+								start: start,
+								end: end,
+							},
+							true
+							);
 						}
 					});
-					calendar.fullCalendar('renderEvent',
-					{
-						title: title,
-						start: start,
-						end: end,
-						allDay: allDay
-					},
-					true
-					);
 				}
 				calendar.fullCalendar('unselect');	
 			}

@@ -1005,6 +1005,8 @@ $(document).ready(function() {
 			success:function(resp){
 				if(resp.status=="noLogin"){
 					showModalLogin();
+				}else if(resp.status=="respondido"){
+					mensajeCuentaActivada('Ya contestaste esta pregunta');
 				}else if(resp.status=="success"){
 					mensajeCuentaActivada('Respuesta correcta');
 				}else{
@@ -1031,6 +1033,8 @@ function validarRespuesta(element){
 				showModalLogin();
 			}else if(resp.status=="success"){
 				mensajeCuentaActivada('Respuesta correcta');
+			}if(resp.status=="respondido"){
+				mensajeCuentaActivada('Ya contestaste esta pregunta');
 			}else{
 				mensajeWarning('Respuesta incorrecta');
 			}
