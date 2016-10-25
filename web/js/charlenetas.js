@@ -1072,6 +1072,55 @@ FB.ui({
 });
 }
 
+$('body').on(
+		'beforeSubmit',
+		'#editar-usuario',
+		function() {
+			var form = $(this);
+			// return false if form still have some validation errors
+			if (form.find('.has-error').length) {
+				return false;
+			}
+			var button = document.getElementById('js-editar-submit-usuario');
+			var l = Ladda.create(button);
+		 	l.start();
+			// submit form
+			$.ajax({
+				url : form.attr('action'),// url para peticion
+				type : 'post', // Metodo en el que se enviara la informacion
+				data : new FormData(this), // La informacion a mandar
+				dataType: 'json',  // Tipo de respuesta
+				cache : false, // sin cache
+				contentType : false,
+				processData : false,
+				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
+					l.stop();
+				},
+				statusCode: {
+				    404: function() {
+				      alert( "page not found" );
+				    }
+				  }
+
+			});
+			return false;
+		});
+
+/**
+ * Abrir modal para editar perfil de usuario
+ * @param token
+ 
+function abrirModalEditarUsuario(id_usuario){
+	$('#js-modal-user-editar .modal-content').html(loading);
+	var url = 'editar-perfil-usuario?idUsuario='+id_usuario;
+	$.ajax({
+		url:url,
+		success:function(res){
+			$('#js-modal-user-editar .modal-content').html(res);
+		}
+	});
+}*/
+
 //window.fbAsyncInit = function() {
 //	FB.init({
 //		//appId : '1029875693761281',

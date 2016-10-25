@@ -33,6 +33,7 @@ use app\models\CatTipoCreditos;
 use app\models\EntUsuariosCreditosGastados;
 use app\models\VistaTotalCreditos;
 use app\models\EntUsuariosRespuestasSabiasQue;
+use yii\web\UploadedFile;
 
 class NetasController extends Controller {
 	
@@ -572,7 +573,7 @@ class NetasController extends Controller {
 	}
 	
 	/**
-	 * Muestra la ventana de perfil del usuario
+	 * Muestra la ventana de edicion de perfil del usuario
 	 */
 	public function actionPerfilUsuario() {
 		// id del usuario logueado
@@ -581,7 +582,12 @@ class NetasController extends Controller {
 		// Buscamos el usuario
 		$usuario = EntUsuarios::findOne ( $idUsuario );
 		
-		return $this->render ( 'perfilUsuario', [ 
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($usuario->load ( Yii::$app->request->post () )) {
+			$usuario->save();
+		}
+		
+		return $this->renderAjax ( '_formUsuario', [ 
 				'usuario' => $usuario 
 		] );
 	}
@@ -883,9 +889,9 @@ class NetasController extends Controller {
 		//$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$id_usuario])->one();
 		
 		$vistaCreditos = new VistaTotalCreditos();
-		$vistaCredito = $vistaCreditos->find()->where(['USUARIO'=>$id_usuario])->one();
+		$vistaCredito = $vistaCreditos->find()->where(['id_usuario'=>$id_usuario])->one();
 	
-		if($vistaCredito->TOTAL >= $costo->costo){
+		if($vistaCredito->num_total_creditos >= $costo->costo){
 			try {
 				$bdd = new PDO ( 'mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root' );
 			} catch ( Exception $e ) {

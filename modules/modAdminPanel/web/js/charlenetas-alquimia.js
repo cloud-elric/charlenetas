@@ -13,6 +13,7 @@ var loading = '<div class="loader-center">'+
 						'</div>'+
 					'</div>'+
 				'</div>';
+
 function cargarFormulario() {
 	$.ajax({
 		url : 'crear-alquimia',
