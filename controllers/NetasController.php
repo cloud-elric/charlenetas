@@ -584,10 +584,14 @@ class NetasController extends Controller {
 		
 		// Si la informacion es enviada se carga a su respectivo modelo
 		if ($usuario->load ( Yii::$app->request->post () )) {
+			$usuario->imageProfile = UploadedFile::getInstance ( $usuario, 'imageProfile' );
+			$usuario->txt_imagen = Utils::generateToken ( "img_" ) . "." . "jpg";
 			$usuario->save();
+			
+			$post->upload( $usuario->txt_imagen );
 		}
 		
-		return $this->renderAjax ( '_formUsuario', [ 
+		return $this->render ( '_formUsuario', [ 
 				'usuario' => $usuario 
 		] );
 	}

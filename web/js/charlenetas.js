@@ -1106,21 +1106,6 @@ $('body').on(
 			return false;
 		});
 
-/**
- * Abrir modal para editar perfil de usuario
- * @param token
- 
-function abrirModalEditarUsuario(id_usuario){
-	$('#js-modal-user-editar .modal-content').html(loading);
-	var url = 'editar-perfil-usuario?idUsuario='+id_usuario;
-	$.ajax({
-		url:url,
-		success:function(res){
-			$('#js-modal-user-editar .modal-content').html(res);
-		}
-	});
-}*/
-
 //window.fbAsyncInit = function() {
 //	FB.init({
 //		//appId : '1029875693761281',
