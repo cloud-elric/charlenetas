@@ -1,11 +1,15 @@
 $(document).ready(function(){
-		
+	$('.modal-trigger').leanModal();	
 	var date = new Date();
 	var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();
 	
 	var calendar = $('#calendar').fullCalendar({
+		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+        monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+        dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+        dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
 		editable: true,
 		eventLimit: true, 
 		events: 'http://localhost/charlenetas/web/adminPanel/calendario/anadir-citas',
@@ -48,7 +52,7 @@ $(document).ready(function(){
 			calendar.fullCalendar('changeView','agendaDay')
 			
 			if(view.name == 'agendaDay'){
-				var title = prompt('Title:');
+				var title = prompt("Evento:");
 				if (title) {
 					start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
 					end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');

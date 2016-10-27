@@ -14,14 +14,20 @@
 		<a href="<?=$post->txt_url?>"></a>
 	</div>
 	
+	<form>
 	<div class="switch pin-content-wrapper-switch">
-		<label>
+		
+		<input type="radio" value="true" >Verdadero
+		<input type="radio" value="False" >Falso
+		
+		<!-- <label>
 		Falso
 		<input data-token="<?=$post->txt_token?>" type="checkbox" class="js-respuesta-check" onchange="validarRespuesta($(this));">
 		<span class="lever"></span>
 		Verdadero
-		</label>
+		</label> -->
 	</div>
+	</form>
 
 	<?php
 		#include 'elementos/pins-social.php';
