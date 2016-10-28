@@ -34,6 +34,9 @@
     padding: 20px
     color: $headers
     cursor: pointer
+    +respond-to(xs)
+      right: -16px
+      top: -6px
 
 .full-pin-content
   height: 100%
@@ -72,6 +75,8 @@
         flex-direction: row-reverse
         margin-top: 10px
       .post-publisher
+        +respond-to(xs)
+          margin-left: 20px
         h6
           font-size: .8em
           color: $p-body-txt
@@ -113,11 +118,17 @@
     border-radius: 6px
     padding: 25px
     margin: 20px 0
+    +respond-to(xs)
+      padding: 20px 10px
     h3
       font-weight: 400
       font-size: 3em
       margin-left: 20px
       margin-top: 10px
+      +respond-to(xs)
+        font-size: 2.2em
+      +respond-to(xx)
+        font-size: 1.6em
 
 
 
@@ -280,6 +291,9 @@
     .full-pin-body-content-img
 
       float: left
+      +respond-to(xs)
+        float: none
+        text-align: center
       img
         margin-right: 25px
         margin-bottom: 20px
@@ -287,10 +301,14 @@
         margin-top: 20px
         max-width: 400px
         border-radius: 6px
+        +respond-to(xs)
+          margin-right: 0
+          margin-left: 0
+          width: 100%
     .full-pin-body-content-text
       p
         text-align: justify
-        padding-right: 20px
+        padding-right: 20px 
 
 .full-pin-body-img-horizontal
   text-align: center
@@ -309,6 +327,8 @@
       a
         color: $header-menu-hover !important
         font-size: .8em
+        +respond-to(xs)
+          width: 90%!important
     .indicator
       top: 0
       background-color: $header-menu

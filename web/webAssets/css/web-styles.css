@@ -1388,6 +1388,13 @@ nav.mobile ul li a.filter-active span {
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+  #wrapper > i {
+    right: -16px;
+    top: -6px;
+  }
+}
+
 .full-pin-content {
   height: 100%;
   width: 100%;
@@ -1449,6 +1456,13 @@ nav.mobile ul li a.filter-active span {
     justify-content: flex-end;
     flex-direction: row-reverse;
     margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .full-pin-content .full-pin-header .post-publisher-data .post-publisher,
+  .full-pin-content .respuesta-header .post-publisher-data .post-publisher {
+    margin-left: 20px;
   }
 }
 
@@ -1525,6 +1539,15 @@ nav.mobile ul li a.filter-active span {
   margin: 20px 0;
 }
 
+@media screen and (max-width: 768px) {
+  .full-pin-content .full-pin-body,
+  .full-pin-content .full-pin-respuesta,
+  .full-pin-content .new-comment,
+  .full-pin-content .comment {
+    padding: 20px 10px;
+  }
+}
+
 .full-pin-content .full-pin-body h3,
 .full-pin-content .full-pin-respuesta h3,
 .full-pin-content .new-comment h3,
@@ -1533,6 +1556,24 @@ nav.mobile ul li a.filter-active span {
   font-size: 3em;
   margin-left: 20px;
   margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .full-pin-content .full-pin-body h3,
+  .full-pin-content .full-pin-respuesta h3,
+  .full-pin-content .new-comment h3,
+  .full-pin-content .comment h3 {
+    font-size: 2.2em;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .full-pin-content .full-pin-body h3,
+  .full-pin-content .full-pin-respuesta h3,
+  .full-pin-content .new-comment h3,
+  .full-pin-content .comment h3 {
+    font-size: 1.6em;
+  }
 }
 
 .full-pin-content .full-pin-social .new-comment {
@@ -1831,6 +1872,13 @@ nav.mobile ul li a.filter-active span {
   float: left;
 }
 
+@media screen and (max-width: 768px) {
+  .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-img {
+    float: none;
+    text-align: center;
+  }
+}
+
 .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-img img {
   margin-right: 25px;
   margin-bottom: 20px;
@@ -1838,6 +1886,14 @@ nav.mobile ul li a.filter-active span {
   margin-top: 20px;
   max-width: 400px;
   border-radius: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-img img {
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+  }
 }
 
 .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-text p {
@@ -1867,6 +1923,12 @@ nav.mobile ul li a.filter-active span {
 .full-pin-contexto-tabs-menu ul li a {
   color: #7ea2c7 !important;
   font-size: .8em;
+}
+
+@media screen and (max-width: 768px) {
+  .full-pin-contexto-tabs-menu ul li a {
+    width: 90% !important;
+  }
 }
 
 .full-pin-contexto-tabs-menu ul .indicator {

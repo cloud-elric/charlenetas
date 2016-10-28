@@ -414,26 +414,14 @@ body .wrap .section .anim-account .account-login h4 {
 		width: 90%;
 	}
 	.modal-login-register .section .anim-account{
+		max-width: 430px;
 		width: 56%;
 	}
 	.modal-login-register .section{
 		padding: 50px 60px;
 		width: 90%;
 	}
-	.modal-login-register .section .anim-account{
-		width: 56%;
-	}
-}
-@media only screen and (max-width: 520px){
-	.modal-login-register .section .anim-account{
-		padding: 24px 18px;
-		width: 98%;
-	}
-	.modal-login-register .section .anim-account .anim-account-tab .anim-account-tab-item{
-		font-size: .8em;
-	}
-}
-@media only screen and (max-width: 600px){
+	/* Media */
 	.modal-login-register .section .anim-account .account-singup h4,
 	body .wrap .section .anim-account .account-login h4{
 		display: none;
@@ -466,11 +454,12 @@ body .wrap .section .anim-account .account-login h4 {
 	.modal-login-register .section .anim-account{
 		position: relative;
 		max-height: 90%;
+		overflow-x: hidden;
 		overflow-y: auto;
-		max-width: 90%;
+		max-width: 430px;
 		width: 90%;
 		left: 50% !important;
-		margin-left: -45%;
+		margin-left: -215px;
 		top: 54%;
 	}
 	.modal-login-register .sing-up, body .wrap .login{
@@ -478,6 +467,26 @@ body .wrap .section .anim-account .account-login h4 {
 	}
 	.modal .modal-content{
 		padding: 0;
+	}
+}
+@media only screen and (max-width: 520px){
+	.modal-login-register .section .anim-account{
+		padding: 24px 18px;
+		width: 98%;
+	}
+	.modal-login-register .section .anim-account .anim-account-tab .anim-account-tab-item{
+		font-size: .8em;
+	}
+	.modal-login-register .section .anim-account{
+		position: relative;
+		max-height: 90%;
+		overflow-x: hidden;
+		overflow-y: auto;
+		max-width: 90%;
+		width: 90%;
+		left: 50% !important;
+		margin-left: -45%;
+		top: 54%;
 	}
 }
 
