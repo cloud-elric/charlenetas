@@ -31,7 +31,6 @@ use app\models\EntPosts;
 <?php
 $postTotales = EntPosts::find()->count("id_post"); 
 if($postTotales>=ConstantesWeb::PINS_A_MOSTRAR){
-	# echo "Total de  posts: ". $postTotales;
 ?>
 
 <div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
@@ -109,6 +108,10 @@ if($postTotales>=ConstantesWeb::PINS_A_MOSTRAR){
 					<!-- Login / SignUp -->
 					<div class="account-singup" id="js-contenedor-crear-cuenta"></div>
 					<div class="account-login" id="js-contenedor-login"></div>
+					<!-- Close -->
+					<div class="anim-account-close">
+						<span>+</span>
+					</div>
 				</div>
 			</section>
 			<!-- end / .section -->

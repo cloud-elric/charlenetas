@@ -1953,3 +1953,41 @@ nav.mobile ul li a.filter-active span {
   text-align: justify;
   padding-right: 30px;
 }
+
+.pin-sabias-que-form-checkbox {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.pin-sabias-que-form-checkbox p {
+  margin-bottom: 0;
+}
+
+.pin-sabias-que-respuesta-error,
+.pin-sabias-que-respuesta-succes {
+  font-family: "Raleway", sans-serif;
+  font-size: .84em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.pin-sabias-que-respuesta-error {
+  color: #D91E18;
+}
+
+.pin-sabias-que-respuesta-succes {
+  color: #57ED5F;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:after {
+  background-color: #345678;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:before,
+[type="radio"].with-gap:checked + label:after {
+  border-color: #345678;
+}

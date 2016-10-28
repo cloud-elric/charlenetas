@@ -31,7 +31,7 @@ use app\models\EntSabiasQue;
 	?>
 	
 				<div class="switch pin-content-wrapper-switch">
-					<form class="pin-sabias-que-form-checkbox">
+					<form>
 						<p>
 	      					<input name="group1" type="radio" id="test1" value="false" data-token="<?=$post->txt_token?>" class="js-respuesta-check" onclick="validarRespuesta($(this));"/>
 			    	  		<label for="test1">Falso</label>
@@ -45,17 +45,17 @@ use app\models\EntSabiasQue;
 	<?php 	
 			}else if($pregAdmin->b_verdadero == $validar->b_respuesta){
 	?>
-						<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>
+						<p>Respondiste correctamente</p>
 	<?php
 			}else if($pregAdmin->b_verdadero != $validar->b_respuesta){
 	?>
-							<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>
+							<p>Respondiste incorrectamente</p>
 	<?php 
 			}
 		}else if(Yii::$app->user->isGuest){
 	?>
 				<div class="switch pin-content-wrapper-switch">
-					<form class="pin-sabias-que-form-checkbox">
+					<form>
 						<p>
 	      					<input name="group1" type="radio" id="test1" data-token="<?=$post->txt_token?>" type="checkbox" class="js-respuesta-check" onclick="validarRespuesta($(this));"/>
 			      			<label for="test1">Falso</label>
