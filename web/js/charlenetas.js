@@ -1079,3 +1079,7 @@ FB.ui({
 //	});
 //
 //};
+
+$('.anim-account-close').on('click', function() {
+	$('.lean-overlay').trigger('click');
+});

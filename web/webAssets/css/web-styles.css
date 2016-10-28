@@ -644,35 +644,30 @@ body {
 
 @media screen and (max-width: 1350px) {
   .pins-grid-container {
-    background-color: red;
     max-width: 1068px;
   }
 }
 
 @media screen and (max-width: 1080px) {
   .pins-grid-container {
-    background-color: yellow;
     max-width: 800px;
   }
 }
 
 @media screen and (max-width: 820px) {
   .pins-grid-container {
-    background-color: purple;
     max-width: 538px;
   }
 }
 
 @media screen and (max-width: 560px) {
   .pins-grid-container {
-    background-color: blue;
     max-width: 270px;
   }
 }
 
 @media screen and (max-width: 290px) {
   .pins-grid-container {
-    background-color: green;
     max-width: auto;
     width: 96%;
   }

@@ -266,6 +266,38 @@ button:focus{
 	color: #345678;
 }
 
+/* Close */
+.modal-login-register .section .anim-account .anim-account-close{
+	background-color: #EEE;
+	align-items: center;
+	border-radius: 50%;
+	cursor: pointer;
+	display: none;
+	height: 30px;
+	justify-content: center;
+	position: absolute;
+	right: 2px;
+	top: 3px;
+	width: 30px;
+}
+.modal-login-register .section .anim-account .anim-account-close:hover,
+.modal-login-register .section .anim-account .anim-account-close:focus{
+	background-color: #DDD;
+	outline: none;
+}
+	.modal-login-register .section .anim-account .anim-account-close span{
+		color: #FFF;
+		font-size: 1.8em;
+		-ms-transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+@media screen and (max-width: 768px){
+	.modal-login-register .section .anim-account .anim-account-close{
+		display: flex;
+	}
+}
+
 
 .modal-login-register .section .anim-account .account-singup, body .wrap .section .anim-account .account-login {
 	display: block;
@@ -439,6 +471,7 @@ body .wrap .section .anim-account .account-login h4 {
 		width: 90%;
 		left: 50% !important;
 		margin-left: -45%;
+		top: 54%;
 	}
 	.modal-login-register .sing-up, body .wrap .login{
 		display: none;

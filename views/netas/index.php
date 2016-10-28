@@ -108,6 +108,10 @@ if($postTotales>=ConstantesWeb::PINS_A_MOSTRAR){
 					<!-- Login / SignUp -->
 					<div class="account-singup" id="js-contenedor-crear-cuenta"></div>
 					<div class="account-login" id="js-contenedor-login"></div>
+					<!-- Close -->
+					<div class="anim-account-close">
+						<span>+</span>
+					</div>
 				</div>
 			</section>
 			<!-- end / .section -->
