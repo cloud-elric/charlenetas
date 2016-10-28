@@ -21,7 +21,7 @@ class RulesContexto {
 				],
 				[
 						[
-								'txt_descripcion', 'fch_publicacion'
+								'txt_titulo','txt_descripcion', 'fch_publicacion'
 						],
 						'required',
 						'message'=>'Requerido',

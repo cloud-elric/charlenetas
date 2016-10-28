@@ -23,6 +23,43 @@ function cargarFormulario(){
 	});
 }
 
+var pages = 1;
+//Carga mas pins de los post
+function cargarMasPosts(postTotales, numeroPostMostrar) {
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-media'));
+	l.start();
+	 	
+	totalPostMostrados = (pages+1)*10;
+	totalPost = postTotales - totalPostMostrados;
+	
+	var contenedor = $('#js-contenedor-tarjetas');
+	var url = basePath+'adminPanel/admin/get-mas-posts-media?page=' + pages;
+
+	$.ajax({
+		url : url,
+		success : function(res) {
+
+			var $items = $(res);
+
+			contenedor.append($items);
+			//contenedor.masonry('appended', $items);
+
+			pages++;
+
+			//filtrarPost();
+			
+			if(totalPost<=0){
+				$("#js-cargar-mas-posts-media").remove();
+			}else{
+				$("#js-cargar-mas-posts-media label").text('('+totalPost+')');
+			}
+			
+			l.stop();
+		}
+	});
+
+}
+
 /**
  * Abrir modal para editar
  * @param token
@@ -70,6 +107,9 @@ $('body').on('beforeSubmit', '#form-media', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	var button = document.getElementById('js-crear-submit');
+	var l = Ladda.create(button);
+ 	l.start();
 	// submit form
 	$.ajax({
 		url : form.attr('action'),
@@ -83,6 +123,7 @@ $('body').on('beforeSubmit', '#form-media', function() {
 					&& response.status == 'success') {
 				// Cierra el modal
 				$('#js-modal-post').closeModal();
+				l.stop();
 				// Se agrega una nueva tarjeta a la vista
 				agregarTarjetaNueva(response);
 				$('.modal-trigger').leanModal();
@@ -94,50 +135,55 @@ $('body').on('beforeSubmit', '#form-media', function() {
 				$('#form-media').yiiActiveForm('updateMessages',
 						response, true);
 			}
+		},
+		error: function(){
+			l.stop();
 		}
 	});
 	return false;
 });
 
-$('body').on(
-		'beforeSubmit',
-		'#editar-media',
-		function() {
-			var form = $(this);
-			// return false if form still have some validation errors
-			if (form.find('.has-error').length) {
-				return false;
+$('body').on('beforeSubmit', '#editar-media', function() {
+	var form = $(this);
+	// return false if form still have some validation errors
+	if (form.find('.has-error').length) {
+		return false;
+	}
+	var button = document.getElementById('js-editar-submit');
+	var l = Ladda.create(button);
+ 	l.start();
+	// submit form
+	$.ajax({
+		url : form.attr('action'),// url para peticion
+		type : 'post', // Metodo en el que se enviara la informacion
+		data : new FormData(this), // La informacion a mandar
+		dataType: 'json',  // Tipo de respuesta
+		cache : false, // sin cache
+		contentType : false,
+		processData : false,
+		success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
+			// Si la respuesta contiene la propiedad status y es success
+			if (response.hasOwnProperty('status') && response.status == 'success') {
+				// Cierra el modal
+				$('#js-modal-post-editar').closeModal();
+						
+				$('#js-modal-post-editar  .modal-content').html(loading);
+						
+				$('#card_'+response.tk+' img').attr('src',response.t);
+			} else {
+					// Muestra los errores
+					$('#editar-media').yiiActiveForm('updateMessages', response, true);
 			}
-			// submit form
-			$.ajax({
-				url : form.attr('action'),// url para peticion
-				type : 'post', // Metodo en el que se enviara la informacion
-				data : new FormData(this), // La informacion a mandar
-				dataType: 'json',  // Tipo de respuesta
-				cache : false, // sin cache
-				contentType : false,
-				processData : false,
-				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
-					// Si la respuesta contiene la propiedad status y es success
-					if (response.hasOwnProperty('status')
-							&& response.status == 'success') {
-						// Cierra el modal
-						$('#js-modal-post-editar').closeModal();
-						
-						$('#js-modal-post-editar  .modal-content').html(loading);
-						
-						$('#card_'+response.tk+' img').attr('src',response.t);
-					} else {
-						// Muestra los errores
-						$('#editar-media').yiiActiveForm('updateMessages',
-								response, true);
-					}
-				},
-				statusCode: {
-				    404: function() {
-				      alert( "page not found" );
-				    }
-				  }
+			l.stop();
+		},
+		error: function(){
+			l.stop();
+		},
+		statusCode: {
+		    404: function() {
+		    	alert( "page not found" );
+		    }
+		}
 
 			});
 			return false;
@@ -156,3 +202,4 @@ function cargarImagenes(elemento){
 		}
 	});
 }
+

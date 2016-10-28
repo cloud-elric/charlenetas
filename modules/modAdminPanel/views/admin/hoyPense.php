@@ -3,6 +3,7 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+use app\models\ConstantesWeb;
 
 $this->title = 'Hoy pense';
 $this->icon = '<i class="ion ion-android-bulb"></i>';
@@ -53,6 +54,21 @@ $this->icon = '<i class="ion ion-android-bulb"></i>';
 
 </div>
 <!-- end /.page-cont -->
+
+<?php
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_HOY_PENSE])->count('id_usuario'); 
+if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
+//echo "Total de  posts: ". $postTotales;
+?>
+
+<div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
+	id="js-cargar-mas-posts-hoy-pense" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	entradas...<label>(<?=$postTotales - ConstantesWeb::POSTS_MOSTRAR?>)</label></span></div>
+
+<?php
+//$postTotales -= ConstantesWeb::POSTS_MOSTRAR;
+}
+?>
 
 <?php
 	// foreach ($postsHoyPense as $postHoyPense){

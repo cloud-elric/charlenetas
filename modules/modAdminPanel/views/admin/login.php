@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\modules\modAdminPanel\assets\ModuleAsset;
+use yii\web\View;
 
 $this->title = 'Ingresar';
 $this->params ['breadcrumbs'] [] = $this->title;
@@ -52,7 +53,7 @@ $bundle->js [] = 'js/login.js'; // dynamic file added
 									 <?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
 									<?= $form->field($model, 'password')->passwordInput()?>
 					<div class="col s12 right-align">
-									<?= Html::submitButton('Login <i class="material-icons right">send</i>',['class'=>'btn waves-effect waves-light center', 'name' => 'login-button', 'data-style'=>'"zoom-in'])?>
+									<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-submit-login', 'class'=>'btn waves-effect waves-light center ladda-button', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
 								</div>
 				</div>
 
@@ -61,16 +62,36 @@ $bundle->js [] = 'js/login.js'; // dynamic file added
 						<?php ActiveForm::end(); ?>
 						<!-- <p class="datos"><a href="" class="crear-cuenta">Crear cuenta</a></p> -->
 			<p class="datos">
-				<a href="" class="olvide-pass">Olvide contraseña</a>
+<!-- 				<a href="" class="olvide-pass">Olvide contraseña</a> -->
 			</p>
 		</div>
 		<!-- <div class="login-foter"><img src="assets/imgs/power-by-2geeks.png"></div> -->
 	</div>
 </div>
-</div>
 
 
+<?php 
+$this->registerJs ( "
+ $('body').on(
+		'beforeSubmit',
+		'#login-form',
+		function() {
+			var button = document.getElementById('js-submit-login');
+			var l  = Ladda.create(button);
+			l.start();
+			var form = $(this);
+			// return false if form still have some validation errors
+			if (form.find('.has-error').length) {
+				return false;
+			}
+			
+			
+		});
 
+  ", View::POS_END );
+
+
+?>
 
 
 

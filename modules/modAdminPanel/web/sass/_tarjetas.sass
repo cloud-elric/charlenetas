@@ -30,7 +30,7 @@
 			color: $header-menu
 			font-family: $f-secundary
 			font-size: 1.4em
-			font-weight: 900
+			font-weight: 700
 			margin-bottom: 10px
 			overflow: hidden
 			text-overflow: ellipsis
@@ -95,12 +95,21 @@
 			[type="checkbox"]+label
 				height: 15px
 				padding-left: 20px
+		.card-contexto-options-extra
+			i
+				background-color: $header-menu
 	// Tarjetas con color en especifico
 	// En contexto
 	&.card-contexto
+		.card-contexto-status
+			align-items: center
+			justify-content: space-between
 		.card-contexto-options
 			i
 				background-color: $color-contexto
+			.card-contexto-options-extra
+				i
+					background-color: $header-menu
 	// A verdadazos
 	&.card-verdadazos
 		.card-contexto-options
@@ -133,15 +142,21 @@
 				background-color: $color-hoy-pense
 	// Media
 	&.card-media
+		background-position: 50%
+		background-repeat: no-repeat 
+		background-size: cover
+		height: 220px
 		.card-contexto-options
 			i
 				background-color: $color-media
 	// User
 	&.card-user
 		padding: 0
+		p
+			margin: 0
 		// Content
 		.card-user-cont
-			padding: 30px 10px 4px
+			padding: 20px 10px 4px
 			.card-user-avatar
 				position: relative
 				img

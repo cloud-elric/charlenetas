@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
+use yii\helpers\Url;
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
@@ -50,7 +51,7 @@ $usuario = $post->idUsuario;
 
 			<div class="full-pin-body-content">
 				<div class="full-pin-body-content-img">
-					<img src="webAssets/images/<?=$post->txt_imagen?>"
+					<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=$post->txt_imagen?>"
 						alt="<?=$post->txt_titulo?>" />
 				</div>
 				<div class="full-pin-body-content-text">
@@ -72,7 +73,7 @@ $usuario = $post->idUsuario;
 
 			<div class="full-pin-body-content">
 				<div class="full-pin-body-content-img">
-					<img src="webAssets/images/<?=$hijo->txt_imagen?>"
+					<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=$hijo->txt_imagen?>"
 						alt="<?=$hijo->txt_titulo?>" />
 				</div>
 				<div class="full-pin-body-content-text">
@@ -93,9 +94,6 @@ $usuario = $post->idUsuario;
 			<div class="feedback did-usr-interact" onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
-			<div class="feedback">
-				<i class="icon icon-twitter"></i>
-			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
 			<?php
@@ -112,9 +110,9 @@ $usuario = $post->idUsuario;
 		include 'elementos/comentarios.php';
 		?>
 	</div>
-	<div id="js-cargar-comentarios"
-		onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">Cargar
-		más comentarios</div>
+	<?php
+		include 'elementos/botonCargarComentarios.php';
+		?>
 </section>
 
 <script>

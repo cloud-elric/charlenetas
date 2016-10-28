@@ -42,6 +42,6 @@ foreach ( $feedbacks as $feedback ) {
 	id='js-feedback-<?=$comentario->txt_token?>-<?=$feedback->txt_token?>'
 	>
 	<i class="icon <?=$icon?>"></i> <span
-		id='js-contador-<?=$comentario->txt_token?>-<?=$feedback->txt_token?>'><?=$numFeed?></span>
+		id='js-contador-<?=$comentario->txt_token?>-<?=$feedback->txt_token?>'><?=$numFeed?$numFeed:'0'?></span>
 </div>
 <?php }?>

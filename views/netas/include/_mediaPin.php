@@ -12,4 +12,9 @@ use app\modules\ModUsuarios\models\Utils;
 	<div class="pin-video-icon">
 		<i class="large material-icons">play_circle_outline</i>
 	</div>
+	<div class="pin-content-wrapper" lang="en">
+		<p class="pin-descripcion">
+			<?= $post->txt_descripcion?>
+		</p>
+	</div>
 </a>

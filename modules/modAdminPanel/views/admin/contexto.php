@@ -3,34 +3,96 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
-$this->title = '<i class="ion ion-android-share-alt"></i> Contextos';
+$this->title = 'Contexto';
+$this->icon = '<i class="ion ion-network"></i>';
 ?>
 <!-- .page-cont -->
 <div class="page-cont">
+	
+	<!-- .contexto-search -->
+	<div class="contexto-search">
+	<?php
+$form = ActiveForm::begin ( [ 
+		'options' => [ 
+				'enctype' => 'multipart/form-data',
+				'class' => 'contexto-search-form'
+		],
+ 		'method'=>'get',
+		'layout' => 'horizontal',
+		'id' => 'form-search',
+		'fieldConfig' => [ 
+				'template' => "{input}\n{label}\n{error}",
+				'horizontalCssClasses' => [ 
+						'error' => 'mdl-textfield__error' 
+				],
+				'labelOptions' => [ 
+						'class' => 'mdl-textfield__label ' 
+				],
+				'options' => [ 
+						'class' => 'input-field col s6 m3' 
+				] 
+		],
+		'errorCssClass' => 'invalid' 
+] );
+?>
 
-	<div class="row">
+<?=Html::input('text', 'searchTags','',['placeholder'=>'Buscar por tag'])?>
+
+<?= Html::submitButton('Buscar tag<i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
+
+<?php ActiveForm::end();
+
+include 'templates/formato-fecha.php';
+
+?>
+	</div>
+	<!-- end - .contexto-search -->
+
+	<div class="row" id="js-contenedor-tarjetas">
 		
 		<?php foreach ( $postsContexto as $postContexto ) {?>
 			<div class="col s12 m6 l4">
-				<div class="card card-contexto">
+				<div class="card card-contexto" data-token="<?=$postContexto->txt_token?>">
 					
-					<div class="card-contexto-cont">
-						<p class="card-desc"><?= $postContexto->txt_descripcion?></p>
+					<div class="card-contexto-cont" id="card_<?=$postContexto->txt_token?>">
+						<h3 class="card-title"><?= $postContexto->txt_descripcion?></h3>
 					</div>
 
 					<div class="card-contexto-status">
 						<p class="card-contexto-status-comen">
 							<i class="ion icon icon-comment"></i> <span><?= EntComentariosPosts::find ()->where ( [ 'id_post' => $postContexto->id_tipo_post ] )->andWhere ( [ 'is','id_comentario_padre',null ] )->count ( "id_post" )?></span>
 						</p>
+						<?php 
+						if($postContexto->entContextos->idContextoPadre){
+						?>
+							<button  id="btn-aso-<?=$postContexto->txt_token?>" class="btn btn-sin-asociar" onclick="deseleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Desasociar</button>
+						<?php 
+							}else{
+								?>
+							<button id="btn-aso-<?=$postContexto->txt_token?>" class="btn btn-sin-asociar" onclick="seleccionarAsociar($(this));" data-token=<?=$postContexto->txt_token?>>Asociar</button>	
+						<?php 		
+							}
+						?>
 					</div>
 
 					<div class="card-contexto-options">
-						<div class="card-contexto-options-check">
-							<input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
-							<label for="filled-in-box1"></label>
-						</div>
+						<?php 
+						if($postContexto->entContextos->idContextoPadre){
+							$contextoPadre = $postContexto->entContextos->idContextoPadre->idPost;
+						?>
+						
+						<a class="card-contexto-options-extra" href="">
+						<i class="ion ion-network tooltipped" data-position="top" data-delay="50" data-tooltip="<?=$contextoPadre->txt_titulo?>"></i></a>
+						<?php
+						}
+						?>
+						
+						<a id="button_<?=$postContexto->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarContexto('<?=$postContexto->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
+					</a>
 					</div>
 
 				</div>
@@ -39,48 +101,29 @@ $this->title = '<i class="ion ion-android-share-alt"></i> Contextos';
 		<?php }?>
 
 	</div>
-
-	<!-- <div class="col s12">
-		<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
-	</div> -->
-
+	
+	
+	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-check">
-			<i class="ion ion-ios-trash-outline"></i>
-		</a> <a
-			class="btn-floating btn-large waves-effect waves-light btn-agregar">
+		<!-- Modal Trigger -->
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post" onclick='document.getElementById("form-contexto").reset();'>
 			<i class="ion ion-wand"></i>
 		</a>
 	</div>
+	<!-- end /.fixed-action-btn -->
 
 
 </div>
 <!-- end /.page-cont -->
 <?php
-// foreach ( $postsContexto as $postContexto ) {
-// 	echo $postContexto->txt_descripcion . "   ";
-// 	echo $postContexto->txt_imagen . "   ";
-// 	// echo $postContexto->entContextos->id_contexto_padre . " ";
-// 	echo $postContexto->txt_url . "   ";
-// 	echo $postContexto->fch_creacion . "   ";
-// 	echo $postContexto->fch_publicacion . "   ";
-	
-// 	echo "</br>";
-// 	echo "</br>";
-// }
-// echo "total= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postContexto->id_tipo_post 
-// ] )->count ( "id_tipo_post" . "   " );
-// echo "total likes= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postContexto->id_tipo_post 
-// ] )->sum ( "num_likes" );
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-contexto.js'; // dynamic file added
 // $bundle->css [] = 'css/lenetas.css';
 
-include 'templates/modalPost.php';
-
 $this->registerJs ( "
 		cargarFormulario();
+		$(document).ready(function(){
+    	$('.modal-trigger').leanModal();
+  });
     ", View::POS_END );

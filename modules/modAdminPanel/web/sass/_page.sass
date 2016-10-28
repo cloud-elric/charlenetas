@@ -58,6 +58,7 @@
 		// Calificación
 		.input-calificacion
 			height: 70px
+			height: 100px
 			label
 				display: block
 				position: relative
@@ -77,11 +78,13 @@
 				font-size: 1.3em
 // Modal fixed footer
 .modal.modal-fixed-footer
-	// height: 60%
-	max-height: 90%
-	top: 6%
+	height: auto
+	max-height: 80%
+	top: 10%
 	.modal-content
 		height: 100%
+		position: relative
+		+transition(height 0.3s ease-in)
 
 // Modal small height
 .modal.modal-small-height

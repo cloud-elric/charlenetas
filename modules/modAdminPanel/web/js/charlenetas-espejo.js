@@ -27,6 +27,47 @@ $(document).ready(function(){
 	
 });
 
+var pages = 1;
+var totalPostMostrados = 0;
+var totalPost = 0;
+
+//Carga mas pins de los post
+function cargarMasPosts(postTotales, numeroPostMostrar) {
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-espejo'));
+ 	l.start();
+	 	
+	totalPostMostrados = (pages+1)*10;
+	totalPost = postTotales - totalPostMostrados;
+	
+	var contenedor = $('#js-contenedor-tarjetas');
+	var url = basePath+'adminPanel/admin/get-mas-posts-espejo?page=' + pages;
+	
+	$.ajax({
+		url : url,
+		success : function(res) {
+
+			var $items = $(res);
+
+			contenedor.append($items);
+			//contenedor.masonry('appended', $items);
+
+			pages++;
+
+			//filtrarPost();
+			
+			if(totalPost <= 0){
+				console.log(totalPost);
+				$("#js-cargar-mas-posts-espejo").remove();
+			}else{
+				$("#js-cargar-mas-posts-espejo label").text('('+totalPost+')');
+			}
+			
+			l.stop();
+		}
+	});
+
+}
+
 /**
  * Abrir modal para editar
  * @param token
@@ -91,3 +132,17 @@ $('body').on(
 			});
 			return false;
 		});
+
+$(document).ready(function(){
+	$('.card-espejo').on('click', function(e) {
+		console.log(e);
+		
+		if (e.target.localName == 'i') {
+			return;
+		}
+		var token = $(this).data('token');
+		showPostFull(token)
+	});
+	
+	
+});

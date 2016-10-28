@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
 use yii\helpers\Url;
+
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
@@ -32,12 +33,12 @@ $usuario = $post->idUsuario;
 		alt="Verdadazos - Netas bien duras" />
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
-			<div class="feedback did-usr-interact" onclick='compartirFacebook("<?=$post->txt_token?>")'>
+			<div class="feedback " onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
-			<div class="feedback">
-				<i class="icon icon-twitter"></i>
-			</div>
+<!-- 			<div class="feedback"> -->
+<!-- 				<i class="icon icon-twitter"></i> -->
+<!-- 			</div> -->
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
 			<?php
@@ -54,7 +55,7 @@ $usuario = $post->idUsuario;
 		include 'elementos/comentarios.php';
 		?>
 	</div>
-	<div id="js-cargar-comentarios"
-		onclick="cargarComentarios('<?=Html::encode($post->txt_token)?>', false)">Cargar
-		más comentarios</div>
+	<?php
+		include 'elementos/botonCargarComentarios.php';
+		?>
 </section>

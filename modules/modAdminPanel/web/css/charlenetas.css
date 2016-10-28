@@ -23,6 +23,7 @@
 	3.0 - Login
 	4.0 - Dashboard
 	5.0 - Tarjetas
+	6.0 - Contexto
 	--------------------------------------------------------
 	*/
 /*!
@@ -311,6 +312,183 @@ hr {
   line-height: 2.3rem;
 }
 
+/*  Input (Global)
+	@mixin =============================================== */
+input:not([type]),
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=url],
+input[type=time],
+input[type=date],
+input[type=datetime],
+input[type=datetime-local],
+input[type=tel],
+input[type=number],
+input[type=search],
+textarea.materialize-textarea {
+  border-bottom: 1px solid #9e9e9e;
+}
+
+.input-field input[type=email]:focus + label,
+.input-field input[type=tel]:focus + label,
+.input-field input[type=text]:focus + label,
+.input-field textarea:focus + label {
+  color: #345678;
+}
+
+.input-field input[type=email]:focus,
+.input-field input[type=tel]:focus,
+.input-field input[type=text]:focus,
+.input-field textarea:focus {
+  border-bottom: 1px solid #345678;
+  box-shadow: 0 1px 0 0 #345678;
+}
+
+.input-field input[type=email].valid,
+.input-field input[type=tel].valid,
+.input-field input[type=text].valid,
+.input-field textarea.valid {
+  border-bottom: 1px solid #345678;
+  box-shadow: 0 1px 0 0 #345678;
+  color: #345678;
+}
+
+.input-field input[type=email].invalid,
+.input-field input[type=tel].invalid,
+.input-field input[type=text].invalid,
+.input-field textarea.invalid {
+  border-bottom: 1px solid #f44336;
+  box-shadow: 0 1px 0 0 #f44336;
+  color: #f44336;
+}
+
+.input-field .prefix.active,
+.input-field label.active {
+  color: #345678;
+}
+
+.input-field textarea:focus + label.active {
+  color: #345678;
+}
+
+.input-field textarea:focus {
+  border-bottom: 1px solid #345678 !important;
+  box-shadow: 0 1px 0 0 #345678 !important;
+}
+
+.input-field .f_error {
+  color: #f44336;
+  font-weight: 600;
+  margin-left: 46px;
+}
+
+input:not([type]).invalid + label:after,
+input:not([type]):focus.invalid + label:after,
+input[type=text].invalid + label:after,
+input[type=text]:focus.invalid + label:after,
+input[type=password].invalid + label:after,
+input[type=password]:focus.invalid + label:after,
+input[type=email].invalid + label:after,
+input[type=email]:focus.invalid + label:after,
+input[type=url].invalid + label:after,
+input[type=url]:focus.invalid + label:after,
+input[type=time].invalid + label:after,
+input[type=time]:focus.invalid + label:after,
+input[type=date].invalid + label:after,
+input[type=date]:focus.invalid + label:after,
+input[type=datetime].invalid + label:after,
+input[type=datetime]:focus.invalid + label:after,
+input[type=datetime-local].invalid + label:after,
+input[type=datetime-local]:focus.invalid + label:after,
+input[type=tel].invalid + label:after,
+input[type=tel]:focus.invalid + label:after,
+input[type=number].invalid + label:after,
+input[type=number]:focus.invalid + label:after,
+input[type=search].invalid + label:after,
+input[type=search]:focus.invalid + label:after,
+textarea.materialize-textarea.invalid + label:after,
+textarea.materialize-textarea:focus.invalid + label:after {
+  font-weight: 400;
+}
+
+/*  Error
+	@mixin =============================================== */
+form .help-block-error {
+  color: #f44336;
+}
+
+/*  Datepicker
+	@mixin =============================================== */
+.picker__date-display {
+  background-color: #345678;
+}
+
+.picker__weekday-display {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.picker__close,
+.picker__today {
+  color: #345678;
+}
+
+button.picker__today:focus,
+button.picker__clear:focus,
+button.picker__close:focus {
+  background-color: #e9eff5;
+}
+
+.picker__nav--prev:hover,
+.picker__nav--next:hover {
+  background-color: #e9eff5;
+}
+
+.picker__day.picker__day--today {
+  color: #345678;
+}
+
+.picker__day--selected,
+.picker__day--selected:hover,
+.picker--focused .picker__day--selected {
+  background-color: #345678;
+}
+
+/*  Checkbox - Radio
+	@mixin =============================================== */
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:before,
+[type="radio"].with-gap:checked + label:after {
+  border: 2px solid #345678;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:after {
+  background-color: #345678;
+}
+
+.field-entposts-imagen {
+  position: relative;
+}
+
+.field-entposts-imagen .file-bg {
+  background-color: #EEE;
+  background-image: url(../imgs/bg.jpg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  bottom: -20px;
+  left: 10px;
+  position: absolute;
+  right: 10px;
+  top: -20px;
+  z-index: 9999;
+}
+
 /*!
 	-----------------------------------------------------------------------------
 
@@ -395,6 +573,15 @@ hr {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+.header .header-cont .toolbar > a span.toolbar-span {
+  display: block;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
 .header .header-cont .toolbar > a .badge {
   display: inline-block;
   width: 20px;
@@ -427,15 +614,13 @@ hr {
   background-color: #ff9800;
 }
 
-.header .header-cont .toolbar > a.dropdown-button i {
+.header .header-cont .toolbar > a.dropdown-button i.dropdown-user-ion {
   margin-left: 8px;
 }
 
 .header .header-cont .toolbar .dropdown-content {
   position: absolute;
   top: 66px !important;
-  width: 94px;
-  width: 140px !important;
 }
 
 .header .header-cont .toolbar .dropdown-content li a {
@@ -446,6 +631,18 @@ hr {
 .header .header-cont .toolbar .dropdown-content li a:hover {
   background-color: rgba(33, 33, 33, 0.02);
   color: #303030;
+}
+
+.header .header-cont .toolbar .dropdown-content.dropdown-content-user {
+  width: 140px !important;
+}
+
+.header .header-cont .toolbar .dropdown-content.dropdown-content-notificaciones {
+  width: 240px !important;
+}
+
+.header .header-cont .toolbar .dropdown-content.dropdown-content-agenda {
+  width: 260px !important;
 }
 
 /*  Nav
@@ -634,6 +831,7 @@ hr {
 
 .modal .modal-content .input-calificacion {
   height: 70px;
+  height: 100px;
 }
 
 .modal .modal-content .input-calificacion label {
@@ -661,12 +859,18 @@ hr {
 }
 
 .modal.modal-fixed-footer {
-  max-height: 90%;
-  top: 6%;
+  height: auto;
+  max-height: 80%;
+  top: 10%;
 }
 
 .modal.modal-fixed-footer .modal-content {
   height: 100%;
+  position: relative;
+  -ms-transition: height 0.3s ease-in;
+  -moz-transition: height 0.3s ease-in;
+  -webkit-transition: height 0.3s ease-in;
+  transition: height 0.3s ease-in;
 }
 
 .modal.modal-small-height {
@@ -741,7 +945,12 @@ hr {
 
 .footer .footer-cont p {
   color: #345678;
+  font-size: .9em;
   font-weight: 400;
+}
+
+.footer .footer-cont p a {
+  font-size: .9em;
 }
 
 .footer.footer-agenda {
@@ -899,6 +1108,7 @@ hr {
 
 .dashboard .dashboard-card .dashboard-card-cont i {
   color: #e9e9e9;
+  color: #f3f3f3;
   font-size: 3.1em;
 }
 
@@ -908,6 +1118,7 @@ hr {
 
 .dashboard .dashboard-card .dashboard-card-foot p {
   color: white;
+  margin: 0;
 }
 
 .dashboard .dashboard-card .dashboard-card-foot p i,
@@ -990,6 +1201,14 @@ hr {
   background-color: #0F2687;
 }
 
+.dashboard .dashboard-card.card-notificaciones .dashboard-card-cont h3 {
+  color: #0F2687;
+}
+
+.dashboard .dashboard-card.card-notificaciones .dashboard-card-foot {
+  background-color: #ff9800;
+}
+
 /*!
 	-----------------------------------------------------------------------------
 
@@ -1028,7 +1247,7 @@ hr {
   color: #345678;
   font-family: "Raleway", sans-serif;
   font-size: 1.4em;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1123,8 +1342,21 @@ hr {
   padding-left: 20px;
 }
 
+.card .card-contexto-options .card-contexto-options-extra i {
+  background-color: #345678;
+}
+
+.card.card-contexto .card-contexto-status {
+  align-items: center;
+  justify-content: space-between;
+}
+
 .card.card-contexto .card-contexto-options i {
   background-color: #DFF040;
+}
+
+.card.card-contexto .card-contexto-options .card-contexto-options-extra i {
+  background-color: #345678;
 }
 
 .card.card-verdadazos .card-contexto-options i {
@@ -1151,6 +1383,13 @@ hr {
   background-color: #57ED5F;
 }
 
+.card.card-media {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 220px;
+}
+
 .card.card-media .card-contexto-options i {
   background-color: #0F2687;
 }
@@ -1159,8 +1398,12 @@ hr {
   padding: 0;
 }
 
+.card.card-user p {
+  margin: 0;
+}
+
 .card.card-user .card-user-cont {
-  padding: 30px 10px 4px;
+  padding: 20px 10px 4px;
 }
 
 .card.card-user .card-user-cont .card-user-avatar {
@@ -1344,4 +1587,18 @@ hr {
 
 .fixed-action-btn a i.material-icons {
   font-size: 2em;
+}
+
+/*!
+	-----------------------------------------------------------------------------
+
+	6.0 - Contexto
+			# extra
+
+	-----------------------------------------------------------------------------
+	*/
+/*  Contexto
+	@mixin =============================================== */
+.contexto-search {
+  margin-bottom: 40px;
 }

@@ -1,5 +1,11 @@
 var pages = 1;
 var pagesComentarios = 0;
+var numComentarios = 0;
+var comentariosShow = 0;
+var comentariosRestantes = 0;
+var totalPostMostrados = 0;
+var totalPost = 0;
+
 var masonryOptions = {
 	itemSelector : '.pin',
 	columnWidth : 250,
@@ -8,11 +14,16 @@ var masonryOptions = {
 };
 var basePath = 'http://localhost/charlenetas/web/';
 //var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
-var basePathFace = 'http://notei.com.mx/';
+
 
 // Carga mas pins de los post
-function cargarMasPosts() {
-
+function cargarMasPosts(postTotales, numeroPostMostrar) {
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
+ 	l.start();
+	
+	totalPostMostrados = (pages+1)*5;
+	totalPost = postTotales - totalPostMostrados;
+	
 	var contenedor = $('#js-contenedor-posts-tarjetas');
 	var url = basePath+'netas/get-mas-posts?page=' + pages;
 
@@ -28,6 +39,14 @@ function cargarMasPosts() {
 			pages++;
 
 			filtrarPost();
+			
+			if(totalPost<=0){
+				$("#js-cargar-mas-posts").remove();
+			}else{
+				$("#js-cargar-mas-posts label").text('('+totalPost+')');
+			}
+			
+			l.stop();
 		}
 	});
 
@@ -67,10 +86,23 @@ function cargarComentarios(token, borrarAnteriores) {
 		}
 	})
 
-	// $('#js-comments').append('<div id="js-cargar-comentarios"
-	// onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
+	calcularComentarios();
+
 	pagesComentarios++;
 
+}
+
+function calcularComentarios(){
+	
+	comentariosRestantes = numComentarios-comentariosShow;
+	
+	if(comentariosRestantes < 1){
+		$('#js-cargar-comentarios').remove();
+	}else{
+		$('#js-cargar-comentarios span label').text('('+comentariosRestantes+')');
+	}
+	
+	numComentarios = comentariosRestantes;
 }
 
 // Carga las respuestas de cada comentario
@@ -115,9 +147,8 @@ function showPostFull(token) {
 	$('body').css('overflow', 'hidden');
 
 	background.toggle();
-	content.html('');
-
 	content.load(url, function() {
+		//content.html('');
 		cargarComentarios(token, true);
 	});
 }
@@ -147,10 +178,27 @@ function showPostAfterLogin(token) {
 
 // Cierra el post con toda su información
 function hidePostFull() {
+	var content = $('#js-content');
+	content.html('<div style="display: flex;align-items: center;justify-content: center;height: 100%;position: relative;">'+
+					'<div class="preloader-wrapper big active">'+
+					    '<div class="spinner-layer spinner-blue-only">'+
+					      '<div class="circle-clipper left">'+
+					        '<div class="circle"></div>'+
+					      '</div><div class="gap-patch">'+
+					        '<div class="circle"></div>'+
+					      '</div><div class="circle-clipper right">'+
+					        '<div class="circle"></div>'+
+					      '</div>'+
+					    '</div>'+
+				  '</div>'+
+				 '</div>');
 	var background = $('#backScreen');
 	background.toggle();
 	$('body').css('overflow', 'auto');
 	pagesComentarios = 0;
+	numComentarios = 0;
+	comentariosShow = 0;
+	comentariosRestantes = 0;
 	$('#js-content').html();
 }
 
@@ -222,6 +270,81 @@ function addSubscriptores(token) {
 	$('#js-suscriptores-' + token).text(parseInt(subs) + 1);
 	$('#js-subs-like-'+token).addClass('did-usr-interact');
 	
+}
+
+/**
+ * Muestra mensaje de cuenta activada
+ * @param $mensaje
+ */
+function mensajeCuentaActivada($mensaje){
+	toastr.options = {
+			  
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": false,
+			  "positionClass": "toast-top-full-width",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+	
+	// Display an info toast with no title
+	toastr.success('<i class="material-icons">done</i>' + $mensaje)
+}
+
+function mensajeError(mensaje){
+	toastr.options = {
+			  
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": false,
+			  "positionClass": "toast-top-full-width",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+	
+	// Display an info toast with no title
+	toastr.error(mensaje)
+}
+
+function mensajeWarning(mensaje){
+	toastr.options = {
+			  
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": false,
+			  "positionClass": "toast-top-full-width",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+			
+	
+	// Display an info toast with no title
+	// toastr.warning(mensaje)
+	toastr.warning('<i class="material-icons">report_problem</i>' + mensaje)
 }
 
 /**
@@ -594,8 +717,20 @@ function loadSign() {
 
 // Muestra el login en un modal
 function showModalLogin() {
+	
+	$(".account-singup").hide();
+	$('#js-message-sign-up').hide();
+	$('.anim-account').animate({left: '-1%'}, 300, function() {
+	// $(".account-login .animated").animate({ "opacity": "0" }, 0, function() {
+		$(".account-login .animated").animate({ "opacity": "0" }, 0 );
+		$(".anim-account").animate({ "left": "2%" }, 350 );
+		$(".account-login").show();
+		$(".account-login .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
+	});
 
-	$('.modal-trigger').trigger('click');
+	$('#js-modal-lgoin-con').trigger('click');
+	
+	document.getElementById("sign-form").reset();
 
 }
 
@@ -606,6 +741,13 @@ function cargarHabilidadesUsuario() {
 	cargarInputComentario();
 	cargarInputRespuestas();
 	cargarHabilidadLike();
+	loadEspejoPreguntar();
+	
+	$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
+}
+
+function agregarPregunta(){
+	$('#js-modal-espejo').trigger('click');
 }
 
 // Carga la habilidad para los feedback
@@ -722,6 +864,20 @@ function cambiarClassPin(elemento, opacity) {
 }
 
 /**
+ * Carga el espejo para preguntar
+ */
+function loadEspejoPreguntar(){
+	var url = basePath+'netas/agregar-espejo';
+	var contenedor = $('#modal-pregunta-espejo .modal-content');
+	$.ajax({
+		url : url,
+		success : function(res) {
+			contenedor.html(res);
+		}
+	});
+}
+
+/**
  * Oculta o aparece a los tipo post
  * 
  * @param idTipoPost
@@ -773,7 +929,21 @@ var grid;
 
 $(document).ready(function() {
 	
-
+	$('.modal-content .wrap').on('click', function(e){
+		
+		
+		if (e.target.className == 'wrap') {
+			e.preventDefault();
+			$('.lean-overlay').trigger('click');
+			
+		}
+		
+	})
+	
+	$("#js-ingresar-cerrar-sesion").on("click", function(e){
+		e.preventDefault();
+	});
+	
 	grid = $('.grid').masonry(masonryOptions);
 
 	setInterval(function() {
@@ -784,10 +954,10 @@ $(document).ready(function() {
 	$('#js-login').on('click', function(e) {
 		e.preventDefault();
 	});
-
-	$('.btn').on('click', function(e) {
-		e.preventDefault();
-	});
+	
+//	$('.btn').on('click', function(e) {
+//		e.preventDefault();
+//	});
 
 	$('#backScreen').on('click', function(e) {
 		if (e.target !== this) {
@@ -821,47 +991,58 @@ $(document).ready(function() {
 	grid.on('layoutComplete', function(event, laidOutItems) {
 
 	});
-
-});
-
-$('body').on('beforeSubmit', '#login-form', function() {
-	var form = $(this);
-	// return false if form still have some validation errors
-	if (form.find('.has-error').length) {
-		return false;
-	}
 	
-	var button = document.getElementById('js-login-submit');
-	var l = Ladda.create(button);
- 	l.start();
-	// submit form
-	$.ajax({
-		url : form.attr('action'),
-		type : 'post',
-		data : form.serialize(),
-		success : function(response) {
-			
-			// Si la respuesta contiene la propiedad status y es success
-			if (response.hasOwnProperty('status')
-					&& response.status == 'success') {
-				var token = $('#js-token-post').val();
-				showPostAfterLogin(token);
-				cargarCerrarSesion();
-			} else {
-				// Muestra los errores
-				$('#login-form').yiiActiveForm('updateMessages',
-						response, true);
+	$('.js-respuesta-check').on('change', function(e){
+		
+		return false;
+		var valor = element.prop("checked");
+		var token = element.data("token");
+		var url = basePath+'netas/validar-respuesta?respuesta='+valor+'&token='+token;
+		
+		$.ajax({
+			url:url,
+			dataType:'json',
+			success:function(resp){
+				if(resp.status=="noLogin"){
+					showModalLogin();
+				}else if(resp.status=="respondido"){
+					mensajeCuentaActivada('Ya contestaste esta pregunta');
+				}else if(resp.status=="success"){
+					mensajeCuentaActivada('Respuesta correcta');
+				}else{
+					mensajeWarning('Respuesta incorrecta');
+				}
 			}
-			
-			l.stop();
-		},
-		error:function(){
-			l.stop();
-		}
+		
+		});
 	});
-	return false;
+
 });
 
+function validarRespuesta(element){
+	
+	var valor1 = element.val();
+	var valor = element.prop("checked");
+	var token = element.data("token");
+	var url = basePath+'netas/validar-respuesta?respuesta='+valor1+'&token='+token;
+	
+	$.ajax({
+		url:url,
+		dataType:'json',
+		success:function(resp){
+			if(resp.status=="noLogin"){
+				showModalLogin();
+			}else if(resp.status=="success"){
+				mensajeCuentaActivada('Respuesta correcta');
+			}if(resp.status=="respondido"){
+				mensajeCuentaActivada('Ya contestaste esta pregunta');
+			}else{
+				mensajeWarning('Respuesta incorrecta');
+			}
+		}
+	
+	});
+}
 
 function cargarCerrarSesion(){
 	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="'+basePath+'site/logout">Cerrar sesión</a>';
@@ -892,17 +1073,48 @@ FB.ui({
 });
 }
 
-window.fbAsyncInit = function() {
-	FB.init({
-		//appId : '1029875693761281',
-		appId:'1779986862262300',
-		cookie : true, // enable cookies to allow the server to access
-		// the session
-		xfbml : true, // parse social plugins on this page
-		version : 'v2.6' // use any version
-	});
+$('body').on(
+		'beforeSubmit',
+		'#editar-usuario',
+		function() {
+			var form = $(this);
+			// return false if form still have some validation errors
+			if (form.find('.has-error').length) {
+				return false;
+			}
+			var button = document.getElementById('js-editar-submit-usuario');
+			var l = Ladda.create(button);
+		 	l.start();
+			// submit form
+			$.ajax({
+				url : form.attr('action'),// url para peticion
+				type : 'post', // Metodo en el que se enviara la informacion
+				data : new FormData(this), // La informacion a mandar
+				dataType: 'json',  // Tipo de respuesta
+				cache : false, // sin cache
+				contentType : false,
+				processData : false,
+				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
+					l.stop();
+				},
+				statusCode: {
+				    404: function() {
+				      alert( "page not found" );
+				    }
+				  }
 
-};
+			});
+			return false;
+		});
 
-
-
+//window.fbAsyncInit = function() {
+//	FB.init({
+//		//appId : '1029875693761281',
+//		appId:'1779986862262300',
+//		cookie : true, // enable cookies to allow the server to access
+//		// the session
+//		xfbml : true, // parse social plugins on this page
+//		version : 'v2.6' // use any version
+//	});
+//
+//};

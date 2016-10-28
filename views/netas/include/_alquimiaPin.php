@@ -18,13 +18,13 @@ use yii\helpers\Url;
 			<?=$post->txt_descripcion?>
 		</p>
 		<div class="pin-alquimia-grades">
-			<span>Calificacion Charlenetas</span>
+			<span>Calificación Charlenetas</span>
 			<?php
 			// Asignamos el modelo de alquimia a una variable
 			$alquimia = $post->entAlquimias;
 			?>
 			<?=$alquimia->contenedorEstrellas(Html::encode($alquimia->num_calificacion_admin))?>
-			<span>Los usuarios</span>
+			<span>Calificación netanautas</span>
 			<div class="star-wrapper">
 				<?php
 				// Pintar estrellas

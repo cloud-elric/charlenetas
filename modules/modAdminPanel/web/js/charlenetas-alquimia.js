@@ -13,6 +13,7 @@ var loading = '<div class="loader-center">'+
 						'</div>'+
 					'</div>'+
 				'</div>';
+
 function cargarFormulario() {
 	$.ajax({
 		url : 'crear-alquimia',
@@ -20,6 +21,44 @@ function cargarFormulario() {
 			$('#js-modal-post .modal-content').html(res);
 		}
 	});
+}
+
+var pages = 1;
+//Carga mas pins de los post
+function cargarMasPosts(postTotales, numeroPostMostrar) {
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-alquimia'));
+ 	l.start();
+	 	
+	totalPostMostrados = (pages+1)*10;
+	totalPost = postTotales - totalPostMostrados;
+	
+	var contenedor = $('#js-contenedor-tarjetas');
+	var url = basePath+'adminPanel/admin/get-mas-posts-alquimia?page=' + pages;
+	
+	$.ajax({
+		url : url,
+		success : function(res) {
+
+			var $items = $(res);
+
+			contenedor.append($items);
+			//contenedor.masonry('appended', $items);
+
+			pages++;
+
+			//filtrarPost();
+			
+			if(totalPost <= 0){
+				console.log(totalPost);
+				$("#js-cargar-mas-posts-alquimia").remove();
+			}else{
+				$("#js-cargar-mas-posts-alquimia label").text('('+totalPost+')');
+			}
+			
+			l.stop();
+		}
+	});
+
 }
 
 function calificarPrenderEstrellas(elemento) {
@@ -98,6 +137,9 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			var button = document.getElementById('js-crear-submit');
+			var l = Ladda.create(button);
+		 	l.start();
 			// submit form
 			$.ajax({
 				url : form.attr('action'),// url para peticion
@@ -125,6 +167,7 @@ $('body').on(
 						$('#form-alquimia').yiiActiveForm('updateMessages',
 								response, true);
 					}
+					l.stop();
 				},
 				statusCode: {
 				    404: function() {
@@ -145,6 +188,9 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			var button = document.getElementById('js-editar-submit');
+			var l = Ladda.create(button);
+		 	l.start();
 			// submit form
 			$.ajax({
 				url : form.attr('action'),// url para peticion
@@ -168,6 +214,7 @@ $('body').on(
 						$('#editar-alquimia').yiiActiveForm('updateMessages',
 								response, true);
 					}
+					l.stop();
 				},
 				statusCode: {
 				    404: function() {
