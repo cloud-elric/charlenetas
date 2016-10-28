@@ -33,21 +33,17 @@ $form = ActiveForm::begin ( [
 ?>
 	<div class='row'>
 
-		<?= $form->field($post, 'txt_titulo')->textInput(['maxlength' => true])?>
+		<?= $form->field($usuario, 'txt_titulo')->textInput(['maxlength' => true])?>
 
-		<?= $form->field($alquimia, 'num_calificacion_admin', ['template'=>'{input}{label}'.$alquimia->contenedorEstrellas($alquimia->num_calificacion_admin, '', false, true).'{error}','options'=>['class'=>'input-field col s12 m6 input-calificacion']])->hiddenInput()?>
+		<?= $form->field($usuario, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
+
+		<?= $form->field($usuario, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
+
+		<?= $form->field($usuario, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
 		
-		<?= $form->field($post, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
-
-		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
-
-		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
-
 	</div>
 
 	<?= Html::submitButton('<span class="ladda-label">Crear</span>',['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name'=>'boton-alquimia', 'data-style'=>'zoom-in'])?>
-
-
 
 <?php
 

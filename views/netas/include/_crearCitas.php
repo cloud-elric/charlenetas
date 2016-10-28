@@ -22,12 +22,13 @@
 
 <?= $this->render ('//layouts/header') ?>
 
-<h4><span>Crear cita</span></h4>
+<?php //if($creditos->numero_creditos > 0){ ?>
+	<h4><span>Crear cita</span></h4>
 
-<div id='calendar'></div>
-<br/>
-<?php 
-	$this->registerJsFile('@web/js/calendario.js',['depends' => [\app\assets\AppAsset::className()]]);
-?>
+	<div id='calendar'></div>
+	<br/>
+	<?php 
+		$this->registerJsFile('@web/js/calendario.js',['depends' => [\app\assets\AppAsset::className()]]);
+	?>
 
-<?php //include 'elementos/calendario.php'?>
+<?php //}?>

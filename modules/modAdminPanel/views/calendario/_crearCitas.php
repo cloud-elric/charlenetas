@@ -22,4 +22,3 @@
 <div id='calendar'></div>
 <br/>
 
-

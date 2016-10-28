@@ -27,7 +27,6 @@ use app\models\EntNotificaciones;
 use app\models\EntRespuestasEspejo;
 use app\models\EntCitas;
 use yii\db\mssql\PDO;
-use yii\behaviors\TimestampBehavior;
 
 class NetasController extends Controller {
 	
@@ -51,7 +50,7 @@ class NetasController extends Controller {
 								'cargar-input-comentario',
 								'calificar-alquimia',
 								'get-calificacion-usuario',
-								// 'validar-respuesta',
+								'validar-respuesta',
 								'perfil-usuario',
 								'agregar-espejo' 
 						],
@@ -155,9 +154,10 @@ class NetasController extends Controller {
 	/**
 	 * Busca todos los post por orden de fecha de publicacion
 	 */
-	public function actionIndex($token = null) {
-		if (! empty ( $token )) {
-			$this->getPostByToken ( $token );
+	public function actionIndex($token=null) {
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
 		}
 		
 		// Recupera n numero de registros por paginacion
@@ -172,7 +172,7 @@ class NetasController extends Controller {
 		return $this->render ( 'index', [ 
 				'listaPost' => $listaPost,
 				'tiposPost' => $tiposPost,
-				'token' => $token 
+				'token'=>$token
 		] );
 	}
 	
@@ -195,20 +195,15 @@ class NetasController extends Controller {
 	
 	/**
 	 * Mostrar notificaciones al usuario
-	 * 
 	 * @return string
 	 */
 	public function actionNotificaciones() {
-		$notificaciones = new EntNotificaciones ();
-		$usuario = $notificaciones->find ()->where ( [ 
-				'id_usuario' => Yii::$app->user->identity 
-		] )->andWhere ( [ 
-				'b_leido' => 0 
-		] )->orderBy ( 'fch_creacion ASC' )->limit ( 5 )->all ();
-		
-		return $this->render ( 'notificaciones', [ 
-				'notificaciones' => $usuario 
-		] );
+	
+		$notificaciones = new EntNotificaciones();
+		$usuario = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
+			
+		return $this->render( 'notificaciones', ['notificaciones'=>$usuario]);
+	
 	}
 	
 	/**
@@ -344,7 +339,7 @@ class NetasController extends Controller {
 	 *
 	 * @param unknown $token        	
 	 */
-	public function actionComentarPost($token) {
+	public function actionComentarPost($token = null) {
 		$this->layout = false;
 		$idUsuario = Yii::$app->user->identity->id_usuario;
 		
@@ -547,14 +542,14 @@ class NetasController extends Controller {
 		
 		if ($respuesta->guardarComentarioUsuario ( $idUsuario, $comentario->id_post )) {
 			
-			// que se un usuario diferente
-			if ($idUsuario != $comentario->id_usuario) {
-				
-				$notificaciones = new EntNotificaciones ();
-				
-				$notificaciones->guardarNotificacion ( $comentario, $notificaciones );
-			}
+			//que se un usuario diferente
+			if($idUsuario != $comentario->id_usuario){
 			
+				$notificaciones = new EntNotificaciones();
+			
+				$notificaciones->guardarNotificacion($comentario, $notificaciones);
+			}
+				
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			
@@ -592,34 +587,11 @@ class NetasController extends Controller {
 	 *
 	 * @param unknown $token        	
 	 */
-	public function actionValidarRespuesta($respuesta, $token = null) {
-		Yii::$app->response->format = Response::FORMAT_JSON;
-		
-		if (Yii::$app->user->isGuest) {
-			return [ 
-					'status' => 'noLogin' 
-			];
-		}
-		
+	public function actionValidarRespuesta($token) {
 		// busca el post necesario
 		$post = $this->getPostByToken ( $token );
 		
 		$sabiasQue = $post->entSabiasQue;
-
-		$boolRes = 'false';
-		if($sabiasQue->b_verdadero){
-			$boolRes = 'true';
-		}
-		
-		if ($boolRes == $respuesta) {
-			return [ 
-					'status' => 'success' 
-			];
-		} else {
-			return [ 
-					'status' => 'error' 
-			];
-		}
 	}
 	
 	/**
@@ -721,9 +693,6 @@ class NetasController extends Controller {
 			case 7 : // Solo por hoy
 				$render = '//netas/include/_soloPorHoyTarjetaCompleta';
 				break;
-			case 8 : // Sabias que
-				$render = '//netas/include/_sabiasQueTarjetaCompleta';
-				break;
 			default :
 				$render = '//netas/include/_alquimiaTarjetaCompleta';
 				break;
@@ -746,20 +715,15 @@ class NetasController extends Controller {
 		] );
 		
 		if ($post->load ( Yii::$app->request->post () )) {
-			Yii::$app->response->format = Response::FORMAT_JSON;
-			if ($postGuardado = $post->guardarEspejo ( $post )) {
+			if($postGuardado = $post->guardarEspejo($post)){
+						
+				$notificaciones = new EntNotificaciones();
+					
+				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
 				
-				$notificaciones = new EntNotificaciones ();
-				
-				$notificaciones->guardarNotificacionPreguntas ( $postGuardado, $notificaciones );
-				
-				return [ 
-						'status' => 'success' 
-				];
-			} else {
-				return [ 
-						'status' => 'error' 
-				];
+				return 'success';
+			}else{
+				return 'error';
 			}
 		}
 		
@@ -770,33 +734,28 @@ class NetasController extends Controller {
 	
 	/**
 	 * Guarda si al usuario le gusto o no la respuesta del admin
-	 * en b_de_acuerdo de la tabla ent_espuestas_espejo
-	 * 
-	 * @param unknown $token        	
-	 * @param unknown $feed        	
+ 	 * en b_de_acuerdo de la tabla ent_espuestas_espejo
+	 * @param unknown $token
+	 * @param unknown $feed
 	 */
 	public function actionAgregarAcuerdo($token, $feed) {
 		$this->layout = false;
+	
+		$acuerdo = new EntRespuestasEspejo();
+		$posts = new EntPosts();
+		$post = $posts->find()->where(['txt_token'=>$token])->one();
 		
-		$acuerdo = new EntRespuestasEspejo ();
-		$posts = new EntPosts ();
-		$post = $posts->find ()->where ( [ 
-				'txt_token' => $token 
-		] )->one ();
-		
-		$respuesta = $acuerdo->find ()->where ( [ 
-				'id_post' => $post->id_post 
-		] )->one ();
+		$respuesta = $acuerdo->find()->where(['id_post'=>$post->id_post])->one();
 		
 		$respuesta->b_de_acuerdo = $feed;
 		
-		$notificacion = new EntNotificaciones ();
-		$notificacion->guardarNotificacionAcuerdo ( $post, $notificacion );
-		
-		if ($respuesta->save ())
+		$notificacion = new EntNotificaciones();
+		$notificacion->guardarNotificacionAcuerdo($post,$notificacion);
+	
+		if($respuesta->save ())
 			echo "success";
-		
-		else
+	
+		else 
 			echo "error";
 	}
 	
@@ -804,60 +763,52 @@ class NetasController extends Controller {
 	 * crear cita para el usuario en sesiÃ³n
 	 */
 	public function actionCrearCita() {
+		$cita = new EntCitas();
 	
-		return $this->render ( '//netas/include/_crearCitas' ); 
+		if ($cita->load ( Yii::$app->request->post () )) {
+			if($citaGuardada = $cita->guardarCitas($cita)){
+	
+				$notificaciones = new EntNotificaciones();
+					
+				$notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones);
+	
+				return 'success';
+			} else{
+				return 'error';
+			}
+		}
+	
+		return $this->renderAjax ( '//netas/include/_crearCitas', [
+				'cita' => $cita
+		] );
 	}
 	
 	/**
-	 * Aï¿½adir las citas al calendario
+	 * Añadir las citas al calendario
 	 */
-	public function actionAnadirCitas() {
-		$json = array ();
+	public function actionAnadirCitas(){
 		
-		$requete = "SELECT * FROM ent_citas where b_habilitado = 1 ORDER BY id ";
+		$json = array();
+ 
+ 		$requete = "SELECT * FROM evento ORDER BY id";
+ 	
+ 		try {
+ 			$bdd = new PDO('mysql:host=localhost;dbname=calendario', 'root', 'root');
+ 		} catch(Exception $e) {
+ 			exit('Imposible conectar a la base de datos.');
+ 		}
+ 
+ 		$resultat = $bdd->query($requete) or die(print_r($bdd->errorInfo()));
+ 
+ 		echo json_encode($resultat->fetchAll(PDO::FETCH_ASSOC));
 		
-		try {
-			$bdd = new PDO ( 'mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root' );
-		} catch ( Exception $e ) {
-			exit ( 'Imposible conectar a la base de datos.' );
-		}
+ 		/*$tabla = new EntCitas();
+		$citas = $tabla->find()->all();
 		
-		$resultat = $bdd->query ( $requete ) or die ( print_r ( $bdd->errorInfo () ) );
+		return $this->render('//netas/include/anadirCitas', [
+				'citas' => $citas
+		]);*/
 		
-		echo json_encode ( $resultat->fetchAll ( PDO::FETCH_ASSOC ) );
 	}
-	
-	/**
-	 * Agregar citas a la base de datos
-	 */
-	public function actionAgregarCitas() {
-		$title = $_POST ['title'];
-		$start = $_POST ['start'];
-		$end = $_POST ['end'];
-		$id_usuario = 26; // Yii::$app->user->identity;
-		$txt_token = Utils::generateToken ( 'cita_' );
-		
-		try {
-			$bdd = new PDO ( 'mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root' );
-		} catch ( Exception $e ) {
-			exit ( 'Imposible conectar a la base de datos.' );
-		}
-		
-		$notificaciones = new EntNotificaciones ();
-		$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
-		if ($notificacion)
-			echo "SUCCESS";
-		else
-			echo "ERROR";
-		
-		$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
-		$q = $bdd->prepare ( $sql );
-		$q->execute ( array (
-				':title' => $title,
-				':start' => $start,
-				':end' => $end,
-				':id_usuario' => $id_usuario,
-				':txt_token' => $txt_token 
-		) );
-	}
+
 }
