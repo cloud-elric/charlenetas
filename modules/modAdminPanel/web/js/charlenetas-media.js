@@ -51,7 +51,7 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 			if(totalPost<=0){
 				$("#js-cargar-mas-posts-media").remove();
 			}else{
-				$("#js-cargar-mas-posts label").text('('+totalPost+')');
+				$("#js-cargar-mas-posts-media label").text('('+totalPost+')');
 			}
 			
 			l.stop();

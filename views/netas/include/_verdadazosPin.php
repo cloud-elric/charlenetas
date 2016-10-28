@@ -17,4 +17,7 @@ use app\modules\ModUsuarios\models\Utils;
 			<?=Utils::subStrTexto($post->txt_descripcion, 500)?>
 		</p>
 	</div>
+	<?php
+		include 'elementos/pins-social.php';
+	?>
 </div>

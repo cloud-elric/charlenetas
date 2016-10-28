@@ -31,7 +31,6 @@ use app\models\EntPosts;
 <?php
 $postTotales = EntPosts::find()->count("id_post"); 
 if($postTotales>=ConstantesWeb::PINS_A_MOSTRAR){
-	echo "Total de  posts: ". $postTotales;
 ?>
 
 <div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"

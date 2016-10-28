@@ -146,7 +146,7 @@ window.fbAsyncInit = function() {
 
 <script>
   $(document).ready(function() {
-    $('.animsition').animsition();
+    $('.animsition').animsition({transition: function(url){}});
   });
 
   window.onbeforeunload=function(){

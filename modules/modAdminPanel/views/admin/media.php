@@ -48,12 +48,12 @@ $this->icon = '<i class="ion ion-images"></i>';
 
 <?php
 $postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_MEDIA])->count('id_usuario'); 
-if($postTotales>=ConstantesWeb::POSTS_MOSTRAR){
+if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 ?>
 
 <div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
 	id="js-cargar-mas-posts-media" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
-	entradas...</span></div>
+	entradas...<label>(<?=$postTotales - ConstantesWeb::POSTS_MOSTRAR?>)</label></span></div>
 
 <?php
 }

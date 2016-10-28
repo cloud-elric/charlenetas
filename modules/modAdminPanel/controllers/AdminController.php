@@ -1086,14 +1086,14 @@ class AdminController extends Controller {
 	
 		// Pintar vista
 		return $this->renderAjax ( 'itemsAlquimia', [
-				'postsEspejo' => $listaPost
+				'postsAlquimia' => $listaPost
 		] );
 	}
 	
 	/**
 	 * Obtiene los post por paginacion
 	 */
-	public function actionGetMasPostsKoyPense($page = 1) {
+	public function actionGetMasPostsHoyPense($page = 1) {
 	
 		// Layout que usara la vista
 		$this->layout = false;
@@ -1104,7 +1104,61 @@ class AdminController extends Controller {
 	
 		// Pintar vista
 		return $this->renderAjax ( 'itemsHoyPense', [
-				'postsEspejo' => $listaPost
+				'postsHoyPense' => $listaPost
+		] );
+	}
+	
+	/**
+	 * Obtiene los post por paginacion
+	 */
+	public function actionGetMasPostsSabiasQue($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+		$tipoPost = ConstantesWeb::POST_TYPE_SABIAS_QUE;
+	
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
+	
+		// Pintar vista
+		return $this->renderAjax ( 'itemsSabiasQue', [
+				'postsSabiasQue' => $listaPost
+		] );
+	}
+	
+	/**
+	 * Obtiene los post por paginacion
+	 */
+	public function actionGetMasPostsSoloPorHoy($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+		$tipoPost = ConstantesWeb::POST_TYPE_SOLO_POR_HOY;
+	
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
+	
+		// Pintar vista
+		return $this->renderAjax ( 'itemsSoloPorHoy', [
+				'postsSoloPorHoy' => $listaPost
+		] );
+	}
+	
+	/**
+	 * Obtiene los post por paginacion
+	 */
+	public function actionGetMasPostsVerdadazos($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+		$tipoPost = ConstantesWeb::POST_TYPE_VERDADAZOS;
+	
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
+	
+		// Pintar vista
+		return $this->renderAjax ( 'itemsVerdadazos', [
+				'postsVerdadazos' => $listaPost
 		] );
 	}
 }

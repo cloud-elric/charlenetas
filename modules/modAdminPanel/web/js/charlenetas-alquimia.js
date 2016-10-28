@@ -51,7 +51,7 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 				console.log(totalPost);
 				$("#js-cargar-mas-posts-alquimia").remove();
 			}else{
-				$("#js-cargar-mas-posts label").text('('+totalPost+')');
+				$("#js-cargar-mas-posts-alquimia label").text('('+totalPost+')');
 			}
 			
 			l.stop();

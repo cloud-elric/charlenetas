@@ -991,6 +991,29 @@ $(document).ready(function() {
 	grid.on('layoutComplete', function(event, laidOutItems) {
 
 	});
+	
+	$('.js-respuesta-check').on('change', function(e){
+		
+		return false;
+		var valor = element.prop("checked");
+		var token = element.data("token");
+		var url = basePath+'netas/validar-respuesta?respuesta='+valor+'&token='+token;
+		
+		$.ajax({
+			url:url,
+			dataType:'json',
+			success:function(resp){
+				if(resp.status=="noLogin"){
+					showModalLogin();
+				}else if(resp.status=="success"){
+					mensajeCuentaActivada('Respuesta correcta');
+				}else{
+					mensajeWarning('Respuesta incorrecta');
+				}
+			}
+		
+		});
+	});
 
 });
 
