@@ -992,29 +992,6 @@ $(document).ready(function() {
 
 	});
 	
-	$('.js-respuesta-check').on('change', function(e){
-		
-		return false;
-		var valor = element.prop("checked");
-		var token = element.data("token");
-		var url = basePath+'netas/validar-respuesta?respuesta='+valor+'&token='+token;
-		
-		$.ajax({
-			url:url,
-			dataType:'json',
-			success:function(resp){
-				if(resp.status=="noLogin"){
-					showModalLogin();
-				}else if(resp.status=="success"){
-					mensajeCuentaActivada('Respuesta correcta');
-				}else{
-					mensajeWarning('Respuesta incorrecta');
-				}
-			}
-		
-		});
-	});
-
 });
 
 function validarRespuesta(element){
@@ -1028,6 +1005,7 @@ function validarRespuesta(element){
 		dataType:'json',
 		success:function(resp){
 			if(resp.status=="noLogin"){
+				
 				showModalLogin();
 			}else if(resp.status=="success"){
 				mensajeCuentaActivada('Respuesta correcta');
@@ -1067,6 +1045,14 @@ FB.ui({
     else{}
 });
 }
+
+$( function() {
+    $( "#sortable" ).sortable({
+      revert: true
+    });
+    
+    $( ".js-elemento-leer" ).disableSelection();
+  } );
 
 //window.fbAsyncInit = function() {
 //	FB.init({
