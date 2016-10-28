@@ -1021,9 +1021,10 @@ $(document).ready(function() {
 
 function validarRespuesta(element){
 	
+	var valor1 = element.val();
 	var valor = element.prop("checked");
 	var token = element.data("token");
-	var url = basePath+'netas/validar-respuesta?respuesta='+valor+'&token='+token;
+	var url = basePath+'netas/validar-respuesta?respuesta='+valor1+'&token='+token;
 	
 	$.ajax({
 		url:url,

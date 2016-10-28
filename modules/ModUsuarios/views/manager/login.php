@@ -89,12 +89,14 @@ $(document).ready(function(){
 				if (response.hasOwnProperty('status')
 						&& response.status == 'success') {
 					var token = $('#js-token-post').val();
-					showPostAfterLogin(token);
-					cargarCerrarSesion();
-					mensajeCuentaActivada("Bienvenido de nuevo charlenauta");
-					loadEspejoPreguntar();
+					if(!Yii::$app->user->isGuest){
+						showPostAfterLogin(token);
+						cargarCerrarSesion();
+						mensajeCuentaActivada("Bienvenido de nuevo charlenauta");
+						loadEspejoPreguntar();
 					
-					$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
+						$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
+					}
 					
 				} else {
 					// Muestra los errores

@@ -644,7 +644,11 @@ class NetasController extends Controller {
 					
 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
 				$respuestaSabiasQue->id_usuario = $idUsuario;
-				$respuestaSabiasQue->b_respuesta = 1;
+				if($respuesta == true){
+					$respuestaSabiasQue->b_respuesta = 1;
+				}else{
+					$respuestaSabiasQue->b_respuesta = 0;
+				}
 				$respuestaSabiasQue->save();
 				
 				$cat = new CatTipoCreditos();
@@ -660,6 +664,15 @@ class NetasController extends Controller {
 						'status' => 'success'
 				];
 			} else {
+				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
+				$respuestaSabiasQue->id_usuario = $idUsuario;
+				if($respuesta == true){
+					$respuestaSabiasQue->b_respuesta = 1;
+				}else{
+					$respuestaSabiasQue->b_respuesta = 0;
+				}
+				$respuestaSabiasQue->save();
+				
 				return [
 						'status' => 'error'
 				];

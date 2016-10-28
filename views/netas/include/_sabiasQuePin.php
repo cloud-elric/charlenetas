@@ -1,4 +1,7 @@
 <?php
+use app\models\EntUsuariosRespuestasSabiasQue;
+use yii\web\View;
+use app\models\EntSabiasQue;
 /* @var $post EntPosts*/
 ?>
 
@@ -14,25 +17,60 @@
 		<a href="<?=$post->txt_url?>"></a>
 	</div>
 	
-	<form>
-	<div class="switch pin-content-wrapper-switch">
+	<?php 
 		
-		<input type="radio" value="true" >Verdadero
-		<input type="radio" value="False" >Falso
-		
-		<!-- <label>
-		Falso
-		<input data-token="<?=$post->txt_token?>" type="checkbox" class="js-respuesta-check" onchange="validarRespuesta($(this));">
-		<span class="lever"></span>
-		Verdadero
-		</label> -->
-	</div>
-	</form>
+		if(!Yii::$app->user->isGuest){
+			$idUsuario = Yii::$app->user->identity->id_usuario;
+			
+			$sabiasQue = new EntSabiasQue();
+			$pregAdmin = $sabiasQue->find()->where(['id_post'=>$post->id_post])->one();
+			
+			$respuesta = new EntUsuariosRespuestasSabiasQue();
+			$validar = $respuesta->find()->where(['id_usuario'=>$idUsuario])->andWhere(['id_post'=>$post->id_post])->one();
+			if($validar == false){	
+	?>
+	
+				<div class="switch pin-content-wrapper-switch">
+					<form>
+						<p>
+	      					<input name="group1" type="radio" id="test1" value="false" data-token="<?=$post->txt_token?>" class="js-respuesta-check" onclick="validarRespuesta($(this));"/>
+			    	  		<label for="test1">Falso</label>
+	    				</p>
+		    			<p>
+		      				<input name="group1" type="radio" id="test2" value="true" data-token="<?=$post->txt_token?>" class="js-respuesta-check" onclick="validarRespuesta($(this));"/>
+	    	  				<label for="test2">Verdadero</label>
+	    				</p>
+  					</form>
+				</div>
+	<?php 	
+			}else if($pregAdmin->b_verdadero == $validar->b_respuesta){
+	?>
+						<p>Respondiste correctamente</p>
+	<?php
+			}else if($pregAdmin->b_verdadero != $validar->b_respuesta){
+	?>
+							<p>Respondiste incorrectamente</p>
+	<?php 
+			}
+		}else if(Yii::$app->user->isGuest){
+	?>
+				<div class="switch pin-content-wrapper-switch">
+					<form>
+						<p>
+	      					<input name="group1" type="radio" id="test1" data-token="<?=$post->txt_token?>" type="checkbox" class="js-respuesta-check" onclick="validarRespuesta($(this));"/>
+			      			<label for="test1">Falso</label>
+		    			</p>
+		    			<p>
+	    	  				<input name="group1" type="radio" id="test2" data-token="<?=$post->txt_token?>" type="checkbox" class="js-respuesta-check" onclick="validarRespuesta($(this));"/>
+	      					<label for="test2">Verdadero</label>
+	    				</p>
+  					</form>
+  				</div>
 
 	<?php
+		}
 		#include 'elementos/pins-social.php';
 	?>
-
 
 	<!--?=$post->fch_creacion?-->
 </div>
