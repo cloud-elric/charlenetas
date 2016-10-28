@@ -171,9 +171,7 @@ function showPostAfterLogin(token) {
 		});
 	}else{
 		$('#modal-login').closeModal();
-	}
-	
-	
+	}	
 }
 
 // Cierra el post con toda su información

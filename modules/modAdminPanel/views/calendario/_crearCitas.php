@@ -1,5 +1,6 @@
 
 <head>	
+	
 	<style>
 
 		body {
@@ -20,5 +21,6 @@
 <h4><span>Agenda</span></h4>
 
 <div id='calendar'></div>
-<br/>
 
+ <!-- Modal Trigger -->
+  
