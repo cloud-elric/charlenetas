@@ -453,14 +453,16 @@ body .wrap .section .anim-account .account-login h4 {
 	}
 	.modal-login-register .section .anim-account{
 		position: relative;
-		max-height: 90%;
+		max-height: 90vh;
 		overflow-x: hidden;
 		overflow-y: auto;
 		max-width: 430px;
 		width: 90%;
 		left: 50% !important;
 		margin-left: -215px;
-		top: 54%;
+		margin-top: -45vh;
+		top: 50%;
+		/*height: 90vh;*/
 	}
 	.modal-login-register .sing-up, body .wrap .login{
 		display: none;
@@ -469,6 +471,22 @@ body .wrap .section .anim-account .account-login h4 {
 		padding: 0;
 	}
 }
+/*@media only screen and (max-device-width: 768px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+	.modal-login-register .section .anim-account{
+		position: relative;
+		max-height: 90%;
+		overflow-x: hidden;
+		overflow-y: auto;
+		max-width: 430px;
+		width: 90%;
+		left: 50% !important;
+		margin-left: -215px;
+		margin-top: -45vh;
+		top: 50%;
+		height: 90vh;
+	}
+}*/
+
 @media only screen and (max-width: 520px){
 	.modal-login-register .section .anim-account{
 		padding: 24px 18px;
@@ -479,16 +497,31 @@ body .wrap .section .anim-account .account-login h4 {
 	}
 	.modal-login-register .section .anim-account{
 		position: relative;
-		max-height: 90%;
+		max-height: 90vh;
 		overflow-x: hidden;
 		overflow-y: auto;
 		max-width: 90%;
 		width: 90%;
 		left: 50% !important;
 		margin-left: -45%;
-		top: 54%;
+		margin-top: -45vh;
+		top: 50%;
+		/*height: 90vh;*/
 	}
 }
+/*@media only screen and (max-device-width: 520px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+	.modal-login-register .section .anim-account{
+		position: relative;
+		max-height: 90%;
+		overflow-x: hidden;
+		overflow-y: auto;
+		max-width: 430px;
+		width: 90%;
+		left: 50% !important;
+		margin-left: -215px;
+		top: 78%;
+	}
+}*/
 
 /** Login **/
 .account-login #js-login-submit,
