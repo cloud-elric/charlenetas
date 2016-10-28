@@ -1544,7 +1544,7 @@ nav.mobile ul li a.filter-active span {
   .full-pin-content .full-pin-respuesta,
   .full-pin-content .new-comment,
   .full-pin-content .comment {
-    padding: 20px 10px;
+    padding: 20px 16px;
   }
 }
 
@@ -1564,6 +1564,8 @@ nav.mobile ul li a.filter-active span {
   .full-pin-content .new-comment h3,
   .full-pin-content .comment h3 {
     font-size: 2.2em;
+    margin-left: 0;
+    margin-top: 0;
   }
 }
 
@@ -1899,6 +1901,12 @@ nav.mobile ul li a.filter-active span {
 .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-text p {
   text-align: justify;
   padding-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-text p {
+    padding-right: 0;
+  }
 }
 
 .full-pin-body-img-horizontal {
