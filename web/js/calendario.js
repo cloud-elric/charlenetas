@@ -15,15 +15,20 @@ var calendar = $('#calendar').fullCalendar({
 		calendar.fullCalendar('changeView','agendaDay')
 		
 		if(view.name == 'agendaDay'){
-			var title = prompt('Title:');
-			if (title) {
-				start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
-				alert(start);
-				end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
-				m = moment(date);
-				m.add(1,'hours').hours();
-				end = moment(m).format('YYYY-MM-DD HH:mm:ss');
-				alert(end);
+			$('.modal-trigger').trigger('click');
+			//var title = prompt('Title:');
+			//if (title) {
+			start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+			//alert(start);
+			end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+			m = moment(date);
+			m.add(1,'hours').hours();
+			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
+			//alert(end);
+				
+			$('#submitButton').on('click', function(e){
+				e.preventDefault();
+				title = $('#nombreCita').val()
 				$.ajax({
 					url: 'agregar-citas',
 					data: 'title='+ title+'&start='+ start +'&end='+ end ,
@@ -49,7 +54,7 @@ var calendar = $('#calendar').fullCalendar({
 						alert("Ocurrio un error inesperado en el servidor");
 					}
 				});
-			}
+			});
 			calendar.fullCalendar('unselect');	
 		}
 	} 

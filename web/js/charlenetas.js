@@ -1032,7 +1032,7 @@ function validarRespuesta(element){
 				showModalLogin();
 			}else if(resp.status=="success"){
 				mensajeCuentaActivada('Respuesta correcta');
-			}if(resp.status=="respondido"){
+			}else if(resp.status=="respondido"){
 				mensajeCuentaActivada('Ya contestaste esta pregunta');
 			}else{
 				mensajeWarning('Respuesta incorrecta');

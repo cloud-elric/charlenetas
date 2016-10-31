@@ -59,7 +59,9 @@ class NetasController extends Controller {
 								'get-calificacion-usuario',
 								// 'validar-respuesta',
 								'perfil-usuario',
-								'agregar-espejo' 
+								'agregar-espejo',
+								'agregar-citas',
+								'crear-citas'
 						],
 						'rules' => [
 								
@@ -635,21 +637,29 @@ class NetasController extends Controller {
 		} else {
 			$boolRes = 'false';
 			
-			if($sabiasQue->b_verdadero){
+			if($sabiasQue->b_verdadero === 1){
 				$boolRes = 'true';
 			}
+			$respuestaSabiasQue->id_post = $sabiasQue->id_post;
+			$respuestaSabiasQue->id_usuario = $idUsuario;
+			if($respuesta === "true"){
+				$respuestaSabiasQue->b_respuesta = 1;
+			}else{
+				$respuestaSabiasQue->b_respuesta = 0;
+			}
+			$respuestaSabiasQue->save();
 			
-			if ($boolRes == $respuesta) {
+			if ($boolRes === $respuesta) {
 				//$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
 					
-				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
-				$respuestaSabiasQue->id_usuario = $idUsuario;
-				if($respuesta == true){
-					$respuestaSabiasQue->b_respuesta = 1;
-				}else{
-					$respuestaSabiasQue->b_respuesta = 0;
-				}
-				$respuestaSabiasQue->save();
+// 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
+// 				$respuestaSabiasQue->id_usuario = $idUsuario;
+// 				if($respuesta === "true"){
+// 					$respuestaSabiasQue->b_respuesta = 1;
+// 				}else{
+// 					$respuestaSabiasQue->b_respuesta = 0;
+// 				}
+// 				$respuestaSabiasQue->save();
 				
 				$cat = new CatTipoCreditos();
 				$contestar = $cat->find()->where(['nombre'=>"Contestar"])->one();
@@ -664,14 +674,14 @@ class NetasController extends Controller {
 						'status' => 'success'
 				];
 			} else {
-				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
-				$respuestaSabiasQue->id_usuario = $idUsuario;
-				if($respuesta == true){
-					$respuestaSabiasQue->b_respuesta = 1;
-				}else{
-					$respuestaSabiasQue->b_respuesta = 0;
-				}
-				$respuestaSabiasQue->save();
+// 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
+// 				$respuestaSabiasQue->id_usuario = $idUsuario;
+// 				if($respuesta === "true"){
+// 					$respuestaSabiasQue->b_respuesta = 1;
+// 				}else{
+// 					$respuestaSabiasQue->b_respuesta = 0;
+// 				}
+// 				$respuestaSabiasQue->save();
 				
 				return [
 						'status' => 'error'
