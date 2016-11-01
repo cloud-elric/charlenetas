@@ -21,7 +21,10 @@ $this->icon = '<i class="ion ion-eye"></i>';
 		?>
 		<div class="col s12 m6 l4" id="card_<?=$postEspejo->txt_token?>">
 			<div class="card card-espejo" data-token="<?=$postEspejo->txt_token?>">
-				
+				<p>
+      				<input type="checkbox" id="delete-<?=$postEspejo->txt_token?>" value="<?=$postEspejo->txt_token?>"/>
+      				<label for="delete-<?=$postEspejo->txt_token?>">Eliminar</label>
+    			</p>
 				<div class="card-contexto-cont">
 					<p class="card-desc"><?=$postEspejo->txt_descripcion?></p>
 				</div>
@@ -43,7 +46,7 @@ $this->icon = '<i class="ion ion-eye"></i>';
 					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalResponderEspejo('<?=$postEspejo->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
-					</a>
+					</a>				
 				</div>
 			</div>
 		</div>
@@ -53,6 +56,9 @@ $this->icon = '<i class="ion ion-eye"></i>';
 		
 	</div>
 	<!-- end /.row -->
+	<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
+		<i class="ion ion-trash"></i>
+	</a>
 
 </div>
 <!-- end /.page-cont -->

@@ -17,7 +17,10 @@ $this->icon = '<i class="ion ion-android-done-all"></i>';
 		<div class="col s12 m6 l4" id="card_<?=$postVerdadazos->txt_token?>">
 
 			<div class="card card-verdadazos" data-token="<?=$postVerdadazos->txt_token?>">
-				
+				<p>
+      				<input type="checkbox" id="delete-<?=$postVerdadazos->txt_token?>" value="<?=$postVerdadazos->txt_token?>"/>
+      				<label for="delete-<?=$postVerdadazos->txt_token?>">Eliminar</label>
+    			</p>
 				<div class="card-contexto-cont">
 					<p class="card-desc"><?=$postVerdadazos->txt_descripcion?></p>
 				</div>
@@ -42,6 +45,9 @@ $this->icon = '<i class="ion ion-android-done-all"></i>';
 	<div class="fixed-action-btn horizontal">
 		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i>
+		</a>
+		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
+			<i class="ion ion-trash"></i>
 		</a>
 	</div>
 

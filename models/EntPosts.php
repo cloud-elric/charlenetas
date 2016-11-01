@@ -63,7 +63,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		 */
 		$query = EntPosts::find ()->where ( [ 
 				"id_tipo_post" => $post 
-		] );
+		] )->andWhere(['b_habilitado'=>1]);
 		
 		$order = [ 
 				'fch_creacion' => 'asc' 

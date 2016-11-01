@@ -27,6 +27,23 @@ $(document).ready(function(){
 	
 });
 
+//Eliminar posts
+function deletePosts(){
+	var del = document.getElementsByTagName('input');
+	for(i=0;i<del.length;i++){
+		if(del[i].checked){
+			//console.log(del[i].value);
+			$.ajax({
+				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+del[i].value,
+				type : 'GET',
+				success: function(){
+					alert("ok");
+				}
+			});
+		}
+	}
+}
+
 var pages = 1;
 var totalPostMostrados = 0;
 var totalPost = 0;

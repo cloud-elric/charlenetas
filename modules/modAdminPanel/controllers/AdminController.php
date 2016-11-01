@@ -125,7 +125,7 @@ class AdminController extends Controller {
 	}
 	public function actionAlquimia($page = 0) {
 		$idPost = 2;
-		$postsAlquimia = EntPosts::getPosts ( $page, $idPost );
+		$postsAlquimia = EntPosts::getPosts ( $page, $idPost ); 
 		
 		return $this->render ( 'alquimia', [ 
 				"postsAlquimia" => $postsAlquimia 
@@ -203,7 +203,7 @@ class AdminController extends Controller {
 		else
 			echo "ERROR";
 	}
-	public function actionDeshabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc") {
+	public function actionDeshabilitarPost($tokenPost = null) {
 		$postDeshabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postDeshabilitar->b_habilitado = 0;
 		
