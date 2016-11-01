@@ -22,5 +22,3 @@
 
 <div id='calendar'></div>
 
- <!-- Modal Trigger -->
-  

@@ -61,6 +61,36 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
 	<?=$this->render('@app/modules/modAdminPanel/views/admin/templates/modalPost');?>
 	
 	<?=$this->render('@app/modules/modAdminPanel/views/admin/templates/modalEditar');?>
+	
+	<!-- Modal para crear citas en calendario -->
+	<a class="modal-trigger waves-effect waves-ligth btn" href="#modal2" style="display: none">Modal</a>
+	<!-- Modal structure -->
+	<div id="modal2" class="modal">
+		<div class="modal-content">
+			<h4>Crear Cita Admin</h4>
+			<form>
+				<label>Cita: </label>
+				<input type="text" id="nombreCita" name="nombreCita">
+				<div>
+					<button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" id="submitButton">Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<!-- Modal para eliminar citas en calendario -->
+ 	<a class="modal-trigger js-eliminar waves-effect waves-light btn" href="#modal3" style="display: none">Modal</a>
+
+  	<!-- Modal Structure -->
+  	<div id="modal3" class="modal">
+    	<div class="modal-content">
+      		<p>Deseas Eliminar la cita del calendario</p>
+    	</div>
+    	<div class="modal-footer">
+      		<button type="button" id="Aceptar" value="true" class=" modal-action modal-close waves-effect waves-green btn-flat">Aceptar</button>
+      		<button type="button" id="Cancelar" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</button>
+    	</div>
+  </div>
 
 <?php $this->endBody() ?>
 </body>

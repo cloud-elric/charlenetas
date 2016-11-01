@@ -15,7 +15,6 @@ $(document).ready(function(){
 		events: 'http://localhost/charlenetas/web/adminPanel/calendario/anadir-citas',
 		selectable: true,
 		selectHelper: true,
-		editable: true,
 		eventDrop: function(event, delta) {
 			start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
 			alert(start);
@@ -52,13 +51,19 @@ $(document).ready(function(){
 			calendar.fullCalendar('changeView','agendaDay')
 			
 			if(view.name == 'agendaDay'){
-				var title = prompt("Evento:");
-				if (title) {
-					start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
-					end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
-					m = moment(date);
-					m.add(1,'hours').hours();
-					end = moment(m).format('YYYY-MM-DD HH:mm:ss');
+				//$('.modal-trigger').leanModal();
+				$('.modal-trigger').trigger('click');
+				//var title = prompt("Evento:");
+				//if (title) {
+				start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+				end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+				m = moment(date);
+				m.add(1,'hours').hours();
+				end = moment(m).format('YYYY-MM-DD HH:mm:ss');
+				
+				$('#submitButton').on('click', function(e){
+					e.preventDefault();
+					title = $('#nombreCita').val()
 					$.ajax({
 						url: 'agregar-citas',
 						data: 'title='+ title+'&start='+ start +'&end='+ end ,
@@ -75,25 +80,26 @@ $(document).ready(function(){
 							);
 						}
 					});
-				}
+				});
 				calendar.fullCalendar('unselect');	
 			}
 		},
 		eventRender: function(event, element) {
 	    	element.append( "<span class='closeon'>X</span>" );
 	    	element.find('.closeon').click(function(calEvent, jsEvent, view) {
-	     	  	$.ajax({
-	        	   url: 'eliminar-citas',
-	        	   data: 'id=' + event.id,
-	   	    	   type: "POST",
-	   	    	   success: function () {
-	   	    			var aceptar = confirm("Quiere eliminar este evento?");
-	   	    			if (aceptar == true) {
-	   	    				calendar.fullCalendar('removeEvents',event.id);
-	 	   			   	    alert("Acaba de eliminar la cita del calendario");
-	   	    			} 
-	        	   }
-	        	});
+	    		$('.modal-trigger.js-eliminar').trigger('click');
+	    		$('#Aceptar').on('click', function(e){
+	    			e.preventDefault();
+	    			$.ajax({
+	    				url: 'eliminar-citas',
+	    				data: 'id=' + event.id,
+	    				type: "POST",
+	    				success: function () {
+	    					calendar.fullCalendar('removeEvents',event.id);
+	    					//alert("Acaba de eliminar la cita del calendario");	    
+	    				}
+	    			});
+	    		});
 	    	});
 		}
 	});

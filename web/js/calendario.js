@@ -7,6 +7,10 @@ var y = date.getFullYear();
 var calendar = $('#calendar').fullCalendar({
     // put your options and callbacks here
 	eventLimit: true,
+	monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+    dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+    dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
 	events: 'http://localhost/charlenetas/web/netas/anadir-citas',
 	    
 	dayClick: function(date, jsEvent, view ){
