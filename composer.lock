@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "120d739f20e7d4bb8805975dda6db36e",
-    "content-hash": "407e7cc75a82961402d4ac6d5e375112",
+    "hash": "ea1679c3555715be3ff86616bdc15ab1",
+    "content-hash": "823cc7817238a98c0af6b8a18779b9ac",
     "packages": [
         {
             "name": "2amigos/yii2-file-upload-widget",
@@ -498,6 +498,48 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "bsushil/meta",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bSushil/meta-actions.git",
+                "reference": "d59aa5ed7becc970af1df69962bf0aa7da8f11df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bSushil/meta-actions/zipball/d59aa5ed7becc970af1df69962bf0aa7da8f11df",
+                "reference": "d59aa5ed7becc970af1df69962bf0aa7da8f11df",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "sspl\\meta\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sushil Bajimaya",
+                    "email": "sushil.bajimaya@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii 2 Meta. Finds and lists actions in controllers/models/modules",
+            "homepage": "https://github.com/bSushil/meta-actions",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2015-09-27 09:56:35"
         },
         {
             "name": "cebe/markdown",
@@ -1367,7 +1409,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-widget-fileinput": 20
+        "kartik-v/yii2-widget-fileinput": 20,
+        "bsushil/meta": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

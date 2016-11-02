@@ -22,6 +22,7 @@ use app\models\EntPostsExtend;
 use app\models\EntRespuestasEspejo;
 use app\models\EntNotificaciones;
 use app\models\ConstantesWeb;
+use sspl\meta\MetaData;
 
 /**
  * Default controller for the `adminPanel` module
@@ -203,6 +204,13 @@ class AdminController extends Controller {
 		else
 			echo "ERROR";
 	}
+	
+	//mostrar actions del controlador
+	public function actionMostrarActions(){
+		//etaData::getControllersActions();
+		return $this->render('mostrarActions');
+	}
+	
 	public function actionDeshabilitarPost($tokenPost = null) {
 		$postDeshabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postDeshabilitar->b_habilitado = 0;

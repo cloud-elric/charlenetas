@@ -14,13 +14,18 @@ $this->icon = '<i class="ion ion-android-done-all"></i>';
 
 	<div class="row" id="js-contenedor-tarjetas">
 <?php foreach ( $postsVerdadazos as $postVerdadazos ) {?>
+
+		<div>
+			<p>
+      			<input type="checkbox" id="delete-<?=$postVerdadazos->txt_token?>" value="<?=$postVerdadazos->txt_token?>"/>
+      			<label for="delete-<?=$postVerdadazos->txt_token?>">Eliminar</label>
+    		</p>
+		</div>
+
 		<div class="col s12 m6 l4" id="card_<?=$postVerdadazos->txt_token?>">
 
 			<div class="card card-verdadazos" data-token="<?=$postVerdadazos->txt_token?>">
-				<p>
-      				<input type="checkbox" id="delete-<?=$postVerdadazos->txt_token?>" value="<?=$postVerdadazos->txt_token?>"/>
-      				<label for="delete-<?=$postVerdadazos->txt_token?>">Eliminar</label>
-    			</p>
+				
 				<div class="card-contexto-cont">
 					<p class="card-desc"><?=$postVerdadazos->txt_descripcion?></p>
 				</div>
@@ -56,7 +61,7 @@ $this->icon = '<i class="ion ion-android-done-all"></i>';
 <!-- end /.page-cont -->
 
 <?php
-$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_VERDADAZOS])->count('id_usuario'); 
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_VERDADAZOS])->andWhere(['b_habilitado'=>1])->count('id_usuario'); 
 if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 //echo "Total de  posts: ". $postTotales;
 ?>

@@ -18,7 +18,8 @@ $config = [
 				],
 
 		],
-		'components' => [ 
+		'components' => [
+				'metadata'=>['class'=>'Metadata'],
 				'assetManager' => [
 						'bundles' => [
 								'yii\bootstrap\BootstrapPluginAsset' => [

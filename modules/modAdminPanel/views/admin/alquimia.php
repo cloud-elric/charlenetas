@@ -22,12 +22,15 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 		
 		foreach ($postsAlquimia as $postAlquimia){
 		?>
+		<div>
+			<p>
+      			<input type="checkbox" id="delete-<?=$postAlquimia->txt_token?>" value="<?=$postAlquimia->txt_token?>"/>
+      			<label for="delete-<?=$postAlquimia->txt_token?>">Eliminar</label>
+    		</p>
+		</div>
 		<div class="col s12 m6 l4" id="card_<?=$postAlquimia->txt_token?>">
 			<div class="card card-alquimia" data-token="<?=$postAlquimia->txt_token?>">
-				<p>
-      				<input type="checkbox" id="delete-<?=$postAlquimia->txt_token?>" value="<?=$postAlquimia->txt_token?>"/>
-      				<label for="delete-<?=$postAlquimia->txt_token?>">Eliminar</label>
-    			</p>
+				
 				<div class="card-contexto-cont">
 					<h3 class="card-title"><?= $postAlquimia->txt_titulo ?></h3>
 				</div>
@@ -69,7 +72,7 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 <!-- end /.page-cont -->
 
 <?php
-$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_ALQUIMIA])->count('id_usuario'); 
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_ALQUIMIA])->andWhere(['b_habilitado'=>1])->count('id_usuario'); 
 if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 ?>
 
