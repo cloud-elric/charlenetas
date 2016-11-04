@@ -22,12 +22,7 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 		
 		foreach ($postsAlquimia as $postAlquimia){
 		?>
-		<div>
-			<p>
-      			<input type="checkbox" id="delete-<?=$postAlquimia->txt_token?>" value="<?=$postAlquimia->txt_token?>"/>
-      			<label for="delete-<?=$postAlquimia->txt_token?>">Eliminar</label>
-    		</p>
-		</div>
+		
 		<div class="col s12 m6 l4" id="card_<?=$postAlquimia->txt_token?>">
 			<div class="card card-alquimia" data-token="<?=$postAlquimia->txt_token?>">
 				
@@ -43,6 +38,12 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 				</div>
 
 				<div class="card-contexto-options">
+
+					<div class="alquimia-delete-check-cont">
+						<input type="checkbox" id="delete-<?=$postAlquimia->txt_token?>" value="<?=$postAlquimia->txt_token?>"/>
+						<label class="alquimia-delete-check" for="delete-<?=$postAlquimia->txt_token?>"></label>
+					</div>
+
 					<a id="button_<?=$postAlquimia->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia('<?=$postAlquimia->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
@@ -63,7 +64,7 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 			<i class="ion ion-wand"></i>
 		</a>
 		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
-			<i class="ion ion-trash"></i>
+			<i class="ion ion-ios-trash-outline"></i>
 		</a>
 	</div>
 	<!-- end /.fixed-action-btn -->

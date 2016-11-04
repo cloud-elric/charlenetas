@@ -78,6 +78,8 @@ function deletePosts(){
 	}
 }
 
+
+
 function calificarPrenderEstrellas(elemento) {
 	var calificacion = elemento.data('value');
 	encenderEstrellas(calificacion);
@@ -252,12 +254,19 @@ function stopEvent(ev) {
 
 $(document).ready(function(){
 	$('.card-alquimia').on('click', function(e) {
-		
+
 		if (e.target.localName == 'i') {
 			e.stopPropagation();
 			return;
 		}
+
+		else if ($(e.target).hasClass('alquimia-delete-check')) {
+			e.stopPropagation();
+			return false;
+		}
+
 		var token = $(this).data('token');
 		showPostFull(token)
 	});
+
 });

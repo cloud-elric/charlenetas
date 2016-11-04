@@ -67,9 +67,14 @@
 				font-size: 1em
 	// Optiones
 	.card-contexto-options
+		align-items: center
+		// background-color: rgba(blue,.3)
+		display: flex
+		justify-content: center
 		position: absolute
 		right: 20px
 		top: 10px
+		vertical-align: middle
 		// @include respond-to(xs)
 		// 	top: 10px
 		i,
@@ -98,6 +103,8 @@
 		.card-contexto-options-extra
 			i
 				background-color: $header-menu
+		.card-delete-check-cont
+			position: relative
 	// Tarjetas con color en especifico
 	// En contexto
 	&.card-contexto
@@ -269,3 +276,9 @@
 				line-height: 60px
 		i.material-icons
 			font-size: 2em
+
+// Alquimia
+[type="checkbox"]+label
+	padding-left: 25px
+[type="checkbox"]+label:before, [type="checkbox"]:not(.filled-in)+label:after
+	top: 4px

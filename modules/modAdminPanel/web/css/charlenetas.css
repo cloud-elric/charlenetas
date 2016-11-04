@@ -482,11 +482,17 @@ button.picker__close:focus {
   -ms-border-radius: 3px;
   border-radius: 3px;
   bottom: -20px;
+  display: none;
   left: 10px;
   position: absolute;
   right: 10px;
   top: -20px;
   z-index: 9999;
+}
+
+.field-entposts-imagen.field-entposts-imagen-true .btn {
+  bottom: 0;
+  position: absolute;
 }
 
 /*!
@@ -1303,9 +1309,13 @@ button.picker__close:focus {
 }
 
 .card .card-contexto-options {
+  align-items: center;
+  display: flex;
+  justify-content: center;
   position: absolute;
   right: 20px;
   top: 10px;
+  vertical-align: middle;
 }
 
 .card .card-contexto-options i,
@@ -1344,6 +1354,10 @@ button.picker__close:focus {
 
 .card .card-contexto-options .card-contexto-options-extra i {
   background-color: #345678;
+}
+
+.card .card-contexto-options .card-delete-check-cont {
+  position: relative;
 }
 
 .card.card-contexto .card-contexto-status {
@@ -1587,6 +1601,14 @@ button.picker__close:focus {
 
 .fixed-action-btn a i.material-icons {
   font-size: 2em;
+}
+
+[type="checkbox"] + label {
+  padding-left: 25px;
+}
+
+[type="checkbox"] + label:before, [type="checkbox"]:not(.filled-in) + label:after {
+  top: 4px;
 }
 
 /*!
