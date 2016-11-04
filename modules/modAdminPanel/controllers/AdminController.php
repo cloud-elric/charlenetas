@@ -23,6 +23,7 @@ use app\models\EntRespuestasEspejo;
 use app\models\EntNotificaciones;
 use app\models\ConstantesWeb;
 use sspl\meta\MetaData;
+use app\models\CatTiposUsuarios;
 
 /**
  * Default controller for the `adminPanel` module
@@ -219,6 +220,43 @@ class AdminController extends Controller {
 			echo "SUCCESS ";
 		else
 			echo "ERROR";
+	}
+	
+	/**
+	 * Vista creacion de usuarios
+	 */
+	public function actionCrearUsuarios(){
+		
+		return $this->render('crearUsuarios');
+	}
+	
+	/**
+	 * Almacenar usuarios en la tabla
+	 */
+	public function actionAlmacenarUsuarios(){
+		$tipoUsuarios = new CatTiposUsuarios();
+		
+		if($tipoUsuarios->load(Yii::$app->request->post ())){
+			$tipoUsuarios->save();
+		}
+	}
+	
+	/**
+	 * almacena los actions para cada usuario
+	 */
+	public function actionAlmacenarRol($id_action){
+		/*$tiposUsuarios = new ModUsuariosEntUsuarios();
+		$usuario = $tiposUsuarios->find()->where(['id_usuario'=>])->one();
+		 
+		$relaciones = new RelUsuarios();
+		 
+		if(!$action){
+
+			$relaciones->id_tipo_usuario = $usuario->id_tipo_usuario;
+			$relaciones->id_action = $i;
+			$relaciones->save();
+		}*/
+		echo "success";
 	}
 	
 	/**
