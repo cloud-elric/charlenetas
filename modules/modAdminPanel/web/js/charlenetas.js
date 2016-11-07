@@ -34,6 +34,8 @@ $(document).ready(function(){
 		//console.log(arrayToken);
 	});
 	
+	$('select').material_select();
+	
 	$('#js-mostrar-agenda').on('click',function(e){
 		e.preventDefault();
 		var arrayToken = [];
@@ -134,6 +136,17 @@ function cargarComentarios(token, borrarAnteriores) {
 
 }
 
+function cambioUser(idUser,idTipo){
+	//console.log(idUser);
+	//console.log(idTipo);
+	$.ajax({
+		url: basePath + 'adminPanel/admin/cambiar-user?idUser=' + idUser + '&idTipo=' + idTipo,
+		method : 'GET',
+		success : function(res) {
+			//alert("ok");	
+		}
+	});
+}
 
 //Carga las respuestas de cada comentario
 function cargarRespuestas(token, pageRespuestas) {
@@ -525,3 +538,56 @@ function loadLada(element) {
 	l.start();
 	showModalLogin()
 }
+
+/**
+ * asignar roles a usuarios
+ */
+function almacenarRoles(){
+	var act = document.getElementsByTagName('input');
+	for(i=0;i<act.length;i++){
+		if(act[i].checked){
+			//console.log(act[i].value);
+			$.ajax({
+				url: 'http://localhost/charlenetas/web/adminPanel/admin/almacenar-rol?id_action='+act[i].value,
+				type : 'GET',
+				success: function(){
+					alert("ok");
+				}
+			});
+		}
+	}
+}
+
+$('body').on(
+		'beforeSubmit',
+		'#almacenar-usuarios',
+		function() {
+			var form = $(this);
+			// return false if form still have some validation errors
+			if (form.find('.has-error').length) {
+				return false;
+			}
+			var button = document.getElementById('js-btn-crear-usuarios');
+			var l = Ladda.create(button);
+		 	l.start();
+			// submit form
+			$.ajax({
+				url : form.attr('action'),// url para peticion
+				type : 'post', // Metodo en el que se enviara la informacion
+				data : new FormData(this), // La informacion a mandar
+				dataType: 'json',  // Tipo de respuesta
+				cache : false, // sin cache
+				contentType : false,
+				processData : false,
+				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
+					l.stop();
+				},
+				statusCode: {
+				    404: function() {
+				      alert( "page not found" );
+				    }
+				  }
+
+			});
+			return false;
+		});

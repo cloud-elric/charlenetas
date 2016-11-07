@@ -23,6 +23,9 @@ use app\models\EntRespuestasEspejo;
 use app\models\EntNotificaciones;
 use app\models\ConstantesWeb;
 use sspl\meta\MetaData;
+use app\models\CatTiposUsuarios;
+use app\models\RelUsuarios;
+use app\models\ModUsuariosEntUsuarios;
 
 /**
  * Default controller for the `adminPanel` module
@@ -211,6 +214,14 @@ class AdminController extends Controller {
 		return $this->render('mostrarActions');
 	}
 	
+	public function actionCambiarUser($idUser,$idTipo){
+		$users = new ModUsuariosEntUsuarios();
+		$user = $users->find()->where(['id_usuario'=>$idUser])->one();
+		
+		$user->id_tipo_usuario = $idTipo;
+		$user->save();
+	}
+	
 	public function actionDeshabilitarPost($tokenPost = null) {
 		$postDeshabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postDeshabilitar->b_habilitado = 0;
@@ -219,6 +230,42 @@ class AdminController extends Controller {
 			echo "SUCCESS ";
 		else
 			echo "ERROR";
+	}
+	
+	/**
+	 * Vista creacion de usuarios
+	 */
+	public function actionCrearUsuarios(){
+		
+		return $this->render('crearUsuarios');
+	}
+	
+	/**
+	 * Almacenar usuarios en la tabla
+	 */
+	public function actionAlmacenarUsuarios(){
+		$tipoUsuarios = new CatTiposUsuarios();
+		
+		if($tipoUsuarios->load(Yii::$app->request->post ())){
+			$tipoUsuarios->save();
+		}
+	}
+	
+	/**
+	 * almacena los actions para cada usuario
+	 */
+	public function actionAlmacenarRol($id_action){
+		$tiposUsuarios = new CatTiposUsuarios();
+		$usuario = $tiposUsuarios->find()->orderBy('id_tipo_usuario DESC')->all();
+		 
+		$relaciones = new RelUsuarios();
+		
+		foreach($usuario as $us){
+			$relaciones->id_tipo_usuario = $us->id_tipo_usuario;
+			$relaciones->id_action = $id_action;
+			$relaciones->save();
+			break;
+		}
 	}
 	
 	/**
