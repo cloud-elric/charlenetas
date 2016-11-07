@@ -45,11 +45,11 @@ $form = ActiveForm::begin ( [
 		</div>
 	</div>
 	
-	<div>
-		<button onclick="almacenarRoles()"Crear</button>
-	</div>
-	
 	<?php } ?>
+	<br>
+	<div>
+		<input type="button" onclick="almacenarRoles()" value="Asignar">
+	</div>
 	
 <?php
 ActiveForm::end ();
