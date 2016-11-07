@@ -24,6 +24,7 @@
 	4.0 - Dashboard
 	5.0 - Tarjetas
 	6.0 - Contexto
+	7.0 - Calendario
 	--------------------------------------------------------
 	*/
 /*!
@@ -534,6 +535,12 @@ button.picker__close:focus {
   }
 }
 
+@media screen and (max-width: 450px) {
+  .header .logo {
+    width: 40px;
+  }
+}
+
 .header .header-cont {
   align-items: center;
   background-color: white;
@@ -554,6 +561,12 @@ button.picker__close:focus {
   }
 }
 
+@media screen and (max-width: 450px) {
+  .header .header-cont {
+    width: calc(100% - 40px);
+  }
+}
+
 .header .header-cont .toolbar {
   align-items: center;
   display: flex;
@@ -569,6 +582,18 @@ button.picker__close:focus {
   height: 100%;
   padding: 0 20px;
   position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .header .header-cont .toolbar > a {
+    padding: 0 18px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header .header-cont .toolbar > a {
+    padding: 0 12px;
+  }
 }
 
 .header .header-cont .toolbar > a i {
@@ -667,6 +692,12 @@ button.picker__close:focus {
 @media screen and (max-width: 768px) {
   .nav {
     width: 60px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .nav {
+    width: 40px;
   }
 }
 
@@ -784,6 +815,12 @@ button.picker__close:focus {
   }
 }
 
+@media screen and (max-width: 450px) {
+  .page {
+    margin-left: 40px;
+  }
+}
+
 .page .page-header {
   padding-top: 30px;
   padding-left: calc(0.75rem + 30px);
@@ -813,6 +850,12 @@ button.picker__close:focus {
 @media screen and (max-width: 768px) {
   .page .page-cont {
     padding: 30px 16px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .page .page-cont {
+    padding: 25px 10px;
   }
 }
 
@@ -936,6 +979,12 @@ button.picker__close:focus {
   }
 }
 
+@media screen and (max-width: 450px) {
+  .footer {
+    margin-left: 40px;
+  }
+}
+
 .footer .footer-cont {
   border-top: 1px solid #c8d3e6;
   display: flex;
@@ -953,6 +1002,13 @@ button.picker__close:focus {
   color: #345678;
   font-size: .9em;
   font-weight: 400;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .footer .footer-cont p {
+    text-align: center;
+  }
 }
 
 .footer .footer-cont p a {
@@ -1623,4 +1679,279 @@ button.picker__close:focus {
 	@mixin =============================================== */
 .contexto-search {
   margin-bottom: 40px;
+}
+
+/*!
+	-----------------------------------------------------------------------------
+
+	7.0 - Calendario
+			# Header
+			# Nav
+			# Page
+			# Footer
+
+	-----------------------------------------------------------------------------
+	*/
+/*  Calendario
+	@mixin =============================================== */
+.fc,
+.fc.fc-unthemed {
+  padding: 0 8px;
+  position: relative;
+}
+
+.fc .fc-today,
+.fc.fc-unthemed .fc-today {
+  background-color: rgba(126, 162, 199, 0.2);
+  border-color: rgba(126, 162, 199, 0.2);
+}
+
+.fc .fc-toolbar,
+.fc.fc-unthemed .fc-toolbar {
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-toolbar .fc-left,
+  .fc.fc-unthemed .fc-toolbar .fc-left {
+    float: none;
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
+
+.fc .fc-toolbar .fc-left > h2,
+.fc.fc-unthemed .fc-toolbar .fc-left > h2 {
+  font-size: 1.4em;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-toolbar .fc-left > h2,
+  .fc.fc-unthemed .fc-toolbar .fc-left > h2 {
+    float: none;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-toolbar .fc-right,
+  .fc.fc-unthemed .fc-toolbar .fc-right {
+    align-items: center;
+    float: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.fc .fc-toolbar .fc-right button,
+.fc .fc-toolbar .fc-right button.fc-today-button,
+.fc .fc-toolbar .fc-right button.fc-state-default,
+.fc .fc-toolbar .fc-right button.fc-state-hover,
+.fc .fc-toolbar .fc-right button.fc-state-disabled,
+.fc.fc-unthemed .fc-toolbar .fc-right button,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-today-button,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-default,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-hover,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-disabled {
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #345678;
+  color: #345678;
+  font-size: 1.05em;
+  font-weight: 500;
+}
+
+.fc .fc-toolbar .fc-right button:focus,
+.fc .fc-toolbar .fc-right button.fc-today-button:focus,
+.fc .fc-toolbar .fc-right button.fc-state-default:focus,
+.fc .fc-toolbar .fc-right button.fc-state-hover:focus,
+.fc .fc-toolbar .fc-right button.fc-state-disabled:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-today-button:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-default:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-hover:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-disabled:focus {
+  background-color: #7ea2c7;
+  color: white;
+}
+
+.fc .fc-toolbar .fc-right .fc-button-group button,
+.fc.fc-unthemed .fc-toolbar .fc-right .fc-button-group button {
+  background-color: #345678;
+  background-image: none;
+  color: white;
+}
+
+.fc .fc-toolbar .fc-right .fc-button-group button:active,
+.fc.fc-unthemed .fc-toolbar .fc-right .fc-button-group button:active {
+  background-color: #e9eff5;
+  background-image: none;
+}
+
+.fc .fc-toolbar .fc-right .fc-button-group button:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right .fc-button-group button:focus {
+  background-color: #7ea2c7;
+  background-image: none;
+}
+
+.fc .fc-view-container,
+.fc.fc-unthemed .fc-view-container {
+  background-color: white;
+}
+
+.fc .fc-view-container .fc-head .fc-head-container.fc-widget-header,
+.fc .fc-view-container .fc-head .fc-row.fc-widget-header,
+.fc .fc-view-container .fc-head thead,
+.fc.fc-unthemed .fc-view-container .fc-head .fc-head-container.fc-widget-header,
+.fc.fc-unthemed .fc-view-container .fc-head .fc-row.fc-widget-header,
+.fc.fc-unthemed .fc-view-container .fc-head thead {
+  border-color: #345678;
+}
+
+.fc .fc-view-container .fc-head .fc-day-header,
+.fc.fc-unthemed .fc-view-container .fc-head .fc-day-header {
+  background-color: #345678;
+  border-color: #345678;
+  color: white;
+  padding: 9px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-view-container .fc-body .fc-scroller,
+  .fc.fc-unthemed .fc-view-container .fc-body .fc-scroller {
+    overflow: auto !important;
+    height: auto !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-view-container .fc-body .fc-row,
+  .fc.fc-unthemed .fc-view-container .fc-body .fc-row {
+    min-height: 7em;
+  }
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton table thead,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton table thead {
+  background-color: #f8f8f8;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-day-top,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-day-top {
+  padding: 6px 0;
+  text-align: center;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-day-top .fc-day-number,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-day-top .fc-day-number {
+  float: none;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container {
+  padding: 4px 2px;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event {
+  border-radius: 0;
+  padding: 4px 2px;
+  position: relative;
+  text-align: center;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content {
+  margin-top: 20px;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event .closeon,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event .closeon {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event table tbody td,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event table tbody td {
+  border-color: #EEE;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-more-cell .fc-more,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-more-cell .fc-more {
+  color: #345678;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-more-cell .fc-more:hover,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-more-cell .fc-more:hover {
+  color: #7ea2c7;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+  padding: 3px 6px;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content {
+  margin-top: 6px;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content .fc-time span,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content .fc-time span {
+  font-family: "Lato", sans-serif;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content .fc-title,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content .fc-title {
+  font-family: "Lato", sans-serif;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .closeon,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .closeon {
+  position: absolute;
+  right: 6px;
+  top: 4px;
+}
+
+.fc .fc-popover .fc-header,
+.fc.fc-unthemed .fc-popover .fc-header {
+  padding: 6px;
+}
+
+.fc .fc-popover .fc-body .fc-event-container,
+.fc.fc-unthemed .fc-popover .fc-body .fc-event-container {
+  padding: 4px 2px;
+}
+
+.fc .fc-popover .fc-body .fc-event-container .fc-day-grid-event,
+.fc.fc-unthemed .fc-popover .fc-body .fc-event-container .fc-day-grid-event {
+  border-radius: 0;
+  margin-bottom: 2px;
+}
+
+.fc .fc-popover .fc-body .fc-event-container .fc-day-grid-event .fc-content,
+.fc.fc-unthemed .fc-popover .fc-body .fc-event-container .fc-day-grid-event .fc-content {
+  margin-top: 20px;
+}
+
+.fc .fc-popover .fc-body .fc-event-container .fc-day-grid-event .closeon,
+.fc.fc-unthemed .fc-popover .fc-body .fc-event-container .fc-day-grid-event .closeon {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.fc.fc-unthemed thead,
+.fc.fc-unthemed.fc-unthemed thead {
+  border-color: #345678;
+  border-bottom: 1px solid #f8f8f8;
 }

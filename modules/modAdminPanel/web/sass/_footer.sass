@@ -17,19 +17,24 @@
 	margin-left: 90px
 	padding: 0 30px
 	position: relative
-	@include respond-to(xs)
+	+respond-to(xs)
 		margin-left: 60px
+	+respond-to(xx)
+		margin-left: 40px
 	.footer-cont
 		border-top: 1px solid #c8d3e6
 		display: flex
 		justify-content: space-between
 		padding: 20px 0
-		@include respond-to(xs)
+		+respond-to(xs)
 			flex-direction: column
 		p
 			color: $header-menu
 			font-size: .9em
 			font-weight: 400
+			margin: 0
+			+respond-to(xs)
+				text-align: center
 			a
 				font-size: .9em
 	&.footer-agenda

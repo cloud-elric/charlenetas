@@ -29,8 +29,10 @@
 		display: flex
 		justify-content: center
 		width: 90px
-		@include respond-to(xs)
+		+respond-to(xs)
 			width: 60px
+		+respond-to(xx)
+			width: 40px
 	.header-cont
 		align-items: center
 		background-color: $white
@@ -45,6 +47,8 @@
 		@include respond-to(xs)
 			padding: 0
 			width: calc(100% - 60px)
+		+respond-to(xx)
+			width: calc(100% - 40px)
 		.toolbar
 			align-items: center
 			// background-color: red
@@ -61,6 +65,10 @@
 				// margin: 0 2px
 				padding: 0 20px
 				position: relative
+				+respond-to(xs)
+					padding: 0 18px
+				+respond-to(xx)
+					padding: 0 12px
 				i
 					font-size: 1.3em
 				&:hover
@@ -142,6 +150,8 @@
 	// 		width: 100% !important
 	@include respond-to(xs)
 		width: 60px
+	@include respond-to(xx)
+		width: 40px
 	a
 		color: #c2c2c2
 		display: block
