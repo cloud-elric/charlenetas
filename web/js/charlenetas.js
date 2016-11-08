@@ -12,8 +12,13 @@ var masonryOptions = {
 	gutter : 15,
 
 };
+<<<<<<< HEAD
+
+var basePathFace = 'http://notei.com.mx/';
+=======
 var basePath = 'http://localhost/charlenetas/web/';
 //var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+>>>>>>> origin/master
 
 
 // Carga mas pins de los post
