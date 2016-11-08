@@ -3,6 +3,8 @@ use yii\web\View;
 use yii\helpers\Url;
 use app\models\ConstantesWeb;
 use app\models\EntPosts;
+
+$this->title = 'Charlenetas';
 ?>
 <?=$this->render('//layouts/header')?>
 <?=$this->render('//layouts/nav', ['tiposPost'=>$tiposPost])?>
@@ -29,12 +31,13 @@ use app\models\EntPosts;
 </div>
 
 <?php
-$postTotales = EntPosts::find()->count("id_post"); 
-if($postTotales>=ConstantesWeb::PINS_A_MOSTRAR){
+$postTotales = EntPosts::find()->Where(['b_habilitado'=>1])->count("id_post"); 
+//echo $postTotales;
+if($postTotales>ConstantesWeb::PINS_A_MOSTRAR){
 ?>
 
 <div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
-	id="js-cargar-mas-posts" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::PINS_A_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	id="js-cargar-mas-posts" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::PINS_A_MOSTRAR?>)"><span class="ladda-label">Cargar mas 
 	entradas...<label>(<?=$postTotales - ConstantesWeb::PINS_A_MOSTRAR?>)</label></span></div>
 
 <?php

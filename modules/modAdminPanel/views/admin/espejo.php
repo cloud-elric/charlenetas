@@ -19,6 +19,12 @@ $this->icon = '<i class="ion ion-eye"></i>';
 			$espejoContestado = true;
 		}
 		?>
+		<div>
+			<p>
+      			<input type="checkbox" id="delete-<?=$postEspejo->txt_token?>" value="<?=$postEspejo->txt_token?>"/>
+      			<label for="delete-<?=$postEspejo->txt_token?>">Eliminar</label>
+    		</p>
+		</div>
 		<div class="col s12 m6 l4" id="card_<?=$postEspejo->txt_token?>">
 			<div class="card card-espejo" data-token="<?=$postEspejo->txt_token?>">
 				
@@ -43,7 +49,7 @@ $this->icon = '<i class="ion ion-eye"></i>';
 					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalResponderEspejo('<?=$postEspejo->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
-					</a>
+					</a>				
 				</div>
 			</div>
 		</div>
@@ -53,12 +59,20 @@ $this->icon = '<i class="ion ion-eye"></i>';
 		
 	</div>
 	<!-- end /.row -->
+	
+	<!-- .fixed-action-btn -->
+	<div class="fixed-action-btn horizontal">
+		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
+			<i class="ion ion-trash"></i>
+		</a>
+	</div>
+	<!-- end /.fixed-action-btn -->
 
 </div>
 <!-- end /.page-cont -->
 
 <?php
-$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_ESPEJO])->count('id_usuario'); 
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_ESPEJO])->andWhere(['b_habilitado'=>1])->count('id_usuario'); 
 if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 //echo "Total de  posts: ". $postTotales;
 ?>

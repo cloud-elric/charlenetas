@@ -15,6 +15,12 @@ $this->icon = '<i class="ion ion-android-bulb"></i>';
 	<div class="row" id="js-contenedor-tarjetas">
 		
 		<?php foreach ($postsHoyPense as $postHoyPense){ ?>
+		<div>
+			<p>
+      			<input type="checkbox" id="delete-<?=$postHoyPense->txt_token?>" value="<?=$postHoyPense->txt_token?>"/>
+      			<label for="delete-<?=$postHoyPense->txt_token?>">Eliminar</label>
+    		</p>
+		</div>
 		
 		<div class="col s12 m6 l4" id="card_<?=$postHoyPense->txt_token?>">
 			<div class="card card-hoy-pense" data-token="<?=$postHoyPense->txt_token?>">
@@ -49,6 +55,9 @@ $this->icon = '<i class="ion ion-android-bulb"></i>';
 		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i>
 		</a>
+		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
+			<i class="ion ion-trash"></i>
+		</a>
 	</div>
 	<!-- end /.fixed-action-btn -->
 
@@ -56,7 +65,7 @@ $this->icon = '<i class="ion ion-android-bulb"></i>';
 <!-- end /.page-cont -->
 
 <?php
-$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_HOY_PENSE])->count('id_usuario'); 
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_HOY_PENSE])->andWhere(['b_habilitado'=>1])->count('id_usuario'); 
 if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 //echo "Total de  posts: ". $postTotales;
 ?>

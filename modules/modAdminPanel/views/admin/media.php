@@ -15,6 +15,12 @@ $this->icon = '<i class="ion ion-images"></i>';
 
 	<div class="row" id="js-contenedor-tarjetas">
 	<?php foreach ($postsMedia as $postMedia){?>
+	<div>
+		<p>
+   			<input type="checkbox" id="delete-<?=$postMedia->txt_token?>" value="<?=$postMedia->txt_token?>"/>
+      		<label for="delete-<?=$postMedia->txt_token?>">Eliminar</label>
+    	</p>
+	</div>
 	
 	<div class="col s12 m6 l4" id="card_<?=$postMedia->txt_token?>">
 			<div class="card card-media" data-token="<?=$postMedia->txt_token?>" style="background-image: url(http://img.youtube.com/vi/<?=Utils::getIdVideoYoutube($postMedia->txt_url)?>/mqdefault.jpg)">
@@ -41,13 +47,16 @@ $this->icon = '<i class="ion ion-images"></i>';
 		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i>
 		</a>
+		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
+			<i class="ion ion-trash"></i>
+		</a>
 	</div>
 
 </div>
 <!-- end /.page-cont -->
 
 <?php
-$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_MEDIA])->count('id_usuario'); 
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_MEDIA])->andWhere(['b_habilitado'=>1])->count('id_usuario'); 
 if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 ?>
 

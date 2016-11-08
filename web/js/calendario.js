@@ -7,6 +7,10 @@ var y = date.getFullYear();
 var calendar = $('#calendar').fullCalendar({
     // put your options and callbacks here
 	eventLimit: true,
+	monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+    dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+    dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
 	events: 'http://localhost/charlenetas/web/netas/anadir-citas',
 	    
 	dayClick: function(date, jsEvent, view ){
@@ -15,15 +19,20 @@ var calendar = $('#calendar').fullCalendar({
 		calendar.fullCalendar('changeView','agendaDay')
 		
 		if(view.name == 'agendaDay'){
-			var title = prompt('Title:');
-			if (title) {
-				start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
-				alert(start);
-				end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
-				m = moment(date);
-				m.add(1,'hours').hours();
-				end = moment(m).format('YYYY-MM-DD HH:mm:ss');
-				alert(end);
+			$('.modal-trigger').trigger('click');
+			//var title = prompt('Title:');
+			//if (title) {
+			start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+			//alert(start);
+			end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+			m = moment(date);
+			m.add(1,'hours').hours();
+			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
+			//alert(end);
+				
+			$('#submitButton').on('click', function(e){
+				e.preventDefault();
+				title = $('#nombreCita').val()
 				$.ajax({
 					url: 'agregar-citas',
 					data: 'title='+ title+'&start='+ start +'&end='+ end ,
@@ -31,7 +40,8 @@ var calendar = $('#calendar').fullCalendar({
 					type: 'POST',
 					success: function(json) {
 						if(json.status == "creditosSuficientes"){
-							alert("Se guardo la cita correctamente");
+							//alert("Se guardo la cita correctamente");
+							$('.lean-overlay').trigger("click");
 							calendar.fullCalendar('renderEvent',
 									{
 									title: title,
@@ -49,7 +59,7 @@ var calendar = $('#calendar').fullCalendar({
 						alert("Ocurrio un error inesperado en el servidor");
 					}
 				});
-			}
+			});
 			calendar.fullCalendar('unselect');	
 		}
 	} 

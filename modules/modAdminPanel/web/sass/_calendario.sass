@@ -1,0 +1,210 @@
+/*!
+	-----------------------------------------------------------------------------
+
+	7.0 - Calendario
+			# Header
+			# Nav
+			# Page
+			# Footer
+
+	-----------------------------------------------------------------------------
+	*/
+
+/*  Calendario
+	================================================ */
+.fc,
+.fc.fc-unthemed
+	// background-color: red
+	padding: 0 8px
+	position: relative
+	.fc-today
+		background-color: rgba($header-menu-hover,.2)
+		border-color: rgba($header-menu-hover,.2)
+	// Header
+	.fc-toolbar
+		margin-bottom: 30px
+		// title
+		.fc-left
+			// background-color: yellow
+			+respond-to(xs)
+				// background-color: red
+				float: none
+				display: block
+				// min-height: 40px
+				margin-bottom: 20px
+				width: 100%
+			> h2
+				font-size: 1.4em
+				font-weight: 500
+				margin-top: 10px
+				+respond-to(xs)
+					float: none
+					text-align: center
+		// Btn Today
+		.fc-right
+			// background-color: pink
+			+respond-to(xs)
+				align-items: center
+				// background-color: puple
+				float: none
+				display: flex
+				justify-content: center
+				// min-height: 40px
+				width: 100%
+			button,
+			button.fc-today-button,
+			button.fc-state-default,
+			button.fc-state-hover,
+			button.fc-state-disabled
+				background-color: transparent
+				background-image: none
+				border: 1px solid $header-menu
+				color: $header-menu
+				font-size: 1.05em
+				font-weight: 500
+				&:focus
+					background-color: $header-menu-hover
+					color: $white
+			// Btns (left-right)
+			.fc-button-group
+				button
+					background-color: $header-menu
+					background-image: none
+					color: $white
+					&:active
+						background-color: $header-menu-off
+						background-image: none
+					&:focus
+						background-color: $header-menu-hover
+						background-image: none
+	// Container
+	.fc-view-container
+		background-color: $white
+		// Header
+		.fc-head
+			.fc-head-container.fc-widget-header,
+			.fc-row.fc-widget-header,
+			thead
+				border-color: $header-menu
+			.fc-day-header
+				background-color: $header-menu
+				border-color: $header-menu
+				color: $white
+				padding: 9px 0
+		// Body
+		.fc-body
+			.fc-scroller
+				+respond-to(xs)
+					overflow: auto!important
+					height: auto!important
+			.fc-row
+				+respond-to(xs)
+					min-height: 7em
+				.fc-content-skeleton
+					table
+						thead
+							background-color: #f8f8f8
+					// top
+					.fc-day-top
+						padding: 6px 0
+						text-align: center
+						.fc-day-number
+							float: none
+					// evento
+					.fc-event-container
+						// background-color: yellow
+						padding: 4px 2px
+						// evento
+						.fc-day-grid-event
+							border-radius: 0
+							padding: 4px 2px
+							position: relative
+							text-align: center
+							.fc-content
+								margin-top: 20px
+							.closeon
+								position: absolute
+								right: 2px
+								top: 2px
+							// table
+							table
+								// body
+								tbody
+									td
+										border-color: #EEE
+					// more
+					.fc-more-cell
+						// background-color: red
+						a.fc-more
+							color: $header-menu
+							display: block
+							font-weight: 800
+							padding: 10px 0
+							text-align: center
+							width: 100%
+							&:hover
+								color: $header-menu-hover
+			// grid
+			.fc-time-grid
+				.fc-time-grid-event
+					+border-radius(0)
+					padding: 3px 6px
+					.fc-content
+						margin-top: 6px
+						.fc-time
+							span
+								font-family: $f-base
+						.fc-title
+							font-family: $f-base
+					.closeon
+						position: absolute
+						right: 6px
+						top: 4px
+	// Pop
+	.fc-popover
+		box-shadow(3)
+		// header
+		.fc-header
+			padding: 6px
+		// body
+		.fc-body
+			.fc-event-container
+				padding: 4px 2px
+				.fc-day-grid-event
+					border-radius: 0
+					margin-bottom: 2px
+					.fc-content
+						margin-top: 20px
+					.closeon
+						position: absolute
+						right: 2px
+						top: 2px
+	// Clase extra
+	&.fc-unthemed
+		thead
+			border-color: $header-menu
+			border-bottom: 1px solid #f8f8f8
+
+
+// Modal Calendario
+// Eliminar
+.modal-calendario
+	.modal-content
+		padding: 40px 24px 20px
+		h4
+			text-align: center
+	.modal-footer
+		align-items: center
+		display: flex
+		justify-content: center
+		padding: 10px 10px 30px
+		.modal-footer-btn-cancelar
+			background-color: transparent
+			+box-shadow(0)
+			color: $header-menu
+			margin-right: 12px
+			&:focus,
+			&:hover
+				+box-shadow(1)
+				opacity: .8
+		// .modal-footer-btn-aceptar
