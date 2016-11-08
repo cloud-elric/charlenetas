@@ -63,16 +63,22 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
 	<?=$this->render('@app/modules/modAdminPanel/views/admin/templates/modalEditar');?>
 	
 	<!-- Modal para crear citas en calendario -->
-	<a class="modal-trigger waves-effect waves-ligth btn" href="#modal2" style="display: none">Modal</a>
+	<a class="modal-trigger js-crear waves-effect waves-ligth btn" href="#modal2" style="display: none">Modal</a>
 	<!-- Modal structure -->
 	<div id="modal2" class="modal">
 		<div class="modal-content">
-			<h4>Crear Cita Admin</h4>
+			<h4>Crear <span>Cita</span></h4>
 			<form>
-				<label>Cita: </label>
-				<input type="text" id="nombreCita" name="nombreCita">
-				<div>
-					<button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" id="submitButton">Guardar</button>
+				<div class="row">
+					<div class="col s12 m12">
+						
+						<label>Cita: </label>
+						<input type="text" id="nombreCita" name="nombreCita">
+						<div>
+							<button type="submit" class="btn btn-submit waves-effect" id="submitButton">Guardar</button>
+						</div>
+
+					</div>
 				</div>
 			</form>
 		</div>
@@ -82,13 +88,13 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
  	<a class="modal-trigger js-eliminar waves-effect waves-light btn" href="#modal3" style="display: none">Modal</a>
 
   	<!-- Modal Structure -->
-  	<div id="modal3" class="modal">
+  	<div id="modal3" class="modal modal-calendario">
     	<div class="modal-content">
-      		<p>Deseas Eliminar la cita del calendario</p>
+      		<h4><span>Deseas</span> Eliminar <span>la cita del calendario</span></h4>
     	</div>
     	<div class="modal-footer">
-      		<button type="button" id="Aceptar" value="true" class=" modal-action modal-close waves-effect waves-green btn-flat">Aceptar</button>
-      		<button type="button" id="Cancelar" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</button>
+      		<button type="button" id="Cancelar" class="btn btn-submit modal-footer-btn-cancelar waves-effect">Cancelar</button>
+      		<button type="button" id="Aceptar" value="true" class="btn btn-submit modal-footer-btn-aceptar waves-effect">Aceptar</button>
     	</div>
   </div>
 

@@ -20,8 +20,10 @@
 	min-height: calc(100vh - 152px)
 	position: relative
 	z-index: 2
-	@include respond-to(xs)
+	+respond-to(xs)
 		margin-left: 60px
+	+respond-to(xx)
+		margin-left: 40px
 	.page-header
 		padding-top: 30px
 		padding-left: calc(0.75rem + 30px)
@@ -36,8 +38,10 @@
 				margin-right: 6px
 	.page-cont
 		padding: 30px
-		@include respond-to(xs)
+		+respond-to(xs)
 			padding: 30px 16px
+		+respond-to(xx)
+			padding: 25px 10px
 
 /*  Page Agenda
 	================================================ */

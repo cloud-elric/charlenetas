@@ -2,6 +2,10 @@
 use app\models\EntComentariosPosts;
 use app\models\EntUsuariosFeedbacks;
 use yii\helpers\Html;
+use app\models\CatTiposUsuarios;
+
+$tipoUsuarios = new CatTiposUsuarios();
+$users = $tipoUsuarios->find()->all();
 ?>
 
 <!-- .page-header -->
@@ -32,7 +36,22 @@ use yii\helpers\Html;
 						<div class="col s9">
 							<p class="card-user-nombre"><?= $usuario->txt_username?></p>
 							<p class="card-user-email"><?= $usuario->txt_email?></p>
-							<p class="card-user-tipo-user"><?= $usuario->idTipoUsuario->txt_nombre?></p>
+							<!-- <p class="card-user-tipo-user"><?= $usuario->idTipoUsuario->txt_nombre?></p> -->
+							<?php if($usuario->idTipoUsuario->txt_nombre != "Super administrador"){ ?>
+							<div class="input-field col s12">
+    							<select onChange="cambioUser(<?=$usuario->id_usuario?>,value)">
+								    <option value="<?= $usuario->idTipoUsuario->id_tipo_usuario?>"><?= $usuario->idTipoUsuario->txt_nombre?></option>
+								    <?php foreach($users as $us){ ?>
+								    	<?php if($us->txt_nombre != $usuario->idTipoUsuario->txt_nombre){ ?>
+								    			<option value="<?= $us->id_tipo_usuario ?>"><?=$us->txt_nombre ?></option>
+								    <?php 	  }
+										  }
+								    ?>
+								</select>
+  							</div>
+  							<?php }else{?>
+  								<p class="card-user-tipo-user"><?= $usuario->idTipoUsuario->txt_nombre?></p>
+  							<?php }?>
 						</div>
 					</div>
 				</div>

@@ -5,6 +5,7 @@ namespace app\modules\modAdminPanel\controllers;
 use yii\web\Controller;
 use yii\db\mssql\PDO;
 use app\modules\ModUsuarios\models\Utils;
+use app\models\EntCitas;
 
 /**
  * Calendario controller for the `adminPanel` module
@@ -36,17 +37,10 @@ class CalendarioController extends Controller
     	
     	$json = array();
     	 
-    	$requete = "SELECT * FROM ent_citas where b_habilitado = 1 ORDER BY id";
+    	$entCitas = new EntCitas();
+    	$ordenCitas = $entCitas->find()->where(['b_habilitado'=>1])->orderBy('id ASC')->asArray()->all();
     	 
-    	try {
-    		$bdd = new PDO('mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root');
-    	} catch(Exception $e) {
-    		exit('Imposible conectar a la base de datos.');
-    	}
-    	 
-    	$resultat = $bdd->query($requete) or die(print_r($bdd->errorInfo()));
-    	 
-    	echo json_encode($resultat->fetchAll(PDO::FETCH_ASSOC));
+    	echo json_encode($ordenCitas);
     	 
     }
     
@@ -60,15 +54,13 @@ class CalendarioController extends Controller
     	$start=$_POST['start'];
     	$end=$_POST['end'];
     	
-    	try {
-    		$bdd = new PDO('mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root');
-    	} catch(Exception $e) {
-    		exit('Imposible conectar a la base de datos.');
-    	}
+    	$entCitas = new EntCitas();
+    	$actualizar = $entCitas->find()->where(['id'=>$id])->one();
     	
-    	$sql = "UPDATE ent_citas SET title=?, start=?, end=? WHERE id=?";
-    	$q = $bdd->prepare($sql);
-    	$q->execute(array($title,$start,$end,$id));
+    	$actualizar->title = $title;
+    	$actualizar->start = $start;
+    	$actualizar->end = $end;
+    	$actualizar->save();
     }
     
     /**
@@ -82,16 +74,16 @@ class CalendarioController extends Controller
     	$id_usuario = 25;//Yii::$app->user->identity;
     	$txt_token = Utils::generateToken ( 'cita_' );
     	
-    	try {
-    		$bdd = new PDO('mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root');
-    	} catch(Exception $e) {
-    		exit('Imposible conectar a la base de datos.');
-    	}
+    	$entCitas = new EntCitas();
     	
-	    $sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
-    	$q = $bdd->prepare($sql);
-    	$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end, ':id_usuario'=>$id_usuario, ':txt_token'=>$txt_token));
-   
+    	$entCitas->title = $title;
+    	$entCitas->start = $start;
+    	$entCitas->end = $end;
+    	$entCitas->id_usuario = $id_usuario;
+    	$entCitas->txt_token = $txt_token;
+    	
+    	$entCitas->save();
+    	//print_r($entCitas);
     }
     
     /**
@@ -100,13 +92,10 @@ class CalendarioController extends Controller
     public function actionEliminarCitas(){
     	$id = $_POST['id'];
     	
-    	$ligacao = mysqli_connect("localhost", "root", "root", "charlenetas_geekdb");
-    	if (mysqli_connect_errno()) {
-    		echo "Can't connect to database: " . mysqli_connect_error();
-    	}
+    	$entCitas = new EntCitas();
+    	$eliminar = $entCitas->find()->where(['id'=>$id])->one();
     	
-    	$sql = "update ent_citas set b_habilitado = 0 WHERE id= '$id'";
-    	$resultado = mysqli_query($ligacao, $sql);
-    	mysqli_close($ligacao);
+    	$eliminar->b_habilitado = 0;
+    	$eliminar->save();
     }
 }

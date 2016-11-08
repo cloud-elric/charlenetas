@@ -886,17 +886,10 @@ class NetasController extends Controller {
 	public function actionAnadirCitas() {
 		$json = array ();
 		
-		$requete = "SELECT * FROM ent_citas where b_habilitado = 1 ORDER BY id ";
+		$entCitas = new EntCitas();
+		$ordenCitas = $entCitas->find()->where(['b_habilitado'=>1])->orderBy('id ASC')->asArray()->all();
 		
-		try {
-			$bdd = new PDO ( 'mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root' );
-		} catch ( Exception $e ) {
-			exit ( 'Imposible conectar a la base de datos.' );
-		}
-		
-		$resultat = $bdd->query ( $requete ) or die ( print_r ( $bdd->errorInfo () ) );
-		
-		echo json_encode ( $resultat->fetchAll ( PDO::FETCH_ASSOC ) );
+		echo json_encode ( $ordenCitas );
 	}
 	
 	/**
@@ -921,11 +914,8 @@ class NetasController extends Controller {
 		$vistaCredito = $vistaCreditos->find()->where(['id_usuario'=>$id_usuario])->one();
 	
 		if($vistaCredito->num_total_creditos >= $costo->costo){
-			try {
-				$bdd = new PDO ( 'mysql:host=localhost;dbname=charlenetas_geekdb', 'root', 'root' );
-			} catch ( Exception $e ) {
-				exit ( 'Imposible conectar a la base de datos.' );
-			}
+			
+			$entCitas = new EntCitas();
 		
 			$notificaciones = new EntNotificaciones ();
 			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
@@ -933,15 +923,13 @@ class NetasController extends Controller {
 			$creditosGastados = new EntUsuariosCreditosGastados();
 			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $id_usuario, $costo->costo);
 		
-			$sql = "INSERT INTO ent_citas (title, start, end, id_usuario, txt_token) VALUES (:title, :start, :end, :id_usuario, :txt_token)";
-			$q = $bdd->prepare ( $sql );
-			$q->execute ( array (
-				':title' => $title,
-				':start' => $start,
-				':end' => $end,
-				':id_usuario' => $id_usuario,
-				':txt_token' => $txt_token 
-			) );
+			$entCitas->title = $title;
+			$entCitas->start = $start;
+			$entCitas->end = $end;
+			$entCitas->id_usuario = $id_usuario;
+			$entCitas->txt_token = $txt_token;
+			$entCitas->save();
+			
 			$success = "creditosSuficientes";
 			return ["status"=>$success];
 		}

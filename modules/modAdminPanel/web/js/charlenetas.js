@@ -34,6 +34,8 @@ $(document).ready(function(){
 		//console.log(arrayToken);
 	});
 	
+	$('select').material_select();
+	
 	$('#js-mostrar-agenda').on('click',function(e){
 		e.preventDefault();
 		var arrayToken = [];
@@ -134,6 +136,17 @@ function cargarComentarios(token, borrarAnteriores) {
 
 }
 
+function cambioUser(idUser,idTipo){
+	//console.log(idUser);
+	//console.log(idTipo);
+	$.ajax({
+		url: basePath + 'adminPanel/admin/cambiar-user?idUser=' + idUser + '&idTipo=' + idTipo,
+		method : 'GET',
+		success : function(res) {
+			//alert("ok");	
+		}
+	});
+}
 
 //Carga las respuestas de cada comentario
 function cargarRespuestas(token, pageRespuestas) {
@@ -538,7 +551,7 @@ function almacenarRoles(){
 				url: 'http://localhost/charlenetas/web/adminPanel/admin/almacenar-rol?id_action='+act[i].value,
 				type : 'GET',
 				success: function(){
-					alert("ok");
+					//alert("ok");
 				}
 			});
 		}
@@ -571,7 +584,7 @@ $('body').on(
 				},
 				statusCode: {
 				    404: function() {
-				      alert( "page not found" );
+				      //alert( "page not found" );
 				    }
 				  }
 
