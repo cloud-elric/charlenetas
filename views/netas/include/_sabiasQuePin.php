@@ -22,12 +22,10 @@ use app\models\EntSabiasQue;
 		if(!Yii::$app->user->isGuest){
 			$idUsuario = Yii::$app->user->identity->id_usuario;
 			
-			$sabiasQue = new EntSabiasQue();
-			$pregAdmin = $sabiasQue->find()->where(['id_post'=>$post->id_post])->one();
+			$pregAdmin =  EntSabiasQue::find()->where(['id_post'=>$post->id_post])->one();
 			
-			$respuesta = new EntUsuariosRespuestasSabiasQue();
-			$validar = $respuesta->find()->where(['id_usuario'=>$idUsuario])->andWhere(['id_post'=>$post->id_post])->one();
-			if($validar == false){	
+			$validar = EntUsuariosRespuestasSabiasQue::find()->where(['id_usuario'=>$idUsuario])->andWhere(['id_post'=>$post->id_post])->one();
+			if(!$validar){	
 	?>
 	
 				<div class="switch pin-content-wrapper-switch">

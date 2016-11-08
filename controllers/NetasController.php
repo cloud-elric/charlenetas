@@ -489,19 +489,22 @@ class NetasController extends Controller {
 			$usuarioCalificacion = new EntUsuariosCalificacionAlquimia ();
 			$usuarioCalificacion->guardarCalificacionUsuario ( $idUsuario, $post->id_post, $calificacion );
 			
-			// Obtenemos el numero de likes del post
-			$alquimia = $post->entAlquimias;
-			$numCalificaciones = $alquimia->calificacionAlquimia;
-			
-			// Si existe calificaciones
-			if ($numCalificaciones) {
-				$alquimia->actualizarCalificacion ( $numCalificaciones->num_calificacion );
-			} else {
-				echo 'nada se encontro';
-			}
 		} else {
 			$calificacionUsuario->num_calificacion = $calificacion;
 			$calificacionUsuario->save ();
+		}
+		
+		// Obtenemos el numero de likes del post
+		$alquimia = $post->entAlquimias;
+		$numCalificaciones = $alquimia->calificacionAlquimia;
+			
+		// Si existe calificaciones
+		if ($numCalificaciones) {
+			
+			$alquimia->actualizarCalificacion ( $numCalificaciones->num_calificacion );
+			echo "success";
+		} else {
+			echo 'nada se encontro';
 		}
 	}
 	
