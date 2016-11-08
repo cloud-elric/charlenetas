@@ -34,6 +34,7 @@ $config = [
 						'timeout' => 3600 
 				], // Segundos que durara la sesion
 				'request' => [
+						'enableCsrfValidation'=>false,
 						// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
 						'cookieValidationKey' => 'KBI6OjMCowgwXJCMlZGkMY7SyGdyGb7s' 
 				],
@@ -97,6 +98,7 @@ $config = [
 								'callback-facebook' => 'modUsuarios/manager/callback-facebook',
 								'/' => 'netas/index',
 								//modulo de administrador
+								"adminPanel/"=>"adminPanel/admin/dashboard",
 								"adminPanel"=>"adminPanel/admin/dashboard"
 						] 
 				] 

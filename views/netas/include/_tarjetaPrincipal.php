@@ -2,7 +2,7 @@
 /* @var $post EntPosts*/
 ?>
 
-<div class="pin" data-post="<?=$post->txt_token?>">
+<div class="pin pin-sabias-que" data-post="<?=$post->txt_token?>">
 	<div class="pin-header"></div>
 	<div class="image">
 		<img data-src="webAssets/images/<?=$post->txt_imagen?>">

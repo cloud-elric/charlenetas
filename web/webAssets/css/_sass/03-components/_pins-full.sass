@@ -20,12 +20,12 @@
     width: 95%
     min-width: 95%
     max-width: 95%
-    background-color: yellow
+    // background-color: yellow
   +respond-to(xs)
     width: 95%
     min-width: 95%
     max-width: 95%
-    background-color: red
+    // background-color: red
   & > i
     position: absolute
     top: 40px
@@ -176,6 +176,18 @@
             border-radius: 50%
       .comment-body
         margin-bottom: 40px
+    .comentarios-cargar-comentarios
+      align-items: center
+      display: flex
+      justify-content: flex-end
+      p
+        cursor: pointer
+        font-weight: 400
+        text-decoration: underline
+        +respond-to(xs)
+          font-size: .85em
+        span
+          margin-right: 10px
 .comment-footer,
 .respuesta-footer,
 .full-pin-body-footer
@@ -284,7 +296,9 @@
   text-align: center
   img
     float: none
+    margin-top: 20px
     min-width: 100%
+    width: 100%
   p
     text-align: left
 

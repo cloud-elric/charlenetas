@@ -20,30 +20,32 @@ class AppAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [
 			'css/charlenetas.css',
-			//'css/component.css',
-			//'plugins/pins-grid/pins.min.css',
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css',
 			'https://fonts.googleapis.com/icon?family=Material+Icons',
 			'webAssets/css/web-styles.css',
 			'plugins/ladda-bootstrap/dist/ladda-themeless.min.css',
+			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css',
 			'css/temporal.css',
 			'css/animate.css',
-			'css/login.css'
+			'css/login.css',
+			'plugins/animsition/css/animsition.min.css',
+			'css/fullcalendar.css'
+
 	];
 	public $js = [
-			// 'js/codrops-js/modernizr.custom.js',
-			// 'js/codrops-js/masonry.pkgd.min.js',
-			// 'js/codrops-js/imagesloaded.js',
-			// 'js/codrops-js/classie.js',
-			// 'js/codrops-js/AnimOnScroll.js',
+			
 			'js/charlenetas.js',
-			//'plugins/pins-grid/pins.min.js',
-			//'plugins/pins-grid/pins.js',
+			
 			'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js',
 			'http://masonry.desandro.com/masonry.pkgd.js',
 			'plugins/ladda-bootstrap/dist/spin.min.js',
 			'plugins/ladda-bootstrap/dist/ladda.min.js',
-			'js/login.js'
+			'js/login.js',
+			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
+			'plugins/animsition/js/animsition.min.js',
+			'js/moment.min.js',
+			'js/fullcalendar.js',
+			'js/calendario.js'
 
 	]
 	;

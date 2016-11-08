@@ -27,7 +27,7 @@ foreach ( $listaPost as $post ) {
 		case 8: // Sabias que
 			include 'include/_sabiasQuePin.php';
 		default :
-			include 'include/_tarjetaPrincipal.php';
+			#include 'include/_tarjetaPrincipal.php';
 			break;
 	}
 }

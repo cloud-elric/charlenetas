@@ -14,7 +14,10 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+<<<<<<< HEAD
 	<script> var basePath = '<?=Yii::$app->urlManager->createAbsoluteUrl ( [ ] );?>'; </script>
+=======
+>>>>>>> origin/master
 	<link rel="shortcut icon" type="image/png" href="<?=Url::base()?>/favicon.png"/>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,7 +72,11 @@ function statusChangeCallback(response) {
 			}else{
 				// Logged into your app and Facebook.
 				$.ajax({
+<<<<<<< HEAD
 					url:'<?=Yii::$app->urlManager->createAbsoluteUrl ( [] )?>callback-facebook',
+=======
+					url:'http://notei.com.mx/test/wwwCharlenetas/web/callback-facebook',
+>>>>>>> origin/master
 					success:function(response){
 
 						if(response.status=="success"){

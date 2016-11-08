@@ -103,7 +103,7 @@ class EntComentariosPosts extends \yii\db\ActiveRecord
     	$this->id_post = $idPost;
     	$this->id_usuario = $idUsuario;
     	$this->fch_comentario = Utils::getFechaActual();
-    	$this->txt_token = Utils::generateToken('com');
+    	$this->txt_token = Utils::generateToken('com_');
     	
     	return $this->save()?$this:null;
     }

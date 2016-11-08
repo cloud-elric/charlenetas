@@ -3,6 +3,7 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+use app\models\ConstantesWeb;
 
 $this->title = 'Sabias que';
 $this->icon = '<i class="ion ion-help"></i>';
@@ -23,7 +24,6 @@ $this->icon = '<i class="ion ion-help"></i>';
 				</div>
 
 				<div class="card-contexto-options">
-					
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSabiasQue('<?=$postSabiasQue->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
@@ -44,23 +44,18 @@ $this->icon = '<i class="ion ion-help"></i>';
 
 </div>
 <!-- end /.page-cont -->
-	<?php	
-		//echo $postSabiasQue->txt_descripcion . "   ";
-		//echo $postSabiasQue->txt_imagen . "   ";
-		//if($postSabiasQue->entSabiasQue->b_verdadero == 1)
-//			//echo "SI" . "   ";
-	//	else 
-		//	echo "NO" . "   ";
-//		echo $postSabiasQue->txt_url . "   ";
-	//	echo $postSabiasQue->fch_creacion . "   ";
-		//echo $postSabiasQue->fch_publicacion . "   ";
-//		echo"</br>";
-//		echo"</br>";
-//	}
-//	echo "total= " . EntPosts::find()->where(['id_tipo_post'=>$postSabiasQue->id_tipo_post])->count("id_tipo_post" . "   ");
-//	echo "total likes= " . EntPosts::find()->where(['id_tipo_post'=>$postSabiasQue->id_tipo_post])->sum("num_likes");
-//	echo "total comentarios= " . EntComentariosPosts::find()->where(['id_post'=>$postSabiasQue->id_tipo_post])->count("id_post");
+	
+<?php
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_SABIAS_QUE])->count('id_usuario'); 
+if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
+?>
 
+<div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
+	id="js-cargar-mas-posts-sabias-que" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	entradas...<label>(<?=$postTotales - ConstantesWeb::POSTS_MOSTRAR?>)</label></span></div>
+
+<?php
+}
 ?>
 
 <?php 	

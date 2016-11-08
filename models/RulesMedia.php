@@ -11,7 +11,7 @@ class RulesMedia {
 		$rules = [
 				[
 						[
-								'txt_url'
+								'txt_url', 'fch_publicacion', 'txt_descripcion'
 						],
 						'required',
 						'message'=>'Requerido',
@@ -19,7 +19,7 @@ class RulesMedia {
 				],
 				[
 						[
-								'txt_url'
+								'txt_url', 'fch_publicacion', 'txt_descripcion'
 						],
 						'required',
 						'message'=>'Requerido',

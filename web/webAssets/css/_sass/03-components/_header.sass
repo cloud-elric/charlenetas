@@ -15,6 +15,7 @@
       +respond-to(xs)
         display: block
     a
+      cursor: pointer
       margin: 0 10px
       padding: 10px 20px
       text-transform: uppercase
@@ -70,6 +71,8 @@ nav
         flex-direction: column-reverse
         align-items: center
         justify-content: flex-start
+        p
+          color: $header-menu-off
         span
           height: 3px
           width: 150%
@@ -77,6 +80,8 @@ nav
           transition: transform 300ms ease-in-out
         &.filter-active
           color: $header-menu
+          p
+            color: $header-menu
           span.color-espejo
             background-color: $color-espejo
           span.color-hoy-pense
@@ -96,6 +101,8 @@ nav
         &:hover
           background-color: transparent
           color: $header-menu-hover
+          // p
+          //   color: $header-menu-hover
           span
             transform: translateY(-3px)
 nav.mobile
@@ -119,6 +126,8 @@ nav.mobile
         height: inherit
         color: $header-menu
         opacity: 0.3
+        p
+          color: $header-menu
         span
           position: absolute
           top: 0
