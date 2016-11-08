@@ -29,6 +29,7 @@ use yii\helpers\Url;
 				<?php
 				// Pintar estrellas
 				echo $alquimia->generarEstrellas($alquimia->num_calificacion_usuario);
+				
 				?>
 			</div>
 		</div>

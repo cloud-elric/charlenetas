@@ -41,8 +41,8 @@ class EntAlquimias extends \yii\db\ActiveRecord {
 				[ 
 						[ 
 								'id_post',
-								'num_calificacion_admin',
- 								'num_calificacion_usuario' 
+								'num_calificacion_admin'
+ 								
 						],
 						'integer' 
 				],

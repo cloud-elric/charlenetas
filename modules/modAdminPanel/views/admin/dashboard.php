@@ -1,4 +1,8 @@
+<?php 
 
+$this->title = 'Dashboard';
+
+?>
 <!-- .page-cont -->
 <div class="page-cont dashboard">
 
