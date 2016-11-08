@@ -63,7 +63,7 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
 	<?=$this->render('@app/modules/modAdminPanel/views/admin/templates/modalEditar');?>
 	
 	<!-- Modal para crear citas en calendario -->
-	<a class="modal-trigger waves-effect waves-ligth btn" href="#modal2" style="display: none">Modal</a>
+	<a class="modal-trigger js-crear waves-effect waves-ligth btn" href="#modal2" style="display: none">Modal</a>
 	<!-- Modal structure -->
 	<div id="modal2" class="modal">
 		<div class="modal-content">

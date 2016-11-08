@@ -40,7 +40,8 @@ var calendar = $('#calendar').fullCalendar({
 					type: 'POST',
 					success: function(json) {
 						if(json.status == "creditosSuficientes"){
-							alert("Se guardo la cita correctamente");
+							//alert("Se guardo la cita correctamente");
+							$('.lean-overlay').trigger("click");
 							calendar.fullCalendar('renderEvent',
 									{
 									title: title,

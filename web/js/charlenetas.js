@@ -21,7 +21,7 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
  	l.start();
 	
-	totalPostMostrados = (pages+1)*5;
+	totalPostMostrados = (pages+1)*30;
 	totalPost = postTotales - totalPostMostrados;
 	
 	var contenedor = $('#js-contenedor-posts-tarjetas');

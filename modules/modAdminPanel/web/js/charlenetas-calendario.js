@@ -17,18 +17,18 @@ $(document).ready(function(){
 		selectHelper: true,
 		eventDrop: function(event, delta) {
 			start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
-			alert(start);
+			//alert(start);
 			end = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
 			m = moment(date);
 			m.add(1,'hours').hours();
 			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
-			alert(end);
+			//alert(end);
 			$.ajax({
 				url: 'actualizar-citas',
 				data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
 				type: 'POST',
 				success: function(json) {
-					alert('OK');
+					//alert('OK');
 				}
 			});
 		},
@@ -40,7 +40,7 @@ $(document).ready(function(){
 				data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
 				type: 'POST',
 				success: function(json) {
-					alert('OK');
+					//alert('OK');
 				}
 			});		 
 		},
@@ -52,7 +52,7 @@ $(document).ready(function(){
 			
 			if(view.name == 'agendaDay'){
 				//$('.modal-trigger').leanModal();
-				$('.modal-trigger').trigger('click');
+				$('.modal-trigger.js-crear').trigger('click');
 				//var title = prompt("Evento:");
 				//if (title) {
 				start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
@@ -69,7 +69,8 @@ $(document).ready(function(){
 						data: 'title='+ title+'&start='+ start +'&end='+ end ,
 						type: 'POST',
 						success: function(json) {
-							alert('OK');
+							//alert('OK');
+							$('.lean-overlay').trigger("click");
 							calendar.fullCalendar('renderEvent',
 							{
 								title: title,
@@ -95,6 +96,7 @@ $(document).ready(function(){
 	    				data: 'id=' + event.id,
 	    				type: "POST",
 	    				success: function () {
+	    					$('.lean-overlay').trigger("click");
 	    					calendar.fullCalendar('removeEvents',event.id);
 	    					//alert("Acaba de eliminar la cita del calendario");	    
 	    				}

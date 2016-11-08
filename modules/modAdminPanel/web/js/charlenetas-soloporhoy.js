@@ -33,7 +33,7 @@ function deletePosts(){
 				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+del[i].value,
 				type : 'GET',
 				success: function(){
-					alert("ok");
+					//alert("ok");
 				}
 			});
 		}
@@ -203,7 +203,7 @@ $('body').on(
 				},
 				statusCode: {
 				    404: function() {
-				      alert( "page not found" );
+				      //alert( "page not found" );
 				    }
 				  }
 

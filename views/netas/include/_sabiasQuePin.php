@@ -6,7 +6,7 @@ use app\models\EntSabiasQue;
 ?>
 
 <div class="pin pin-sabias-que" data-post="<?=$post->txt_token?>">
-	<div class="pin-header"></div>
+	<div class="pin-header pin-header-sabias-que"></div>
 	<div class="image">
 		<img data-src="webAssets/images/<?=$post->txt_imagen?>">
 	</div>

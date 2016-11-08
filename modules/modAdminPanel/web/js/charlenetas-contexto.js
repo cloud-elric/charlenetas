@@ -124,7 +124,7 @@ $('body').on(
 				},
 				statusCode: {
 				    404: function() {
-				      alert( "page not found" );
+				      //alert( "page not found" );
 				    }
 				  }
 
@@ -174,7 +174,7 @@ $('body').on(
 				},
 				statusCode: {
 				    404: function() {
-				      alert( "page not found" );
+				      //alert( "page not found" );
 				    }
 				  }
 

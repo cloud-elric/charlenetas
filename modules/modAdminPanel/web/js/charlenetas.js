@@ -551,7 +551,7 @@ function almacenarRoles(){
 				url: 'http://localhost/charlenetas/web/adminPanel/admin/almacenar-rol?id_action='+act[i].value,
 				type : 'GET',
 				success: function(){
-					alert("ok");
+					//alert("ok");
 				}
 			});
 		}
@@ -584,7 +584,7 @@ $('body').on(
 				},
 				statusCode: {
 				    404: function() {
-				      alert( "page not found" );
+				      //alert( "page not found" );
 				    }
 				  }
 
