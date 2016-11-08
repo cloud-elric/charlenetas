@@ -163,7 +163,9 @@
 			margin: 0
 		// Content
 		.card-user-cont
-			padding: 20px 10px 4px
+			padding: 20px 10px 10px
+			.row
+				margin-bottom: 0
 			.card-user-avatar
 				position: relative
 				img
@@ -184,14 +186,49 @@
 			.card-user-nombre
 				font-size: 1.4em
 				line-height: 1
+				overflow: hidden
+				text-overflow: ellipsis
+				white-space: nowrap
+				width: 100%
 			.card-user-email
 				color: rgba(117,117,117,.7)
 				font-size: .95em
 				font-weight: 400
+				overflow: hidden
+				text-overflow: ellipsis
+				white-space: nowrap
 				width: 100%
+			.input-field
+				font-weight: 500
+				margin-top: 15px
+				padding-left: 0
+				padding-right: 0
+				.select-wrapper
+					span
+						right: 8px
+						top: 8px
+					input.select-dropdown
+						background-color: rgba(#EEE,.6)
+						border-bottom: 0px solid transparent
+						box-sizing: border-box
+						height: 2rem
+						line-height: 2rem
+						padding: 0 10px
+						width: 100%
+						&:active,
+						&:focus,
+						&:hover,
+						&:visited
+							border-bottom: 0px solid transparent
+							box-shadow: none
 			.card-user-tipo-user
 				font-weight: 500
-				margin-top: 6px
+				margin-top: 16px
+				margin-bottom: 5px
+				overflow: hidden
+				text-overflow: ellipsis
+				white-space: nowrap
+				width: 100%
 		// Footer
 		.card-user-statistics
 			background-color: #ececec

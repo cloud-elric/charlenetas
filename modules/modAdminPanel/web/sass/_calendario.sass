@@ -112,6 +112,7 @@
 							float: none
 					// evento
 					.fc-event-container
+						// background-color: yellow
 						padding: 4px 2px
 						// evento
 						.fc-day-grid-event
@@ -131,13 +132,18 @@
 								tbody
 									td
 										border-color: #EEE
-									
-						// more
-						.fc-more-cell
-							.fc-more
-								color: $header-menu
-								&:hover
-									color: $header-menu-hover
+					// more
+					.fc-more-cell
+						// background-color: red
+						a.fc-more
+							color: $header-menu
+							display: block
+							font-weight: 800
+							padding: 10px 0
+							text-align: center
+							width: 100%
+							&:hover
+								color: $header-menu-hover
 			// grid
 			.fc-time-grid
 				.fc-time-grid-event
@@ -178,3 +184,27 @@
 		thead
 			border-color: $header-menu
 			border-bottom: 1px solid #f8f8f8
+
+
+// Modal Calendario
+// Eliminar
+.modal-calendario
+	.modal-content
+		padding: 40px 24px 20px
+		h4
+			text-align: center
+	.modal-footer
+		align-items: center
+		display: flex
+		justify-content: center
+		padding: 10px 10px 30px
+		.modal-footer-btn-cancelar
+			background-color: transparent
+			+box-shadow(0)
+			color: $header-menu
+			margin-right: 12px
+			&:focus,
+			&:hover
+				+box-shadow(1)
+				opacity: .8
+		// .modal-footer-btn-aceptar
