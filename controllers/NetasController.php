@@ -950,4 +950,9 @@ class NetasController extends Controller {
 			return ["status"=>$error] ;
 		}
 	}
+	
+	public function actionPayPal(){
+		
+		return $this->render('paypal');
+	}
 }

@@ -3,6 +3,8 @@ use yii\web\View;
 use yii\helpers\Url;
 use app\models\ConstantesWeb;
 use app\models\EntPosts;
+
+$this->title = 'Charlenetas';
 ?>
 <?=$this->render('//layouts/header')?>
 <?=$this->render('//layouts/nav', ['tiposPost'=>$tiposPost])?>
