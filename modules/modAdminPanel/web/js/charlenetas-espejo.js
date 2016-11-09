@@ -14,18 +14,6 @@ var loading = '<div class="loader-center">'+
 					'</div>'+
 				'</div>';
 
-$(document).ready(function(){
-	$('.card-espejo').on('click', function(e) {
-		console.log(e);
-		
-		if (e.target.className !== '') {
-			return;
-		}
-		var token = $(this).data('token');
-		showPostFull(token)
-	});
-	
-});
 
 //Eliminar posts
 function deletePosts(){
@@ -153,10 +141,11 @@ $('body').on(
 $(document).ready(function(){
 	$('.card-espejo').on('click', function(e) {
 		console.log(e);
-		
-		if (e.target.localName == 'i') {
+		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+			e.stopPropagation();
 			return;
 		}
+		
 		var token = $(this).data('token');
 		showPostFull(token)
 	});

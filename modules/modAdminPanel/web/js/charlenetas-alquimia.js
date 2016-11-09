@@ -253,20 +253,15 @@ function stopEvent(ev) {
 	}
 
 $(document).ready(function(){
-	$('.card-alquimia').on('click', function(e) {
-
-		if (e.target.localName == 'i') {
+	$('.card-alquimia').on('click', function(e) {	
+		//console.log(e.target);
+		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
 			e.stopPropagation();
 			return;
 		}
-
-		else if ($(e.target).hasClass('alquimia-delete-check')) {
-			e.stopPropagation();
-			return false;
-		}
-
+		//$(e.target).hasClass('alquimia-delete-check')
+	
 		var token = $(this).data('token');
 		showPostFull(token)
 	});
-
 });
