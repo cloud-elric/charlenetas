@@ -581,6 +581,9 @@ class NetasController extends Controller {
 	 * Muestra la ventana de edicion de perfil del usuario
 	 */
 	public function actionPerfilUsuario() {
+		
+		$this->layout = 'mainProfile';
+		
 		// id del usuario logueado
 		$idUsuario = Yii::$app->user->identity->id_usuario;
 		

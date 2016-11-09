@@ -1,4 +1,3 @@
-
 <?=$usuario->nombreCompleto?>
 <br>
 <?=$usuario->txt_imagen?>
