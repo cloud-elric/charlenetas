@@ -1065,3 +1065,7 @@ $( function() {
 //	});
 //
 //};
+
+$('.anim-account-close').on('click', function() {
+	$('.lean-overlay').trigger('click');
+});

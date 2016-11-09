@@ -3,6 +3,7 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+use app\models\ConstantesWeb;
 $this->title = 'Solo por hoy';
 $this->icon = '<i class="ion ion-android-warning"></i>';
 ?>
@@ -56,29 +57,19 @@ $this->icon = '<i class="ion ion-android-warning"></i>';
 <!-- end /.page-cont -->
 
 <?php
-// foreach ( $postsSoloPorHoy as $postSoloPorHoy ) {
-// 	echo $postSoloPorHoy->txt_descripcion . "   ";
-// 	echo $postSoloPorHoy->txt_imagen . "   ";
-// 	echo $postSoloPorHoy->entSoloPorHoys->num_articulo . "   ";
-// 	echo $postSoloPorHoy->txt_url . "   ";
-// 	echo $postSoloPorHoy->fch_creacion . "   ";
-// 	echo $postSoloPorHoy->fch_publicacion . "   ";
-// 	echo "</br>";
-// 	echo "</br>";
-// }
-// echo "total= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postSoloPorHoy->id_tipo_post 
-// ] )->count ( "id_tipo_post" . "   " );
-// echo "total likes= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postSoloPorHoy->id_tipo_post 
-// ] )->sum ( "num_likes" );
-// echo "total comentarios= " . EntComentariosPosts::find ()->where ( [ 
-// 		'id_post' => $postSoloPorHoy->id_tipo_post 
-// ] )->andWhere ( [ 
-// 		'is',
-// 		'id_comentario_padre',
-// 		null 
-// ] )->count ( "id_post" );
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_SOLO_POR_HOY])->count('id_usuario'); 
+if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
+?>
+
+<div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
+	id="js-cargar-mas-posts-solo-por-hoy" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	entradas...<label>(<?=$postTotales - ConstantesWeb::POSTS_MOSTRAR?>)</label></span></div>
+
+<?php
+}
+?>
+
+<?php
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-soloporhoy.js'; // dynamic file added

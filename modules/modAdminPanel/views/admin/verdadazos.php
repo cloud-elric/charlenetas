@@ -3,6 +3,7 @@ use app\models\EntPosts;
 use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
+use app\models\ConstantesWeb;
 
 $this->title = 'Verdadazos';
 $this->icon = '<i class="ion ion-android-done-all"></i>';
@@ -49,22 +50,21 @@ $this->icon = '<i class="ion ion-android-done-all"></i>';
 <!-- end /.page-cont -->
 
 <?php
-// foreach ( $postsVerdadazos as $postVerdadazos ) {
-// 	echo $postVerdadazos->txt_descripcion . "   ";
-// 	echo $postVerdadazos->txt_imagen . "   ";
-// 	echo $postVerdadazos->num_likes . "   ";
-// 	echo $postVerdadazos->fch_creacion . "   ";
-// 	echo $postVerdadazos->fch_publicacion . "   ";
-	
-// 	echo "</br>";
-// 	echo "</br>";
-// }
-// echo "total= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postVerdadazos->id_tipo_post 
-// ] )->count ( "id_tipo_post" . "   " );
-// echo "total likes= " . EntPosts::find ()->where ( [ 
-// 		'id_tipo_post' => $postVerdadazos->id_tipo_post 
-// ] )->sum ( "num_likes" );
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_VERDADAZOS])->count('id_usuario'); 
+if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
+//echo "Total de  posts: ". $postTotales;
+?>
+
+<div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
+	id="js-cargar-mas-posts-verdadazos" onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	entradas...<label>(<?=$postTotales - ConstantesWeb::POSTS_MOSTRAR?>)</label></span></div>
+
+<?php
+//$postTotales -= ConstantesWeb::POSTS_MOSTRAR;
+}
+?>
+
+<?php
 
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-verdadazos.js'; // dynamic file added

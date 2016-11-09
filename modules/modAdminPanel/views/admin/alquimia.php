@@ -65,7 +65,7 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 
 <?php
 $postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_ALQUIMIA])->count('id_usuario'); 
-if($postTotales>=ConstantesWeb::POSTS_MOSTRAR){
+if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 ?>
 
 <div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
