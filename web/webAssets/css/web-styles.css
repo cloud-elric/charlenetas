@@ -637,9 +637,40 @@ body {
 
 .pins-grid-container {
   padding: 10px;
-  margin-bottom: 50px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
   max-width: 1595px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1350px) {
+  .pins-grid-container {
+    max-width: 1068px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .pins-grid-container {
+    max-width: 800px;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .pins-grid-container {
+    max-width: 538px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .pins-grid-container {
+    max-width: 270px;
+  }
+}
+
+@media screen and (max-width: 290px) {
+  .pins-grid-container {
+    max-width: auto;
+    width: 96%;
+  }
 }
 
 p {
@@ -995,6 +1026,10 @@ h6 {
   top: -1px;
 }
 
+.pin-agregar-espejo .pin-content-wrapper {
+  text-align: center;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -1011,6 +1046,9 @@ h6 {
 
 .header div .filters-toggle {
   display: none;
+  height: 24px;
+  padding: 0;
+  width: 24px;
 }
 
 @media (min-width: 769px) and (max-width: 959px) {
@@ -1023,6 +1061,11 @@ h6 {
   .header div .filters-toggle {
     display: block;
   }
+}
+
+.header div .filters-toggle i {
+  margin-left: 0;
+  margin-top: 0;
 }
 
 .header div a {
@@ -1040,6 +1083,27 @@ h6 {
   justify-content: center;
 }
 
+@media screen and (max-width: 768px) {
+  .header div a {
+    margin: 0;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header div a {
+    font-size: .6em;
+    padding: 8px 4px;
+  }
+}
+
+@media screen and (max-width: 290px) {
+  .header div a {
+    font-size: .54em;
+    padding: 4px 1px;
+  }
+}
+
 .header div a i {
   margin-left: 10px;
   margin-top: -5px;
@@ -1053,6 +1117,12 @@ h6 {
   margin: 0 40px;
 }
 
+@media screen and (max-width: 768px) {
+  .header .logo {
+    margin: 0;
+  }
+}
+
 .header .logo img {
   width: 100%;
 }
@@ -1060,11 +1130,17 @@ h6 {
 nav {
   background-color: white;
   width: 90%;
-  min-width: 1024px;
   max-width: 1280px;
   overflow: hidden;
   border-radius: 6px;
   margin: 10px auto 50px;
+}
+
+@media (min-width: 960px) and (max-width: 1024px) {
+  nav {
+    min-width: auto;
+    width: 95%;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 959px) {
@@ -1079,7 +1155,7 @@ nav {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
   nav {
     display: none;
   }
@@ -1180,8 +1256,22 @@ nav.mobile {
   z-index: 999;
   margin: 0;
   border-radius: 0;
-  max-width: 400px;
-  min-width: 400px;
+  max-width: 300px;
+  min-width: 300px;
+}
+
+@media screen and (max-width: 768px) {
+  nav.mobile {
+    min-width: auto;
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  nav.mobile {
+    min-width: auto;
+    width: 65%;
+  }
 }
 
 nav.mobile ul {
@@ -1302,6 +1392,13 @@ nav.mobile ul li a.filter-active span {
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+  #wrapper > i {
+    right: -16px;
+    top: -6px;
+  }
+}
+
 .full-pin-content {
   height: 100%;
   width: 100%;
@@ -1363,6 +1460,13 @@ nav.mobile ul li a.filter-active span {
     justify-content: flex-end;
     flex-direction: row-reverse;
     margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .full-pin-content .full-pin-header .post-publisher-data .post-publisher,
+  .full-pin-content .respuesta-header .post-publisher-data .post-publisher {
+    margin-left: 20px;
   }
 }
 
@@ -1439,6 +1543,15 @@ nav.mobile ul li a.filter-active span {
   margin: 20px 0;
 }
 
+@media screen and (max-width: 768px) {
+  .full-pin-content .full-pin-body,
+  .full-pin-content .full-pin-respuesta,
+  .full-pin-content .new-comment,
+  .full-pin-content .comment {
+    padding: 20px 16px;
+  }
+}
+
 .full-pin-content .full-pin-body h3,
 .full-pin-content .full-pin-respuesta h3,
 .full-pin-content .new-comment h3,
@@ -1447,6 +1560,26 @@ nav.mobile ul li a.filter-active span {
   font-size: 3em;
   margin-left: 20px;
   margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .full-pin-content .full-pin-body h3,
+  .full-pin-content .full-pin-respuesta h3,
+  .full-pin-content .new-comment h3,
+  .full-pin-content .comment h3 {
+    font-size: 2.2em;
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .full-pin-content .full-pin-body h3,
+  .full-pin-content .full-pin-respuesta h3,
+  .full-pin-content .new-comment h3,
+  .full-pin-content .comment h3 {
+    font-size: 1.6em;
+  }
 }
 
 .full-pin-content .full-pin-social .new-comment {
@@ -1745,6 +1878,13 @@ nav.mobile ul li a.filter-active span {
   float: left;
 }
 
+@media screen and (max-width: 768px) {
+  .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-img {
+    float: none;
+    text-align: center;
+  }
+}
+
 .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-img img {
   margin-right: 25px;
   margin-bottom: 20px;
@@ -1754,9 +1894,23 @@ nav.mobile ul li a.filter-active span {
   border-radius: 6px;
 }
 
+@media screen and (max-width: 768px) {
+  .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-img img {
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-text p {
   text-align: justify;
   padding-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .full-pin-body-img-vertical .full-pin-body-content .full-pin-body-content-text p {
+    padding-right: 0;
+  }
 }
 
 .full-pin-body-img-horizontal {
@@ -1783,6 +1937,12 @@ nav.mobile ul li a.filter-active span {
   font-size: .8em;
 }
 
+@media screen and (max-width: 768px) {
+  .full-pin-contexto-tabs-menu ul li a {
+    width: 90% !important;
+  }
+}
+
 .full-pin-contexto-tabs-menu ul .indicator {
   top: 0;
   background-color: #345678;
@@ -1796,4 +1956,42 @@ nav.mobile ul li a.filter-active span {
 .full-pin-body-contexto-tabs .contexto-data-tab p {
   text-align: justify;
   padding-right: 30px;
+}
+
+.pin-sabias-que-form-checkbox {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.pin-sabias-que-form-checkbox p {
+  margin-bottom: 0;
+}
+
+.pin-sabias-que-respuesta-error,
+.pin-sabias-que-respuesta-succes {
+  font-family: "Raleway", sans-serif;
+  font-size: .84em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.pin-sabias-que-respuesta-error {
+  color: #D91E18;
+}
+
+.pin-sabias-que-respuesta-succes {
+  color: #57ED5F;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:after {
+  background-color: #345678;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:before,
+[type="radio"].with-gap:checked + label:after {
+  border-color: #345678;
 }

@@ -987,50 +987,27 @@ $(document).ready(function() {
 
 	});
 	
-	$('.js-respuesta-check').on('change', function(e){
-		
-		return false;
-		var valor = element.prop("checked");
-		var token = element.data("token");
-		var url = basePath+'netas/validar-respuesta?respuesta='+valor+'&token='+token;
-		
-		$.ajax({
-			url:url,
-			dataType:'json',
-			success:function(resp){
-				if(resp.status=="noLogin"){
-					showModalLogin();
-				}else if(resp.status=="respondido"){
-					mensajeCuentaActivada('Ya contestaste esta pregunta');
-				}else if(resp.status=="success"){
-					mensajeCuentaActivada('Respuesta correcta');
-				}else{
-					mensajeWarning('Respuesta incorrecta');
-				}
-			}
-		
-		});
-	});
-
 });
 
 function validarRespuesta(element){
 	
-	var valor1 = element.val();
 	var valor = element.prop("checked");
 	var token = element.data("token");
-	var url = basePath+'netas/validar-respuesta?respuesta='+valor1+'&token='+token;
+	var url = basePath+'netas/validar-respuesta?respuesta='+valor+'&token='+token;
 	
 	$.ajax({
 		url:url,
 		dataType:'json',
 		success:function(resp){
 			if(resp.status=="noLogin"){
+				
 				showModalLogin();
 			}else if(resp.status=="success"){
 				mensajeCuentaActivada('Respuesta correcta');
+
 			}else if(resp.status=="respondido"){
 				mensajeCuentaActivada('Ya contestaste esta pregunta');
+
 			}else{
 				mensajeWarning('Respuesta incorrecta');
 			}
@@ -1068,39 +1045,13 @@ FB.ui({
 });
 }
 
-$('body').on(
-		'beforeSubmit',
-		'#editar-usuario',
-		function() {
-			var form = $(this);
-			// return false if form still have some validation errors
-			if (form.find('.has-error').length) {
-				return false;
-			}
-			var button = document.getElementById('js-editar-submit-usuario');
-			var l = Ladda.create(button);
-		 	l.start();
-			// submit form
-			$.ajax({
-				url : form.attr('action'),// url para peticion
-				type : 'post', // Metodo en el que se enviara la informacion
-				data : new FormData(this), // La informacion a mandar
-				dataType: 'json',  // Tipo de respuesta
-				cache : false, // sin cache
-				contentType : false,
-				processData : false,
-				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
-					l.stop();
-				},
-				statusCode: {
-				    404: function() {
-				      alert( "page not found" );
-				    }
-				  }
-
-			});
-			return false;
-		});
+$( function() {
+    $( "#sortable" ).sortable({
+      revert: true
+    });
+    
+    $( ".js-elemento-leer" ).disableSelection();
+  } );
 
 //window.fbAsyncInit = function() {
 //	FB.init({
@@ -1113,3 +1064,7 @@ $('body').on(
 //	});
 //
 //};
+
+$('.anim-account-close').on('click', function() {
+	$('.lean-overlay').trigger('click');
+});
