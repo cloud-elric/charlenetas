@@ -29,11 +29,13 @@ function deletePosts(){
 	for(i=0;i<del.length;i++){
 		if(del[i].checked){
 			//console.log(del[i].value);
+			var token = del[i].value;
 			$.ajax({
 				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+del[i].value,
 				type : 'GET',
 				success: function(){
 					//alert("ok");
+					$('#card_'+ token).remove();
 				}
 			});
 		}
@@ -210,9 +212,9 @@ $('body').on(
 
 $(document).ready(function(){
 	$('.card-verdadazos').on('click', function(e) {
-		console.log(e);
-		
-		if (e.target.className !== '') {
+		//console.log(e);
+		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+			e.stopPropagation();
 			return;
 		}
 		var token = $(this).data('token');

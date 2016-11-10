@@ -15,13 +15,6 @@ $this->icon = '<i class="ion ion-android-done-all"></i>';
 	<div class="row" id="js-contenedor-tarjetas">
 <?php foreach ( $postsVerdadazos as $postVerdadazos ) {?>
 
-		<div>
-			<p>
-      			<input type="checkbox" id="delete-<?=$postVerdadazos->txt_token?>" value="<?=$postVerdadazos->txt_token?>"/>
-      			<label for="delete-<?=$postVerdadazos->txt_token?>">Eliminar</label>
-    		</p>
-		</div>
-
 		<div class="col s12 m6 l4" id="card_<?=$postVerdadazos->txt_token?>">
 
 			<div class="card card-verdadazos" data-token="<?=$postVerdadazos->txt_token?>">
@@ -37,6 +30,10 @@ $this->icon = '<i class="ion ion-android-done-all"></i>';
 				</div>
 
 				<div class="card-contexto-options">
+					<div>
+      					<input type="checkbox" id="delete-<?=$postVerdadazos->txt_token?>" value="<?=$postVerdadazos->txt_token?>"/>
+      					<label for="delete-<?=$postVerdadazos->txt_token?>"></label>
+					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarVerdadazos('<?=$postVerdadazos->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

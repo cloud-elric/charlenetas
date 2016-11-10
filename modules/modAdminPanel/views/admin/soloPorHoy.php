@@ -14,13 +14,7 @@ $this->icon = '<i class="ion ion-android-warning"></i>';
 
 	<div class="row" id="js-contenedor-tarjetas">
 	<?php foreach ($postsSoloPorHoy as $postSoloPorHoy){?>
-	
-		<div>
-			<p>
-      			<input type="checkbox" id="delete-<?=$postSoloPorHoy->txt_token?>" value="<?=$postSoloPorHoy->txt_token?>"/>
-      			<label for="delete-<?=$postSoloPorHoy->txt_token?>">Eliminar</label>
-    		</p>
-		</div>
+
 		<div class="col s12 m6 l4" id="card_<?=$postSoloPorHoy->txt_token?>">
 			<div class="card card-solo-por-hoy" data-token="<?=$postSoloPorHoy->txt_token?>">
 				
@@ -36,6 +30,10 @@ $this->icon = '<i class="ion ion-android-warning"></i>';
 				</div>
 
 				<div class="card-contexto-options">
+					<div>
+      					<input type="checkbox" id="delete-<?=$postSoloPorHoy->txt_token?>" value="<?=$postSoloPorHoy->txt_token?>"/>
+      					<label for="delete-<?=$postSoloPorHoy->txt_token?>"></label>
+					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
