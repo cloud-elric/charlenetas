@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "2amigos/yii2-file-upload-widget": "~1.0",
-        "kartik-v/yii2-widget-fileinput": "@dev"
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "bsushil/meta": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

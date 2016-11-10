@@ -63,7 +63,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		 */
 		$query = EntPosts::find ()->where ( [ 
 				"id_tipo_post" => $post 
-		] );
+		] )->andWhere(['b_habilitado'=>1]);
 		
 		$order = [ 
 				'fch_creacion' => 'asc' 
@@ -80,7 +80,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 			
 			$query = EntPosts::find ()->where ( [ 
 					"id_tipo_post" => $post 
-			] )->joinWith ( 'entEspejos ent_espejos' )->joinWith ( 'entRespuestasEspejo ent_respuestas_espejo' )->orderBy ( 'num_subscriptores desc, ent_respuestas_espejo.fch_publicacion_respuesta' );
+			] )->andWhere(['b_habilitado'=>1])->joinWith ( 'entEspejos ent_espejos' )->joinWith ( 'entRespuestasEspejo ent_respuestas_espejo' )->orderBy ( 'num_subscriptores desc, ent_respuestas_espejo.fch_publicacion_respuesta' );
 		}
 		
 		// Carga el dataprovider

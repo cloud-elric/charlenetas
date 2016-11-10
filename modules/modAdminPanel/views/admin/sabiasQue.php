@@ -16,6 +16,12 @@ $this->icon = '<i class="ion ion-help"></i>';
 
 	<?php foreach ($postsSabiasQue as $postSabiasQue){ ?>
 	
+		<div>
+			<p>
+      			<input type="checkbox" id="delete-<?=$postSabiasQue->txt_token?>" value="<?=$postSabiasQue->txt_token?>"/>
+      			<label for="delete-<?=$postSabiasQue->txt_token?>">Eliminar</label>
+    		</p>
+		</div>
 		<div class="col s12 m6 l4" id="card_<?=$postSabiasQue->txt_token?>">
 			<div class="card card-sabias-que" data-token="<?=$postSabiasQue->txt_token?>">
 
@@ -39,6 +45,9 @@ $this->icon = '<i class="ion ion-help"></i>';
 		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
 			<i class="ion ion-wand"></i> 
 		</a>
+		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
+			<i class="ion ion-trash"></i>
+		</a>
 	</div>
 
 
@@ -46,7 +55,7 @@ $this->icon = '<i class="ion ion-help"></i>';
 <!-- end /.page-cont -->
 	
 <?php
-$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_SABIAS_QUE])->count('id_usuario'); 
+$postTotales = EntPosts::find()->where(['id_tipo_post'=>ConstantesWeb::POST_TYPE_SABIAS_QUE])->andWhere(['b_habilitado'=>1])->count('id_usuario'); 
 if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 ?>
 

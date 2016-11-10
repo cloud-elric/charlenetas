@@ -32,8 +32,8 @@ public static function tableName()
     public function rules()
     {
         return [
-            [['id', 'title', 'id_usuario', 'txt_token'], 'required'],
-            [['id', 'id_usuario', 'b_habilitado'], 'integer'],
+            [['title', 'id_usuario', 'txt_token'], 'required'],
+            [['id_usuario', 'b_habilitado'], 'integer'],
             [['start', 'end'], 'safe'],
             [['title', 'txt_token'], 'string', 'max' => 60],
         ];

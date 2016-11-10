@@ -1,0 +1,48 @@
+/*!
+	-----------------------------------------------------------------------------
+
+	8.0 - Usuarios
+			# Crear usuario
+			# Lista de usuarios
+	-----------------------------------------------------------------------------
+	*/
+
+.cs6
+	margin: 0 auto
+	max-width: 600px
+	width: 100%
+
+/*  Crear usuario
+	================================================ */
+.crear-usuario
+	// background-color: red
+	@extend .card
+	cursor: default
+	padding: 10px 0 0
+	.card-cont
+		// background-color: purple
+		padding: 20px 10px 4px
+		.col-roles
+			// background-color: yellow
+			h5
+				// background-color: green
+				font-weight: 700
+				margin: 20px auto 30px
+				text-align: center
+			.col-checkbox
+				margin-bottom: 12px
+			.btn-asignar
+				background-color: transparent
+				+box-shadow(0)
+				color: $header-menu
+				&:focus,
+				&:hover
+					+box-shadow(2)
+
+/*  Lista de usuarios
+	================================================ */
+.lista-usuario
+
+.select-wrapper
+	input.select-dropdown
+		margin-bottom: 0

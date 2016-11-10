@@ -12,16 +12,13 @@ var masonryOptions = {
 	gutter : 15,
 
 };
-var basePath = 'http://localhost/charlenetas/web/';
-//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
-
 
 // Carga mas pins de los post
 function cargarMasPosts(postTotales, numeroPostMostrar) {
 	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
  	l.start();
 	
-	totalPostMostrados = (pages+1)*5;
+	totalPostMostrados = (pages+1)*30;
 	totalPost = postTotales - totalPostMostrados;
 	
 	var contenedor = $('#js-contenedor-posts-tarjetas');
@@ -171,9 +168,7 @@ function showPostAfterLogin(token) {
 		});
 	}else{
 		$('#modal-login').closeModal();
-	}
-	
-	
+	}	
 }
 
 // Cierra el post con toda su información
@@ -1009,6 +1004,10 @@ function validarRespuesta(element){
 				showModalLogin();
 			}else if(resp.status=="success"){
 				mensajeCuentaActivada('Respuesta correcta');
+
+			}else if(resp.status=="respondido"){
+				mensajeCuentaActivada('Ya contestaste esta pregunta');
+
 			}else{
 				mensajeWarning('Respuesta incorrecta');
 			}

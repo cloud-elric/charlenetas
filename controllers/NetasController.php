@@ -52,7 +52,9 @@ class NetasController extends Controller {
 								'get-calificacion-usuario',
 								'validar-respuesta',
 								'perfil-usuario',
-								'agregar-espejo' 
+								'agregar-espejo',
+								'agregar-citas',
+								'crear-citas'
 						],
 						'rules' => [
 								
@@ -476,19 +478,22 @@ class NetasController extends Controller {
 			$usuarioCalificacion = new EntUsuariosCalificacionAlquimia ();
 			$usuarioCalificacion->guardarCalificacionUsuario ( $idUsuario, $post->id_post, $calificacion );
 			
-			// Obtenemos el numero de likes del post
-			$alquimia = $post->entAlquimias;
-			$numCalificaciones = $alquimia->calificacionAlquimia;
-			
-			// Si existe calificaciones
-			if ($numCalificaciones) {
-				$alquimia->actualizarCalificacion ( $numCalificaciones->num_calificacion );
-			} else {
-				echo 'nada se encontro';
-			}
 		} else {
 			$calificacionUsuario->num_calificacion = $calificacion;
 			$calificacionUsuario->save ();
+		}
+		
+		// Obtenemos el numero de likes del post
+		$alquimia = $post->entAlquimias;
+		$numCalificaciones = $alquimia->calificacionAlquimia;
+			
+		// Si existe calificaciones
+		if ($numCalificaciones) {
+			
+			$alquimia->actualizarCalificacion ( $numCalificaciones->num_calificacion );
+			echo "success";
+		} else {
+			echo 'nada se encontro';
 		}
 	}
 	
@@ -592,6 +597,71 @@ class NetasController extends Controller {
 		$post = $this->getPostByToken ( $token );
 		
 		$sabiasQue = $post->entSabiasQue;
+
+		
+		$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
+		$buscarRespuesta = $respuestaSabiasQue->find()->where(['id_post'=>$sabiasQue->id_post])->andWhere(['id_usuario'=>$idUsuario])->one();  
+
+		if($buscarRespuesta){
+			return [
+					'status' => 'respondido'
+			];
+		
+		} else {
+			$boolRes = 'false';
+			
+			if($sabiasQue->b_verdadero === 1){
+				$boolRes = 'true';
+			}
+			$respuestaSabiasQue->id_post = $sabiasQue->id_post;
+			$respuestaSabiasQue->id_usuario = $idUsuario;
+			if($respuesta === "true"){
+				$respuestaSabiasQue->b_respuesta = 1;
+			}else{
+				$respuestaSabiasQue->b_respuesta = 0;
+			}
+			$respuestaSabiasQue->save();
+			
+			if ($boolRes === $respuesta) {
+				//$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
+					
+// 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
+// 				$respuestaSabiasQue->id_usuario = $idUsuario;
+// 				if($respuesta === "true"){
+// 					$respuestaSabiasQue->b_respuesta = 1;
+// 				}else{
+// 					$respuestaSabiasQue->b_respuesta = 0;
+// 				}
+// 				$respuestaSabiasQue->save();
+				
+				$cat = new CatTipoCreditos();
+				$contestar = $cat->find()->where(['nombre'=>"Contestar"])->one();
+				
+				$creditos = new EntUsuariosCreditos();
+				$creditos->id_usuario = $idUsuario;
+				$creditos->numero_creditos = $contestar->costo;
+				$creditos->txt_descripcion = "Contestar pregunta";
+				$creditos->save();
+					
+				return [
+						'status' => 'success'
+				];
+			} else {
+// 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
+// 				$respuestaSabiasQue->id_usuario = $idUsuario;
+// 				if($respuesta === "true"){
+// 					$respuestaSabiasQue->b_respuesta = 1;
+// 				}else{
+// 					$respuestaSabiasQue->b_respuesta = 0;
+// 				}
+// 				$respuestaSabiasQue->save();
+				
+				return [
+						'status' => 'error'
+				];
+			}
+		}
+
 	}
 	
 	/**
@@ -784,31 +854,66 @@ class NetasController extends Controller {
 	}
 	
 	/**
-	 * Añadir las citas al calendario
+	 * Aï¿½adir las citas al calendario
 	 */
 	public function actionAnadirCitas(){
 		
-		$json = array();
- 
- 		$requete = "SELECT * FROM evento ORDER BY id";
- 	
- 		try {
- 			$bdd = new PDO('mysql:host=localhost;dbname=calendario', 'root', 'root');
- 		} catch(Exception $e) {
- 			exit('Imposible conectar a la base de datos.');
- 		}
- 
- 		$resultat = $bdd->query($requete) or die(print_r($bdd->errorInfo()));
- 
- 		echo json_encode($resultat->fetchAll(PDO::FETCH_ASSOC));
-		
- 		/*$tabla = new EntCitas();
-		$citas = $tabla->find()->all();
-		
-		return $this->render('//netas/include/anadirCitas', [
-				'citas' => $citas
-		]);*/
-		
-	}
 
+		$entCitas = new EntCitas();
+		$ordenCitas = $entCitas->find()->where(['b_habilitado'=>1])->orderBy('id ASC')->asArray()->all();
+		
+		echo json_encode ( $ordenCitas );
+	}
+	
+	/**
+	 * Agregar citas a la base de datos
+	 */
+	public function actionAgregarCitas() {
+		$title = $_POST ['title'];
+		$start = $_POST ['start'];
+		$end = $_POST ['end'];
+		$id_usuario = Yii::$app->user->identity->id_usuario;
+		$txt_token = Utils::generateToken ( 'cita_' );
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		
+		//buscar los creditos del usuario, si tienen los sufucientes para hacer la cita.
+		//$creditosUsuarios = new EntUsuariosCreditos();
+		$tipoCredito = new CatTipoCreditos();
+		
+		$costo = $tipoCredito->find()->where(['nombre'=>'Cita'])->one();
+		//$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$id_usuario])->one();
+		
+		$vistaCreditos = new VistaTotalCreditos();
+		$vistaCredito = $vistaCreditos->find()->where(['id_usuario'=>$id_usuario])->one();
+	
+		if($vistaCredito->num_total_creditos >= $costo->costo){
+			
+			$entCitas = new EntCitas();
+		
+			$notificaciones = new EntNotificaciones ();
+			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
+			
+			$creditosGastados = new EntUsuariosCreditosGastados();
+			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $id_usuario, $costo->costo);
+		
+			$entCitas->title = $title;
+			$entCitas->start = $start;
+			$entCitas->end = $end;
+			$entCitas->id_usuario = $id_usuario;
+			$entCitas->txt_token = $txt_token;
+			$entCitas->save();
+			
+			$success = "creditosSuficientes";
+			return ["status"=>$success];
+		}
+		else{ 
+		 	$error = "creditosInsuficientes";
+			return ["status"=>$error] ;
+		}
+	}
+	
+	public function actionPayPal(){
+		
+		return $this->render('paypal');
+	}
 }
