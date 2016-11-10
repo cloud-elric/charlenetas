@@ -1045,13 +1045,6 @@ FB.ui({
 });
 }
 
-$( function() {
-    $( "#sortable" ).sortable({
-      revert: true
-    });
-    
-    $( ".js-elemento-leer" ).disableSelection();
-  } );
 
 //window.fbAsyncInit = function() {
 //	FB.init({
