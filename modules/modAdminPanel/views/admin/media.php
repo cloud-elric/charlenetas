@@ -45,7 +45,7 @@ $this->icon = '<i class="ion ion-images"></i>';
 			<i class="ion ion-wand"></i>
 		</a>
 		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
-			<i class="ion ion-trash"></i>
+			<i class="ion ion-ios-trash-outline"></i>
 		</a>
 	</div>
 

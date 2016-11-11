@@ -19,20 +19,17 @@ var loading = '<div class="loader-center">'+
 function deletePosts(){
 	var del = document.getElementsByTagName('input');
 	var token;
-	for(i=0;i<del.length;i++){
-		if(del[i].checked){
-			//console.log(del[i].value);
-			token = del[i].value;
-			$.ajax({
-				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+del[i].value,
-				type : 'GET',
-				success: function(){
-					//alert("ok");
-					$('#card_'+ token).remove();
-				}
-			});
-		}
-	}
+	$("input:checked").each(function(){
+		console.log($(this).val());
+		token = $(this).val();
+		console.log("token"+token);
+		//alert(token);
+		$('#card_'+ token).remove();
+		var ajax=$.ajax({
+			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+			type : 'GET'
+		});
+	});
 }
 
 var pages = 1;

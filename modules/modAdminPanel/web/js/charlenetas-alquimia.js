@@ -64,20 +64,18 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 //Eliminar posts
 function deletePosts(){
 	var del = document.getElementsByTagName('input');
-	for(i=0;i<del.length;i++){
-		if(del[i].checked){
-			//console.log(del[i].value);
-			var token = del[i].value;
-			$.ajax({
-				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+del[i].value,
-				type : 'GET',
-				success: function(){
-					//alert("ok");
-					$('#card_'+ token).remove();
-				}
-			});
-		}
-	}
+	var token;
+	$("input:checked").each(function(){
+		console.log($(this).val());
+		token = $(this).val();
+		console.log("token"+token);
+		//alert(token);
+		$('#card_'+ token).remove();
+		var ajax=$.ajax({
+			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+			type : 'GET'
+		});
+	});
 }
 
 
@@ -133,9 +131,11 @@ function agregarTarjetaNueva(json) {
 			+ '	<i class="ion icon icon-comment"></i> <span>0</span>'
 			+ '</p>'
 			+ '</div>'
-			
-			
 			+ '<div class="card-contexto-options">'
+			+'<div>'
+			+'<input type="checkbox" id="delete-'+json.tk+'" value="'+json.tk+'"/>'
+  			+'<label for="delete-'+json.tk+'"></label>'
+			+'</div>'
 			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia(\''+json.tk+'\')" href="#js-modal-post-editar">'
 			+'<i class="ion ion-android-more-vertical card-edit"></i>'
 			+'</a>'
@@ -172,13 +172,16 @@ $('body').on(
 				processData : false,
 				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
 					// Si la respuesta contiene la propiedad status y es success
+					console.log("success");
 					if (response.hasOwnProperty('status')
 							&& response.status == 'success') {
 						// Cierra el modal
+						console.log("success");
 						$('#js-modal-post').closeModal();
 						// Se agrega una nueva tarjeta a la vista
 						agregarTarjetaNueva(response);
 						$('.modal-trigger').leanModal();
+						l.stop();
 						// Reseteamos el modal
 						document.getElementById("form-alquimia").reset();
 						
@@ -188,14 +191,12 @@ $('body').on(
 						$('#form-alquimia').yiiActiveForm('updateMessages',
 								response, true);
 					}
-					l.stop();
 				},
 				statusCode: {
 				    404: function() {
 				      //alert( "page not found" );
 				    }
 				  }
-
 			});
 			return false;
 		});

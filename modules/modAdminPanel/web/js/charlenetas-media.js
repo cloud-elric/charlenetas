@@ -26,20 +26,18 @@ function cargarFormulario(){
 //Eliminar posts
 function deletePosts(){
 	var del = document.getElementsByTagName('input');
-	for(i=0;i<del.length;i++){
-		if(del[i].checked){
-			//console.log(del[i].value);
-			var token = del[i].value;
-			$.ajax({
-				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+del[i].value,
-				type : 'GET',
-				success: function(){
-					//alert("ok");
-					$('#card_'+ token).remove();
-				}
-			});
-		}
-	}
+	var token;
+	$("input:checked").each(function(){
+		console.log($(this).val());
+		token = $(this).val();
+		console.log("token"+token);
+		//alert(token);
+		$('#card_'+ token).remove();
+		var ajax=$.ajax({
+			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+			type : 'GET'
+		});
+	});
 }
 
 var pages = 1;
@@ -96,11 +94,14 @@ function abrirModalEditarMedia(token){
 
 function agregarTarjetaNueva(json) {
 	var template = '<div class="col s12 m6 l4" id="card_'+json.tk+'">'
-			+ '<div class="card card-media" data-token="'+json.tk+'" onclick="showPostFull(\''+json.tk+'\')">'
-			+ '<h3><img'
-			+ ' src="'+json.t+'"></h3>'
-			
+			+ '<div class="card card-media" data-token="'+json.tk+'" style="background-image: url('+json.t+')">'
+			//+ '<h3><img'
+			//+ ' src="'+json.t+'"></h3>'
 			+ '<div class="card-contexto-options">'
+			+'<div>'
+			+'<input type="checkbox" id="delete-'+json.tk+'" value="'+json.tk+'"/>'
+  			+'<label for="delete-'+json.tk+'"></label>'
+			+'</div>'
 			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarMedia(\''+json.tk+'\')" href="#js-modal-post-editar">'
 			+'<i class="ion ion-android-more-vertical card-edit"></i>'
 			+'</a>'

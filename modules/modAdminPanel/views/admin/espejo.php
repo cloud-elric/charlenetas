@@ -55,7 +55,7 @@ $this->icon = '<i class="ion ion-eye"></i>';
 	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
 		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
-			<i class="ion ion-trash"></i>
+			<i class="ion ion-ios-trash-outline"></i>
 		</a>
 	</div>
 	<!-- end /.fixed-action-btn -->

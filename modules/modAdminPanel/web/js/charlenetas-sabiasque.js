@@ -28,20 +28,15 @@ function deletePosts(){
 	var del = document.getElementsByTagName('input');
 	var token;
 	$("input:checked").each(function(){
-		
-	
-		//if(del[i].checked){
-			console.log($(this).val());
-			token = $(this).val();
-			$.ajax({
-				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+token,
-				type : 'GET',
-				success: function(){
-					alert(token);
-					$('#card_'+ token).remove();
-				}
-			});
-		//}
+		console.log($(this).val());
+		token = $(this).val();
+		console.log("token"+token);
+		//alert(token);
+		$('#card_'+ token).remove();
+		var ajax=$.ajax({
+			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+			type : 'GET'
+		});
 	});
 }
 
@@ -103,6 +98,10 @@ function agregarTarjetaNueva(json) {
 			+ '</div>'
 			
 			+ '<div class="card-contexto-options">'
+			+'<div>'
+			+'<input type="checkbox" id="delete-'+json.tk+'" value="'+json.tk+'"/>'
+  			+'<label for="delete-'+json.tk+'"></label>'
+			+'</div>'
 			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSabiasQue(\''+json.tk+'\')" href="#js-modal-post-editar">'
 			+'<i class="ion ion-android-more-vertical card-edit"></i>'
 			+'</a>'
