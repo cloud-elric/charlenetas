@@ -19,12 +19,6 @@ $this->icon = '<i class="ion ion-eye"></i>';
 			$espejoContestado = true;
 		}
 		?>
-		<div>
-			<p>
-      			<input type="checkbox" id="delete-<?=$postEspejo->txt_token?>" value="<?=$postEspejo->txt_token?>"/>
-      			<label for="delete-<?=$postEspejo->txt_token?>">Eliminar</label>
-    		</p>
-		</div>
 		<div class="col s12 m6 l4" id="card_<?=$postEspejo->txt_token?>">
 			<div class="card card-espejo" data-token="<?=$postEspejo->txt_token?>">
 				
@@ -40,17 +34,15 @@ $this->icon = '<i class="ion ion-eye"></i>';
 						<i class="ion icon icon-comment"></i> <span><?=$espejoContestado?'Espejo respondido':'Espejo no respondido'?></span>
 					</p>
 				</div>
-
 				<div class="card-contexto-options">
-					<div class="card-contexto-options-check">
-						<input type="checkbox" class="filled-in" id="filled-in-box3"
-							checked="checked" /> <label for="filled-in-box3"></label>
-
+					<div>
+      					<input type="checkbox" id="delete-<?=$postEspejo->txt_token?>" value="<?=$postEspejo->txt_token?>"/>
+      					<label class="espejo-delete-check" for="delete-<?=$postEspejo->txt_token?>"></label>
 					</div>
-					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalResponderEspejo('<?=$postEspejo->txt_token?>')" href="#js-modal-post-editar">
+					<a id="button_<?=$postEspejo->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalResponderEspejo('<?=$postEspejo->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
-					</a>				
-				</div>
+					</a>
+				</div>							
 			</div>
 		</div>
 
@@ -63,7 +55,7 @@ $this->icon = '<i class="ion ion-eye"></i>';
 	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
 		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
-			<i class="ion ion-trash"></i>
+			<i class="ion ion-ios-trash-outline"></i>
 		</a>
 	</div>
 	<!-- end /.fixed-action-btn -->

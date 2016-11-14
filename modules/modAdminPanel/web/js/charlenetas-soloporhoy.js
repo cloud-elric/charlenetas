@@ -26,18 +26,18 @@ function cargarFormulario(){
 //Eliminar posts
 function deletePosts(){
 	var del = document.getElementsByTagName('input');
-	for(i=0;i<del.length;i++){
-		if(del[i].checked){
-			//console.log(del[i].value);
-			$.ajax({
-				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+del[i].value,
-				type : 'GET',
-				success: function(){
-					//alert("ok");
-				}
-			});
-		}
-	}
+	var token;
+	$("input:checked").each(function(){
+		console.log($(this).val());
+		token = $(this).val();
+		console.log("token"+token);
+		//alert(token);
+		$('#card_'+ token).remove();
+		var ajax=$.ajax({
+			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+			type : 'GET'
+		});
+	});
 }
 
 var pages = 1;
@@ -103,6 +103,10 @@ function agregarTarjetaNueva(json) {
 			+'</div>'
 			
 			+'<div class="card-contexto-options">'
+			+'<div>'
+			+'<input type="checkbox" id="delete-'+json.tk+'" value="'+json.tk+'"/>'
+  			+'<label for="delete-'+json.tk+'"></label>'
+			+'</div>'
 			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarHoyPense(\''+json.tk+'\')" href="#js-modal-post-editar">'
 			+'<i class="ion ion-android-more-vertical card-edit"></i>'
 			+'</a>'
@@ -219,9 +223,9 @@ function stopEvent(ev) {
 
 $(document).ready(function(){
 	$('.card-solo-por-hoy').on('click', function(e) {
-		console.log(e);
-		
-		if (e.target.localName == 'i') {
+		//console.log(e);
+		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+			e.stopPropagation();
 			return;
 		}
 		var token = $(this).data('token');

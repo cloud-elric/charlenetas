@@ -3,7 +3,6 @@
 namespace app\modules\modAdminPanel\controllers;
 
 use yii\web\Controller;
-use yii\db\mssql\PDO;
 use app\modules\ModUsuarios\models\Utils;
 use app\models\EntCitas;
 
@@ -71,7 +70,7 @@ class CalendarioController extends Controller
     	$title=$_POST['title'];
     	$start=$_POST['start'];
     	$end=$_POST['end'];
-    	$id_usuario = 25;//Yii::$app->user->identity;
+    	$id_usuario = Yii::$app->user->identity->id_usuario;
     	$txt_token = Utils::generateToken ( 'cita_' );
     	
     	$entCitas = new EntCitas();

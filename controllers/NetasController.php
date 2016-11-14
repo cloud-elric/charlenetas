@@ -200,7 +200,7 @@ class NetasController extends Controller {
 	 * @return string
 	 */
 	public function actionNotificaciones() {
-	
+
 		$notificaciones = new EntNotificaciones();
 		$usuario = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
 			
@@ -570,6 +570,9 @@ class NetasController extends Controller {
 	 * Muestra la ventana de perfil del usuario
 	 */
 	public function actionPerfilUsuario() {
+		
+		$this->layout = 'mainProfile';
+		
 		// id del usuario logueado
 		$idUsuario = Yii::$app->user->identity->id_usuario;
 		

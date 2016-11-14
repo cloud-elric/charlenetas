@@ -14,34 +14,22 @@ var loading = '<div class="loader-center">'+
 					'</div>'+
 				'</div>';
 
-$(document).ready(function(){
-	$('.card-espejo').on('click', function(e) {
-		console.log(e);
-		
-		if (e.target.className !== '') {
-			return;
-		}
-		var token = $(this).data('token');
-		showPostFull(token)
-	});
-	
-});
 
 //Eliminar posts
 function deletePosts(){
 	var del = document.getElementsByTagName('input');
-	for(i=0;i<del.length;i++){
-		if(del[i].checked){
-			//console.log(del[i].value);
-			$.ajax({
-				url: 'http://localhost/charlenetas/web/adminPanel/admin/deshabilitar-post?tokenPost='+del[i].value,
-				type : 'GET',
-				success: function(){
-					//alert("ok");
-				}
-			});
-		}
-	}
+	var token;
+	$("input:checked").each(function(){
+		console.log($(this).val());
+		token = $(this).val();
+		console.log("token"+token);
+		//alert(token);
+		$('#card_'+ token).remove();
+		var ajax=$.ajax({
+			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+			type : 'GET'
+		});
+	});
 }
 
 var pages = 1;
@@ -153,10 +141,11 @@ $('body').on(
 $(document).ready(function(){
 	$('.card-espejo').on('click', function(e) {
 		console.log(e);
-		
-		if (e.target.localName == 'i') {
+		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+			e.stopPropagation();
 			return;
 		}
+		
 		var token = $(this).data('token');
 		showPostFull(token)
 	});

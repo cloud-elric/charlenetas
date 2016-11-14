@@ -1,5 +1,6 @@
 /**
- * Proyecto
+ 
+* Proyecto
  *
  * # author      Damián <@damian>
  * # copyright   Copyright (c) 2016, Proyecto
@@ -14,6 +15,14 @@
 /**
  * Document Ready
  */
+
+/**
+ * Variables
+ */
+var basePath = 'http://localhost/charlenetas/web/';
+//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
+var pagesComentarios = 0;
+
 $(document).ready(function(){
 
 	$('#js-mostrar-notificaciones').on('click',function(e){
@@ -23,7 +32,7 @@ $(document).ready(function(){
 			var item = $(this);
 			arrayToken[index] = item.data("token");
 			$.ajax({
-				url : 'http://localhost/charlenetas/web/adminPanel/admin/leer-notificacion?token='+arrayToken[index],
+				url : basePath + 'adminPanel/admin/leer-notificacion?token='+arrayToken[index],
 				type : 'GET',
 				success: function(){
 					
@@ -43,7 +52,7 @@ $(document).ready(function(){
 			var item = $(this);
 			arrayToken[index] = item.data("token");
 			$.ajax({
-				url : 'http://localhost/charlenetas/web/adminPanel/admin/leer-notificacion?token='+arrayToken[index],
+				url : basePath + 'adminPanel/admin/leer-notificacion?token='+arrayToken[index],
 				type : 'GET',
 				success: function(){
 					
@@ -88,14 +97,6 @@ $(window).load(function(){
 	$(".wrap").delay(3000).fadeIn();
 });
 
-
-
-/**
- * Variables
- */
-var basePath = 'http://localhost/charlenetas/web/';
-//var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
-var pagesComentarios = 0;
 
 //Muestra un post con toda su información
 function showPostFull(token) {
@@ -548,7 +549,7 @@ function almacenarRoles(){
 		if(act[i].checked){
 			//console.log(act[i].value);
 			$.ajax({
-				url: 'http://localhost/charlenetas/web/adminPanel/admin/almacenar-rol?id_action='+act[i].value,
+				url: basePath + 'adminPanel/admin/almacenar-rol?id_action='+act[i].value,
 				type : 'GET',
 				success: function(){
 					//alert("ok");

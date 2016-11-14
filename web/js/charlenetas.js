@@ -933,11 +933,23 @@ $(document).ready(function() {
 			
 		}
 		
-	})
+	});
+	
+	$('.pin-solo-por-hoy').on('click', function(e){
+		console.log(e.target.localName);
+		if(e.target.localName == 'a'){
+			e.stopPropagation();
+			return;
+		}
+//		var token = $(this).data('token');
+//		showPostFull(token)
+	});
+	
 	
 	$("#js-ingresar-cerrar-sesion").on("click", function(e){
 		e.preventDefault();
 	});
+	
 	
 	grid = $('.grid').masonry(masonryOptions);
 
