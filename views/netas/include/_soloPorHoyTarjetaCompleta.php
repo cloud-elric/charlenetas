@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
 use yii\helpers\Url;
+use yii\web\View;
+
 $usuario = $post->idUsuario;
 
 #$url = 'http://sms-tecnomovil.com/SvtSendSms?username=PIXERED&password=CARLOS&message=' . urlencode ($message) .'&numbers=' . $telefono;
@@ -17,7 +19,10 @@ $usuario = $post->idUsuario;
 		</div>
 
 		<div class="post-publisher-avatar">
-			<?=Html::img(Html::encode($usuario->getImageProfile()))?>
+			<?php 
+			#if(!Yii::$app->user->isGuest) { ?>
+						<?=Html::img(Html::encode($usuario->getImageProfile()))?>
+			<?php #}?>			
 		</div>
 
 	</div>

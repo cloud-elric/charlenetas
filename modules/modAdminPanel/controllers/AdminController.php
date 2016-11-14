@@ -64,7 +64,39 @@ class AdminController extends Controller {
 												'media',
 												'sabias-que',
 												'solo-por-hoy',
-												'verdadazos' 
+												'verdadazos',
+												'usuarios',
+												'notificaciones',
+												'agenda',
+												'habilitar-post',
+												'mostrar-actions',
+												'deshabilitar-post',
+												'crear-alquimia',
+												'crear-verdadazos',
+												'crear-hoy-pense',
+												'crear-media',
+												'crear-contexto',
+												'crear-solo-por-hoy',
+												'crear-sabias-que',
+												'editar-alquimia',
+												'responder-espejo',
+												'editar-verdadazos',
+												'editar-hoy-pense',
+												'editar-contexto',
+												'editar-media',
+												'editar-solo-por-hoy',
+												'editar-sabias-que',
+												'cargar-imagenes',
+												'leer-notificacion',
+												'asociar-contexto',
+												'desasociar-contexto',
+												'get-mas-posts-espejo',
+												'get-mas-posts-media',
+												'get-mas-posts-alquimia',
+												'get-mas-posts-hoy-pense',
+												'get-mas-posts-sabias-que',
+												'get-mas-posts-solo-por-hoy',
+												'get-mas-posts-verdadazos'
 										]
 										,
 										'allow' => true,
@@ -93,7 +125,7 @@ class AdminController extends Controller {
 	 */
 	public function actionDashboard() {
 		$dashboard = new CatTiposPosts ();
-		$posts = $dashboard->find ()->orderBy ( 'txt_nombre ASC' )->all ();
+		$posts = $dashboard->find()->orderBy( 'txt_nombre ASC' )->all();
 		
 		return $this->render ( 'dashboard', [ 
 				"dashboard" => $posts 
@@ -283,7 +315,7 @@ class AdminController extends Controller {
 		if ($validacion = $this->validarAlquimia ( $post, $alquimia )) {
 			return $validacion;
 		}
-		
+	
 		// Si la informacion es enviada se carga a su respectivo modelo
 		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			

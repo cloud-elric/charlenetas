@@ -209,7 +209,7 @@ class NetasController extends Controller {
 	public function actionNotificaciones() {
 		$notificaciones = new EntNotificaciones ();
 		$usuario = $notificaciones->find ()->where ( [ 
-				'id_usuario' => Yii::$app->user->identity 
+				'id_usuario' => Yii::$app->user->identity->id_usuario 
 		] )->andWhere ( [ 
 				'b_leido' => 0 
 		] )->orderBy ( 'fch_creacion ASC' )->limit ( 5 )->all ();

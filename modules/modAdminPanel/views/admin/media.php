@@ -1,6 +1,5 @@
 <?php
 use app\models\EntPosts;
-use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 use app\modules\ModUsuarios\models\Utils;
@@ -15,12 +14,6 @@ $this->icon = '<i class="ion ion-images"></i>';
 
 	<div class="row" id="js-contenedor-tarjetas">
 	<?php foreach ($postsMedia as $postMedia){?>
-	<div>
-		<p>
-   			<input type="checkbox" id="delete-<?=$postMedia->txt_token?>" value="<?=$postMedia->txt_token?>"/>
-      		<label for="delete-<?=$postMedia->txt_token?>">Eliminar</label>
-    	</p>
-	</div>
 	
 	<div class="col s12 m6 l4" id="card_<?=$postMedia->txt_token?>">
 			<div class="card card-media" data-token="<?=$postMedia->txt_token?>" style="background-image: url(http://img.youtube.com/vi/<?=Utils::getIdVideoYoutube($postMedia->txt_url)?>/mqdefault.jpg)">
@@ -29,6 +22,10 @@ $this->icon = '<i class="ion ion-images"></i>';
 				<!-- </h3> -->
 
 				<div class="card-contexto-options">
+					<div>
+			   			<input type="checkbox" id="delete-<?=$postMedia->txt_token?>" value="<?=$postMedia->txt_token?>"/>
+      					<label for="delete-<?=$postMedia->txt_token?>"></label>
+					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarMedia('<?=$postMedia->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
@@ -48,7 +45,7 @@ $this->icon = '<i class="ion ion-images"></i>';
 			<i class="ion ion-wand"></i>
 		</a>
 		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
-			<i class="ion ion-trash"></i>
+			<i class="ion ion-ios-trash-outline"></i>
 		</a>
 	</div>
 

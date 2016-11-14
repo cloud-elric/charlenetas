@@ -769,6 +769,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		}
 		return false;
 	}
+	
 	public function cargarImagen($post) {
 		$post->imagen->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_posts'] . $post->txt_imagen );
 		return true;

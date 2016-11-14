@@ -43,6 +43,9 @@ $this->icon = '<i class="ion ion-android-people"></i>';
 							<div class="input-field col s12 m12">
 								<?= $form->field($tipoUsuarios, 'txt_descripcion')->textInput(['maxlength' => true, 'class'=>'validate'])?>
 							</div>
+							<div class="col s12 12 center-align">
+								<?= Html::submitButton('<span class="ladda-label">Crear</span>',['id'=>'js-btn-crear-usuarios', 'class'=>'btn btn-submit waves-effect waves-light ladda-button', 'data-style'=>'zoom-in'])?>
+							</div>
 
 							<!-- Asignar Roles -->
 							<div class="col s12 m12 col-roles">
@@ -83,10 +86,6 @@ $this->icon = '<i class="ion ion-android-people"></i>';
 
 				</div>
 
-			</div>
-
-			<div class="col s12 12 center-align">
-				<?= Html::submitButton('<span class="ladda-label">Crear</span>',['id'=>'js-btn-crear-usuarios', 'class'=>'btn btn-submit waves-effect waves-light ladda-button', 'data-style'=>'zoom-in'])?>
 			</div>
 
 		</div>

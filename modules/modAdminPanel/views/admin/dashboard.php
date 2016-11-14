@@ -1,6 +1,16 @@
 <?php 
 
+use app\models\EntPosts;
+
 $this->title = 'Dashboard';
+
+//Retorna el tatal de post que estan habilitados en la BD
+function totalPost($idTipo){
+	$posts = new EntPosts();
+	$postsHabilitados = $posts->find()->where(['id_tipo_post'=>$idTipo])->andWhere(['b_habilitado'=>1])->count();
+	
+	return $postsHabilitados;
+}
 
 ?>
 <!-- .page-cont -->
@@ -21,7 +31,7 @@ $this->title = 'Dashboard';
 					</div>
 				</div>
 				<div class="dashboard-card-foot">
-					<p><i class="ion ion-document"></i> <span><?=count($dash->entPosts)?> post</span></p>
+					<p><i class="ion ion-document"></i> <span><?=totalPost($dash->id_tipo_post)?> post</span></p>
 				</div>
 			</a>
 		</div>
