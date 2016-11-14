@@ -27,13 +27,6 @@ use app\models\EntNotificaciones;
 use app\models\EntRespuestasEspejo;
 use app\models\EntCitas;
 use yii\db\mssql\PDO;
-use yii\behaviors\TimestampBehavior;
-use app\models\EntUsuariosCreditos;
-use app\models\CatTipoCreditos;
-use app\models\EntUsuariosCreditosGastados;
-use app\models\VistaTotalCreditos;
-use app\models\EntUsuariosRespuestasSabiasQue;
-use yii\web\UploadedFile;
 
 class NetasController extends Controller {
 	
@@ -57,7 +50,7 @@ class NetasController extends Controller {
 								'cargar-input-comentario',
 								'calificar-alquimia',
 								'get-calificacion-usuario',
-								// 'validar-respuesta',
+								'validar-respuesta',
 								'perfil-usuario',
 								'agregar-espejo',
 								'agregar-citas',
@@ -163,9 +156,10 @@ class NetasController extends Controller {
 	/**
 	 * Busca todos los post por orden de fecha de publicacion
 	 */
-	public function actionIndex($token = null) {
-		if (! empty ( $token )) {
-			$this->getPostByToken ( $token );
+	public function actionIndex($token=null) {
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
 		}
 		
 		// Recupera n numero de registros por paginacion
@@ -180,7 +174,7 @@ class NetasController extends Controller {
 		return $this->render ( 'index', [ 
 				'listaPost' => $listaPost,
 				'tiposPost' => $tiposPost,
-				'token' => $token 
+				'token'=>$token
 		] );
 	}
 	
@@ -203,20 +197,15 @@ class NetasController extends Controller {
 	
 	/**
 	 * Mostrar notificaciones al usuario
-	 * 
 	 * @return string
 	 */
 	public function actionNotificaciones() {
-		$notificaciones = new EntNotificaciones ();
-		$usuario = $notificaciones->find ()->where ( [ 
-				'id_usuario' => Yii::$app->user->identity->id_usuario 
-		] )->andWhere ( [ 
-				'b_leido' => 0 
-		] )->orderBy ( 'fch_creacion ASC' )->limit ( 5 )->all ();
-		
-		return $this->render ( 'notificaciones', [ 
-				'notificaciones' => $usuario 
-		] );
+
+		$notificaciones = new EntNotificaciones();
+		$usuario = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(5)->all();
+			
+		return $this->render( 'notificaciones', ['notificaciones'=>$usuario]);
+	
 	}
 	
 	/**
@@ -352,7 +341,7 @@ class NetasController extends Controller {
 	 *
 	 * @param unknown $token        	
 	 */
-	public function actionComentarPost($token) {
+	public function actionComentarPost($token = null) {
 		$this->layout = false;
 		$idUsuario = Yii::$app->user->identity->id_usuario;
 		
@@ -558,14 +547,14 @@ class NetasController extends Controller {
 		
 		if ($respuesta->guardarComentarioUsuario ( $idUsuario, $comentario->id_post )) {
 			
-			// que se un usuario diferente
-			if ($idUsuario != $comentario->id_usuario) {
-				
-				$notificaciones = new EntNotificaciones ();
-				
-				$notificaciones->guardarNotificacion ( $comentario, $notificaciones );
-			}
+			//que se un usuario diferente
+			if($idUsuario != $comentario->id_usuario){
 			
+				$notificaciones = new EntNotificaciones();
+			
+				$notificaciones->guardarNotificacion($comentario, $notificaciones);
+			}
+				
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			
@@ -578,7 +567,7 @@ class NetasController extends Controller {
 	}
 	
 	/**
-	 * Muestra la ventana de edicion de perfil del usuario
+	 * Muestra la ventana de perfil del usuario
 	 */
 	public function actionPerfilUsuario() {
 		
@@ -590,18 +579,7 @@ class NetasController extends Controller {
 		// Buscamos el usuario
 		$usuario = EntUsuarios::findOne ( $idUsuario );
 		
-		// Si la informacion es enviada se carga a su respectivo modelo
-		if ($usuario->load ( Yii::$app->request->post () )) {
-			$usuario->imageProfile = UploadedFile::getInstance ( $usuario, 'imageProfile' );
-			if (! empty ( $usuario->imageProfile )) {
-				$usuario->txt_imagen = Utils::generateToken ( "img_" ) . "." . "jpg";
-			}
-			$usuario->save();
-			
-			$post->upload( $usuario->txt_imagen );
-		}
-		
-		return $this->render ( '_formUsuario', [ 
+		return $this->render ( 'perfilUsuario', [ 
 				'usuario' => $usuario 
 		] );
 	}
@@ -617,20 +595,12 @@ class NetasController extends Controller {
 	 *
 	 * @param unknown $token        	
 	 */
-	public function actionValidarRespuesta($respuesta, $token = null) {
-		Yii::$app->response->format = Response::FORMAT_JSON;
-		
-		if (Yii::$app->user->isGuest) {
-			return [ 
-					'status' => 'noLogin' 
-			];
-		}
-		
+	public function actionValidarRespuesta($token) {
 		// busca el post necesario
 		$post = $this->getPostByToken ( $token );
-		$idUsuario = Yii::$app->user->identity->id_usuario;
 		
 		$sabiasQue = $post->entSabiasQue;
+
 		
 		$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
 		$buscarRespuesta = $respuestaSabiasQue->find()->where(['id_post'=>$sabiasQue->id_post])->andWhere(['id_usuario'=>$idUsuario])->one();  
@@ -694,6 +664,7 @@ class NetasController extends Controller {
 				];
 			}
 		}
+
 	}
 	
 	/**
@@ -795,9 +766,6 @@ class NetasController extends Controller {
 			case 7 : // Solo por hoy
 				$render = '//netas/include/_soloPorHoyTarjetaCompleta';
 				break;
-			case 8 : // Sabias que
-				$render = '//netas/include/_sabiasQueTarjetaCompleta';
-				break;
 			default :
 				$render = '//netas/include/_alquimiaTarjetaCompleta';
 				break;
@@ -820,20 +788,15 @@ class NetasController extends Controller {
 		] );
 		
 		if ($post->load ( Yii::$app->request->post () )) {
-			Yii::$app->response->format = Response::FORMAT_JSON;
-			if ($postGuardado = $post->guardarEspejo ( $post )) {
+			if($postGuardado = $post->guardarEspejo($post)){
+						
+				$notificaciones = new EntNotificaciones();
+					
+				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
 				
-				$notificaciones = new EntNotificaciones ();
-				
-				$notificaciones->guardarNotificacionPreguntas ( $postGuardado, $notificaciones );
-				
-				return [ 
-						'status' => 'success' 
-				];
-			} else {
-				return [ 
-						'status' => 'error' 
-				];
+				return 'success';
+			}else{
+				return 'error';
 			}
 		}
 		
@@ -844,33 +807,28 @@ class NetasController extends Controller {
 	
 	/**
 	 * Guarda si al usuario le gusto o no la respuesta del admin
-	 * en b_de_acuerdo de la tabla ent_espuestas_espejo
-	 * 
-	 * @param unknown $token        	
-	 * @param unknown $feed        	
+ 	 * en b_de_acuerdo de la tabla ent_espuestas_espejo
+	 * @param unknown $token
+	 * @param unknown $feed
 	 */
 	public function actionAgregarAcuerdo($token, $feed) {
 		$this->layout = false;
+	
+		$acuerdo = new EntRespuestasEspejo();
+		$posts = new EntPosts();
+		$post = $posts->find()->where(['txt_token'=>$token])->one();
 		
-		$acuerdo = new EntRespuestasEspejo ();
-		$posts = new EntPosts ();
-		$post = $posts->find ()->where ( [ 
-				'txt_token' => $token 
-		] )->one ();
-		
-		$respuesta = $acuerdo->find ()->where ( [ 
-				'id_post' => $post->id_post 
-		] )->one ();
+		$respuesta = $acuerdo->find()->where(['id_post'=>$post->id_post])->one();
 		
 		$respuesta->b_de_acuerdo = $feed;
 		
-		$notificacion = new EntNotificaciones ();
-		$notificacion->guardarNotificacionAcuerdo ( $post, $notificacion );
-		
-		if ($respuesta->save ())
+		$notificacion = new EntNotificaciones();
+		$notificacion->guardarNotificacionAcuerdo($post,$notificacion);
+	
+		if($respuesta->save ())
 			echo "success";
-		
-		else
+	
+		else 
 			echo "error";
 	}
 	
@@ -878,20 +836,32 @@ class NetasController extends Controller {
 	 * crear cita para el usuario en sesión
 	 */
 	public function actionCrearCita() {
-		/*$creditosUsuarios = new EntUsuariosCreditos();
-		$idUsuario = Yii::$app->user->identity->id_usuario;
-		
-		$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$idUsuario])->one();*/
+		$cita = new EntCitas();
 	
-		return $this->render ( '//netas/include/_crearCitas'/*, ['creditos'=>$creditos]*/); 
+		if ($cita->load ( Yii::$app->request->post () )) {
+			if($citaGuardada = $cita->guardarCitas($cita)){
+	
+				$notificaciones = new EntNotificaciones();
+					
+				$notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones);
+	
+				return 'success';
+			} else{
+				return 'error';
+			}
+		}
+	
+		return $this->renderAjax ( '//netas/include/_crearCitas', [
+				'cita' => $cita
+		] );
 	}
 	
 	/**
 	 * A�adir las citas al calendario
 	 */
-	public function actionAnadirCitas() {
-		$json = array ();
+	public function actionAnadirCitas(){
 		
+
 		$entCitas = new EntCitas();
 		$ordenCitas = $entCitas->find()->where(['b_habilitado'=>1])->orderBy('id ASC')->asArray()->all();
 		

@@ -1,0 +1,36 @@
+// 
+// Extras
+// 
+
+// Pin Sabias Que - Form checkbox
+.pin-sabias-que-form-checkbox
+	align-items: center
+	display: flex
+	justify-content: space-around
+	width: 100%
+	p
+		margin-bottom: 0
+// Respuesta (Error - Success)
+.pin-sabias-que-respuesta-error,
+.pin-sabias-que-respuesta-succes
+	font-family: $links
+	font-size: .84em
+	font-weight: 700
+	text-align: center
+.pin-sabias-que-respuesta-error
+	color: $error
+.pin-sabias-que-respuesta-succes
+	color: $color-hoy-pense
+
+// 
+// Materialize
+//
+
+// Checkbox
+[type="radio"]:checked+label:after,
+[type="radio"].with-gap:checked+label:after
+	background-color: $header-menu
+[type="radio"]:checked+label:after,
+[type="radio"].with-gap:checked+label:before,
+[type="radio"].with-gap:checked+label:after
+	border-color: $header-menu
