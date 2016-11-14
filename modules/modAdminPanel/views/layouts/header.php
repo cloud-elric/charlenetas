@@ -54,7 +54,7 @@ use app\models\EntCitas;
 					 		foreach($notiCitas as $notiCita){ 
 						  		if($mostrarCita->txt_token === $notiCita->txt_token_objeto && $mostrarCita->b_habilitado == 1){
 				?>
-									<li class="js-agenda-item" data-token="<?= $notiCita->txt_token_objeto?>"><a href="http://localhost/charlenetas/web/adminPanel/calendario/calendario"><?= $mostrarCita->title?></a></li>
+									<li class="js-agenda-item" data-token="<?= $notiCita->txt_token_objeto?>"><a href="<?= yii::$app->homeUrl . "adminPanel/calendario/calendario"?>"><?= $mostrarCita->title?></a></li>
 				<?php	
 						  		}
 						    }
@@ -112,6 +112,7 @@ use app\models\EntCitas;
 			<!-- .dropdown-content USER (dropdown) -->
 			<ul id='dropdown-user' class='dropdown-content dropdown-content-user'>
 				<li><a href="#!">Perfil</a></li>
+				<li><a href="<?= yii::$app->homeUrl . "adminPanel/calendario/calendario"?>">Calendario</a></li>
 				<li><a href="#!">Extra</a></li>
 				<li><?=Html::a('Cerrar sesión', ['../site/logout'])?></li>
 			</ul>
