@@ -1057,14 +1057,6 @@ FB.ui({
 });
 }
 
-$( function() {
-    $( "#sortable" ).sortable({
-      revert: true
-    });
-    
-    $( ".js-elemento-leer" ).disableSelection();
-  } );
-
 //window.fbAsyncInit = function() {
 //	FB.init({
 //		//appId : '1029875693761281',
