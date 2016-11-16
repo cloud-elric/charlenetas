@@ -23,6 +23,16 @@
   width: 40px;
 }
 
+.full-pin-body-content-text ul {
+    /* padding: 0; */
+    list-style-type: decimal;
+    padding: initial;
+}
+
+
+.full-pin-body-content-text ul li {
+    list-style-type: decimal;
+}
 /*.pin .image img {
     width:100%;
 }*/

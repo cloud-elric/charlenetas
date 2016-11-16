@@ -33,7 +33,7 @@ $usuario = $post->idUsuario;
 		</div>
 		<div class="full-pin-body-content-text">
 			<p>
-				<?=Html::encode($post->txt_descripcion)?>
+				<?=$post->txt_descripcion?>
 			</p>
 		</div>
 	</div>

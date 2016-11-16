@@ -543,6 +543,32 @@ function encenderEstrellas(estrellasAEncender) {
 
 }
 
+function encenderEstrellasGeneral(estrellasAEncender, token){
+	$('#js-alquimia-'+token+' .star-wrapper:eq(1) .icon-star').each(function(index) {
+
+		var estrella = $(this);
+		var calificacion = estrella.data('value');
+
+		estrella.addClass('icon-star-empty');
+
+		if (estrellasAEncender >= calificacion) {
+			estrella.removeClass('icon-star-empty');
+		}
+	});
+	
+	$('#js-content .star-wrapper:eq(1) .icon-star').each(function(index) {
+
+		var estrella = $(this);
+		var calificacion = estrella.data('value');
+
+		estrella.addClass('icon-star-empty');
+
+		if (estrellasAEncender >= calificacion) {
+			estrella.removeClass('icon-star-empty');
+		}
+	});
+}
+
 /**
  * Califica alquimia
  */
@@ -551,8 +577,17 @@ function calificarAquimia(token, calificacion) {
 			+ calificacion;
 	$.ajax({
 		url : url,
-		success : function() {
-
+		success : function(response) {
+			if (response.hasOwnProperty('status')
+					&& response.status == 'success') {
+				
+				
+				encenderEstrellasGeneral(response.num_calificacion, token);
+			} else {
+				// Muestra los errores
+				$('#form-alquimia').yiiActiveForm('updateMessages',
+						response, true);
+			}
 		},
 		statusCode : {
 			403 : function() {

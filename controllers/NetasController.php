@@ -495,17 +495,19 @@ class NetasController extends Controller {
 			$calificacionUsuario->save ();
 		}
 		
-		// Obtenemos el numero de likes del post
+		// Obtenemos el numero de calificacion del post
 		$alquimia = $post->entAlquimias;
 		$numCalificaciones = $alquimia->calificacionAlquimia;
+		
+		Yii::$app->response->format = Response::FORMAT_JSON;
 			
 		// Si existe calificaciones
 		if ($numCalificaciones) {
 			
 			$alquimia->actualizarCalificacion ( $numCalificaciones->num_calificacion );
-			echo "success";
+			return ['status'=>'success', 'num_calificacion'=>$numCalificaciones->num_calificacion];
 		} else {
-			echo 'nada se encontro';
+			return ['status'=>'error'];
 		}
 	}
 	

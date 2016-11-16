@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\data\ActiveDataProvider;
 use app\models\ConstantesWeb;
+use yii\db\Expression;
 
 class EntPostsExtend extends EntPosts
 {
@@ -16,7 +17,7 @@ class EntPostsExtend extends EntPosts
      */
 	public static function getPostByPagination($page = 0, $pageSize=ConstantesWeb::PINS_A_MOSTRAR){
 
-		$query = EntPosts::find('fch_publicacion <=NOW() AND b_habilitado=1');
+		$query = EntPosts::find()->where(['<=', 'fch_publicacion', new Expression('NOW()')])->andWhere(['b_habilitado'=>1]);
 
 		// Carga el dataprovider
 		$dataProvider = new ActiveDataProvider([
@@ -39,7 +40,7 @@ class EntPostsExtend extends EntPosts
 	 */
 	public static function getPostPorPaginacion($page = 0, $pageSize=ConstantesWeb::POSTS_MOSTRAR){
 	
-		$query = EntPosts::find('fch_publicacion <=NOW() AND b_habilitado=1');
+		$query = EntPosts::find()->where(['<=', 'fch_publicacion', new Expression('NOW()')])->andWhere(['b_habilitado'=>1]);
 	
 		// Carga el dataprovider
 		$dataProvider = new ActiveDataProvider([
