@@ -1057,6 +1057,7 @@ FB.ui({
 });
 }
 
+
 //$( function() {
 //    $( "#sortable" ).sortable({
 //      revert: true
@@ -1064,6 +1065,7 @@ FB.ui({
 //    
 //    $( ".js-elemento-leer" ).disableSelection();
 //  } );
+
 
 //window.fbAsyncInit = function() {
 //	FB.init({

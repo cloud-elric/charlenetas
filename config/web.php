@@ -51,7 +51,7 @@ $config = [
 						] 
 				],
 				'errorHandler' => [ 
-						'errorAction' => 'site/error' 
+						'errorAction' => 'netas/error' 
 				],
 				'mailer' => [ 
 						'class' => 'yii\swiftmailer\Mailer',

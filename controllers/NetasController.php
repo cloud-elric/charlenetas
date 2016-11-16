@@ -72,6 +72,18 @@ class NetasController extends Controller {
 	}
 	
 	/**
+	 * @inheritdoc
+	 */
+	public function actions()
+	{
+		return [
+				'error' => [
+						'class' => 'yii\web\ErrorAction',
+				]
+		];
+	}
+	
+	/**
 	 * Obtenemos la calificacion del usuario logueado
 	 *
 	 * @param unknown $token        	
