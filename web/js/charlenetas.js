@@ -1023,6 +1023,20 @@ function validarRespuesta(element){
 			}else{
 				mensajeWarning('Respuesta incorrecta');
 			}
+		},
+		statusCode : {
+			403 : function() {
+				showModalLogin();
+			},
+			404 : function() {
+				
+			},
+			500 : function() {
+				
+			}
+		},
+		error:function(){
+			element.prop("checked", false);
 		}
 	
 	});

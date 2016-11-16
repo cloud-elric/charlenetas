@@ -5,10 +5,10 @@
 
 
 use yii\helpers\Html;
-use app\assets\AppAsset;
 use yii\helpers\Url;
+use app\assets\AppAssetProfile;
 
-AppAsset::register($this);
+AppAssetProfile::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="page-profile">
 
 <?php $this->beginBody() ?>
 

@@ -19,7 +19,7 @@
 /**
  * Variables
  */
-var basePath = 'http://localhost/charlenetas/web/';
+
 //var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var pagesComentarios = 0;
 
