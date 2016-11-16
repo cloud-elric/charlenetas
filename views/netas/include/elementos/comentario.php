@@ -54,9 +54,11 @@ $dataTokenReply = 'data-token="' . $comentario->txt_token . '"';
 		id="js-respuestas-comentario-<?=$comentario->txt_token?>"></div>
 
 	<div id="js-cargar-mas-respuestas-<?=$comentario->txt_token?>" class="comentarios-cargar-comentarios" data-token='<?=$comentario->txt_token?>' onclick="cargarRespuestasPage($(this))">
+	<?php if($comentario->entComentariosPosts){?>
 		<p>
 			<span>Cargar mas respuestas...</span><i class="icon icon icon-comment"></i>
 		</p>
+	<?php }?>	
 	</div>
 
 	<input type="hidden" id='js-page-respuesta-<?=$comentario->txt_token?>'  value='0'/>
