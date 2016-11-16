@@ -33,6 +33,14 @@
 .full-pin-body-content-text ul li {
     list-style-type: decimal;
 }
+
+.pin-sabias-que.pin .pin-content-wrapper .pin-link a{   
+margin: 25px 0;
+    display: block;
+    line-height: 2.2em;
+    font-weight: 900;
+    font-family: "Raleway", sans-serif;
+    }
 /*.pin .image img {
     width:100%;
 }*/

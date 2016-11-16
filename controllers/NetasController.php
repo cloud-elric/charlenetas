@@ -27,6 +27,9 @@ use app\models\EntNotificaciones;
 use app\models\EntRespuestasEspejo;
 use app\models\EntCitas;
 use yii\db\mssql\PDO;
+use app\models\EntUsuariosRespuestasSabiasQue;
+use app\models\EntUsuariosCreditos;
+use app\models\CatTipoCreditos;
 
 class NetasController extends Controller {
 	
@@ -609,15 +612,18 @@ class NetasController extends Controller {
 	 *
 	 * @param unknown $token        	
 	 */
-	public function actionValidarRespuesta($token) {
+	public function actionValidarRespuesta($respuesta, $token) {
+		
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
 		// busca el post necesario
 		$post = $this->getPostByToken ( $token );
 		
 		$sabiasQue = $post->entSabiasQue;
 
-		
-		$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
-		$buscarRespuesta = $respuestaSabiasQue->find()->where(['id_post'=>$sabiasQue->id_post])->andWhere(['id_usuario'=>$idUsuario])->one();  
+		$buscarRespuesta = EntUsuariosRespuestasSabiasQue::find()->where(['id_post'=>$sabiasQue->id_post])->andWhere(['id_usuario'=>$idUsuario])->one();  
 
 		if($buscarRespuesta){
 			return [
@@ -630,6 +636,9 @@ class NetasController extends Controller {
 			if($sabiasQue->b_verdadero === 1){
 				$boolRes = 'true';
 			}
+			
+			$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
+			
 			$respuestaSabiasQue->id_post = $sabiasQue->id_post;
 			$respuestaSabiasQue->id_usuario = $idUsuario;
 			if($respuesta === "true"){
@@ -640,19 +649,9 @@ class NetasController extends Controller {
 			$respuestaSabiasQue->save();
 			
 			if ($boolRes === $respuesta) {
-				//$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
-					
-// 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
-// 				$respuestaSabiasQue->id_usuario = $idUsuario;
-// 				if($respuesta === "true"){
-// 					$respuestaSabiasQue->b_respuesta = 1;
-// 				}else{
-// 					$respuestaSabiasQue->b_respuesta = 0;
-// 				}
-// 				$respuestaSabiasQue->save();
 				
-				$cat = new CatTipoCreditos();
-				$contestar = $cat->find()->where(['nombre'=>"Contestar"])->one();
+				
+				$contestar = CatTipoCreditos::find()->where(['nombre'=>"Contestar"])->one();
 				
 				$creditos = new EntUsuariosCreditos();
 				$creditos->id_usuario = $idUsuario;
@@ -661,20 +660,14 @@ class NetasController extends Controller {
 				$creditos->save();
 					
 				return [
-						'status' => 'success'
+						'status' => 'success',
+						'txt_url'=>$post->txt_url
 				];
 			} else {
-// 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
-// 				$respuestaSabiasQue->id_usuario = $idUsuario;
-// 				if($respuesta === "true"){
-// 					$respuestaSabiasQue->b_respuesta = 1;
-// 				}else{
-// 					$respuestaSabiasQue->b_respuesta = 0;
-// 				}
-// 				$respuestaSabiasQue->save();
 				
 				return [
-						'status' => 'error'
+						'status' => 'error',
+						'txt_url'=>$post->txt_url
 				];
 			}
 		}

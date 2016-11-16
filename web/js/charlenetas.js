@@ -16,13 +16,13 @@ var masonryOptions = {
 // Carga mas pins de los post
 function cargarMasPosts(postTotales, numeroPostMostrar) {
 	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
- 	l.start();
-	
-	totalPostMostrados = (pages+1)*30;
+	l.start();
+
+	totalPostMostrados = (pages + 1) * 30;
 	totalPost = postTotales - totalPostMostrados;
-	
+
 	var contenedor = $('#js-contenedor-posts-tarjetas');
-	var url = basePath+'netas/get-mas-posts?page=' + pages;
+	var url = basePath + 'netas/get-mas-posts?page=' + pages;
 
 	$.ajax({
 		url : url,
@@ -36,33 +36,33 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 			pages++;
 
 			filtrarPost();
-			
-			if(totalPost<=0){
+
+			if (totalPost <= 0) {
 				$("#js-cargar-mas-posts").remove();
-			}else{
-				$("#js-cargar-mas-posts label").text('('+totalPost+')');
+			} else {
+				$("#js-cargar-mas-posts label").text('(' + totalPost + ')');
 			}
-			
+
 			l.stop();
 		}
 	});
 
 }
 
-function filtrarPost(){
+function filtrarPost() {
 
-$( ".js-filter-tipo-post" ).each(function( index ) {
+	$(".js-filter-tipo-post").each(function(index) {
 		var elemento = $(this);
 		var tipoPost = elemento.data('value');
-		
-		var opacity=0;
+
+		var opacity = 0;
 
 		if (elemento.hasClass('filter-active')) {
 			opacity = 1;
 		}
 
 		ocultarTipoPost(tipoPost, opacity)
-	  
+
 	});
 }
 
@@ -70,8 +70,8 @@ $( ".js-filter-tipo-post" ).each(function( index ) {
 // pondran abajo
 function cargarComentarios(token, borrarAnteriores) {
 	var comentariosContenedor = $('#js-comments');
-	var urlComentarios = basePath+'netas/cargar-comentarios?token=' + token + '&page='
-			+ pagesComentarios;
+	var urlComentarios = basePath + 'netas/cargar-comentarios?token=' + token
+			+ '&page=' + pagesComentarios;
 
 	// Carga los comentarios via asincrona
 
@@ -89,22 +89,23 @@ function cargarComentarios(token, borrarAnteriores) {
 
 }
 
-function calcularComentarios(){
-	
-	comentariosRestantes = numComentarios-comentariosShow;
-	
-	if(comentariosRestantes < 1){
+function calcularComentarios() {
+
+	comentariosRestantes = numComentarios - comentariosShow;
+
+	if (comentariosRestantes < 1) {
 		$('#js-cargar-comentarios').remove();
-	}else{
-		$('#js-cargar-comentarios span label').text('('+comentariosRestantes+')');
+	} else {
+		$('#js-cargar-comentarios span label').text(
+				'(' + comentariosRestantes + ')');
 	}
-	
+
 	numComentarios = comentariosRestantes;
 }
 
 // Carga las respuestas de cada comentario
 function cargarRespuestas(token, pageRespuestas) {
-	var url = basePath+'netas/cargar-respuestas?token=' + token + '&page='
+	var url = basePath + 'netas/cargar-respuestas?token=' + token + '&page='
 			+ pageRespuestas;
 
 	$.ajax({
@@ -139,13 +140,13 @@ function cargarRespuestasPage(element) {
 function showPostFull(token) {
 	var background = $('#backScreen');
 	var content = $('#js-content');
-	var url = basePath+'netas/cargar-post?token=' + token;
+	var url = basePath + 'netas/cargar-post?token=' + token;
 
 	$('body').css('overflow', 'hidden');
 
 	background.toggle();
 	content.load(url, function() {
-		//content.html('');
+		// content.html('');
 		cargarComentarios(token, true);
 	});
 }
@@ -154,39 +155,39 @@ function showPostFull(token) {
 function showPostAfterLogin(token) {
 	var background = $('#backScreen');
 	var content = $('#js-content');
-	var url = basePath+'netas/cargar-post?token=' + token;
+	var url = basePath + 'netas/cargar-post?token=' + token;
 
 	$('body').css('overflow', 'hidden');
 
 	content.html('');
 
-	if(token){
+	if (token) {
 		content.load(url, function() {
 			cargarComentarios(token, true);
 			$('#modal-login').closeModal();
 			$('body').css('overflow', 'hidden');
 		});
-	}else{
+	} else {
 		$('#modal-login').closeModal();
-	}	
+	}
 }
 
 // Cierra el post con toda su información
 function hidePostFull() {
 	var content = $('#js-content');
-	content.html('<div style="display: flex;align-items: center;justify-content: center;height: 100%;position: relative;">'+
-					'<div class="preloader-wrapper big active">'+
-					    '<div class="spinner-layer spinner-blue-only">'+
-					      '<div class="circle-clipper left">'+
-					        '<div class="circle"></div>'+
-					      '</div><div class="gap-patch">'+
-					        '<div class="circle"></div>'+
-					      '</div><div class="circle-clipper right">'+
-					        '<div class="circle"></div>'+
-					      '</div>'+
-					    '</div>'+
-				  '</div>'+
-				 '</div>');
+	content
+			.html('<div style="display: flex;align-items: center;justify-content: center;height: 100%;position: relative;">'
+					+ '<div class="preloader-wrapper big active">'
+					+ '<div class="spinner-layer spinner-blue-only">'
+					+ '<div class="circle-clipper left">'
+					+ '<div class="circle"></div>'
+					+ '</div><div class="gap-patch">'
+					+ '<div class="circle"></div>'
+					+ '</div><div class="circle-clipper right">'
+					+ '<div class="circle"></div>'
+					+ '</div>'
+					+ '</div>'
+					+ '</div>' + '</div>');
 	var background = $('#backScreen');
 	background.toggle();
 	$('body').css('overflow', 'auto');
@@ -198,25 +199,25 @@ function hidePostFull() {
 }
 
 /**
- * Carga todas notificaciones para que las vizualisen los ususarios y 
+ * Carga todas notificaciones para que las vizualisen los ususarios y
  */
-function cargarNotificaciones(){
+function cargarNotificaciones() {
 	var url = basePath + 'netas/notificaciones';
-	
+
 	$.ajax({
 		url : url,
 		dataType : 'html',
-		succes : function(res){
-			
+		succes : function(res) {
+
 		}
 	});
 }
 
-//setInterval(cargarNotificaciones, 1000);
+// setInterval(cargarNotificaciones, 1000);
 
 // Metodo para suscribirse a una pregunta espejo
 function suscribirseEspejo(token) {
-	var url = basePath+'netas/suscripcion-espejo?token=' + token;
+	var url = basePath + 'netas/suscripcion-espejo?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -230,11 +231,14 @@ function suscribirseEspejo(token) {
 		success : function(res) {
 
 			if (res === 'subscrito') {
-				// Colocar un mensaje de que usuario ya esta inscrito desSuscribirseEspejo(
+				// Colocar un mensaje de que usuario ya esta inscrito
+				// desSuscribirseEspejo(
 				removeSubscriptores(token);
-				$('#js-subs-like-' + token).attr('onclick', 'suscribirseEspejo("'+token+'")');
+				$('#js-subs-like-' + token).attr('onclick',
+						'suscribirseEspejo("' + token + '")');
 			} else {
-				$('#js-subs-like-' + token).attr('onclick', 'desSuscribirseEspejo("'+token+'")');
+				$('#js-subs-like-' + token).attr('onclick',
+						'desSuscribirseEspejo("' + token + '")');
 			}
 
 		},
@@ -259,84 +263,84 @@ function suscribirseEspejo(token) {
  * Agrega el botón para agregar subscritores
  */
 function addSubscriptores(token) {
-	
+
 	var subs = $('#js-suscriptores-' + token).text();
 
 	$('#js-suscriptores-' + token).text(parseInt(subs) + 1);
-	$('#js-subs-like-'+token).addClass('did-usr-interact');
-	
+	$('#js-subs-like-' + token).addClass('did-usr-interact');
+
 }
 
 /**
  * Muestra mensaje de cuenta activada
+ * 
  * @param $mensaje
  */
-function mensajeCuentaActivada($mensaje){
+function mensajeCuentaActivada($mensaje) {
 	toastr.options = {
-			  
-			  "debug": false,
-			  "newestOnTop": false,
-			  "progressBar": false,
-			  "positionClass": "toast-top-full-width",
-			  "preventDuplicates": false,
-			  "onclick": null,
-			  "showDuration": "300",
-			  "hideDuration": "1000",
-			  "timeOut": "5000",
-			  "extendedTimeOut": "1000",
-			  "showEasing": "swing",
-			  "hideEasing": "linear",
-			  "showMethod": "fadeIn",
-			  "hideMethod": "fadeOut"
-			}
-	
+
+		"debug" : false,
+		"newestOnTop" : false,
+		"progressBar" : false,
+		"positionClass" : "toast-top-full-width",
+		"preventDuplicates" : false,
+		"onclick" : null,
+		"showDuration" : "300",
+		"hideDuration" : "1000",
+		"timeOut" : "5000",
+		"extendedTimeOut" : "1000",
+		"showEasing" : "swing",
+		"hideEasing" : "linear",
+		"showMethod" : "fadeIn",
+		"hideMethod" : "fadeOut"
+	}
+
 	// Display an info toast with no title
 	toastr.success('<i class="material-icons">done</i>' + $mensaje)
 }
 
-function mensajeError(mensaje){
+function mensajeError(mensaje) {
 	toastr.options = {
-			  
-			  "debug": false,
-			  "newestOnTop": false,
-			  "progressBar": false,
-			  "positionClass": "toast-top-full-width",
-			  "preventDuplicates": false,
-			  "onclick": null,
-			  "showDuration": "300",
-			  "hideDuration": "1000",
-			  "timeOut": "5000",
-			  "extendedTimeOut": "1000",
-			  "showEasing": "swing",
-			  "hideEasing": "linear",
-			  "showMethod": "fadeIn",
-			  "hideMethod": "fadeOut"
-			}
-	
+
+		"debug" : false,
+		"newestOnTop" : false,
+		"progressBar" : false,
+		"positionClass" : "toast-top-full-width",
+		"preventDuplicates" : false,
+		"onclick" : null,
+		"showDuration" : "300",
+		"hideDuration" : "1000",
+		"timeOut" : "5000",
+		"extendedTimeOut" : "1000",
+		"showEasing" : "swing",
+		"hideEasing" : "linear",
+		"showMethod" : "fadeIn",
+		"hideMethod" : "fadeOut"
+	}
+
 	// Display an info toast with no title
 	toastr.error(mensaje)
 }
 
-function mensajeWarning(mensaje){
+function mensajeWarning(mensaje) {
 	toastr.options = {
-			  
-			  "debug": false,
-			  "newestOnTop": false,
-			  "progressBar": false,
-			  "positionClass": "toast-top-full-width",
-			  "preventDuplicates": false,
-			  "onclick": null,
-			  "showDuration": "300",
-			  "hideDuration": "1000",
-			  "timeOut": "5000",
-			  "extendedTimeOut": "1000",
-			  "showEasing": "swing",
-			  "hideEasing": "linear",
-			  "showMethod": "fadeIn",
-			  "hideMethod": "fadeOut"
-			}
-			
-	
+
+		"debug" : false,
+		"newestOnTop" : false,
+		"progressBar" : false,
+		"positionClass" : "toast-top-full-width",
+		"preventDuplicates" : false,
+		"onclick" : null,
+		"showDuration" : "300",
+		"hideDuration" : "1000",
+		"timeOut" : "5000",
+		"extendedTimeOut" : "1000",
+		"showEasing" : "swing",
+		"hideEasing" : "linear",
+		"showMethod" : "fadeIn",
+		"hideMethod" : "fadeOut"
+	}
+
 	// Display an info toast with no title
 	// toastr.warning(mensaje)
 	toastr.warning('<i class="material-icons">report_problem</i>' + mensaje)
@@ -346,18 +350,18 @@ function mensajeWarning(mensaje){
  * Remueve el botón para eliminar subscritores
  */
 function removeSubscriptores(token) {
-	
+
 	var subs = $('#js-suscriptores-' + token).text();
 
 	$('#js-suscriptores-' + token).text(parseInt(subs) - 1);
-	$('#js-subs-like-'+token).removeClass('did-usr-interact');
+	$('#js-subs-like-' + token).removeClass('did-usr-interact');
 }
 
 /**
  * Metodo para suscribirse a una pregunta espejo
  */
 function desSuscribirseEspejo(token) {
-	var url = basePath+'netas/des-suscripcion-espejo?token=' + token;
+	var url = basePath + 'netas/des-suscripcion-espejo?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -372,9 +376,11 @@ function desSuscribirseEspejo(token) {
 
 			if (res === 'sinSubscripcion') {
 				addSubscriptores(token);
-				$('#js-subs-like-' + token).attr('onclick', 'desSuscribirseEspejo("'+token+'")');
+				$('#js-subs-like-' + token).attr('onclick',
+						'desSuscribirseEspejo("' + token + '")');
 			} else {
-				$('#js-subs-like-' + token).attr('onclick', 'suscribirseEspejo("'+token+'")');
+				$('#js-subs-like-' + token).attr('onclick',
+						'suscribirseEspejo("' + token + '")');
 			}
 
 		},
@@ -395,11 +401,12 @@ function desSuscribirseEspejo(token) {
 }
 
 /**
- * Guarda si al usuario le gusto o no la respuesta del admin
- * en b_de_acuerdo de la tabla ent_espuestas_espejo 
+ * Guarda si al usuario le gusto o no la respuesta del admin en b_de_acuerdo de
+ * la tabla ent_espuestas_espejo
  */
 function agregarAcuerdo(token, feed) {
-	var url = basePath+'netas/agregar-acuerdo?token=' + token + '&feed=' + feed;
+	var url = basePath + 'netas/agregar-acuerdo?token=' + token + '&feed='
+			+ feed;
 
 	$.ajax({
 		url : url,
@@ -426,7 +433,7 @@ function agregarAcuerdo(token, feed) {
  */
 function enviarComentario(token) {
 	var data = $('#js-comentario-form-' + token).serialize();
-	var url = basePath+'netas/comentar-post?token=' + token;
+	var url = basePath + 'netas/comentar-post?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -457,7 +464,8 @@ function enviarComentario(token) {
  * Guarda un comentario del usuario
  */
 function agregarFeedback(token, feed) {
-	var url = basePath+'netas/agregar-feedback?token=' + token + '&feed=' + feed;
+	var url = basePath + 'netas/agregar-feedback?token=' + token + '&feed='
+			+ feed;
 
 	$.ajax({
 		url : url,
@@ -543,19 +551,20 @@ function encenderEstrellas(estrellasAEncender) {
 
 }
 
-function encenderEstrellasGeneral(estrellasAEncender, token){
-	$('#js-alquimia-'+token+' .star-wrapper:eq(1) .icon-star').each(function(index) {
+function encenderEstrellasGeneral(estrellasAEncender, token) {
+	$('#js-alquimia-' + token + ' .star-wrapper:eq(1) .icon-star').each(
+			function(index) {
 
-		var estrella = $(this);
-		var calificacion = estrella.data('value');
+				var estrella = $(this);
+				var calificacion = estrella.data('value');
 
-		estrella.addClass('icon-star-empty');
+				estrella.addClass('icon-star-empty');
 
-		if (estrellasAEncender >= calificacion) {
-			estrella.removeClass('icon-star-empty');
-		}
-	});
-	
+				if (estrellasAEncender >= calificacion) {
+					estrella.removeClass('icon-star-empty');
+				}
+			});
+
 	$('#js-content .star-wrapper:eq(1) .icon-star').each(function(index) {
 
 		var estrella = $(this);
@@ -573,20 +582,19 @@ function encenderEstrellasGeneral(estrellasAEncender, token){
  * Califica alquimia
  */
 function calificarAquimia(token, calificacion) {
-	var url = basePath+'netas/calificar-alquimia?token=' + token + '&calificacion='
-			+ calificacion;
+	var url = basePath + 'netas/calificar-alquimia?token=' + token
+			+ '&calificacion=' + calificacion;
 	$.ajax({
 		url : url,
 		success : function(response) {
 			if (response.hasOwnProperty('status')
 					&& response.status == 'success') {
-				
-				
+
 				encenderEstrellasGeneral(response.num_calificacion, token);
 			} else {
 				// Muestra los errores
-				$('#form-alquimia').yiiActiveForm('updateMessages',
-						response, true);
+				$('#form-alquimia').yiiActiveForm('updateMessages', response,
+						true);
 			}
 		},
 		statusCode : {
@@ -609,7 +617,7 @@ function calificarAquimia(token, calificacion) {
 function enviarRespuesta(token) {
 
 	var data = $('#js-comentario-form-' + token).serialize();
-	var url = basePath+'netas/responder-comentario?token=' + token;
+	var url = basePath + 'netas/responder-comentario?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -643,7 +651,7 @@ function enviarRespuesta(token) {
  * @param token
  */
 function likePost(token) {
-	var url = basePath+'netas/like-post?token=' + token;
+	var url = basePath + 'netas/like-post?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -715,7 +723,7 @@ function loadLada(element) {
 function loadLogin() {
 	// var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
 	// var url = 'http://localhost/charlenetas/web/login';
-	var url = basePath+'login';
+	var url = basePath + 'login';
 	var contentModal = $('#modal-login .modal-content #js-contenedor-login');
 
 	$.ajax({
@@ -733,7 +741,7 @@ function loadLogin() {
 function loadSign() {
 	// var url = 'http://notei.com.mx/test/wwwCharlenetas/web/login';
 	// var url = 'http://localhost/charlenetas/web/login';
-	var url = basePath+'sign-up';
+	var url = basePath + 'sign-up';
 	var contentModal = $('#modal-login .modal-content #js-contenedor-crear-cuenta');
 
 	$.ajax({
@@ -747,19 +755,28 @@ function loadSign() {
 
 // Muestra el login en un modal
 function showModalLogin() {
-	
+
 	$(".account-singup").hide();
 	$('#js-message-sign-up').hide();
-	$('.anim-account').animate({left: '-1%'}, 300, function() {
-	// $(".account-login .animated").animate({ "opacity": "0" }, 0, function() {
-		$(".account-login .animated").animate({ "opacity": "0" }, 0 );
-		$(".anim-account").animate({ "left": "2%" }, 350 );
+	$('.anim-account').animate({
+		left : '-1%'
+	}, 300, function() {
+		// $(".account-login .animated").animate({ "opacity": "0" }, 0,
+		// function() {
+		$(".account-login .animated").animate({
+			"opacity" : "0"
+		}, 0);
+		$(".anim-account").animate({
+			"left" : "2%"
+		}, 350);
 		$(".account-login").show();
-		$(".account-login .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
+		$(".account-login .animated").each(function(index) {
+			$(this).addClass("delay-" + (index) + " fadeInUp");
+		});
 	});
 
 	$('#js-modal-lgoin-con').trigger('click');
-	
+
 	document.getElementById("sign-form").reset();
 
 }
@@ -772,11 +789,11 @@ function cargarHabilidadesUsuario() {
 	cargarInputRespuestas();
 	cargarHabilidadLike();
 	loadEspejoPreguntar();
-	
+
 	$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
 }
 
-function agregarPregunta(){
+function agregarPregunta() {
 	$('#js-modal-espejo').trigger('click');
 }
 
@@ -811,7 +828,7 @@ function cargarCalificacion() {
  * @param token
  */
 function cargarCalificacionUsuario(token) {
-	var url = basePath+'netas/get-calificacion-usuario?token=' + token;
+	var url = basePath + 'netas/get-calificacion-usuario?token=' + token;
 
 	$.ajax({
 		url : url,
@@ -849,7 +866,7 @@ function cargarHabilidadLike() {
  */
 function cargarInputComentario() {
 	var comentarioNuevo = $('#new-comment');
-	var url = basePath+'netas/cargar-input-comentario?token='
+	var url = basePath + 'netas/cargar-input-comentario?token='
 			+ comentarioNuevo.data('token');
 
 	$.ajax({
@@ -866,38 +883,40 @@ function cargarInputComentario() {
  * Carga los input para responder
  */
 function cargarInputRespuestas() {
-	$('.js-reply-comentario').each(function() {
-		var reply = $(this);
-		var url = basePath+'netas/cargar-input-respuesta?token=' + reply.data('token');
+	$('.js-reply-comentario').each(
+			function() {
+				var reply = $(this);
+				var url = basePath + 'netas/cargar-input-respuesta?token='
+						+ reply.data('token');
 
-		$.ajax({
-			url : url,
-			success : function(res) {
-				reply.html(res);
-			}
-		});
-	});
+				$.ajax({
+					url : url,
+					success : function(res) {
+						reply.html(res);
+					}
+				});
+			});
 }
 
 /**
  * Cambia la clase pin a otra
  */
 function cambiarClassPin(elemento, opacity) {
-	
-	if(opacity==1){
+
+	if (opacity == 1) {
 		elemento.addClass('pin');
-		elemento.css('display','block');
-	}else{
+		elemento.css('display', 'block');
+	} else {
 		elemento.removeClass('pin');
-		elemento.css('display','none');
+		elemento.css('display', 'none');
 	}
 }
 
 /**
  * Carga el espejo para preguntar
  */
-function loadEspejoPreguntar(){
-	var url = basePath+'netas/agregar-espejo';
+function loadEspejoPreguntar() {
+	var url = basePath + 'netas/agregar-espejo';
 	var contenedor = $('#modal-pregunta-espejo .modal-content');
 	$.ajax({
 		url : url,
@@ -958,34 +977,31 @@ function ocultarTipoPost(tipoPost, opacity) {
 var grid;
 
 $(document).ready(function() {
-	
-	$('.modal-content .wrap').on('click', function(e){
-		
-		
+
+	$('.modal-content .wrap').on('click', function(e) {
+
 		if (e.target.className == 'wrap') {
 			e.preventDefault();
 			$('.lean-overlay').trigger('click');
-			
+
 		}
-		
+
 	});
-	
-	$('.pin-solo-por-hoy').on('click', function(e){
+
+	$('.pin-solo-por-hoy').on('click', function(e) {
 		console.log(e.target.localName);
-		if(e.target.localName == 'a'){
+		if (e.target.localName == 'a') {
 			e.stopPropagation();
 			return;
 		}
-//		var token = $(this).data('token');
-//		showPostFull(token)
+		// var token = $(this).data('token');
+		// showPostFull(token)
 	});
-	
-	
-	$("#js-ingresar-cerrar-sesion").on("click", function(e){
+
+	$("#js-ingresar-cerrar-sesion").on("click", function(e) {
 		e.preventDefault();
 	});
-	
-	
+
 	grid = $('.grid').masonry(masonryOptions);
 
 	setInterval(function() {
@@ -996,10 +1012,10 @@ $(document).ready(function() {
 	$('#js-login').on('click', function(e) {
 		e.preventDefault();
 	});
-	
-//	$('.btn').on('click', function(e) {
-//		e.preventDefault();
-//	});
+
+	// $('.btn').on('click', function(e) {
+	// e.preventDefault();
+	// });
 
 	$('#backScreen').on('click', function(e) {
 		if (e.target !== this) {
@@ -1011,7 +1027,7 @@ $(document).ready(function() {
 
 	$('.modal-trigger').leanModal({
 		complete : function() {
-			//$('body').css('overflow', 'hidden');
+			// $('body').css('overflow', 'hidden');
 		} // Callback for Modal close
 	});
 
@@ -1033,52 +1049,66 @@ $(document).ready(function() {
 	grid.on('layoutComplete', function(event, laidOutItems) {
 
 	});
-	
+
 });
 
-function validarRespuesta(element){
-	
-	var valor = element.prop("checked");
+function validarRespuesta(element) {
+
+	var valor = element.val();
 	var token = element.data("token");
-	var url = basePath+'netas/validar-respuesta?respuesta='+valor+'&token='+token;
-	
-	$.ajax({
-		url:url,
-		dataType:'json',
-		success:function(resp){
-			if(resp.status=="noLogin"){
-				
-				showModalLogin();
-			}else if(resp.status=="success"){
-				mensajeCuentaActivada('Respuesta correcta');
+	var url = basePath + 'netas/validar-respuesta?respuesta=' + valor
+			+ '&token=' + token;
 
-			}else if(resp.status=="respondido"){
-				mensajeCuentaActivada('Ya contestaste esta pregunta');
+	$
+			.ajax({
+				url : url,
+				dataType : 'json',
+				success : function(resp) {
+					if (resp.status == "noLogin") {
+						showModalLogin();
+					} else if (resp.status == "success") {
+						mensajeCuentaActivada('Respuesta correcta');
+						remplazarBoton(token, resp, '<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
+					} else if (resp.status == "respondido") {
+						mensajeCuentaActivada('Ya contestaste esta pregunta');
+						remplazarBoton(token, resp, '<p class="pin-sabias-que-respuesta-succes">Ya contestaste esta pregunta</p>');
+					} else {
+						mensajeWarning('Respuesta incorrecta');
+						remplazarBoton(token, resp, '<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
+					}
+				},
+				statusCode : {
+					403 : function() {
+						showModalLogin();
+					},
+					404 : function() {
 
-			}else{
-				mensajeWarning('Respuesta incorrecta');
-			}
-		},
-		statusCode : {
-			403 : function() {
-				showModalLogin();
-			},
-			404 : function() {
-				
-			},
-			500 : function() {
-				
-			}
-		},
-		error:function(){
-			element.prop("checked", false);
-		}
-	
-	});
+					},
+					500 : function() {
+
+					}
+				},
+				error : function() {
+					element.prop("checked", false);
+				}
+
+			});
 }
 
-function cargarCerrarSesion(){
-	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="'+basePath+'site/logout">Cerrar sesión</a>';
+function remplazarBoton(token, resp, text){
+	var nota = '<div class="pin-link">'
+		+ '<a class="waves-effect waves-light btn btn-secondary" href="'
+		+ resp.txt_url
+		+ '" target="_blank">Ver nota</a>' + '</div>';
+	$('#js-sabias-que-pin-'+token+' .pin-content-wrapper').append(nota);
+	$('#js-sabias-que-pin-'+token+' .switch.pin-content-wrapper-switch').remove();
+	
+	$('#js-sabias-que-pin-'+token).append(text);
+}
+
+function cargarCerrarSesion() {
+	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="' + basePath
+			+ 'site/logout">Cerrar sesión</a>';
 	$("#js-ingresar-cerrar-sesion").replaceWith(cerrarSesion);
 }
 
@@ -1086,38 +1116,39 @@ $('.filters-toggle').on('click', function() {
 	$('nav').toggleClass('mobile');
 });
 
-function  compartirFacebook(token){
+function compartirFacebook(token) {
 
 	var image = $('.full-pin-body-content-img img').attr('src');
-	var description =  $(".full-pin-body-content-text h3").text()+$(".full-pin-body-content-text p").text();
+	var description = $(".full-pin-body-content-text h3").text()
+			+ $(".full-pin-body-content-text p").text();
 	var title = $('.full-pin-header h2').text();
 	console.log(image);
-FB.ui({
-    method: 'feed',
-    name: title,
-    link: basePath+'netas/index?token='+token,
-    picture: basePathFace+image,
-    caption: 'Charlenetas',
-    description: description
+	FB.ui({
+		method : 'feed',
+		name : title,
+		link : basePath + 'netas/index?token=' + token,
+		picture : basePathFace + image,
+		caption : 'Charlenetas',
+		description : description
 
-}, function(response) {
-    if(response && response.post_id){}
-    else{}
-});
+	}, function(response) {
+		if (response && response.post_id) {
+		} else {
+		}
+	});
 }
 
-
-//window.fbAsyncInit = function() {
-//	FB.init({
-//		//appId : '1029875693761281',
-//		appId:'1779986862262300',
-//		cookie : true, // enable cookies to allow the server to access
-//		// the session
-//		xfbml : true, // parse social plugins on this page
-//		version : 'v2.6' // use any version
-//	});
+// window.fbAsyncInit = function() {
+// FB.init({
+// //appId : '1029875693761281',
+// appId:'1779986862262300',
+// cookie : true, // enable cookies to allow the server to access
+// // the session
+// xfbml : true, // parse social plugins on this page
+// version : 'v2.6' // use any version
+// });
 //
-//};
+// };
 
 $('.anim-account-close').on('click', function() {
 	$('.lean-overlay').trigger('click');
