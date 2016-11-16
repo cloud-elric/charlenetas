@@ -69,7 +69,7 @@ $form = ActiveForm::begin ( [
 	
 	</div>
 
-<?= Html::submitButton('<span class="ladda-label">Crear</span>', ['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit ladda-button', 'name' => 'boton-sabias', 'data-style'=>'zoom-in'])?>
+<?= Html::submitButton($post->isNewRecord?'crear':'editar', ['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit ladda-button', 'name' => 'boton-sabias', 'data-style'=>'zoom-in'])?>
 
 <?php
 

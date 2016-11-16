@@ -3,6 +3,7 @@ use yii\web\View;
 use yii\helpers\Url;
 use app\models\ConstantesWeb;
 use app\models\EntPosts;
+use app\models\ModUsuariosEntUsuarios;
 
 $this->title = 'Charlenetas';
 ?>
@@ -13,18 +14,44 @@ $this->title = 'Charlenetas';
 	<div class="pins-grid-container">
 		<div class="grid" id="js-contenedor-posts-tarjetas">
 
-			<div class="pin pin-agregar-espejo">
-				<div class="pin-header pin-header-agregar-espejo"></div>
-				<div class="image">
-					<img src="<?=Url::base()?>/webAssets/images/espejo.jpg">
-				</div>
-				<div class="pin-content-wrapper" lang="en">
-					<a href="#modal-pregunta-espejo" class="btn pin-titulo"
-						id="js-preguntar-espejo" <?=Yii::$app->user->isGuest?'onclick="showModalLogin();"':'onclick="agregarPregunta();"'?>>Pregunta al espejo</a>
-				</div>
-			</div>
 			<?php
-			include 'masPosts.php';
+			if (!Yii::$app->user->isGuest) {
+				$idUser = Yii::$app->user->identity->id_usuario;
+				$idTipo = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$idUser])->one();
+				
+				if($idTipo->id_tipo_usuario == 2){
+			
+					include 'masPosts.php';
+				}else{
+			?>
+					<div class="pin pin-agregar-espejo">
+						<div class="pin-header pin-header-agregar-espejo"></div>
+						<div class="image">
+							<img src="<?=Url::base()?>/webAssets/images/espejo.jpg">
+						</div>
+						<div class="pin-content-wrapper" lang="en">
+							<a href="#modal-pregunta-espejo" class="btn pin-titulo"
+								id="js-preguntar-espejo" <?=Yii::$app->user->isGuest?'onclick="showModalLogin();"':'onclick="agregarPregunta();"'?>>Pregunta al espejo</a>
+						</div>
+					</div>
+			<?php 
+					include 'masPosts.php';
+				}
+			}else{
+			?>
+				<div class="pin pin-agregar-espejo">
+						<div class="pin-header pin-header-agregar-espejo"></div>
+						<div class="image">
+							<img src="<?=Url::base()?>/webAssets/images/espejo.jpg">
+						</div>
+						<div class="pin-content-wrapper" lang="en">
+							<a href="#modal-pregunta-espejo" class="btn pin-titulo"
+								id="js-preguntar-espejo" <?=Yii::$app->user->isGuest?'onclick="showModalLogin();"':'onclick="agregarPregunta();"'?>>Pregunta al espejo</a>
+						</div>
+					</div>
+			<?php
+					include 'masPosts.php';
+			}
 			?>
   </div>
 	</div>

@@ -93,11 +93,20 @@ $(document).ready(function(){
 						showPostAfterLogin(token);
 						cargarCerrarSesion();
 						mensajeCuentaActivada("Bienvenido de nuevo charlenauta");
-						loadEspejoPreguntar();
-					
+						$.ajax({
+							url: basePath+'netas/preguntar-tipo-usuario',
+							type: 'post',
+							success: function(resp){
+								if (resp.hasOwnProperty('status')
+										&& resp.status == 'admin') {
+									$('.pin-agregar-espejo').remove();
+								}else if (resp.hasOwnProperty('status')
+										&& resp.status == 'charlenauta'){
+									loadEspejoPreguntar();	
+								}
+							}
+						});
 						$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
-					
-					
 				} else {
 					// Muestra los errores
 					$('#login-form').yiiActiveForm('updateMessages',

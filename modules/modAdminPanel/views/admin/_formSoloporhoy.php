@@ -44,7 +44,7 @@ $form = ActiveForm::begin ( [
 		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
    	</div>
 
-<?= Html::submitButton('<span class="ladda-label">Crear</span>', ['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit ladda-button', 'name' => 'boton-solo', 'data-style'=>'zoom-in'])?>
+<?= Html::submitButton($post->isNewRecord?'crear':'editar', ['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit ladda-button', 'name' => 'boton-solo', 'data-style'=>'zoom-in'])?>
 
 <?php
 
