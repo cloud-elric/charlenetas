@@ -97,6 +97,20 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
       		<button type="button" id="Aceptar" value="true" class="btn btn-submit modal-footer-btn-aceptar waves-effect">Aceptar</button>
     	</div>
   </div>
+  
+    <!-- Modal para eliminar post en adminPanel -->
+ 	<a class="modal-trigger js-eliminar-post waves-effect waves-light btn" href="#modal4" style="display: none">Modal</a>
+  
+    <!-- Modal Structure -->
+  	<div id="modal4" class="modal modal-eliminar-post">
+    	<div class="modal-content">
+      		<h4><span>Deseas</span> Eliminar <span>el post</span></h4>
+    	</div>
+    	<div class="modal-footer">
+      		<button type="button" id="Cancelar-post" class="btn btn-submit modal-footer-btn-cancelar waves-effect">Cancelar</button>
+      		<button type="button" id="Aceptar-post" value="true" class="btn btn-submit modal-footer-btn-aceptar waves-effect">Aceptar</button>
+    	</div>
+  </div>
 
 <?php $this->endBody() ?>
 </body>

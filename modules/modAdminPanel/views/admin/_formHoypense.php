@@ -43,7 +43,7 @@ $form = ActiveForm::begin ( [
 
 	</div>
 
-	<?= Html::submitButton('<span class="ladda-label">Crear</span>', ['id'=>$hoyPense->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name' => 'boton-hoy', 'data-style'=>'zoom-in'])?>
+	<?= Html::submitButton($hoyPense->isNewRecord?'crear':'edtar', ['id'=>$hoyPense->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name' => 'boton-hoy', 'data-style'=>'zoom-in'])?>
 
 <?php ActiveForm::end();
 

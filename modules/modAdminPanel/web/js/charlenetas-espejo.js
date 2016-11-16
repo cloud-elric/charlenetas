@@ -19,16 +19,26 @@ var loading = '<div class="loader-center">'+
 function deletePosts(){
 	var del = document.getElementsByTagName('input');
 	var token;
-	$("input:checked").each(function(){
-		console.log($(this).val());
-		token = $(this).val();
-		console.log("token"+token);
-		//alert(token);
-		$('#card_'+ token).remove();
-		var ajax=$.ajax({
-			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
-			type : 'GET'
+	
+	$('.modal-trigger.js-eliminar-post').trigger('click');
+	$('#Aceptar-post').on('click', function(e){
+		e.preventDefault();
+	
+		$("input:checked").each(function(){
+			console.log($(this).val());
+			token = $(this).val();
+			console.log("token"+token);
+			//alert(token);
+			$('#card_'+ token).remove();
+			$('.lean-overlay').trigger("click");
+			var ajax=$.ajax({
+				url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+				type : 'GET'
+			});
 		});
+	});
+	$('#Cancelar-post').on('click', function(e){
+		$('.lean-overlay').trigger("click");
 	});
 }
 

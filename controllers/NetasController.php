@@ -26,10 +26,12 @@ use app\models\EntAlquimias;
 use app\models\EntNotificaciones;
 use app\models\EntRespuestasEspejo;
 use app\models\EntCitas;
-use yii\db\mssql\PDO;
 use app\models\EntUsuariosRespuestasSabiasQue;
 use app\models\EntUsuariosCreditos;
 use app\models\CatTipoCreditos;
+
+use app\models\ModUsuariosEntUsuarios;
+
 
 class NetasController extends Controller {
 	
@@ -793,6 +795,7 @@ class NetasController extends Controller {
 		$post = new EntPosts ( [ 
 				'scenario' => 'agregarEspejo' 
 		] );
+		Yii::$app->response->format = Response::FORMAT_JSON;
 		
 		if ($post->load ( Yii::$app->request->post () )) {
 			if($postGuardado = $post->guardarEspejo($post)){
@@ -801,9 +804,9 @@ class NetasController extends Controller {
 					
 				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
 				
-				return 'success';
+				return ['status'=>'success'];
 			}else{
-				return 'error';
+				return ['status'=>'error'];
 			}
 		}
 		
@@ -925,5 +928,19 @@ class NetasController extends Controller {
 	public function actionPayPal(){
 		
 		return $this->render('paypal');
+	}
+	
+	public function actionPreguntarTipoUsuario(){
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		
+		$idUser = Yii::$app->user->identity->id_usuario;
+		
+		$idTipo = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$idUser])->one();
+		
+		if($idTipo->id_tipo_usuario == 2){
+			return['status'=>'admin'];
+		}else{
+			return['status'=>'charlenauta'];
+		}
 	}
 }
