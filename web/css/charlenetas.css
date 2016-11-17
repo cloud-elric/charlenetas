@@ -97,3 +97,14 @@ margin: 25px 0;
 .recovery-pass .input-field{
 	    margin-bottom: 30px;
 }
+
+.account-recovery-pass h4{
+color: #345678;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+        margin-bottom: 40px;
+}

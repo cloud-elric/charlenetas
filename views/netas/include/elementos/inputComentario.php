@@ -2,10 +2,11 @@
 use yii\widgets\ActiveForm;
 use app\models\EntComentariosPosts;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 // Si el usuario esta logueado ponemos su avatar
 if (Yii::$app->user->isGuest) {
-	echo Html::img ( 'webAssets/images/usr-avatar.png', [
+	echo Html::img ( Yii::$app->urlManager->createAbsoluteUrl ( [''] ).'webAssets/images/usr-avatar.png', [
 			'width' => '30px'
 	] );
 } else {

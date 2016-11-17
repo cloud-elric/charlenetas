@@ -15,7 +15,7 @@ $usuario = $post->idUsuario;
 	<div class="post-publisher-data">
 		<div class="post-publisher">
 			<h6>Publicado por: Charlene</h6>
-			<h6><?=$post->fch_creacion?></h6>
+			<h6><?=Utils::changeFormatDate(Html::encode($post->fch_creacion))?></h6>
 		</div>
 
 		<div class="post-publisher-avatar">
