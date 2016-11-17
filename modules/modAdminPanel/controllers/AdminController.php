@@ -264,6 +264,33 @@ class AdminController extends Controller {
 			echo "ERROR";
 	}
 	
+	public function actionDeshabilitarPostContexto($tokenPost = null) {
+		$postDeshabilitar = EntPosts::getPostByToken ( $tokenPost );
+		$postDeshabilitar->b_habilitado = 0;
+		
+		$entContexto = EntContextos::find()->all();
+	
+		foreach($entContexto as $contexto){
+			if($contexto->id_contexto_padre == $postDeshabilitar->id_post){
+				$contexto->id_contexto_padre = null;
+			}else if($contexto->id_post == $postDeshabilitar->id_post){
+				$contexto->id_contexto_padre = null;
+			}
+			if($contexto->save()){
+				echo "Success ";
+			}else{
+				//print_r($contexto);
+				echo "Error";
+			}
+		}
+		
+		if ($postDeshabilitar->save ()){
+			echo "SUCCESS";
+		}else{
+				echo "ERROR";
+		}
+	}
+	
 	/**
 	 * Vista creacion de usuarios
 	 */

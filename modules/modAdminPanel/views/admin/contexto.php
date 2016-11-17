@@ -54,7 +54,7 @@ include 'templates/formato-fecha.php';
 	<div class="row" id="js-contenedor-tarjetas">
 		
 		<?php foreach ( $postsContexto as $postContexto ) {?>
-			<div class="col s12 m6 l4">
+			<div class="col s12 m6 l4" id="card_<?=$postContexto->txt_token?>">
 				<div class="card card-contexto" data-token="<?=$postContexto->txt_token?>">
 					
 					<div class="card-contexto-cont" id="card_<?=$postContexto->txt_token?>">
@@ -79,6 +79,11 @@ include 'templates/formato-fecha.php';
 					</div>
 
 					<div class="card-contexto-options">
+						<div>
+							<input type="checkbox" id="delete-<?=$postContexto->txt_token?>" value="<?=$postContexto->txt_token?>"/>
+							<label class="alquimia-delete-check" for="delete-<?=$postContexto->txt_token?>"></label>
+						</div>
+					
 						<?php 
 						if($postContexto->entContextos->idContextoPadre){
 							$contextoPadre = $postContexto->entContextos->idContextoPadre->idPost;
@@ -108,6 +113,9 @@ include 'templates/formato-fecha.php';
 		<!-- Modal Trigger -->
 		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post" onclick='document.getElementById("form-contexto").reset();'>
 			<i class="ion ion-wand"></i>
+		</a>
+		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePostsContexto()">
+			<i class="ion ion-ios-trash-outline"></i>
 		</a>
 	</div>
 	<!-- end /.fixed-action-btn -->
