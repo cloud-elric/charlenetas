@@ -11,7 +11,7 @@ use yii\helpers\Url;
 	<div class="pin-header pin-header-espejo"></div>
 
 	<div class=image>
-		<img src="<?=Url::base()?>/webAssets/images/espejo.jpg">
+		<img src="<?=Url::base()?>/webAssets/images/espejo.png">
 	</div>
 
 

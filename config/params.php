@@ -27,7 +27,7 @@ if (YII_ENV_DEV) {
 					'email' => [ 
 							'emailActivacion' => 'welcome@2gom.com.mx',
 							'subjectActivacion' => 'Activar cuenta',
-							'emailRecuperarPass' => 'support@2gom.com.mx',
+							'emailRecuperarPass' => 'support@charlenetas.com',
 							'subjectRecuperarPass' => 'Recuperar contraseña' 
 					],
 					'recueperarPass' => [ 

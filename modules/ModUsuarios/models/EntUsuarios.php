@@ -189,8 +189,16 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'repeatPassword' 
 						],
 						'required',
-						'on' => 'cambiarPass' 
+						'on' => 'cambiarPass',
+						'message' => 'Campo requerido'
 				],
+				[
+				'repeatPassword',
+				'compare',
+				'compareAttribute' => 'password',
+				'on' => 'cambiarPass',
+				'message' => 'La contraseña no coincide'
+						],
 				[ 
 						[ 
 								'fch_creacion',

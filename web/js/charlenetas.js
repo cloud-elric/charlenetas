@@ -735,6 +735,17 @@ function loadLogin() {
 	})
 }
 
+function loadRecuperarPass() {
+	var url = basePath + 'peticion-pass';
+	var contentModal = $('#modal-login .modal-content #js-contenedor-recovery');
+	$.ajax({
+		url : url,
+		success : function(res) {
+			contentModal.html(res);
+		}
+	})
+}
+
 /**
  * Carga Registro de usuario
  */
@@ -755,9 +766,10 @@ function loadSign() {
 
 // Muestra el login en un modal
 function showModalLogin() {
-
+	$(".account-recovery-pass").hide();
 	$(".account-singup").hide();
 	$('#js-message-sign-up').hide();
+	$('#js-message-recovery').hide();
 	$('.anim-account').animate({
 		left : '-1%'
 	}, 300, function() {
@@ -976,8 +988,48 @@ function ocultarTipoPost(tipoPost, opacity) {
 
 var grid;
 
-$(document).ready(function() {
+// Click para cada item
+$(document).on({
+	'click' : function(e) {
+		e.preventDefault();
+		
+			$(".account-login").hide();
+			$(".account-recovery-pass .animated").animate({
+				"opacity" : "0"
+			}, "slow", function() {
 
+				$(".account-recovery-pass").show();
+				$(".account-recovery-pass .animated").each(function(index) {
+					$(this).addClass("delay-" + (index) + " fadeInUp");
+				});
+			});
+
+		
+
+	}
+}, '#js-olvide-mi-contrasenia');
+
+// Click para cada item
+$(document).on({
+	'click' : function(e) {
+		e.preventDefault();
+
+		$(".account-recovery-pass").hide();
+		$(".account-login .animated").animate({
+			"opacity" : "0"
+		}, "slow", function() {
+
+			$(".account-login").show();
+			$(".account-login .animated").each(function(index) {
+				$(this).addClass("delay-" + (index) + " fadeInUp");
+			});
+		});
+
+	}
+}, '#iniciar-sesion');
+
+$(document).ready(function() {
+	
 	$('.modal-content .wrap').on('click', function(e) {
 
 		if (e.target.className == 'wrap') {
@@ -1068,13 +1120,16 @@ function validarRespuesta(element) {
 						showModalLogin();
 					} else if (resp.status == "success") {
 						mensajeCuentaActivada('Respuesta correcta');
-						remplazarBoton(token, resp, '<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
+						remplazarBoton(token, resp,
+								'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
 					} else if (resp.status == "respondido") {
 						mensajeCuentaActivada('Ya contestaste esta pregunta');
-						remplazarBoton(token, resp, '<p class="pin-sabias-que-respuesta-succes">Ya contestaste esta pregunta</p>');
+						remplazarBoton(token, resp,
+								'<p class="pin-sabias-que-respuesta-succes">Ya contestaste esta pregunta</p>');
 					} else {
 						mensajeWarning('Respuesta incorrecta');
-						remplazarBoton(token, resp, '<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
+						remplazarBoton(token, resp,
+								'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
 					}
 				},
 				statusCode : {
@@ -1095,15 +1150,15 @@ function validarRespuesta(element) {
 			});
 }
 
-function remplazarBoton(token, resp, text){
+function remplazarBoton(token, resp, text) {
 	var nota = '<div class="pin-link">'
-		+ '<a class="waves-effect waves-light btn btn-secondary" href="'
-		+ resp.txt_url
-		+ '" target="_blank">Ver nota</a>' + '</div>';
-	$('#js-sabias-que-pin-'+token+' .pin-content-wrapper').append(nota);
-	$('#js-sabias-que-pin-'+token+' .switch.pin-content-wrapper-switch').remove();
-	
-	$('#js-sabias-que-pin-'+token).append(text);
+			+ '<a class="waves-effect waves-light btn btn-secondary" href="'
+			+ resp.txt_url + '" target="_blank">Ver nota</a>' + '</div>';
+	$('#js-sabias-que-pin-' + token + ' .pin-content-wrapper').append(nota);
+	$('#js-sabias-que-pin-' + token + ' .switch.pin-content-wrapper-switch')
+			.remove();
+
+	$('#js-sabias-que-pin-' + token).append(text);
 }
 
 function cargarCerrarSesion() {

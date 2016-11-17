@@ -153,7 +153,7 @@ class AdminController extends Controller {
 	}
 	public function actionEspejo($page = 0) {
 		$idPost = 1;
-		$postsEspejo = EntPosts::getPosts ( $page, $idPost );
+		$postsEspejo = EntPosts::getPosts ( $page, $idPost);
 		
 		return $this->render ( 'espejo', [ 
 				"postsEspejo" => $postsEspejo 

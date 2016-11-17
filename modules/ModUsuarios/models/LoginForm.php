@@ -40,7 +40,8 @@ class LoginForm extends Model {
 								'username' 
 						],
 						'required',
-						'on' => 'recovery' 
+						'on' => 'recovery',
+						'message' => 'Campo requerido'
 				],
 				[ 
 						[ 

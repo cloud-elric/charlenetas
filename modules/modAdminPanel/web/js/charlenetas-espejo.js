@@ -124,7 +124,7 @@ $('body').on(
 						$('#card_'+response.tk+' .card-espejo .respondido span').text('Espejo respondido');
 						
 						if(!response.e){
-							$('#card_'+response.tk).clone().appendTo( "#js-contenedor-tarjetas" );
+							$('#card_'+response.tk).clone().appendTo( "#test2" );
 							$('#card_'+response.tk).remove();
 							$('.modal-trigger').leanModal();
 						}

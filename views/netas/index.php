@@ -27,7 +27,7 @@ $this->title = 'Charlenetas';
 					<div class="pin pin-agregar-espejo">
 						<div class="pin-header pin-header-agregar-espejo"></div>
 						<div class="image">
-							<img src="<?=Url::base()?>/webAssets/images/espejo.jpg">
+							<img src="<?=Url::base()?>/webAssets/images/espejo.png">
 						</div>
 						<div class="pin-content-wrapper" lang="en">
 							<a href="#modal-pregunta-espejo" class="btn pin-titulo"
@@ -42,7 +42,7 @@ $this->title = 'Charlenetas';
 				<div class="pin pin-agregar-espejo">
 						<div class="pin-header pin-header-agregar-espejo"></div>
 						<div class="image">
-							<img src="<?=Url::base()?>/webAssets/images/espejo.jpg">
+							<img src="<?=Url::base()?>/webAssets/images/espejo.png">
 						</div>
 						<div class="pin-content-wrapper" lang="en">
 							<a href="#modal-pregunta-espejo" class="btn pin-titulo"
@@ -132,14 +132,21 @@ if($postTotales>ConstantesWeb::PINS_A_MOSTRAR){
 						<p style="color: white;">Para activar tu cuenta se ha enviado un
 							correo electronico a la dirección proporcionada.</p>
 					</div>
+					<div class="green darken-1" id="js-message-recovery"
+						style="display:none;position: absolute; width: 100%; height: 100%; top: 0; left: 0; padding: 40px 30px; color: white; ">
+						<h1>Revisa tu email.</h1>
+						<p style="color: white;">Se ha enviado a la dirección proporcionada un link para recuperar su password.</p>
+					</div>
 					<!-- Tabs -->
 					<div class="anim-account-tab">
 						<p class="anim-account-tab-item btn-login-register active" data-account="singup">Login</p>
 						<p class="anim-account-tab-item btn-login-register" data-account="login">Registrarse</p>
+						
 					</div>
 					<!-- Login / SignUp -->
 					<div class="account-singup" id="js-contenedor-crear-cuenta"></div>
 					<div class="account-login" id="js-contenedor-login"></div>
+					<div class="account-recovery-pass" style="display:none;" id="js-contenedor-recovery"></div>
 				</div>
 			</section>
 			<!-- end / .section -->
@@ -167,6 +174,7 @@ if (Yii::$app->user->isGuest) {
 	$this->registerJs ( "
   loadLogin();
 loadSign();
+loadRecuperarPass()
 $('ul.tabs').tabs();
 
   ", View::POS_END );
@@ -179,11 +187,9 @@ $('ul.tabs').tabs();
 }
 
 if (! empty ( $token )) {
-	?>
-<script>
+	$this->registerJs ( "
   		showPostFull('".$token."');
-  </script>
-<?php
+	", View::POS_END, 'mostarPost' );
 }
 ?>
 

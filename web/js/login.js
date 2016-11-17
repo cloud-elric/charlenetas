@@ -1,11 +1,14 @@
 /**
  * Function
  */
-$(".btn-login-register").click(function() {
+$(".btn-login-register").on('click',function(e) {
+	e.preventDefault();
 	var item = $(this).data("account");
 	$(".btn-login-register").removeClass("active");
 	$(this).addClass("active");
 	if(item === "singup"){
+		esconderRecovery();
+		
 		$(".account-singup").hide();
 		$('#js-message-sign-up').hide();
 		$('.anim-account').animate({left: '-1%'}, 300, function() {
@@ -15,8 +18,11 @@ $(".btn-login-register").click(function() {
 			$(".account-login").show();
 			$(".account-login .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
 		});
+		
 	}
 	else if(item === "login"){
+		$('#js-message-recovery').hide();
+		esconderRecovery();
 		$(".account-login").hide();
 		$('.anim-account').animate({left: '50%'}, 300, function() {
 		$(".account-singup .animated").animate({ "opacity": "0" }, "slow" );
@@ -25,8 +31,14 @@ $(".btn-login-register").click(function() {
 			$(".account-singup").show();
 			$(".account-singup .animated").each(function(index) {$( this ).addClass("delay-"+(index)+" fadeInUp");});
 		});
-	} else {
+	}else {
 		$(".anim-account").css("left", "48%");
 		$(".anim-account").css("marginLeft", "-230px");
 	}
 });
+
+function esconderRecovery(){
+	
+	$(".account-recovery-pass").hide();
+	
+}

@@ -16,6 +16,7 @@ AppAsset::register($this);
 <head>
 
 	<script> var basePath = '<?=Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>'; </script>
+	<script>var basePathFace = 'http://charlenetas.com/';</script>
 
 	<link rel="shortcut icon" type="image/png" href="<?=Url::base()?>/favicon.png"/>
     <meta charset="<?= Yii::$app->charset ?>">

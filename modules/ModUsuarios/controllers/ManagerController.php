@@ -89,9 +89,15 @@ class ManagerController extends Controller {
 	 * Crea peticion para el cambio de contraseña
 	 */
 	public function actionPeticionPass() {
+		
 		$model = new LoginForm ();
 		$model->scenario = 'recovery';
-		if ($model->load ( Yii::$app->request->post () ) && $model->validate ()) {
+		if ($model->load ( Yii::$app->request->post () ) ) {
+			
+			// Validacion de los modelos
+			if ($validacion = $this->validarLogin ( $model )) {
+				return $validacion;
+			}
 			
 			$peticionPass = new EntUsuariosCambioPass ();
 			
@@ -107,11 +113,20 @@ class ManagerController extends Controller {
 			$parametrosEmail ['user'] = $user->getNombreCompleto ();
 			
 			// Envio de correo electronico
-			$utils->sendEmailRecuperarPassword ( $user->txt_email, $parametrosEmail );
+			if($utils->sendEmailRecuperarPassword ( $user->txt_email, $parametrosEmail )){
+				Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+				
+				return ['status'=>'success'];
+			}
 		}
-		return $this->render ( 'peticionPass', [ 
-				'model' => $model 
-		] );
+		
+		if (Yii::$app->request->isAjax) {
+				
+			return $this->renderAjax ( 'peticionPass', [
+					'model' => $model
+			] );
+		}
+		
 	}
 	
 	/**
@@ -126,9 +141,7 @@ class ManagerController extends Controller {
 			 *
 			 * @todo Poner mensaje de que la peticion ha expirado
 			 */
-			return $this->redirect ( [ 
-					'peticion-pass' 
-			] );
+			return $this->goHome();
 		}
 		
 		$model = new EntUsuarios ();
@@ -142,10 +155,13 @@ class ManagerController extends Controller {
 			
 			$peticion->updateUsuarioPeticion ();
 			
-			return $this->redirect ( [ 
-					'login' 
-			] );
+				if (Yii::$app->getUser ()->login ( $user )) {
+						return $this->goHome ();
+					}
 		}
+		
+		$this->layout = '@app/modules/ModUsuarios/views/manager/mainLogin';
+		
 		
 		return $this->render ( 'cambiarPass', [ 
 				'model' => $model 
