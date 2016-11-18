@@ -25,7 +25,7 @@ if (YII_ENV_DEV) {
 					], // Cierra la primera sesion abierta para una nueva sesion
 					'mandarCorreoActivacion' => true, // Envia correo electronico para activar la cuenta del usuario
 					'email' => [ 
-							'emailActivacion' => 'welcome@2gom.com.mx',
+							'emailActivacion' => 'welcome@charlenetas.com',
 							'subjectActivacion' => 'Activar cuenta',
 							'emailRecuperarPass' => 'support@charlenetas.com',
 							'subjectRecuperarPass' => 'Recuperar contraseña' 
@@ -62,9 +62,9 @@ if (YII_ENV_DEV) {
 					], // Cierra la primera sesion abierta para una nueva sesion
 					'mandarCorreoActivacion' => true, // Envia correo electronico para activar la cuenta del usuario
 					'email' => [ 
-							'emailActivacion' => 'welcome@2gom.com.mx',
+							'emailActivacion' => 'welcome@charlenetas.com',
 							'subjectActivacion' => 'Activar cuenta',
-							'emailRecuperarPass' => 'support@2gom.com.mx',
+							'emailRecuperarPass' => 'support@charlenetas.com',
 							'subjectRecuperarPass' => 'Recuperar contraseña' 
 					],
 					'recueperarPass' => [ 
