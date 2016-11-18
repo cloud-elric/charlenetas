@@ -92,12 +92,13 @@ $(document).ready(function(){
 				if (response.hasOwnProperty('status')
 						&& response.status == 'success') {
 					var token = $('#js-token-post').val();
-					
+						cargarFuncionalidadRespuestas();
 						showPostAfterLogin(token);
 						cargarCerrarSesion();
 						mensajeCuentaActivada("Bienvenido de nuevo netanauta");
 						loadEspejoPreguntar();
 						cargarRespuestasSabiasQue();
+						
 						$.ajax({
 							url: basePath+'netas/preguntar-tipo-usuario',
 							type: 'post',

@@ -80,6 +80,7 @@ function statusChangeCallback(response) {
 
 						if(response.status=="success"){
 							var token = $('#js-token-post').val();
+							cargarFuncionalidadRespuestas();
 							showPostAfterLogin(token);
 							cargarCerrarSesion();
 							loadEspejoPreguntar();

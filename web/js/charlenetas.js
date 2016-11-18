@@ -1223,4 +1223,19 @@ $('.anim-account-close').on('click', function() {
 });
 
 
+function cargarFuncionalidadRespuestas(){
+	$('.js-respuesta-check').each(function(index){
+		$(this).attr('onclick','validarRespuesta($(this));')
+	});
+	
+}
+
+function deshabilitarBotonSabias(elemento){
+	
+	$(this).prop('checked', false);
+	
+	showModalLogin();
+}
+
+
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

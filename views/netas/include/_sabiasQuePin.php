@@ -86,16 +86,16 @@ if (! Yii::$app->user->isGuest) {
 				<div class="switch pin-content-wrapper-switch">
 		<form class="pin-sabias-que-form-checkbox">
 			<p>
-				<input value="false" name="group1" type="radio" id="test1"
-					data-token="<?=$post->txt_token?>" type="checkbox"
-					class="js-respuesta-check" onclick="validarRespuesta($(this));" />
-				<label for="test1">Falso</label>
+				<input value="false" name="group1" type="radio" id="test1-<?=$post->txt_token?>"
+					data-token="<?=$post->txt_token?>" type="checkbox" 
+					class="js-respuesta-check" onclick="deshabilitarBotonSabias($(this));" />
+				<label for="test1-<?=$post->txt_token?>">Falso</label>
 			</p>
 			<p>
-				<input name="group1" value="true" type="radio" id="test2"
-					data-token="<?=$post->txt_token?>" type="checkbox"
-					class="js-respuesta-check" onclick="validarRespuesta($(this));" />
-				<label for="test2">Verdadero</label>
+				<input name="group1" value="true" type="radio" id="test2-<?=$post->txt_token?>"
+					data-token="<?=$post->txt_token?>" type="checkbox" 
+					class="js-respuesta-check" onclick="deshabilitarBotonSabias($(this));" />
+				<label for="test2-<?=$post->txt_token?>">Verdadero</label>
 			</p>
 		</form>
 	</div>
