@@ -22,13 +22,6 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
     <?php $this->head() ?>
     <script> var basePath = '<?=Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>'; </script>
     
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-  <script type="text/javascript">
-  //tinymce.init({
-    //selector: '.editor',
-    //inline: true
-  //});
-  </script>
 </head>
 <body>
 <?php $this->beginBody() ?>

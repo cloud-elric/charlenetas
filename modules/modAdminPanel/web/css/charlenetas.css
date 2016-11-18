@@ -2090,3 +2090,11 @@ button.picker__close:focus {
 .select-wrapper input.select-dropdown {
   margin-bottom: 0;
 }
+
+.mce-container {
+    display: inline-block !important;
+}
+
+.mce-edit-area.mce-container.mce-panel.mce-stack-layout-item{
+	display: block !important;
+}
