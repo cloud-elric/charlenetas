@@ -11,7 +11,7 @@ class RulesSabiasQue {
 		$rules = [
 				[
 						[
-								'txt_descripcion', 'fch_publicacion'
+								'txt_descripcion', 'fch_publicacion', 'txt_url'
 						],
 						'required',
 						'message'=>'Requerido',

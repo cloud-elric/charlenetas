@@ -26,6 +26,7 @@ use sspl\meta\MetaData;
 use app\models\CatTiposUsuarios;
 use app\models\RelUsuarios;
 use app\models\ModUsuariosEntUsuarios;
+use app\models\EntUsuariosRespuestasSabiasQue;
 
 /**
  * Default controller for the `adminPanel` module
@@ -96,9 +97,8 @@ class AdminController extends Controller {
 												'get-mas-posts-hoy-pense',
 												'get-mas-posts-sabias-que',
 												'get-mas-posts-solo-por-hoy',
-												'get-mas-posts-verdadazos'
-										]
-										,
+												'get-mas-posts-verdadazos' 
+										],
 										'allow' => true,
 										// Allow users, moderators and admins to create
 										'roles' => [ 
@@ -125,7 +125,7 @@ class AdminController extends Controller {
 	 */
 	public function actionDashboard() {
 		$dashboard = new CatTiposPosts ();
-		$posts = $dashboard->find()->orderBy( 'txt_nombre ASC' )->all();
+		$posts = $dashboard->find ()->orderBy ( 'txt_nombre ASC' )->all ();
 		
 		return $this->render ( 'dashboard', [ 
 				"dashboard" => $posts 
@@ -153,7 +153,7 @@ class AdminController extends Controller {
 	}
 	public function actionEspejo($page = 0) {
 		$idPost = 1;
-		$postsEspejo = EntPosts::getPosts ( $page, $idPost);
+		$postsEspejo = EntPosts::getPosts ( $page, $idPost );
 		
 		return $this->render ( 'espejo', [ 
 				"postsEspejo" => $postsEspejo 
@@ -161,7 +161,7 @@ class AdminController extends Controller {
 	}
 	public function actionAlquimia($page = 0) {
 		$idPost = 2;
-		$postsAlquimia = EntPosts::getPosts ( $page, $idPost ); 
+		$postsAlquimia = EntPosts::getPosts ( $page, $idPost );
 		
 		return $this->render ( 'alquimia', [ 
 				"postsAlquimia" => $postsAlquimia 
@@ -240,20 +240,20 @@ class AdminController extends Controller {
 			echo "ERROR";
 	}
 	
-	//mostrar actions del controlador
-	public function actionMostrarActions(){
-		//etaData::getControllersActions();
-		return $this->render('mostrarActions');
+	// mostrar actions del controlador
+	public function actionMostrarActions() {
+		// etaData::getControllersActions();
+		return $this->render ( 'mostrarActions' );
 	}
-	
-	public function actionCambiarUser($idUser,$idTipo){
-		$users = new ModUsuariosEntUsuarios();
-		$user = $users->find()->where(['id_usuario'=>$idUser])->one();
+	public function actionCambiarUser($idUser, $idTipo) {
+		$users = new ModUsuariosEntUsuarios ();
+		$user = $users->find ()->where ( [ 
+				'id_usuario' => $idUser 
+		] )->one ();
 		
 		$user->id_tipo_usuario = $idTipo;
-		$user->save();
+		$user->save ();
 	}
-	
 	public function actionDeshabilitarPost($tokenPost = null) {
 		$postDeshabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postDeshabilitar->b_habilitado = 0;
@@ -263,66 +263,64 @@ class AdminController extends Controller {
 		else
 			echo "ERROR";
 	}
-	
 	public function actionDeshabilitarPostContexto($tokenPost = null) {
 		$postDeshabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postDeshabilitar->b_habilitado = 0;
 		
-		$entContexto = EntContextos::find()->all();
-	
-		foreach($entContexto as $contexto){
-			if($contexto->id_contexto_padre == $postDeshabilitar->id_post){
+		$entContexto = EntContextos::find ()->all ();
+		
+		foreach ( $entContexto as $contexto ) {
+			if ($contexto->id_contexto_padre == $postDeshabilitar->id_post) {
 				$contexto->id_contexto_padre = null;
-			}else if($contexto->id_post == $postDeshabilitar->id_post){
+			} else if ($contexto->id_post == $postDeshabilitar->id_post) {
 				$contexto->id_contexto_padre = null;
 			}
-			if($contexto->save()){
+			if ($contexto->save ()) {
 				echo "Success ";
-			}else{
-				//print_r($contexto);
+			} else {
+				// print_r($contexto);
 				echo "Error";
 			}
 		}
 		
-		if ($postDeshabilitar->save ()){
+		if ($postDeshabilitar->save ()) {
 			echo "SUCCESS";
-		}else{
-				echo "ERROR";
+		} else {
+			echo "ERROR";
 		}
 	}
 	
 	/**
 	 * Vista creacion de usuarios
 	 */
-	public function actionCrearUsuarios(){
-		
-		return $this->render('crearUsuarios');
+	public function actionCrearUsuarios() {
+		return $this->render ( 'crearUsuarios' );
 	}
 	
 	/**
 	 * Almacenar usuarios en la tabla
 	 */
-	public function actionAlmacenarUsuarios(){
-		$tipoUsuarios = new CatTiposUsuarios();
+	public function actionAlmacenarUsuarios() {
+		$tipoUsuarios = new CatTiposUsuarios ();
 		
-		if($tipoUsuarios->load(Yii::$app->request->post ())){
-			$tipoUsuarios->save();
+		if ($tipoUsuarios->load ( Yii::$app->request->post () )) {
+			$tipoUsuarios->save ();
 		}
 	}
 	
 	/**
 	 * almacena los actions para cada usuario
 	 */
-	public function actionAlmacenarRol($id_action){
-		$tiposUsuarios = new CatTiposUsuarios();
-		$usuario = $tiposUsuarios->find()->orderBy('id_tipo_usuario DESC')->all();
-		 
-		$relaciones = new RelUsuarios();
+	public function actionAlmacenarRol($id_action) {
+		$tiposUsuarios = new CatTiposUsuarios ();
+		$usuario = $tiposUsuarios->find ()->orderBy ( 'id_tipo_usuario DESC' )->all ();
 		
-		foreach($usuario as $us){
+		$relaciones = new RelUsuarios ();
+		
+		foreach ( $usuario as $us ) {
 			$relaciones->id_tipo_usuario = $us->id_tipo_usuario;
 			$relaciones->id_action = $id_action;
-			$relaciones->save();
+			$relaciones->save ();
 			break;
 		}
 	}
@@ -342,7 +340,7 @@ class AdminController extends Controller {
 		if ($validacion = $this->validarAlquimia ( $post, $alquimia )) {
 			return $validacion;
 		}
-	
+		
 		// Si la informacion es enviada se carga a su respectivo modelo
 		if ($alquimia->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			
@@ -532,7 +530,6 @@ class AdminController extends Controller {
 		if ($validacion = $this->validarContexto ( $post, $contexto )) {
 			return $validacion;
 		}
-		
 		
 		if ($contexto->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
@@ -848,49 +845,49 @@ class AdminController extends Controller {
 	/**
 	 * Editar contexto
 	 *
-	 * @param string $token
+	 * @param string $token        	
 	 */
 	public function actionEditarContexto($token = null) {
 		// Busca el post por el token
 		$post = $this->getPostByToken ( $token );
 		$post->scenario = 'editarHoyPense';
 		$post->fch_publicacion = Utils::changeFormatDate ( $post->fch_publicacion );
-	
+		
 		$contexto = $post->entContextos;
 		// Validacion de los modelos
-		if ($validacion = $this->validarContexto( $post, $contexto )) {
+		if ($validacion = $this->validarContexto ( $post, $contexto )) {
 			return $validacion;
 		}
-	
+		
 		// Si la informacion es enviada se carga a su respectivo modelo
 		if ($post->load ( Yii::$app->request->post () )) {
-				
+			
 			// usuario logueado
 			$usuario = Yii::$app->user->identity;
-				
+			
 			$post->imagen = UploadedFile::getInstance ( $post, 'imagen' );
-				
+			
 			if (! empty ( $post->imagen )) {
 				$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 			}
-				
+			
 			$post->id_usuario = $usuario->id_usuario;
 			$post->editarContexto ( $post, $contexto );
-				
+			
 			if (! empty ( $post->imagen )) {
 				$post->cargarImagen ( $post );
 			}
-				
-			return [
+			
+			return [ 
 					'status' => 'success',
 					't' => $post->txt_titulo,
-					'tk' => $post->txt_token
+					'tk' => $post->txt_token 
 			];
 		}
-	
-		return $this->renderAjax ( '_formContexto', [
+		
+		return $this->renderAjax ( '_formContexto', [ 
 				'post' => $post,
-				'contexto'=>$contexto
+				'contexto' => $contexto 
 		] );
 	}
 	
@@ -1096,7 +1093,7 @@ class AdminController extends Controller {
 	
 	/**
 	 * Asocia un contexto con otro
-	 * 
+	 *
 	 * @param unknown $token1        	
 	 * @param unknown $token2        	
 	 */
@@ -1155,17 +1152,17 @@ class AdminController extends Controller {
 	 * Obtiene los post por paginacion
 	 */
 	public function actionGetMasPostsEspejo($page = 1) {
-	
+		
 		// Layout que usara la vista
 		$this->layout = false;
 		$tipoPost = ConstantesWeb::POST_TYPE_ESPEJO;
-	
+		
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
-	
+		$listaPost = EntPostsExtend::getPosts ( $page, $tipoPost );
+		
 		// Pintar vista
-		return $this->renderAjax ( 'itemsEspejo', [
-				'postsEspejo' => $listaPost
+		return $this->renderAjax ( 'itemsEspejo', [ 
+				'postsEspejo' => $listaPost 
 		] );
 	}
 	
@@ -1173,34 +1170,34 @@ class AdminController extends Controller {
 	 * Obtiene los post por paginacion
 	 */
 	public function actionGetMasPostsMedia($page = 1) {
-	
+		
 		// Layout que usara la vista
 		$this->layout = false;
-		$tipoPost = ConstantesWeb::POST_TYPE_MEDIA; 
-	
+		$tipoPost = ConstantesWeb::POST_TYPE_MEDIA;
+		
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
-	
+		$listaPost = EntPostsExtend::getPosts ( $page, $tipoPost );
+		
 		// Pintar vista
-		return $this->renderAjax ( 'itemsMedia', [
-				'postsMedia' => $listaPost
+		return $this->renderAjax ( 'itemsMedia', [ 
+				'postsMedia' => $listaPost 
 		] );
 	}
 	/**
 	 * Obtiene los post por paginacion
 	 */
 	public function actionGetMasPostsAlquimia($page = 1) {
-	
+		
 		// Layout que usara la vista
 		$this->layout = false;
 		$tipoPost = ConstantesWeb::POST_TYPE_ALQUIMIA;
-	
+		
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
-	
+		$listaPost = EntPostsExtend::getPosts ( $page, $tipoPost );
+		
 		// Pintar vista
-		return $this->renderAjax ( 'itemsAlquimia', [
-				'postsAlquimia' => $listaPost
+		return $this->renderAjax ( 'itemsAlquimia', [ 
+				'postsAlquimia' => $listaPost 
 		] );
 	}
 	
@@ -1208,17 +1205,17 @@ class AdminController extends Controller {
 	 * Obtiene los post por paginacion
 	 */
 	public function actionGetMasPostsHoyPense($page = 1) {
-	
+		
 		// Layout que usara la vista
 		$this->layout = false;
 		$tipoPost = ConstantesWeb::POST_TYPE_HOY_PENSE;
-	
+		
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
-	
+		$listaPost = EntPostsExtend::getPosts ( $page, $tipoPost );
+		
 		// Pintar vista
-		return $this->renderAjax ( 'itemsHoyPense', [
-				'postsHoyPense' => $listaPost
+		return $this->renderAjax ( 'itemsHoyPense', [ 
+				'postsHoyPense' => $listaPost 
 		] );
 	}
 	
@@ -1226,17 +1223,17 @@ class AdminController extends Controller {
 	 * Obtiene los post por paginacion
 	 */
 	public function actionGetMasPostsSabiasQue($page = 1) {
-	
+		
 		// Layout que usara la vista
 		$this->layout = false;
 		$tipoPost = ConstantesWeb::POST_TYPE_SABIAS_QUE;
-	
+		
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
-	
+		$listaPost = EntPostsExtend::getPosts ( $page, $tipoPost );
+		
 		// Pintar vista
-		return $this->renderAjax ( 'itemsSabiasQue', [
-				'postsSabiasQue' => $listaPost
+		return $this->renderAjax ( 'itemsSabiasQue', [ 
+				'postsSabiasQue' => $listaPost 
 		] );
 	}
 	
@@ -1244,35 +1241,36 @@ class AdminController extends Controller {
 	 * Obtiene los post por paginacion
 	 */
 	public function actionGetMasPostsSoloPorHoy($page = 1) {
-	
+		
 		// Layout que usara la vista
 		$this->layout = false;
 		$tipoPost = ConstantesWeb::POST_TYPE_SOLO_POR_HOY;
-	
+		
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
-	
+		$listaPost = EntPostsExtend::getPosts ( $page, $tipoPost );
+		
 		// Pintar vista
-		return $this->renderAjax ( 'itemsSoloPorHoy', [
-				'postsSoloPorHoy' => $listaPost
+		return $this->renderAjax ( 'itemsSoloPorHoy', [ 
+				'postsSoloPorHoy' => $listaPost 
 		] );
 	}
+	
 	
 	/**
 	 * Obtiene los post por paginacion
 	 */
 	public function actionGetMasPostsVerdadazos($page = 1) {
-	
+		
 		// Layout que usara la vista
 		$this->layout = false;
 		$tipoPost = ConstantesWeb::POST_TYPE_VERDADAZOS;
-	
+		
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPosts( $page, $tipoPost );
-	
+		$listaPost = EntPostsExtend::getPosts ( $page, $tipoPost );
+		
 		// Pintar vista
-		return $this->renderAjax ( 'itemsVerdadazos', [
-				'postsVerdadazos' => $listaPost
+		return $this->renderAjax ( 'itemsVerdadazos', [ 
+				'postsVerdadazos' => $listaPost 
 		] );
 	}
 }

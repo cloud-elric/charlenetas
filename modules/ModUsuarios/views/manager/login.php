@@ -96,6 +96,8 @@ $(document).ready(function(){
 						showPostAfterLogin(token);
 						cargarCerrarSesion();
 						mensajeCuentaActivada("Bienvenido de nuevo charlenauta");
+						loadEspejoPreguntar();
+						cargarRespuestasSabiasQue();
 						$.ajax({
 							url: basePath+'netas/preguntar-tipo-usuario',
 							type: 'post',

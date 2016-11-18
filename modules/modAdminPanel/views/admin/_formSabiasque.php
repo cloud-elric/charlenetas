@@ -65,6 +65,8 @@ $form = ActiveForm::begin ( [
 		
 		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
 		
+		<?= $form->field($post, 'txt_url', ['options'=>['class'=>'input-field col s12']])->textInput()?>
+		
 		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
 	
 	</div>

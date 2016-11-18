@@ -151,6 +151,31 @@ function showPostFull(token) {
 	});
 }
 
+
+function cargarRespuestasSabiasQue(){
+	$('.pin-sabias-que').each(function(index){
+		var elemento = $(this);
+		var token = elemento.data('post');
+		var url = basePath+'netas/get-respuestas-sabias-que?token='+token;
+		
+		$.ajax({
+			url:url,
+			dataType:'JSON',
+			success:function(response){
+				if(response.status=='bien'){
+					remplazarBoton(token, response,
+					'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
+				}else if(response.status=='mal'){
+					remplazarBoton(token, response,
+					'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
+				}
+			}
+		});
+	});
+}
+
+
+
 // Muestra el post despues del logueo
 function showPostAfterLogin(token) {
 	var background = $('#backScreen');

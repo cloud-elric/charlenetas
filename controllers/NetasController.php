@@ -930,6 +930,34 @@ class NetasController extends Controller {
 		return $this->render('paypal');
 	}
 	
+	/**
+	 * Busca la respuesta del usuario
+	 *
+	 * @param unknown $token
+	 */
+	public function actionGetRespuestasSabiasQue($token = null) {
+		$post = $this->getPostByToken ( $token );
+		// usuario logueado
+		$usuario = Yii::$app->user->identity;
+	
+		Yii::$app->response->format = Response::FORMAT_JSON;
+	
+		$respuestaUsuario = EntUsuariosRespuestasSabiasQue::find ()->where ( [
+				'id_usuario' => $usuario->id_usuario,
+				'id_post' => $post->id_post
+		] )->one ();
+	
+		if(empty($respuestaUsuario)){
+			return ['status'=>'sin'];
+		}else {
+			if($respuestaUsuario->b_respuesta){
+				return ['status'=>'bien','txt_url'=>$post->txt_url];
+			}else{
+				return ['status'=>'mal','txt_url'=>$post->txt_url];
+			}
+		}
+	}
+	
 	public function actionPreguntarTipoUsuario(){
 		Yii::$app->response->format = Response::FORMAT_JSON;
 		

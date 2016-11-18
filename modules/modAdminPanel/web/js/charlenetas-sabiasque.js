@@ -96,6 +96,7 @@ function abrirModalEditarSabiasQue(token){
 		url:url,
 		success:function(res){
 			$('#js-modal-post-editar .modal-content').html(res);
+			
 		}
 	});
 }
@@ -233,3 +234,4 @@ $(document).ready(function(){
 	
 	
 });
+
