@@ -142,7 +142,7 @@
 																<td style='padding:0cm 0cm 0cm 0cm'>
 																	<p class=MsoNormal style='line-height:28.35pt'>
 																		<span style='font-size:15.5pt;font-family:"Arial",sans-serif;color:#7F8C8D'>
-																			Hola charlenauta. Hemos visto que haz solicitado tu contraseña. La podras cambiar dando clic al botón de abajo <o:p></o:p>
+																			Hola netanauta. Hemos visto que haz solicitado tu contraseña. La podras cambiar dando clic al botón de abajo <o:p></o:p>
 																		</span>
 																	</p>
 																</td>

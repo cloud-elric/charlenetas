@@ -83,7 +83,7 @@ function statusChangeCallback(response) {
 							showPostAfterLogin(token);
 							cargarCerrarSesion();
 							loadEspejoPreguntar();
-							mensajeCuentaActivada("Bienvenido charlenauta");
+							mensajeCuentaActivada("Bienvenido netanauta");
 							loadEspejoPreguntar();
 							cargarRespuestasSabiasQue();
 							
