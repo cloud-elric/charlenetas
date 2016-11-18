@@ -240,6 +240,5 @@ $(document).ready(function(){
 		var token = $(this).data('token');
 		showPostFull(token)
 	});
-	
 });
 

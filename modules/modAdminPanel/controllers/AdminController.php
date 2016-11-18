@@ -1273,4 +1273,19 @@ class AdminController extends Controller {
 				'postsVerdadazos' => $listaPost 
 		] );
 	}
+	
+	public function actionGetMasUsuarios($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+		//$tipoPost = ConstantesWeb::POST_TYPE_ALQUIMIA;
+	
+		// Recupera n numero de registros por paginacion
+		$listaUsuarios = EntUsuarios::getUsuarios( $page );
+	
+		// Pintar vista
+		return $this->renderAjax ( 'itemsUsuarios', [
+				'usuarios' => $listaUsuarios
+		] );
+	}
 }

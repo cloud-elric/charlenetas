@@ -710,6 +710,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		$this->imageProfile->saveAs ( Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $nombreImagen );
 	}
 	
+	
 	/**
 	 * Si la imagen esta vacia mandamos una por default
 	 *

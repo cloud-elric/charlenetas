@@ -137,18 +137,6 @@ function cargarComentarios(token, borrarAnteriores) {
 
 }
 
-function cambioUser(idUser,idTipo){
-	//console.log(idUser);
-	//console.log(idTipo);
-	$.ajax({
-		url: basePath + 'adminPanel/admin/cambiar-user?idUser=' + idUser + '&idTipo=' + idTipo,
-		method : 'GET',
-		success : function(res) {
-			//alert("ok");	
-		}
-	});
-}
-
 //Carga las respuestas de cada comentario
 function cargarRespuestas(token, pageRespuestas) {
 	var url = basePath+'netas/cargar-respuestas?token=' + token + '&page='
