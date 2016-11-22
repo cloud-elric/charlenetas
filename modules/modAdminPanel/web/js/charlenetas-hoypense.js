@@ -190,6 +190,13 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			//var data = form.serialize();
+			//var desc = document.getElementById('descripcion');
+			//var descripcion = desc.getAttribute('data-descripcion');
+			//console.log(descripcion);
+			
+			//data.append("EntPosts[txt_descripcion]",descripcion);
+			
 			var button = document.getElementById('js-editar-submit');
 			var l = Ladda.create(button);
 		 	l.start();

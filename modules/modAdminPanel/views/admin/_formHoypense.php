@@ -7,7 +7,7 @@ $classActive = $hoyPense->isNewRecord?'':'active';
 <head>
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script>
-	tinymce.init({ selector:'.bb', inline:false});//.field-entposts-txt_descripcion
+	tinymce.init({ selector:'.divTiny', inline:false});//.field-entposts-txt_descripcion
 </script>
 
 </head>
@@ -45,12 +45,13 @@ $form = ActiveForm::begin ( [
 		<?= $form->field($hoyPense, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
 
 		<?= $form->field($hoyPense, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
+		
    		<div>
    	
-   		<div class="bb">
-   			<h4>hola a todos</h4>
-   		</div>
-			</div>
+   			<div class="divTiny">
+   				<h4><?= $hoyPense->txt_descripcion ?></h4>
+   			</div>
+		</div>
 	</div>
 
 	<?= Html::submitButton($hoyPense->isNewRecord?'crear':'editar', ['id'=>$hoyPense->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name' => 'boton-hoy', 'data-style'=>'zoom-in'])?>

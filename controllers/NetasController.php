@@ -815,6 +815,7 @@ class NetasController extends Controller {
 		] );
 	}
 	
+	
 	/**
 	 * Guarda si al usuario le gusto o no la respuesta del admin
  	 * en b_de_acuerdo de la tabla ent_espuestas_espejo
