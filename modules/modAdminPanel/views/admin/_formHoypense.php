@@ -4,13 +4,6 @@ use yii\bootstrap\ActiveForm;
 
 $classActive = $hoyPense->isNewRecord?'':'active';
 ?>
-<head>
-	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-<script>
-	tinymce.init({ selector:'.divTiny', inline:false});//.field-entposts-txt_descripcion
-</script>
-
-</head>
 
 <h4><?=$hoyPense->isNewRecord?'Agregar':'Editar'?> <span>Hoy pense</span></h4>
 
@@ -46,12 +39,9 @@ $form = ActiveForm::begin ( [
 
 		<?= $form->field($hoyPense, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
 		
-   		<div>
-   	
-   			<div class="divTiny">
-   				<h4><?= $hoyPense->txt_descripcion ?></h4>
-   			</div>
-		</div>
+   		<div class="divTiny">
+   			<?= $hoyPense->txt_descripcion ?>
+   		</div>
 	</div>
 
 	<?= Html::submitButton($hoyPense->isNewRecord?'crear':'editar', ['id'=>$hoyPense->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name' => 'boton-hoy', 'data-style'=>'zoom-in'])?>
@@ -60,3 +50,7 @@ $form = ActiveForm::begin ( [
 
 include 'templates/formato-fecha.php';
 ?>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>
+	tinymce.init({ selector:'.divTiny', inline:false});//.field-entposts-txt_descripcion
+</script>

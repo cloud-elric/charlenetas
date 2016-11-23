@@ -42,13 +42,15 @@ if (! Yii::$app->user->isGuest) {
 	if ($respuesta) {
 		?>
 <!-- Boton para guardar la respuesta -->
-<a class="waves-effect waves-light btn btn-primary"
+<a class="waves-effect waves-light btn btn-primary ladda-button animated delay-3"
+	data-style="zoom-in"
 	id="js-responder-<?=$token?>"
 	onclick="enviarRespuesta('<?=$token?>');">Responder</a>
 
 <?php }else{?>
 <!-- Boton para guardar el comentario -->
-<a class="waves-effect waves-light btn btn-primary"
+<a class="waves-effect waves-light btn btn-primary ladda-button animated delay-3"
+	data-style="zoom-in"
 	id="js-responder-<?=$token?>"
 	onclick="enviarComentario('<?=$token?>');">Publicar</a>
 <?php }?>

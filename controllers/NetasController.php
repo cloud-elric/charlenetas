@@ -795,7 +795,6 @@ class NetasController extends Controller {
 		$post = new EntPosts ( [ 
 				'scenario' => 'agregarEspejo' 
 		] );
-		Yii::$app->response->format = Response::FORMAT_JSON;
 		
 		if ($post->load ( Yii::$app->request->post () )) {
 			if($postGuardado = $post->guardarEspejo($post)){
@@ -804,8 +803,9 @@ class NetasController extends Controller {
 					
 				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
 				
-				return ['status'=>'success'];
+				return $this->renderAjax('//netas/include/_espejoPin',['post'=>$postGuardado]);
 			}else{
+				Yii::$app->response->format = Response::FORMAT_JSON;
 				return ['status'=>'error'];
 			}
 		}
@@ -814,7 +814,6 @@ class NetasController extends Controller {
 				'post' => $post 
 		] );
 	}
-	
 	
 	/**
 	 * Guarda si al usuario le gusto o no la respuesta del admin

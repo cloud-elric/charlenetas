@@ -24,7 +24,7 @@ $this->title = 'Charlenetas';
 					include 'masPosts.php';
 				}else{
 			?>
-					<div class="pin pin-agregar-espejo">
+					<div id="js-creador-espejo" class="pin pin-agregar-espejo">
 						<div class="pin-header pin-header-agregar-espejo"></div>
 						<div class="image">
 							<img src="<?=Url::base()?>/webAssets/images/espejo.png">

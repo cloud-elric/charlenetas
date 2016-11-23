@@ -193,18 +193,22 @@ $('body').on(
 			//var data = form.serialize();
 			//var desc = document.getElementById('descripcion');
 			//var descripcion = desc.getAttribute('data-descripcion');
-			//console.log(descripcion);
 			
 			//data.append("EntPosts[txt_descripcion]",descripcion);
 			
 			var button = document.getElementById('js-editar-submit');
 			var l = Ladda.create(button);
 		 	l.start();
+		 	
+		 	console.debug(tinyMCE.activeEditor.getContent());
+		 	console.log(tinymce.activeEditor.getContent());
+		 	var data = new FormData(this);
+		 	data.append("EntPosts[txt_descripcion]",tinymce.activeEditor.getContent());
 			// submit form
 			$.ajax({
 				url : form.attr('action'),// url para peticion
 				type : 'post', // Metodo en el que se enviara la informacion
-				data : new FormData(this), // La informacion a mandar
+				data : data, // La informacion a mandar
 				dataType: 'json',  // Tipo de respuesta
 				cache : false, // sin cache
 				contentType : false,

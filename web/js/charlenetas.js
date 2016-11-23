@@ -459,7 +459,11 @@ function agregarAcuerdo(token, feed) {
 function enviarComentario(token) {
 	var data = $('#js-comentario-form-' + token).serialize();
 	var url = basePath + 'netas/comentar-post?token=' + token;
-
+	
+	var button = document.getElementById('js-responder-'+token);
+	var l = Ladda.create(button);
+ 	l.start();
+	
 	$.ajax({
 		url : url,
 		data : data,
@@ -468,6 +472,7 @@ function enviarComentario(token) {
 		success : function(res) {
 			$('#new-comment').after(res);
 			$('#js-comentario-form-' + token + ' textarea').val('');
+			l.stop();
 		},
 		statusCode : {
 			403 : function() {
@@ -643,6 +648,10 @@ function enviarRespuesta(token) {
 
 	var data = $('#js-comentario-form-' + token).serialize();
 	var url = basePath + 'netas/responder-comentario?token=' + token;
+	
+	var button = document.getElementById('js-responder-'+token);
+	var l = Ladda.create(button);
+ 	l.start();
 
 	$.ajax({
 		url : url,
@@ -653,6 +662,7 @@ function enviarRespuesta(token) {
 
 			$('#js-comentario-form-' + token + ' textarea').val('');
 			$('#js-respuestas-comentario-' + token).prepend(res);
+			l.stop();
 		},
 		statusCode : {
 			403 : function() {
