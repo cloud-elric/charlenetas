@@ -113,6 +113,7 @@ $config = [
 								'login' => 'modUsuarios/manager/login',
 								'callback-facebook' => 'modUsuarios/manager/callback-facebook',
 								'/' => 'netas/index',
+								'peticion-activar'=>'modUsuarios/manager/peticion-activar',
 								//modulo de administrador
 								"adminPanel/"=>"adminPanel/admin/dashboard",
 								"adminPanel"=>"adminPanel/admin/dashboard"

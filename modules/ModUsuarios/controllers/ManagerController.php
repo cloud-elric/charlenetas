@@ -88,6 +88,55 @@ class ManagerController extends Controller {
 	/**
 	 * Crea peticion para el cambio de contraseña
 	 */
+	public function actionPeticionActivar() {
+	
+		$model = new LoginForm ();
+		$model->scenario = 'recovery';
+		if ($model->load ( Yii::$app->request->post () ) ) {
+				
+			// Validacion de los modelos
+			if ($validacion = $this->validarLogin ( $model )) {
+				return $validacion;
+			}
+				
+			$activacion = EntUsuariosActivacion::find()->where(['id_usuario'=> $model->userEncontrado->id_usuario])->one();
+			
+			if(empty($activacion)){
+				$activacion->saveUsuarioActivacion (  $model->userEncontrado->id_usuario );
+			}
+			
+			$user = EntUsuarios::find()->where(['id_usuario'=>$model->userEncontrado->id_usuario])->one();
+				
+			// Enviar correo de activación
+			$utils = new Utils ();
+			// Parametros para el email
+			$parametrosEmail ['url'] = Yii::$app->urlManager->createAbsoluteUrl ( [
+					'activar-cuenta/' . $activacion->txt_token
+			] );
+			$parametrosEmail ['user'] = $user->getNombreCompleto ();
+				
+			// Envio de correo electronico
+				
+			// Envio de correo electronico
+			if($utils->sendEmailActivacion ( $user->txt_email, $parametrosEmail ) ){
+				Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+	
+				return ['status'=>'success'];
+			}
+		}
+	
+		if (Yii::$app->request->isAjax) {
+	
+			return $this->renderAjax ( 'reenviarCodigo', [
+					'model' => $model
+			] );
+		}
+	
+	}
+	
+	/**
+	 * Crea peticion para el cambio de contraseña
+	 */
 	public function actionPeticionPass() {
 		
 		$model = new LoginForm ();
@@ -154,6 +203,16 @@ class ManagerController extends Controller {
 			$user->save ();
 			
 			$peticion->updateUsuarioPeticion ();
+			
+			if($user->id_status==EntUsuarios::STATUS_PENDIENTED){
+				$activacion = EntUsuariosActivacion::find()->where(['id_usuario'=>$user->id_usuario])->one();
+				
+				if(!empty($activacion)){
+					$activacion->actualizaActivacion ();
+				}
+				
+				$user->activarUsuario ();
+			}
 			
 				if (Yii::$app->getUser ()->login ( $user )) {
 						return $this->goHome ();

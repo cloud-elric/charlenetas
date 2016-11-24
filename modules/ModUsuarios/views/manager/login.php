@@ -57,7 +57,12 @@ if (Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']) {
 		<i></i> <span class="ladda-label">Ingresar con Facebook</span>
 	</button>
 <?php }?>
-<div style="margin-top:10px;text-align: right;" class="animated">
+
+<div style="margin-top:30px;float: left;" class="animated">
+			<?= Html::a('Reenviar correo de activación','',['id'=>'js-enviar-activacion', 'style'=>'font-size:14px;    text-decoration: underline; font-weight: 400;'])?>
+		</div>
+
+<div style="float:right; margin-top:30px;text-align: right;" class="animated">
 			<?= Html::a('Olvide mi contraseña','',['id'=>'js-olvide-mi-contrasenia', 'style'=>'font-size:14px;    text-decoration: underline; font-weight: 400;'])?>
 		</div>
 	<!-- <p class="link-olvide-password animated">¿Olvidaste tu contraseña?</p> -->

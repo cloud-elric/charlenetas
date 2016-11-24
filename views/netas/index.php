@@ -147,6 +147,7 @@ if($postTotales>ConstantesWeb::PINS_A_MOSTRAR){
 					<div class="account-singup" id="js-contenedor-crear-cuenta"></div>
 					<div class="account-login" id="js-contenedor-login"></div>
 					<div class="account-recovery-pass" style="display:none;" id="js-contenedor-recovery"></div>
+					<div class="account-activar" style="display:none;" id="js-contenedor-activar"></div>
 				</div>
 			</section>
 			<!-- end / .section -->
@@ -174,7 +175,8 @@ if (Yii::$app->user->isGuest) {
 	$this->registerJs ( "
   loadLogin();
 loadSign();
-loadRecuperarPass()
+loadRecuperarPass();
+loadReenviarEmailActivacion();
 $('ul.tabs').tabs();
 
   ", View::POS_END );

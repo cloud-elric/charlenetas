@@ -770,6 +770,19 @@ function loadLogin() {
 	})
 }
 
+function loadReenviarEmailActivacion(){
+	
+	var url = basePath + 'peticion-activar';
+	var contentModal = $('#modal-login .modal-content #js-contenedor-activar');
+	$.ajax({
+		url : url,
+		success : function(res) {
+			contentModal.html(res);
+		}
+	})
+	
+}
+
 function loadRecuperarPass() {
 	var url = basePath + 'peticion-pass';
 	var contentModal = $('#modal-login .modal-content #js-contenedor-recovery');
@@ -805,6 +818,7 @@ function showModalLogin() {
 	$(".account-singup").hide();
 	$('#js-message-sign-up').hide();
 	$('#js-message-recovery').hide();
+	$('.account-activar').hide();
 	$('.anim-account').animate({
 		left : '-1%'
 	}, 300, function() {
@@ -1044,6 +1058,27 @@ $(document).on({
 	}
 }, '#js-olvide-mi-contrasenia');
 
+//Click para cada item
+$(document).on({
+	'click' : function(e) {
+		e.preventDefault();
+		
+			$(".account-login").hide();
+			$(".account-activar .animated").animate({
+				"opacity" : "0"
+			}, "slow", function() {
+
+				$(".account-activar").show();
+				$(".account-activar .animated").each(function(index) {
+					$(this).addClass("delay-" + (index) + " fadeInUp");
+				});
+			});
+
+		
+
+	}
+}, '#js-enviar-activacion');
+
 // Click para cada item
 $(document).on({
 	'click' : function(e) {
@@ -1062,6 +1097,26 @@ $(document).on({
 
 	}
 }, '#iniciar-sesion');
+
+$(document).on({
+	'click' : function(e) {
+		e.preventDefault();
+
+		$(".account-activar").hide();
+		$(".account-login .animated").animate({
+			"opacity" : "0"
+		}, "slow", function() {
+
+			$(".account-login").show();
+			$(".account-login .animated").each(function(index) {
+				$(this).addClass("delay-" + (index) + " fadeInUp");
+			});
+		});
+
+	}
+}, '#iniciar-sesion-activar');
+
+
 
 $(document).ready(function() {
 	

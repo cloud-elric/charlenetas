@@ -540,6 +540,12 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		] );
 	}
 	
+	public static function findUser($username){
+		return static::findOne ( [
+				'txt_email' => $username,
+		] );
+	}
+	
 	/**
 	 * Finds user by password reset token
 	 *

@@ -89,10 +89,12 @@ class LoginForm extends Model {
 	 */
 	public function validatePassword($attribute, $params) {
 		if (! $this->hasErrors ()) {
-			$user = $this->getUser ();
+			$user = $this->getUserByEmail ();
 			
 			if (! $user || ! $user->validatePassword ( $this->password )) {
 				$this->addError ( $attribute, 'Usuario y/o contraseña incorrectos.' );
+			}else if($user->id_status == EntUsuarios::STATUS_PENDIENTED){
+				$this->addError ( $attribute, 'Para ingresar debe activar su cuenta.' );
 			}
 		}
 	}
@@ -101,10 +103,10 @@ class LoginForm extends Model {
 	 * Valida que el usuario exista
 	 */
 	public function validateUsuario($attribute, $params) {
-		$this->userEncontrado = $this->getUser ();
+		$this->userEncontrado = $this->getUserByEmail ();
 		
 		if (empty($this->userEncontrado)) {
-			$this->addError ( $attribute, 'No existe una cuenta asociada al corro electronico ingresado.' );
+			$this->addError ( $attribute, 'No existe una cuenta asociada al correo electronico ingresado.' );
 		}
 	}
 	
@@ -115,7 +117,10 @@ class LoginForm extends Model {
 	 */
 	public function login() {
 		if ($this->validate ()) {
-			return Yii::$app->user->login ( $this->getUser (), $this->rememberMe ? 3600 * 24 * 30 : 0 );
+			
+			
+			
+			return Yii::$app->user->login ( $this->getUserByEmail (), $this->rememberMe ? 3600 * 24 * 30 : 0 );
 		}
 		return false;
 	}
@@ -131,6 +136,15 @@ class LoginForm extends Model {
 			
 		}
 		
+		return $this->_user;
+	}
+	
+	public function getUserByEmail() {
+		if ($this->_user === false) {
+			$this->_user = EntUsuarios::findUser( $this->username );
+				
+		}
+	
 		return $this->_user;
 	}
 }
