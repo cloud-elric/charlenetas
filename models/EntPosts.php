@@ -743,7 +743,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 	 * @throws Exception
 	 * @return boolean
 	 */
-	public function guardarSabiasQue($sabiasque, $post) {
+	public function guardarSabiasQue($sabiasque, $post, $respuesta) {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_SABIAS_QUE;
 		$post->fch_creacion = Utils::getFechaActual ();
 		$post->txt_token = Utils::generateToken ( 'post' );
@@ -754,6 +754,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		try {
 			if ($post->save ()) {
 				$sabiasque->id_post = $post->id_post;
+				$sabiasque->b_verdadero = $respuesta;
 				
 				if ($sabiasque->save ()) {
 					

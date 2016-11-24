@@ -613,22 +613,22 @@ class AdminController extends Controller {
 	/**
 	 * Guarda sabias que
 	 */
-	public function actionCrearSabiasQue() {
+	public function actionCrearSabiasQue($respuesta = null) {
 		// Declaracion de modelos
 		$sabiasque = new EntSabiasQue ();
 		$post = new EntPosts ( [ 
 				'scenario' => 'crearSabiasQue' 
 		] );
 		
-		if ($validacion = $this->validarSoloPorHoy ( $post, $sabiasque )) {
+		if ($validacion = $this->validarSabiasQue ( $post, $sabiasque )) {
 			return $validacion;
 		}
-		
+	
 		if ($sabiasque->load ( Yii::$app->request->post () ) && $post->load ( Yii::$app->request->post () )) {
 			$usuario = Yii::$app->user->identity;
 			
 			$post->id_usuario = $usuario->id_usuario;
-			$post->guardarSabiasQue ( $sabiasque, $post );
+			$post->guardarSabiasQue ( $sabiasque, $post, $respuesta );
 			
 			return [ 
 					'status' => 'success',

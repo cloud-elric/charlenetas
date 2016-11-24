@@ -138,12 +138,21 @@ $('body').on('beforeSubmit', '#form-sabiasque', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	
+	var valor;
+	$("input:checked").each(function(){
+		//console.log($(this).val());
+		valor = $(this).val();
+	});
+	//console.log(valor);
+	
+	var url = form.attr('action')+"?respuesta="+valor;
 	var button = document.getElementById('js-crear-submit');
 	var l = Ladda.create(button);
  	l.start();
 	// submit form
 	$.ajax({
-		url : form.attr('action'),
+		url : url,
 		type : 'post',
 		 data: new FormData( this ),
 		 cache: false,
