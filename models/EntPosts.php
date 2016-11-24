@@ -812,7 +812,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 	 * @param unknown $post        	
 	 * @return \app\models\EntPosts|NULL
 	 */
-	public function guardarEspejo($post) {
+	public function guardarEspejo($post, $anonimo) {
 		$post->id_tipo_post = ConstantesWeb::POST_TYPE_ESPEJO;
 		$post->id_usuario = Yii::$app->user->identity->id_usuario;
 		$post->txt_token = Utils::generateToken ( 'post_' );
@@ -825,6 +825,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 				$espejo = new EntEspejos ();
 				$espejo->id_post = $post->id_post;
 				$espejo->num_subscriptores = 0;
+				$espejo->b_anonimo = $anonimo;
 				
 				if ($espejo->save ()) {
 					

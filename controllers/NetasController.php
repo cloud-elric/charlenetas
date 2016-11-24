@@ -791,13 +791,13 @@ class NetasController extends Controller {
 	/**
 	 * Agrega espejo para el usuario en sesión
 	 */
-	public function actionAgregarEspejo() {
+	public function actionAgregarEspejo($anonimo = null) {
 		$post = new EntPosts ( [ 
 				'scenario' => 'agregarEspejo' 
 		] );
 		
 		if ($post->load ( Yii::$app->request->post () )) {
-			if($postGuardado = $post->guardarEspejo($post)){
+			if($postGuardado = $post->guardarEspejo($post, $anonimo)){
 						
 				$notificaciones = new EntNotificaciones();
 					

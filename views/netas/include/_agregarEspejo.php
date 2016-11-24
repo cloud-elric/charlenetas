@@ -1,8 +1,10 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\models\EntEspejos;
 
 $classActive = $post->isNewRecord ? '' : 'active';
+$espejo = new EntEspejos();
 ?>
 
 <h4><?=$post->isNewRecord?'Agregar':'Editar'?> <span>Espejo</span>
@@ -33,7 +35,22 @@ $form = ActiveForm::begin ( [
 
 ?>
 <div class='row'>
-		
+		<?php 
+		echo $form->field ( $espejo, 'b_anonimo',['labelOptions' => [
+				'class' => 'mdl-textfield__label active'
+		]])->radioList ( [
+				'0' => 'No',
+				'1' => 'Si'
+		], [ 
+					'item' => function ($index, $label, $name, $checked, $value) {
+						$checked = $checked ? 'checked' : '';
+						$return = '<input class="with-gap" name="' . $name . '" type="radio" '.$checked.' id="respuesta_' . $index . '"  value="' . $value . '"/>';
+						$return .= '<label for="respuesta_' . $index . '">' . $label . '</label>';
+						return $return;
+					} 
+			])->label ();
+		echo "<br/>";
+		?>
 		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
 	</div>
 
@@ -53,13 +70,20 @@ $(document).ready(function(){
 		if (form.find('.has-error').length) {
 			return false;
 		}
-		
+
+		var valor;
+		$("input:checked").each(function(){
+			//console.log($(this).val());
+			valor = $(this).val();
+		});
+
+		var url = form.attr('action')+"?anonimo="+valor;
 		var button = document.getElementById('js-preguntar-btn');
 		var l = Ladda.create(button);
 	 	l.start();
 		// submit form
 			$.ajax({
-				url : form.attr('action'),// url para peticion
+				url : url,// url para peticion
 				type : 'post', // Metodo en el que se enviara la informacion
 				data: form.serialize(),
 				success : function(response) { 
