@@ -527,7 +527,7 @@ function addFeedback(token, feed) {
 	var contador = $('#js-contador-' + token + '-' + feed).text();
 
 	elemento.addClass('did-usr-interact');
-	elemento.attr('onclick', 'removeFeedback("' + token + '","' + feed + '")');
+	elemento.attr('onclick', 'removeFeedbacks("' + token + '","' + feed + '")');
 
 	$('#js-contador-' + token + '-' + feed).text(parseInt(contador) + 1);
 	agregarFeedback(token, feed);
@@ -543,11 +543,39 @@ function removeFeedback(token, feed) {
 	var contador = $('#js-contador-' + token + '-' + feed).text();
 
 	elemento.removeClass('did-usr-interact');
-	elemento.attr('onclick', 'addFeedback("' + token + '","' + feed + '")');
+	elemento.attr('onclick', 'revisarFeedbacks("' + token + '","' + feed + '")');
 
 	$('#js-contador-' + token + '-' + feed).text(parseInt(contador) - 1);
 
 	agregarFeedback(token, feed)
+}
+
+/**
+ * 
+ * @returns
+ */
+function revisarFeedbacks(token, feed){
+	var feedbacks = $('.comment-feedbacks').children('div');
+	console.log(feedbacks);
+	var no;
+	for(i = 0; i < feedbacks.length; i++){
+		
+		if($(feedbacks[i]).hasClass('did-usr-interact')){
+			//console.log("si");
+			//console.log($(feedbacks[i]).attr('data-token'));
+			//console.log($(feedbacks[i]).attr('data-tfb'));
+			
+			//if($(feedbacks[i]).attr('data-token') == token){
+				removeFeedback($(feedbacks[i]).attr('data-token'), $(feedbacks[i]).attr('data-tfb'));
+				//$(feedbacks[i]).attr("onClick", "revisarFeedbacks(token, $(feedbacks[i]).attr('data-tfb'))");
+			//}
+		}else if($(feedbacks[i]).attr('data-token') == token){
+			//console.log("no");
+			addFeedback(token, feed);
+			//$(feedbacks[i]).attr("onClick", "removeFeedback(token, $(feedbacks[i]).attr('data-tfb'))");
+			break;
+		}	
+	}
 }
 
 /**

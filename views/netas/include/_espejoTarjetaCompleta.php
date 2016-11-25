@@ -22,7 +22,7 @@ $espejo = $postEspejos->find()->where(['id_post'=>$post->id_post])->one();
 			<?php 
 			}else{
 			?>
-				<h6>Publicado por: Anonino</h6>
+				<h6>Publicado por: Netanauta</h6>
 			<?php 
 			}
 			?>

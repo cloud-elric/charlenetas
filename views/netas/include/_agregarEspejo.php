@@ -35,23 +35,25 @@ $form = ActiveForm::begin ( [
 
 ?>
 <div class='row'>
+		
+		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
+		
 		<?php 
 		echo $form->field ( $espejo, 'b_anonimo',['labelOptions' => [
 				'class' => 'mdl-textfield__label active'
-		]])->radioList ( [
+		]])->checkboxList ( [
 				'0' => 'No',
 				'1' => 'Si'
 		], [ 
 					'item' => function ($index, $label, $name, $checked, $value) {
 						$checked = $checked ? 'checked' : '';
-						$return = '<input class="with-gap" name="' . $name . '" type="radio" '.$checked.' id="respuesta_' . $index . '"  value="' . $value . '"/>';
+						$return = '<input class="with-gap" name="' . $name . '" type="checkbox" '.$checked.' id="respuesta_' . $index . '"  value="' . $value . '"/>';
 						$return .= '<label for="respuesta_' . $index . '">' . $label . '</label>';
 						return $return;
 					} 
 			])->label ();
-		echo "<br/>";
 		?>
-		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
+		
 	</div>
 
 <?= Html::submitButton('<span class="ladda-label">Preguntar </span>', array('class'=>'btn btn-submit waves-effect ladda-button','id'=>'js-preguntar-btn','data-style'=>'zoom-in'))?>
