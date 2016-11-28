@@ -191,12 +191,22 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			
+			var valor;
+			$("input:checked").each(function(){
+				//console.log($(this).val());
+				valor = $(this).val();
+			});
+			//console.log(valor);
+			
+			var url = form.attr('action')+"?respuesta="+valor;
+			
 			var button = document.getElementById('js-editar-submit');
 			var l = Ladda.create(button);
 		 	l.start();
 			// submit form
 			$.ajax({
-				url : form.attr('action'),// url para peticion
+				url : url,// url para peticion
 				type : 'post', // Metodo en el que se enviara la informacion
 				data : new FormData(this), // La informacion a mandar
 				dataType: 'json',  // Tipo de respuesta

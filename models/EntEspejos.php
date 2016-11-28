@@ -47,6 +47,7 @@ class EntEspejos extends \yii\db\ActiveRecord
         return [
             'id_post' => 'Id Post',
             'num_subscriptores' => 'Num Subscriptores',
+        	'b_anonimo'=>'Publicar pregunta como anonimo'
         ];
     }
 

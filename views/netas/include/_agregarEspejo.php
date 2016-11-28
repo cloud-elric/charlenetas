@@ -7,7 +7,7 @@ $classActive = $post->isNewRecord ? '' : 'active';
 $espejo = new EntEspejos();
 ?>
 
-<h4><?=$post->isNewRecord?'Agregar':'Editar'?> <span>Espejo</span>
+<h4><?=$post->isNewRecord?'Preguntar al ':'Editar'?> <span>Espejo</span>
 </h4>
 
 <?php

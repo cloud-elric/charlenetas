@@ -1141,8 +1141,8 @@ $(document).on({
 $(document).ready(function() {
 	
 	$('.modal-content .wrap').on('click', function(e) {
-
-		if (e.target.className == 'wrap') {
+		console.log(e.target.className);
+		if (e.target.className == 'section') {
 			e.preventDefault();
 			$('.lean-overlay').trigger('click');
 
@@ -1317,9 +1317,11 @@ function cargarFuncionalidadRespuestas(){
 
 function deshabilitarBotonSabias(elemento){
 	
-	$(this).prop('checked', false);
+	
 	
 	showModalLogin();
+	
+	elemento.prop('checked', false);
 }
 
 
