@@ -37,8 +37,8 @@ $form = ActiveForm::begin ( [
 			echo $form->field ( $sabiasque, 'b_verdadero',['labelOptions' => [ 
 						'class' => 'mdl-textfield__label active' 
 				]])->radioList ( [ 
-					'0' => 'No',
-					'1' => 'Si' 
+					'0' => 'Falso',
+					'1' => 'Verdadero' 
 			], [ 
 					'item' => function ($index, $label, $name, $checked, $value) {
 						$checked = $checked ? 'checked' : '';
@@ -49,8 +49,8 @@ $form = ActiveForm::begin ( [
 			])->label ();
 		} else {
 			echo $form->field ( $sabiasque, 'b_verdadero' )->radioList ( [ 
-					'0' => 'No',
-					'1' => 'Si' 
+					'0' => 'Falso',
+					'1' => 'Verdadero' 
 			], [ 
 					'item' => function ($index, $label, $name, $checked, $value) {
 						$checked = $checked ? 'checked' : '';
