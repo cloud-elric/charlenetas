@@ -13,8 +13,10 @@ foreach ( $feedbacks as $feedback ) {
 	
 		$feedBackActivado = 'did-usr-interact';
 		$onclick = 'removeFeedback("' . $comentario->txt_token . '","' . $feedback->txt_token . '");';
+		//$onclick = 'revisarFeedbacks("' . $comentario->txt_token . '","' . $feedback->txt_token . '");';
 	} else {
-		$onclick = 'addFeedback("' . $comentario->txt_token . '","' . $feedback->txt_token . '");';
+		//$onclick = 'addFeedback("' . $comentario->txt_token . '","' . $feedback->txt_token . '");';
+		$onclick = 'revisarFeedbacks("' . $comentario->txt_token . '","' . $feedback->txt_token . '");';
 	}
 	
 	switch ($feedback->id_tipo_feedback) {

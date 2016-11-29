@@ -43,7 +43,7 @@ if (Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']) {
 	] );
 	?>
 	<div class="row">
-		<?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
+		<?= $form->field($model, 'username')->textInput()?>
 		<?= $form->field($model, 'password')->passwordInput()?>
 		<div class="center">
 			<?= Html::submitButton('<span class="ladda-label">Login</span>',['id'=>'js-login-submit', 'class'=>'btn waves-effect waves-light center ladda-button animated', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
@@ -57,6 +57,14 @@ if (Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']) {
 		<i></i> <span class="ladda-label">Ingresar con Facebook</span>
 	</button>
 <?php }?>
+
+<div style="margin-top:30px;float: left;" class="animated">
+			<?= Html::a('Reenviar correo de activación','',['id'=>'js-enviar-activacion', 'style'=>'font-size:14px;    text-decoration: underline; font-weight: 400;'])?>
+		</div>
+
+<div style="float:right; margin-top:30px;text-align: right;" class="animated">
+			<?= Html::a('Olvide mi contraseña','',['id'=>'js-olvide-mi-contrasenia', 'style'=>'font-size:14px;    text-decoration: underline; font-weight: 400;'])?>
+		</div>
 	<!-- <p class="link-olvide-password animated">¿Olvidaste tu contraseña?</p> -->
 </div>
 
@@ -89,15 +97,27 @@ $(document).ready(function(){
 				if (response.hasOwnProperty('status')
 						&& response.status == 'success') {
 					var token = $('#js-token-post').val();
-					
+						cargarFuncionalidadRespuestas();
 						showPostAfterLogin(token);
 						cargarCerrarSesion();
-						mensajeCuentaActivada("Bienvenido de nuevo charlenauta");
+						mensajeCuentaActivada("Bienvenido de nuevo netanauta");
 						loadEspejoPreguntar();
-					
+						cargarRespuestasSabiasQue();
+						
+						$.ajax({
+							url: basePath+'netas/preguntar-tipo-usuario',
+							type: 'post',
+							success: function(resp){
+								if (resp.hasOwnProperty('status')
+										&& resp.status == 'admin') {
+									$('.pin-agregar-espejo').remove();
+								}else if (resp.hasOwnProperty('status')
+										&& resp.status == 'charlenauta'){
+									loadEspejoPreguntar();	
+								}
+							}
+						});
 						$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
-					
-					
 				} else {
 					// Muestra los errores
 					$('#login-form').yiiActiveForm('updateMessages',

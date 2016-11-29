@@ -56,6 +56,11 @@ class Utils {
 		return date_format ( $date, "Y-m-d H:i:s" );
 	}
 	
+	public static function changeFormatDateShort($string){
+		$date = date_create ($string );
+		return date_format ( $date, "Y-m-d" );
+	}
+	
 	/**
 	 * Obtenemos la fecha actual para almacenarla
 	 *

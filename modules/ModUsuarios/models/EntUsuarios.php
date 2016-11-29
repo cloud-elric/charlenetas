@@ -189,8 +189,16 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'repeatPassword' 
 						],
 						'required',
-						'on' => 'cambiarPass' 
+						'on' => 'cambiarPass',
+						'message' => 'Campo requerido'
 				],
+				[
+				'repeatPassword',
+				'compare',
+				'compareAttribute' => 'password',
+				'on' => 'cambiarPass',
+				'message' => 'La contraseña no coincide'
+						],
 				[ 
 						[ 
 								'fch_creacion',
@@ -532,6 +540,12 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		] );
 	}
 	
+	public static function findUser($username){
+		return static::findOne ( [
+				'txt_email' => $username,
+		] );
+	}
+	
 	/**
 	 * Finds user by password reset token
 	 *
@@ -701,6 +715,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		// Guardado de la imagen
 		$this->imageProfile->saveAs ( Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $nombreImagen );
 	}
+	
 	
 	/**
 	 * Si la imagen esta vacia mandamos una por default

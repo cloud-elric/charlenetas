@@ -19,7 +19,7 @@
 /**
  * Variables
  */
-var basePath = 'http://localhost/charlenetas/web/';
+
 //var basePath = 'http://notei.com.mx/test/wwwCharlenetas/web/';
 var pagesComentarios = 0;
 
@@ -135,18 +135,6 @@ function cargarComentarios(token, borrarAnteriores) {
 	// onclick="cargarComentarios(\''+token+'\', false)">Cargar más</div>');
 	pagesComentarios++;
 
-}
-
-function cambioUser(idUser,idTipo){
-	//console.log(idUser);
-	//console.log(idTipo);
-	$.ajax({
-		url: basePath + 'adminPanel/admin/cambiar-user?idUser=' + idUser + '&idTipo=' + idTipo,
-		method : 'GET',
-		success : function(res) {
-			//alert("ok");	
-		}
-	});
 }
 
 //Carga las respuestas de cada comentario

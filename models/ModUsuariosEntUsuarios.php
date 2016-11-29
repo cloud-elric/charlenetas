@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "mod_usuarios_ent_usuarios".
@@ -95,6 +96,29 @@ class ModUsuariosEntUsuarios extends \yii\db\ActiveRecord
             'fch_actualizacion' => 'Fch Actualizacion',
             'id_status' => 'Id Status',
         ];
+    }
+    
+    public static function getUsuarios($page = 0, $pageSize = ConstantesWeb::USUARIOS_MOSTRAR,$params=null){
+    	
+    	$query = ModUsuariosEntUsuarios::find();
+    	
+    	$order = [
+    			'fch_creacion' => 'asc'
+    	];
+    	
+    	// Carga el dataprovider
+    	$dataProvider = new ActiveDataProvider ( [
+    			'query' => $query,
+    			'sort' => [
+    					'defaultOrder' => $order
+    			],
+    			'pagination' => [
+    					'pageSize' => $pageSize,
+    					'page' => $page
+    			]
+    	] );
+    	
+    	return $dataProvider->getModels ();
     }
 
     /**
@@ -248,4 +272,5 @@ class ModUsuariosEntUsuarios extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ModUsuariosEntUsuariosFacebook::className(), ['id_usuario' => 'id_usuario']);
     }
+   
 }

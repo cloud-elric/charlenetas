@@ -1,27 +1,93 @@
-<?php 
+<?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
+	<h4 class="animated">Recuperar contraseña</h4>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
+	<div class="row">
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+    <?php
+$form = ActiveForm::begin ( [ 
+						'id' => 'peticion-form',
+						// 'enableAjaxValidation' => true,
+						'enableClientValidation' => true,
+						// 'validationUrl' => Url::base().'/netas/validacion-usuario',
+						'layout' => 'horizontal',
+						'class' => 'col s12',
+						'fieldConfig' => [ 
+								'template' => "<div class='row'>{input}\n{label}\n{error}</div>",
+								'horizontalCssClasses' => [ 
+										'error' => 'mdl-textfield__error' 
+								],
+								'labelOptions' => [ 
+										'class' => 'mdl-textfield__label' 
+								],
+								'options' => [ 
+										'class' => 'input-field col s12 animated' 
+								] 
+						],
+						'errorCssClass' => 'invalid' 
+				] );
+				?>
 
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Recuperar password', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true])?>
+        <div class="center">
+                <?= Html::submitButton('<span class="ladda-label">Recuperar contraseña</span>',['id'=>'js-recuperar-submit', 'class'=>'btn waves-effect waves-light center ladda-button animated', 'name' => 'login-button', 'data-style'=>'zoom-in'])?>
         </div>
 
     <?php ActiveForm::end(); ?>
-</div>
+    <div style="margin-top:10px;text-align: right;" class="animated">
+			<?= Html::a('Iniciar sesión','',['id'=>'iniciar-sesion',  'style'=>'font-size:14px;    text-decoration: underline; font-weight: 400;'])?>
+		</div>
+	</div>
+
+
+<script>
+
+$(document).ready(function(){
+	$('#js-recuperar-submit').on('click', function(e){
+		e.preventDefault();
+		$('#peticion-form').submit();
+	})
+
+	$('body').on('beforeSubmit', '#peticion-form', function() {
+		var form = $(this);
+		// return false if form still have some validation errors
+		if (form.find('.has-error').length) {
+			return false;
+		}
+		
+		var button = document.getElementById('js-recuperar-submit');
+		var l = Ladda.create(button);
+	 	l.start();
+		// submit form
+		$.ajax({
+			url : form.attr('action'),
+			type : 'post',
+			data : form.serialize(),
+			success : function(response) {
+				
+				// Si la respuesta contiene la propiedad status y es success
+				if (response.hasOwnProperty('status')
+						&& response.status == 'success') {
+					$("#js-contenedor-recovery").hide();
+					$('#js-message-recovery').show();
+					document.getElementById("js-recuperar-submit").reset();
+				} else {
+					// Muestra los errores
+					$('#peticion-form').yiiActiveForm('updateMessages',
+							response, true);
+				}
+				
+				l.stop();
+			},
+			error:function(){
+				l.stop();
+			}
+		});
+		return false;
+	});
+});
+
+</script>

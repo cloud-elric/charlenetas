@@ -26,7 +26,12 @@ use app\models\EntAlquimias;
 use app\models\EntNotificaciones;
 use app\models\EntRespuestasEspejo;
 use app\models\EntCitas;
-use yii\db\mssql\PDO;
+use app\models\EntUsuariosRespuestasSabiasQue;
+use app\models\EntUsuariosCreditos;
+use app\models\CatTipoCreditos;
+
+use app\models\ModUsuariosEntUsuarios;
+
 
 class NetasController extends Controller {
 	
@@ -69,6 +74,18 @@ class NetasController extends Controller {
 				] 
 		];
 		// everything else is denied
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	public function actions()
+	{
+		return [
+				'error' => [
+						'class' => 'yii\web\ErrorAction',
+				]
+		];
 	}
 	
 	/**
@@ -483,17 +500,19 @@ class NetasController extends Controller {
 			$calificacionUsuario->save ();
 		}
 		
-		// Obtenemos el numero de likes del post
+		// Obtenemos el numero de calificacion del post
 		$alquimia = $post->entAlquimias;
 		$numCalificaciones = $alquimia->calificacionAlquimia;
+		
+		Yii::$app->response->format = Response::FORMAT_JSON;
 			
 		// Si existe calificaciones
 		if ($numCalificaciones) {
 			
 			$alquimia->actualizarCalificacion ( $numCalificaciones->num_calificacion );
-			echo "success";
+			return ['status'=>'success', 'num_calificacion'=>$numCalificaciones->num_calificacion];
 		} else {
-			echo 'nada se encontro';
+			return ['status'=>'error'];
 		}
 	}
 	
@@ -595,15 +614,18 @@ class NetasController extends Controller {
 	 *
 	 * @param unknown $token        	
 	 */
-	public function actionValidarRespuesta($token) {
+	public function actionValidarRespuesta($respuesta, $token) {
+		
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
 		// busca el post necesario
 		$post = $this->getPostByToken ( $token );
 		
 		$sabiasQue = $post->entSabiasQue;
 
-		
-		$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
-		$buscarRespuesta = $respuestaSabiasQue->find()->where(['id_post'=>$sabiasQue->id_post])->andWhere(['id_usuario'=>$idUsuario])->one();  
+		$buscarRespuesta = EntUsuariosRespuestasSabiasQue::find()->where(['id_post'=>$sabiasQue->id_post])->andWhere(['id_usuario'=>$idUsuario])->one();  
 
 		if($buscarRespuesta){
 			return [
@@ -616,6 +638,9 @@ class NetasController extends Controller {
 			if($sabiasQue->b_verdadero === 1){
 				$boolRes = 'true';
 			}
+			
+			$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
+			
 			$respuestaSabiasQue->id_post = $sabiasQue->id_post;
 			$respuestaSabiasQue->id_usuario = $idUsuario;
 			if($respuesta === "true"){
@@ -626,19 +651,9 @@ class NetasController extends Controller {
 			$respuestaSabiasQue->save();
 			
 			if ($boolRes === $respuesta) {
-				//$respuestaSabiasQue = new EntUsuariosRespuestasSabiasQue();
-					
-// 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
-// 				$respuestaSabiasQue->id_usuario = $idUsuario;
-// 				if($respuesta === "true"){
-// 					$respuestaSabiasQue->b_respuesta = 1;
-// 				}else{
-// 					$respuestaSabiasQue->b_respuesta = 0;
-// 				}
-// 				$respuestaSabiasQue->save();
 				
-				$cat = new CatTipoCreditos();
-				$contestar = $cat->find()->where(['nombre'=>"Contestar"])->one();
+				
+				$contestar = CatTipoCreditos::find()->where(['nombre'=>"Contestar"])->one();
 				
 				$creditos = new EntUsuariosCreditos();
 				$creditos->id_usuario = $idUsuario;
@@ -647,20 +662,14 @@ class NetasController extends Controller {
 				$creditos->save();
 					
 				return [
-						'status' => 'success'
+						'status' => 'success',
+						'txt_url'=>$post->txt_url
 				];
 			} else {
-// 				$respuestaSabiasQue->id_post = $sabiasQue->id_post;
-// 				$respuestaSabiasQue->id_usuario = $idUsuario;
-// 				if($respuesta === "true"){
-// 					$respuestaSabiasQue->b_respuesta = 1;
-// 				}else{
-// 					$respuestaSabiasQue->b_respuesta = 0;
-// 				}
-// 				$respuestaSabiasQue->save();
 				
 				return [
-						'status' => 'error'
+						'status' => 'error',
+						'txt_url'=>$post->txt_url
 				];
 			}
 		}
@@ -782,21 +791,22 @@ class NetasController extends Controller {
 	/**
 	 * Agrega espejo para el usuario en sesión
 	 */
-	public function actionAgregarEspejo() {
+	public function actionAgregarEspejo($anonimo = null) {
 		$post = new EntPosts ( [ 
 				'scenario' => 'agregarEspejo' 
 		] );
 		
 		if ($post->load ( Yii::$app->request->post () )) {
-			if($postGuardado = $post->guardarEspejo($post)){
+			if($postGuardado = $post->guardarEspejo($post, $anonimo)){
 						
 				$notificaciones = new EntNotificaciones();
 					
 				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
 				
-				return 'success';
+				return $this->renderAjax('//netas/include/_espejoPin',['post'=>$postGuardado]);
 			}else{
-				return 'error';
+				Yii::$app->response->format = Response::FORMAT_JSON;
+				return ['status'=>'error'];
 			}
 		}
 		
@@ -918,5 +928,47 @@ class NetasController extends Controller {
 	public function actionPayPal(){
 		
 		return $this->render('paypal');
+	}
+	
+	/**
+	 * Busca la respuesta del usuario
+	 *
+	 * @param unknown $token
+	 */
+	public function actionGetRespuestasSabiasQue($token = null) {
+		$post = $this->getPostByToken ( $token );
+		// usuario logueado
+		$usuario = Yii::$app->user->identity;
+	
+		Yii::$app->response->format = Response::FORMAT_JSON;
+	
+		$respuestaUsuario = EntUsuariosRespuestasSabiasQue::find ()->where ( [
+				'id_usuario' => $usuario->id_usuario,
+				'id_post' => $post->id_post
+		] )->one ();
+	
+		if(empty($respuestaUsuario)){
+			return ['status'=>'sin'];
+		}else {
+			if($respuestaUsuario->b_respuesta){
+				return ['status'=>'bien','txt_url'=>$post->txt_url];
+			}else{
+				return ['status'=>'mal','txt_url'=>$post->txt_url];
+			}
+		}
+	}
+	
+	public function actionPreguntarTipoUsuario(){
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		
+		$idUser = Yii::$app->user->identity->id_usuario;
+		
+		$idTipo = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$idUser])->one();
+		
+		if($idTipo->id_tipo_usuario == 2){
+			return['status'=>'admin'];
+		}else{
+			return['status'=>'charlenauta'];
+		}
 	}
 }

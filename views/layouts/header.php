@@ -19,7 +19,6 @@ use app\models\EntNotificaciones;
 		//  echo Html::img(Yii::$app->user->identity->getImageProfile());	
 		//  echo Yii::$app->user->identity->nombreCompleto.'<br>';
 		 	echo Html::a('Cerrar sesión', ['site/logout']);
-		 	echo Html::a('Crear cita',['netas/crear-cita']);
 		 }else{
 
 		 	?>

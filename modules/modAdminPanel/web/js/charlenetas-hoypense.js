@@ -27,16 +27,26 @@ function cargarFormulario(){
 function deletePosts(){
 	var del = document.getElementsByTagName('input');
 	var token;
-	$("input:checked").each(function(){
-		console.log($(this).val());
-		token = $(this).val();
-		console.log("token"+token);
-		//alert(token);
-		$('#card_'+ token).remove();
-		var ajax=$.ajax({
-			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
-			type : 'GET'
+	
+	$('.modal-trigger.js-eliminar-post').trigger('click');
+	$('#Aceptar-post').on('click', function(e){
+		e.preventDefault();
+	
+		$("input:checked").each(function(){
+			console.log($(this).val());
+			token = $(this).val();
+			console.log("token"+token);
+			//alert(token);
+			$('#card_'+ token).remove();
+			$('.lean-overlay').trigger("click");
+			var ajax=$.ajax({
+				url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+				type : 'GET'
+			});
 		});
+	});
+	$('#Cancelar-post').on('click', function(e){
+		$('.lean-overlay').trigger("click");
 	});
 }
 
@@ -180,14 +190,25 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			//var data = form.serialize();
+			//var desc = document.getElementById('descripcion');
+			//var descripcion = desc.getAttribute('data-descripcion');
+			
+			//data.append("EntPosts[txt_descripcion]",descripcion);
+			
 			var button = document.getElementById('js-editar-submit');
 			var l = Ladda.create(button);
 		 	l.start();
+		 	
+		 	console.debug(tinyMCE.activeEditor.getContent());
+		 	console.log(tinymce.activeEditor.getContent());
+		 	var data = new FormData(this);
+		 	data.append("EntPosts[txt_descripcion]",tinymce.activeEditor.getContent());
 			// submit form
 			$.ajax({
 				url : form.attr('action'),// url para peticion
 				type : 'post', // Metodo en el que se enviara la informacion
-				data : new FormData(this), // La informacion a mandar
+				data : data, // La informacion a mandar
 				dataType: 'json',  // Tipo de respuesta
 				cache : false, // sin cache
 				contentType : false,
@@ -230,6 +251,5 @@ $(document).ready(function(){
 		var token = $(this).data('token');
 		showPostFull(token)
 	});
-	
 });
 

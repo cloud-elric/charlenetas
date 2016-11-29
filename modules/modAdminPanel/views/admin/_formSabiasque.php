@@ -37,8 +37,8 @@ $form = ActiveForm::begin ( [
 			echo $form->field ( $sabiasque, 'b_verdadero',['labelOptions' => [ 
 						'class' => 'mdl-textfield__label active' 
 				]])->radioList ( [ 
-					'0' => 'No',
-					'1' => 'Si' 
+					'0' => 'Falso',
+					'1' => 'Verdadero' 
 			], [ 
 					'item' => function ($index, $label, $name, $checked, $value) {
 						$checked = $checked ? 'checked' : '';
@@ -49,8 +49,8 @@ $form = ActiveForm::begin ( [
 			])->label ();
 		} else {
 			echo $form->field ( $sabiasque, 'b_verdadero' )->radioList ( [ 
-					'0' => 'No',
-					'1' => 'Si' 
+					'0' => 'Falso',
+					'1' => 'Verdadero' 
 			], [ 
 					'item' => function ($index, $label, $name, $checked, $value) {
 						$checked = $checked ? 'checked' : '';
@@ -65,11 +65,13 @@ $form = ActiveForm::begin ( [
 		
 		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
 		
+		<?= $form->field($post, 'txt_url', ['options'=>['class'=>'input-field col s12']])->textInput()?>
+		
 		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
 	
 	</div>
 
-<?= Html::submitButton('<span class="ladda-label">Crear</span>', ['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit ladda-button', 'name' => 'boton-sabias', 'data-style'=>'zoom-in'])?>
+<?= Html::submitButton($post->isNewRecord?'crear':'editar', ['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit ladda-button', 'name' => 'boton-sabias', 'data-style'=>'zoom-in'])?>
 
 <?php
 

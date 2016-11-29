@@ -142,7 +142,7 @@
 																<td style='padding:0cm 0cm 0cm 0cm'>
 																	<p class=MsoNormal style='line-height:28.35pt'>
 																		<span style='font-size:15.5pt;font-family:"Arial",sans-serif;color:#7F8C8D'>
-																			Te encuentras a unos segundos de formar parte de la comunidad Charlenautas. Da click en el botón de abajo para activar tu cuenta. <o:p></o:p>
+																			Te encuentras a unos segundos de formar parte de la comunidad de charlenetas. Da click en el botón de abajo para activar tu cuenta. <o:p></o:p>
 																		</span>
 																	</p>
 																</td>
@@ -172,7 +172,7 @@
 																			<span style='font-size:13.5pt;font-family:"Arial",sans-serif;color:#7F8C8D'>
 																				<a href="<?=$url?>">
 																					<span style='color:white'>
-																						Convertirme en Charlenauta
+																						Convertirme en netanauta
 																					</span>
 																				</a> <o:p></o:p>
 																			</span>

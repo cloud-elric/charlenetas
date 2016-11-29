@@ -2,10 +2,11 @@
 use yii\widgets\ActiveForm;
 use app\models\EntComentariosPosts;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 // Si el usuario esta logueado ponemos su avatar
 if (Yii::$app->user->isGuest) {
-	echo Html::img ( 'webAssets/images/usr-avatar.png', [
+	echo Html::img ( Yii::$app->urlManager->createAbsoluteUrl ( [''] ).'webAssets/images/usr-avatar.png', [
 			'width' => '30px'
 	] );
 } else {
@@ -41,13 +42,15 @@ if (! Yii::$app->user->isGuest) {
 	if ($respuesta) {
 		?>
 <!-- Boton para guardar la respuesta -->
-<a class="waves-effect waves-light btn btn-primary"
+<a class="waves-effect waves-light btn btn-primary ladda-button animated delay-3"
+	data-style="zoom-in"
 	id="js-responder-<?=$token?>"
 	onclick="enviarRespuesta('<?=$token?>');">Responder</a>
 
 <?php }else{?>
 <!-- Boton para guardar el comentario -->
-<a class="waves-effect waves-light btn btn-primary"
+<a class="waves-effect waves-light btn btn-primary ladda-button animated delay-3"
+	data-style="zoom-in"
 	id="js-responder-<?=$token?>"
 	onclick="enviarComentario('<?=$token?>');">Publicar</a>
 <?php }?>

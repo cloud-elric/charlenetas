@@ -27,16 +27,26 @@ function cargarFormulario(){
 function deletePosts(){
 	var del = document.getElementsByTagName('input');
 	var token;
-	$("input:checked").each(function(){
-		console.log($(this).val());
-		token = $(this).val();
-		console.log("token"+token);
-		//alert(token);
-		$('#card_'+ token).remove();
-		var ajax=$.ajax({
-			url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
-			type : 'GET'
+	
+	$('.modal-trigger.js-eliminar-post').trigger('click');
+	$('#Aceptar-post').on('click', function(e){
+		e.preventDefault();
+	
+		$("input:checked").each(function(){
+			console.log($(this).val());
+			token = $(this).val();
+			console.log("token"+token);
+			//alert(token);
+			$('#card_'+ token).remove();
+			$('.lean-overlay').trigger("click");
+			var ajax=$.ajax({
+				url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+				type : 'GET'
+			});
 		});
+	});
+	$('#Cancelar-post').on('click', function(e){
+		$('.lean-overlay').trigger("click");
 	});
 }
 
@@ -86,6 +96,7 @@ function abrirModalEditarSabiasQue(token){
 		url:url,
 		success:function(res){
 			$('#js-modal-post-editar .modal-content').html(res);
+			
 		}
 	});
 }
@@ -127,12 +138,21 @@ $('body').on('beforeSubmit', '#form-sabiasque', function() {
 	if (form.find('.has-error').length) {
 		return false;
 	}
+	
+	var valor;
+	$("input:checked").each(function(){
+		//console.log($(this).val());
+		valor = $(this).val();
+	});
+	//console.log(valor);
+	
+	var url = form.attr('action')+"?respuesta="+valor;
 	var button = document.getElementById('js-crear-submit');
 	var l = Ladda.create(button);
  	l.start();
 	// submit form
 	$.ajax({
-		url : form.attr('action'),
+		url : url,
 		type : 'post',
 		 data: new FormData( this ),
 		 cache: false,
@@ -171,12 +191,22 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			
+			var valor;
+			$("input:checked").each(function(){
+				//console.log($(this).val());
+				valor = $(this).val();
+			});
+			//console.log(valor);
+			
+			var url = form.attr('action')+"?respuesta="+valor;
+			
 			var button = document.getElementById('js-editar-submit');
 			var l = Ladda.create(button);
 		 	l.start();
 			// submit form
 			$.ajax({
-				url : form.attr('action'),// url para peticion
+				url : url,// url para peticion
 				type : 'post', // Metodo en el que se enviara la informacion
 				data : new FormData(this), // La informacion a mandar
 				dataType: 'json',  // Tipo de respuesta
@@ -223,3 +253,4 @@ $(document).ready(function(){
 	
 	
 });
+

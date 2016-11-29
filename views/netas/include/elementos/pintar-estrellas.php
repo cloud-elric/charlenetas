@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 ?>
-<!-- //TODO:: poner el "for2 para por cada numero de calificción total poner las estrellas -->
 <span>Calificación Charlenetas</span>
 <?php
 $alquimia = $post->entAlquimias;

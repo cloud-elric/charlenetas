@@ -16,6 +16,7 @@ AppAsset::register($this);
 <head>
 
 	<script> var basePath = '<?=Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>'; </script>
+	<script>var basePathFace = 'http://charlenetas.com/';</script>
 
 	<link rel="shortcut icon" type="image/png" href="<?=Url::base()?>/favicon.png"/>
     <meta charset="<?= Yii::$app->charset ?>">
@@ -79,11 +80,13 @@ function statusChangeCallback(response) {
 
 						if(response.status=="success"){
 							var token = $('#js-token-post').val();
+							cargarFuncionalidadRespuestas();
 							showPostAfterLogin(token);
 							cargarCerrarSesion();
 							loadEspejoPreguntar();
-							mensajeCuentaActivada("Bienvenido charlenauta");
+							mensajeCuentaActivada("Bienvenido netanauta");
 							loadEspejoPreguntar();
+							cargarRespuestasSabiasQue();
 							
 							$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');
 							}
@@ -118,6 +121,7 @@ function checkLoginState() {
 window.fbAsyncInit = function() {
 	FB.init({
 		//appId : '1029875693761281',
+		//appId:'171096896693553',
 		appId:'1779986862262300',
 		cookie : true, // enable cookies to allow the server to access
 		// the session

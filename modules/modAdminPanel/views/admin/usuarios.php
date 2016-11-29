@@ -3,6 +3,10 @@ use app\models\EntComentariosPosts;
 use app\models\EntUsuariosFeedbacks;
 use yii\helpers\Html;
 use app\models\CatTiposUsuarios;
+use app\modules\ModUsuarios\models\EntUsuarios;
+use app\models\ModUsuariosEntUsuarios;
+use app\models\ConstantesWeb;
+use app\modules\modAdminPanel\assets\ModuleAsset;
 
 $tipoUsuarios = new CatTiposUsuarios();
 $users = $tipoUsuarios->find()->all();
@@ -17,7 +21,7 @@ $users = $tipoUsuarios->find()->all();
 <!-- .page-cont -->
 <div class="page-cont">
 
-	<div class="row">
+	<div class="row" id="js-contenedor-tarjetas">
 
 	<?php foreach($usuarios as $usuario){ ?>
 
@@ -74,3 +78,21 @@ $users = $tipoUsuarios->find()->all();
 		<?php } ?>
 	</div>
 </div>
+
+<?php 
+$totalUsers = ModUsuariosEntUsuarios::find()->count('id_usuario');
+if($totalUsers>ConstantesWeb::USUARIOS_MOSTRAR){
+?>
+	<div class="more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in"
+	id="js-cargar-mas-usuarios" onclick="cargarMasUsuarios(<?=$totalUsers?>,<?=ConstantesWeb::USUARIOS_MOSTRAR?>);"><span class="ladda-label">Cargar mas
+	usuarios...<label>(<?=$totalUsers - ConstantesWeb::USUARIOS_MOSTRAR?>)</label></span></div>
+<?php 
+}
+?>
+
+<?php 
+$bundle = ModuleAsset::register ( Yii::$app->view );
+$bundle->js [] = 'js/charlenetas-usuarios.js';
+?>
+
+	

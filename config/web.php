@@ -51,22 +51,37 @@ $config = [
 						] 
 				],
 				'errorHandler' => [ 
-						'errorAction' => 'site/error' 
+						'errorAction' => 'netas/error' 
 				],
 				'mailer' => [ 
 						'class' => 'yii\swiftmailer\Mailer',
 						'transport' => [ 
+// 								'class' => 'Swift_SmtpTransport',
+// 								'host' => 'smtp.gmail.com', // e.g. smtp.mandrillapp.com or smtp.gmail.com
+// 								'username' => 'humberto2geekonemonkey@gmail.com',
+// 								'password' => '9&s3Z2L24e9^3GfXt',
+// 								'port' => '587', // Port 25 is a very common port too
+// 								'encryption' => 'tls'
 								'class' => 'Swift_SmtpTransport',
-								'host' => 'smtp.gmail.com', // e.g. smtp.mandrillapp.com or smtp.gmail.com
-								'username' => 'humberto2geekonemonkey@gmail.com',
-								'password' => '9&s3Z2L24e9^3GfXt',
+								'host' => 'smtp.ipower.com', // e.g. smtp.mandrillapp.com or smtp.gmail.com
+								'username' => 'welcome@charlenetas.com',
+								'password' => 'Welcome2016',
 								'port' => '587', // Port 25 is a very common port too
-								'encryption' => 'tls' 
+								'encryption' => 'tls'
 						] 
 				],
 				'log' => [ 
 						'traceLevel' => YII_DEBUG ? 3 : 0,
 						'targets' => [ 
+								'email' => [
+										'class' => 'yii\log\EmailTarget',
+										'levels' => ['error', 'warning'],
+										'message' => [
+												'from' => ['email_from@gmail.com'],
+												'to' => ['email_to@gmail.com'],
+												'subject' => 'New example.com log message',
+										],
+								],
 								[ 
 										'class' => 'yii\log\FileTarget',
 										'levels' => [ 
@@ -98,6 +113,7 @@ $config = [
 								'login' => 'modUsuarios/manager/login',
 								'callback-facebook' => 'modUsuarios/manager/callback-facebook',
 								'/' => 'netas/index',
+								'peticion-activar'=>'modUsuarios/manager/peticion-activar',
 								//modulo de administrador
 								"adminPanel/"=>"adminPanel/admin/dashboard",
 								"adminPanel"=>"adminPanel/admin/dashboard"

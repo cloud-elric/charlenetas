@@ -67,6 +67,8 @@ if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 
 <?php 	
 	$bundle = ModuleAsset::register ( Yii::$app->view );
+	
+// 	$bundle->js [] = '//cdn.tinymce.com/4/tinymce.min.js';
 	$bundle->js [] = 'js/charlenetas-sabiasque.js'; // dynamic file added
 	
 	$this->registerJs ( "

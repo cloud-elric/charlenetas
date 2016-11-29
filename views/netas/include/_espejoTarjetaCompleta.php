@@ -3,7 +3,11 @@ use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
 use app\models\ConstantesWeb;
 use app\models\EntRespuestasEspejo;
+use app\models\EntEspejos;
 $usuario = $post->idUsuario;
+
+$postEspejos = new EntEspejos();
+$espejo = $postEspejos->find()->where(['id_post'=>$post->id_post])->one();
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
@@ -11,7 +15,17 @@ $usuario = $post->idUsuario;
 	<h2>El Espejo</h2>
 	<div class="post-publisher-data">
 		<div class="post-publisher">
-			<h6>Publicado por: <?=$post->idUsuario->nombreCompleto?></h6>
+			<?php 
+			if($espejo->b_anonimo == 0){	
+			?>
+				<h6>Publicado por: <?=$post->idUsuario->nombreCompleto?></h6>
+			<?php 
+			}else{
+			?>
+				<h6>Publicado por: Netanauta</h6>
+			<?php 
+			}
+			?>
 			<h6><?=Utils::changeFormatDate(Html::encode($post->fch_creacion))?></h6>
 		</div>
 

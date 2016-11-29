@@ -75,12 +75,42 @@ function stopEvent(ev) {
 	  // this ought to keep t-daddy from getting the click.
 	  ev.stopPropagation();
 	 
-	}
+}
+
+//Eliminar posts
+function deletePostsContexto(){
+	var del = document.getElementsByTagName('input');
+	var token;
+	
+	$('.modal-trigger.js-eliminar-post').trigger('click');
+	$('#Aceptar-post').on('click', function(e){
+		e.preventDefault();
+	
+		$("input:checked").each(function(){
+			console.log($(this).val());
+			token = $(this).val();
+			console.log("token"+token);
+			//alert(token);
+			$('#card_'+ token).remove();
+			$('.lean-overlay').trigger("click");
+			var ajax=$.ajax({
+				url: basePath+'adminPanel/admin/deshabilitar-post-contexto?tokenPost='+token,
+				type : 'GET',
+				success: function(){
+					window.location.reload(true);
+				}
+			});
+		});
+	});
+	$('#Cancelar-post').on('click', function(e){
+		$('.lean-overlay').trigger("click");
+	});
+}
 
 $(document).ready(function(){
 	$('.card-contexto').on('click', function(e) {
 		console.log(e.target);
-		if (e.target.localName == 'i' || e.target.localName == 'button') {
+		if (e.target.localName == 'i' || e.target.localName == 'button' || e.target.localName == 'label' || e.target.localName == 'input') {
 			e.stopPropagation();
 			return;
 		}

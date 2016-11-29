@@ -1,8 +1,12 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\models\EntEspejos;
 
 /* @var $post EntPosts*/
+
+$postEspejos = new EntEspejos();
+$espejo = $postEspejos->find()->where(['id_post'=>$post->id_post])->one();
 ?>
 
 <div class="pin pin-espejo"
@@ -11,7 +15,7 @@ use yii\helpers\Url;
 	<div class="pin-header pin-header-espejo"></div>
 
 	<div class=image>
-		<img src="<?=Url::base()?>/webAssets/images/espejo.jpg">
+		<img src="<?=Url::base()?>/webAssets/images/espejo.png">
 	</div>
 
 
@@ -25,13 +29,16 @@ use yii\helpers\Url;
 
 		<div class="pin-social-usr">
 		<?php
-		$usuario = $post->idUsuario;
+		if($espejo->b_anonimo == 0){
+			$usuario = $post->idUsuario;
 
-		if (! empty ( $usuario )) {
-			echo Html::img ( $usuario->getImageProfile());
-			echo '<span>' . $usuario->txt_username . '</span>';
+			if (! empty ( $usuario )) {
+				echo Html::img ( $usuario->getImageProfile());
+				echo '<span>' . $usuario->txt_username . '</span>';
+			}
+		}else{
+			echo '<span>Netanauta</span>';
 		}
-
 		?>
 
 	</div>
