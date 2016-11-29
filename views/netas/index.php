@@ -137,6 +137,8 @@ if($postTotales>ConstantesWeb::PINS_A_MOSTRAR){
 						<h1>Revisa tu email.</h1>
 						<p style="color: white;">Se ha enviado a la dirección proporcionada un link para recuperar su password.</p>
 					</div>
+					<!-- Close -->
+					<span class="anim-account-close"><i class="icon-close"></i></span>
 					<!-- Tabs -->
 					<div class="anim-account-tab">
 						<p class="anim-account-tab-item btn-login-register active" data-account="singup">Login</p>
