@@ -94,6 +94,10 @@ $usuario = $post->idUsuario;
 			<div class="feedback did-usr-interact" onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
+			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
+				<i class="material-icons">tab_unselected</i>
+				<h6 style="opacity:0; position:fixed; width:0; height:0; overflow:overflow; top:-1px; left:-1px" id="link-<?=$post->txt_token?>"><?=Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>netas/index?token=<?=$post->txt_token?></h6>
+			</div>
 		</div>
 		<div class="full-pin-body-footer-feedbacks">
 			<?php

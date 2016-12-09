@@ -30,7 +30,7 @@ class AppAssetProfile extends AssetBundle {
 	public $js = [ 
 			'plugins/animsition/js/animsition.min.js',
 			'plugins/profile-remark/js/bootstrap.min.js',
-			'js/profile.js',
+			'js/profile.js'
 	]
 	;
 	public $depends = [ 

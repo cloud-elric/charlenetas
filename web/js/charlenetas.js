@@ -1314,6 +1314,28 @@ function cargarFuncionalidadRespuestas(){
 	});
 	
 }
+/**
+ * Copiar 
+ */
+function copiarClipboard(){
+	console.log("dentro de la funcion");
+	var clipboard = new Clipboard('#copy-button');
+
+	clipboard.on('success', function(e) {
+		mensajeCuentaActivada("Enlace copiado");
+		console.info('Action:', e.action);
+	    console.info('Text:', e.text);
+	    console.info('Trigger:', e.trigger);
+
+	    e.clearSelection();
+	    clipboard.destroy();
+	});
+
+//	clipboard.on('error', function(e) {
+//	    console.error('Action:', e.action);
+//	    console.error('Trigger:', e.trigger);
+//	});
+}
 
 function deshabilitarBotonSabias(elemento){
 	

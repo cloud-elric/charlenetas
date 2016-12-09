@@ -46,7 +46,8 @@ class AppAsset extends AssetBundle {
 			'plugins/animsition/js/animsition.min.js',
 			'js/moment.min.js',
 			'js/fullcalendar.js',
-			'js/calendario.js'
+			'js/calendario.js',
+			'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js'
 
 	]
 	;
