@@ -1,0 +1,143 @@
+/*  Modal
+	================================================ */
+.modal-tuto
+	display: none
+	position: fixed
+	z-index: 19
+	left: 0
+	top: 0
+	width: 100%
+	height: 100vh
+	overflow: auto
+	background-color: #0059B2
+	align-items: center
+	justify-content: center
+
+	// Modal Content
+	.modal-content
+		border-radius: 4px
+		position: relative
+		background-color: #fff
+		margin: auto
+		height: 80vh
+		overflow-y: auto
+		padding: 0
+		border: none
+		width: 80%
+		width: 400px
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
+		-webkit-animation-name: animatetop
+		-webkit-animation-duration: 0.4s
+		animation-name: animatetop
+		animation-duration: 0.4s
+
+		.owl-stage-outer
+			position: relative
+			width: 100%
+
+			.owl-stage
+				position: relative
+				width: 100%
+
+				.owl-item
+					// background-color: red
+					display: flex
+					padding: 30px 20px
+
+					.item
+						align-items: center
+						display: flex
+						flex-direction: column
+						justify-content: center
+
+						.screen-ayuda-corousel-item-imagen
+							border-radius: 50%
+							height: 200px
+							margin-bottom: 60px
+							overflow: hidden
+							width: 200px
+
+						h3
+							font-size: 3rem
+							margin-bottom: 30px
+
+						p
+							font-size: 1.15rem
+							letter-spacing: 1px
+
+		.owl-controls
+
+			.owl-dots
+				align-items: center
+				bottom: 240px
+				display: flex
+				justify-content: center
+				height: 30px
+				position: absolute
+				width: 100%
+
+				.owl-dot
+					background-color: black
+					border-radius: 50%
+					cursor: default!important
+					display: block
+					height: 6px
+					margin-right: 8px
+					width: 6px
+					&:last-child
+						margin-right: 0
+					&:hover
+						background-color: black
+					&.active
+						background-color: blue
+
+			.owl-nav
+				.owl-prev
+					display: none!important
+				.owl-next
+					align-items: center
+					background-color: blue
+					bottom: 20px
+					display: flex
+					height: 30px
+					justify-content: center
+					left: 50%
+					position: absolute
+					width: 30px
+
+					i
+						color: white
+						font-size: 2.5rem
+
+	// Animation
+	@-webkit-keyframes animatetop 
+		from
+			top:-300px
+			opacity:0
+		to
+			top:0
+			opacity:1
+
+	@keyframes animatetop 
+		from
+			top:-300px
+			opacity:0
+		to
+			top:0
+			opacity:1
+
+
+	// Close Button
+	.modal-close
+		cursor: pointer
+		color: white
+		font-size: 28px
+		font-weight: bold
+		position: absolute
+		right: 30px
+		top: 30px
+		&:hover,
+		&:focus 
+			color: #CCC
+			text-decoration: none
+			cursor: pointer

@@ -1136,10 +1136,13 @@ $(document).on({
 	}
 }, '#iniciar-sesion-activar');
 
-
+// Modal
+var modal = document.getElementById('modal-tutoriales');
+var modalOpen = document.getElementById("modal-tutoriales-open");
+var modalClose = document.getElementById("modal-tutoriales-close");
 
 $(document).ready(function() {
-	
+
 	$('.modal-content .wrap').on('click', function(e) {
 		console.log(e.target.className);
 		if (e.target.className == 'section') {
@@ -1212,6 +1215,60 @@ $(document).ready(function() {
 
 	});
 
+	// 
+	// 
+	// 
+
+	/**
+	 * Modal
+	 */
+	// Open Modal
+	$(modalOpen).on("click", function(){
+		modal.style.display = "flex";
+	});
+	// Close Modal
+	$(modalClose).on("click", function(){
+		modal.style.display = "none";
+	});
+
+
+	$('.owl-carousel-tutoriales').owlCarousel({
+		center: true,
+		margin: 0,
+		loop: true,
+		nav: true,
+		items: 1,
+		responsive:{
+			0:{
+				touchDrag: true,
+				mouseDrag: true
+			},
+			600:{
+				touchDrag: false,
+				mouseDrag: false
+			},
+			1000:{
+				touchDrag: false,
+				mouseDrag: false
+			}
+		}
+	});
+
+
+}); // end - READY
+// Close Modal de Tutoriales
+window.onclick = function(event) {
+	// Modal - Close
+	if (event.target == modal) {
+		modal.style.display = "none";
+	}
+}
+// Close Modal de Tutoriales
+$(window).bind("click touchstart", function(){
+	// Modal - Close
+	if (event.target == modal) {
+		modal.style.display = "none";
+	}
 });
 
 function validarRespuesta(element) {
@@ -1348,3 +1405,4 @@ function deshabilitarBotonSabias(elemento){
 
 
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+

@@ -216,3 +216,50 @@ if (! empty ($isCuentaActivada)) {
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
+
+<!-- .modal -->
+<div id="modal-tutoriales" class="modal-tuto">
+
+	<!-- .modal-content -->
+	<div class="modal-content owl-carousel-tutoriales">
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Espejo</h3>
+
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem sed maiores, dicta nostrum.
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Alquimia</h3>
+
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem sed maiores, dicta nostrum.
+			</p>
+
+		</div>
+
+	</div>
+	<!-- end - .modal-content -->
+
+	<!-- Brn Close -->
+	<span id="modal-tutoriales-close" class="modal-close">
+		<i class="icon-close"></i>
+	</span>
+
+	<!-- <i class="material-icons medium icon-demo">trending_flat</i> -->
+
+</div>
+<!-- end - .modal -->

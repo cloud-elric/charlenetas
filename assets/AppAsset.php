@@ -29,6 +29,7 @@ class AppAsset extends AssetBundle {
 			'css/animate.css',
 			'css/login.css',
 			'plugins/animsition/css/animsition.min.css',
+			'plugins/owl/css/owl.carousel.css',
 			'css/fullcalendar.css'
 			//'css/ionicons.min.css'
 
@@ -44,6 +45,7 @@ class AppAsset extends AssetBundle {
 			'js/login.js',
 			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
 			'plugins/animsition/js/animsition.min.js',
+			'plugins/owl/js/owl.carousel.min.js',
 			'js/moment.min.js',
 			'js/fullcalendar.js',
 			'js/calendario.js',
