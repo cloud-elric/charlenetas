@@ -1,7 +1,5 @@
 <?php
-
 namespace app\controllers;
-
 use Yii;
 use yii\web\Controller;
 use app\models\EntPostsExtend;
@@ -653,13 +651,13 @@ class NetasController extends Controller {
 			if ($boolRes === $respuesta) {
 				
 				
-				$contestar = CatTipoCreditos::find()->where(['nombre'=>"Contestar"])->one();
+// 				$contestar = CatTipoCreditos::find()->where(['nombre'=>"Contestar"])->one();
 				
-				$creditos = new EntUsuariosCreditos();
-				$creditos->id_usuario = $idUsuario;
-				$creditos->numero_creditos = $contestar->costo;
-				$creditos->txt_descripcion = "Contestar pregunta";
-				$creditos->save();
+// 				$creditos = new EntUsuariosCreditos();
+// 				$creditos->id_usuario = $idUsuario;
+// 				$creditos->numero_creditos = $contestar->costo;
+// 				$creditos->txt_descripcion = "Contestar pregunta";
+// 				$creditos->save();
 					
 				return [
 						'status' => 'success',

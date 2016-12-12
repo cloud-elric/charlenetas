@@ -27,6 +27,7 @@ use app\models\CatTiposUsuarios;
 use app\models\RelUsuarios;
 use app\models\ModUsuariosEntUsuarios;
 use app\models\EntUsuariosRespuestasSabiasQue;
+use yii\web\NotFoundHttpException;
 
 /**
  * Default controller for the `adminPanel` module
@@ -1004,7 +1005,7 @@ class AdminController extends Controller {
 	 *
 	 * @param string $token        	
 	 */
-	public function actionEditarSabiasQue($token = null) {
+	public function actionEditarSabiasQue($token = null, $respuesta=null) {
 		// Busca el post por el token
 		$post = $this->getPostByToken ( $token );
 		$post->scenario = 'editarSabiasQue';
@@ -1028,7 +1029,7 @@ class AdminController extends Controller {
 			if (! empty ( $post->imagen )) {
 				$post->txt_imagen = Utils::generateToken ( "img" ) . "." . $post->imagen->extension;
 			}
-			
+			$sabiasque->b_verdadero = $respuesta;
 			$post->id_usuario = $usuario->id_usuario;
 			$post->editarSabiasQue ( $sabiasque, $post );
 			
@@ -1039,7 +1040,8 @@ class AdminController extends Controller {
 			return [ 
 					'status' => 'success',
 					't' => $post->txt_descripcion,
-					'tk' => $post->txt_token 
+					'tk' => $post->txt_token,
+					'b'=>$sabiasque->b_verdadero
 			];
 		}
 		
@@ -1078,7 +1080,7 @@ class AdminController extends Controller {
 		if (($post = EntPostsExtend::getPostByToken ( $token )) !== null) {
 			return $post;
 		} else {
-			throw new NotFoundHttpException ( 'The requested page does not exist.' );
+			throw new NotFoundHttpException( 'The requested page does not exist.' );
 		}
 	}
 	public function actionLeerNotificacion($token) {
