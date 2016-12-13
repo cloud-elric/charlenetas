@@ -1289,6 +1289,7 @@ $(document).ready(function() {
 
 	$("body").on("click", "#modal-tutoriales-finalizar", function(e){
 		modal.style.display = "none";
+		owl.trigger('to.owl.carousel', [0,0,true]);
 	});
 
 }); // end - READY
