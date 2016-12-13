@@ -1231,12 +1231,20 @@ $(document).ready(function() {
 		modal.style.display = "none";
 	});
 
+	var owl = $('.owl-carousel-tutoriales');
 
-	$('.owl-carousel-tutoriales').owlCarousel({
+
+	// owl.on('changed.owl.carousel', function(event) {
+	// 	var currentItem = event.item.index;
+	// 	console.log(currentItem);
+	// });
+
+	owl.owlCarousel({
 		center: true,
 		margin: 0,
-		loop: true,
+		loop: false,
 		nav: true,
+		navText: ['<i class="ion ion-chevron-left"></i>','<i class="ion ion-chevron-right"></i>'],
 		items: 1,
 		responsive:{
 			0:{
@@ -1252,24 +1260,39 @@ $(document).ready(function() {
 				mouseDrag: false
 			}
 		}
+	}).on('changed.owl.carousel', function(event) {
+		var currentItem = event.item.index;
+		console.log(currentItem);
+
+		if(currentItem === 11){
+			console.log("Listo");
+			setTimeout(alertFunc, 200);
+		}
+		else{
+			$(".owl-next").attr('id', '');
+			$(".owl-next").removeClass("owl-next-finalizar");
+			$(".owl-next").html('<i class="ion ion-chevron-right"></i>');
+		}
 	});
 
+	// Dot - dehabilitar (prev&next)
+	// $(".owl-dot").on("click", function(e){
+	// 	e.stopPropagation();
+	// });
+
+	// Función
+	function alertFunc() {
+		$(".owl-next").attr('id', 'modal-tutoriales-finalizar');
+		$("#modal-tutoriales-finalizar").addClass("owl-next-finalizar");
+		$("#modal-tutoriales-finalizar").html('<i class="ion ion-android-done"></i>');
+	}
+
+	$("body").on("click", "#modal-tutoriales-finalizar", function(e){
+		modal.style.display = "none";
+	});
 
 }); // end - READY
-// Close Modal de Tutoriales
-window.onclick = function(event) {
-	// Modal - Close
-	if (event.target == modal) {
-		modal.style.display = "none";
-	}
-}
-// Close Modal de Tutoriales
-$(window).bind("click touchstart", function(){
-	// Modal - Close
-	if (event.target == modal) {
-		modal.style.display = "none";
-	}
-});
+
 
 function validarRespuesta(element) {
 

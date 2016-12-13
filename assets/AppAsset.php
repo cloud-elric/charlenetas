@@ -30,8 +30,8 @@ class AppAsset extends AssetBundle {
 			'css/login.css',
 			'plugins/animsition/css/animsition.min.css',
 			'plugins/owl/css/owl.carousel.css',
+			'plugins/ionicons/css/ionicons.min.css',
 			'css/fullcalendar.css'
-			//'css/ionicons.min.css'
 
 	];
 	public $js = [
