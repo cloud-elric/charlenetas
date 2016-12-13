@@ -1233,12 +1233,6 @@ $(document).ready(function() {
 
 	var owl = $('.owl-carousel-tutoriales');
 
-
-	// owl.on('changed.owl.carousel', function(event) {
-	// 	var currentItem = event.item.index;
-	// 	console.log(currentItem);
-	// });
-
 	owl.owlCarousel({
 		center: true,
 		margin: 0,
@@ -1262,10 +1256,8 @@ $(document).ready(function() {
 		}
 	}).on('changed.owl.carousel', function(event) {
 		var currentItem = event.item.index;
-		console.log(currentItem);
 
 		if(currentItem === 11){
-			console.log("Listo");
 			setTimeout(alertFunc, 200);
 		}
 		else{
@@ -1274,11 +1266,6 @@ $(document).ready(function() {
 			$(".owl-next").html('<i class="ion ion-chevron-right"></i>');
 		}
 	});
-
-	// Dot - dehabilitar (prev&next)
-	// $(".owl-dot").on("click", function(e){
-	// 	e.stopPropagation();
-	// });
 
 	// Función
 	function alertFunc() {
