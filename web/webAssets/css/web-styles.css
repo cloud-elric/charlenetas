@@ -2077,6 +2077,7 @@ nav.mobile ul li a.filter-active span {
   display: flex;
   height: 100%;
   padding: 30px 20px;
+  width: 320px;
 }
 
 @media screen and (max-width: 768px) {
@@ -2103,6 +2104,7 @@ nav.mobile ul li a.filter-active span {
 @media screen and (max-width: 768px) {
   .modal-tuto .modal-content .owl-stage-outer .owl-stage .owl-item .item .screen-ayuda-corousel-item-imagen {
     height: 140px;
+    margin-bottom: 20px;
     width: 140px;
   }
 }
@@ -2111,6 +2113,12 @@ nav.mobile ul li a.filter-active span {
   color: #333;
   font-size: 1.3rem;
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-tuto .modal-content .owl-stage-outer .owl-stage .owl-item .item h3 {
+    margin-bottom: 10px;
+  }
 }
 
 .modal-tuto .modal-content .owl-stage-outer .owl-stage .owl-item .item p {
