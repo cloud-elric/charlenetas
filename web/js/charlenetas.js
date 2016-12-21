@@ -1136,11 +1136,16 @@ $(document).on({
 	}
 }, '#iniciar-sesion-activar');
 
-
+// Modal
+var modal = document.getElementById('modal-tutoriales');
+var modalOpen = document.getElementById("modal-tutoriales-open");
+var modalClose = document.getElementById("modal-tutoriales-close");
 
 $(document).ready(function() {
+
 	
 	$('.modal-content .wrap').on('click touchstart', function(e) {
+
 		console.log(e.target.className);
 		if (e.target.className == 'section') {
 			e.preventDefault();
@@ -1212,7 +1217,73 @@ $(document).ready(function() {
 
 	});
 
-});
+	// 
+	// 
+	// 
+
+	/**
+	 * Modal
+	 */
+	// Open Modal
+	$(modalOpen).on("click", function(){
+		modal.style.display = "flex";
+		
+		var owl = $('.owl-carousel-tutoriales');
+
+		owl.owlCarousel({
+			center: true,
+			margin: 0,
+			loop: false,
+			nav: true,
+			navText: ['<i class="ion ion-chevron-left"></i>','<i class="ion ion-chevron-right"></i>'],
+			items: 1,
+			responsive:{
+				0:{
+					touchDrag: true,
+					mouseDrag: true
+				},
+				600:{
+					touchDrag: false,
+					mouseDrag: false
+				},
+				1000:{
+					touchDrag: false,
+					mouseDrag: false
+				}
+			}
+		}).on('changed.owl.carousel', function(event) {
+			var currentItem = event.item.index;
+
+			if(currentItem === 11){
+				setTimeout(alertFunc, 200);
+			}
+			else{
+				$(".owl-next").attr('id', '');
+				$(".owl-next").removeClass("owl-next-finalizar");
+				$(".owl-next").html('<i class="ion ion-chevron-right"></i>');
+			}
+		});
+		
+	});
+	// Close Modal
+	$(modalClose).on("click", function(){
+		modal.style.display = "none";
+	});
+
+	// Función
+	function alertFunc() {
+		$(".owl-next").attr('id', 'modal-tutoriales-finalizar');
+		$("#modal-tutoriales-finalizar").addClass("owl-next-finalizar");
+		$("#modal-tutoriales-finalizar").html('<i class="ion ion-android-done"></i>');
+	}
+
+	$("body").on("click", "#modal-tutoriales-finalizar", function(e){
+		modal.style.display = "none";
+		owl.trigger('to.owl.carousel', [0,0,true]);
+	});
+
+}); // end - READY
+
 
 function validarRespuesta(element) {
 
@@ -1314,6 +1385,28 @@ function cargarFuncionalidadRespuestas(){
 	});
 	
 }
+/**
+ * Copiar 
+ */
+function copiarClipboard(){
+	console.log("dentro de la funcion");
+	var clipboard = new Clipboard('#copy-button');
+
+	clipboard.on('success', function(e) {
+		mensajeCuentaActivada("Enlace copiado");
+		console.info('Action:', e.action);
+	    console.info('Text:', e.text);
+	    console.info('Trigger:', e.trigger);
+
+	    e.clearSelection();
+	    clipboard.destroy();
+	});
+
+//	clipboard.on('error', function(e) {
+//	    console.error('Action:', e.action);
+//	    console.error('Trigger:', e.trigger);
+//	});
+}
 
 function deshabilitarBotonSabias(elemento){
 	
@@ -1326,3 +1419,4 @@ function deshabilitarBotonSabias(elemento){
 
 
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+

@@ -199,7 +199,7 @@ $('body').on(
 			});
 			//console.log(valor);
 			
-			var url = form.attr('action')+"?respuesta="+valor;
+			var url = form.attr('action')+"&respuesta="+valor;
 			
 			var button = document.getElementById('js-editar-submit');
 			var l = Ladda.create(button);

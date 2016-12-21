@@ -29,8 +29,9 @@ class AppAsset extends AssetBundle {
 			'css/animate.css',
 			'css/login.css',
 			'plugins/animsition/css/animsition.min.css',
+			'plugins/owl/css/owl.carousel.css',
+			'plugins/ionicons/css/ionicons.min.css',
 			'css/fullcalendar.css'
-			//'css/ionicons.min.css'
 
 	];
 	public $js = [
@@ -44,9 +45,11 @@ class AppAsset extends AssetBundle {
 			'js/login.js',
 			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
 			'plugins/animsition/js/animsition.min.js',
+			'plugins/owl/js/owl.carousel.min.js',
 			'js/moment.min.js',
 			'js/fullcalendar.js',
-			'js/calendario.js'
+			'js/calendario.js',
+			'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js'
 
 	]
 	;

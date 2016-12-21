@@ -1,0 +1,224 @@
+/*  Modal
+	================================================ */
+.modal-tuto
+	display: none
+	position: fixed
+	z-index: 19
+	left: 0
+	top: 0
+	width: 100%
+	height: 100vh
+	overflow: auto
+	background-color: #0059B2
+	align-items: center
+	justify-content: center
+
+	// Modal Content
+	.modal-content
+		border-radius: 4px
+		position: relative
+		background-color: #fff
+		margin: auto
+		// height: 80vh
+		max-width: 320px
+		overflow-y: auto
+		padding: 0
+		border: none
+		// width: 80%
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
+		-webkit-animation-name: animatetop
+		-webkit-animation-duration: 0.4s
+		animation-name: animatetop
+		animation-duration: 0.4s
+
+		+respond-to(lg)
+			height: auto
+			min-height: 60vh
+			max-height: 90vh
+			width: 80%
+		+respond-to(md)
+			height: auto
+			min-height: 60vh
+			max-height: 90vh
+			width: 80%
+		+respond-to(sm)
+			height: auto
+			min-height: 45vh
+			max-height: 90vh
+			width: 90%
+		+respond-to(xs)
+			height: auto
+			min-height: 45vh
+			max-height: 90vh
+			width: 90%
+
+		.owl-stage-outer
+			// background-color: red
+			height: 100%
+			position: relative
+			width: 100%
+			z-index: 2
+
+			.owl-stage
+				height: 100%
+				position: relative
+				width: 100%
+
+				.owl-item
+					// background-color: red
+					display: flex
+					height: 100%
+					padding: 30px 20px
+
+					+respond-to(xs)
+						padding: 20px
+
+					.item
+						align-items: center
+						display: flex
+						flex-direction: column
+						justify-content: flex-start
+						// padding: 0 20px
+
+						.screen-ayuda-corousel-item-imagen
+							border-radius: 50%
+							height: 200px
+							margin-bottom: 30px
+							overflow: hidden
+							width: 200px
+
+							// +respond-to(sm)
+							// 	height: 200px
+							// 	width: 200px
+							+respond-to(xs)
+								height: 140px
+								width: 140px
+
+						h3
+							color: #333
+							font-size: 1.3rem
+							margin-bottom: 20px
+
+						p
+							color: #333
+							font-size: 1rem
+							letter-spacing: 1px
+
+						.modal-tutoriales-finalizar
+							align-items: center
+							background-color: #0059B2
+							border-radius: 50%
+							bottom: 14px
+							display: flex
+							height: 30px
+							justify-content: center
+							// left: 50%
+							// margin-left: -20px
+							position: absolute
+							right: 30px
+							width: 30px
+							z-index: 13
+
+							i
+								color: white
+								font-size: 1rem
+								margin-left: 2px
+
+		.owl-controls
+			// background-color: yellow
+			position: relative
+			z-index: 2
+
+			.owl-dots
+				align-items: center
+				bottom: 8px
+				display: flex
+				justify-content: center
+				height: 30px
+				position: absolute
+				width: 100%
+				z-index: 4
+
+				.owl-dot
+					background-color: #BBB
+					border-radius: 50%
+					cursor: default!important
+					display: block
+					height: 6px
+					margin-right: 8px
+					width: 6px
+					&:last-child
+						margin-right: 0
+					// &:hover
+					// 	background-color: #999
+					&.active
+						background-color: #333
+
+			.owl-nav
+				.owl-prev
+					display: none!important
+				.owl-next
+					align-items: center
+					background-color: #0059B2
+					border-radius: 50%
+					bottom: 8px
+					display: flex
+					height: 30px
+					justify-content: center
+					// left: 50%
+					// margin-left: -20px
+					position: absolute
+					right: 20px
+					width: 30px
+					z-index: 9
+
+					i
+						color: white
+						font-size: 1rem
+						margin-left: 2px
+
+				.owl-next-finalizar
+					background-color: $color-hoy-pense
+					i
+						font-size: 1.1rem
+
+	// Animation
+	@-webkit-keyframes animatetop 
+		from
+			top:-300px
+			opacity:0
+		to
+			top:0
+			opacity:1
+
+	@keyframes animatetop 
+		from
+			top:-300px
+			opacity:0
+		to
+			top:0
+			opacity:1
+
+
+	// Close Button
+	.modal-close
+		cursor: pointer
+		color: white
+		font-size: 28px
+		font-weight: bold
+		position: absolute
+		right: 30px
+		top: 30px
+		&:hover,
+		&:focus 
+			color: #CCC
+			text-decoration: none
+			cursor: pointer
+
+		+respond-to(xs)
+			background-color: #0059B2
+			border-radius: 50%
+			font-size: 18px
+			right: 10px
+			top: 20px
+			z-index: 8

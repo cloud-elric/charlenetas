@@ -240,10 +240,13 @@ button:focus{
 }
 
 
-/*  tabs  */
+/*  anim account  */
 .modal-login-register .section .anim-account{
 	background-color: transparent;
 }
+
+
+/* tabs */
 .modal-login-register .section .anim-account .anim-account-tab{
 	background-color: transparent;
 	align-items: center;
@@ -516,21 +519,7 @@ body .wrap .section .anim-account .account-login h4 {
 		font-size: .57em;
 	}
 }
-/*@media only screen and (max-device-width: 768px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-	.modal-login-register .section .anim-account{
-		position: relative;
-		max-height: 90%;
-		overflow-x: hidden;
-		overflow-y: auto;
-		max-width: 430px;
-		width: 90%;
-		left: 50% !important;
-		margin-left: -215px;
-		margin-top: -45vh;
-		top: 50%;
-		height: 90vh;
-	}
-}*/
+
 
 @media only screen and (max-width: 520px){
 	.modal-login-register .section .anim-account{
@@ -660,4 +649,156 @@ body .wrap .section .anim-account .account-login h4{
 #toast-container .toast.toast-success .toast-message i,
 #toast-container .toast.toast-warning .toast-message i{
     margin-right: 10px;
+}
+
+/*Tablet*/
+@media only screen and (max-device-width : 1023px){
+	.modal-login-register .section .anim-account{
+		margin-top: -98vh;
+	}
+}
+@media only screen and (max-device-width : 1023px) and (orientation : portrait){
+	.modal-login-register .section .anim-account{
+		margin-top: -98vh;
+	}
+}
+@media only screen and (max-device-width : 1023px) and (orientation : landscape){
+	.modal-login-register .section{ overflow: hidden; }
+	.modal-login-register .section .anim-account{
+		/*margin-top: -100vh;*/
+		margin: 0 auto;
+		max-height: 90vh;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+}
+/**/
+@media only screen and (min-device-width : 800px) and (max-device-width : 1280px){
+	.modal-login-register .section .anim-account{
+		margin-top: -249px;
+	}
+}
+@media only screen and (min-device-width : 800px) and (max-device-width : 1280px) and (orientation : portrait){
+	.modal-login-register .section .anim-account{
+		margin-top: -249px;
+	}
+}
+@media only screen and (min-device-width : 800px) and (max-device-width : 1280px) and (orientation : landscape){
+	.modal-login-register .section .anim-account{
+		margin-top: -249px;
+	}
+}
+
+/*nexxus 10*/
+@media only screen and (min-device-width : 800px) and (max-device-width : 1280px){
+	.modal-login-register .section .anim-account{
+		margin-top: -249px!important;
+	}
+}
+@media only screen and (min-device-width : 800px) and (max-device-width : 1280px) and (orientation : portrait){
+	.modal-login-register .section .anim-account{
+		margin-top: -249px!important;
+	}
+}
+@media only screen and (min-device-width : 800px) and (max-device-width : 1280px) and (orientation : landscape){
+	.modal-login-register .section .anim-account{
+		margin-top: -249px;
+	}
+}
+
+/*tablet*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+	.modal-login-register .section .anim-account{
+		margin: 0 auto;
+	}
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait){
+	.modal-login-register .section .anim-account{
+		margin: 0 auto;
+	}
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape){
+	.modal-login-register .section .anim-account{
+		margin-top: -249px;
+	}
+}
+				
+
+/*Nexus 5*/
+@media only screen and (max-device-width : 640px) and (orientation : landscape){
+	.modal-login-register .section .anim-account{
+		left: auto!important;
+		top: auto!important;
+	}
+}
+
+/*Movil Lg*/
+@media only screen and (min-device-width : 568px) and (max-device-width : 767px){
+	.modal-login-register .section .anim-account{
+		/*margin-top: -98vh;*/
+	}
+}
+@media only screen and (min-device-width : 568px) and (max-device-width : 767px) and (orientation : portrait){
+	.modal-login-register .section .anim-account{
+		/*margin-top: -98vh;*/
+	}
+}
+@media only screen and (min-device-width : 568px) and (max-device-width : 767px) and (orientation : landscape){
+	.modal-login-register .section{ overflow: hidden; }
+	.modal-login-register .section .anim-account{
+		/*margin-top: -100vh;*/
+		margin: 0 auto;
+		max-height: 90vh;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+}
+
+/*Lumia 520*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 533px) and (orientation : landscape){
+	.modal-login-register .section .anim-account{
+		margin-top: 0!important;
+	}
+}
+
+/*Movil Sm*/
+@media only screen and (min-device-width : 351px) and (max-device-width : 567px){
+	.modal-login-register .section{ overflow: hidden; }
+	.modal-login-register .section .anim-account{
+		margin-top: -98vh;
+	}
+}
+@media only screen and (min-device-width : 351px) and (max-device-width : 567px) and (orientation : portrait){
+	.modal-login-register .section{ overflow: hidden; }
+	.modal-login-register .section .anim-account{
+		margin-top: -98vh;
+	}
+}
+@media only screen and (min-device-width : 351px) and (max-device-width : 567px) and (orientation : landscape){
+	.modal-login-register .section{ overflow: hidden; }
+	.modal-login-register .section .anim-account{
+		margin-top: -100vh;
+		max-height: 80vh;
+	}
+}
+
+/*Movel Xs*/
+@media only screen and (max-device-width : 350px){
+	.modal-login-register .section{ overflow: hidden; }
+	.modal-login-register .section .anim-account{
+		margin-top: -98vh;
+	}
+}
+@media only screen and (max-device-width : 350px) and (orientation : portrait){
+	.modal-login-register .section{ overflow: hidden; }
+	.modal-login-register .section .anim-account{
+		margin-top: -98vh;
+	}
+}
+@media only screen and (max-device-width : 350px) and (orientation : landscape){
+	.modal-login-register .section{ overflow: hidden; }
+	.modal-login-register .section .anim-account{
+		margin-top: -100vh;
+		max-height: 80vh;
+	}
 }

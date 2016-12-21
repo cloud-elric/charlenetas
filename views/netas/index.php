@@ -137,6 +137,8 @@ if($postTotales>ConstantesWeb::PINS_A_MOSTRAR){
 						<h1>Revisa tu email.</h1>
 						<p style="color: white;">Se ha enviado a la dirección proporcionada un link para recuperar su password.</p>
 					</div>
+					<!-- Close -->
+					<span class="anim-account-close"><i class="icon-close"></i></span>
 					<!-- Tabs -->
 					<div class="anim-account-tab">
 						<p class="anim-account-tab-item btn-login-register active" data-account="singup">Login</p>
@@ -214,3 +216,195 @@ if (! empty ($isCuentaActivada)) {
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
+
+<!-- .modal -->
+<div id="modal-tutoriales" class="modal-tuto">
+
+	<!-- .modal-content -->
+	<div class="modal-content owl-carousel-tutoriales">
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Bienvenid@ a Charlenetas!</h3>
+
+			<p>
+				Una comunidad virtual libre de censura, creada para compartir reflexiones entre Netanautas. ¿Te enseñamos a navegar? ó ¿Cómo navegar? ó Aprende a navegar! (y aquí opciones que digan “saltar tutorial” y “no volver a mostrar”)
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Conviérte en un Netanauta</h3>
+
+			<p>
+				Inscríbete Gratis y comparte tus opiniones! 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Oculta lo que no quieras ver</h3>
+
+			<p>
+				Da click en las secciones que no quieres ver o actívalas nuevamente para filtrar las Netas que quieras ocultar o leer
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Espejo</h3>
+
+			<p>
+				¿Tienes un problema y quieres un Consejo? – Puedes preguntar aquí 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Alquimia</h3>
+
+			<p>
+				Te recomendamos películas de fuerte contenido que te transformarán 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Hoy pense</h3>
+
+			<p>
+				Lee y comparte opiniones personales sobre temas sociales 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Sabías qué</h3>
+
+			<p>
+				Pon a prueba tus conocimientos, responde y sorpréndete con el resultado 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Solo por hoy</h3>
+
+			<p>
+				Conoce tus derechos y aprende a exigirlos 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Verdadazos</h3>
+
+			<p>
+				Debate con frases que exponen la cruda realidad sobre desigualdades de género 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Contexto</h3>
+
+			<p>
+				Obtén una visión completa con noticias relacionadas 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Media</h3>
+
+			<p>
+				Mira los episodios del Programa Atando Cabos y mucho más 
+			</p>
+
+		</div>
+
+		<div class="item">
+			
+			<div class="screen-ayuda-corousel-item-imagen">
+				<img src="http://placehold.it/300x300" alt="">
+			</div>
+
+			<h3>Workshops</h3>
+
+			<p>
+				Conoce cursos, conferencias y talleres disponibles
+			</p>
+
+			<!-- <span id="modal-tutoriales-finalizar" class="modal-tutoriales-finalizar">
+				<i class="ion ion-android-done"></i>
+			</span> -->
+
+		</div>
+
+
+	</div>
+	<!-- end - .modal-content -->
+
+	<!-- Brn Close -->
+	<span id="modal-tutoriales-close" class="modal-close">
+		<i class="icon-close"></i>
+	</span>
+
+	<!-- <i class="material-icons medium icon-demo">trending_flat</i> -->
+
+</div>
+<!-- end - .modal -->
