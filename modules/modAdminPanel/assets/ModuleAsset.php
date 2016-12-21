@@ -13,6 +13,7 @@ class ModuleAsset extends AssetBundle {
 			'css/ionicons.min.css',
 			'css/asScrollable.min.css',
 			'css/charlenetas.css',
+			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css',
 			'css/temporal.css',
 			'css/fullcalendar.css',
 			'plugins/ladda-bootstrap/ladda-themeless.min.css',
@@ -27,10 +28,12 @@ class ModuleAsset extends AssetBundle {
 			'js/moment.min.js',
 			'js/fullcalendar.js',
 			'js/charlenetas-calendario.js',
+			'//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
 			
 			'plugins/ladda-bootstrap/spin.min.js',
 			'plugins/ladda-bootstrap/ladda.min.js',
-			'plugins/tags-input/jquery.tagsinput.min.js'
+			'plugins/tags-input/jquery.tagsinput.min.js',
+			'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js'
 	];
 	
 	public $depends = [ 

@@ -580,3 +580,55 @@ $('body').on(
 			});
 			return false;
 		});
+
+/**
+ * Muestra mensaje de cuenta activada
+ * 
+ * @param $mensaje
+ */
+function mensajeCuentaActivada($mensaje) {
+	toastr.options = {
+
+		"debug" : false,
+		"newestOnTop" : false,
+		"progressBar" : false,
+		"positionClass" : "toast-top-full-width",
+		"preventDuplicates" : false,
+		"onclick" : null,
+		"showDuration" : "300",
+		"hideDuration" : "1000",
+		"timeOut" : "5000",
+		"extendedTimeOut" : "1000",
+		"showEasing" : "swing",
+		"hideEasing" : "linear",
+		"showMethod" : "fadeIn",
+		"hideMethod" : "fadeOut"
+	}
+
+	// Display an info toast with no title
+	toastr.success('<i class="material-icons">done</i>' + $mensaje)
+}
+
+
+/**
+ * Copiar 
+ */
+function copiarClipboard(){
+	console.log("dentro de la funcion");
+	var clipboard = new Clipboard('#copy-button');
+
+	clipboard.on('success', function(e) {
+		mensajeCuentaActivada("Enlace copiado");
+		console.info('Action:', e.action);
+	    console.info('Text:', e.text);
+	    console.info('Trigger:', e.trigger);
+
+	    e.clearSelection();
+	    clipboard.destroy();
+	});
+
+//	clipboard.on('error', function(e) {
+//	    console.error('Action:', e.action);
+//	    console.error('Trigger:', e.trigger);
+//	});
+}

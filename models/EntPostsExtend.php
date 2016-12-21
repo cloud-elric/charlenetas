@@ -17,7 +17,7 @@ class EntPostsExtend extends EntPosts
      */
 	public static function getPostByPagination($page = 0, $pageSize=ConstantesWeb::PINS_A_MOSTRAR){
 
-		$query = EntPosts::find()->where(['<=', 'fch_publicacion', new Expression('NOW()')])->andWhere(['b_habilitado'=>1]);
+		$query = EntPosts::find()->where(['<=', 'fch_publicacion', new Expression('NOW()')])->andWhere(['b_habilitado'=>1])->andWhere(['!=','id_tipo_post', ConstantesWeb::POST_TYPE_CONTEXTO]);
 
 		// Carga el dataprovider
 		$dataProvider = new ActiveDataProvider([
