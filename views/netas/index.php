@@ -226,7 +226,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-alquimia.png">
 			</div>
 
 			<h3>Bienvenid@ a Charlenetas!</h3>
@@ -240,7 +240,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-espejo.png">
 			</div>
 
 			<h3>Conviérte en un Netanauta</h3>
@@ -254,7 +254,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-sabias-que.png">
 			</div>
 
 			<h3>Oculta lo que no quieras ver</h3>
@@ -268,7 +268,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-alquimia.png">
 			</div>
 
 			<h3>Espejo</h3>
@@ -282,7 +282,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-espejo.png">
 			</div>
 
 			<h3>Alquimia</h3>
@@ -296,7 +296,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-sabias-que.png">
 			</div>
 
 			<h3>Hoy pense</h3>
@@ -310,7 +310,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-alquimia.png">
 			</div>
 
 			<h3>Sabías qué</h3>
@@ -324,7 +324,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-espejo.png">
 			</div>
 
 			<h3>Solo por hoy</h3>
@@ -338,7 +338,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-sabias-que.png">
 			</div>
 
 			<h3>Verdadazos</h3>
@@ -352,7 +352,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-alquimia.png">
 			</div>
 
 			<h3>Contexto</h3>
@@ -366,7 +366,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-espejo.png">
 			</div>
 
 			<h3>Media</h3>
@@ -380,7 +380,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/300x300" alt="">
+				<img src="<?=Url::base()?>/webAssets/images/img-sabias-que.png">
 			</div>
 
 			<h3>Workshops</h3>
