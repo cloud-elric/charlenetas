@@ -1143,7 +1143,9 @@ var modalClose = document.getElementById("modal-tutoriales-close");
 
 $(document).ready(function() {
 
-	$('.modal-content .wrap').on('click', function(e) {
+	
+	$('.modal-content .wrap').on('click touchstart', function(e) {
+
 		console.log(e.target.className);
 		if (e.target.className == 'section') {
 			e.preventDefault();
