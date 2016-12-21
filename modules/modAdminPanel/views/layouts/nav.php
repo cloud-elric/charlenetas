@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 	$dashboard = new CatTiposPosts();
-	$posts = $dashboard->find()->orderBy('txt_nombre ASC')->all();
+	$posts = $dashboard->find()->where(['b_habilitado'=>1])->orderBy('txt_nombre ASC')->all();
 
 ?>
 

@@ -1225,46 +1225,47 @@ $(document).ready(function() {
 	// Open Modal
 	$(modalOpen).on("click", function(){
 		modal.style.display = "flex";
+		
+		var owl = $('.owl-carousel-tutoriales');
+
+		owl.owlCarousel({
+			center: true,
+			margin: 0,
+			loop: false,
+			nav: true,
+			navText: ['<i class="ion ion-chevron-left"></i>','<i class="ion ion-chevron-right"></i>'],
+			items: 1,
+			responsive:{
+				0:{
+					touchDrag: true,
+					mouseDrag: true
+				},
+				600:{
+					touchDrag: false,
+					mouseDrag: false
+				},
+				1000:{
+					touchDrag: false,
+					mouseDrag: false
+				}
+			}
+		}).on('changed.owl.carousel', function(event) {
+			var currentItem = event.item.index;
+
+			if(currentItem === 11){
+				setTimeout(alertFunc, 200);
+			}
+			else{
+				$(".owl-next").attr('id', '');
+				$(".owl-next").removeClass("owl-next-finalizar");
+				$(".owl-next").html('<i class="ion ion-chevron-right"></i>');
+			}
+		});
+		
 	});
 	// Close Modal
 	$(modalClose).on("click", function(){
 		modal.style.display = "none";
-	});
-
-	var owl = $('.owl-carousel-tutoriales');
-
-	owl.owlCarousel({
-		center: true,
-		margin: 0,
-		loop: false,
-		nav: true,
-		navText: ['<i class="ion ion-chevron-left"></i>','<i class="ion ion-chevron-right"></i>'],
-		items: 1,
-		responsive:{
-			0:{
-				touchDrag: true,
-				mouseDrag: true
-			},
-			600:{
-				touchDrag: false,
-				mouseDrag: false
-			},
-			1000:{
-				touchDrag: false,
-				mouseDrag: false
-			}
-		}
-	}).on('changed.owl.carousel', function(event) {
-		var currentItem = event.item.index;
-
-		if(currentItem === 11){
-			setTimeout(alertFunc, 200);
-		}
-		else{
-			$(".owl-next").attr('id', '');
-			$(".owl-next").removeClass("owl-next-finalizar");
-			$(".owl-next").html('<i class="ion ion-chevron-right"></i>');
-		}
 	});
 
 	// Función
