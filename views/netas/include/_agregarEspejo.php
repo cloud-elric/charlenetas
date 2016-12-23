@@ -60,6 +60,9 @@ $(document).ready(function(){
 		if (form.find('.has-error').length) {
 			return false;
 		}
+		var button = document.getElementById('js-preguntar-btn');
+		var l = Ladda.create(button);
+	 	l.start();
 
 		var valor = 0;
 		$("input:checked").each(function(){
@@ -68,9 +71,6 @@ $(document).ready(function(){
 		});
 
 		var url = form.attr('action')+"?anonimo="+valor;
-		var button = document.getElementById('js-preguntar-btn');
-		var l = Ladda.create(button);
-	 	l.start();
 		// submit form
 			$.ajax({
 				url : url,// url para peticion

@@ -999,6 +999,7 @@ function cambiarClassPin(elemento, opacity) {
 function loadEspejoPreguntar() {
 	var url = basePath + 'netas/agregar-espejo';
 	var contenedor = $('#modal-pregunta-espejo .modal-content');
+	
 	$.ajax({
 		url : url,
 		success : function(res) {
