@@ -2,10 +2,10 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-//$classActive = $post->isNewRecord?'':'active';
+$classActive = $cliente->isNewRecord?'':'active';
 ?>
 
-<h4><?php /*echo $post->isNewRecord?'Agregar':'Editar'*/?> <span>Cliente</span></h4>
+<h4><?= $cliente->isNewRecord?'Agregar':'Editar'?> <span>Cliente</span></h4>
 
 <?php
 $form = ActiveForm::begin ( [ 
@@ -14,14 +14,14 @@ $form = ActiveForm::begin ( [
 		],
  		
 		'layout' => 'horizontal',
-		'id' => 'form-cliente',
+		'id' => $cliente->isNewRecord?'form-cliente':'editar-cliente',
 		'fieldConfig' => [ 
 				'template' => "{input}\n{label}\n{error}",
 				'horizontalCssClasses' => [ 
 						'error' => 'mdl-textfield__error' 
 				],
 				'labelOptions' => [ 
-						'class' => 'mdl-textfield__label '//.$classActive 
+						'class' => 'mdl-textfield__label '.$classActive 
 				],
 				'options' => [ 
 						'class' => 'input-field col s12 m6' 
@@ -43,7 +43,7 @@ $form = ActiveForm::begin ( [
 		
 	</div>
 
-	<?= Html::submitButton('crear',['id'=>'js-crear-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name'=>'boton-cliente', 'data-style'=>'zoom-in'])?>
+	<?= Html::submitButton($cliente->isNewRecord?'crear':'editar', ['id'=>$cliente->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name'=>'boton-cliente', 'data-style'=>'zoom-in'])?>
 
 <?php
 

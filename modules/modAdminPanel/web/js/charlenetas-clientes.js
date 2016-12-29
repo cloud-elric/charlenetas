@@ -66,8 +66,8 @@ function deletePosts(){
 	var del = document.getElementsByTagName('input');
 	var token;
 	
-	$('.modal-trigger.js-eliminar-post').trigger('click');
-	$('#Aceptar-post').on('click', function(e){
+	$('.modal-trigger.js-eliminar-cliente').trigger('click');
+	$('#Aceptar-cliente').on('click', function(e){
 		e.preventDefault();
 	
 		$("input:checked").each(function(){
@@ -75,15 +75,15 @@ function deletePosts(){
 			token = $(this).val();
 			console.log("token"+token);
 			//alert(token);
-			$('#card_'+ token).remove();
+			$('#card_cliente_'+ token).remove();
 			$('.lean-overlay').trigger("click");
 			var ajax=$.ajax({
-				url: basePath+'adminPanel/admin/deshabilitar-post?tokenPost='+token,
+				url: basePath+'adminPanel/admin/deshabilitar-cliente?idCliente='+token,
 				type : 'GET'
 			});
 		});
 	});
-	$('#Cancelar-post').on('click', function(e){
+	$('#Cancelar-cliente').on('click', function(e){
 		$('.lean-overlay').trigger("click");
 	});
 }
@@ -119,9 +119,9 @@ function encenderEstrellas(estrellasAEncender) {
  * Abrir modal para editar
  * @param token
  */
-function abrirModalEditarAlquimia(token){
+function abrirModalEditarCliente(token){
 	$('#js-modal-post-editar .modal-content').html(loading);
-	var url = 'editar-alquimia?token='+token;
+	var url = 'editar-cliente?token='+token;
 	$.ajax({
 		url:url,
 		success:function(res){
@@ -131,37 +131,40 @@ function abrirModalEditarAlquimia(token){
 }
 
 function agregarTarjetaNueva(json) {
-	var template = '<div class="col s12 m6 l4" id="card_'+json.tk+'">'
-			+ '<div class="card card-alquimia" data-token="'+json.tk+'" onclick="showPostFull(\''+json.tk+'\')">'
-			+ '<div class="card-contexto-cont">'
-			+ '<h3 class="card-title">'+json.t+'</h3>'
+	var template = '<div class="col s12 m6 l4" id="card_cliente_'+json.id+'">'
+			+ '<div class="card card-user">'	
+			+ '<div class="card-user-cont">'
+			+ '<div class="row">'
+			+ '<div class="col s9">'
+			+ '<p class="card-user-nombre">'+json.nombre+'</p>'
+			+ '<p class="card-user-email">'+json.correo+'</p>'
+  			+ '<p class="card-user-email">'+json.tel+'</p>'
 			+ '</div>'
-			+ '<div class="card-contexto-status">'
-			+ '<p class="card-contexto-status-comen">'
-			+ '	<i class="ion icon icon-comment"></i> <span>0</span>'
-			+ '</p>'
+			+ '</div>'
 			+ '</div>'
 			+ '<div class="card-contexto-options">'
-			+'<div>'
-			+'<input type="checkbox" id="delete-'+json.tk+'" value="'+json.tk+'"/>'
-  			+'<label for="delete-'+json.tk+'"></label>'
-			+'</div>'
-			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAlquimia(\''+json.tk+'\')" href="#js-modal-post-editar">'
-			+'<i class="ion ion-android-more-vertical card-edit"></i>'
-			+'</a>'
-			+ '</div>' +  '</div>';
+			+ '<div>'
+			+ '<input type="checkbox" id="delete-'+json.id+'" value="'+json.id+'"/>'
+			+ '<label class="alquimia-delete-check" for="delete-'+json.id+'"></label>'
+			+ '</div>'
+			+ '<a id="button_'+json.id+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarCliente('+json.id+')" href="#js-modal-post-editar">'
+			+ '<i class="ion ion-android-more-vertical card-edit"></i>'
+			+ '</a>'
+			+ '</div>'
+			+ '</div>'
+			+ '</div>';
 	var contenedor = $('#js-contenedor-tarjetas');
 	
 	contenedor.prepend(template);
 	
-	var element = document.getElementById("button_"+json.tk);
-	console.log(element);
-	element.addEventListener("click", stopEvent, false);
+//	var element = document.getElementById("button_"+json.tk);
+//	console.log(element);
+//	element.addEventListener("click", stopEvent, false);
 }
 
 $('body').on(
 		'beforeSubmit',
-		'#form-alquimia',
+		'#form-cliente',
 		function() {
 			var form = $(this);
 			// return false if form still have some validation errors
@@ -183,8 +186,7 @@ $('body').on(
 				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
 					// Si la respuesta contiene la propiedad status y es success
 					console.log("success");
-					if (response.hasOwnProperty('status')
-							&& response.status == 'success') {
+					if (response.status == 'success') {
 						// Cierra el modal
 						console.log("success");
 						$('#js-modal-post').closeModal();
@@ -193,9 +195,8 @@ $('body').on(
 						$('.modal-trigger').leanModal();
 						l.stop();
 						// Reseteamos el modal
-						document.getElementById("form-alquimia").reset();
+						document.getElementById("form-cliente").reset();
 						
-						encenderEstrellas(0);
 					} else {
 						// Muestra los errores
 						$('#form-alquimia').yiiActiveForm('updateMessages',
@@ -213,7 +214,7 @@ $('body').on(
 
 $('body').on(
 		'beforeSubmit',
-		'#editar-alquimia',
+		'#editar-cliente',
 		function() {
 			var form = $(this);
 			// return false if form still have some validation errors
@@ -235,16 +236,18 @@ $('body').on(
 				processData : false,
 				success : function(response) { // Cuando la peticion sea exitosamente se ejecutara la funcion
 					// Si la respuesta contiene la propiedad status y es success
-					if (response.hasOwnProperty('status')
-							&& response.status == 'success') {
+					if (response.status == 'success') {
 						// Cierra el modal
 						$('#js-modal-post-editar').closeModal();
 						
 						$('#js-modal-post-editar .modal-content').html(loading);
-						$('#card_'+response.tk+' .card-alquimia h3').text(response.t);
+						$('#card_cliente_'+response.id+' .card-user-nombre').text(response.nombre);
+						$('#card_cliente_'+response.id+' .card-user-email').text(response.correo);
+						$('#card_cliente_'+response.id+' .card-user-phone').text(response.tel);
+						
 					} else {
 						// Muestra los errores
-						$('#editar-alquimia').yiiActiveForm('updateMessages',
+						$('#editar-cliente').yiiActiveForm('updateMessages',
 								response, true);
 					}
 					l.stop();

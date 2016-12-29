@@ -1293,8 +1293,11 @@ class AdminController extends Controller {
 	}
 	
 	public function actionClientes(){
+		$clientes = EntClientes::find()->where(['b_habilitado'=>1])->all();
 		
-		return $this->render('clientes');
+		return $this->render('clientes',[
+				'clientes' =>$clientes
+		]);
 	}
 	
 	/**
@@ -1306,10 +1309,59 @@ class AdminController extends Controller {
 	
 		// Si la informacion es enviada se carga a su respectivo modelo
 		if ($cliente->load ( Yii::$app->request->post ())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
 			$cliente->save();
+			
+			return [
+				'status' => 'success',
+				'id' => $cliente->id_cliente,
+				'nombre' => $cliente->txt_nombre,
+				'correo' => $cliente->txt_correo,
+				'tel' => $cliente->num_telefono
+			];
 		}
 	
 		return $this->renderAjax ( 'crearCliente', [
+				'cliente' => $cliente
+		] );
+	}
+	
+	public function actionDeshabilitarCliente($idCliente = null) {
+		$clienteDeshabilitar = EntClientes::find()->where(['id_cliente'=>$idCliente])->andWhere(['b_habilitado'=>1])->one();
+		$clienteDeshabilitar->b_habilitado = 0;
+	
+		if ($clienteDeshabilitar->save ())
+			echo "cliente deshabilitado";
+		else
+			echo "error al deshabilitar cliente";
+	}
+	
+	/**
+	 * Editar cliente
+	 *
+	 * @param string $token
+	 */
+	public function actionEditarCliente($token = null) {
+		// Busca el post por el token
+		$this->layout = false;
+		$cliente = EntClientes::find()->where(['id_cliente'=>$token])->andWhere(['b_habilitado'=>1])->one();
+		//$cliente->scenario = 'editarCliente';
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($cliente->load ( Yii::$app->request->post ())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			$cliente->save();
+				
+			return [
+					'status' => 'success',
+					'id' => $cliente->id_cliente,
+					'nombre' => $cliente->txt_nombre,
+					'correo' => $cliente->txt_correo,
+					'tel' => $cliente->num_telefono
+			];
+		}
+	
+		return $this->renderAjax ( '_formCliente', [
 				'cliente' => $cliente
 		] );
 	}

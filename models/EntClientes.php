@@ -12,6 +12,7 @@ use Yii;
  * @property string $txt_apellido
  * @property string $txt_correo
  * @property string $num_telefono
+ * @property string $b_habilitado
  */
 class EntClientes extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class EntClientes extends \yii\db\ActiveRecord
     {
         return [
             [['txt_nombre', 'txt_correo', 'num_telefono'], 'required'],
-            [['num_telefono'], 'integer'],
+            [['num_telefono', 'b_habilitado'], 'integer'],
             [['txt_nombre', 'txt_apellido', 'txt_correo'], 'string', 'max' => 50],
         ];
     }
@@ -42,10 +43,11 @@ class EntClientes extends \yii\db\ActiveRecord
     {
         return [
             'id_cliente' => 'Id Cliente',
-            'txt_nombre' => 'Txt Nombre',
-            'txt_apellido' => 'Txt Apellido',
-            'txt_correo' => 'Txt Correo',
-            'num_telefono' => 'Num Telefono',
+            'txt_nombre' => 'Nombre',
+            'txt_apellido' => 'Apellido',
+            'txt_correo' => 'Correo',
+            'num_telefono' => 'Telefono',
+            'b_habilitado' => 'Habilitado',
         ];
     }
 }
