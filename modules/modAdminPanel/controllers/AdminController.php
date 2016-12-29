@@ -127,7 +127,7 @@ class AdminController extends Controller {
 	 */
 	public function actionDashboard() {
 		$dashboard = new CatTiposPosts ();
-		$posts = $dashboard->find ()->orderBy ( 'txt_nombre ASC' )->all ();
+		$posts = $dashboard->find ()->where(['b_habilitado'=>1])->orderBy ( 'txt_nombre ASC' )->all ();
 		
 		return $this->render ( 'dashboard', [ 
 				"dashboard" => $posts 

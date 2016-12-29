@@ -1227,6 +1227,8 @@ $(document).ready(function() {
 	 */
 	// Open Modal
 	$(modalOpen).on("click", function(){
+		
+		return false;
 		modal.style.display = "flex";
 		
 		var owl = $('.owl-carousel-tutoriales');
