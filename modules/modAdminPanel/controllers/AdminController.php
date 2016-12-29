@@ -28,6 +28,7 @@ use app\models\RelUsuarios;
 use app\models\ModUsuariosEntUsuarios;
 use app\models\EntUsuariosRespuestasSabiasQue;
 use yii\web\NotFoundHttpException;
+use app\models\EntClientes;
 
 /**
  * Default controller for the `adminPanel` module
@@ -1288,6 +1289,28 @@ class AdminController extends Controller {
 		// Pintar vista
 		return $this->renderAjax ( 'itemsUsuarios', [
 				'usuarios' => $listaUsuarios
+		] );
+	}
+	
+	public function actionClientes(){
+		
+		return $this->render('clientes');
+	}
+	
+	/**
+	 * Guarda cliente
+	 */
+	public function actionCrearCliente() {
+		// Declaracion de modelos
+		$cliente = new EntClientes();
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($cliente->load ( Yii::$app->request->post ())) {
+			$cliente->save();
+		}
+	
+		return $this->renderAjax ( 'crearCliente', [
+				'cliente' => $cliente
 		] );
 	}
 }
