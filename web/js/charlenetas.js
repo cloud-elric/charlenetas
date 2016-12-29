@@ -560,7 +560,7 @@ function revisarFeedbacks(token, feed){
 	var no;
 	for(i = 0; i < feedbacks.length; i++){
 		
-		if($(feedbacks[i]).hasClass('did-usr-interact')){
+		if($(feedbacks[i]).hasClass('did-usr-interact') && $(feedbacks[i]).attr('data-token') == token){
 			//console.log("si");
 			removeFeedback($(feedbacks[i]).attr('data-token'), $(feedbacks[i]).attr('data-tfb'));
 		}else if($(feedbacks[i]).attr('data-token') == token && $(feedbacks[i]).attr('data-tfb') == feed){
