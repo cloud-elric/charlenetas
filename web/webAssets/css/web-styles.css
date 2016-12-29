@@ -2261,3 +2261,425 @@ nav.mobile ul li a.filter-active span {
     z-index: 8;
   }
 }
+
+/*  Modal
+	@mixin =============================================== */
+.crear-cita {
+  padding-top: 30px;
+}
+
+.crear-cita h4 {
+  font-family: "Raleway", sans-serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.fc-toolbar .fc-left h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/*  Calendario
+	@mixin =============================================== */
+.fc,
+.fc.fc-unthemed {
+  padding: 0 8px;
+  position: relative;
+}
+
+.fc .fc-today,
+.fc.fc-unthemed .fc-today {
+  background-color: rgba(126, 162, 199, 0.2);
+  border-color: rgba(126, 162, 199, 0.2);
+}
+
+.fc .fc-toolbar,
+.fc.fc-unthemed .fc-toolbar {
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-toolbar .fc-left,
+  .fc.fc-unthemed .fc-toolbar .fc-left {
+    float: none;
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
+
+.fc .fc-toolbar .fc-left > h2,
+.fc.fc-unthemed .fc-toolbar .fc-left > h2 {
+  font-size: 1.4em;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-toolbar .fc-left > h2,
+  .fc.fc-unthemed .fc-toolbar .fc-left > h2 {
+    float: none;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-toolbar .fc-right,
+  .fc.fc-unthemed .fc-toolbar .fc-right {
+    align-items: center;
+    float: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.fc .fc-toolbar .fc-right button,
+.fc .fc-toolbar .fc-right button.fc-today-button,
+.fc .fc-toolbar .fc-right button.fc-state-default,
+.fc .fc-toolbar .fc-right button.fc-state-hover,
+.fc .fc-toolbar .fc-right button.fc-state-disabled,
+.fc.fc-unthemed .fc-toolbar .fc-right button,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-today-button,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-default,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-hover,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-disabled {
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #345678;
+  color: #345678;
+  font-size: 1.05em;
+  font-weight: 500;
+}
+
+.fc .fc-toolbar .fc-right button:focus,
+.fc .fc-toolbar .fc-right button.fc-today-button:focus,
+.fc .fc-toolbar .fc-right button.fc-state-default:focus,
+.fc .fc-toolbar .fc-right button.fc-state-hover:focus,
+.fc .fc-toolbar .fc-right button.fc-state-disabled:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-today-button:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-default:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-hover:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right button.fc-state-disabled:focus {
+  background-color: #7ea2c7;
+  color: white;
+}
+
+.fc .fc-toolbar .fc-right .fc-button-group button,
+.fc.fc-unthemed .fc-toolbar .fc-right .fc-button-group button {
+  background-color: #345678;
+  background-image: none;
+  color: white;
+}
+
+.fc .fc-toolbar .fc-right .fc-button-group button:active,
+.fc.fc-unthemed .fc-toolbar .fc-right .fc-button-group button:active {
+  background-color: #e9eff5;
+  background-image: none;
+}
+
+.fc .fc-toolbar .fc-right .fc-button-group button:focus,
+.fc.fc-unthemed .fc-toolbar .fc-right .fc-button-group button:focus {
+  background-color: #7ea2c7;
+  background-image: none;
+}
+
+.fc .fc-view-container,
+.fc.fc-unthemed .fc-view-container {
+  background-color: white;
+}
+
+.fc .fc-view-container .fc-head .fc-head-container.fc-widget-header,
+.fc .fc-view-container .fc-head .fc-row.fc-widget-header,
+.fc .fc-view-container .fc-head thead,
+.fc.fc-unthemed .fc-view-container .fc-head .fc-head-container.fc-widget-header,
+.fc.fc-unthemed .fc-view-container .fc-head .fc-row.fc-widget-header,
+.fc.fc-unthemed .fc-view-container .fc-head thead {
+  border-color: #345678;
+}
+
+.fc .fc-view-container .fc-head .fc-day-header,
+.fc.fc-unthemed .fc-view-container .fc-head .fc-day-header {
+  background-color: #345678;
+  border-color: #345678;
+  color: white;
+  padding: 9px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-view-container .fc-body .fc-scroller,
+  .fc.fc-unthemed .fc-view-container .fc-body .fc-scroller {
+    overflow: auto !important;
+    height: auto !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .fc .fc-view-container .fc-body .fc-row,
+  .fc.fc-unthemed .fc-view-container .fc-body .fc-row {
+    min-height: 7em;
+  }
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton table thead,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton table thead {
+  background-color: #f8f8f8;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-day-top,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-day-top {
+  padding: 6px 0;
+  text-align: center;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-day-top .fc-day-number,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-day-top .fc-day-number {
+  float: none;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container {
+  padding: 4px 2px;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event {
+  border-radius: 0;
+  padding: 4px 2px;
+  position: relative;
+  text-align: center;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event .fc-content {
+  margin-top: 20px;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event .closeon,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event .closeon {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event table tbody td,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-event-container .fc-day-grid-event table tbody td {
+  border-color: #EEE;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-more-cell a.fc-more,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-more-cell a.fc-more {
+  color: #345678;
+  display: block;
+  font-weight: 800;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.fc .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-more-cell a.fc-more:hover,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-row .fc-content-skeleton .fc-more-cell a.fc-more:hover {
+  color: #7ea2c7;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event {
+  border-radius: none;
+  padding: 3px 6px;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content {
+  margin-top: 6px;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content .fc-time span,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content .fc-time span {
+  font-family: "Lato", sans-serif;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content .fc-title,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .fc-content .fc-title {
+  font-family: "Lato", sans-serif;
+}
+
+.fc .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .closeon,
+.fc.fc-unthemed .fc-view-container .fc-body .fc-time-grid .fc-time-grid-event .closeon {
+  position: absolute;
+  right: 6px;
+  top: 4px;
+}
+
+.fc .fc-popover .fc-header,
+.fc.fc-unthemed .fc-popover .fc-header {
+  padding: 6px;
+}
+
+.fc .fc-popover .fc-body .fc-event-container,
+.fc.fc-unthemed .fc-popover .fc-body .fc-event-container {
+  padding: 4px 2px;
+}
+
+.fc .fc-popover .fc-body .fc-event-container .fc-day-grid-event,
+.fc.fc-unthemed .fc-popover .fc-body .fc-event-container .fc-day-grid-event {
+  border-radius: 0;
+  margin-bottom: 2px;
+}
+
+.fc .fc-popover .fc-body .fc-event-container .fc-day-grid-event .fc-content,
+.fc.fc-unthemed .fc-popover .fc-body .fc-event-container .fc-day-grid-event .fc-content {
+  margin-top: 20px;
+}
+
+.fc .fc-popover .fc-body .fc-event-container .fc-day-grid-event .closeon,
+.fc.fc-unthemed .fc-popover .fc-body .fc-event-container .fc-day-grid-event .closeon {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.fc.fc-unthemed thead,
+.fc.fc-unthemed.fc-unthemed thead {
+  border-color: #345678;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+/*  Input (Global)
+	@mixin =============================================== */
+input:not([type]),
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=url],
+input[type=time],
+input[type=date],
+input[type=datetime],
+input[type=datetime-local],
+input[type=tel],
+input[type=number],
+input[type=search],
+textarea.materialize-textarea {
+  border-bottom: 1px solid #9e9e9e;
+}
+
+.input-field input[type=email]:focus + label,
+.input-field input[type=tel]:focus + label,
+.input-field input[type=text]:focus + label,
+.input-field textarea:focus + label {
+  color: #345678;
+}
+
+.input-field input[type=email]:focus,
+.input-field input[type=tel]:focus,
+.input-field input[type=text]:focus,
+.input-field textarea:focus {
+  border-bottom: 1px solid #345678;
+  box-shadow: 0 1px 0 0 #345678;
+}
+
+.input-field input[type=email].valid,
+.input-field input[type=tel].valid,
+.input-field input[type=text].valid,
+.input-field textarea.valid {
+  border-bottom: 1px solid #345678;
+  box-shadow: 0 1px 0 0 #345678;
+  color: #345678;
+}
+
+.input-field input[type=email].invalid,
+.input-field input[type=tel].invalid,
+.input-field input[type=text].invalid,
+.input-field textarea.invalid {
+  border-bottom: 1px solid #D91E18;
+  box-shadow: 0 1px 0 0 #D91E18;
+  color: #D91E18;
+}
+
+.input-field .prefix.active,
+.input-field label.active {
+  color: #345678;
+}
+
+.input-field textarea:focus + label.active {
+  color: #345678;
+}
+
+.input-field textarea:focus {
+  border-bottom: 1px solid #345678 !important;
+  box-shadow: 0 1px 0 0 #345678 !important;
+}
+
+.input-field .f_error {
+  color: #D91E18;
+  font-weight: 600;
+  margin-left: 46px;
+}
+
+input:not([type]).invalid + label:after,
+input:not([type]):focus.invalid + label:after,
+input[type=text].invalid + label:after,
+input[type=text]:focus.invalid + label:after,
+input[type=password].invalid + label:after,
+input[type=password]:focus.invalid + label:after,
+input[type=email].invalid + label:after,
+input[type=email]:focus.invalid + label:after,
+input[type=url].invalid + label:after,
+input[type=url]:focus.invalid + label:after,
+input[type=time].invalid + label:after,
+input[type=time]:focus.invalid + label:after,
+input[type=date].invalid + label:after,
+input[type=date]:focus.invalid + label:after,
+input[type=datetime].invalid + label:after,
+input[type=datetime]:focus.invalid + label:after,
+input[type=datetime-local].invalid + label:after,
+input[type=datetime-local]:focus.invalid + label:after,
+input[type=tel].invalid + label:after,
+input[type=tel]:focus.invalid + label:after,
+input[type=number].invalid + label:after,
+input[type=number]:focus.invalid + label:after,
+input[type=search].invalid + label:after,
+input[type=search]:focus.invalid + label:after,
+textarea.materialize-textarea.invalid + label:after,
+textarea.materialize-textarea:focus.invalid + label:after {
+  font-weight: 400;
+}
+
+/*  Datepicker
+	@mixin =============================================== */
+.picker__date-display {
+  background-color: #345678;
+}
+
+.picker__weekday-display {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.picker__close,
+.picker__today {
+  color: #345678;
+}
+
+button.picker__today:focus,
+button.picker__clear:focus,
+button.picker__close:focus {
+  background-color: #e9eff5;
+}
+
+.picker__nav--prev:hover,
+.picker__nav--next:hover {
+  background-color: #e9eff5;
+}
+
+.picker__day.picker__day--today {
+  color: #345678;
+}
+
+.picker__day--selected,
+.picker__day--selected:hover,
+.picker--focused .picker__day--selected {
+  background-color: #345678;
+}

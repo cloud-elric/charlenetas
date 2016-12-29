@@ -22,20 +22,24 @@
 	</style>
 </head>
 
-<h4><span>Crear cita</span></h4>
-
-<div id='calendar'></div>
-<br/>
-
 <?php include 'elementos/calendario.php'?>
 
 <?= $this->render ('//layouts/header') ?>
 
-<?php //if($creditos->numero_creditos > 0){ ?>
-	<h4><span>Crear cita</span></h4>
+<!-- .crear-cita -->
+<div class="crear-cita">
 
+	<h4><span>Crear cita</span></h4>
 	<div id='calendar'></div>
-	<br/>
+
+</div>
+<!-- end - .crear-cita -->
+
+
+<?php //if($creditos->numero_creditos > 0){ ?>
+
+	<!-- <div id='calendar'></div>
+	<br/> -->
 	
 	<a class="modal-trigger waves-effect waves-light btn" href="#modal1" style="display: none">Modal</a>
 	<!-- Modal Structure -->

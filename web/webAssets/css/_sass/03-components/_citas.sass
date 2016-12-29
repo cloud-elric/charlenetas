@@ -1,0 +1,332 @@
+/*  Modal
+	================================================ */
+.crear-cita
+	// background-color: red
+	padding-top: 30px
+
+	h4
+		font-family: $header-main
+		font-size: 2.8rem
+		font-weight: 900
+		margin-bottom: 48px
+		text-align: center
+
+// Reset style Calendar
+.fc-toolbar
+	.fc-left
+		h2
+			font-family: $header-main
+			font-size: 2rem
+			font-weight: 700
+
+
+/*  Calendario
+	================================================ */
+.fc,
+.fc.fc-unthemed
+	// background-color: red
+	padding: 0 8px
+	position: relative
+	.fc-today
+		background-color: rgba($header-menu-hover,.2)
+		border-color: rgba($header-menu-hover,.2)
+	// Header
+	.fc-toolbar
+		margin-bottom: 30px
+		// title
+		.fc-left
+			// background-color: yellow
+			+respond-to(xs)
+				// background-color: red
+				float: none
+				display: block
+				// min-height: 40px
+				margin-bottom: 20px
+				width: 100%
+			> h2
+				font-size: 1.4em
+				font-weight: 500
+				margin-top: 10px
+				+respond-to(xs)
+					float: none
+					text-align: center
+		// Btn Today
+		.fc-right
+			// background-color: pink
+			+respond-to(xs)
+				align-items: center
+				// background-color: puple
+				float: none
+				display: flex
+				justify-content: center
+				// min-height: 40px
+				width: 100%
+			button,
+			button.fc-today-button,
+			button.fc-state-default,
+			button.fc-state-hover,
+			button.fc-state-disabled
+				background-color: transparent
+				background-image: none
+				border: 1px solid $header-menu
+				color: $header-menu
+				font-size: 1.05em
+				font-weight: 500
+				&:focus
+					background-color: $header-menu-hover
+					color: $white
+			// Btns (left-right)
+			.fc-button-group
+				button
+					background-color: $header-menu
+					background-image: none
+					color: $white
+					&:active
+						background-color: $header-menu-off
+						background-image: none
+					&:focus
+						background-color: $header-menu-hover
+						background-image: none
+	// Container
+	.fc-view-container
+		background-color: $white
+		// Header
+		.fc-head
+			.fc-head-container.fc-widget-header,
+			.fc-row.fc-widget-header,
+			thead
+				border-color: $header-menu
+			.fc-day-header
+				background-color: $header-menu
+				border-color: $header-menu
+				color: $white
+				padding: 9px 0
+		// Body
+		.fc-body
+			.fc-scroller
+				+respond-to(xs)
+					overflow: auto!important
+					height: auto!important
+			.fc-row
+				+respond-to(xs)
+					min-height: 7em
+				.fc-content-skeleton
+					table
+						thead
+							background-color: #f8f8f8
+					// top
+					.fc-day-top
+						padding: 6px 0
+						text-align: center
+						.fc-day-number
+							float: none
+					// evento
+					.fc-event-container
+						// background-color: yellow
+						padding: 4px 2px
+						// evento
+						.fc-day-grid-event
+							border-radius: 0
+							padding: 4px 2px
+							position: relative
+							text-align: center
+							.fc-content
+								margin-top: 20px
+							.closeon
+								position: absolute
+								right: 2px
+								top: 2px
+							// table
+							table
+								// body
+								tbody
+									td
+										border-color: #EEE
+					// more
+					.fc-more-cell
+						// background-color: red
+						a.fc-more
+							color: $header-menu
+							display: block
+							font-weight: 800
+							padding: 10px 0
+							text-align: center
+							width: 100%
+							&:hover
+								color: $header-menu-hover
+			// grid
+			.fc-time-grid
+				.fc-time-grid-event
+					border-radius: none
+					padding: 3px 6px
+					.fc-content
+						margin-top: 6px
+						.fc-time
+							span
+								font-family: $body-main
+						.fc-title
+							font-family: $body-main
+					.closeon
+						position: absolute
+						right: 6px
+						top: 4px
+	// Pop
+	.fc-popover
+		box-shadow(3)
+		// header
+		.fc-header
+			padding: 6px
+		// body
+		.fc-body
+			.fc-event-container
+				padding: 4px 2px
+				.fc-day-grid-event
+					border-radius: 0
+					margin-bottom: 2px
+					.fc-content
+						margin-top: 20px
+					.closeon
+						position: absolute
+						right: 2px
+						top: 2px
+	// Clase extra
+	&.fc-unthemed
+		thead
+			border-color: $header-menu
+			border-bottom: 1px solid #f8f8f8
+
+
+
+/*  Input (Global)
+	================================================ */
+input:not([type]), 
+input[type=text], 
+input[type=password], 
+input[type=email], 
+input[type=url], 
+input[type=time], 
+input[type=date], 
+input[type=datetime], 
+input[type=datetime-local], 
+input[type=tel], 
+input[type=number], 
+input[type=search], 
+textarea.materialize-textarea
+	border-bottom: 1px solid #9e9e9e
+
+
+.input-field
+	input[type=email]:focus + label,
+	input[type=tel]:focus + label,
+	input[type=text]:focus + label,
+	textarea:focus + label
+		color: $header-menu
+		// @include respond-to(xs)
+		// 	font-size: .8em
+
+// label underline focus color
+.input-field
+	input[type=email]:focus,
+	input[type=tel]:focus,
+	input[type=text]:focus,
+	textarea:focus
+		border-bottom: 1px solid $header-menu
+		box-shadow: 0 1px 0 0 $header-menu
+
+// valid color
+.input-field
+	input[type=email].valid,
+	input[type=tel].valid,
+	input[type=text].valid,
+	textarea.valid
+		border-bottom: 1px solid $header-menu
+		box-shadow: 0 1px 0 0 $header-menu
+		color: $header-menu
+
+// invalid color
+.input-field
+	input[type=email].invalid,
+	input[type=tel].invalid,
+	input[type=text].invalid,
+	textarea.invalid 
+		border-bottom: 1px solid $error
+		box-shadow: 0 1px 0 0 $error
+		color: $error
+
+// icon prefix focus color
+.input-field
+	.prefix.active,
+	label.active
+		color: $header-menu
+	textarea:focus + label.active
+		color: $header-menu
+	textarea:focus
+		border-bottom: 1px solid $header-menu !important
+		box-shadow: 0 1px 0 0 $header-menu !important
+	// Error
+	.f_error
+		// background-color: green
+		color: $error
+		font-weight: 600
+		margin-left: 46px
+
+// AFTER
+input:not([type]).invalid + label:after, 
+input:not([type]):focus.invalid + label:after, 
+input[type=text].invalid + label:after, 
+input[type=text]:focus.invalid + label:after, 
+input[type=password].invalid + label:after, 
+input[type=password]:focus.invalid + label:after, 
+input[type=email].invalid + label:after, 
+input[type=email]:focus.invalid + label:after, 
+input[type=url].invalid + label:after, 
+input[type=url]:focus.invalid + label:after, 
+input[type=time].invalid + label:after, 
+input[type=time]:focus.invalid + label:after, 
+input[type=date].invalid + label:after, 
+input[type=date]:focus.invalid + label:after, 
+input[type=datetime].invalid + label:after, 
+input[type=datetime]:focus.invalid + label:after, 
+input[type=datetime-local].invalid + label:after, 
+input[type=datetime-local]:focus.invalid + label:after, 
+input[type=tel].invalid + label:after, 
+input[type=tel]:focus.invalid + label:after, 
+input[type=number].invalid + label:after, 
+input[type=number]:focus.invalid + label:after, 
+input[type=search].invalid + label:after, 
+input[type=search]:focus.invalid + label:after, 
+textarea.materialize-textarea.invalid + label:after, 
+textarea.materialize-textarea:focus.invalid + label:after
+	font-weight: 400
+
+
+/*  Datepicker
+	================================================ */
+.picker__date-display
+	background-color: $header-menu
+.picker__weekday-display
+	background-color: rgba($black,.4)
+
+.picker__close,
+.picker__today
+	color: $header-menu
+
+button.picker__today,
+button.picker__clear,
+button.picker__close
+	&:focus
+		background-color: $header-menu-off
+
+.picker__nav--prev,
+.picker__nav--next
+	&:hover
+		background-color: $header-menu-off
+
+
+.picker__day.picker__day--today
+	color: $header-menu
+
+.picker__day--selected,
+.picker__day--selected:hover,
+.picker--focused .picker__day--selected
+	background-color: $header-menu
