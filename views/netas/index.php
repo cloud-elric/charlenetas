@@ -226,13 +226,16 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/200x200">
+				<img src="<?=Url::base()?>/webAssets/images/logo-charlenetas.png" alt="Charlenetas.com" />
 			</div>
 
 			<h3>Bienvenid@ a Charlenetas!</h3>
 
 			<p>
-				Una comunidad virtual libre de censura, creada para compartir reflexiones entre Netanautas. ¿Te enseñamos a navegar? ó ¿Cómo navegar? ó Aprende a navegar! (y aquí opciones que digan “saltar tutorial” y “no volver a mostrar”)
+				Una comunidad virtual libre de censura, creada para compartir reflexiones entre Netanautas.
+			</p>
+			<p>
+				Acontinuación ve los tutoriales.
 			</p>
 
 		</div>
@@ -240,7 +243,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/200x200">
+				<img src="<?=Url::base()?>/webAssets/images/img-charlenauta.png">
 			</div>
 
 			<h3>Conviérte en un Netanauta</h3>
@@ -296,7 +299,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/200x200">
+				<img src="<?=Url::base()?>/webAssets/images/img-hoypense.png">
 			</div>
 
 			<h3>Hoy pense</h3>
@@ -324,7 +327,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/200x200">
+				<img src="<?=Url::base()?>/webAssets/images/img-soloporhoy.png">
 			</div>
 
 			<h3>Solo por hoy</h3>
@@ -338,7 +341,7 @@ if (! empty ($isCuentaActivada)) {
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/200x200">
+				<img src="<?=Url::base()?>/webAssets/images/img-verdadazos.png">
 			</div>
 
 			<h3>Verdadazos</h3>
@@ -349,7 +352,7 @@ if (! empty ($isCuentaActivada)) {
 
 		</div>
 
-		<div class="item">
+		<!-- <div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
 				<img src="http://placehold.it/200x200">
@@ -361,12 +364,12 @@ if (! empty ($isCuentaActivada)) {
 				Obtén una visión completa con noticias relacionadas 
 			</p>
 
-		</div>
+		</div> -->
 
 		<div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
-				<img src="http://placehold.it/200x200">
+				<img src="<?=Url::base()?>/webAssets/images/img-media.png">
 			</div>
 
 			<h3>Media</h3>
@@ -377,7 +380,7 @@ if (! empty ($isCuentaActivada)) {
 
 		</div>
 
-		<div class="item">
+		<!-- <div class="item">
 			
 			<div class="screen-ayuda-corousel-item-imagen">
 				<img src="http://placehold.it/200x200">
@@ -389,12 +392,8 @@ if (! empty ($isCuentaActivada)) {
 				Conoce cursos, conferencias y talleres disponibles
 			</p>
 
-			<!-- <span id="modal-tutoriales-finalizar" class="modal-tutoriales-finalizar">
-				<i class="ion ion-android-done"></i>
-			</span> -->
-
 		</div>
-
+ -->
 
 	</div>
 	<!-- end - .modal-content -->

@@ -2003,7 +2003,7 @@ nav.mobile ul li a.filter-active span {
   width: 100%;
   height: 100vh;
   overflow: auto;
-  background-color: #0059B2;
+  background-color: #658BEA;
   align-items: center;
   justify-content: center;
 }
@@ -2076,7 +2076,7 @@ nav.mobile ul li a.filter-active span {
 .modal-tuto .modal-content .owl-stage-outer .owl-stage .owl-item {
   display: flex;
   height: 100%;
-  padding: 30px 20px;
+  padding: 20px 20px 50px;
   width: 320px;
 }
 
@@ -2125,11 +2125,12 @@ nav.mobile ul li a.filter-active span {
   color: #333;
   font-size: 1rem;
   letter-spacing: 1px;
+  margin-bottom: 8px;
 }
 
 .modal-tuto .modal-content .owl-stage-outer .owl-stage .owl-item .item .modal-tutoriales-finalizar {
   align-items: center;
-  background-color: #0059B2;
+  background-color: #658BEA;
   border-radius: 50%;
   bottom: 14px;
   display: flex;
@@ -2154,7 +2155,7 @@ nav.mobile ul li a.filter-active span {
 
 .modal-tuto .modal-content .owl-controls .owl-dots {
   align-items: center;
-  bottom: 8px;
+  bottom: 20px;
   display: flex;
   justify-content: center;
   height: 30px;
@@ -2187,9 +2188,9 @@ nav.mobile ul li a.filter-active span {
 
 .modal-tuto .modal-content .owl-controls .owl-nav .owl-next {
   align-items: center;
-  background-color: #0059B2;
+  background-color: #658BEA;
   border-radius: 50%;
-  bottom: 8px;
+  bottom: 20px;
   display: flex;
   height: 30px;
   justify-content: center;
@@ -2253,7 +2254,7 @@ nav.mobile ul li a.filter-active span {
 
 @media screen and (max-width: 768px) {
   .modal-tuto .modal-close {
-    background-color: #0059B2;
+    background-color: #658BEA;
     border-radius: 50%;
     font-size: 18px;
     right: 10px;
@@ -2548,106 +2549,6 @@ nav.mobile ul li a.filter-active span {
   border-bottom: 1px solid #f8f8f8;
 }
 
-/*  Input (Global)
-	@mixin =============================================== */
-input:not([type]),
-input[type=text],
-input[type=password],
-input[type=email],
-input[type=url],
-input[type=time],
-input[type=date],
-input[type=datetime],
-input[type=datetime-local],
-input[type=tel],
-input[type=number],
-input[type=search],
-textarea.materialize-textarea {
-  border-bottom: 1px solid #9e9e9e;
-}
-
-.input-field input[type=email]:focus + label,
-.input-field input[type=tel]:focus + label,
-.input-field input[type=text]:focus + label,
-.input-field textarea:focus + label {
-  color: #345678;
-}
-
-.input-field input[type=email]:focus,
-.input-field input[type=tel]:focus,
-.input-field input[type=text]:focus,
-.input-field textarea:focus {
-  border-bottom: 1px solid #345678;
-  box-shadow: 0 1px 0 0 #345678;
-}
-
-.input-field input[type=email].valid,
-.input-field input[type=tel].valid,
-.input-field input[type=text].valid,
-.input-field textarea.valid {
-  border-bottom: 1px solid #345678;
-  box-shadow: 0 1px 0 0 #345678;
-  color: #345678;
-}
-
-.input-field input[type=email].invalid,
-.input-field input[type=tel].invalid,
-.input-field input[type=text].invalid,
-.input-field textarea.invalid {
-  border-bottom: 1px solid #D91E18;
-  box-shadow: 0 1px 0 0 #D91E18;
-  color: #D91E18;
-}
-
-.input-field .prefix.active,
-.input-field label.active {
-  color: #345678;
-}
-
-.input-field textarea:focus + label.active {
-  color: #345678;
-}
-
-.input-field textarea:focus {
-  border-bottom: 1px solid #345678 !important;
-  box-shadow: 0 1px 0 0 #345678 !important;
-}
-
-.input-field .f_error {
-  color: #D91E18;
-  font-weight: 600;
-  margin-left: 46px;
-}
-
-input:not([type]).invalid + label:after,
-input:not([type]):focus.invalid + label:after,
-input[type=text].invalid + label:after,
-input[type=text]:focus.invalid + label:after,
-input[type=password].invalid + label:after,
-input[type=password]:focus.invalid + label:after,
-input[type=email].invalid + label:after,
-input[type=email]:focus.invalid + label:after,
-input[type=url].invalid + label:after,
-input[type=url]:focus.invalid + label:after,
-input[type=time].invalid + label:after,
-input[type=time]:focus.invalid + label:after,
-input[type=date].invalid + label:after,
-input[type=date]:focus.invalid + label:after,
-input[type=datetime].invalid + label:after,
-input[type=datetime]:focus.invalid + label:after,
-input[type=datetime-local].invalid + label:after,
-input[type=datetime-local]:focus.invalid + label:after,
-input[type=tel].invalid + label:after,
-input[type=tel]:focus.invalid + label:after,
-input[type=number].invalid + label:after,
-input[type=number]:focus.invalid + label:after,
-input[type=search].invalid + label:after,
-input[type=search]:focus.invalid + label:after,
-textarea.materialize-textarea.invalid + label:after,
-textarea.materialize-textarea:focus.invalid + label:after {
-  font-weight: 400;
-}
-
 /*  Datepicker
 	@mixin =============================================== */
 .picker__date-display {
@@ -2682,4 +2583,40 @@ button.picker__close:focus {
 .picker__day--selected:hover,
 .picker--focused .picker__day--selected {
   background-color: #345678;
+}
+
+.modal .modal-footer .btn,
+.modal .modal-footer .btn-large,
+.modal .modal-footer .btn-flat {
+  background-color: #345678;
+  color: white;
+}
+
+.modal .modal-footer .btn:active, .modal .modal-footer .btn:hover, .modal .modal-footer .btn:focus, .modal .modal-footer .btn:visited,
+.modal .modal-footer .btn-large:active,
+.modal .modal-footer .btn-large:hover,
+.modal .modal-footer .btn-large:focus,
+.modal .modal-footer .btn-large:visited,
+.modal .modal-footer .btn-flat:active,
+.modal .modal-footer .btn-flat:hover,
+.modal .modal-footer .btn-flat:focus,
+.modal .modal-footer .btn-flat:visited {
+  background-color: #7ea2c7;
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #345678;
+  box-shadow: 0 1px 0 0 #345678;
 }

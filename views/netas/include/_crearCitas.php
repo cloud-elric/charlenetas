@@ -50,7 +50,7 @@
 				<label>Cita: </label>
 				<input type="text" id="nombreCita" name="nombreCita">
 				<div class="modal-footer">
-					<button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat" id="submitButton" >Guardar</button>
+					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat" id="submitButton" >Guardar</button>
 				</div>
 	  		</form>
 	  	</div>

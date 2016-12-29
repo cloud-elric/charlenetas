@@ -1222,6 +1222,8 @@ $(document).ready(function() {
 	// 
 	// 
 
+	var owl = $('.owl-carousel-tutoriales');
+
 	/**
 	 * Modal
 	 */
@@ -1231,8 +1233,6 @@ $(document).ready(function() {
 		return false;
 		modal.style.display = "flex";
 		
-		var owl = $('.owl-carousel-tutoriales');
-
 		owl.owlCarousel({
 			center: true,
 			margin: 0,
@@ -1257,8 +1257,8 @@ $(document).ready(function() {
 		}).on('changed.owl.carousel', function(event) {
 			var currentItem = event.item.index;
 
-			if(currentItem === 11){
-				setTimeout(alertFunc, 200);
+			if(currentItem === 9){
+				setTimeout(modalFinish, 200);
 			}
 			else{
 				$(".owl-next").attr('id', '');
@@ -1274,7 +1274,7 @@ $(document).ready(function() {
 	});
 
 	// Función
-	function alertFunc() {
+	function modalFinish() {
 		$(".owl-next").attr('id', 'modal-tutoriales-finalizar');
 		$("#modal-tutoriales-finalizar").addClass("owl-next-finalizar");
 		$("#modal-tutoriales-finalizar").html('<i class="ion ion-android-done"></i>');
