@@ -160,7 +160,7 @@ $('body').on('beforeSubmit', '#form-anuncio', function() {
 				agregarTarjetaNueva(response);
 				$('.modal-trigger').leanModal();
 				// Reseteamos el modal
-				document.getElementById("form-media").reset();
+				document.getElementById("form-anuncio").reset();
 				
 			} else {
 				// Muestra los errores
@@ -204,7 +204,7 @@ $('body').on('beforeSubmit', '#editar-anuncio', function() {
 				$('#card_anuncio_'+response.id).attr('src',response.t);
 			} else {
 					// Muestra los errores
-					$('#editar-media').yiiActiveForm('updateMessages', response, true);
+					$('#editar-anuncio').yiiActiveForm('updateMessages', response, true);
 			}
 			l.stop();
 		},
