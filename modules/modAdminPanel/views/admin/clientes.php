@@ -15,7 +15,7 @@ use app\modules\modAdminPanel\assets\ModuleAsset;
 	<div class="row" id="js-contenedor-tarjetas">
 		<?php foreach($clientes as $cliente){?>
 			<div class="col s12 m6 l4" id="card_cliente_<?=$cliente->id_cliente?>">
-				<div class="card card-user">
+				<div class="card card-user" data-token="<?=$cliente->id_cliente?>">
 					<div class="card-user-cont">
 						<div class="row">
 							<div class="col s9">

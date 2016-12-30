@@ -29,6 +29,8 @@ use app\models\ModUsuariosEntUsuarios;
 use app\models\EntUsuariosRespuestasSabiasQue;
 use yii\web\NotFoundHttpException;
 use app\models\EntClientes;
+use app\models\EntAnuncios;
+use yii\helpers\Url;
 
 /**
  * Default controller for the `adminPanel` module
@@ -1358,11 +1360,98 @@ class AdminController extends Controller {
 					'nombre' => $cliente->txt_nombre,
 					'correo' => $cliente->txt_correo,
 					'tel' => $cliente->num_telefono
-			];
+			];;
 		}
 	
 		return $this->renderAjax ( '_formCliente', [
 				'cliente' => $cliente
+		] );
+	}
+	
+	public function actionMostrarAnuncios($idC){
+		$cliente = EntClientes::find()->where(['id_cliente'=>$idC])->one();
+		$anuncios = EntAnuncios::find()->where(['id_cliente'=>$idC])->andWhere(['b_habilitado'=>1])->all();
+		
+		return $this->render('anuncios',[
+			'cliente' => $cliente,
+			'anuncios' => $anuncios
+		]);
+	}
+	
+	public function actionCrearAnuncio($idC = 0){
+		$anuncio = new EntAnuncios();
+		
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($anuncio->load ( Yii::$app->request->post ())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			
+			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
+			$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
+			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
+			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
+			$anuncio->save();
+			$url = Url::base()."/uploads/imagenesAnuncios/";
+			if ($anuncio->cargarImagenAnuncio ( $anuncio )) {
+				return [
+						'status' => 'success',
+						'id' => $anuncio->id_anuncio,
+						'url' => $url,
+						'img' => $anuncio->txt_imagen
+				];
+			}
+		}
+		
+		return $this->renderAjax ( 'crearAnuncio', [
+				'anuncio' => $anuncio,
+				'id' => $idC
+		] );
+	}
+	
+	public function actionDeshabilitarAnuncio($idA = null) {
+		$anuncioDeshabilitar = EntAnuncios::find()->where(['id_anuncio'=>$idA])->andWhere(['b_habilitado'=>1])->one();
+		$anuncioDeshabilitar->b_habilitado = 0;
+		echo $anuncioDeshabilitar->id_anuncio . "--" . $anuncioDeshabilitar->b_habilitado. "--";
+
+		if ($anuncioDeshabilitar->save(false)){
+			echo "anuncio deshabilitado";
+		}else{
+			print_r($anuncioDeshabilitar->errors);
+			echo "error al deshabilitar anuncio";
+		}
+	}
+	
+	public function actionEditarAnuncio($token = null) {
+		// Busca el post por el token
+		$this->layout = false;
+		$anuncio = EntAnuncios::find()->where(['id_anuncio'=>$token])->andWhere(['b_habilitado'=>1])->one();
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($anuncio->load ( Yii::$app->request->post ())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			
+			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
+			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
+			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
+				
+			if (! empty ( $anuncio->imagen )) {
+				$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
+			}
+			
+			if (! empty ( $anuncio->imagen )) {
+				$anuncio->cargarImagenAnuncio ( $anuncio );
+			}
+			
+			$anuncio->save();
+	
+			return [
+					'status' => 'success',
+					'id' => $anuncio->id_anuncio
+			];
+		}
+	
+		return $this->renderAjax ( '_formAnuncio', [
+				'anuncio' => $anuncio,
+				'id' => $anuncio->id_cliente
 		] );
 	}
 }

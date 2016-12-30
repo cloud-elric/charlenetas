@@ -270,7 +270,7 @@ function stopEvent(ev) {
 	}
 
 $(document).ready(function(){
-	$('.card-alquimia').on('click', function(e) {	
+	$('.card-user').on('click', function(e) {	
 		//console.log(e.target);
 		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
 			e.stopPropagation();
@@ -279,6 +279,12 @@ $(document).ready(function(){
 		//$(e.target).hasClass('alquimia-delete-check')
 	
 		var token = $(this).data('token');
-		showPostFull(token)
+		mostrarAnuncios(token)
 	});
 });
+
+function mostrarAnuncios(id){
+	console.log("id-"+id);
+	window.location.href = basePath+'adminPanel/admin/mostrar-anuncios?idC='+id;
+}
+
