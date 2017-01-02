@@ -51,6 +51,15 @@ $this->title = 'Charlenetas';
 					</div>
 			<?php
 					include 'masPosts.php';
+					
+					
+					//foreach($listaAnuncios as $anuncio){
+			?>
+						
+			<?php 
+					//}
+					
+					
 			}
 			?>
   </div>

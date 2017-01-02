@@ -29,6 +29,8 @@ use app\models\EntUsuariosCreditos;
 use app\models\CatTipoCreditos;
 
 use app\models\ModUsuariosEntUsuarios;
+use app\models\EntAnuncios;
+use yii\db\Expression;
 
 
 class NetasController extends Controller {
@@ -179,6 +181,7 @@ class NetasController extends Controller {
 		
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
+		$listaAnuncios = EntAnuncios::find()->where(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 		
 		// Tipos de post
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
@@ -189,6 +192,7 @@ class NetasController extends Controller {
 		return $this->render ( 'index', [ 
 				'listaPost' => $listaPost,
 				'tiposPost' => $tiposPost,
+				'listaAnuncios' => $listaAnuncios,
 				'token'=>$token
 		] );
 	}
