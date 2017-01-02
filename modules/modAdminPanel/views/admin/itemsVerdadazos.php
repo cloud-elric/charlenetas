@@ -18,6 +18,10 @@ use app\models\EntComentariosPosts;
 				</div>
 
 				<div class="card-contexto-options">
+					<div>
+      					<input type="checkbox" id="delete-<?=$postVerdadazos->txt_token?>" value="<?=$postVerdadazos->txt_token?>"/>
+      					<label for="delete-<?=$postVerdadazos->txt_token?>"></label>
+					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarVerdadazos('<?=$postVerdadazos->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

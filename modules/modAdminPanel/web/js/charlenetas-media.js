@@ -70,7 +70,7 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 
 			contenedor.append($items);
 			//contenedor.masonry('appended', $items);
-
+			
 			pages++;
 
 			//filtrarPost();
@@ -92,15 +92,25 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
  * @param token
  */
 function abrirModalEditarMedia(token){
+	//console.log("aqui");
 	$('#js-modal-post-editar .modal-content').html(loading);
+	
 	var url = 'editar-media?token='+token;
 	$.ajax({
 		url:url,
 		success:function(res){
+			//console.log(res);
 			$('#js-modal-post-editar .modal-content').html(res);
+			//alert(res);
 		}
 	});
 }
+//$(document).on({
+//	'onClick' : function(e){
+//		$('#js-modal-post-editar .modal-content').html(loading);
+//	}
+//}, '.waves-effect.waves-light.modal-trigger');
+
 
 function agregarTarjetaNueva(json) {
 	var template = '<div class="col s12 m6 l4" id="card_'+json.tk+'">'
@@ -197,7 +207,7 @@ $('body').on('beforeSubmit', '#editar-media', function() {
 				// Cierra el modal
 				$('#js-modal-post-editar').closeModal();
 						
-				$('#js-modal-post-editar  .modal-content').html(loading);
+				//$('#js-modal-post-editar  .modal-content').html(loading);
 						
 				$('#card_'+response.tk+' img').attr('src',response.t);
 			} else {
@@ -232,4 +242,5 @@ function cargarImagenes(elemento){
 		}
 	});
 }
+
 

@@ -18,6 +18,10 @@ use app\models\EntComentariosPosts;
 				</div>
 
 				<div class="card-contexto-options">
+					<div>
+      					<input type="checkbox" id="delete-<?=$postSoloPorHoy->txt_token?>" value="<?=$postSoloPorHoy->txt_token?>"/>
+      					<label for="delete-<?=$postSoloPorHoy->txt_token?>"></label>
+					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>

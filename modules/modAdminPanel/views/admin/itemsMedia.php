@@ -9,10 +9,14 @@
 				<!-- </h3> -->
 
 				<div class="card-contexto-options">
+					<div>
+			   			<input type="checkbox" id="delete-<?=$postMedia->txt_token?>" value="<?=$postMedia->txt_token?>"/>
+      					<label for="delete-<?=$postMedia->txt_token?>"></label>
+					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarMedia('<?=$postMedia->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>
 			</div>
 	</div>
-		<?php }?>
+<?php }?>
