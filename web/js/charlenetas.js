@@ -1425,12 +1425,14 @@ function deshabilitarBotonSabias(elemento){
 
 $(document).ready(function(){
 	//document.cookie = "cookie1=; max-age=0; path=/";
-	//alert(document.cookie);
-	if($("#js-check-mostrar").checked){
-		//document.cookie = "cookie1=noMostrar; path=/";
-	}
 	
-	if(document.cookie != "noMostrar"){
+	$("#checkbox").change(function(){
+		document.cookie = "cookie1=noMostrar; path=/";
+		//alert(document.cookie);
+	});
+	//alert(document.cookie);
+	
+	if(document.cookie != "cookie1=noMostrar"){
 		setTimeout(function(){
 			$(modalOpen).click();
 		}, 5000);

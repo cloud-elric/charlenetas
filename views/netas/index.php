@@ -418,7 +418,7 @@ if (! empty ($isCuentaActivada)) {
 					
 				<div class="label--checkbox-row">
 					<div class="label--checkbox-row-col">
-						<input type="checkbox" id="checkbox" class="checkbox" checked>
+						<input type="checkbox" id="checkbox" class="checkbox">
 					</div>
 					<div class="label--checkbox-row-col">
 						No volver a mostrar
