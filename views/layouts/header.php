@@ -19,10 +19,12 @@ use app\models\EntNotificaciones;
 		//  echo Html::img(Yii::$app->user->identity->getImageProfile());	
 		//  echo Yii::$app->user->identity->nombreCompleto.'<br>';
 		 	echo Html::a('Cerrar sesión', ['site/logout']);
+		 	echo Html::a('Citas', ['netas/crear-cita']);
 		 }else{
 
 		 	?>
 		 	<a id="js-ingresar-cerrar-sesion" onclick="showModalLogin();">Ingresar</a>
+		 	<a id="js-citas" onclick="showModalLogin();">Citas</a>
 		 	<?php 
 		 }
 		 ?>

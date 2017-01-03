@@ -1349,6 +1349,10 @@ function cargarCerrarSesion() {
 	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="' + basePath
 			+ 'site/logout">Cerrar sesión</a>';
 	$("#js-ingresar-cerrar-sesion").replaceWith(cerrarSesion);
+	
+	var citas = '<a id="js-citas" href="' + basePath
+	+ 'netas/crear-cita">Citas</a>';
+	$("#js-citas").replaceWith(citas);
 }
 
 $('.filters-toggle').on('click', function() {
