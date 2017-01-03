@@ -9,7 +9,9 @@ foreach ( $listaPost as $post ) {
 	if($countAnuncio > 5){
 		$countAnuncio = 0;
 	}
+
 	if($num == $countPost && $countAnuncio < 5 && count($listaAnuncios) > 0){
+
 		include 'include/_anuncioPin.php';
 		$countAnuncio++;
 
