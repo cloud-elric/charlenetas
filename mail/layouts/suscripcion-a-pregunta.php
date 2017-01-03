@@ -76,7 +76,7 @@
 														<span style='font-size:20px;color:#FFF'>
 															<a href="<?=$url?>">
 																<span style='color:#FFF'>
-																	Activa tu cuenta aquí
+																	Ver respuesta
 																</span>
 															</a>
 														</span>
