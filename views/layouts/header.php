@@ -5,7 +5,8 @@ use app\models\EntNotificaciones;
 ?>
 <div class="header">
 	<div class="">
-		<a href="#" class="disabled">Workshops</a> <a href="#" id="modal-tutoriales-open" class="disabled">Tutoriales</a>
+		<a href="#" class="disabled">Workshops</a>
+		<a href="#" id="modal-tutoriales-open" class="disabled">Tutoriales</a>
 	</div>
 	<div class="logo">
 		<img src="<?=Url::base()?>/webAssets/images/logo-charlenetas.png" alt="Charlenetas.com" />

@@ -1230,7 +1230,6 @@ $(document).ready(function() {
 	// Open Modal
 	$(modalOpen).on("click", function(){
 		
-		return false;
 		modal.style.display = "flex";
 		
 		owl.owlCarousel({
@@ -1423,6 +1422,21 @@ function deshabilitarBotonSabias(elemento){
 	
 	elemento.prop('checked', false);
 }
+
+$(document).ready(function(){
+	//document.cookie = "cookie1=; max-age=0; path=/";
+	//alert(document.cookie);
+	if($("#js-check-mostrar").checked){
+		//document.cookie = "cookie1=noMostrar; path=/";
+	}
+	
+	if(document.cookie != "noMostrar"){
+		setTimeout(function(){
+			$(modalOpen).click();
+		}, 5000);
+	}
+	
+});
 
 
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
