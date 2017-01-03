@@ -973,4 +973,19 @@ class NetasController extends Controller {
 			return['status'=>'charlenauta'];
 		}
 	}
+	
+	public function actionEnviarEmail(){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'folio' => 12345,
+				'nombre' => "qwerty",
+		];
+	
+		$utils->sendBienvenida( "damian@2gom.com.mx", $parametrosEmail );
+// 		$utils->sendComentarioContestado( "damian@2gom.com.mx", $parametrosEmail );
+// 		$utils->sendPreguntaContestada( "damian@2gom.com.mx", $parametrosEmail );
+// 		$utils->sendRecuperarPassword( "damian@2gom.com.mx", $parametrosEmail );
+// 		$utils->sendSuscripcion( "damian@2gom.com.mx", $parametrosEmail );
+	}
 }

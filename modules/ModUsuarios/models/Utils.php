@@ -119,6 +119,37 @@ class Utils {
 	}
 	
 	/**
+	 * Envia el correo electronico para recuperar el correo electronico
+	 *
+	 * @param array $parametrosEmail
+	 * @return boolean
+	 */
+	public function sendBienvenida($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/bienvenida.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Â¡Bienvenido! Ya eres parte de la comunidad.', $parametrosEmail );
+	}
+	
+	public function sendComentarioContestado($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/comentario-contestado.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Comentario contestado.', $parametrosEmail );
+	}
+	
+	public function sendPreguntaContestada($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-contestada.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Pregunta contestada.', $parametrosEmail );
+	}
+	
+	public function sendRecuperarPassword($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/recuperar-password.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Recuperar contraseña.', $parametrosEmail );
+	}
+	
+	public function sendSuscripcion($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/suscripcion-a-pregunta.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Suscripcion a pregunta.', $parametrosEmail );
+	}
+	
+	/**
 	 * Envia mensaje de correo electronico
 	 *
 	 * @param string $templateHtml        	

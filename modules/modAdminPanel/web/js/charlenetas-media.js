@@ -87,12 +87,16 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 
 }
 
+$(document).ready(function() {
+	$('.modal-trigger').leanModal();
+});
+
 /**
  * Abrir modal para editar
  * @param token
  */
 function abrirModalEditarMedia(token){
-	//console.log("aqui");
+	console.log("aqui");
 	$('#js-modal-post-editar .modal-content').html(loading);
 	
 	var url = 'editar-media?token='+token;
