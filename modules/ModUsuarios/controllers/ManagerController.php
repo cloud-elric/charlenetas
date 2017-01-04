@@ -62,7 +62,7 @@ class ManagerController extends Controller {
 					$parametrosEmail ['user'] = $user->getNombreCompleto ();
 					
 					// Envio de correo electronico
-					$utils->sendEmailActivacion ( $user->txt_email, $parametrosEmail );
+					$utils->sendBienvenida ( $user->txt_email, $parametrosEmail );
 					// $this->redirect ( [
 					// 'login'
 					// ] );
@@ -162,7 +162,7 @@ class ManagerController extends Controller {
 			$parametrosEmail ['user'] = $user->getNombreCompleto ();
 			
 			// Envio de correo electronico
-			if($utils->sendEmailRecuperarPassword ( $user->txt_email, $parametrosEmail )){
+			if($utils->sendRecuperarPassword( $user->txt_email, $parametrosEmail )){
 				Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 				
 				return ['status'=>'success'];

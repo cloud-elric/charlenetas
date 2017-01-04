@@ -31,6 +31,7 @@ use yii\web\NotFoundHttpException;
 use app\models\EntClientes;
 use app\models\EntAnuncios;
 use yii\helpers\Url;
+use app\models\EntUsuariosSubscripciones;
 
 /**
  * Default controller for the `adminPanel` module
@@ -740,7 +741,13 @@ class AdminController extends Controller {
 // 				$notificaciones->guardarNotificacionRespuestasAdmin ( $post, $notificaciones );
 				
 				$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$post->id_usuario])->one();
-				$this->enviarEmail($usuario);
+				$this->enviarEmailEspejoContestado($usuario, $post->txt_token);
+				
+				$suscrito = EntUsuariosSubscripciones::find()->where(['id_post'=>$post->id_post])->one();
+				if($suscrito){
+					$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$suscrito->id_usuario])->one();
+					$this->enviarEmailSuscritoEspejo($user, $token);
+				}
 			}
 			
 			return [ 
@@ -1458,19 +1465,27 @@ class AdminController extends Controller {
 		] );
 	}
 	
-	private function enviarEmail($user){
+	private function enviarEmailEspejoContestado($user, $token){
 	
 		$utils = new Utils();
 		$parametrosEmail = [
-				'folio' => 12345,
-				'nombre' => "qwerty",
+				'nombre' => $user->txt_username,
+				'correo' => $user->txt_email,
+				'token' => $token
+		];
+		
+ 		$utils->sendPreguntaContestada( $user->txt_email, $parametrosEmail );
+	}
+	
+	private function enviarEmailSuscritoEspejo($user, $token){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $user->txt_username,
+				'correo' => $user->txt_email,
+				'token' => $token
 		];
 	
-		//		$utils->sendPreguntaEspejo( "ruloalpe@yahoo.com.mx", $parametrosEmail );
-		// 		$utils->sendBienvenida( "damian@2gom.com.mx", $parametrosEmail );
-		// 		$utils->sendComentarioContestado( "damian@2gom.com.mx", $parametrosEmail );
-		 		$utils->sendPreguntaContestada( "ruloalpe@yahoo.com.mx", $parametrosEmail );
-		// 		$utils->sendRecuperarPassword( "damian@2gom.com.mx", $parametrosEmail );
-		// 		$utils->sendSuscripcion( "damian@2gom.com.mx", $parametrosEmail );
+		$utils->sendSuscripcion( $user->txt_email, $parametrosEmail );
 	}
 }

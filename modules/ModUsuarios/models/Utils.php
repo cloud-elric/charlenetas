@@ -131,12 +131,12 @@ class Utils {
 	
 	public function sendComentarioContestado($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/comentario-contestado.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Comentario contestado.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/comentario-contestado.php', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Comentario contestado.', $parametrosEmail );
 	}
 	
 	public function sendPreguntaContestada($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-contestada.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Pregunta contestada.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-contestada.php', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Pregunta contestada.', $parametrosEmail );
 	}
 	
 	public function sendRecuperarPassword($email, $parametrosEmail) {
@@ -146,12 +146,17 @@ class Utils {
 	
 	public function sendSuscripcion($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/suscripcion-a-pregunta.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Suscripcion a pregunta.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/suscripcion-a-pregunta.php', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Suscripcion a pregunta.', $parametrosEmail );
 	}
 	
 	public function sendPreguntaEspejo($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-espejo.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Pregunta de espejo.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-espejo.php', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Pregunta de espejo.', $parametrosEmail );
+	}
+	
+	public function sendCitaCreada($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-creada.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Han hecho una cita.', $parametrosEmail );
 	}
 	
 	/**
