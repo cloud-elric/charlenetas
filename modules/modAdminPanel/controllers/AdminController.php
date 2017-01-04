@@ -736,8 +736,11 @@ class AdminController extends Controller {
 			
 			if ($post->id_usuario != Yii::$app->user->identity->id_usuario) {
 				// Guardar la notificacion
-				$notificaciones = new EntNotificaciones ();
-				$notificaciones->guardarNotificacionRespuestasAdmin ( $post, $notificaciones );
+// 				$notificaciones = new EntNotificaciones ();
+// 				$notificaciones->guardarNotificacionRespuestasAdmin ( $post, $notificaciones );
+				
+				$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$post->id_usuario])->one();
+				$this->enviarEmail($usuario);
 			}
 			
 			return [ 
@@ -1453,5 +1456,21 @@ class AdminController extends Controller {
 				'anuncio' => $anuncio,
 				'id' => $anuncio->id_cliente
 		] );
+	}
+	
+	private function enviarEmail($user){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'folio' => 12345,
+				'nombre' => "qwerty",
+		];
+	
+		//		$utils->sendPreguntaEspejo( "ruloalpe@yahoo.com.mx", $parametrosEmail );
+		// 		$utils->sendBienvenida( "damian@2gom.com.mx", $parametrosEmail );
+		// 		$utils->sendComentarioContestado( "damian@2gom.com.mx", $parametrosEmail );
+		 		$utils->sendPreguntaContestada( "ruloalpe@yahoo.com.mx", $parametrosEmail );
+		// 		$utils->sendRecuperarPassword( "damian@2gom.com.mx", $parametrosEmail );
+		// 		$utils->sendSuscripcion( "damian@2gom.com.mx", $parametrosEmail );
 	}
 }

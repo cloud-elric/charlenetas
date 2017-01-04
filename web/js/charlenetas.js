@@ -878,7 +878,7 @@ function agregarPregunta() {
 	$('#js-modal-espejo').trigger('click');
 }
 
-// Carga la habilidad para los feedback
+//Carga la habilidad para los feedback
 function cargarFeeds() {
 	$('.js-feedback').each(function(index) {
 		var token = $(this).data('token');

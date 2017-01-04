@@ -149,6 +149,11 @@ class Utils {
 		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/suscripcion-a-pregunta.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Suscripcion a pregunta.', $parametrosEmail );
 	}
 	
+	public function sendPreguntaEspejo($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-espejo.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Pregunta de espejo.', $parametrosEmail );
+	}
+	
 	/**
 	 * Envia mensaje de correo electronico
 	 *

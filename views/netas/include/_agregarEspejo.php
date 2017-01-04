@@ -77,7 +77,7 @@ $(document).ready(function(){
 				type : 'post', // Metodo en el que se enviara la informacion
 				data: form.serialize(),
 				success : function(response) { 
-					console.log(response); 
+					//console.log(response); 
 
 					// Si la respuesta contiene la propiedad status y es success
 					if (response.hasOwnProperty('status')

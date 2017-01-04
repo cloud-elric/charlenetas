@@ -31,6 +31,8 @@ use app\models\CatTipoCreditos;
 use app\models\ModUsuariosEntUsuarios;
 use app\models\EntAnuncios;
 use yii\db\Expression;
+use app\models\VistaTotalCreditos;
+use app\models\CatTiposUsuarios;
 
 
 class NetasController extends Controller {
@@ -801,9 +803,11 @@ class NetasController extends Controller {
 		if ($post->load ( Yii::$app->request->post () )) {
 			if($postGuardado = $post->guardarEspejo($post, $anonimo)){
 						
-				$notificaciones = new EntNotificaciones();
-					
-				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+// 				$notificaciones = new EntNotificaciones();	
+// 				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+				$admin = ModUsuariosEntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
+				
+				$this->enviarEmail($admin);
 				
 				return $this->renderAjax('//netas/include/_espejoPin',['post'=>$postGuardado]);
 			}else{
@@ -974,7 +978,7 @@ class NetasController extends Controller {
 		}
 	}
 	
-	public function actionEnviarEmail(){
+	private function enviarEmail($user){
 	
 		$utils = new Utils();
 		$parametrosEmail = [
@@ -982,9 +986,10 @@ class NetasController extends Controller {
 				'nombre' => "qwerty",
 		];
 	
-		$utils->sendBienvenida( "damian@2gom.com.mx", $parametrosEmail );
+//		$utils->sendPreguntaEspejo( "ruloalpe@yahoo.com.mx", $parametrosEmail );
+// 		$utils->sendBienvenida( "damian@2gom.com.mx", $parametrosEmail );
 // 		$utils->sendComentarioContestado( "damian@2gom.com.mx", $parametrosEmail );
-// 		$utils->sendPreguntaContestada( "damian@2gom.com.mx", $parametrosEmail );
+// 		$utils->sendPreguntaContestada( "ruloalpe@yahoo.com.mx", $parametrosEmail );
 // 		$utils->sendRecuperarPassword( "damian@2gom.com.mx", $parametrosEmail );
 // 		$utils->sendSuscripcion( "damian@2gom.com.mx", $parametrosEmail );
 	}
