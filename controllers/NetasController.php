@@ -34,6 +34,7 @@ use yii\db\Expression;
 use app\models\VistaTotalCreditos;
 use app\models\CatTiposUsuarios;
 use app\models\EntUsuariosCreditosGastados;
+use app\models\EntClientes;
 
 
 class NetasController extends Controller {
@@ -184,7 +185,10 @@ class NetasController extends Controller {
 		
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
-		$listaAnuncios = EntAnuncios::find()->where(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+		
+		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->count();
+		$numRand = rand(1,$countClientes);
+		$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 		
 		// Tipos de post
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
@@ -196,27 +200,37 @@ class NetasController extends Controller {
 				'listaPost' => $listaPost,
 				'tiposPost' => $tiposPost,
 				'listaAnuncios' => $listaAnuncios,
-				'token'=>$token
+				'token'=>$token,
+				'numRand' => $numRand
 		] );
 	}
 	
 	/**
 	 * Obtiene los post por paginacion
 	 */
-	public function actionGetMasPosts($page = 1) {
+	public function actionGetMasPosts($page = 1, $num = 0) {
 		
 		// Layout que usara la vista
 		$this->layout = false;
 		
+		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->count();
+		$numRand = rand(1,$countClientes);
+		if($numRand == $num && $numRand+1 < $countClientes){
+			$numRand++;
+		}else if($numRand == $num && $numRand+1 > $countClientes){
+			$numRand--;
+		}
+		
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ( $page );
-		$listaAnuncios = EntAnuncios::find()->where(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+		$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 		
 		
 		// Pintar vista
 		return $this->render ( 'masPosts', [ 
 				'listaPost' => $listaPost,
-				'listaAnuncios' => $listaAnuncios
+				'listaAnuncios' => $listaAnuncios,
+				'numRand' => $numRand
 		] );
 	}
 	

@@ -20,14 +20,17 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 
 	totalPostMostrados = (pages + 1) * 30;
 	totalPost = postTotales - totalPostMostrados;
-
+	
+	var num = $(".container-fluid").data("anuncio");
+	console.log("numeroAnuncio"+num );
+	
 	var contenedor = $('#js-contenedor-posts-tarjetas');
-	var url = basePath + 'netas/get-mas-posts?page=' + pages;
+	var url = basePath + 'netas/get-mas-posts?page=' + pages +"&num="+num;
 
 	$.ajax({
 		url : url,
 		success : function(res) {
-
+			$(contenedor).append('<input class="js-anuncios-por-pagina" type="hidden" data-anuncio="'+res.numRand+'">');
 			var $items = $(res);
 
 			grid.append($items);
