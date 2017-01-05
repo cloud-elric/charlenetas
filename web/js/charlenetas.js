@@ -14,6 +14,7 @@ var masonryOptions = {
 };
 
 // Carga mas pins de los post
+var arrayAnuncios = [];
 function cargarMasPosts(postTotales, numeroPostMostrar) {
 	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
 	l.start();
@@ -22,23 +23,27 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 	totalPost = postTotales - totalPostMostrados;
 	
 	var num = $(".container-fluid").data("anuncio");
-	console.log("numeroAnuncio"+num );
+	arrayAnuncios[0] = num;
+	
+	//console.log("numeroAnuncio"+num );
 	
 	var contenedor = $('#js-contenedor-posts-tarjetas');
-	var url = basePath + 'netas/get-mas-posts?page=' + pages +"&num="+num;
+	var url = basePath + 'netas/get-mas-posts?page=' + pages +"&num="+num+"&array="+arrayAnuncios;
 
 	$.ajax({
 		url : url,
 		success : function(res) {
-			$(contenedor).append('<input class="js-anuncios-por-pagina" type="hidden" data-anuncio="'+res.numRand+'">');
 			var $items = $(res);
 
 			grid.append($items);
 			grid.masonry('appended', $items);
-
+			
 			pages++;
 
 			filtrarPost();
+			
+			arrayAnuncios.push($(".js-anuncios-por-pagina:last").data("anuncio"));
+			console.log(arrayAnuncios);
 
 			if (totalPost <= 0) {
 				$("#js-cargar-mas-posts").remove();

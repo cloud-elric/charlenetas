@@ -13,7 +13,6 @@ $this->title = 'Charlenetas';
 <div data-anuncio="<?= $numRand ?>" class="container-fluid">
 	<div class="pins-grid-container">
 		<div class="grid" id="js-contenedor-posts-tarjetas">
-			<input class="js-anuncios-por-pagina" type="hidden" data-anuncio="<?= $numRand ?>">
 
 			<?php
 			if (!Yii::$app->user->isGuest) {

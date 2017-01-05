@@ -208,23 +208,29 @@ class NetasController extends Controller {
 	/**
 	 * Obtiene los post por paginacion
 	 */
-	public function actionGetMasPosts($page = 1, $num = 0) {
+	public function actionGetMasPosts($page = 1, $num = 0, $array) {
 		
 		// Layout que usara la vista
 		$this->layout = false;
 		
-		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->count();
-		$numRand = rand(1,$countClientes);
-		if($numRand == $num && $numRand+1 < $countClientes){
-			$numRand++;
-		}else if($numRand == $num && $numRand+1 > $countClientes){
-			$numRand--;
+		if(count($array) > 1){
+			// Recupera n numero de registros por paginacion
+			$listaPost = EntPostsExtend::getPostByPagination ( $page );
+			$listaAnuncios = EntAnuncios::find()->where(['not in', 'id_cliente', [$array]])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+		}else{
+		
+			$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->count();
+			$numRand = rand(1,$countClientes);
+			if($numRand == $num && $numRand+1 <= $countClientes){
+				$numRand++;
+			}else if($numRand == $num && $numRand+1 >= $countClientes){
+				$numRand--;
+			}
+			
+			// Recupera n numero de registros por paginacion
+			$listaPost = EntPostsExtend::getPostByPagination ( $page );
+			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 		}
-		
-		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPostByPagination ( $page );
-		$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
-		
 		
 		// Pintar vista
 		return $this->render ( 'masPosts', [ 

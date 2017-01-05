@@ -126,37 +126,37 @@ class Utils {
 	 */
 	public function sendBienvenida($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/bienvenida.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Â¡Bienvenido! Ya eres parte de la comunidad.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/bienvenida.html', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Â¡Bienvenido! Ya eres parte de la comunidad.', $parametrosEmail );
 	}
 	
 	public function sendComentarioContestado($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/comentario-contestado.php', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Comentario contestado.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/comentario-contestado.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Comentario contestado.', $parametrosEmail );
 	}
 	
 	public function sendPreguntaContestada($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-contestada.php', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Pregunta contestada.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-contestada.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Pregunta contestada.', $parametrosEmail );
 	}
 	
 	public function sendRecuperarPassword($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/recuperar-password.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Recuperar contraseña.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/recuperar-password.html', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Recuperar contraseña.', $parametrosEmail );
 	}
 	
 	public function sendSuscripcion($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/suscripcion-a-pregunta.php', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Suscripcion a pregunta.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/suscripcion-a-pregunta.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Suscripcion a pregunta.', $parametrosEmail );
 	}
 	
 	public function sendPreguntaEspejo($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-espejo.php', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Pregunta de espejo.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/pregunta-espejo.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Pregunta de espejo.', $parametrosEmail );
 	}
 	
 	public function sendCitaCreada($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-creada.html', '@app/modules/ModUsuarios/email/', 'no-reply@onex.mx', $email, 'Han hecho una cita.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-creada.html', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Han hecho una cita.', $parametrosEmail );
 	}
 	
 	/**
