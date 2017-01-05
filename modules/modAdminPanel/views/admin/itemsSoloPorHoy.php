@@ -18,11 +18,21 @@ use app\models\EntComentariosPosts;
 				</div>
 
 				<div class="card-contexto-options">
-					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
+				<div>
+				<input type="checkbox" id="delete-<?=$postSoloPorHoy->txt_token?>" value="<?=$postSoloPorHoy->txt_token?>" />
+				<label for="delete-<?=$postSoloPorHoy->txt_token?>"></label>
+			</div>
+					<a  id="button_<?=$postSoloPorHoy->txt_token?> class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>
 
 			</div>
 		</div>
+		
+		<script>
+var elementNuevo = document.getElementById("button_<?=$postSoloPorHoy->txt_token?>");
+elementNuevo.addEventListener("click", stopEvent, false);
+$('#button_<?=$postSoloPorHoy->txt_token?>').leanModal();
+</script>
 		<?php }?>

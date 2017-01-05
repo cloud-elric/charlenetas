@@ -23,5 +23,9 @@
 
 			</div>
 		</div>
-
+<script>
+var elementNuevo = document.getElementById("button_<?=$postHoyPense->txt_token?>");
+elementNuevo.addEventListener("click", stopEvent, false);
+$('#button_<?=$postHoyPense->txt_token?>').leanModal();
+</script>
 		<?php } ?>
