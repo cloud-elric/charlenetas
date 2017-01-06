@@ -412,21 +412,6 @@ if (! empty ($isCuentaActivada)) {
 		<i class="icon-close"></i>
 	</span>
 
-	<!-- <ul class="list modal-check">
-		<li class="list__item">
-			<label class="label--checkbox">
-					
-				<div class="label--checkbox-row">
-					<div class="label--checkbox-row-col">
-						<input type="checkbox" id="checkbox" class="checkbox">
-					</div>
-					<div class="label--checkbox-row-col">
-						No volver a mostrar
-					</div>
-				</div>
-			</label>
-		</li>
-	</ul> -->
 
 	<div class="form-group-check">
 		<div class="boxes">
