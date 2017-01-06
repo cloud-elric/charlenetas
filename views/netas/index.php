@@ -412,7 +412,7 @@ if (! empty ($isCuentaActivada)) {
 		<i class="icon-close"></i>
 	</span>
 
-	<ul class="list modal-check">
+	<!-- <ul class="list modal-check">
 		<li class="list__item">
 			<label class="label--checkbox">
 					
@@ -426,7 +426,15 @@ if (! empty ($isCuentaActivada)) {
 				</div>
 			</label>
 		</li>
-	</ul>
+	</ul> -->
+
+	<div class="form-group-check">
+		<div class="boxes">
+			<input type="checkbox" id="checkbox">
+			<label for="checkbox">No volver a mostrar</label>
+		</div>
+		<!-- <div class="form-group-check-mask mask-checks"></div> -->
+	</div>
 
 	<!-- <i class="material-icons medium icon-demo">trending_flat</i> -->
 

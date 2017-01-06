@@ -11,7 +11,7 @@
 	overflow: auto
 	background-color: $color-espejo
 	align-items: center
-	justify-content: center
+	justify-content: flex-start
 
 	// Modal Content
 	.modal-content
@@ -124,6 +124,7 @@
 						flex-direction: column
 						justify-content: flex-start
 						// padding: 0 20px
+						width: 100%
 
 						.screen-ayuda-corousel-item-imagen
 							border-radius: 50%
@@ -144,6 +145,7 @@
 							color: #333
 							font-size: 1.3rem
 							margin-bottom: 20px
+							width: 100%
 
 							+respond-to(xs)
 								margin-bottom: 10px
@@ -153,6 +155,7 @@
 							font-size: 1rem
 							letter-spacing: 1px
 							margin-bottom: 8px
+							width: 100%
 
 						.modal-tutoriales-finalizar
 							align-items: center
@@ -296,15 +299,127 @@
 			z-index: 8
 
 
+	// Checkbox
+	.form-group-check
+		background-color: $color-espejo
+		// background-color: red
+		border-radius: 4px
+		bottom: 30px
+		left: 50%
+		list-style: none
+		margin: 0
+		margin-left: -85px
+		padding: 2px 10px
+		position: absolute
+		width: 170px
+		z-index: 9
+
+		+respond-to(sm)
+			justify-content: flex-end
+
+		+respond-to(xs)
+			justify-content: flex-end
+
+		.boxes 
+			// background-color: rgba(#484848,.3)
+			position: relative
+			z-index: 2
+
+			/*Checkboxes styles*/
+			input[type="checkbox"]
+				display: none 
+
+			input[type="checkbox"] + label 
+				display: block
+				position: relative
+				padding-left: 35px
+				margin-bottom: 20px
+				// font-family: $font-din
+				font-size: .8rem
+				color: $white
+				cursor: pointer
+				-webkit-user-select: none
+				-moz-user-select: none
+				-ms-user-select: none
+
+				+respond-to(xs)
+					font-size: .9rem
+
+				// a
+				// 	font-size: 1.05rem
+				// 	color: $primary-color
+				// 	text-decoration: underline
+
+				// 	+respond-to(xs)
+				// 		font-size: 1rem
+
+			input[type="checkbox"] + label:last-child
+				margin-bottom: 0 
+
+			input[type="checkbox"] + label:before 
+				content: ''
+				display: block
+				width: 16px
+				height: 16px
+				border: 1px solid $white
+				position: absolute
+				left: 8px
+				top: 2px
+				opacity: .6
+				-webkit-transition: all .12s, border-color .08s
+				transition: all .12s, border-color .08s
+
+				+respond-to(xs)
+					top: 2px
+
+				+respond-to(xx)
+					top: 9px
+			
+
+			input[type="checkbox"]:checked + label:before 
+				width: 10px
+				top: -2px
+				left: 4px
+				border-radius: 0
+				opacity: 1
+				border-top-color: transparent
+				border-left-color: transparent
+				-webkit-transform: rotate(45deg)
+				transform: rotate(45deg)
+
+				+respond-to(xs)
+					top: 0px
+
+				+respond-to(xx)
+					top: 4px
+		
+		// Mask 
+		.form-group-check-mask
+			// background-color: rgba(red,.4)
+			bottom: 0
+			cursor: pointer
+			height: 100%
+			left: 0
+			position: absolute
+			right: 0
+			top: 0
+			width: 100%
+			z-index: 4
+
+
 	// Modal Checkbox
 	.list
 		background-color: $color-espejo
+		// background-color: red
 		border-radius: 4px
 		bottom: 30px
+		left: 50%
 		list-style: none
 		margin: 0
+		margin-left: -85px
 		padding: 2px 10px
 		position: absolute
+		width: 170px
 		z-index: 9
 
 		// Movil Lg
@@ -323,66 +438,66 @@
 		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : landscape)
 			bottom: 0px
 
-		.list__item 
+		.list__item
+			background-color: pink
 			margin: 0
 			padding: 0
 
-
-		.label--checkbox 
-			position: relative
-			// margin: .5rem
-			font-family: Arial, sans-serif
-			line-height: 135%
-			cursor: pointer
-			color: $white
-			font-size: .8em
-			.label--checkbox-row
-				text-align: left
-				@include respond-to(xs)
-					text-align: center
-				.label--checkbox-row-col
-					display: inline-block
-					vertical-align: middle
+			.label--checkbox
+				background-color: teal
+				position: relative
+				// margin: .5rem
+				font-family: Arial, sans-serif
+				line-height: 135%
+				cursor: pointer
+				color: $white
+				font-size: .8em
+				.label--checkbox-row
+					background-color: yellow
+					text-align: left
 					@include respond-to(xs)
 						text-align: center
-					span
-						display: block
-						text-decoration: underline
+					.label--checkbox-row-col
+						background-color: marron
+						display: inline-block
+						vertical-align: middle
+						@include respond-to(xs)
+							text-align: center
+						span
+							display: block
+							text-decoration: underline
 
-		.checkbox 
-			position: relative
-			top: 0
-			margin: 0 1rem 0 0
-			cursor: pointer
-			opacity: 1
-			left: auto
-			cursor: pointer
-			&:before 
-				+transition(all .3s ease-in-out)
-				content: ""
-				position: absolute
-				left: 0
-				z-index: 1
-				width: 1rem
-				height: 1rem
-				border: 2px solid $white
-				top: 2px
-		  
-			&:checked 
-				&:before 
-					transform: rotate(-45deg)
-					height: .5rem
-					border-color: $color-espejo
-					border-top-style: none
-					border-right-style: none
-		    
-		  
-			&:after 
-				content: ""
-				position: absolute
+			.checkbox 
+				position: relative
 				top: 0
-				left: 0
-				width: 1.1rem
-				height: 1.1rem
-				background-color: $white
+				margin: 0 1rem 0 0
 				cursor: pointer
+				opacity: 1
+				left: auto
+				cursor: pointer
+				&:before 
+					+transition(all .3s ease-in-out)
+					content: ""
+					position: absolute
+					left: 0
+					z-index: 1
+					width: 1rem
+					height: 1rem
+					border: 2px solid $white
+					top: 2px
+				&:checked 
+					&:before 
+						transform: rotate(-45deg)
+						height: .5rem
+						border-color: $color-espejo
+						border-top-style: none
+						border-right-style: none
+				&:after 
+					content: ""
+					position: absolute
+					top: 0
+					left: 0
+					width: 1.1rem
+					height: 1.1rem
+					background-color: $white
+					cursor: pointer

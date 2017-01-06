@@ -1242,6 +1242,7 @@ $(document).ready(function() {
 	$(modalOpen).on("click", function(){
 
 		modal.style.display = "flex";
+		modal.style.display = "-ms-flexbox";
 		
 		owl.owlCarousel({
 			center: true,
