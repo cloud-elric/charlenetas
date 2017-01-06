@@ -186,8 +186,8 @@ class NetasController extends Controller {
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
 		
-		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->count();
-		$numRand = rand(1,$countClientes);
+		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
+		$numRand = $countClientes->id_cliente;
 		$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 		
 		// Tipos de post
@@ -241,11 +241,11 @@ class NetasController extends Controller {
 			
 		}else{
 		
-			$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->count();
-			$numRand = rand(1,$countClientes);
-			if($numRand == $num && $numRand+1 <= $countClientes){
+			$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
+			$numRand = $countClientes->id_cliente;
+			if($numRand == $num && $numRand+1 <= $countClientes->id_cliente){
 				$numRand++;
-			}else if($numRand == $num && $numRand+1 >= $countClientes){
+			}else if($numRand == $num && $numRand+1 >= $countClientes->id_cliente){
 				$numRand--;
 			}
 			
@@ -1074,7 +1074,7 @@ class NetasController extends Controller {
 				'token' => $token
 		];
 	
-		$utils->sendPreguntaEspejo(/*$admin->txt_email'alfredo@2gom.com.mx'*/'humberto@2gom.com.mx', $parametrosEmail );
+		$utils->sendPreguntaEspejo($admin->txt_email, $parametrosEmail );
 	}
 	
 	private function enviarEmailAgregarCita($admin, $user){
