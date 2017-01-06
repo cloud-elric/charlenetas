@@ -975,7 +975,8 @@ class NetasController extends Controller {
 			$entCitas->save();
 			
 			$admin = ModUsuariosEntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
-			$this->enviarEmailAgregarCita($admin);
+			$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$id_usuario])->one();
+			$this->enviarEmailAgregarCita($admin, $usuario);
 			
 			$success = "creditosSuficientes";
 			return ["status"=>$success];
@@ -1061,7 +1062,7 @@ class NetasController extends Controller {
 				'token' => $token
 		];
 	
-		$utils->sendComentarioContestado(/*$user->txt_email*/'alperulo@yahoo.com', $parametrosEmail );
+		$utils->sendComentarioContestado(/*$user->txt_email*/'raul@2gom.com.mx', $parametrosEmail );
 	}
 	
 	private function enviarEmailPreguntaEspejo($user, $token){
@@ -1076,14 +1077,15 @@ class NetasController extends Controller {
 		$utils->sendPreguntaEspejo($user->txt_email, $parametrosEmail );
 	}
 	
-	private function enviarEmailAgregarCita($user){
+	private function enviarEmailAgregarCita($admin, $user){
 	
 		$utils = new Utils();
 		$parametrosEmail = [
 				'nombre' => $user->txt_username,
+				'ap_paterno' => $user->txt_apellido_paterno,
 				'correo' => $user->txt_email
 		];
 	
-		$utils->sendCitaCreada($user->txt_email, $parametrosEmail );
+		$utils->sendCitaCreada(/*$admin->txt_email*/'raul@2gom.com.mx', $parametrosEmail );
 	}
 }

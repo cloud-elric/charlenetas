@@ -41,18 +41,28 @@
 	<!-- <div id='calendar'></div>
 	<br/> -->
 	
-	<a class="modal-trigger waves-effect waves-light btn" href="#modal1" style="display: none">Modal</a>
+	<a class="modal-trigger modal-cita waves-effect waves-light btn" href="#modal1" style="display: none">Modal</a>
 	<!-- Modal Structure -->
   	<div id="modal1" class="modal">
     	<div class="modal-content">
       		<h4>Crear Cita</h4>
       		<form>
-				<label>Cita: </label>
-				<input type="text" id="nombreCita" name="nombreCita">
+				<h5>Se creara una cita </h5>
+<!-- 				<input type="text" id="nombreCita" name="nombreCita"> -->
 				<div class="modal-footer">
-					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat" id="submitButton" >Guardar</button>
+					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat" id="submitButton" >Aceptar</button>
+					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat" id="submitButtonCancelar" >Cancelar</button>
 				</div>
 	  		</form>
+	  	</div>
+	</div>
+	
+	
+	<a class="modal-trigger modal-creditos waves-effect waves-light btn" href="#modal2" style="display: none">Modal</a>
+	<!-- Modal Structure -->
+  	<div id="modal2" class="modal">
+    	<div class="modal-content">
+      		<h4>No tienes los creditos suficientes</h4>
 	  	</div>
 	</div>
 	

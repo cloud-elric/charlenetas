@@ -156,7 +156,7 @@ class Utils {
 	
 	public function sendCitaCreada($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-creada.html', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Han hecho una cita.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-creada.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Han hecho una cita.', $parametrosEmail );
 	}
 	
 	/**

@@ -53,12 +53,13 @@
 						</tr>
 						<tr>
 							<td colspan=2 style="color: #265D9E; font-size: 24px; padding: 30px 0px;">
-								Han hecho una cita en charlenetas.
+								<h3><?= $nombre . " " . $ap_paterno ?></h3>
+								Ha hecho una cita en charlenetas.
 							</td>
 						</tr>
 						<tr>
 							<td align="center" colspan=2 style="padding: 20px 0px 100px;">
-								<a href="#" style="background-color: #498FE1; border-radius: 5px; color: #FFF; display: block; font-size: 20px; height: 43px; line-height: 43px; margin: 0 auto; padding: 0 20px; width: 78%;" class="link-responsive">Ver respuesta</a>
+								<a href="<?= Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>adminPanel/calendario/calendario" style="background-color: #498FE1; border-radius: 5px; color: #FFF; display: block; font-size: 20px; height: 43px; line-height: 43px; margin: 0 auto; padding: 0 20px; width: 78%;" class="link-responsive">Ver Cita</a>
 							</td>
 						</tr>
 						<tr>

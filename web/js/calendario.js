@@ -19,7 +19,7 @@ var calendar = $('#calendar').fullCalendar({
 		calendar.fullCalendar('changeView','agendaDay')
 		
 		if(view.name == 'agendaDay'){
-			$('.modal-trigger').trigger('click');
+			$('.modal-trigger.modal-cita').trigger('click');
 			//var title = prompt('Title:');
 			//if (title) {
 			start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
@@ -32,10 +32,10 @@ var calendar = $('#calendar').fullCalendar({
 				
 			$('#submitButton').on('click', function(e){
 				e.preventDefault();
-				title = $('#nombreCita').val()
+				title = "Han hecho una cita en charlenetas";//$('#nombreCita').val()
 				$.ajax({
 					url: 'agregar-citas',
-					data: 'title='+ title+'&start='+ start +'&end='+ end ,
+					data: 'title='+ title +'&start='+ start +'&end='+ end ,
 					//dataType: "JSON",
 					type: 'POST',
 					success: function(json) {
@@ -52,7 +52,8 @@ var calendar = $('#calendar').fullCalendar({
 								true // make the event 'stick'
 								);
 						}else {
-							alert("No tienes los creditos suficientes");
+							//alert("No tienes los creditos suficientes");
+							$('.modal-trigger.modal-creditos').trigger('click');
 						}
 					},
 					error: function(){
@@ -60,6 +61,11 @@ var calendar = $('#calendar').fullCalendar({
 					}
 				});
 			});
+			
+			$('#submitButtonCancelar').on('click', function(e){
+				$('.lean-overlay').trigger("click");
+			});
+			
 			calendar.fullCalendar('unselect');	
 		}
 	} 

@@ -5,6 +5,9 @@ namespace app\modules\modAdminPanel\controllers;
 use yii\web\Controller;
 use app\modules\ModUsuarios\models\Utils;
 use app\models\EntCitas;
+use yii\filters\AccessControl;
+use app\modules\modAdminPanel\components\AccessRule;
+use app\modules\ModUsuarios\models\EntUsuarios;
 
 /**
  * Calendario controller for the `adminPanel` module
@@ -12,6 +15,44 @@ use app\models\EntCitas;
 class CalendarioController extends Controller
 {
 	public $layout = 'main';
+	
+	public function behaviors() {
+		// http://code.tutsplus.com/tutorials/how-to-program-with-yii2-user-access-controls--cms-23173
+		return [
+	
+				'access' => [
+						'class' => AccessControl::className (),
+						// We will override the default rule config with the new AccessRule class
+						'ruleConfig' => [
+								'class' => AccessRule::className ()
+						],
+						'only' => [
+								'calendario',
+								'anadir-citas',
+								'actualizar-citas',
+								'agregar-citas',
+								'eliminar-citas'
+						],
+						'rules' => [
+								[
+										'actions' => [
+												'calendario',
+								'anadir-citas',
+								'actualizar-citas',
+								'agregar-citas',
+								'eliminar-citas'
+										],
+										'allow' => true,
+										// Allow users, moderators and admins to create
+										'roles' => [
+												EntUsuarios::ROLE_ADMIN
+										]
+								]
+						]
+				]
+		];
+	}
+	
     /**
      * Renders the index view for the module
      * @return string
