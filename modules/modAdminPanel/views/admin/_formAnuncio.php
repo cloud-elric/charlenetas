@@ -38,7 +38,7 @@ $form = ActiveForm::begin ( [
 	
 		<?= $form->field($anuncio, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
 
-		<?= $form->field($anuncio, 'fch_creacion')->textInput(["class"=>"datepicker"])?>
+		<?= $form->field($anuncio, 'imagen2', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
 		
 		<?= $form->field($anuncio, 'fch_finalizacion')->textInput(["class"=>"datepicker"])?>
 

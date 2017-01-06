@@ -13,17 +13,20 @@ var masonryOptions = {
 
 };
 
-// Carga mas pins de los post
 var arrayAnuncios = [];
+var num;
+$(document).ready(function(){
+	num = $(".container-fluid").data("anuncio");
+	arrayAnuncios[0] = num;
+});
+
+// Carga mas pins de los post
 function cargarMasPosts(postTotales, numeroPostMostrar) {
 	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
 	l.start();
 
 	totalPostMostrados = (pages + 1) * 30;
 	totalPost = postTotales - totalPostMostrados;
-	
-	var num = $(".container-fluid").data("anuncio");
-	arrayAnuncios[0] = num;
 	
 	//console.log("numeroAnuncio"+num );
 	

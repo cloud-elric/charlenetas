@@ -1380,7 +1380,7 @@ class AdminController extends Controller {
 	
 	public function actionMostrarAnuncios($idC){
 		$cliente = EntClientes::find()->where(['id_cliente'=>$idC])->one();
-		$anuncios = EntAnuncios::find()->where(['id_cliente'=>$idC])->andWhere(['b_habilitado'=>1])->all();
+		$anuncios = EntAnuncios::find()->where(['id_cliente'=>$idC])->andWhere(['b_habilitado'=>1])->orderBy('id_anuncio DESC')->all();
 		
 		return $this->render('anuncios',[
 			'cliente' => $cliente,
@@ -1397,16 +1397,33 @@ class AdminController extends Controller {
 			
 			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
 			$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
+			$anuncio->fch_creacion = Utils::getFechaActual();
 			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
 			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
 			$anuncio->save();
 			$url = Url::base()."/uploads/imagenesAnuncios/";
+			
+			$anuncio2 = new EntAnuncios();	
+			$anuncio2->imagen2 = UploadedFile::getInstance ( $anuncio2, 'imagen2' );
+			$anuncio2->id_anuncio = $anuncio->id_anuncio + 1;
+			$anuncio2->id_cliente = $anuncio->id_cliente;
+			$anuncio2->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio2->imagen2->extension;
+			$anuncio2->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
+			$anuncio2->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
+			$anuncio2->save();
+// 			print_r($anuncio2);
+// 			exit();
+			$anuncio2->cargarImagenAnuncio2( $anuncio2 );
+			
+			
 			if ($anuncio->cargarImagenAnuncio ( $anuncio )) {
 				return [
 						'status' => 'success',
 						'id' => $anuncio->id_anuncio,
 						'url' => $url,
-						'img' => $anuncio->txt_imagen
+						'img' => $anuncio->txt_imagen,
+						'id2' => $anuncio2->id_anuncio,
+						'img2' => $anuncio2->txt_imagen
 				];
 			}
 		}

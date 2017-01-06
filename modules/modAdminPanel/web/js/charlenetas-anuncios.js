@@ -53,42 +53,42 @@ function deletePosts(){
 	});
 }
 
-var pages = 1;
-//Carga mas pins de los post
-function cargarMasPosts(postTotales, numeroPostMostrar) {
-	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-media'));
-	l.start();
-	 	
-	totalPostMostrados = (pages+1)*10;
-	totalPost = postTotales - totalPostMostrados;
-	
-	var contenedor = $('#js-contenedor-tarjetas');
-	var url = basePath+'adminPanel/admin/get-mas-posts-media?page=' + pages;
-
-	$.ajax({
-		url : url,
-		success : function(res) {
-
-			var $items = $(res);
-
-			contenedor.append($items);
-			//contenedor.masonry('appended', $items);
-
-			pages++;
-
-			//filtrarPost();
-			
-			if(totalPost<=0){
-				$("#js-cargar-mas-posts-media").remove();
-			}else{
-				$("#js-cargar-mas-posts-media label").text('('+totalPost+')');
-			}
-			
-			l.stop();
-		}
-	});
-
-}
+//var pages = 1;
+////Carga mas pins de los post
+//function cargarMasPosts(postTotales, numeroPostMostrar) {
+//	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-media'));
+//	l.start();
+//	 	
+//	totalPostMostrados = (pages+1)*10;
+//	totalPost = postTotales - totalPostMostrados;
+//	
+//	var contenedor = $('#js-contenedor-tarjetas');
+//	var url = basePath+'adminPanel/admin/get-mas-posts-media?page=' + pages;
+//
+//	$.ajax({
+//		url : url,
+//		success : function(res) {
+//
+//			var $items = $(res);
+//
+//			contenedor.append($items);
+//			//contenedor.masonry('appended', $items);
+//
+//			pages++;
+//
+//			//filtrarPost();
+//			
+//			if(totalPost<=0){
+//				$("#js-cargar-mas-posts-media").remove();
+//			}else{
+//				$("#js-cargar-mas-posts-media label").text('('+totalPost+')');
+//			}
+//			
+//			l.stop();
+//		}
+//	});
+//
+//}
 
 /**
  * Abrir modal para editar
@@ -119,9 +119,24 @@ function agregarTarjetaNueva(json) {
 			+ '</div>'
 			+ '</div>'
 			+ '</div>';
-	var contenedor = $('#js-contenedor-tarjetas');
 	
+	var template2 = '<div class="col s12 m6 l4" id="card_anuncio_'+json.id2+'">'
+	+ '<div class="card card-media" data-token="'+json.id2+'" style="background-image: url('+json.url+json.img2+')">'
+	+ '<div class="card-contexto-options">'
+	+ '<div>'
+	+ '<input type="checkbox" id="delete_anuncio_'+json.id2+'" value="'+json.id2+'"/>'
+		+ '<label for="delete_anuncio_'+json.id2+'"></label>'
+	+ '</div>'
+	+ '<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAnuncio('+json.id2+')" href="#js-modal-post-editar">'
+	+ '<i class="ion ion-android-more-vertical card-edit"></i>'
+	+ '</a>'
+	+ '</div>'
+	+ '</div>'
+	+ '</div>';
+	
+	var contenedor = $('#js-contenedor-tarjetas');
 	contenedor.prepend(template);
+	contenedor.prepend(template2);
 	
 //	var element = document.getElementById("button_"+json.tk);
 //	console.log(element);

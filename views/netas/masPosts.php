@@ -7,7 +7,8 @@ $numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->all(
 $countPost = 0;
 $countAnuncio = 0;
 
-$num = rand(1,5);
+//$num = rand(1,5);
+$num = 5;
 
 foreach ( $listaPost as $post ) {
 	if($countAnuncio > count($numAnunciosCliente)){
@@ -19,7 +20,8 @@ foreach ( $listaPost as $post ) {
 		include 'include/_anuncioPin.php';
 		$countAnuncio++;
 
-		$num = rand($num+2,$num+6);
+		//$num = rand($num+2,$num+6);
+		$num += 5;
 	}else{
 	
 		if($post->b_habilitado == 1){

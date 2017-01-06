@@ -21,6 +21,8 @@ use Yii;
 class EntAnuncios extends \yii\db\ActiveRecord
 {
 	public $imagen;
+	public $imagen2;
+	
 	/**
      * @inheritdoc
      */
@@ -40,7 +42,8 @@ class EntAnuncios extends \yii\db\ActiveRecord
             [['fch_creacion', 'fch_finalizacion'], 'safe'],
             [['txt_imagen', 'txt_descripcion'], 'string', 'max' => 60],
             [['id_cliente'], 'exist', 'skipOnError' => true, 'targetClass' => EntClientes::className(), 'targetAttribute' => ['id_cliente' => 'id_cliente']],
-        	[['imagen'],'image', 'extensions' => 'png, jpg, jpeg']
+        	[['imagen', 'imagen2'],'image', 'extensions' => 'png, jpg, jpeg'],
+        	//[['imagen2'],'image', 'extensions' => 'png, jpg, jpeg']
         ];
     }
 
@@ -72,5 +75,8 @@ class EntAnuncios extends \yii\db\ActiveRecord
     public function cargarImagenAnuncio($anuncio) {
     	$anuncio->imagen->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_anuncios'] . $anuncio->txt_imagen );
     	return true;
+    }
+    public function cargarImagenAnuncio2($anuncio) {
+    	return $anuncio->imagen2->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_anuncios'] . $anuncio->txt_imagen );
     }
 }
