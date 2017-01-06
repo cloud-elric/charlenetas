@@ -269,19 +269,31 @@ function stopEvent(ev) {
 	 
 	}
 
-$(document).ready(function(){
-	$('.card-user').on('click', function(e) {	
-		//console.log(e.target);
-		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
-			e.stopPropagation();
-			return;
-		}
-		//$(e.target).hasClass('alquimia-delete-check')
-	
-		var token = $(this).data('token');
-		mostrarAnuncios(token)
-	});
-});
+//$(document).ready(function(){
+//	$('.card-user').on('click', function(e) {	
+//		//console.log(e.target);
+//		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+//			e.stopPropagation();
+//			return;
+//		}
+//		//$(e.target).hasClass('alquimia-delete-check')
+//	
+//		var token = $(this).data('token');
+//		mostrarAnuncios(token)
+//	});
+//});
+
+document.on({'click':function(e){
+	if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+		e.stopPropagation();
+		return;
+	}
+	//$(e.target).hasClass('alquimia-delete-check')
+
+	var token = $(this).data('token');
+	mostrarAnuncios(token)
+	}
+}, '.card-user');
 
 function mostrarAnuncios(id){
 	console.log("id-"+id);

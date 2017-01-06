@@ -1062,19 +1062,19 @@ class NetasController extends Controller {
 				'token' => $token
 		];
 	
-		$utils->sendComentarioContestado(/*$user->txt_email*/'raul@2gom.com.mx', $parametrosEmail );
+		$utils->sendComentarioContestado($user->txt_email, $parametrosEmail );
 	}
 	
-	private function enviarEmailPreguntaEspejo($user, $token){
+	private function enviarEmailPreguntaEspejo($admin, $token){
 	
 		$utils = new Utils();
 		$parametrosEmail = [
-				'nombre' => $user->txt_username,
-				'correo' => $user->txt_email,
+				'nombre' => $admin->txt_username,
+				'correo' => $admin->txt_email,
 				'token' => $token
 		];
 	
-		$utils->sendPreguntaEspejo($user->txt_email, $parametrosEmail );
+		$utils->sendPreguntaEspejo(/*$admin->txt_email'alfredo@2gom.com.mx'*/'humberto@2gom.com.mx', $parametrosEmail );
 	}
 	
 	private function enviarEmailAgregarCita($admin, $user){
@@ -1086,6 +1086,6 @@ class NetasController extends Controller {
 				'correo' => $user->txt_email
 		];
 	
-		$utils->sendCitaCreada(/*$admin->txt_email*/'raul@2gom.com.mx', $parametrosEmail );
+		$utils->sendCitaCreada($admin->txt_email, $parametrosEmail );
 	}
 }
