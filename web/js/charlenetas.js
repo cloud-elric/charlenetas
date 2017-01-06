@@ -14,28 +14,36 @@ var masonryOptions = {
 };
 
 // Carga mas pins de los post
+var arrayAnuncios = [];
 function cargarMasPosts(postTotales, numeroPostMostrar) {
 	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
 	l.start();
 
 	totalPostMostrados = (pages + 1) * 30;
 	totalPost = postTotales - totalPostMostrados;
-
+	
+	var num = $(".container-fluid").data("anuncio");
+	arrayAnuncios[0] = num;
+	
+	//console.log("numeroAnuncio"+num );
+	
 	var contenedor = $('#js-contenedor-posts-tarjetas');
-	var url = basePath + 'netas/get-mas-posts?page=' + pages;
+	var url = basePath + 'netas/get-mas-posts?page=' + pages +"&num="+num+"&array="+arrayAnuncios;
 
 	$.ajax({
 		url : url,
 		success : function(res) {
-
 			var $items = $(res);
 
 			grid.append($items);
 			grid.masonry('appended', $items);
-
+			
 			pages++;
 
 			filtrarPost();
+			
+			arrayAnuncios.push($(".js-anuncios-por-pagina:last").data("anuncio"));
+			console.log(arrayAnuncios);
 
 			if (totalPost <= 0) {
 				$("#js-cargar-mas-posts").remove();
@@ -878,7 +886,7 @@ function agregarPregunta() {
 	$('#js-modal-espejo').trigger('click');
 }
 
-// Carga la habilidad para los feedback
+//Carga la habilidad para los feedback
 function cargarFeeds() {
 	$('.js-feedback').each(function(index) {
 		var token = $(this).data('token');
@@ -1145,10 +1153,10 @@ var modalClose = document.getElementById("modal-tutoriales-close");
 $(document).ready(function() {
 
 	
-	$('.modal-content .wrap').on('click touchstart', function(e) {
+	$('#modal-login .modal-content .wrap').on('click touchstart', function(e) {
 
 		console.log(e.target.className);
-		if (e.target.className == 'section') {
+		if (e.target.className == 'wrap') {
 			e.preventDefault();
 			$('.lean-overlay').trigger('click');
 
@@ -1229,8 +1237,7 @@ $(document).ready(function() {
 	 */
 	// Open Modal
 	$(modalOpen).on("click", function(){
-		
-		
+
 		modal.style.display = "flex";
 		
 		owl.owlCarousel({
@@ -1349,6 +1356,10 @@ function cargarCerrarSesion() {
 	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="' + basePath
 			+ 'site/logout">Cerrar sesión</a>';
 	$("#js-ingresar-cerrar-sesion").replaceWith(cerrarSesion);
+	
+	var citas = '<a id="js-citas" href="' + basePath
+	+ 'netas/crear-cita">Citas</a>';
+	$("#js-citas").replaceWith(citas);
 }
 
 $('.filters-toggle').on('click', function() {
@@ -1378,6 +1389,7 @@ function compartirFacebook(token) {
 }
 
 $('.anim-account-close').on('click', function() {
+	
 	$('.lean-overlay').trigger('click');
 });
 
@@ -1418,6 +1430,38 @@ function deshabilitarBotonSabias(elemento){
 	showModalLogin();
 	
 	elemento.prop('checked', false);
+}
+
+$(document).ready(function(){
+	//document.cookie = "cookie1=; max-age=0; path=/";
+	
+	$("#checkbox").change(function(){
+		document.cookie = "cookie1=noMostrar; path=/";
+		
+	});
+	
+	
+	if(getCookie('cookie1')!="noMostrar"){
+		setTimeout(function(){
+			$(modalOpen).click();
+		}, 5000);
+	}
+	
+});
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }
 
 

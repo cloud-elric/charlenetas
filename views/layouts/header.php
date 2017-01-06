@@ -5,7 +5,8 @@ use app\models\EntNotificaciones;
 ?>
 <div class="header">
 	<div class="">
-		<a href="#" class="disabled">Workshops</a> <a href="#" id="modal-tutoriales-open" class="disabled">Tutoriales</a>
+		<a href="#" class="disabled">Workshops</a>
+		<a href="#" id="modal-tutoriales-open" class="disabled">Tutoriales</a>
 	</div>
 	<div class="logo">
 		<img src="<?=Url::base()?>/webAssets/images/logo-charlenetas.png" alt="Charlenetas.com" />
@@ -19,10 +20,12 @@ use app\models\EntNotificaciones;
 		//  echo Html::img(Yii::$app->user->identity->getImageProfile());	
 		//  echo Yii::$app->user->identity->nombreCompleto.'<br>';
 		 	echo Html::a('Cerrar sesión', ['site/logout']);
+		 	echo Html::a('Citas', ['netas/crear-cita']);
 		 }else{
 
 		 	?>
 		 	<a id="js-ingresar-cerrar-sesion" onclick="showModalLogin();">Ingresar</a>
+		 	<a id="js-citas" onclick="showModalLogin();">Citas</a>
 		 	<?php 
 		 }
 		 ?>

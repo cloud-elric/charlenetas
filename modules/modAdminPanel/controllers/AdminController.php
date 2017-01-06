@@ -31,6 +31,7 @@ use yii\web\NotFoundHttpException;
 use app\models\EntClientes;
 use app\models\EntAnuncios;
 use yii\helpers\Url;
+use app\models\EntUsuariosSubscripciones;
 
 /**
  * Default controller for the `adminPanel` module
@@ -736,8 +737,17 @@ class AdminController extends Controller {
 			
 			if ($post->id_usuario != Yii::$app->user->identity->id_usuario) {
 				// Guardar la notificacion
-				$notificaciones = new EntNotificaciones ();
-				$notificaciones->guardarNotificacionRespuestasAdmin ( $post, $notificaciones );
+// 				$notificaciones = new EntNotificaciones ();
+// 				$notificaciones->guardarNotificacionRespuestasAdmin ( $post, $notificaciones );
+				
+				$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$post->id_usuario])->one();
+				$this->enviarEmailEspejoContestado($usuario, $post->txt_token);
+				
+				$suscrito = EntUsuariosSubscripciones::find()->where(['id_post'=>$post->id_post])->one();
+				if($suscrito){
+					$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$suscrito->id_usuario])->one();
+					$this->enviarEmailSuscritoEspejo($user, $token);
+				}
 			}
 			
 			return [ 
@@ -1453,5 +1463,29 @@ class AdminController extends Controller {
 				'anuncio' => $anuncio,
 				'id' => $anuncio->id_cliente
 		] );
+	}
+	
+	private function enviarEmailEspejoContestado($user, $token){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $user->txt_username,
+				'correo' => $user->txt_email,
+				'token' => $token
+		];
+		
+ 		$utils->sendPreguntaContestada( $user->txt_email, $parametrosEmail );
+	}
+	
+	private function enviarEmailSuscritoEspejo($user, $token){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $user->txt_username,
+				'correo' => $user->txt_email,
+				'token' => $token
+		];
+	
+		$utils->sendSuscripcion( $user->txt_email, $parametrosEmail );
 	}
 }

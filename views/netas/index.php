@@ -10,7 +10,7 @@ $this->title = 'Charlenetas';
 <?=$this->render('//layouts/header')?>
 <?=$this->render('//layouts/nav', ['tiposPost'=>$tiposPost])?>
 
-<div class=container-fluid>
+<div data-anuncio="<?= $numRand ?>" class="container-fluid">
 	<div class="pins-grid-container">
 		<div class="grid" id="js-contenedor-posts-tarjetas">
 
@@ -51,6 +51,15 @@ $this->title = 'Charlenetas';
 					</div>
 			<?php
 					include 'masPosts.php';
+					
+					
+					//foreach($listaAnuncios as $anuncio){
+			?>
+						
+			<?php 
+					//}
+					
+					
 			}
 			?>
   </div>
@@ -398,10 +407,26 @@ if (! empty ($isCuentaActivada)) {
 	</div>
 	<!-- end - .modal-content -->
 
-	<!-- Brn Close -->
+	<!-- Btn Close -->
 	<span id="modal-tutoriales-close" class="modal-close">
 		<i class="icon-close"></i>
 	</span>
+
+	<ul class="list modal-check">
+		<li class="list__item">
+			<label class="label--checkbox">
+					
+				<div class="label--checkbox-row">
+					<div class="label--checkbox-row-col">
+						<input type="checkbox" id="checkbox" class="checkbox">
+					</div>
+					<div class="label--checkbox-row-col">
+						No volver a mostrar
+					</div>
+				</div>
+			</label>
+		</li>
+	</ul>
 
 	<!-- <i class="material-icons medium icon-demo">trending_flat</i> -->
 

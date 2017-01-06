@@ -8,10 +8,12 @@
 				</div>
 
 				<div class="card-contexto-options">
+
 				<div>
 				<input type="checkbox" id="delete-<?=$postSabiasQue->txt_token?>" value="<?=$postSabiasQue->txt_token?>" />
 				<label for="delete-<?=$postSabiasQue->txt_token?>"></label>
 			</div>
+
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSabiasQue('<?=$postSabiasQue->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
