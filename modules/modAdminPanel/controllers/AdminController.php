@@ -743,8 +743,8 @@ class AdminController extends Controller {
 				$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$post->id_usuario])->one();
 				$this->enviarEmailEspejoContestado($usuario, $post->txt_token);
 				
-				$suscrito = EntUsuariosSubscripciones::find()->where(['id_post'=>$post->id_post])->one();
-				if($suscrito){
+				$suscritos = EntUsuariosSubscripciones::find()->where(['id_post'=>$post->id_post])->all();
+				foreach($suscritos as $suscrito){
 					$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$suscrito->id_usuario])->one();
 					$this->enviarEmailSuscritoEspejo($user, $token);
 				}

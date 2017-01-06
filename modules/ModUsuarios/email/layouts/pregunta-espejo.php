@@ -53,9 +53,10 @@
 						</tr>
 						<tr>
 							<td colspan=2 style="color: #265D9E; font-size: 24px; padding: 30px 0px;">
-								<?= $nombre ?>
-								<?= $correo ?>
+								
 								Haz recibido una pregunta en charlenetas.
+								<br>
+								
 							</td>
 						</tr>
 						<tr>
