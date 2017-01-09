@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use vendor\facebook\FacebookI;
 
 class SiteController extends Controller
 {
@@ -121,5 +122,28 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    
+    public function actionEnviarNotificacion(){
+    	
+    	$app_id = '1779986862262300';
+    	
+    	$app_secret = 'b00ca2920c357bf845b8f23aab5eae6e';
+    	
+    	$app_access_token = $app_id . '|' . $app_secret;
+    	
+//     	$response = $fb->fb->api( '/10210942290421102/notifications', 'POST', array(
+    	
+//     			'template' => 'You have received a new message.',
+    	
+//     			'href' => Yii::$app->urlManager->createAbsoluteUrl ( [''] ),
+    	
+//     			'access_token' => $app_access_token
+//     	) );
+    	
+//     	print_r($response);
+
+    	$fb = new FacebookI();
+    	$fb->fb->post('/10210942290421102/notifications?access_token='.$app_access_token.'& href=http://notei.com.mx/test/wwwCharlenetas/web/&template=Tienes un nuevo mensaje');
     }
 }
