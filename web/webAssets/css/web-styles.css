@@ -587,9 +587,15 @@ body {
   width: 100%;
 }
 
+@media screen and (min-width: 1351px) {
+  .pins-grid-container {
+    max-width: 1348px;
+  }
+}
+
 @media screen and (max-width: 1350px) {
   .pins-grid-container {
-    max-width: 1068px;
+    max-width: 1348px;
   }
 }
 
@@ -2182,10 +2188,19 @@ nav.mobile ul li a.filter-active span {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .modal-tuto .modal-content {
+    height: auto;
+    max-height: 90vh;
+    padding: 10px 0;
+    width: 90%;
+  }
+}
+
 @media only screen and (min-device-width: 351px) and (max-device-width: 767px) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 59vh;
+    min-height: 62vh;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2195,7 +2210,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 351px) and (max-device-width: 767px) and (orientation: portrait) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 59vh;
+    min-height: 62vh;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2215,7 +2230,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 300px) and (max-device-width: 350px) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 64vh;
+    min-height: 66vh;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2225,7 +2240,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 300px) and (max-device-width: 350px) and (orientation: portrait) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 64vh;
+    min-height: 66vh;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2554,6 +2569,30 @@ nav.mobile ul li a.filter-active span {
   }
 }
 
+@media only screen and (min-device-width: 351px) and (max-device-width: 767px) and (orientation: landscape) {
+  .modal-tuto .form-group-check {
+    bottom: 2px;
+  }
+}
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 350px) {
+  .modal-tuto .form-group-check {
+    bottom: 4px;
+  }
+}
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 350px) and (orientation: portrait) {
+  .modal-tuto .form-group-check {
+    bottom: 4px;
+  }
+}
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 350px) and (orientation: landscape) {
+  .modal-tuto .form-group-check {
+    bottom: 8px;
+  }
+}
+
 .modal-tuto .form-group-check .boxes {
   position: relative;
   z-index: 2;
@@ -2606,12 +2645,6 @@ nav.mobile ul li a.filter-active span {
   }
 }
 
-@media screen and (max-width: 450px) {
-  .modal-tuto .form-group-check .boxes input[type="checkbox"] + label:before {
-    top: 9px;
-  }
-}
-
 .modal-tuto .form-group-check .boxes input[type="checkbox"]:checked + label:before {
   width: 10px;
   top: -2px;
@@ -2628,12 +2661,6 @@ nav.mobile ul li a.filter-active span {
 @media screen and (max-width: 768px) {
   .modal-tuto .form-group-check .boxes input[type="checkbox"]:checked + label:before {
     top: 0px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .modal-tuto .form-group-check .boxes input[type="checkbox"]:checked + label:before {
-    top: 4px;
   }
 }
 
@@ -3164,4 +3191,38 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .anuncio.250-400 {
   height: 400px;
   width: 250px;
+}
+
+.pin.pin-anuncio {
+  background-color: #EEE;
+}
+
+.pin.pin-anuncio .pin-content-wrapper {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 0;
+  padding: 0 !important;
+}
+
+.pin.pin-anuncio .pin-content-wrapper p {
+  display: none;
+}
+
+.pin.pin-anuncio .pin-content-wrapper .pin-link {
+  display: none;
+}
+
+.pin .pin-header-anuncio {
+  background-color: green;
+}
+
+.pin.pin-anuncio-250-250 .pin-content-wrapper {
+  height: 250px;
+  width: 100%;
+}
+
+.pin.pin-anuncio-250-400 .pin-content-wrapper {
+  height: 400px;
+  width: 100%;
 }

@@ -50,16 +50,23 @@
 			padding: 10px 0
 			width: 90%
 		
+		+respond-to(xs)
+			height: auto
+			// min-height: 62vh
+			max-height: 90vh
+			padding: 10px 0
+			width: 90%
+
 		// Movil Lg
 		@media only screen and (min-device-width : 351px) and (max-device-width : 767px)
 			height: auto
-			min-height: 59vh
+			min-height: 62vh
 			max-height: 90vh
 			padding: 10px 0
 			width: 90%
 		@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : portrait)
 			height: auto
-			min-height: 59vh
+			min-height: 62vh
 			max-height: 90vh
 			padding: 10px 0
 			width: 90%
@@ -73,13 +80,13 @@
 		// Movil Xs
 		@media only screen and (min-device-width : 300px) and (max-device-width : 350px)
 			height: auto
-			min-height: 64vh
+			min-height: 66vh
 			max-height: 90vh
 			padding: 10px 0
 			width: 90%
 		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : portrait)
 			height: auto
-			min-height: 64vh
+			min-height: 66vh
 			max-height: 90vh
 			padding: 10px 0
 			width: 90%
@@ -320,6 +327,23 @@
 		+respond-to(xs)
 			justify-content: flex-end
 
+		// Movil Lg
+		// @media only screen and (min-device-width : 351px) and (max-device-width : 767px)
+		// 	bottom: 30px
+		// @media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : portrait)
+		// 	bottom: 30px
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : landscape)
+			bottom: 2px
+
+		// Movil Xs
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px)
+			bottom: 4px
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : portrait)
+			bottom: 4px
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : landscape)
+			bottom: 8px
+
+
 		.boxes 
 			// background-color: rgba(#484848,.3)
 			position: relative
@@ -372,8 +396,8 @@
 				+respond-to(xs)
 					top: 2px
 
-				+respond-to(xx)
-					top: 9px
+				// +respond-to(xx)
+				// 	top: 9px
 			
 
 			input[type="checkbox"]:checked + label:before 
@@ -390,8 +414,8 @@
 				+respond-to(xs)
 					top: 0px
 
-				+respond-to(xx)
-					top: 4px
+				// +respond-to(xx)
+				// 	top: 4px
 		
 		// Mask 
 		.form-group-check-mask
