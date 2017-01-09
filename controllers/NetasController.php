@@ -178,6 +178,7 @@ class NetasController extends Controller {
 	 * Busca todos los post por orden de fecha de publicacion
 	 */
 	public function actionIndex($token=null) {
+		$session = Yii::$app->session;
 		
 		if(!empty($token)){
 			$this->getPostByToken($token);
@@ -186,10 +187,10 @@ class NetasController extends Controller {
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
 		
-		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->count();
-		$numRand = rand(1,$countClientes);
+		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
+		$numRand = $countClientes->id_cliente;
 		$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
-		
+		$session->set('clientes', [$numRand]);
 		// Tipos de post
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
 				'b_habilitado' => 1 
@@ -208,58 +209,45 @@ class NetasController extends Controller {
 	/**
 	 * Obtiene los post por paginacion
 	 */
-	public function actionGetMasPosts($page = 1, $num = 0, $array) {
-		
+	public function actionGetMasPosts($page = 1) {
+		$session = Yii::$app->session;
 		// Layout que usara la vista
 		$this->layout = false;
-		$arrayAnun = explode(",", $array);
+		//$arrayAnun = explode(",", $array);
+		$arrayAnun = null;
 		
-		foreach ($arrayAnun AS $index => $value)
+		$clientes = $session->get('clientes');
+		//foreach ($clientes AS $index => $value)
+		foreach ($clientes AS $index => $value)
 			$arrayAnun[$index] = (int)$value;
 		
-// 		var_dump($arrayAnun);
-// 		exit();
-
-		if(count($arrayAnun) > 1){
+		$countClientes = EntClientes::find()->where(['NOT IN', 'id_cliente',$arrayAnun])->andWhere(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
 			
-			// Recupera n numero de registros por paginacion
-			$listaPost = EntPostsExtend::getPostByPagination ( $page );
-			$listaAnuncios = EntAnuncios::find()->where(['NOT IN', 'id_cliente', $arrayAnun])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
-			
-			$num;
-			foreach($listaAnuncios as $list){
-				$num = $list->id_cliente;
-				break;
-			}
-			
-			// Pintar vista
-			return $this->render ( 'masPosts', [
-					'listaPost' => $listaPost,
-					'listaAnuncios' => $listaAnuncios,
-					'numRand' => $num
-			] );
+		if(!$countClientes){
+			$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
+			$numRand = $countClientes->id_cliente;
+			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+			$session->set('clientes', []);
+			$arrayAnun[] = $numRand;
+			$session->set('clientes', $arrayAnun);
 			
 		}else{
 		
-			$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->count();
-			$numRand = rand(1,$countClientes);
-			if($numRand == $num && $numRand+1 <= $countClientes){
-				$numRand++;
-			}else if($numRand == $num && $numRand+1 >= $countClientes){
-				$numRand--;
-			}
-			
-			// Recupera n numero de registros por paginacion
-			$listaPost = EntPostsExtend::getPostByPagination ( $page );
+			$numRand = $countClientes->id_cliente;
+			$arrayAnun[] = $numRand;
+			$session->set('clientes', $arrayAnun);
+				
 			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
-			
-			// Pintar vista
-			return $this->render ( 'masPosts', [
-					'listaPost' => $listaPost,
-					'listaAnuncios' => $listaAnuncios,
-					'numRand' => $numRand
-			] );
 		}
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPostByPagination ( $page );
+				
+		// Pintar vista
+		return $this->render ( 'masPosts', [
+			'listaPost' => $listaPost,
+			'listaAnuncios' => $listaAnuncios,
+			'numRand' => $numRand
+		]);
 	}
 	
 	/**
@@ -1074,7 +1062,7 @@ class NetasController extends Controller {
 				'token' => $token
 		];
 	
-		$utils->sendPreguntaEspejo(/*$admin->txt_email'alfredo@2gom.com.mx'*/'humberto@2gom.com.mx', $parametrosEmail );
+		$utils->sendPreguntaEspejo($admin->txt_email, $parametrosEmail );
 	}
 	
 	private function enviarEmailAgregarCita($admin, $user){

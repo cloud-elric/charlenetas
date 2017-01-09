@@ -132,7 +132,7 @@ function abrirModalEditarCliente(token){
 
 function agregarTarjetaNueva(json) {
 	var template = '<div class="col s12 m6 l4" id="card_cliente_'+json.id+'">'
-			+ '<div class="card card-user">'	
+			+ '<div class="card card-user" onClick="mostrarAnuncios('+json.id+')">'	
 			+ '<div class="card-user-cont">'
 			+ '<div class="row">'
 			+ '<div class="col s9">'
@@ -269,9 +269,22 @@ function stopEvent(ev) {
 	 
 	}
 
+$(document).ready(function(){
+	$('.card-user').on('click', function(e) {	
+		//console.log(e.target);
+		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+			e.stopPropagation();
+			return;
+		}
+		//$(e.target).hasClass('alquimia-delete-check')
+	
+		var token = $(this).data('token');
+		mostrarAnuncios(token)
+	});
+});
+
 //$(document).ready(function(){
-//	$('.card-user').on('click', function(e) {	
-//		//console.log(e.target);
+//	document.on({'click':function(e){
 //		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
 //			e.stopPropagation();
 //			return;
@@ -280,20 +293,9 @@ function stopEvent(ev) {
 //	
 //		var token = $(this).data('token');
 //		mostrarAnuncios(token)
-//	});
+//		}
+//	}, '.card-user');
 //});
-
-document.on({'click':function(e){
-	if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
-		e.stopPropagation();
-		return;
-	}
-	//$(e.target).hasClass('alquimia-delete-check')
-
-	var token = $(this).data('token');
-	mostrarAnuncios(token)
-	}
-}, '.card-user');
 
 function mostrarAnuncios(id){
 	console.log("id-"+id);

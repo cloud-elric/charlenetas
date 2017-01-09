@@ -1305,7 +1305,7 @@ class AdminController extends Controller {
 	}
 	
 	public function actionClientes(){
-		$clientes = EntClientes::find()->where(['b_habilitado'=>1])->all();
+		$clientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy('id_cliente DESC')->all();
 		
 		return $this->render('clientes',[
 				'clientes' =>$clientes

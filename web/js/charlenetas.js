@@ -13,13 +13,6 @@ var masonryOptions = {
 
 };
 
-var arrayAnuncios = [];
-var num;
-$(document).ready(function(){
-	num = $(".container-fluid").data("anuncio");
-	arrayAnuncios[0] = num;
-});
-
 // Carga mas pins de los post
 function cargarMasPosts(postTotales, numeroPostMostrar) {
 	var l = Ladda.create(document.getElementById('js-cargar-mas-posts'));
@@ -31,7 +24,7 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 	//console.log("numeroAnuncio"+num );
 	
 	var contenedor = $('#js-contenedor-posts-tarjetas');
-	var url = basePath + 'netas/get-mas-posts?page=' + pages +"&num="+num+"&array="+arrayAnuncios;
+	var url = basePath + 'netas/get-mas-posts?page=' + pages;
 
 	$.ajax({
 		url : url,
@@ -44,9 +37,6 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 			pages++;
 
 			filtrarPost();
-			
-			arrayAnuncios.push($(".js-anuncios-por-pagina:last").data("anuncio"));
-			console.log(arrayAnuncios);
 
 			if (totalPost <= 0) {
 				$("#js-cargar-mas-posts").remove();

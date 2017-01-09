@@ -1,4 +1,3 @@
-<input class="js-anuncios-por-pagina" type="hidden" data-anuncio="<?= $numRand ?>">
 <?php
 use app\models\EntAnuncios;
 
