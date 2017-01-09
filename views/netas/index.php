@@ -10,7 +10,7 @@ $this->title = 'Charlenetas';
 <?=$this->render('//layouts/header')?>
 <?=$this->render('//layouts/nav', ['tiposPost'=>$tiposPost])?>
 
-<div data-anuncio="<?= $numRand ?>" class="container-fluid">
+<div class="container-fluid">
 	<div class="pins-grid-container">
 		<div class="grid" id="js-contenedor-posts-tarjetas">
 

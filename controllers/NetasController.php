@@ -188,9 +188,16 @@ class NetasController extends Controller {
 		$listaPost = EntPostsExtend::getPostByPagination ();
 		
 		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
-		$numRand = $countClientes->id_cliente;
-		$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
-		$session->set('clientes', [$numRand]);
+		if($countClientes){
+			$numRand = $countClientes->id_cliente;
+			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+			$session->set('clientes', [$numRand]);
+		}else{
+			$listaAnuncios = EntAnuncios::find()->all();
+			$numRand = 0;
+			$session->set('clientes', [$numRand]);
+		}
+			
 		// Tipos de post
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
 				'b_habilitado' => 1 
@@ -224,19 +231,25 @@ class NetasController extends Controller {
 		$countClientes = EntClientes::find()->where(['NOT IN', 'id_cliente',$arrayAnun])->andWhere(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
 			
 		if(!$countClientes){
+			//echo $countClientes->id_clientes;
 			$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
-			$numRand = $countClientes->id_cliente;
-			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
-			$session->set('clientes', []);
-			$arrayAnun[] = $numRand;
-			$session->set('clientes', $arrayAnun);
+			if($countClientes){
+				$numRand = $countClientes->id_cliente;
+				$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+				$session->set('clientes', []);
+				$arrayAnun[] = $numRand;
+				$session->set('clientes', $arrayAnun);
+			}else{
+				$listaAnuncios = EntAnuncios::find()->all();
+				$numRand = 0;
+				$session->set('clientes', [$numRand]);
+			}
 			
 		}else{
-		
 			$numRand = $countClientes->id_cliente;
 			$arrayAnun[] = $numRand;
 			$session->set('clientes', $arrayAnun);
-				
+					
 			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 		}
 		// Recupera n numero de registros por paginacion
