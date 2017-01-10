@@ -1397,7 +1397,7 @@ class AdminController extends Controller {
 			
 			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
 			$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
-			$anuncio->fch_creacion = Utils::getFechaActual();
+			//$anuncio->fch_creacion = Utils::getFechaActual();
 			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
 			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
 			$anuncio->save();
