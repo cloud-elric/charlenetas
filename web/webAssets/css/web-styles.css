@@ -3177,22 +3177,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
   box-shadow: 0 1px 0 0 #345678;
 }
 
-/*  Anuncios
-	@mixin =============================================== */
-.anuncio {
-  background-color: red;
-}
-
-.anuncio.250-250 {
-  height: 250px;
-  width: 250px;
-}
-
-.anuncio.250-400 {
-  height: 400px;
-  width: 250px;
-}
-
 .pin.pin-anuncio {
   background-color: #EEE;
 }
@@ -3214,7 +3198,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 .pin .pin-header-anuncio {
-  background-color: green;
+  background-color: maroon;
 }
 
 .pin.pin-anuncio-250-250 .pin-content-wrapper {
