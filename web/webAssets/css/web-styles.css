@@ -2191,7 +2191,7 @@ nav.mobile ul li a.filter-active span {
 @media screen and (max-width: 768px) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 320px;
+    min-height: 200px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2221,7 +2221,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 351px) and (max-device-width: 767px) and (orientation: landscape) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 320px;
+    min-height: 200px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2251,7 +2251,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 300px) and (max-device-width: 350px) and (orientation: landscape) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 320px;
+    min-height: 200px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2264,6 +2264,48 @@ nav.mobile ul li a.filter-active span {
   position: relative;
   width: 100%;
   z-index: 2;
+}
+
+@media only screen and (min-device-width: 351px) and (max-device-width: 767px) {
+  .modal-tuto .modal-content .owl-stage-outer {
+    min-height: 320px;
+    max-height: 90vh;
+  }
+}
+
+@media only screen and (min-device-width: 351px) and (max-device-width: 767px) and (orientation: portrait) {
+  .modal-tuto .modal-content .owl-stage-outer {
+    min-height: 320px;
+    max-height: 90vh;
+  }
+}
+
+@media only screen and (min-device-width: 351px) and (max-device-width: 767px) and (orientation: landscape) {
+  .modal-tuto .modal-content .owl-stage-outer {
+    min-height: 200px;
+    max-height: 90vh;
+  }
+}
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 350px) {
+  .modal-tuto .modal-content .owl-stage-outer {
+    min-height: 320px;
+    max-height: 90vh;
+  }
+}
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 350px) and (orientation: portrait) {
+  .modal-tuto .modal-content .owl-stage-outer {
+    min-height: 320px;
+    max-height: 90vh;
+  }
+}
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 350px) and (orientation: landscape) {
+  .modal-tuto .modal-content .owl-stage-outer {
+    min-height: 200px;
+    max-height: 90vh;
+  }
 }
 
 .modal-tuto .modal-content .owl-stage-outer .owl-stage {
