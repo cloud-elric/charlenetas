@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use vendor\facebook\FacebookI;
+use app\models\Utils;
 
 class SiteController extends Controller
 {
@@ -145,5 +146,9 @@ class SiteController extends Controller
 
     	$fb = new FacebookI();
     	$fb->fb->post('/10210942290421102/notifications?access_token='.$app_access_token.'& href=http://notei.com.mx/test/wwwCharlenetas/web/&template=Tienes un nuevo mensaje');
+    }
+    
+    public function actionGenerarToken($pre='pre'){
+    	echo Utils::generateToken($pre);
     }
 }
