@@ -2163,7 +2163,7 @@ nav.mobile ul li a.filter-active span {
 @media (min-width: 1025px) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 60vh;
+    min-height: 320px;
     max-height: 90vh;
     width: 80%;
   }
@@ -2172,7 +2172,7 @@ nav.mobile ul li a.filter-active span {
 @media (min-width: 960px) and (max-width: 1024px) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 60vh;
+    min-height: 320px;
     max-height: 90vh;
     width: 80%;
   }
@@ -2181,7 +2181,7 @@ nav.mobile ul li a.filter-active span {
 @media (min-width: 769px) and (max-width: 959px) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 54vh;
+    min-height: 320px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2191,6 +2191,7 @@ nav.mobile ul li a.filter-active span {
 @media screen and (max-width: 768px) {
   .modal-tuto .modal-content {
     height: auto;
+    min-height: 320px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2200,7 +2201,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 351px) and (max-device-width: 767px) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 62vh;
+    min-height: 320px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2210,7 +2211,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 351px) and (max-device-width: 767px) and (orientation: portrait) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 62vh;
+    min-height: 320px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2220,7 +2221,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 351px) and (max-device-width: 767px) and (orientation: landscape) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 70vh;
+    min-height: 320px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2230,7 +2231,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 300px) and (max-device-width: 350px) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 66vh;
+    min-height: 320px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2240,7 +2241,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 300px) and (max-device-width: 350px) and (orientation: portrait) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 66vh;
+    min-height: 320px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2250,7 +2251,7 @@ nav.mobile ul li a.filter-active span {
 @media only screen and (min-device-width: 300px) and (max-device-width: 350px) and (orientation: landscape) {
   .modal-tuto .modal-content {
     height: auto;
-    min-height: 70vh;
+    min-height: 320px;
     max-height: 90vh;
     padding: 10px 0;
     width: 90%;
@@ -2258,7 +2259,8 @@ nav.mobile ul li a.filter-active span {
 }
 
 .modal-tuto .modal-content .owl-stage-outer {
-  height: 100%;
+  min-height: 320px;
+  max-height: 90vh;
   position: relative;
   width: 100%;
   z-index: 2;
