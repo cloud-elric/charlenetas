@@ -186,11 +186,11 @@ class NetasController extends Controller {
 		
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
-		
+		$fch_actual = date("Y-m-d 00:00:00");
 		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
 		if($countClientes){
 			$numRand = $countClientes->id_cliente;
-			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 			$session->set('clientes', [$numRand]);
 		}else{
 			$listaAnuncios = EntAnuncios::find()->all();
@@ -222,6 +222,7 @@ class NetasController extends Controller {
 		$this->layout = false;
 		//$arrayAnun = explode(",", $array);
 		$arrayAnun = null;
+		$fch_actual = date("Y-m-d 00:00:00");
 		
 		$clientes = $session->get('clientes');
 		//foreach ($clientes AS $index => $value)
@@ -235,7 +236,7 @@ class NetasController extends Controller {
 			$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
 			if($countClientes){
 				$numRand = $countClientes->id_cliente;
-				$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+				$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 				$session->set('clientes', []);
 				$arrayAnun[] = $numRand;
 				$session->set('clientes', $arrayAnun);
@@ -250,7 +251,7 @@ class NetasController extends Controller {
 			$arrayAnun[] = $numRand;
 			$session->set('clientes', $arrayAnun);
 					
-			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
 		}
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ( $page );

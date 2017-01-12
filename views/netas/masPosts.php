@@ -1,7 +1,7 @@
 <?php
 use app\models\EntAnuncios;
-
-$numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->all();
+$fch_actual = date("Y-m-d 00:00:00");
+$numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->all();
 
 $countPost = 0;
 $countAnuncio = 0;

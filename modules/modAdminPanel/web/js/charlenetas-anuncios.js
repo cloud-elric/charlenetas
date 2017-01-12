@@ -250,3 +250,23 @@ function cargarImagenes(elemento){
 	});
 }
 
+$(document).on({
+	'change' : function(e) {
+		var file, img;
+		
+		if (file = this.files[0]) {
+			console.log("qwertyui");
+			img = new Image();
+			img.onload = function() {
+				alert(this.width + " " + this.height);
+			};
+			img.onerror = function() {
+				alert( "not a valid file: " + file.type);
+	        };
+		}else{
+			console.log("error");
+		}
+	}	
+},'#entanuncios-imagen');
+
+
