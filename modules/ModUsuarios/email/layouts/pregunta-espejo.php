@@ -61,7 +61,7 @@
 						</tr>
 						<tr>
 							<td align="center" colspan=2 style="padding: 20px 0px 100px;">
-								<a href="<?= Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>adminPanel/admin/espejo" style="background-color: #498FE1; border-radius: 5px; color: #FFF; display: block; font-size: 20px; height: 43px; line-height: 43px; margin: 0 auto; padding: 0 20px; width: 78%;" class="link-responsive">Ver respuesta</a>
+								<a href="<?= Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>adminPanel/admin/espejo" style="background-color: #498FE1; border-radius: 5px; color: #FFF; display: block; font-size: 20px; height: 43px; line-height: 43px; margin: 0 auto; padding: 0 20px; width: 78%;" class="link-responsive">Ver pregunta</a>
 							</td>
 						</tr>
 						<tr>

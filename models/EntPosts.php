@@ -817,7 +817,7 @@ class EntPosts extends \yii\db\ActiveRecord {
 		$post->id_usuario = Yii::$app->user->identity->id_usuario;
 		$post->txt_token = Utils::generateToken ( 'post_' );
 		$post->fch_creacion = Utils::getFechaActual ();
-		$post->fch_publicacion = Utils::changeFormatDateShort( $post->fch_creacion);
+		$post->fch_publicacion = Utils::getFechaActual ();
 		
 		$transaction = EntPosts::getDb ()->beginTransaction ();
 		try {

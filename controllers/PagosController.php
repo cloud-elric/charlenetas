@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use vendor\facebook\FacebookI;
+use app\models\Pagos;
+use app\models\Utils;
 
 class SiteController extends Controller
 {
@@ -54,8 +56,23 @@ class SiteController extends Controller
         ];
     }
 
-   
-    private function generarOrdenCompra(){
+   /**
+    * 
+    */
+    public function actionGenerarTicketOpenPay(){
+    	$this->layout = false;
+    	$data = $this->generarOrdenCompraOpenPay();
+    	
+    	return $this->render('openPay',[]);
+    }
+    
+    private function generarOrdenCompraOpenPay(){
+    	$pago = new Pagos();
+    	$orderId = Utils::generateToken('odc');
+    	return $pago->oPCodeBar('descripcion del producto', $orderId, 200);
+    }
+    
+    private function generarOrdenCompraPayPal(){
     	
     }
 }
