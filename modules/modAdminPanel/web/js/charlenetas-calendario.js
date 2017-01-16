@@ -12,7 +12,7 @@ $(document).ready(function(){
         dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
 		editable: true,
 		eventLimit: true, 
-		events: 'http://localhost/charlenetas/web/adminPanel/calendario/anadir-citas',
+		events: basePath + '/adminPanel/calendario/anadir-citas',
 		selectable: true,
 		selectHelper: true,
 		eventDrop: function(event, delta) {
