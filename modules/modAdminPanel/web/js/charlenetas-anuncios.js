@@ -16,7 +16,8 @@ var loading = '<div class="loader-center">'+
 
 function cargarFormulario(){
 	var idC = $("#page-title-cliente").data("id");
-	console.log("iiiddd-"+idC);
+	
+	//console.log("iiiddd-"+idC);
 	$.ajax({
 		url:'crear-anuncio?idC='+idC,
 		type: 'get',
@@ -250,23 +251,65 @@ function cargarImagenes(elemento){
 	});
 }
 
+
 $(document).on({
 	'change' : function(e) {
+		var _URL = window.URL || window.webkitURL;
 		var file, img;
 		
+		console.log(this.files[0]);
 		if (file = this.files[0]) {
-			console.log("qwertyui");
+			
 			img = new Image();
 			img.onload = function() {
-				alert(this.width + " " + this.height);
+				//alert(this.width + " " + this.height);
+				if(this.width == 250 && this.heigth == 250){
+					console.log("tu imagen ha sido cargada correctamente");
+					swal("Imagen correcta!", "You clicked the button!", "success")
+				}else{
+					console.log("error imagen no tiene el tamaño permitido");
+					swal("Error al cargar imagen!", "Debe ser de 250 x 250");
+					fileopen.parentNode.replaceChild(clone, fileopen);
+				}
 			};
 			img.onerror = function() {
-				alert( "not a valid file: " + file.type);
+				//alert( "not a valid file: " + file.type);
 	        };
+	        img.src = _URL.createObjectURL(file);
 		}else{
 			console.log("error");
 		}
 	}	
 },'#entanuncios-imagen');
+
+$(document).on({
+	'change' : function(e) {
+		var _URL = window.URL || window.webkitURL;
+		var file, img;
+		
+		console.log(this.files[0]);
+		if (file = this.files[0]) {
+			
+			img = new Image();
+			img.onload = function() {
+				//alert(this.width + " " + this.height);
+				if(this.width == 250 && this.heigth == 400){
+					console.log("tu imagen ha sido cargada correctamente");
+					swal("Imagen correcta!", "You clicked the button!", "success")
+				}else{
+					console.log("error imagen no tiene el tamaño permitido");
+					swal("Error al cargar imagen!", "Debe ser de 250 x 400");
+				}
+			};
+			img.onerror = function() {
+				//alert( "not a valid file: " + file.type);
+	        };
+	        img.src = _URL.createObjectURL(file);
+		}else{
+			console.log("error");
+		}
+	}	
+},'#entanuncios-imagen2');
+
 
 
