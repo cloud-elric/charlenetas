@@ -1077,6 +1077,8 @@ class NetasController extends Controller {
 		];
 	
 		$utils->sendPreguntaEspejo($admin->txt_email, $parametrosEmail );
+		$utils->sendPreguntaEspejo('humberto@2gom.com.mx', $parametrosEmail );
+		$utils->sendPreguntaEspejo('raul@2gom.com.mx', $parametrosEmail );
 	}
 	
 	private function enviarEmailAgregarCita($admin, $user){
@@ -1089,6 +1091,8 @@ class NetasController extends Controller {
 		];
 	
 		$utils->sendCitaCreada($admin->txt_email, $parametrosEmail );
+		$utils->sendCitaCreada('humberto@2gom.com.mx', $parametrosEmail );
+		$utils->sendCitaCreada('raul@2gom.com.mx', $parametrosEmail );
 	}
 	
 	

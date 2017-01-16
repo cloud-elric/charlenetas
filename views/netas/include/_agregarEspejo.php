@@ -55,7 +55,8 @@ ActiveForm::end ();
 <script>
 $(document).ready(function(){
 
-	$('#js-preguntar-btn').on('click', function(){
+	$('#js-preguntar-btn').on('click', function(e){
+		e.preventDefault();
 		var button = document.getElementById('js-preguntar-btn');
 		var l = Ladda.create(button);
 	 	l.start();
