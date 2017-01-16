@@ -2,6 +2,7 @@
 
 namespace app\modules\modAdminPanel\controllers;
 
+use Yii;
 use yii\web\Controller;
 use app\modules\ModUsuarios\models\Utils;
 use app\models\EntCitas;
