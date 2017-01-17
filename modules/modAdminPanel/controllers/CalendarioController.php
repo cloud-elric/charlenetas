@@ -9,6 +9,7 @@ use app\models\EntCitas;
 use yii\filters\AccessControl;
 use app\modules\modAdminPanel\components\AccessRule;
 use app\modules\ModUsuarios\models\EntUsuarios;
+use yii\web\Response;
 
 /**
  * Calendario controller for the `adminPanel` module
@@ -138,5 +139,22 @@ class CalendarioController extends Controller
     	
     	$eliminar->b_habilitado = 0;
     	$eliminar->save();
+    }
+    
+    /**
+     * Verificacion de citas por el admin
+     */
+    public function actionVerificarCitas(){
+    	Yii::$app->response->format = Response::FORMAT_JSON;
+    	
+    	$id = $_POST['id'];
+    	 
+    	$entCitas = new EntCitas();
+    	$verificar = $entCitas->find()->where(['id'=>$id])->one();
+    	 
+    	$verificar->b_activo = 1;
+    	$verificar->save();
+    	
+    	return ['id' => $verificar->id];
     }
 }

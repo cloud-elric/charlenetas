@@ -4,10 +4,11 @@ $(document).ready(function(){
 	var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();
+	var idUsuario = $(".js-calendario").data('id');
 	
 	var calendar = $('#calendar').fullCalendar({
 		
-		//defaultView: 'agendaWeek',
+		defaultView: 'agendaWeek',
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
         monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
         dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
@@ -48,11 +49,11 @@ $(document).ready(function(){
 		},
 		
 		dayClick: function(date, jsEvent, view ){
-			var view = $('#calendar').fullCalendar('getView');
-			calendar.fullCalendar('gotoDate',date)
-			calendar.fullCalendar('changeView','agendaDay')
-			
-			if(view.name == 'agendaDay'){
+//			var view = $('#calendar').fullCalendar('getView');
+//			calendar.fullCalendar('gotoDate',date)
+//			calendar.fullCalendar('changeView','agendaDay')
+//			
+//			if(view.name == 'agendaDay'){
 				//$('.modal-trigger').leanModal();
 				$('.modal-trigger.js-crear').trigger('click');
 				//var title = prompt("Evento:");
@@ -75,7 +76,7 @@ $(document).ready(function(){
 							$('.lean-overlay').trigger("click");
 							calendar.fullCalendar('renderEvent',
 							{
-								title: title,
+								//title: title,
 								start: start,
 								end: end,
 							},
@@ -85,10 +86,38 @@ $(document).ready(function(){
 					});
 				});
 				calendar.fullCalendar('unselect');	
-			}
+			//}
 		},
 		eventRender: function(event, element) {
-	    	element.append( "<span class='closeon'>X</span>" );
+			element.find('.fc-title').html("");
+			if(event.b_activo == 1) {
+				element.css('backgroundColor', '#04B404');
+		    }
+			
+	    	element.append( "<span class='closeon' style='z-index:2'>X</span>");
+	    	if(event.id_usuario != idUsuario){
+	    		element.append("<span class='verificar' style='z-index:2; position:relative'>V</span>");
+	    	}
+	    	element.find('.verificar').on('click', function(calEvent, jsEvent, view) {
+	    		console.log('verificado-'+event.id);
+	    		$.ajax({
+    				url: 'verificar-citas',
+    				data: 'id=' + event.id,
+    				type: "POST",
+    				success: function (resp) {
+    					element.css('backgroundColor', '#04B404');
+//    					calendar.fullCalendar('backgroundColor', '#04B404', event.id
+////    						eventRender: function(event, element, view) {
+////    							if(event.id == resp.id) {
+////    								element.css('backgroundColor', '#04B404');
+////    						    }
+////    						}
+//    					);
+    					//alert("Acaba de eliminar la cita del calendario");	    
+    				}
+    			});
+	    	});
+	    	
 	    	element.find('.closeon').click(function(calEvent, jsEvent, view) {
 	    		console.log("Eliminar");
 	    		$('.modal-trigger.js-eliminar').trigger('click');

@@ -23,9 +23,9 @@ var calendar = $('#calendar').fullCalendar({
 	},
 	    
 	dayClick: function(date, jsEvent, view ){
-		var view = $('#calendar').fullCalendar('getView');
-		calendar.fullCalendar('gotoDate',date)
-		calendar.fullCalendar('changeView','agendaDay')
+		//var view = $('#calendar').fullCalendar('getView');
+		//calendar.fullCalendar('gotoDate',date)
+		//calendar.fullCalendar('changeView','agendaDay')
 		
 		//if(view.name == 'agendaDay'){
 			$('.modal-trigger.modal-cita').trigger('click');
@@ -41,7 +41,7 @@ var calendar = $('#calendar').fullCalendar({
 				
 			$('#submitButton').on('click', function(e){
 				e.preventDefault();
-				title = "Han hecho una cita en charlenetas";//$('#nombreCita').val()
+				title = "Haz hecho una cita en charlenetas";//$('#nombreCita').val()
 				$.ajax({
 					url: 'agregar-citas',
 					data: 'title='+ title +'&start='+ start +'&end='+ end ,
