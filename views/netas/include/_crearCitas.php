@@ -27,7 +27,7 @@
 <?= $this->render ('//layouts/header') ?>
 
 <!-- .crear-cita -->
-<div class="crear-cita">
+<div class="crear-cita js-crear-cita" data-id="<?= Yii::$app->user->identity->id_usuario?>">
 
 	<h4><span>Crear cita</span></h4>
 	<div id='calendar'></div>

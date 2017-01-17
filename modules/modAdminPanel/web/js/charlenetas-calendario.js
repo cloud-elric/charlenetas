@@ -6,6 +6,8 @@ $(document).ready(function(){
 	var y = date.getFullYear();
 	
 	var calendar = $('#calendar').fullCalendar({
+		
+		//defaultView: 'agendaWeek',
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
         monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
         dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
@@ -88,6 +90,7 @@ $(document).ready(function(){
 		eventRender: function(event, element) {
 	    	element.append( "<span class='closeon'>X</span>" );
 	    	element.find('.closeon').click(function(calEvent, jsEvent, view) {
+	    		console.log("Eliminar");
 	    		$('.modal-trigger.js-eliminar').trigger('click');
 	    		$('#Aceptar').on('click', function(e){
 	    			e.preventDefault();
@@ -101,6 +104,9 @@ $(document).ready(function(){
 	    					//alert("Acaba de eliminar la cita del calendario");	    
 	    				}
 	    			});
+	    		});
+	    		$('#Cancelar').on('click', function(e){
+	    			$('.lean-overlay').trigger("click");
 	    		});
 	    	});
 		}

@@ -263,7 +263,7 @@ $(document).on({
 			img = new Image();
 			img.onload = function() {
 				//alert(this.width + " " + this.height);
-				if(this.width == 250 && this.heigth == 250){
+				if(this.width == 250 /*&& this.heigth == 250*/){
 					console.log("tu imagen ha sido cargada correctamente");
 					swal("Imagen correcta!", "You clicked the button!", "success")
 				}else{
@@ -293,7 +293,7 @@ $(document).on({
 			img = new Image();
 			img.onload = function() {
 				//alert(this.width + " " + this.height);
-				if(this.width == 250 && this.heigth == 400){
+				if(this.width == 250 /*&& this.heigth == 400*/){
 					console.log("tu imagen ha sido cargada correctamente");
 					swal("Imagen correcta!", "You clicked the button!", "success")
 				}else{

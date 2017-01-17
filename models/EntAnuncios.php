@@ -42,8 +42,8 @@ class EntAnuncios extends \yii\db\ActiveRecord
             [['fch_creacion', 'fch_finalizacion'], 'safe'],
             [['txt_imagen', 'txt_descripcion'], 'string', 'max' => 60],
             [['id_cliente'], 'exist', 'skipOnError' => true, 'targetClass' => EntClientes::className(), 'targetAttribute' => ['id_cliente' => 'id_cliente']],
-        	[['imagen'],'image', 'minWidth' => 250, 'maxWidth' => 250,'minHeight' => 250, 'maxHeight' => 250, 'extensions' => 'png, jpg, jpeg'],
-        	[['imagen2'],'image', 'minWidth' => 250, 'maxWidth' => 250,'minHeight' => 400, 'maxHeight' => 400,'extensions' => 'png, jpg, jpeg']
+        	[['imagen'],'image', 'minWidth' => 250, 'maxWidth' => 250,/*'minHeight' => 250, 'maxHeight' => 250,*/ 'extensions' => 'png, jpg, jpeg'],
+        	[['imagen2'],'image', 'minWidth' => 250, 'maxWidth' => 250,/*'minHeight' => 400, 'maxHeight' => 400,*/'extensions' => 'png, jpg, jpeg']
         ];
     }
 
