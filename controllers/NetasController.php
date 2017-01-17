@@ -711,13 +711,13 @@ class NetasController extends Controller {
 			if ($boolRes === $respuesta) {
 				
 				
-// 				$contestar = CatTipoCreditos::find()->where(['nombre'=>"Contestar"])->one();
+				$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::RESPONDER_PREGUNTA_CORRECTAMENTE])->one();
 				
-// 				$creditos = new EntUsuariosCreditos();
-// 				$creditos->id_usuario = $idUsuario;
-// 				$creditos->numero_creditos = $contestar->costo;
-// 				$creditos->txt_descripcion = "Contestar pregunta";
-// 				$creditos->save();
+				$creditos = new EntUsuariosCreditos();
+				$creditos->id_usuario = $idUsuario;
+				$creditos->numero_creditos = $contestar->costo;
+				$creditos->txt_descripcion = "Por contestar un sabias que correctamente";
+				$creditos->save();
 					
 				return [
 						'status' => 'success',
@@ -1010,14 +1010,18 @@ class NetasController extends Controller {
 				'id_usuario' => $usuario->id_usuario,
 				'id_post' => $post->id_post
 		] )->one ();
+		
+		$sabiasQue = $post->entSabiasQue;
 	
+		
+		
 		if(empty($respuestaUsuario)){
 			return ['status'=>'sin'];
 		}else {
-			if($respuestaUsuario->b_respuesta){
-				return ['status'=>'bien','txt_url'=>$post->txt_url];
+			if($respuestaUsuario->b_respuesta==$sabiasQue->b_verdadero){
+				return ['status'=>'bien','txt_url'=>$post->txt_url, 'b_respuesta'=>$sabiasQue->b_verdadero];
 			}else{
-				return ['status'=>'mal','txt_url'=>$post->txt_url];
+				return ['status'=>'mal','txt_url'=>$post->txt_url,'b_respuesta'=>$sabiasQue->b_verdadero];
 			}
 		}
 	}

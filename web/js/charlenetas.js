@@ -163,12 +163,17 @@ function cargarRespuestasSabiasQue(){
 			url:url,
 			dataType:'JSON',
 			success:function(response){
+				var respondido = 'falso';
+				if(response.b_respuesta){
+					var respondido = 'verdadero';	
+				}
+				
 				if(response.status=='bien'){
 					remplazarBoton(token, response,
-					'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
+					'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p><p class="pin-sabias-que-respuesta-succes">Respuesta: '+respondido+'</p>');
 				}else if(response.status=='mal'){
 					remplazarBoton(token, response,
-					'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
+					'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p><p class="pin-sabias-que-respuesta-succes">Respuesta: '+respondido+'</p>');
 				}
 			}
 		});
