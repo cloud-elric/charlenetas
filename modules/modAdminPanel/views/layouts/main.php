@@ -92,6 +92,8 @@ $bundle = ModuleAsset::register ( Yii::$app->view );
   	<div id="modal3" class="modal modal-calendario">
     	<div class="modal-content">
       		<h4><span>Deseas</span> Eliminar <span>la cita del calendario</span></h4>
+      		<label>Por que: </label>
+			<input type="text" id="txtporque" name="txtporque">
     	</div>
     	<div class="modal-footer">
       		<button type="button" id="Cancelar" class="btn btn-submit modal-footer-btn-cancelar waves-effect">Cancelar</button>

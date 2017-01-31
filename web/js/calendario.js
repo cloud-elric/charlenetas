@@ -1,4 +1,4 @@
-var basePath = 'http://localhost/charlenetas/web'; 
+//var basePath = 'http://localhost/charlenetas/web'; 
 var idUsuario = $('.js-crear-cita').data("id");
 console.log(idUsuario);
 var date = new Date();
@@ -14,18 +14,21 @@ var calendar = $('#calendar').fullCalendar({
     monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
     dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
     dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
-	events: basePath + '/netas/anadir-citas',
+	events: basePath + 'netas/anadir-citas',
 	eventRender: function(event, element, view) {
         if(event.id_usuario != idUsuario) {
-            element.css('backgroundColor', '#E6E6E6');
-            element.val('No disponible');
+            element.css('backgroundColor', '#6F6868');
+            $(element).text('No disponible');
         }
+        if(event.b_activo == 1 && event.id_usuario == idUsuario) {
+			element.css('backgroundColor', '#04B404');
+	    }
 	},
 	    
 	dayClick: function(date, jsEvent, view ){
-		var view = $('#calendar').fullCalendar('getView');
-		calendar.fullCalendar('gotoDate',date)
-		calendar.fullCalendar('changeView','agendaDay')
+		//var view = $('#calendar').fullCalendar('getView');
+		//calendar.fullCalendar('gotoDate',date)
+		//calendar.fullCalendar('changeView','agendaDay')
 		
 		//if(view.name == 'agendaDay'){
 			$('.modal-trigger.modal-cita').trigger('click');
@@ -41,7 +44,7 @@ var calendar = $('#calendar').fullCalendar({
 				
 			$('#submitButton').on('click', function(e){
 				e.preventDefault();
-				title = "Han hecho una cita en charlenetas";//$('#nombreCita').val()
+				title = "Haz hecho una cita en charlenetas";//$('#nombreCita').val()
 				$.ajax({
 					url: 'agregar-citas',
 					data: 'title='+ title +'&start='+ start +'&end='+ end ,
@@ -56,6 +59,7 @@ var calendar = $('#calendar').fullCalendar({
 									title: title,
 									start: start,
 									end: end,
+									id_usuario: idUsuario
 									//allDay: allDay
 									},
 								true // make the event 'stick'

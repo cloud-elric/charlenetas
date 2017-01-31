@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 var date = new Date();
 var d = date.getDate();
 var m = date.getMonth();
 var y = date.getFullYear();
+=======
+$(document).ready(function(){
+	$('.modal-trigger').leanModal();	
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+	var idUsuario = $(".js-calendario").data('id');
+>>>>>>> 900e39dc68d388983a2da429880835c8e9f70869
 	
 var calendar = $('#calendar').fullCalendar({
 		
@@ -49,8 +59,13 @@ var calendar = $('#calendar').fullCalendar({
 //			var view = $('#calendar').fullCalendar('getView');
 //			calendar.fullCalendar('gotoDate',date)
 //			calendar.fullCalendar('changeView','agendaDay')
+<<<<<<< HEAD
 			
 			//if(view.name == 'agendaDay'){
+=======
+//			
+//			if(view.name == 'agendaDay'){
+>>>>>>> 900e39dc68d388983a2da429880835c8e9f70869
 				//$('.modal-trigger').leanModal();
 				$('.modal-trigger.js-crear').trigger('click');
 				//var title = prompt("Evento:");
@@ -73,7 +88,7 @@ var calendar = $('#calendar').fullCalendar({
 							$('.lean-overlay').trigger("click");
 							calendar.fullCalendar('renderEvent',
 							{
-								title: title,
+								//title: title,
 								start: start,
 								end: end,
 							},
@@ -86,7 +101,60 @@ var calendar = $('#calendar').fullCalendar({
 			//}
 		},
 		eventRender: function(event, element) {
+<<<<<<< HEAD
 	    	element.append( "<span class='closeon' style='z-index:2' data-token='"+event.id+"'>X</span>" );
+=======
+			element.find('.fc-title').html("");
+			if(event.b_activo == 1) {
+				element.css('backgroundColor', '#04B404');
+		    }
+			
+	    	element.append( "<span class='closeon' style='z-index:2'>X</span>");
+	    	if(event.id_usuario != idUsuario){
+	    		element.append("<span class='verificar' style='z-index:2; position:relative'>V</span>");
+	    	}
+	    	element.find('.verificar').on('click', function(calEvent, jsEvent, view) {
+	    		console.log('verificado-'+event.id);
+	    		$.ajax({
+    				url: 'verificar-citas',
+    				data: 'id=' + event.id,
+    				type: "POST",
+    				success: function (resp) {
+    					element.css('backgroundColor', '#04B404');
+//    					calendar.fullCalendar('backgroundColor', '#04B404', event.id
+////    						eventRender: function(event, element, view) {
+////    							if(event.id == resp.id) {
+////    								element.css('backgroundColor', '#04B404');
+////    						    }
+////    						}
+//    					);
+    					//alert("Acaba de eliminar la cita del calendario");	    
+    				}
+    			});
+	    	});
+	    	
+	    	element.find('.closeon').click(function(calEvent, jsEvent, view) {
+	    		console.log("Eliminar");
+	    		$('.modal-trigger.js-eliminar').trigger('click');
+	    		$('#Aceptar').on('click', function(e){
+	    			var txt = $('#txtporque').val();
+	    			e.preventDefault();
+	    			$.ajax({
+	    				url: 'eliminar-citas',
+	    				data: {id: event.id, txt: txt},
+	    				type: "POST",
+	    				success: function () {
+	    					$('.lean-overlay').trigger("click");
+	    					calendar.fullCalendar('removeEvents',event.id);
+	    					//alert("Acaba de eliminar la cita del calendario");	    
+	    				}
+	    			});
+	    		});
+	    		$('#Cancelar').on('click', function(e){
+	    			$('.lean-overlay').trigger("click");
+	    		});
+	    	});
+>>>>>>> 900e39dc68d388983a2da429880835c8e9f70869
 		}
 	});
 
