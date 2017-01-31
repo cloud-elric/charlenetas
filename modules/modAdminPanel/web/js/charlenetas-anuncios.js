@@ -217,7 +217,7 @@ $('body').on('beforeSubmit', '#editar-anuncio', function() {
 						
 				$('#js-modal-post-editar  .modal-content').html(loading);
 						
-				$('#card_anuncio_'+response.id).attr('src',response.t);
+				$('#card_anuncio_url_'+response.id).css('background-image', "url("+basePath+"/uploads/imagenesAnuncios/"+response.img+")");
 			} else {
 					// Muestra los errores
 					$('#editar-anuncio').yiiActiveForm('updateMessages', response, true);

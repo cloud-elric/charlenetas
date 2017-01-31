@@ -1449,9 +1449,6 @@ class AdminController extends Controller {
 		if ($anuncio->load ( Yii::$app->request->post ())) {
 			Yii::$app->response->format = Response::FORMAT_JSON;
 			
-			//$img2 = $_POST['EntAnuncios[imagen2]'];
-// 			echo $anuncio->txt_imagen2; 
-// 			exit();
 			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
 			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
 			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
