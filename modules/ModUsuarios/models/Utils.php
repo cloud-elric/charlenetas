@@ -159,6 +159,16 @@ class Utils {
 		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-creada.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Han hecho una cita.', $parametrosEmail );
 	}
 	
+	public function sendCambioCita($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-cambio.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Cambio de una cita.', $parametrosEmail );
+	}
+	
+	public function sendAceptarCita($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-aceptada.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Cambio de una cita.', $parametrosEmail );
+	}
+	
 	/**
 	 * Envia mensaje de correo electronico
 	 *

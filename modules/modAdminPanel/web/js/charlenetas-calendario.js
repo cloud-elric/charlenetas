@@ -122,10 +122,11 @@ $(document).ready(function(){
 	    		console.log("Eliminar");
 	    		$('.modal-trigger.js-eliminar').trigger('click');
 	    		$('#Aceptar').on('click', function(e){
+	    			var txt = $('#txtporque').val();
 	    			e.preventDefault();
 	    			$.ajax({
 	    				url: 'eliminar-citas',
-	    				data: 'id=' + event.id,
+	    				data: {id: event.id, txt: txt},
 	    				type: "POST",
 	    				success: function () {
 	    					$('.lean-overlay').trigger("click");

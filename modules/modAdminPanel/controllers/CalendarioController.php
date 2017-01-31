@@ -10,6 +10,9 @@ use yii\filters\AccessControl;
 use app\modules\modAdminPanel\components\AccessRule;
 use app\modules\ModUsuarios\models\EntUsuarios;
 use yii\web\Response;
+use app\models\EntUsuariosCreditos;
+use app\models\CatTipoCreditos;
+use app\models\ModUsuariosEntUsuarios;
 
 /**
  * Calendario controller for the `adminPanel` module
@@ -133,12 +136,27 @@ class CalendarioController extends Controller
      */
     public function actionEliminarCitas(){
     	$id = $_POST['id'];
+    	$txt = $_POST['txt'];
     	
     	$entCitas = new EntCitas();
     	$eliminar = $entCitas->find()->where(['id'=>$id])->one();
     	
+    	$tipoCredito = new CatTipoCreditos();
+    	$costo = $tipoCredito->find()->where(['nombre'=>'Cita'])->one();
+    	//$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$id_usuario])->one();
+    	
+    	$regresar = new EntUsuariosCreditos();
+    	$regresar->id_usuario = $eliminar->id_usuario;
+    	$regresar->numero_creditos = $costo->costo;
+    	$regresar->txt_descripcion = "Devolucion cita";
+    	$regresar->save();
+    	
     	$eliminar->b_habilitado = 0;
+    	$eliminar->title = $txt;
     	$eliminar->save();
+    	
+    	$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$eliminar->id_usuario])->one();
+    	$this->enviarEmailCambioCita($user, $eliminar);
     }
     
     /**
@@ -155,6 +173,32 @@ class CalendarioController extends Controller
     	$verificar->b_activo = 1;
     	$verificar->save();
     	
+    	$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$verificar->id_usuario])->one();
+    	$this->enviarEmailAceptarCita($user);
+    	
     	return ['id' => $verificar->id];
+    }
+    
+    private function enviarEmailCambioCita($user, $cita){
+    	$utils = new Utils();
+    	$parametrosEmail = [
+    		'nombre' => $user->txt_username,
+    		'ap_paterno' => $user->txt_apellido_paterno,
+    		'correo' => $user->txt_email,
+    		'desc' => $cita->title
+    	];
+    	
+    	$utils->sendCambioCita($user->txt_email, $parametrosEmail );
+    }
+    
+    private function enviarEmailAceptarCita($user){
+    	$utils = new Utils();
+    	$parametrosEmail = [
+    			'nombre' => $user->txt_username,
+    			'ap_paterno' => $user->txt_apellido_paterno,
+    			'correo' => $user->txt_email,
+    	];
+    	 
+    	$utils->sendAceptarCita($user->txt_email, $parametrosEmail );
     }
 }

@@ -121,23 +121,23 @@ function agregarTarjetaNueva(json) {
 			+ '</div>'
 			+ '</div>';
 	
-	var template2 = '<div class="col s12 m6 l4" id="card_anuncio_'+json.id2+'">'
-	+ '<div class="card card-media" data-token="'+json.id2+'" style="background-image: url('+json.url+json.img2+')">'
-	+ '<div class="card-contexto-options">'
-	+ '<div>'
-	+ '<input type="checkbox" id="delete_anuncio_'+json.id2+'" value="'+json.id2+'"/>'
-		+ '<label for="delete_anuncio_'+json.id2+'"></label>'
-	+ '</div>'
-	+ '<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAnuncio('+json.id2+')" href="#js-modal-post-editar">'
-	+ '<i class="ion ion-android-more-vertical card-edit"></i>'
-	+ '</a>'
-	+ '</div>'
-	+ '</div>'
-	+ '</div>';
+//	var template2 = '<div class="col s12 m6 l4" id="card_anuncio_'+json.id2+'">'
+//	+ '<div class="card card-media" data-token="'+json.id2+'" style="background-image: url('+json.url+json.img2+')">'
+//	+ '<div class="card-contexto-options">'
+//	+ '<div>'
+//	+ '<input type="checkbox" id="delete_anuncio_'+json.id2+'" value="'+json.id2+'"/>'
+//		+ '<label for="delete_anuncio_'+json.id2+'"></label>'
+//	+ '</div>'
+//	+ '<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarAnuncio('+json.id2+')" href="#js-modal-post-editar">'
+//	+ '<i class="ion ion-android-more-vertical card-edit"></i>'
+//	+ '</a>'
+//	+ '</div>'
+//	+ '</div>'
+//	+ '</div>';
 	
 	var contenedor = $('#js-contenedor-tarjetas');
 	contenedor.prepend(template);
-	contenedor.prepend(template2);
+//	contenedor.prepend(template2);
 	
 //	var element = document.getElementById("button_"+json.tk);
 //	console.log(element);

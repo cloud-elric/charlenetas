@@ -1397,33 +1397,26 @@ class AdminController extends Controller {
 			
 			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
 			$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
+			$anuncio->imagen2 = UploadedFile::getInstance ( $anuncio, 'imagen2' );
+			$anuncio->txt_imagen2 = Utils::generateToken ( "img" ) . "." . $anuncio->imagen2->extension;
 			//$anuncio->fch_creacion = Utils::getFechaActual();
 			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
 			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
 			$anuncio->save();
 			$url = Url::base()."/uploads/imagenesAnuncios/";
 			
-			$anuncio2 = new EntAnuncios();	
-			$anuncio2->imagen2 = UploadedFile::getInstance ( $anuncio2, 'imagen2' );
-			$anuncio2->id_anuncio = $anuncio->id_anuncio + 1;
-			$anuncio2->id_cliente = $anuncio->id_cliente;
-			$anuncio2->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio2->imagen2->extension;
-			$anuncio2->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
-			$anuncio2->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
-			$anuncio2->save();
 // 			print_r($anuncio2);
 // 			exit();
-			$anuncio2->cargarImagenAnuncio2( $anuncio2 );
+			$anuncio->cargarImagenAnuncio2( $anuncio );
 			
 			
 			if ($anuncio->cargarImagenAnuncio ( $anuncio )) {
 				return [
-						'status' => 'success',
-						'id' => $anuncio->id_anuncio,
-						'url' => $url,
-						'img' => $anuncio->txt_imagen,
-						'id2' => $anuncio2->id_anuncio,
-						'img2' => $anuncio2->txt_imagen
+					'status' => 'success',
+					'id' => $anuncio->id_anuncio,
+					'url' => $url,
+					'img' => $anuncio->txt_imagen,
+					'img2' => $anuncio->txt_imagen2
 				];
 			}
 		}
@@ -1456,23 +1449,32 @@ class AdminController extends Controller {
 		if ($anuncio->load ( Yii::$app->request->post ())) {
 			Yii::$app->response->format = Response::FORMAT_JSON;
 			
+			//$img2 = $_POST['EntAnuncios[imagen2]'];
+// 			echo $anuncio->txt_imagen2; 
+// 			exit();
 			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
 			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
 			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
+			$anuncio->imagen2 = UploadedFile::getInstance ( $anuncio, 'imagen2' );
 				
 			if (! empty ( $anuncio->imagen )) {
 				$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
+				$anuncio->cargarImagenAnuncio( $anuncio );
 			}
 			
-			if (! empty ( $anuncio->imagen )) {
-				$anuncio->cargarImagenAnuncio ( $anuncio );
+			if (! empty ( $anuncio->imagen2 )) {
+				$anuncio->txt_imagen2 = Utils::generateToken ( "img" ) . "." . $anuncio->imagen2->extension;
+				$anuncio->cargarImagenAnuncio2( $anuncio );
 			}
 			
-			$anuncio->save();
-	
+			if(!$anuncio->save())
+			{
+				print_r($anuncio->errors);
+			}
 			return [
-					'status' => 'success',
-					'id' => $anuncio->id_anuncio
+				'status' => 'success',
+				'id' => $anuncio->id_anuncio,
+				'img' => $anuncio->txt_imagen
 			];
 		}
 	

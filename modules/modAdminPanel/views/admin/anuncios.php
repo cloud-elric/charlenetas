@@ -15,7 +15,7 @@ use yii\web\View;
 	<div class="row" id="js-contenedor-tarjetas">
 		<?php foreach($anuncios as $anuncio){ ?>
 			<div class="col s12 m6 l4" id="card_anuncio_<?=$anuncio->id_anuncio?>">
-				<div class="card card-media" data-token="<?=$anuncio->id_anuncio?>" style="background-image: url(<?=Url::base()?>/uploads/imagenesAnuncios/<?= $anuncio->txt_imagen ?>)">
+				<div id="card_anuncio_url<?=$anuncio->id_anuncio?>" class="card card-media" data-token="<?=$anuncio->id_anuncio?>" style="background-image: url(<?=Url::base()?>/uploads/imagenesAnuncios/<?= $anuncio->txt_imagen ?>)">
 					<div class="card-contexto-options">
 						<div>
 			   				<input type="checkbox" id="delete_anuncio_<?=$anuncio->id_anuncio?>" value="<?=$anuncio->id_anuncio?>"/>

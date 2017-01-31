@@ -179,6 +179,7 @@ class NetasController extends Controller {
 	 */
 	public function actionIndex($token=null) {
 		$session = Yii::$app->session;
+		$session->set('clientes', []);
 		
 		if(!empty($token)){
 			$this->getPostByToken($token);
@@ -921,7 +922,7 @@ class NetasController extends Controller {
 			}
 		}
 	
-		return $this->renderAjax ( '//netas/include/_crearCitas', [
+		return $this->render ( '//netas/include/_crearCitas', [
 				'cita' => $cita
 		] );
 	}

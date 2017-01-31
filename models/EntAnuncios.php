@@ -42,8 +42,8 @@ class EntAnuncios extends \yii\db\ActiveRecord
             [['fch_creacion', 'fch_finalizacion'], 'safe'],
             [['txt_imagen', 'txt_descripcion'], 'string', 'max' => 60],
             [['id_cliente'], 'exist', 'skipOnError' => true, 'targetClass' => EntClientes::className(), 'targetAttribute' => ['id_cliente' => 'id_cliente']],
-        	[['imagen'],'image', 'minWidth' => 250, 'maxWidth' => 250,/*'minHeight' => 250, 'maxHeight' => 250,*/ 'extensions' => 'png, jpg, jpeg'],
-        	[['imagen2'],'image', 'minWidth' => 250, 'maxWidth' => 250,/*'minHeight' => 400, 'maxHeight' => 400,*/'extensions' => 'png, jpg, jpeg']
+        	[['imagen'],'image', /*'minWidth' => 250, 'maxWidth' => 250,'minHeight' => 250, 'maxHeight' => 250,*/ 'extensions' => 'png, jpg, jpeg'],
+        	[['imagen2'],'image', /*'minWidth' => 250, 'maxWidth' => 250,'minHeight' => 400, 'maxHeight' => 400,*/'extensions' => 'png, jpg, jpeg']
         ];
     }
 
@@ -73,10 +73,10 @@ class EntAnuncios extends \yii\db\ActiveRecord
     }
     
     public function cargarImagenAnuncio($anuncio) {
-    	$anuncio->imagen->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_anuncios'] . $anuncio->txt_imagen );
+    	$anuncio->imagen->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_anuncios'] . $anuncio->txt_imagen, false );
     	return true;
     }
     public function cargarImagenAnuncio2($anuncio) {
-    	return $anuncio->imagen2->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_anuncios'] . $anuncio->txt_imagen );
+    	return $anuncio->imagen2->saveAs ( Yii::$app->params ['modAdmin'] ['path_imagenes_anuncios'] . $anuncio->txt_imagen2, false );
     }
 }
