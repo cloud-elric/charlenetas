@@ -1,13 +1,11 @@
-$(document).ready(function(){
-	$('.modal-trigger').leanModal();	
-	var date = new Date();
-	var d = date.getDate();
-	var m = date.getMonth();
-	var y = date.getFullYear();
+var date = new Date();
+var d = date.getDate();
+var m = date.getMonth();
+var y = date.getFullYear();
 	
-	var calendar = $('#calendar').fullCalendar({
+var calendar = $('#calendar').fullCalendar({
 		
-		//defaultView: 'agendaWeek',
+		defaultView: 'agendaWeek',
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
         monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
         dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
@@ -48,11 +46,11 @@ $(document).ready(function(){
 		},
 		
 		dayClick: function(date, jsEvent, view ){
-			var view = $('#calendar').fullCalendar('getView');
-			calendar.fullCalendar('gotoDate',date)
-			calendar.fullCalendar('changeView','agendaDay')
+//			var view = $('#calendar').fullCalendar('getView');
+//			calendar.fullCalendar('gotoDate',date)
+//			calendar.fullCalendar('changeView','agendaDay')
 			
-			if(view.name == 'agendaDay'){
+			//if(view.name == 'agendaDay'){
 				//$('.modal-trigger').leanModal();
 				$('.modal-trigger.js-crear').trigger('click');
 				//var title = prompt("Evento:");
@@ -85,30 +83,38 @@ $(document).ready(function(){
 					});
 				});
 				calendar.fullCalendar('unselect');	
-			}
+			//}
 		},
 		eventRender: function(event, element) {
-	    	element.append( "<span class='closeon'>X</span>" );
-	    	element.find('.closeon').click(function(calEvent, jsEvent, view) {
-	    		console.log("Eliminar");
-	    		$('.modal-trigger.js-eliminar').trigger('click');
-	    		$('#Aceptar').on('click', function(e){
-	    			e.preventDefault();
-	    			$.ajax({
-	    				url: 'eliminar-citas',
-	    				data: 'id=' + event.id,
-	    				type: "POST",
-	    				success: function () {
-	    					$('.lean-overlay').trigger("click");
-	    					calendar.fullCalendar('removeEvents',event.id);
-	    					//alert("Acaba de eliminar la cita del calendario");	    
-	    				}
-	    			});
-	    		});
-	    		$('#Cancelar').on('click', function(e){
-	    			$('.lean-overlay').trigger("click");
-	    		});
-	    	});
+	    	element.append( "<span class='closeon' style='z-index:2' data-token='"+event.id+"'>X</span>" );
 		}
 	});
+
+$(document).ready(function(){
+	$('.modal-trigger').leanModal();	
+	
 });
+
+
+$(document).on({
+	'click' : function(e) {
+		var token = $(this).data('token');
+		$('.modal-trigger.js-eliminar').trigger('click');
+		$('#Aceptar').on('click', function(e){
+			e.preventDefault();
+			$.ajax({
+				url: 'eliminar-citas',
+				data: 'id=' + token,
+				type: "POST",
+				success: function () {
+					$('.lean-overlay').trigger("click");
+					calendar.fullCalendar('removeEvents',token);
+					//alert("Acaba de eliminar la cita del calendario");	    
+				}
+			});
+		});
+		$('#Cancelar').on('click', function(e){
+			$('.lean-overlay').trigger("click");
+		});
+	}
+}, '.closeon');
