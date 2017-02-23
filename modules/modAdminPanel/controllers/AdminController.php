@@ -1297,6 +1297,7 @@ class AdminController extends Controller {
 	
 		// Recupera n numero de registros por paginacion
 		$listaUsuarios = EntUsuarios::getUsuarios( $page );
+		
 	
 		// Pintar vista
 		return $this->renderAjax ( 'itemsUsuarios', [

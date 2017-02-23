@@ -29,7 +29,7 @@ $usuario = $post->idUsuario;
 	<p>
 		<?=$post->txt_descripcion?>
 	</p>
-	<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
+	<img style="width: 100%;" src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
 		alt="Verdadazos - Netas bien duras" />
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">

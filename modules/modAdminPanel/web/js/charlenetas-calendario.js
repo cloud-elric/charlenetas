@@ -1,17 +1,9 @@
-<<<<<<< HEAD
+
 var date = new Date();
 var d = date.getDate();
 var m = date.getMonth();
 var y = date.getFullYear();
-=======
-$(document).ready(function(){
-	$('.modal-trigger').leanModal();	
-	var date = new Date();
-	var d = date.getDate();
-	var m = date.getMonth();
-	var y = date.getFullYear();
-	var idUsuario = $(".js-calendario").data('id');
->>>>>>> 900e39dc68d388983a2da429880835c8e9f70869
+
 	
 var calendar = $('#calendar').fullCalendar({
 		
