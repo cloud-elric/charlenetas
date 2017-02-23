@@ -63,6 +63,7 @@ class EntAnuncios extends \yii\db\ActiveRecord
             'fch_finalizacion' => 'Fch Finalizacion',
             'b_habilitado' => 'B Habilitado',
             'b_activo' => 'B Activo',
+        	'txt_url'=>'Url del anuncio'
         ];
     }
 

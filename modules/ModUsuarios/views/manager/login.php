@@ -101,7 +101,6 @@ $(document).ready(function(){
 						showPostAfterLogin(token);
 						cargarCerrarSesion();
 						mensajeCuentaActivada("Bienvenido de nuevo netanauta");
-						loadEspejoPreguntar();
 						cargarRespuestasSabiasQue();
 						
 						$.ajax({
