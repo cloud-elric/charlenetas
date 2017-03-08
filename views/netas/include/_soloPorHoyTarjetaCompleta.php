@@ -8,6 +8,15 @@ $usuario = $post->idUsuario;
 
 #$url = 'http://sms-tecnomovil.com/SvtSendSms?username=PIXERED&password=CARLOS&message=' . urlencode ($message) .'&numbers=' . $telefono;
 ?>
+
+<style type="text/css">
+	.pin-link{
+		display: inline-block;
+		margin-left: 15%;
+    margin-top: 20px;
+	}
+</style>
+
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
 
@@ -47,9 +56,17 @@ $usuario = $post->idUsuario;
 			<p>
 				<?=Html::encode($post->txt_descripcion)?>
 			</p>
-			<a target="_blank" href="http://www.ordenjuridico.gob.mx/Constitucion/articulos/<?=$post->entSoloPorHoys->num_articulo?>.pdf">
-			Ver articulo
-			</a>
+			
+			<div class="pin-link">
+				<a target="_blank" class="waves-effect waves-light btn btn-secondary" href="http://www.ordenjuridico.gob.mx/Constitucion/articulos/<?=$post->entSoloPorHoys->num_articulo?>.pdf">
+				Ver articulo contitucional
+				</a>
+			</div>
+			
+			<div class="pin-link">
+				<a class="waves-effect waves-light btn btn-secondary" href="<?=$post->txt_url?>" target="_blank">Ver nota periodística</a>
+			</div>
+			
 		</div>
 	</div>
 

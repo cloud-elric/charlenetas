@@ -719,16 +719,19 @@ class NetasController extends Controller {
 				$creditos->numero_creditos = $contestar->costo;
 				$creditos->txt_descripcion = "Por contestar un sabias que correctamente";
 				$creditos->save();
-					
+				
+				$resp = $boolRes?'verdadero':'falso';
 				return [
 						'status' => 'success',
-						'txt_url'=>$post->txt_url
+						'txt_url'=>$post->txt_url,
+						'resp' => $resp
 				];
 			} else {
-				
+				$resp = $boolRes?'verdadero':'falso';
 				return [
 						'status' => 'error',
-						'txt_url'=>$post->txt_url
+						'txt_url'=>$post->txt_url,
+						'resp' => $resp
 				];
 			}
 		}

@@ -15,9 +15,7 @@ use yii\helpers\Url;
 		<p class="pin-descripcion">
 			<?=$post->txt_descripcion?>
 		</p>
-		<div class="pin-link">
-			<a class="waves-effect waves-light btn btn-secondary" href="<?=$post->txt_url?>" target="_blank">Ver nota</a>
-		</div>
+		
 	</div>
 	<?php
 		include 'elementos/pins-social.php';

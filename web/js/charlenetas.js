@@ -1311,7 +1311,7 @@ function validarRespuesta(element) {
 					} else if (resp.status == "success") {
 						mensajeCuentaActivada('Respuesta correcta');
 						remplazarBoton(token, resp,
-								'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
+								'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p> <p class="pin-sabias-que-respuesta-succes">Respuesta: '+resp.resp+' </p>'); 
 					} else if (resp.status == "respondido") {
 						mensajeCuentaActivada('Ya contestaste esta pregunta');
 						remplazarBoton(token, resp,
@@ -1319,7 +1319,7 @@ function validarRespuesta(element) {
 					} else {
 						mensajeWarning('Respuesta incorrecta');
 						remplazarBoton(token, resp,
-								'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
+								'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p> <p class="pin-sabias-que-respuesta-succes">Respuesta: '+resp.resp+'</p>');
 					}
 				},
 				statusCode : {

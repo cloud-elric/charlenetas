@@ -15,7 +15,7 @@ function cargarMasUsuarios(userTotales, numeroUserMostrar) {
 	var l = Ladda.create(document.getElementById('js-cargar-mas-usuarios'));
  	l.start();
 	 	
-	totalUserMostrados = (pages+1)*2;
+	totalUserMostrados = (pages+1)*10;
 	totalUsers = userTotales - totalUserMostrados;
 	
 	var contenedor = $('#js-contenedor-tarjetas');
