@@ -107,7 +107,7 @@
 							<td style="color: #BBB; font-size: 10px; font-style: italic; line-height: 16px; padding: 0px 8px 0px 0px;">
 								Este es un correo generado automaticamente, favor de no responderlo.
 								<br>
-								Si haz recibido este email por error o sin haberlo solicitado, porfavor haz caso omiso del mismo.
+								Si has recibido este email por error o sin haberlo solicitado, por favor has caso omiso del mismo.
 							</td>
 						</tr>
 					</table>

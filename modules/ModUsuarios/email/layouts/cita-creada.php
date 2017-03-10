@@ -45,16 +45,16 @@
 					<table width="350" cellpadding="0" cellspacing="0" border="0" class="table-responsive" style="background-color: #FFFCF0; border-radius: 3px; -webkit-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.29); -moz-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.29); box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.29); margin: 0 auto; padding: 20px 20px 30px;">
 						<tr style="padding: 10px 0px 40px;">
 							<td align="left">
-								<img class="imagen-movil" src="http://placehold.it/80x80" alt="">
+								<img class="imagen-movil" src="http://charlenetas.com/webAssets/images/mail-campana.png" alt="">
 							</td>
 							<td align="right">
-								<img class="imagen-movil" src="http://placehold.it/80x80" alt="">
+								<img class="imagen-movil" src="http://charlenetas.com/webAssets/images/logo-charlenetas.png" alt="">
 							</td>
 						</tr>
 						<tr>
 							<td colspan=2 style="color: #265D9E; font-size: 24px; padding: 30px 0px;">
 								<h3><?= $nombre . " " . $ap_paterno ?></h3>
-								Ha hecho una cita en charlenetas.
+								Han hecho una cita en charlenetas.
 							</td>
 						</tr>
 						<tr>
