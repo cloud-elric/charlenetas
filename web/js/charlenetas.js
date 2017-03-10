@@ -1463,6 +1463,18 @@ function getCookie(cname) {
     return "";
 }
 
+//function compartirTwitter(titulo){
+//	desc = $('#txt_descripcion').text();
+//	image = $('.full-pin-header').data('image');
+//	
+//	console.log(desc+"-"+titulo+"-"+image);
+//	$('meta[name=twitter\\:title]').attr('content', titulo);
+//	$('meta[name=twitter\\:description]').attr('content', desc);
+//	$('meta[name=twitter\\:image]').attr('content', basePath+"webAssets/images/espejo.png");
+//	
+//	//$('#compartirTwitter').trigger("click");
+//}
+
 
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 

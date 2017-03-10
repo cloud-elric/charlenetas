@@ -2,11 +2,13 @@
 use yii\helpers\Html;
 use app\modules\ModUsuarios\models\Utils;
 use yii\helpers\Url;
+use yii\web\View;
 
 $usuario = $post->idUsuario;
 ?>
+
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
-<section class="full-pin-header">
+<section class="full-pin-header" data-image="<?= $post->txt_imagen?>">
 
 	<h2>Verdadazos</h2>
 	<div class="post-publisher-data">
@@ -22,24 +24,45 @@ $usuario = $post->idUsuario;
 	</div>
 
 </section>
-
+<script>
+	function compartirTwitter(titulo){
+		alert();
+	desc = $('#txt_descripcion').text();
+	image = $('.full-pin-header').data('image');
+	
+	$('#meta_titulo').attr('content', titulo);
+	$('#meta_descripcion').attr('content', desc);
+	$('#meta_imagen').attr('content', basePath+'webAssets/images/espejo.png');
+	
+	}
+		compartirTwitter('Verdadazos');
+ </script>
 <section
 	class="full-pin-body full-pin-body-alquimia full-pin-body-img-horizontal">
 	<h3><?=$post->txt_titulo?></h3>
-	<p>
+	<p id="txt_descripcion">
 		<?=$post->txt_descripcion?>
 	</p>
-	<img style="width: 100%;" src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
-		alt="Verdadazos - Netas bien duras" />
+	
+	<div class="full-pin-body-content-img-<?= $post->txt_token ?>">
+		<img style="width: 100%;" src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
+			alt="Verdadazos - Netas bien duras" />
+	</div>
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
 			<div class="feedback " onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
+			<div class="feedback">
+				<a href='http://twitter.com/intent/tweet?url=<?= urlencode("http://localhost/charlenetas/web/netas/index?token=".$post->txt_token) ?>'>
+					<i class="icon ion-social-twitter"></i>
+				</a>
+			</div>
 			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
 				<i class="material-icons">tab_unselected</i>
 				<h6 style="opacity:0; position:fixed; width:0; height:0; overflow:overflow; top:-1px; left:-1px" id="link-<?=$post->txt_token?>"><?=Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>netas/index?token=<?=$post->txt_token?></h6>
 			</div>
+					
 <!-- 			<div class="feedback"> -->
 <!-- 				<i class="icon icon-twitter"></i> -->
 <!-- 			</div> -->
@@ -50,6 +73,8 @@ $usuario = $post->idUsuario;
 			?>
 		</div>
 	</div>
+	
+	
 
 </section>
 
