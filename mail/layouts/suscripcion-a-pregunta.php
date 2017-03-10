@@ -17,18 +17,9 @@
 				font-family: Arial, Helvetica, sans-serif;
 				font-size: 16px;
 			}
-			a,
-			a:hover{
-				text-decoration: none;
+			a, a:hover{
+				text-decoration: none
 			}
-			a:link, span.MsoHyperlink
-			{mso-style-priority:99;
-			color:#21B6AE;
-			text-decoration:none;}
-			a:visited, span.MsoHyperlinkFollowed
-			{mso-style-priority:99;
-			color:#21B6AE;
-			text-decoration:none;}
 
 			@media screen and (max-width: 600px){
 				img[class="imagen-movil"]{
@@ -52,40 +43,22 @@
 				<td align="center" style="padding: 20px 20px 30px;">
 
 					<table width="350" cellpadding="0" cellspacing="0" border="0" class="table-responsive" style="background-color: #FFFCF0; border-radius: 3px; -webkit-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.29); -moz-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.29); box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.29); margin: 0 auto; padding: 20px 20px 30px;">
-						<tr style="padding: 10px 20px 40px;">
+						<tr style="padding: 10px 0px 40px;">
 							<td align="left">
-								<img class="imagen-movil" src="http://www.2gom.com.mx/test/wwwCharlenetas/imgs/logo-charlenetas.png" height="80" width="80" alt="">
+								<img class="imagen-movil" src="http://charlenetas.com/webAssets/images/mail-campana.png" alt="">
 							</td>
 							<td align="right">
-								<img class="imagen-movil" src="http://www.2gom.com.mx/test/wwwCharlenetas/imgs/logo-charlenetas.png" height="60" width="60" alt="">
+								<img class="imagen-movil" src="http://charlenetas.com/webAssets/images/logo-charlenetas.png" alt="">
 							</td>
 						</tr>
 						<tr>
-							<td align="center" colspan=2 style="color: #265D9E; font-size: 20px; padding: 30px 0px 10px; text-align: center;">
-								Un Admin a contestado a una pregunta de tu interés.
+							<td colspan=2 style="color: #265D9E; font-size: 24px; padding: 30px 0px;">
+								Charlene ha contestado a una pregunta de tu interés.
 							</td>
 						</tr>
 						<tr>
-							<td align="center" colspan=2>
-								<div align=center>
-									<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=100% style='width:262.5pt;background:#498FE1;border-collapse:collapse;border-radius:5px;box-shadow:rgb(212, 210, 210) 0px 1px 0px;border-spacing:0;margin:0 auto;'>
-										<tr style='height:41.25pt'>
-											<td style='padding:7.5pt 15.0pt 7.5pt 15.0pt;height:41.25pt'>
-												<p class=MsoNormal align=center style='text-align:center;line-height:22.5pt'>
-													<b>
-														<span style='font-size:20px;color:#FFF'>
-															<a href="<?=$url?>">
-																<span style='color:#FFF'>
-																	Ver respuesta
-																</span>
-															</a>
-														</span>
-													</b>
-												</p>
-											</td>
-										</tr>
-									</table>
-								</div>
+							<td align="center" colspan=2 style="padding: 60px 0px 40px;">
+								<a href="<?= Yii::$app->urlManager->createAbsoluteUrl ( [''] );?>netas/index?token=<?=$token?>" style="background-color: #498FE1; border-radius: 5px; color: #FFF; display: block; font-size: 20px; height: 43px; line-height: 43px; margin: 0 auto; padding: 0 20px; width: 78%;" class="link-responsive">Ver respuesta</a>
 							</td>
 						</tr>
 						<tr>
@@ -101,13 +74,13 @@
 
 			<tr>
 
-				<td align="center" >
+				<td>
 					<table width="350" cellpadding="0" cellspacing="0" border="0" class="table-responsive" style="margin: 0 auto; padding: 20px 0px 0px;">
 						<tr>
 							<td style="color: #BBB; font-size: 10px; font-style: italic; line-height: 16px; padding: 0px 8px 0px 0px;">
 								Este es un correo generado automaticamente, favor de no responderlo.
 								<br>
-								Si haz recibido este email por error o sin haberlo solicitado, porfavor haz caso omiso del mismo.
+								Si has recibido este email por error o sin haberlo solicitado, por favor has caso omiso del mismo.
 							</td>
 						</tr>
 					</table>

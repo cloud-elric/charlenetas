@@ -54,7 +54,7 @@
 						<tr>
 							<td colspan=2 style="color: #265D9E; font-size: 24px; padding: 30px 0px;">
 								<h3><?= $nombre . " " . $ap_paterno ?></h3>
-								Ha hecho una cita en charlenetas.
+								Han hecho una cita en charlenetas.
 							</td>
 						</tr>
 						<tr>
