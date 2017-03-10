@@ -7,7 +7,7 @@ $usuario = $post->idUsuario;
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
 <section class="full-pin-header">
 
-	<h2>Hoy Pense</h2>
+	<h2>Hoy Pensé</h2>
 	<div class="post-publisher-data">
 		<div class="post-publisher">
 			<h6>Publicado por: Charlene</h6>

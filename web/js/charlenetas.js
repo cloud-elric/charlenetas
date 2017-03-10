@@ -1311,7 +1311,7 @@ function validarRespuesta(element) {
 					} else if (resp.status == "success") {
 						mensajeCuentaActivada('Respuesta correcta');
 						remplazarBoton(token, resp,
-								'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
+								'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p> <p class="pin-sabias-que-respuesta-succes">Respuesta: '+resp.resp+' </p>'); 
 					} else if (resp.status == "respondido") {
 						mensajeCuentaActivada('Ya contestaste esta pregunta');
 						remplazarBoton(token, resp,
@@ -1319,7 +1319,7 @@ function validarRespuesta(element) {
 					} else {
 						mensajeWarning('Respuesta incorrecta');
 						remplazarBoton(token, resp,
-								'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
+								'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p> <p class="pin-sabias-que-respuesta-succes">Respuesta: '+resp.resp+'</p>');
 					}
 				},
 				statusCode : {
@@ -1367,7 +1367,7 @@ $('.filters-toggle').on('click', function() {
 
 function compartirFacebook(token) {
 
-	var image = $('.full-pin-body-content-img img').attr('src');
+	var image = $('.full-pin-body-content-img-'+token+' img').attr('src');
 	var description = $(".full-pin-body-content-text h3").text()
 			+ $(".full-pin-body-content-text p").text();
 	var title = $('.full-pin-header h2').text();

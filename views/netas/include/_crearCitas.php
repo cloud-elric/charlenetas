@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Url;
+?>
 
 <head>
 	<link rel='stylesheet' href='/fullcalendar-3.0.1/fullcalendar.css' />
@@ -72,3 +75,4 @@
 
 <?php //}?>
 
+<?php include "elementos/tutorial.php"?>
