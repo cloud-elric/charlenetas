@@ -1367,7 +1367,7 @@ $('.filters-toggle').on('click', function() {
 
 function compartirFacebook(token) {
 
-	var image = $('.full-pin-body-content-img img').attr('src');
+	var image = $('.full-pin-body-content-img-'+token+' img').attr('src');
 	var description = $(".full-pin-body-content-text h3").text()
 			+ $(".full-pin-body-content-text p").text();
 	var title = $('.full-pin-header h2').text();
