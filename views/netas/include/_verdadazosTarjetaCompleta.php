@@ -24,19 +24,7 @@ $usuario = $post->idUsuario;
 	</div>
 
 </section>
-<script>
-	function compartirTwitter(titulo){
-		alert();
-	desc = $('#txt_descripcion').text();
-	image = $('.full-pin-header').data('image');
-	
-	$('#meta_titulo').attr('content', titulo);
-	$('#meta_descripcion').attr('content', desc);
-	$('#meta_imagen').attr('content', basePath+'webAssets/images/espejo.png');
-	
-	}
-		compartirTwitter('Verdadazos');
- </script>
+
 <section
 	class="full-pin-body full-pin-body-alquimia full-pin-body-img-horizontal">
 	<h3><?=$post->txt_titulo?></h3>
@@ -77,6 +65,20 @@ $usuario = $post->idUsuario;
 	
 
 </section>
+
+<script>
+	function compartirTwitter(titulo){
+		alert();
+	desc = $('#txt_descripcion').text();
+	image = $('.full-pin-header').data('image');
+	
+	$('#meta_titulo').attr('content', titulo);
+	$('#meta_descripcion').attr('content', desc);
+	$('#meta_imagen').attr('content', basePath+'webAssets/images/espejo.png');
+	
+	}
+		compartirTwitter('Verdadazos');
+ </script>
 
 <section class="full-pin-social">
 	<div id="js-comments">

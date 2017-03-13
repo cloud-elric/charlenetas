@@ -187,6 +187,7 @@ class NetasController extends Controller {
 		
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
+		
 		$fch_actual = date("Y-m-d 00:00:00");
 		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
 		if($countClientes){

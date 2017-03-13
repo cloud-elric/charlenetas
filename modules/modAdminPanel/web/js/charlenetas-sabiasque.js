@@ -248,7 +248,7 @@ $(document).ready(function(){
 			return;
 		}
 		var token = $(this).data('token');
-		showPostFull(token)
+		//showPostFull(token)
 	});
 	
 	

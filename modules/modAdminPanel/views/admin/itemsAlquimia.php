@@ -28,21 +28,6 @@ foreach ( $postsAlquimia as $postAlquimia ) {
 					</a>
 					
 				</div>
-			</div>
-		</div>
-
-		<div class="card-contexto-options">
-		<div>
-				<input type="checkbox" id="delete-<?=$postAlquimia->txt_token?>" value="<?=$postAlquimia->txt_token?>" />
-				<label for="delete-<?=$postAlquimia->txt_token?>"></label>
-			</div>
-			<a id="button_<?=$postAlquimia->txt_token?>"
-				class="waves-effect waves-light modal-trigger"
-				onclick="abrirModalEditarAlquimia('<?=$postAlquimia->txt_token?>')"
-				href="#js-modal-post-editar"> <i
-				class="ion ion-android-more-vertical card-edit"></i>
-			</a>
-
 		</div>
 	</div>
 </div>

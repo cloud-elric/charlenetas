@@ -52,5 +52,5 @@ include 'templates/formato-fecha.php';
 ?>
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script>
-	tinymce.init({ selector:'.divTiny', inline:false});//.field-entposts-txt_descripcion
+	//tinymce.init({ selector:'.divTiny', inline:false});//.field-entposts-txt_descripcion
 </script>
