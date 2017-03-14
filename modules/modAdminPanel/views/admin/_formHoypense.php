@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 
 $classActive = $hoyPense->isNewRecord?'':'active';
 ?>
-
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <h4><?=$hoyPense->isNewRecord?'Agregar':'Editar'?> <span>Hoy pense</span></h4>
 
 <?php
@@ -38,10 +38,12 @@ $form = ActiveForm::begin ( [
 		<?= $form->field($hoyPense, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
 
 		<?= $form->field($hoyPense, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
-		
-   		<div class="divTiny">
-   			<?= $hoyPense->txt_descripcion ?>
-   		</div>
+		<div class="editor">
+		<?= $form->field($hoyPense, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textarea(['class'=>'materialize-textarea'])?>
+		</div>
+<!--    		<div class="divTiny"> -->
+   			<!-- <?= $hoyPense->txt_descripcion ?>-->
+<!--    		</div> -->
 	</div>
 
 	<?= Html::submitButton($hoyPense->isNewRecord?'crear':'editar', ['id'=>$hoyPense->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name' => 'boton-hoy', 'data-style'=>'zoom-in'])?>
@@ -50,7 +52,7 @@ $form = ActiveForm::begin ( [
 
 include 'templates/formato-fecha.php';
 ?>
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
 <script>
 	//tinymce.init({ selector:'.divTiny', inline:false});//.field-entposts-txt_descripcion
 </script>
