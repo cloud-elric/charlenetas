@@ -91,7 +91,7 @@ function statusChangeCallback(response) {
 							cargarCerrarSesion();
 							loadEspejoPreguntar();
 							mensajeCuentaActivada("Bienvenido netanauta");
-							loadEspejoPreguntar();
+							
 							cargarRespuestasSabiasQue();
 							
 							$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');

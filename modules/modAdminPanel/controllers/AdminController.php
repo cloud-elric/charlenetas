@@ -1396,6 +1396,12 @@ class AdminController extends Controller {
 		if ($anuncio->load ( Yii::$app->request->post ())) {
 			Yii::$app->response->format = Response::FORMAT_JSON;
 			
+			if (!filter_var($anuncio->txt_url, FILTER_VALIDATE_URL) === false) {
+				
+			} else {
+				$anuncio->txt_url = 'http://'.$anuncio->txt_url;
+			}
+			
 			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
 			$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
 			$anuncio->imagen2 = UploadedFile::getInstance ( $anuncio, 'imagen2' );
@@ -1427,6 +1433,8 @@ class AdminController extends Controller {
 				'id' => $idC
 		] );
 	}
+	
+	
 	
 	public function actionDeshabilitarAnuncio($idA = null) {
 		$anuncioDeshabilitar = EntAnuncios::find()->where(['id_anuncio'=>$idA])->andWhere(['b_habilitado'=>1])->one();
