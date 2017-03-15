@@ -1,12 +1,12 @@
 <?php
-use app\models\EntAnuncios;
+//use app\models\EntAnuncios;
 $fch_actual = date("Y-m-d 00:00:00");
-$numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->all();
-
+$numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->all();
+//$numAnunciosCliente = count($listaAnuncios);
 $countPost = 0;
 $countAnuncio = 0;
 
-$num = 5;
+$num =45;
 
 foreach ( $listaPost as $post ) {
 	if($countAnuncio > count($numAnunciosCliente)){
@@ -16,10 +16,10 @@ foreach ( $listaPost as $post ) {
 	if($num == $countPost && $countAnuncio < count($numAnunciosCliente) && count($listaAnuncios) > 0){
 
 		include 'include/_anuncioPin.php';
-		if($num == 10 || $num == 20 || $num == 30){
+		if($num == 8 || $num == 16 || $num == 28){
 			$countAnuncio++;
 		}
-		$num += 5;
+		$num += 4;
 	}else{
 	
 		if($post->b_habilitado == 1){
