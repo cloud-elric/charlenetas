@@ -6,7 +6,7 @@ $numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andW
 $countPost = 0;
 $countAnuncio = 0;
 
-$num =45;
+$num =4;
 
 foreach ( $listaPost as $post ) {
 	if($countAnuncio > count($numAnunciosCliente)){
