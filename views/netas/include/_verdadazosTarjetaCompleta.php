@@ -28,9 +28,7 @@ $usuario = $post->idUsuario;
 <section
 	class="full-pin-body full-pin-body-alquimia full-pin-body-img-horizontal">
 	<h3><?=$post->txt_titulo?></h3>
-	<p id="txt_descripcion">
-		<?=$post->txt_descripcion?>
-	</p>
+	<p id="txt_descripcion"><?=$post->txt_descripcion?></p>
 	
 	<div class="full-pin-body-content-img-<?= $post->txt_token ?>">
 		<img style="width: 100%;" src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
@@ -45,6 +43,9 @@ $usuario = $post->idUsuario;
 				<a href='http://twitter.com/intent/tweet?url=<?= urlencode("http://localhost/charlenetas/web/netas/index?token=".$post->txt_token) ?>'>
 					<i class="icon ion-social-twitter"></i>
 				</a>
+			</div>
+			<div class="feedback" onClick="compartirPinterest()">
+				<i class="icon ion-social-pinterest"></i>
 			</div>
 			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
 				<i class="material-icons">tab_unselected</i>
@@ -68,16 +69,15 @@ $usuario = $post->idUsuario;
 
 <script>
 	function compartirTwitter(titulo){
-		alert();
-	desc = $('#txt_descripcion').text();
-	image = $('.full-pin-header').data('image');
-	
-	$('#meta_titulo').attr('content', titulo);
-	$('#meta_descripcion').attr('content', desc);
-	$('#meta_imagen').attr('content', basePath+'webAssets/images/espejo.png');
+		desc = $('#txt_descripcion').text();
+		image = $('.full-pin-header').data('image');
+		
+		$('#meta_titulo').attr('content', titulo);
+		$('#meta_descripcion').attr('content', desc);
+		$('#meta_imagen').attr('content', basePath+'webAssets/images/espejo.png');
 	
 	}
-		compartirTwitter('Verdadazos');
+	compartirTwitter('Verdadazos');
  </script>
 
 <section class="full-pin-social">

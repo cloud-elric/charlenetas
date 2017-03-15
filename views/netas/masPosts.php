@@ -1,12 +1,14 @@
 <?php
 use app\models\EntAnuncios;
 $fch_actual = date("Y-m-d 00:00:00");
-$numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->all();
-
+$numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->all();
+//$numAnunciosCliente = count($listaAnuncios);
 $countPost = 0;
 $countAnuncio = 0;
 
-$num = 4;
+
+$num =4;
+
 
 foreach ( $listaPost as $post ) {
 	if($countAnuncio > count($numAnunciosCliente)){
