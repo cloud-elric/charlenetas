@@ -54,12 +54,26 @@ ActiveForm::end ();
 
 <script>
 $(document).ready(function(){
+
+	$('#js-preguntar-btn').on('click', function(e){
+		e.preventDefault();
+		var button = document.getElementById('js-preguntar-btn');
+		var l = Ladda.create(button);
+	 	l.start();
+$('#form-espejo').submit();
+		});
+	
 	$('body').on('beforeSubmit', '#form-espejo', function() {
+		var button = document.getElementById('js-preguntar-btn');
+		var l = Ladda.create(button);
+	 	l.start();
 		var form = $(this);
 		// return false if form still have some validation errors
 		if (form.find('.has-error').length) {
+			l.stop();
 			return false;
 		}
+		
 
 		var valor = 0;
 		$("input:checked").each(function(){
@@ -68,16 +82,13 @@ $(document).ready(function(){
 		});
 
 		var url = form.attr('action')+"?anonimo="+valor;
-		var button = document.getElementById('js-preguntar-btn');
-		var l = Ladda.create(button);
-	 	l.start();
 		// submit form
 			$.ajax({
 				url : url,// url para peticion
 				type : 'post', // Metodo en el que se enviara la informacion
 				data: form.serialize(),
 				success : function(response) { 
-					console.log(response); 
+					//console.log(response); 
 
 					// Si la respuesta contiene la propiedad status y es success
 					if (response.hasOwnProperty('status')

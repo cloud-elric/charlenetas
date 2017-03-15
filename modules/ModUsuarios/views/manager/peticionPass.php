@@ -73,7 +73,7 @@ $(document).ready(function(){
 						&& response.status == 'success') {
 					$("#js-contenedor-recovery").hide();
 					$('#js-message-recovery').show();
-					document.getElementById("js-recuperar-submit").reset();
+					document.getElementById("peticion-form").reset();
 				} else {
 					// Muestra los errores
 					$('#peticion-form').yiiActiveForm('updateMessages',

@@ -20,19 +20,20 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 
 	totalPostMostrados = (pages + 1) * 30;
 	totalPost = postTotales - totalPostMostrados;
-
+	
+	//console.log("numeroAnuncio"+num );
+	
 	var contenedor = $('#js-contenedor-posts-tarjetas');
 	var url = basePath + 'netas/get-mas-posts?page=' + pages;
 
 	$.ajax({
 		url : url,
 		success : function(res) {
-
 			var $items = $(res);
 
 			grid.append($items);
 			grid.masonry('appended', $items);
-
+			
 			pages++;
 
 			filtrarPost();
@@ -162,12 +163,17 @@ function cargarRespuestasSabiasQue(){
 			url:url,
 			dataType:'JSON',
 			success:function(response){
+				var respondido = 'falso';
+				if(response.b_respuesta){
+					var respondido = 'verdadero';	
+				}
+				
 				if(response.status=='bien'){
 					remplazarBoton(token, response,
-					'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
+					'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p><p class="pin-sabias-que-respuesta-succes">Respuesta: '+respondido+'</p>');
 				}else if(response.status=='mal'){
 					remplazarBoton(token, response,
-					'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
+					'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p><p class="pin-sabias-que-respuesta-succes">Respuesta: '+respondido+'</p>');
 				}
 			}
 		});
@@ -560,7 +566,7 @@ function revisarFeedbacks(token, feed){
 	var no;
 	for(i = 0; i < feedbacks.length; i++){
 		
-		if($(feedbacks[i]).hasClass('did-usr-interact')){
+		if($(feedbacks[i]).hasClass('did-usr-interact') && $(feedbacks[i]).attr('data-token') == token){
 			//console.log("si");
 			removeFeedback($(feedbacks[i]).attr('data-token'), $(feedbacks[i]).attr('data-tfb'));
 		}else if($(feedbacks[i]).attr('data-token') == token && $(feedbacks[i]).attr('data-tfb') == feed){
@@ -878,7 +884,7 @@ function agregarPregunta() {
 	$('#js-modal-espejo').trigger('click');
 }
 
-// Carga la habilidad para los feedback
+//Carga la habilidad para los feedback
 function cargarFeeds() {
 	$('.js-feedback').each(function(index) {
 		var token = $(this).data('token');
@@ -999,6 +1005,7 @@ function cambiarClassPin(elemento, opacity) {
 function loadEspejoPreguntar() {
 	var url = basePath + 'netas/agregar-espejo';
 	var contenedor = $('#modal-pregunta-espejo .modal-content');
+	
 	$.ajax({
 		url : url,
 		success : function(res) {
@@ -1144,10 +1151,10 @@ var modalClose = document.getElementById("modal-tutoriales-close");
 $(document).ready(function() {
 
 	
-	$('.modal-content .wrap').on('click touchstart', function(e) {
+	$('#modal-login .modal-content .wrap').on('click touchstart', function(e) {
 
 		console.log(e.target.className);
-		if (e.target.className == 'section') {
+		if (e.target.className == 'wrap') {
 			e.preventDefault();
 			$('.lean-overlay').trigger('click');
 
@@ -1221,15 +1228,17 @@ $(document).ready(function() {
 	// 
 	// 
 
+	var owl = $('.owl-carousel-tutoriales');
+
 	/**
 	 * Modal
 	 */
 	// Open Modal
 	$(modalOpen).on("click", function(){
-		modal.style.display = "flex";
-		
-		var owl = $('.owl-carousel-tutoriales');
 
+		modal.style.display = "flex";
+		modal.style.display = "-ms-flexbox";
+		
 		owl.owlCarousel({
 			center: true,
 			margin: 0,
@@ -1254,8 +1263,8 @@ $(document).ready(function() {
 		}).on('changed.owl.carousel', function(event) {
 			var currentItem = event.item.index;
 
-			if(currentItem === 11){
-				setTimeout(alertFunc, 200);
+			if(currentItem === 9){
+				setTimeout(modalFinish, 200);
 			}
 			else{
 				$(".owl-next").attr('id', '');
@@ -1271,7 +1280,7 @@ $(document).ready(function() {
 	});
 
 	// Función
-	function alertFunc() {
+	function modalFinish() {
 		$(".owl-next").attr('id', 'modal-tutoriales-finalizar');
 		$("#modal-tutoriales-finalizar").addClass("owl-next-finalizar");
 		$("#modal-tutoriales-finalizar").html('<i class="ion ion-android-done"></i>');
@@ -1302,7 +1311,7 @@ function validarRespuesta(element) {
 					} else if (resp.status == "success") {
 						mensajeCuentaActivada('Respuesta correcta');
 						remplazarBoton(token, resp,
-								'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p>');
+								'<p class="pin-sabias-que-respuesta-succes">Respondiste correctamente</p> <p class="pin-sabias-que-respuesta-succes">Respuesta: '+resp.resp+' </p>'); 
 					} else if (resp.status == "respondido") {
 						mensajeCuentaActivada('Ya contestaste esta pregunta');
 						remplazarBoton(token, resp,
@@ -1310,7 +1319,7 @@ function validarRespuesta(element) {
 					} else {
 						mensajeWarning('Respuesta incorrecta');
 						remplazarBoton(token, resp,
-								'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p>');
+								'<p class="pin-sabias-que-respuesta-error">Respondiste incorrectamente</p> <p class="pin-sabias-que-respuesta-succes">Respuesta: '+resp.resp+'</p>');
 					}
 				},
 				statusCode : {
@@ -1346,6 +1355,10 @@ function cargarCerrarSesion() {
 	var cerrarSesion = '<a id="js-ingresar-cerrar-sesion" href="' + basePath
 			+ 'site/logout">Cerrar sesión</a>';
 	$("#js-ingresar-cerrar-sesion").replaceWith(cerrarSesion);
+	
+	var citas = '<a id="js-citas" href="' + basePath
+	+ 'netas/crear-cita">Citas</a>';
+	$("#js-citas").replaceWith(citas);
 }
 
 $('.filters-toggle').on('click', function() {
@@ -1354,7 +1367,7 @@ $('.filters-toggle').on('click', function() {
 
 function compartirFacebook(token) {
 
-	var image = $('.full-pin-body-content-img img').attr('src');
+	var image = $('.full-pin-body-content-img-'+token+' img').attr('src');
 	var description = $(".full-pin-body-content-text h3").text()
 			+ $(".full-pin-body-content-text p").text();
 	var title = $('.full-pin-header h2').text();
@@ -1375,6 +1388,7 @@ function compartirFacebook(token) {
 }
 
 $('.anim-account-close').on('click', function() {
+	
 	$('.lean-overlay').trigger('click');
 });
 
@@ -1416,6 +1430,68 @@ function deshabilitarBotonSabias(elemento){
 	
 	elemento.prop('checked', false);
 }
+
+$(document).ready(function(){
+	//document.cookie = "cookie1=; max-age=0; path=/";
+	
+	$("#checkbox").change(function(){
+		document.cookie = "cookie1=noMostrar; path=/";
+		
+	});
+	
+	
+	if(getCookie('cookie1')!="noMostrar"){
+		setTimeout(function(){
+			$(modalOpen).click();
+		}, 5000);
+	}
+	
+});
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+/*pinterest*/
+function open_window(url, name){
+	window.open(url, name, 'height=320, width=640, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no');
+}
+
+function setDataURL(tituloArticulo,urlImage,urlArticulo ){
+			open_window('https://pinterest.com/pin/create/button/?url='+urlArticulo+'&media='+urlImage+'&description='+tituloArticulo, 'pinterest_share');
+}
+
+function compartirPinterest(){
+	desc = $('#txt_descripcion').text();
+	image = $('.full-pin-header').data('image');
+	token = $('#js-token-post').val();
+	//alert(desc+image+token);
+	
+	setDataURL(desc, basePath+'uploads/imagenesPosts/'+image, basePath+"netas/index?token="+token);
+}
+
+//function compartirTwitter(titulo){
+//	desc = $('#txt_descripcion').text();
+//	image = $('.full-pin-header').data('image');
+//	
+//	console.log(desc+"-"+titulo+"-"+image);
+//	$('meta[name=twitter\\:title]').attr('content', titulo);
+//	$('meta[name=twitter\\:description]').attr('content', desc);
+//	$('meta[name=twitter\\:image]').attr('content', basePath+"webAssets/images/espejo.png");
+//	
+//	//$('#compartirTwitter').trigger("click");
+//}
 
 
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

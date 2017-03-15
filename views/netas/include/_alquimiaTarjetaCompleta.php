@@ -28,7 +28,7 @@ $alquimia = $post->entAlquimias;
 
 	<div class="full-pin-body-content">
 
-		<div class="full-pin-body-content-img">
+		<div class="full-pin-body-content-img full-pin-body-content-img-<?= $post->txt_token ?>">
 			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
 				alt="Alquimia - Películas que transforman" />
 		</div>

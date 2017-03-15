@@ -29,6 +29,12 @@ use app\models\EntUsuariosCreditos;
 use app\models\CatTipoCreditos;
 
 use app\models\ModUsuariosEntUsuarios;
+use app\models\EntAnuncios;
+use yii\db\Expression;
+use app\models\VistaTotalCreditos;
+use app\models\CatTiposUsuarios;
+use app\models\EntUsuariosCreditosGastados;
+use app\models\EntClientes;
 
 
 class NetasController extends Controller {
@@ -172,6 +178,8 @@ class NetasController extends Controller {
 	 * Busca todos los post por orden de fecha de publicacion
 	 */
 	public function actionIndex($token=null) {
+		$session = Yii::$app->session;
+		$session->set('clientes', []);
 		
 		if(!empty($token)){
 			$this->getPostByToken($token);
@@ -180,6 +188,18 @@ class NetasController extends Controller {
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ();
 		
+		$fch_actual = date("Y-m-d 00:00:00");
+		$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
+		if($countClientes){
+			$numRand = $countClientes->id_cliente;
+			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+			$session->set('clientes', [$numRand]);
+		}else{
+			$listaAnuncios = EntAnuncios::find()->all();
+			$numRand = 0;
+			$session->set('clientes', [$numRand]);
+		}
+			
 		// Tipos de post
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
 				'b_habilitado' => 1 
@@ -189,7 +209,9 @@ class NetasController extends Controller {
 		return $this->render ( 'index', [ 
 				'listaPost' => $listaPost,
 				'tiposPost' => $tiposPost,
-				'token'=>$token
+				'listaAnuncios' => $listaAnuncios,
+				'token'=>$token,
+				'numRand' => $numRand
 		] );
 	}
 	
@@ -197,17 +219,51 @@ class NetasController extends Controller {
 	 * Obtiene los post por paginacion
 	 */
 	public function actionGetMasPosts($page = 1) {
-		
+		$session = Yii::$app->session;
 		// Layout que usara la vista
 		$this->layout = false;
+		//$arrayAnun = explode(",", $array);
+		$arrayAnun = null;
+		$fch_actual = date("Y-m-d 00:00:00");
 		
+		$clientes = $session->get('clientes');
+		//foreach ($clientes AS $index => $value)
+		foreach ($clientes AS $index => $value)
+			$arrayAnun[$index] = (int)$value;
+		
+		$countClientes = EntClientes::find()->where(['NOT IN', 'id_cliente',$arrayAnun])->andWhere(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
+			
+		if(!$countClientes){
+			//echo $countClientes->id_clientes;
+			$countClientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy(new Expression('rand()'))->one();
+			if($countClientes){
+				$numRand = $countClientes->id_cliente;
+				$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+				$session->set('clientes', []);
+				$arrayAnun[] = $numRand;
+				$session->set('clientes', $arrayAnun);
+			}else{
+				$listaAnuncios = EntAnuncios::find()->all();
+				$numRand = 0;
+				$session->set('clientes', [$numRand]);
+			}
+			
+		}else{
+			$numRand = $countClientes->id_cliente;
+			$arrayAnun[] = $numRand;
+			$session->set('clientes', $arrayAnun);
+					
+			$listaAnuncios = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->andWhere(['b_activo'=>1])->orderBy(new Expression('rand()'))->all();
+		}
 		// Recupera n numero de registros por paginacion
 		$listaPost = EntPostsExtend::getPostByPagination ( $page );
-		
+				
 		// Pintar vista
-		return $this->render ( 'masPosts', [ 
-				'listaPost' => $listaPost 
-		] );
+		return $this->render ( 'masPosts', [
+			'listaPost' => $listaPost,
+			'listaAnuncios' => $listaAnuncios,
+			'numRand' => $numRand
+		]);
 	}
 	
 	/**
@@ -568,9 +624,15 @@ class NetasController extends Controller {
 			if($idUsuario != $comentario->id_usuario){
 			
 				$notificaciones = new EntNotificaciones();
-			
 				$notificaciones->guardarNotificacion($comentario, $notificaciones);
+				
+// 				$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$comentario->id_usuario])->one();
+// 				$this->enviarEmailComentario($user, $token);
 			}
+			
+			$post = EntPosts::find()->where(['id_post'=>$comentario->id_post])->one();
+			$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$comentario->id_usuario])->one();
+			$this->enviarEmailComentario($user, $post->txt_token);
 				
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
@@ -651,23 +713,26 @@ class NetasController extends Controller {
 			if ($boolRes === $respuesta) {
 				
 				
-// 				$contestar = CatTipoCreditos::find()->where(['nombre'=>"Contestar"])->one();
+				$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::RESPONDER_PREGUNTA_CORRECTAMENTE])->one();
 				
-// 				$creditos = new EntUsuariosCreditos();
-// 				$creditos->id_usuario = $idUsuario;
-// 				$creditos->numero_creditos = $contestar->costo;
-// 				$creditos->txt_descripcion = "Contestar pregunta";
-// 				$creditos->save();
-					
+				$creditos = new EntUsuariosCreditos();
+				$creditos->id_usuario = $idUsuario;
+				$creditos->numero_creditos = $contestar->costo;
+				$creditos->txt_descripcion = "Por contestar un sabias que correctamente";
+				$creditos->save();
+				
+				$resp = $boolRes?'verdadero':'falso';
 				return [
 						'status' => 'success',
-						'txt_url'=>$post->txt_url
+						'txt_url'=>$post->txt_url,
+						'resp' => $resp
 				];
 			} else {
-				
+				$resp = $boolRes?'verdadero':'falso';
 				return [
 						'status' => 'error',
-						'txt_url'=>$post->txt_url
+						'txt_url'=>$post->txt_url,
+						'resp' => $resp
 				];
 			}
 		}
@@ -797,9 +862,11 @@ class NetasController extends Controller {
 		if ($post->load ( Yii::$app->request->post () )) {
 			if($postGuardado = $post->guardarEspejo($post, $anonimo)){
 						
-				$notificaciones = new EntNotificaciones();
-					
-				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+// 				$notificaciones = new EntNotificaciones();	
+// 				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+				
+				$admin = EntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
+				$this->enviarEmailPreguntaEspejo($admin, $post->txt_token);
 				
 				return $this->renderAjax('//netas/include/_espejoPin',['post'=>$postGuardado]);
 			}else{
@@ -859,7 +926,7 @@ class NetasController extends Controller {
 			}
 		}
 	
-		return $this->renderAjax ( '//netas/include/_crearCitas', [
+		return $this->render ( '//netas/include/_crearCitas', [
 				'cita' => $cita
 		] );
 	}
@@ -901,8 +968,8 @@ class NetasController extends Controller {
 			
 			$entCitas = new EntCitas();
 		
-			$notificaciones = new EntNotificaciones ();
-			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
+// 			$notificaciones = new EntNotificaciones ();
+// 			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
 			
 			$creditosGastados = new EntUsuariosCreditosGastados();
 			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $id_usuario, $costo->costo);
@@ -913,6 +980,10 @@ class NetasController extends Controller {
 			$entCitas->id_usuario = $id_usuario;
 			$entCitas->txt_token = $txt_token;
 			$entCitas->save();
+			
+			$admin = ModUsuariosEntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
+			$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$id_usuario])->one();
+			$this->enviarEmailAgregarCita($admin, $usuario);
 			
 			$success = "creditosSuficientes";
 			return ["status"=>$success];
@@ -944,14 +1015,18 @@ class NetasController extends Controller {
 				'id_usuario' => $usuario->id_usuario,
 				'id_post' => $post->id_post
 		] )->one ();
+		
+		$sabiasQue = $post->entSabiasQue;
 	
+		
+		
 		if(empty($respuestaUsuario)){
 			return ['status'=>'sin'];
 		}else {
-			if($respuestaUsuario->b_respuesta){
-				return ['status'=>'bien','txt_url'=>$post->txt_url];
+			if($respuestaUsuario->b_respuesta==$sabiasQue->b_verdadero){
+				return ['status'=>'bien','txt_url'=>$post->txt_url, 'b_respuesta'=>$sabiasQue->b_verdadero];
 			}else{
-				return ['status'=>'mal','txt_url'=>$post->txt_url];
+				return ['status'=>'mal','txt_url'=>$post->txt_url,'b_respuesta'=>$sabiasQue->b_verdadero];
 			}
 		}
 	}
@@ -969,4 +1044,65 @@ class NetasController extends Controller {
 			return['status'=>'charlenauta'];
 		}
 	}
+	
+	private function enviarEmail($user){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $user->txt_username,
+				'correo' => $user->txt_email
+		];
+	
+//		$utils->sendCitaCreada( "ruloalpe@yahoo.com.mx", $parametrosEmail );
+//		$utils->sendPreguntaEspejo( "ruloalpe@yahoo.com.mx", $parametrosEmail );
+// 		$utils->sendBienvenida( "damian@2gom.com.mx", $parametrosEmail );
+// 		$utils->sendComentarioContestado( "ruloalpe@yahoo.com.mx", $parametrosEmail );
+// 		$utils->sendPreguntaContestada( "ruloalpe@yahoo.com.mx", $parametrosEmail );
+// 		$utils->sendRecuperarPassword( "damian@2gom.com.mx", $parametrosEmail );
+// 		$utils->sendSuscripcion( "damian@2gom.com.mx", $parametrosEmail );
+	}
+	
+	private function enviarEmailComentario($user, $token){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $user->txt_username,
+				'correo' => $user->txt_email,
+				'ap_paterno' => $user->txt_apellido_paterno,
+				'ap_materno' => $user->txt_apellido_materno,
+				'token' => $token
+		];
+	
+		$utils->sendComentarioContestado($user->txt_email, $parametrosEmail );
+	}
+	
+	private function enviarEmailPreguntaEspejo($admin, $token){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $admin->txt_username,
+				'correo' => $admin->txt_email,
+				'token' => $token
+		];
+	
+		$utils->sendPreguntaEspejo($admin->txt_email, $parametrosEmail );
+		$utils->sendPreguntaEspejo('humberto@2gom.com.mx', $parametrosEmail );
+		//$utils->sendPreguntaEspejo('raul@2gom.com.mx', $parametrosEmail );
+	}
+	
+	private function enviarEmailAgregarCita($admin, $user){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $user->txt_username,
+				'ap_paterno' => $user->txt_apellido_paterno,
+				'correo' => $user->txt_email
+		];
+	
+		$utils->sendCitaCreada($admin->txt_email, $parametrosEmail );
+		$utils->sendCitaCreada('humberto@2gom.com.mx', $parametrosEmail );
+		//$utils->sendCitaCreada('raul@2gom.com.mx', $parametrosEmail );
+	}
+	
+	
 }

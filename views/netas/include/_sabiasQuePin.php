@@ -74,11 +74,13 @@ if (! Yii::$app->user->isGuest) {
 			?>
 						<p class="pin-sabias-que-respuesta-succes">Respondiste
 		correctamente</p>
+		<p class="pin-sabias-que-respuesta-succes">Respuesta: <?=$pregAdmin->b_verdadero?'Verdadero':'Falso'?></p>
 	<?php
 		} else if ($pregAdmin->b_verdadero != $validar->b_respuesta) {
 			?>
 							<p class="pin-sabias-que-respuesta-error">Respondiste
 		incorrectamente</p>
+		<p class="pin-sabias-que-respuesta-succes">Respuesta: <?=$pregAdmin->b_verdadero?'Verdadero':'Falso'?></p>
 	<?php
 		}
 	} else if (Yii::$app->user->isGuest) {

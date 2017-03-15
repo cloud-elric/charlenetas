@@ -9,15 +9,15 @@
 	width: 100%
 	height: 100vh
 	overflow: auto
-	background-color: #0059B2
+	background-color: $color-espejo
 	align-items: center
-	justify-content: center
+	justify-content: flex-start
 
 	// Modal Content
 	.modal-content
 		border-radius: 4px
 		position: relative
-		background-color: #fff
+		background-color: $white
 		margin: auto
 		// height: 80vh
 		max-width: 320px
@@ -33,32 +33,116 @@
 
 		+respond-to(lg)
 			height: auto
-			min-height: 60vh
+			// min-height: 60vh
+			min-height: 320px
 			max-height: 90vh
 			width: 80%
+
 		+respond-to(md)
 			height: auto
-			min-height: 60vh
+			// min-height: 60vh
+			min-height: 320px
 			max-height: 90vh
 			width: 80%
+
 		+respond-to(sm)
 			height: auto
-			min-height: 45vh
+			// min-height: 54vh
+			min-height: 320px
 			max-height: 90vh
+			padding: 10px 0
 			width: 90%
+		
 		+respond-to(xs)
 			height: auto
-			min-height: 45vh
+			// min-height: 62vh
+			min-height: 200px
 			max-height: 90vh
+			padding: 10px 0
 			width: 90%
+
+		// Movil Lg
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px)
+			height: auto
+			// min-height: 62vh
+			min-height: 320px
+			max-height: 90vh
+			padding: 10px 0
+			width: 90%
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : portrait)
+			height: auto
+			// min-height: 62vh
+			min-height: 320px
+			max-height: 90vh
+			padding: 10px 0
+			width: 90%
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : landscape)
+			height: auto
+			// min-height: 70vh
+			min-height: 200px
+			max-height: 90vh
+			padding: 10px 0
+			width: 90%
+
+		// Movil Xs
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px)
+			height: auto
+			// min-height: 66vh
+			min-height: 320px
+			max-height: 90vh
+			padding: 10px 0
+			width: 90%
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : portrait)
+			height: auto
+			// min-height: 66vh
+			min-height: 320px
+			max-height: 90vh
+			padding: 10px 0
+			width: 90%
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : landscape)
+			height: auto
+			// min-height: 70vh
+			min-height: 200px
+			max-height: 90vh
+			padding: 10px 0
+			width: 90%
+		
+		// +respond-to(xs)
+		// 	height: auto
+		// 	min-height: 70vh
+		// 	max-height: 90vh
+		// 	width: 90%
 
 		.owl-stage-outer
 			// background-color: red
-			height: 100%
+			min-height: 320px
+			// max-height: 90vh
 			position: relative
 			width: 100%
 			z-index: 2
 
+			// Movil Lg
+			@media only screen and (min-device-width : 351px) and (max-device-width : 767px)
+				min-height: 320px
+				// max-height: 90vh
+			@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : portrait)
+				min-height: 320px
+				// max-height: 90vh
+			@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : landscape)
+				min-height: 200px
+				// max-height: 90vh
+
+			// Movil Xs
+			@media only screen and (min-device-width : 300px) and (max-device-width : 350px)
+				min-height: 320px
+				// max-height: 90vh
+			@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : portrait)
+				min-height: 320px
+				// max-height: 90vh
+			@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : landscape)
+				min-height: 200px
+				// max-height: 90vh
+			
 			.owl-stage
 				height: 100%
 				position: relative
@@ -68,7 +152,8 @@
 					// background-color: red
 					display: flex
 					height: 100%
-					padding: 30px 20px
+					padding: 20px 20px 50px
+					width: 320px
 
 					+respond-to(xs)
 						padding: 20px
@@ -79,6 +164,7 @@
 						flex-direction: column
 						justify-content: flex-start
 						// padding: 0 20px
+						width: 100%
 
 						.screen-ayuda-corousel-item-imagen
 							border-radius: 50%
@@ -92,21 +178,28 @@
 							// 	width: 200px
 							+respond-to(xs)
 								height: 140px
+								margin-bottom: 20px
 								width: 140px
 
 						h3
 							color: #333
 							font-size: 1.3rem
 							margin-bottom: 20px
+							width: 100%
+
+							+respond-to(xs)
+								margin-bottom: 10px
 
 						p
 							color: #333
 							font-size: 1rem
 							letter-spacing: 1px
+							margin-bottom: 8px
+							width: 100%
 
 						.modal-tutoriales-finalizar
 							align-items: center
-							background-color: #0059B2
+							background-color: $color-espejo
 							border-radius: 50%
 							bottom: 14px
 							display: flex
@@ -131,13 +224,32 @@
 
 			.owl-dots
 				align-items: center
-				bottom: 8px
+				bottom: 20px
 				display: flex
 				justify-content: center
 				height: 30px
 				position: absolute
 				width: 100%
 				z-index: 4
+
+				+respond-to(xs)
+					bottom: -2px
+
+				// Movil Lg
+				@media only screen and (min-device-width : 351px) and (max-device-width : 767px)
+					bottom: 4px
+				@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : portrait)
+					bottom: 4px
+				@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : landscape)
+					bottom: -3px
+
+				// Movil Xs
+				@media only screen and (min-device-width : 300px) and (max-device-width : 350px)
+					bottom: 6px
+				@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : portrait)
+					bottom: 6px
+				@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : landscape)
+					bottom: -2px
 
 				.owl-dot
 					background-color: #BBB
@@ -159,9 +271,9 @@
 					display: none!important
 				.owl-next
 					align-items: center
-					background-color: #0059B2
+					background-color: $color-espejo
 					border-radius: 50%
-					bottom: 8px
+					bottom: 20px
 					display: flex
 					height: 30px
 					justify-content: center
@@ -171,6 +283,9 @@
 					right: 20px
 					width: 30px
 					z-index: 9
+
+					+respond-to(xs)
+						bottom: -2px
 
 					i
 						color: white
@@ -216,9 +331,230 @@
 			cursor: pointer
 
 		+respond-to(xs)
-			background-color: #0059B2
+			background-color: $color-espejo
 			border-radius: 50%
 			font-size: 18px
 			right: 10px
 			top: 20px
 			z-index: 8
+
+
+	// Checkbox
+	.form-group-check
+		background-color: $color-espejo
+		// background-color: red
+		border-radius: 4px
+		bottom: 30px
+		left: 50%
+		list-style: none
+		margin: 0
+		margin-left: -85px
+		padding: 2px 10px
+		position: absolute
+		width: 170px
+		z-index: 9
+
+		+respond-to(sm)
+			justify-content: flex-end
+
+		+respond-to(xs)
+			justify-content: flex-end
+
+		// Movil Lg
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px)
+			bottom: 30px
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : portrait)
+			bottom: 30px
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : landscape)
+			bottom: 2px
+
+		// Movil Xs
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px)
+			bottom: 4px
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : portrait)
+			bottom: 4px
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : landscape)
+			bottom: 8px
+
+
+		.boxes 
+			// background-color: rgba(#484848,.3)
+			position: relative
+			z-index: 2
+
+			/*Checkboxes styles*/
+			input[type="checkbox"]
+				display: none 
+
+			input[type="checkbox"] + label 
+				display: block
+				position: relative
+				padding-left: 35px
+				margin-bottom: 20px
+				// font-family: $font-din
+				font-size: .8rem
+				color: $white
+				cursor: pointer
+				-webkit-user-select: none
+				-moz-user-select: none
+				-ms-user-select: none
+
+				+respond-to(xs)
+					font-size: .9rem
+
+				// a
+				// 	font-size: 1.05rem
+				// 	color: $primary-color
+				// 	text-decoration: underline
+
+				// 	+respond-to(xs)
+				// 		font-size: 1rem
+
+			input[type="checkbox"] + label:last-child
+				margin-bottom: 0 
+
+			input[type="checkbox"] + label:before 
+				content: ''
+				display: block
+				width: 16px
+				height: 16px
+				border: 1px solid $white
+				position: absolute
+				left: 8px
+				top: 2px
+				opacity: .6
+				-webkit-transition: all .12s, border-color .08s
+				transition: all .12s, border-color .08s
+
+				+respond-to(xs)
+					top: 2px
+
+				// +respond-to(xx)
+				// 	top: 9px
+			
+
+			input[type="checkbox"]:checked + label:before 
+				width: 10px
+				top: -2px
+				left: 4px
+				border-radius: 0
+				opacity: 1
+				border-top-color: transparent
+				border-left-color: transparent
+				-webkit-transform: rotate(45deg)
+				transform: rotate(45deg)
+
+				+respond-to(xs)
+					top: 0px
+
+				// +respond-to(xx)
+				// 	top: 4px
+		
+		// Mask 
+		.form-group-check-mask
+			// background-color: rgba(red,.4)
+			bottom: 0
+			cursor: pointer
+			height: 100%
+			left: 0
+			position: absolute
+			right: 0
+			top: 0
+			width: 100%
+			z-index: 4
+
+
+	// Modal Checkbox
+	.list
+		background-color: $color-espejo
+		// background-color: red
+		border-radius: 4px
+		bottom: 30px
+		left: 50%
+		list-style: none
+		margin: 0
+		margin-left: -85px
+		padding: 2px 10px
+		position: absolute
+		width: 170px
+		z-index: 9
+
+		// Movil Lg
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px)
+			bottom: 30px
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : portrait)
+			bottom: 30px
+		@media only screen and (min-device-width : 351px) and (max-device-width : 767px) and (orientation : landscape)
+			bottom: 0px
+
+		// Movil Xs
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px)
+			bottom: 10px
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : portrait)
+			bottom: 10px
+		@media only screen and (min-device-width : 300px) and (max-device-width : 350px) and (orientation : landscape)
+			bottom: 0px
+
+		.list__item
+			background-color: pink
+			margin: 0
+			padding: 0
+
+			.label--checkbox
+				background-color: teal
+				position: relative
+				// margin: .5rem
+				font-family: Arial, sans-serif
+				line-height: 135%
+				cursor: pointer
+				color: $white
+				font-size: .8em
+				.label--checkbox-row
+					background-color: yellow
+					text-align: left
+					@include respond-to(xs)
+						text-align: center
+					.label--checkbox-row-col
+						background-color: marron
+						display: inline-block
+						vertical-align: middle
+						@include respond-to(xs)
+							text-align: center
+						span
+							display: block
+							text-decoration: underline
+
+			.checkbox 
+				position: relative
+				top: 0
+				margin: 0 1rem 0 0
+				cursor: pointer
+				opacity: 1
+				left: auto
+				cursor: pointer
+				&:before 
+					+transition(all .3s ease-in-out)
+					content: ""
+					position: absolute
+					left: 0
+					z-index: 1
+					width: 1rem
+					height: 1rem
+					border: 2px solid $white
+					top: 2px
+				&:checked 
+					&:before 
+						transform: rotate(-45deg)
+						height: .5rem
+						border-color: $color-espejo
+						border-top-style: none
+						border-right-style: none
+				&:after 
+					content: ""
+					position: absolute
+					top: 0
+					left: 0
+					width: 1.1rem
+					height: 1.1rem
+					background-color: $white
+					cursor: pointer

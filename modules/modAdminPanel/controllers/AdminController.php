@@ -28,6 +28,10 @@ use app\models\RelUsuarios;
 use app\models\ModUsuariosEntUsuarios;
 use app\models\EntUsuariosRespuestasSabiasQue;
 use yii\web\NotFoundHttpException;
+use app\models\EntClientes;
+use app\models\EntAnuncios;
+use yii\helpers\Url;
+use app\models\EntUsuariosSubscripciones;
 
 /**
  * Default controller for the `adminPanel` module
@@ -126,7 +130,7 @@ class AdminController extends Controller {
 	 */
 	public function actionDashboard() {
 		$dashboard = new CatTiposPosts ();
-		$posts = $dashboard->find ()->orderBy ( 'txt_nombre ASC' )->all ();
+		$posts = $dashboard->find ()->where(['b_habilitado'=>1])->orderBy ( 'txt_nombre ASC' )->all ();
 		
 		return $this->render ( 'dashboard', [ 
 				"dashboard" => $posts 
@@ -733,8 +737,17 @@ class AdminController extends Controller {
 			
 			if ($post->id_usuario != Yii::$app->user->identity->id_usuario) {
 				// Guardar la notificacion
-				$notificaciones = new EntNotificaciones ();
-				$notificaciones->guardarNotificacionRespuestasAdmin ( $post, $notificaciones );
+// 				$notificaciones = new EntNotificaciones ();
+// 				$notificaciones->guardarNotificacionRespuestasAdmin ( $post, $notificaciones );
+				
+				$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$post->id_usuario])->one();
+				$this->enviarEmailEspejoContestado($usuario, $post->txt_token);
+				
+				$suscritos = EntUsuariosSubscripciones::find()->where(['id_post'=>$post->id_post])->all();
+				foreach($suscritos as $suscrito){
+					$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$suscrito->id_usuario])->one();
+					$this->enviarEmailSuscritoEspejo($user, $token);
+				}
 			}
 			
 			return [ 
@@ -1284,10 +1297,220 @@ class AdminController extends Controller {
 	
 		// Recupera n numero de registros por paginacion
 		$listaUsuarios = EntUsuarios::getUsuarios( $page );
+		
 	
 		// Pintar vista
 		return $this->renderAjax ( 'itemsUsuarios', [
 				'usuarios' => $listaUsuarios
 		] );
+	}
+	
+	public function actionClientes(){
+		$clientes = EntClientes::find()->where(['b_habilitado'=>1])->orderBy('id_cliente DESC')->all();
+		
+		return $this->render('clientes',[
+				'clientes' =>$clientes
+		]);
+	}
+	
+	/**
+	 * Guarda cliente
+	 */
+	public function actionCrearCliente() {
+		// Declaracion de modelos
+		$cliente = new EntClientes();
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($cliente->load ( Yii::$app->request->post ())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			$cliente->save();
+			
+			return [
+				'status' => 'success',
+				'id' => $cliente->id_cliente,
+				'nombre' => $cliente->txt_nombre,
+				'correo' => $cliente->txt_correo,
+				'tel' => $cliente->num_telefono
+			];
+		}
+	
+		return $this->renderAjax ( 'crearCliente', [
+				'cliente' => $cliente
+		] );
+	}
+	
+	public function actionDeshabilitarCliente($idCliente = null) {
+		$clienteDeshabilitar = EntClientes::find()->where(['id_cliente'=>$idCliente])->andWhere(['b_habilitado'=>1])->one();
+		$clienteDeshabilitar->b_habilitado = 0;
+	
+		if ($clienteDeshabilitar->save ())
+			echo "cliente deshabilitado";
+		else
+			echo "error al deshabilitar cliente";
+	}
+	
+	/**
+	 * Editar cliente
+	 *
+	 * @param string $token
+	 */
+	public function actionEditarCliente($token = null) {
+		// Busca el post por el token
+		$this->layout = false;
+		$cliente = EntClientes::find()->where(['id_cliente'=>$token])->andWhere(['b_habilitado'=>1])->one();
+		//$cliente->scenario = 'editarCliente';
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($cliente->load ( Yii::$app->request->post ())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			$cliente->save();
+				
+			return [
+					'status' => 'success',
+					'id' => $cliente->id_cliente,
+					'nombre' => $cliente->txt_nombre,
+					'correo' => $cliente->txt_correo,
+					'tel' => $cliente->num_telefono
+			];;
+		}
+	
+		return $this->renderAjax ( '_formCliente', [
+				'cliente' => $cliente
+		] );
+	}
+	
+	public function actionMostrarAnuncios($idC){
+		$cliente = EntClientes::find()->where(['id_cliente'=>$idC])->one();
+		$anuncios = EntAnuncios::find()->where(['id_cliente'=>$idC])->andWhere(['b_habilitado'=>1])->orderBy('id_anuncio DESC')->all();
+		
+		return $this->render('anuncios',[
+			'cliente' => $cliente,
+			'anuncios' => $anuncios
+		]);
+	}
+	
+	public function actionCrearAnuncio($idC = 0){
+		$anuncio = new EntAnuncios();
+		
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($anuncio->load ( Yii::$app->request->post ())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			
+			if (!filter_var($anuncio->txt_url, FILTER_VALIDATE_URL) === false) {
+				
+			} else {
+				$anuncio->txt_url = 'http://'.$anuncio->txt_url;
+			}
+			
+			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
+			$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
+			$anuncio->imagen2 = UploadedFile::getInstance ( $anuncio, 'imagen2' );
+			$anuncio->txt_imagen2 = Utils::generateToken ( "img" ) . "." . $anuncio->imagen2->extension;
+			//$anuncio->fch_creacion = Utils::getFechaActual();
+			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
+			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
+			$anuncio->save();
+			$url = Url::base()."/uploads/imagenesAnuncios/";
+			
+// 			print_r($anuncio2);
+// 			exit();
+			$anuncio->cargarImagenAnuncio2( $anuncio );
+			
+			
+			if ($anuncio->cargarImagenAnuncio ( $anuncio )) {
+				return [
+					'status' => 'success',
+					'id' => $anuncio->id_anuncio,
+					'url' => $url,
+					'img' => $anuncio->txt_imagen,
+					'img2' => $anuncio->txt_imagen2
+				];
+			}
+		}
+		
+		return $this->renderAjax ( 'crearAnuncio', [
+				'anuncio' => $anuncio,
+				'id' => $idC
+		] );
+	}
+	
+	
+	
+	public function actionDeshabilitarAnuncio($idA = null) {
+		$anuncioDeshabilitar = EntAnuncios::find()->where(['id_anuncio'=>$idA])->andWhere(['b_habilitado'=>1])->one();
+		$anuncioDeshabilitar->b_habilitado = 0;
+		echo $anuncioDeshabilitar->id_anuncio . "--" . $anuncioDeshabilitar->b_habilitado. "--";
+
+		if ($anuncioDeshabilitar->save(false)){
+			echo "anuncio deshabilitado";
+		}else{
+			print_r($anuncioDeshabilitar->errors);
+			echo "error al deshabilitar anuncio";
+		}
+	}
+	
+	public function actionEditarAnuncio($token = null) {
+		// Busca el post por el token
+		$this->layout = false;
+		$anuncio = EntAnuncios::find()->where(['id_anuncio'=>$token])->andWhere(['b_habilitado'=>1])->one();
+	
+		// Si la informacion es enviada se carga a su respectivo modelo
+		if ($anuncio->load ( Yii::$app->request->post ())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			
+			$anuncio->fch_creacion = Utils::changeFormatDateInput ( $anuncio->fch_creacion );
+			$anuncio->fch_finalizacion = Utils::changeFormatDateInput ( $anuncio->fch_finalizacion );
+			$anuncio->imagen = UploadedFile::getInstance ( $anuncio, 'imagen' );
+			$anuncio->imagen2 = UploadedFile::getInstance ( $anuncio, 'imagen2' );
+				
+			if (! empty ( $anuncio->imagen )) {
+				$anuncio->txt_imagen = Utils::generateToken ( "img" ) . "." . $anuncio->imagen->extension;
+				$anuncio->cargarImagenAnuncio( $anuncio );
+			}
+			
+			if (! empty ( $anuncio->imagen2 )) {
+				$anuncio->txt_imagen2 = Utils::generateToken ( "img" ) . "." . $anuncio->imagen2->extension;
+				$anuncio->cargarImagenAnuncio2( $anuncio );
+			}
+			
+			if(!$anuncio->save())
+			{
+				print_r($anuncio->errors);
+			}
+			return [
+				'status' => 'success',
+				'id' => $anuncio->id_anuncio,
+				'img' => $anuncio->txt_imagen
+			];
+		}
+	
+		return $this->renderAjax ( '_formAnuncio', [
+				'anuncio' => $anuncio,
+				'id' => $anuncio->id_cliente
+		] );
+	}
+	
+	private function enviarEmailEspejoContestado($user, $token){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $user->txt_username,
+				'correo' => $user->txt_email,
+				'token' => $token
+		];
+		
+ 		$utils->sendPreguntaContestada( $user->txt_email, $parametrosEmail );
+	}
+	
+	private function enviarEmailSuscritoEspejo($user, $token){
+	
+		$utils = new Utils();
+		$parametrosEmail = [
+				'nombre' => $user->txt_username,
+				'correo' => $user->txt_email,
+				'token' => $token
+		];
+	
+		$utils->sendSuscripcion( $user->txt_email, $parametrosEmail );
 	}
 }

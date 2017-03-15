@@ -14,6 +14,10 @@ class ConstantesWeb {
 	const POST_TYPE_SABIAS_QUE = 8;
 	const USUARIOS_MOSTRAR = 10;
 	
+	// TIPOS CREDITOS
+	const RESPONDER_PREGUNTA_CORRECTAMENTE = 2;
+	const REALIZAR_CITA = 1;
+	
 	// Calificación maxima para alquimia
 	const MAX_CALIFICACION_ALQUIMIA = 5;
 

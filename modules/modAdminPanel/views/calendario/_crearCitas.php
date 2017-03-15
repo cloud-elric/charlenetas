@@ -5,7 +5,7 @@ $this->icon = '<i class="ion ion-film-marker"></i>';
 ?>
 
 <!-- .page-cont -->
-<div class="page-cont">
+<div class="page-cont js-calendario" data-id="<?= Yii::$app->user->identity->id_usuario ?>">
 
 	<div id='calendar'></div>
 

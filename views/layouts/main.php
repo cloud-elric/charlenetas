@@ -25,6 +25,12 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    
+    <meta name="twitter:card" content="summary">
+	<meta id="meta_titulo" name="twitter:title" content=" ">
+	<meta id="meta_descripcion" name="twitter:description" content=" ">
+	<meta id="meta_imagen" name="twitter:image" content=" ">
+    
 </head>
 <body>
 <script>
@@ -85,7 +91,7 @@ function statusChangeCallback(response) {
 							cargarCerrarSesion();
 							loadEspejoPreguntar();
 							mensajeCuentaActivada("Bienvenido netanauta");
-							loadEspejoPreguntar();
+							
 							cargarRespuestasSabiasQue();
 							
 							$('#js-preguntar-espejo').attr('onclick', 'agregarPregunta();');

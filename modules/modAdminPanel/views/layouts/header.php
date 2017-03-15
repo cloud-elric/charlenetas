@@ -54,7 +54,7 @@ use app\models\EntCitas;
 					 		foreach($notiCitas as $notiCita){ 
 						  		if($mostrarCita->txt_token === $notiCita->txt_token_objeto && $mostrarCita->b_habilitado == 1){
 				?>
-									<li class="js-agenda-item" data-token="<?= $notiCita->txt_token_objeto?>"><a href="<?= yii::$app->homeUrl . "adminPanel/calendario/calendario"?>"><?= $mostrarCita->title?></a></li>
+								<!-- <li class="js-agenda-item" data-token="<?php //echo $notiCita->txt_token_objeto?>"><a href="<?php // yii::$app->homeUrl . "adminPanel/calendario/calendario"?>"><?php // $mostrarCita->title?></a></li> --> 
 				<?php	
 						  		}
 						    }
@@ -98,7 +98,7 @@ use app\models\EntCitas;
 					
 						if($comparar === false){
 				?>
-							<li class="js-notificacion-item" data-token="<?= $mostrarNotificacion->txt_token_objeto?>"><a href="#!"><?= $mostrarNotificacion->txt_titulo ?></a></li>
+							<!-- <li class="js-notificacion-item" data-token="<?php // $mostrarNotificacion->txt_token_objeto?>"><a href="#!"><?php // $mostrarNotificacion->txt_titulo ?></a></li> -->
 				<?php 
 						}
 					}

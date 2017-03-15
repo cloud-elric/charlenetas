@@ -26,7 +26,6 @@
 					<div class="card-contexto-options-check">
 						<input type="checkbox" class="filled-in" id="filled-in-box3"
 							checked="checked" /> <label for="filled-in-box3"></label>
-
 					</div>
 					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalResponderEspejo('<?=$postEspejo->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
@@ -34,6 +33,5 @@
 				</div>
 			</div>
 		</div>
-
 
 		<?php } ?>
