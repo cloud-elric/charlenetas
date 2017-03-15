@@ -5,7 +5,7 @@ use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 use app\models\ConstantesWeb;
 
-$this->title = 'Hoy pense';
+$this->title = 'Hoy pensé';
 $this->icon = '<i class="ion ion-android-bulb"></i>';
 ?>
 
