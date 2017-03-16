@@ -56,7 +56,7 @@ $usuario = $post->idUsuario;
 				<i class="icon icon-facebook"></i>
 			</div>
 			<div class="feedback" onClick="compartirTwitter()">
-					<i class="icon ion-social-twitter"></i>
+					<i class="icon icon-twitter"></i>
 			</div>
 			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
 				<i class="material-icons">tab_unselected</i>

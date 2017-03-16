@@ -48,7 +48,7 @@ $espejo = $postEspejos->find()->where(['id_post'=>$post->id_post])->one();
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
 			<div class="feedback" onClick="compartirTwitter()">
-					<i class="icon ion-social-twitter"></i>
+					<i class="icon icon-twitter"></i>
 			</div>
 			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
 				<i class="material-icons">tab_unselected</i>
