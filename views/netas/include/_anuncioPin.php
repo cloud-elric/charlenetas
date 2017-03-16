@@ -3,6 +3,7 @@ use yii\helpers\Url;
 ?>
 
 <!-- <div class="pin pin-anuncio pin-anuncio-250-250"> -->
+
 <?php if($num == 4 || $num == 12 || $num == 24 ){?>
 	<div class="pin pin-anuncio pin-anuncio-250-250">
 		<div class="pin-header pin-header-anuncio"></div>
