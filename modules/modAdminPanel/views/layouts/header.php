@@ -99,9 +99,27 @@ use yii\web\View;
 						$comparar = strpos($mostrarNotificacion->txt_token_objeto, $cadena);
 					
 						if($comparar === false){
+							if($mostrarNotificacion->id_tipo_post == 1){
 				?>
-							<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/espejo?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li>
+								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/espejo?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
 				<?php 
+							}else if($mostrarNotificacion->id_tipo_post == 2){
+				?>
+								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/alquimia?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
+				<?php
+							}else if($mostrarNotificacion->id_tipo_post == 3){
+				?>
+								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/verdadazos?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
+				<?php
+							}else if($mostrarNotificacion->id_tipo_post == 4){
+				?>
+								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/hoy-pense?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
+				<?php
+							}else if($mostrarNotificacion->id_tipo_post == 7){
+				?>
+								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/solo-por-hoy?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
+				<?php
+							}
 						}
 					}
 				?>

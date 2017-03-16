@@ -423,7 +423,8 @@ class NetasController extends Controller {
 		$comentario->load ( Yii::$app->request->post () );
 		
 		if ($comentario->guardarComentarioUsuario ( $idUsuario, $post->id_post )) {
-			
+			$notificaciones = new EntNotificaciones();
+			$notificaciones->guardarNotificacionComentarioPost($comentario, $notificaciones);
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			

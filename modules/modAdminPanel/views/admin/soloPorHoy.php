@@ -75,10 +75,15 @@ if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 
 <?php
 }
+
+if (! empty ( $token )) {
+	$this->registerJs ( "
+  		showPostFull('".$token."');
+	", View::POS_END, 'mostarPost' );
+}
 ?>
 
 <?php
-
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-soloporhoy.js'; // dynamic file added
 

@@ -444,7 +444,10 @@ function agregarAcuerdo(token, feed) {
 		dataType : 'html',
 		method : 'GET',
 		success : function(res) {
-
+			
+			if(feed == 1){
+				$('#icono_acuerdo').attr('style', 'color:green');
+			}
 		},
 		statusCode : {
 			403 : function() {

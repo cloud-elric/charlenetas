@@ -106,9 +106,10 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     public function guardarNotificacionPreguntas($post, $notificaciones){
     	 
     	$notificaciones->id_usuario = 25;//Yii::$app->user->identity->id_usuario;
+    	$notificaciones->id_tipo_post = 1;
     	$notificaciones->txt_token_objeto = $post->txt_token;
     	$notificaciones->txt_descripcion = $post->txt_descripcion;
-    	$notificaciones->txt_titulo = "te han una hecho pregunta";
+    	$notificaciones->txt_titulo = "Un charlenauta realizó una pregunta";
     	 
     	 
     	$transaction = EntNotificaciones::getDb()->beginTransaction ();
@@ -172,6 +173,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     public function guardarNotificacionAcuerdo($post, $notificaciones){
     
     	$notificaciones->id_usuario = 25;
+    	$notificaciones->id_tipo_post = 1;
     	$notificaciones->txt_token_objeto = $post->txt_token;
     	$notificaciones->txt_descripcion = "Al usuario le gusto o no tu respuesta";
     	$notificaciones->txt_titulo = "Al usuario le gusto o no tu respuesta";
@@ -206,7 +208,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     
     	$notificaciones->id_usuario = 25;
     	$notificaciones->txt_token_objeto = $txt_token;
-    	$notificaciones->txt_descripcion = "han hecho una cita";
+    	$notificaciones->txt_descripcion = "Un charlenauta realizó una cita";
     	$notificaciones->txt_titulo = $title;
     
     
@@ -228,5 +230,37 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     	return false;
     }
     
-    
+    /**
+     * Guarda las notificaciones de los comentario en los posts
+     * @param unknown $comentario
+     * @throws Exception
+     * @return boolean
+     */
+    public function guardarNotificacionComentarioPost($comentario, $notificaciones){
+    	$com = EntPosts::find()->where(['id_post'=>$comentario->id_post])->one(); 
+    	
+    	$notificaciones->id_usuario = 25;
+    	$notificaciones->id_tipo_post = $com->id_tipo_post;
+    	$notificaciones->txt_token_objeto = $com->txt_token;
+    	$notificaciones->txt_descripcion = $comentario->txt_comentario;
+    	$notificaciones->txt_titulo = "Un charlenauta comentó un post";
+    	 
+    	 
+    	$transaction = EntNotificaciones::getDb()->beginTransaction ();
+    	try {
+    		if ($notificaciones->save()) {
+    			 
+    			$transaction->commit();
+    			return true;
+    		}
+    		//print_r($notificaciones->errors);
+    		//exit();
+    		$transaction->rollBack ();
+    	} catch ( \Exception $e ) {
+    		$transaction->rollBack ();
+    		throw $e;
+    	}
+    	 
+    	return false;
+    }
 }
