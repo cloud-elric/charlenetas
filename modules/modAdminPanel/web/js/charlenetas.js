@@ -25,23 +25,27 @@ var pagesComentarios = 0;
 
 $(document).ready(function(){
 
-	$('#js-mostrar-notificaciones').on('click',function(e){
-		e.preventDefault();
-		var arrayToken = [];
-		$('.js-notificacion-item').each(function(index){
-			var item = $(this);
-			arrayToken[index] = item.data("token");
-			$.ajax({
-				url : basePath + 'adminPanel/admin/leer-notificacion?token='+arrayToken[index],
-				type : 'GET',
-				success: function(){
-					
-				}
-			});
-			
-		});
-		//console.log(arrayToken);
+//	$('#js-mostrar-notificaciones').on('click',function(e){
+//		e.preventDefault();
+//		var arrayToken = [];
+//		$('.js-notificacion-item').each(function(index){
+//			var item = $(this);
+//			arrayToken[index] = item.data("token");
+//			$.ajax({
+//				url : basePath + 'adminPanel/admin/leer-notificacion?token='+arrayToken[index],
+//				type : 'GET',
+//				success: function(){
+//					
+//				}
+//			});
+//			
+//		});
+//		//console.log(arrayToken);
+//	});
+	$('.js-notificacion-item').on('click', function(){
+		var token = $(this).data();
 	});
+	
 	
 	$('select').material_select();
 	

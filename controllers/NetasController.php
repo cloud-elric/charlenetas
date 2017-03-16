@@ -862,8 +862,8 @@ class NetasController extends Controller {
 		if ($post->load ( Yii::$app->request->post () )) {
 			if($postGuardado = $post->guardarEspejo($post, $anonimo)){
 						
-// 				$notificaciones = new EntNotificaciones();	
-// 				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+				$notificaciones = new EntNotificaciones();	
+				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
 				
 				$admin = EntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
 				$this->enviarEmailPreguntaEspejo($admin, $post->txt_token);

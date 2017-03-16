@@ -156,12 +156,17 @@ class AdminController extends Controller {
 				"usuarios" => $usuarios 
 		] );
 	}
-	public function actionEspejo($page = 0) {
+	public function actionEspejo($page = 0, $token=null) {
 		$idPost = 1;
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
+		}
 		$postsEspejo = EntPosts::getPosts ( $page, $idPost );
 		
 		return $this->render ( 'espejo', [ 
-				"postsEspejo" => $postsEspejo 
+				"postsEspejo" => $postsEspejo,
+				'token'=>$token,
 		] );
 	}
 	public function actionAlquimia($page = 0) {

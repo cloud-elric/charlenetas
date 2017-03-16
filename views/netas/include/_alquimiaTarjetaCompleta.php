@@ -52,7 +52,7 @@ $alquimia = $post->entAlquimias;
 				<i class="icon icon-facebook"></i>
 			</div>
 			<div class="feedback" onClick="compartirTwitter()">
-					<i class="icon ion-social-twitter"></i>
+					<i class="icon icon-twitter"></i>
 			</div>
 			<div class="feedback" onClick="compartirPinterest()">
 				<i class="icon ion-social-pinterest"></i>

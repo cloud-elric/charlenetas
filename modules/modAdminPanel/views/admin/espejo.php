@@ -138,6 +138,12 @@ $this->icon = '<i class="ion ion-eye"></i>';
 <!-- end /.page-cont -->
 
 <?php
+if (! empty ( $token )) {
+	$this->registerJs ( "
+  		showPostFull('".$token."');
+	", View::POS_END, 'mostarPost' );
+}
+
 $postTotales = EntPosts::find ()->where ( [ 
 		'id_tipo_post' => ConstantesWeb::POST_TYPE_ESPEJO 
 ] )->andWhere ( [ 

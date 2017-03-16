@@ -3,11 +3,18 @@
 if (YII_ENV_DEV) {
 	$dataBase = [
 			'class' => 'yii\db\Connection',
-			'dsn' => 'mysql:host=192.168.0.4;dbname=charlenetas_unificacion',
+			'dsn' => 'mysql:host=localhost;dbname=charlenetas_geekdb',
 			'username' => 'root',
 			'password' => 'root',
 			'charset' => 'utf8'
 	];
+// 	$dataBase = [
+// 			'class' => 'yii\db\Connection',
+// 			'dsn' => 'mysql:host=192.168.0.4;dbname=charlenetas_unificacion',
+// 			'username' => 'root',
+// 			'password' => 'root',
+// 			'charset' => 'utf8'
+// 	];
 } else {
 	$dataBase = [
 			'class' => 'yii\db\Connection',

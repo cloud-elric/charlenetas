@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use app\models\EntNotificaciones;
 use app\models\EntCitas;
+use yii\helpers\Url;
+use yii\web\View;
 ?>
 <!-- .header -->
 <div class="header">
@@ -54,7 +56,7 @@ use app\models\EntCitas;
 					 		foreach($notiCitas as $notiCita){ 
 						  		if($mostrarCita->txt_token === $notiCita->txt_token_objeto && $mostrarCita->b_habilitado == 1){
 				?>
-								<!-- <li class="js-agenda-item" data-token="<?php //echo $notiCita->txt_token_objeto?>"><a href="<?php // yii::$app->homeUrl . "adminPanel/calendario/calendario"?>"><?php // $mostrarCita->title?></a></li> --> 
+								<li class="js-agenda-item" data-token="<?php echo $notiCita->txt_token_objeto?>"><a href="<?php yii::$app->homeUrl . "adminPanel/calendario/calendario"?>"><?php echo $mostrarCita->title?></a></li> 
 				<?php	
 						  		}
 						    }
@@ -66,7 +68,7 @@ use app\models\EntCitas;
 			<!-- Notificaciones -->
 			<?php 
 				$notificaciones = new EntNotificaciones();
-				//$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(15)->count('id_usuario');
+				$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(15)->count('id_usuario');
 				$mostrarNotificaciones = $notificaciones->find()->where(['id_usuario'=>25/*Yii::$app->user->identity->id_usuario*/])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->all();
 				
 				$cont = 0;
@@ -98,7 +100,7 @@ use app\models\EntCitas;
 					
 						if($comparar === false){
 				?>
-							<!-- <li class="js-notificacion-item" data-token="<?php // $mostrarNotificacion->txt_token_objeto?>"><a href="#!"><?php // $mostrarNotificacion->txt_titulo ?></a></li> -->
+							<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/espejo?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li>
 				<?php 
 						}
 					}
@@ -123,3 +125,21 @@ use app\models\EntCitas;
 	<!-- end /.header-cont -->
 </div>
 <!-- end /.header -->
+
+<?php 
+$this->registerJs ( "
+// 	$(document).ready(function(){
+// 		$('.card-espejo').on('click', function(e) {
+// 			console.log(e);
+// 			if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+// 				e.stopPropagation();
+// 				return;
+// 			}
+			
+// 			var token = $(this).data('token');
+// 			showPostFull(token)
+// 		});
+// 	});
+
+", View::POS_END );
+?>

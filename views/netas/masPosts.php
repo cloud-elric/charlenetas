@@ -1,4 +1,6 @@
 <?php
+use app\models\EntAnuncios;
+
 //use app\models\EntAnuncios;
 $fch_actual = date("Y-m-d 00:00:00");
 $numAnunciosCliente = EntAnuncios::find()->where(['id_cliente'=>$numRand])->andWhere(['<=','fch_creacion', $fch_actual])->andWhere(['>=','fch_finalizacion', $fch_actual])->andWhere(['b_habilitado'=>1])->all();

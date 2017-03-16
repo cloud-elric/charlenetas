@@ -573,6 +573,11 @@ textarea {
   content: '\f30c';
 }
 
+/* '' */
+.icon-pinterest:before {
+  content: '\f2b1';
+}
+
 /* '' */
 body {
   background-color: #FCFFF6;

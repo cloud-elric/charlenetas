@@ -89,7 +89,7 @@ function statusChangeCallback(response) {
 							cargarFuncionalidadRespuestas();
 							showPostAfterLogin(token);
 							cargarCerrarSesion();
-							loadEspejoPreguntar();
+							//loadEspejoPreguntar();
 							mensajeCuentaActivada("Bienvenido netanauta");
 							loadEspejoPreguntar();
 							cargarRespuestasSabiasQue();
