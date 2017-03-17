@@ -2092,9 +2092,9 @@ button.picker__close:focus {
 }
 
 .mce-container {
-    display: inline-block !important;
+   /* display: inline-block !important;*/
 }
 
 .mce-edit-area.mce-container.mce-panel.mce-stack-layout-item{
-	display: block !important;
+	/*display: block !important;*/
 }

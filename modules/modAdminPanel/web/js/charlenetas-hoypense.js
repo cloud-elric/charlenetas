@@ -1,3 +1,9 @@
+// Prevent bootstrap dialog from blocking focusin
+$(document).on('focusin', function(e) {
+    if ($(e.target).closest(".mce-window").length) {
+        e.stopImmediatePropagation();
+    }
+});
 var loading = '<div class="loader-center">'+
 					'<div class="preloader-wrapper big active">'+
 					'<div class="spinner-layer spinner-blue-only">'+
@@ -21,6 +27,11 @@ function cargarFormulario(){
 			$('#js-modal-post .modal-content').html(res);
 		}
 	});
+}
+
+function cargarTiny(){
+	tinymce.remove();
+	tinymce.init({"themes":"modern","plugins":["advlist autolink lists link charmap print preview anchor","searchreplace visualblocks code fullscreen","insertdatetime media table paste"],"toolbar":"undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image","selector":"#crear-wys-hoy-pense"});
 }
 
 //Eliminar posts
@@ -99,6 +110,9 @@ function abrirModalEditarHoyPense(token){
 		url:url,
 		success:function(res){
 			$('#js-modal-post-editar .modal-content').html(res);
+			tinymce.remove();
+			tinymce.init({"themes":"modern","plugins":["advlist autolink lists link charmap print preview anchor","searchreplace visualblocks code fullscreen","insertdatetime media table paste"],"toolbar":"undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image","selector":"#"+token});
+			 
 		}
 	});
 }

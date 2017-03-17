@@ -1,58 +1,82 @@
-<?php
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+ <?php
+	use yii\helpers\Html;
+	use yii\bootstrap\ActiveForm;
+	use dosamigos\tinymce\TinyMce;
+use yii\web\View;
+	
+	$classActive = $hoyPense->isNewRecord ? '' : 'active';
+	?>
+<h4><?=$hoyPense->isNewRecord?'Agregar':'Editar'?> <span>Hoy pense</span>
+</h4>
 
-$classActive = $hoyPense->isNewRecord?'':'active';
-?>
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-<h4><?=$hoyPense->isNewRecord?'Agregar':'Editar'?> <span>Hoy pense</span></h4>
-
 <?php
-$form = ActiveForm::begin ( [
-		'options' => [
-				'enctype' => 'multipart/form-data'
+$form = ActiveForm::begin ( [ 
+		'options' => [ 
+				'enctype' => 'multipart/form-data' 
 		],
 		
 		'layout' => 'horizontal',
-		'id' => $hoyPense->isNewRecord?'form-hoypense':'editar-hoy-pense',
-		'fieldConfig' => [
+		'id' => $hoyPense->isNewRecord ? 'form-hoypense' : 'editar-hoy-pense',
+		'fieldConfig' => [ 
 				'template' => "{input}\n{label}\n{error}",
-				'horizontalCssClasses' => [
-						'error' => 'mdl-textfield__error'
+				'horizontalCssClasses' => [ 
+						'error' => 'mdl-textfield__error' 
 				],
-				'labelOptions' => [
-						'class' => 'mdl-textfield__label '.$classActive 
+				'labelOptions' => [ 
+						'class' => 'mdl-textfield__label ' . $classActive 
 				],
-				'options' => [
-						'class' => 'input-field col s12 m6'
-				]
+				'options' => [ 
+						'class' => 'input-field col s12 m6' 
+				] 
 		],
-		'errorCssClass' => 'invalid'
+		'errorCssClass' => 'invalid' 
 ] );
 ?>
 
-	<div class='row'>
+<div class='row'>
 
 		<?= $form->field($hoyPense, 'txt_titulo', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])?>
 
 		<?= $form->field($hoyPense, 'imagen', ['template'=>'<div class="btn"><span>Imagen</span>{input}</div><div class="file-path-wrapper"><input class="file-path validate" type="text"/></div>{error}','options'=>['class'=>'file-field input-field col s12 m6']])->fileInput()?>
 
 		<?= $form->field($hoyPense, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
-		<div class="editor">
-		<?= $form->field($hoyPense, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textarea(['class'=>'materialize-textarea'])?>
-		</div>
-<!--    		<div class="divTiny"> -->
-   			<!-- <?= $hoyPense->txt_descripcion ?>-->
-<!--    		</div> -->
+	</div>
+<div class="row">
+		<?php
+		
+echo TinyMce::widget ( 
+
+		[ 
+				'name' => 'EntPosts[txt_descripcion]',
+				'value' => $hoyPense->txt_descripcion,
+				'id' => $hoyPense->isNewRecord ? 'crear-wys-hoy-pense' : $hoyPense->txt_token,
+				'options' => [ 
+						'rows' => 15,
+						'class' => $hoyPense->isNewRecord ? 'nuevo-elemento' : $hoyPense->txt_token 
+				],
+				'language' => 'es',
+				'clientOptions' => [ 
+						'themes' => 'modern',
+						'plugins' => [ 
+								"advlist autolink lists link charmap print preview anchor",
+								"searchreplace visualblocks code fullscreen",
+								"insertdatetime media table paste" 
+						],
+						'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image" 
+				] 
+		] );
+		?>
+		
 	</div>
 
-	<?= Html::submitButton($hoyPense->isNewRecord?'crear':'editar', ['id'=>$hoyPense->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name' => 'boton-hoy', 'data-style'=>'zoom-in'])?>
+<?= Html::submitButton($hoyPense->isNewRecord?'crear':'editar', ['id'=>$hoyPense->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit waves-effect waves-light ladda-button animated delay-3', 'name' => 'boton-hoy', 'data-style'=>'zoom-in'])?>
 
-<?php ActiveForm::end();
+<?php
+
+ActiveForm::end ();
 
 include 'templates/formato-fecha.php';
+
+
 ?>
 
-<script>
-	//tinymce.init({ selector:'.divTiny', inline:false});//.field-entposts-txt_descripcion
-</script>
