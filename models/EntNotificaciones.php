@@ -209,7 +209,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     	$notificaciones->id_usuario = 25;
     	$notificaciones->txt_token_objeto = $txt_token;
     	$notificaciones->txt_descripcion = "Un charlenauta realizó una cita";
-    	$notificaciones->txt_titulo = $title;
+    	$notificaciones->txt_titulo = "Un charlenauta realizó una cita";
     
     
     	$transaction = EntNotificaciones::getDb()->beginTransaction ();

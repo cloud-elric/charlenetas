@@ -56,7 +56,7 @@ use yii\web\View;
 					 		foreach($notiCitas as $notiCita){ 
 						  		if($mostrarCita->txt_token === $notiCita->txt_token_objeto && $mostrarCita->b_habilitado == 1){
 				?>
-								<li class="js-agenda-item" data-token="<?php echo $notiCita->txt_token_objeto?>"><a href="<?php yii::$app->homeUrl . "adminPanel/calendario/calendario"?>"><?php echo $mostrarCita->title?></a></li> 
+								<li class="js-agenda-item" data-token="<?php echo $notiCita->txt_token_objeto?>"><a href="<?= yii::$app->homeUrl ?>adminPanel/calendario/calendario?token=<?=$notiCita->txt_token_objeto ?>"><?php echo $notiCita->txt_descripcion?></a></li> 
 				<?php	
 						  		}
 						    }
