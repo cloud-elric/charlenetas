@@ -969,8 +969,8 @@ class NetasController extends Controller {
 			
 			$entCitas = new EntCitas();
 		
-// 			$notificaciones = new EntNotificaciones ();
-// 			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
+			$notificaciones = new EntNotificaciones ();
+			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
 			
 			$creditosGastados = new EntUsuariosCreditosGastados();
 			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $id_usuario, $costo->costo);

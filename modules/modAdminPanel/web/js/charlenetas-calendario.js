@@ -3,7 +3,7 @@ var date = new Date();
 var d = date.getDate();
 var m = date.getMonth();
 var y = date.getFullYear();
-
+var idUsuario = $('.js-calendario').data('id');
 	
 var calendar = $('#calendar').fullCalendar({
 		
@@ -50,14 +50,12 @@ var calendar = $('#calendar').fullCalendar({
 		dayClick: function(date, jsEvent, view ){
 //			var view = $('#calendar').fullCalendar('getView');
 //			calendar.fullCalendar('gotoDate',date)
-//			calendar.fullCalendar('changeView','agendaDay')
-<<<<<<< HEAD
-			
-			//if(view.name == 'agendaDay'){
-=======
+//			calendar.fullCalendar('changeView','agendaDay')			
+			if(view.name == 'agendaDay'){
+
 //			
 //			if(view.name == 'agendaDay'){
->>>>>>> 900e39dc68d388983a2da429880835c8e9f70869
+
 				//$('.modal-trigger').leanModal();
 				$('.modal-trigger.js-crear').trigger('click');
 				//var title = prompt("Evento:");
@@ -70,7 +68,8 @@ var calendar = $('#calendar').fullCalendar({
 				
 				$('#submitButton').on('click', function(e){
 					e.preventDefault();
-					title = $('#nombreCita').val()
+					//title = $('#nombreCita').val()
+					title = "Un charlenauta realizó una cita"
 					$.ajax({
 						url: 'agregar-citas',
 						data: 'title='+ title+'&start='+ start +'&end='+ end ,
@@ -90,12 +89,12 @@ var calendar = $('#calendar').fullCalendar({
 					});
 				});
 				calendar.fullCalendar('unselect');	
-			//}
+			}
 		},
 		eventRender: function(event, element) {
-<<<<<<< HEAD
+
 	    	element.append( "<span class='closeon' style='z-index:2' data-token='"+event.id+"'>X</span>" );
-=======
+
 			element.find('.fc-title').html("");
 			if(event.b_activo == 1) {
 				element.css('backgroundColor', '#04B404');
@@ -146,7 +145,7 @@ var calendar = $('#calendar').fullCalendar({
 	    			$('.lean-overlay').trigger("click");
 	    		});
 	    	});
->>>>>>> 900e39dc68d388983a2da429880835c8e9f70869
+
 		}
 	});
 
