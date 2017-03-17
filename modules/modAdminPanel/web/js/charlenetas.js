@@ -49,23 +49,23 @@ $(document).ready(function(){
 	
 	$('select').material_select();
 	
-	$('#js-mostrar-agenda').on('click',function(e){
-		e.preventDefault();
-		var arrayToken = [];
-		$('.js-agenda-item').each(function(index){
-			var item = $(this);
-			arrayToken[index] = item.data("token");
-			$.ajax({
-				url : basePath + 'adminPanel/admin/leer-notificacion?token='+arrayToken[index],
-				type : 'GET',
-				success: function(){
-					
-				}
-			});
-			
-		});
-		console.log(arrayToken);
-	});
+//	$('#js-mostrar-agenda').on('click',function(e){
+//		e.preventDefault();
+//		var arrayToken = [];
+//		$('.js-agenda-item').each(function(index){
+//			var item = $(this);
+//			arrayToken[index] = item.data("token");
+//			$.ajax({
+//				url : basePath + 'adminPanel/admin/leer-notificacion?token='+arrayToken[index],
+//				type : 'GET',
+//				success: function(){
+//					
+//				}
+//			});
+//			
+//		});
+//		console.log(arrayToken);
+//	});
 	
 	$('#backScreen').on('click', function(e) {
 		if (e.target !== this) {
