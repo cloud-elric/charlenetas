@@ -39,7 +39,7 @@ $usuario = $post->idUsuario;
 			<div class="feedback " onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
-			<div class="feedback" onClick="compartirTwitter()">
+			<div class="feedback" onClick="compartirTwitter('Verdadazos')">
 					<i class="icon icon-twitter"></i>
 			</div>
 			<div class="feedback" onClick="compartirPinterest()">

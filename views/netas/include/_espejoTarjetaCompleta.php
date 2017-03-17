@@ -10,7 +10,7 @@ $postEspejos = new EntEspejos();
 $espejo = $postEspejos->find()->where(['id_post'=>$post->id_post])->one();
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
-<section class="full-pin-header">
+<section class="full-pin-header" data-image="espejo.png">
 
 	<h2>El Espejo</h2>
 	<div class="post-publisher-data">
@@ -47,7 +47,7 @@ $espejo = $postEspejos->find()->where(['id_post'=>$post->id_post])->one();
 
 	<div class="full-pin-body-footer">
 		<div class="full-pin-body-footer-sharebar">
-			<div class="feedback" onClick="compartirTwitter()">
+			<div class="feedback" onClick="compartirTwitter('<?=Html::encode($post->txt_titulo)?>')">
 					<i class="icon icon-twitter"></i>
 			</div>
 			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
