@@ -20,7 +20,9 @@
         "yiisoft/yii2-swiftmailer": "*",
         "2amigos/yii2-file-upload-widget": "~1.0",
         "kartik-v/yii2-widget-fileinput": "@dev",
-        "bsushil/meta": "dev-master"
+        "bsushil/meta": "dev-master",
+        "2amigos/yii2-ckeditor-widget": "^2.0",
+        "2amigos/yii2-tinymce-widget": "~1.1"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -51,7 +51,7 @@ $this->icon = '<i class="ion ion-android-bulb"></i>';
 	<!-- .fixed-action-btn -->
 	<div class="fixed-action-btn horizontal">
 		<!-- Modal Trigger -->
-		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post" onclick="cargarTiny()">
 			<i class="ion ion-wand"></i>
 		</a>
 		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
