@@ -15,14 +15,17 @@ $this->icon = '<i class="ion ion-eye"></i>';
 	$espejosRespondidos = [];
 
 	foreach ( $postsEspejo as $postEspejo ) {
-		$espejo = $postEspejo->entEspejos;
+		//$espejo = $postEspejo->entEspejos;
+		$espejo = $postEspejo->entRespuestasEspejo;
 		
 		if($espejo){
-			$espejosSinResponder[]= $postEspejo;
-		}else{
+			//$espejosSinResponder[]= $postEspejo;
 			$espejosRespondidos[]= $postEspejo;
+		}else{
+			//$espejosRespondidos[]= $postEspejo;
+			$espejosSinResponder[]= $postEspejo;
 		}
-		} ?>
+	} ?>
 <!-- .page-cont -->
 <div class="page-cont">
 	<div class="row" id="js-contenedor-tarjetas">
@@ -75,8 +78,18 @@ $this->icon = '<i class="ion ion-eye"></i>';
 				
 			<?php 
 			}
+			
+			$totalSinResponder = count($espejosSinResponder);
+			if ($totalSinResponder > ConstantesWeb::POSTS_MOSTRAR) {
 			?>
-
+				<div class="more-entries waves-effect waves-light btn ladda-button"
+					data-style="zoom-in" id="js-cargar-mas-posts-espejo"
+					onclick="cargarMasPosts(<?=$totalSinResponder?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);">
+					<span class="ladda-label">Cargar mas entradas...<label>(<?=$totalSinResponder - ConstantesWeb::POSTS_MOSTRAR?>)</label></span>
+				</div>
+			<?php
+			}
+			?>
 			</div>
 			<div id="test2" class="col s12">
 			<?php 
@@ -118,6 +131,17 @@ $this->icon = '<i class="ion ion-eye"></i>';
 				
 			<?php 
 			}
+			$totalResponder = count($espejosRespondidos);
+			echo "Total de posts: ". $totalResponder;
+			if ($totalResponder > ConstantesWeb::POSTS_MOSTRAR) {
+			?>
+				<div class="more-entries waves-effect waves-light btn ladda-button"
+					data-style="zoom-in" id="js-cargar-mas-posts-espejo2"
+					onclick="cargarMasPosts(<?=$totalResponder?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);">
+					<span class="ladda-label">Cargar mas entradas...<label>(<?=$totalResponder - ConstantesWeb::POSTS_MOSTRAR?>)</label></span>
+				</div>
+			<?php
+			}
 			?>
 
 			</div>
@@ -144,24 +168,23 @@ if (! empty ( $token )) {
 	", View::POS_END, 'mostarPost' );
 }
 
-$postTotales = EntPosts::find ()->where ( [ 
-		'id_tipo_post' => ConstantesWeb::POST_TYPE_ESPEJO 
-] )->andWhere ( [ 
-		'b_habilitado' => 1 
-] )->count ( 'id_usuario' );
-if ($postTotales > ConstantesWeb::POSTS_MOSTRAR) {
+// $postTotales = EntPosts::find ()->where ( [ 
+// 		'id_tipo_post' => ConstantesWeb::POST_TYPE_ESPEJO 
+// ] )->andWhere ( [ 
+// 		'b_habilitado' => 1 
+// ] )->count ( 'id_usuario' );
+// if ($postTotales > ConstantesWeb::POSTS_MOSTRAR) {
 	// echo "Total de posts: ". $postTotales;
 	?>
 
-<div class="more-entries waves-effect waves-light btn ladda-button"
+<!-- <div class="more-entries waves-effect waves-light btn ladda-button"
 	data-style="zoom-in" id="js-cargar-mas-posts-espejo"
-	onclick="cargarMasPosts(<?=$postTotales?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);">
-	<span class="ladda-label">Cargar mas entradas...<label>(<?=$postTotales - ConstantesWeb::POSTS_MOSTRAR?>)</label></span>
-</div>
+	
+</div> -->
 
 <?php
 	// $postTotales -= ConstantesWeb::POSTS_MOSTRAR;
-}
+//}
 ?>
 
 <?php

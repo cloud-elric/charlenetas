@@ -107,6 +107,8 @@ $('body').on(
 			if (form.find('.has-error').length) {
 				return false;
 			}
+			var l = Ladda.create(document.getElementById('responder_espejo'));
+		 	l.start();
 			// submit form
 			$.ajax({
 				url : form.attr('action'),// url para peticion
@@ -137,6 +139,7 @@ $('body').on(
 						$('#form-respuesta-espejo').yiiActiveForm('updateMessages',
 								response, true);
 					}
+					l.stop();
 				},
 				statusCode: {
 				    404: function() {

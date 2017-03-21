@@ -59,7 +59,7 @@ $usuario = $post->idUsuario;
 			
 			<div class="pin-link">
 				<a target="_blank" class="waves-effect waves-light btn btn-secondary" href="http://www.ordenjuridico.gob.mx/Constitucion/articulos/<?=$post->entSoloPorHoys->num_articulo?>.pdf">
-				Ver articulo contitucional
+				Ver articulo constitucional
 				</a>
 			</div>
 			
