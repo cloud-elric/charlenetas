@@ -11,21 +11,21 @@ $this->icon = '<i class="ion ion-eye"></i>';
 
 <?php
 
-	$espejosSinResponder = [];
-	$espejosRespondidos = [];
+// 	$espejosSinResponder = [];
+// 	$espejosRespondidos = [];
 
-	foreach ( $postsEspejo as $postEspejo ) {
-		//$espejo = $postEspejo->entEspejos;
-		$espejo = $postEspejo->entRespuestasEspejo;
+// 	foreach ( $postsEspejo as $postEspejo ) {
+// 		//$espejo = $postEspejo->entEspejos;
+// 		$espejo = $postEspejo->entRespuestasEspejo;
 		
-		if($espejo){
-			//$espejosSinResponder[]= $postEspejo;
-			$espejosRespondidos[]= $postEspejo;
-		}else{
-			//$espejosRespondidos[]= $postEspejo;
-			$espejosSinResponder[]= $postEspejo;
-		}
-	} ?>
+// 		if($espejo){
+// 			//$espejosSinResponder[]= $postEspejo;
+// 			$espejosRespondidos[]= $postEspejo;
+// 		}else{
+// 			//$espejosRespondidos[]= $postEspejo;
+// 			$espejosSinResponder[]= $postEspejo;
+// 		}
+// 	} ?>
 <!-- .page-cont -->
 <div class="page-cont">
 	<div class="row" id="js-contenedor-tarjetas">
@@ -39,21 +39,23 @@ $this->icon = '<i class="ion ion-eye"></i>';
 				</ul>
 			</div>
 			<div id="test1" class="col s12">
+			<div id="contenedor1">
 			<?php 
-			foreach($espejosSinResponder as $espejoSinResponder){
+			foreach($espejosSinResp as $espejoSinResponder){
+				$espejoSinResp = EntPosts::find()->where(['id_post'=>$espejoSinResponder->id_post])->one();
 			?>	
 			
-			<div class="col s12 m6 l4" id="card_<?=$espejoSinResponder->txt_token?>">
+			<div class="col s12 m6 l4" id="card_<?=$espejoSinResp->txt_token?>">
 			<div class="card card-espejo"
-				data-token="<?=$espejoSinResponder->txt_token?>">
+				data-token="<?=$espejoSinResp->txt_token?>">
 
 				<div class="card-contexto-cont">
-					<p class="card-desc"><?=$espejoSinResponder->txt_descripcion?></p>
+					<p class="card-desc"><?=$espejoSinResp->txt_descripcion?></p>
 				</div>
 
 				<div class="card-contexto-status">
 					<p class="card-contexto-status-susbs">
-						<i class="ion ion-person-stalker"></i> <span><?=empty($espejoSinResponder->entEspejos)?0:$espejoSinResponder->entEspejos->num_subscriptores?></span>
+						<i class="ion ion-person-stalker"></i> <span><?=empty($espejoSinResp->entEspejos)?0:$espejoSinResp->entEspejos->num_subscriptores?></span>
 					</p>
 					<p class="card-contexto-status-comen respondido">
 						<i class="ion icon icon-comment"></i> <span>Espejo no respondido</span>
@@ -61,14 +63,14 @@ $this->icon = '<i class="ion ion-eye"></i>';
 				</div>
 				<div class="card-contexto-options">
 					<div>
-						<input type="checkbox" id="delete-<?=$espejoSinResponder->txt_token?>"
-							value="<?=$espejoSinResponder->txt_token?>" /> <label
+						<input type="checkbox" id="delete-<?=$espejoSinResp->txt_token?>"
+							value="<?=$espejoSinResp->txt_token?>" /> <label
 							class="espejo-delete-check"
-							for="delete-<?=$espejoSinResponder->txt_token?>"></label>
+							for="delete-<?=$espejoSinResp->txt_token?>"></label>
 					</div>
-					<a id="button_<?=$espejoSinResponder->txt_token?>"
+					<a id="button_<?=$espejoSinResp->txt_token?>"
 						class="waves-effect waves-light modal-trigger"
-						onclick="abrirModalResponderEspejo('<?=$espejoSinResponder->txt_token?>')"
+						onclick="abrirModalResponderEspejo('<?=$espejoSinResp->txt_token?>')"
 						href="#js-modal-post-editar"> <i
 						class="ion ion-android-more-vertical card-edit"></i>
 					</a>
@@ -78,35 +80,40 @@ $this->icon = '<i class="ion ion-eye"></i>';
 				
 			<?php 
 			}
-			
-			$totalSinResponder = count($espejosSinResponder);
+			?>
+			</div>
+			<?php
+			$totalSinResponder = count($totalEspejosSinResp);
 			if ($totalSinResponder > ConstantesWeb::POSTS_MOSTRAR) {
 			?>
 				<div class="more-entries waves-effect waves-light btn ladda-button"
-					data-style="zoom-in" id="js-cargar-mas-posts-espejo"
-					onclick="cargarMasPosts(<?=$totalSinResponder?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);">
+					data-style="zoom-in" id="js-cargar-mas-posts-espejo1"
+					onclick="cargarMasPostsSinResp(<?=$totalSinResponder?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);">
 					<span class="ladda-label">Cargar mas entradas...<label>(<?=$totalSinResponder - ConstantesWeb::POSTS_MOSTRAR?>)</label></span>
 				</div>
 			<?php
 			}
 			?>
+			
 			</div>
 			<div id="test2" class="col s12">
+			<div id="contenedor1">
 			<?php 
-			foreach($espejosRespondidos as $espejoRespondidos){
+			foreach($espejosResp as $espejoRespondidos){
+				$espejoResp = EntPosts::find()->where(['id_post'=>$espejoRespondidos->id_post])->one();
 			?>	
 			
-			<div class="col s12 m6 l4" id="card_<?=$espejoRespondidos->txt_token?>">
+			<div class="col s12 m6 l4" id="card_<?=$espejoResp->txt_token?>">
 			<div class="card card-espejo"
-				data-token="<?=$espejoRespondidos->txt_token?>">
+				data-token="<?=$espejoResp->txt_token?>">
 
 				<div class="card-contexto-cont">
-					<p class="card-desc"><?=$espejoRespondidos->txt_descripcion?></p>
+					<p class="card-desc"><?=$espejoResp->txt_descripcion?></p>
 				</div>
 
 				<div class="card-contexto-status">
 					<p class="card-contexto-status-susbs">
-						<i class="ion ion-person-stalker"></i> <span><?=empty($espejoRespondidos->entEspejos)?0:$espejoRespondidos->entEspejos->num_subscriptores?></span>
+						<i class="ion ion-person-stalker"></i> <span><?=empty($espejoResp->entEspejos)?0:$espejoResp->entEspejos->num_subscriptores?></span>
 					</p>
 					<p class="card-contexto-status-comen respondido">
 						<i class="ion icon icon-comment"></i> <span>Espejo respondido</span>
@@ -114,14 +121,14 @@ $this->icon = '<i class="ion ion-eye"></i>';
 				</div>
 				<div class="card-contexto-options">
 					<div>
-						<input type="checkbox" id="delete-<?=$espejoRespondidos->txt_token?>"
-							value="<?=$espejoRespondidos->txt_token?>" /> <label
+						<input type="checkbox" id="delete-<?=$espejoResp->txt_token?>"
+							value="<?=$espejoResp->txt_token?>" /> <label
 							class="espejo-delete-check"
-							for="delete-<?=$espejoRespondidos->txt_token?>"></label>
+							for="delete-<?=$espejoResp->txt_token?>"></label>
 					</div>
-					<a id="button_<?=$espejoRespondidos->txt_token?>"
+					<a id="button_<?=$espejoResp->txt_token?>"
 						class="waves-effect waves-light modal-trigger"
-						onclick="abrirModalResponderEspejo('<?=$espejoRespondidos->txt_token?>')"
+						onclick="abrirModalResponderEspejo('<?=$espejoResp->txt_token?>')"
 						href="#js-modal-post-editar"> <i
 						class="ion ion-android-more-vertical card-edit"></i>
 					</a>
@@ -131,13 +138,15 @@ $this->icon = '<i class="ion ion-eye"></i>';
 				
 			<?php 
 			}
-			$totalResponder = count($espejosRespondidos);
-			echo "Total de posts: ". $totalResponder;
+			?>
+			</div>
+			<?php
+			$totalResponder = count($totalEspejosResp);
 			if ($totalResponder > ConstantesWeb::POSTS_MOSTRAR) {
 			?>
 				<div class="more-entries waves-effect waves-light btn ladda-button"
 					data-style="zoom-in" id="js-cargar-mas-posts-espejo2"
-					onclick="cargarMasPosts(<?=$totalResponder?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);">
+					onclick="cargarMasPostsResp(<?=$totalResponder?>,<?=ConstantesWeb::POSTS_MOSTRAR?>);">
 					<span class="ladda-label">Cargar mas entradas...<label>(<?=$totalResponder - ConstantesWeb::POSTS_MOSTRAR?>)</label></span>
 				</div>
 			<?php
@@ -177,9 +186,10 @@ if (! empty ( $token )) {
 	// echo "Total de posts: ". $postTotales;
 	?>
 
-<!-- <div class="more-entries waves-effect waves-light btn ladda-button"
+ <!-- <div class="more-entries waves-effect waves-light btn ladda-button"
 	data-style="zoom-in" id="js-cargar-mas-posts-espejo"
-	
+	onclick="cargarMasPosts(<?php //echo $postTotales?>,<?php //echo ConstantesWeb::POSTS_MOSTRAR?>);">
+	<span class="ladda-label">Cargar mas entradas...<label>(<?php //echo $postTotales - ConstantesWeb::POSTS_MOSTRAR?>)</label></span>
 </div> -->
 
 <?php

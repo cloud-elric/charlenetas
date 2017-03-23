@@ -47,15 +47,15 @@ var totalPostMostrados = 0;
 var totalPost = 0;
 
 //Carga mas pins de los post
-function cargarMasPosts(postTotales, numeroPostMostrar) {
-	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-espejo'));
+function cargarMasPostsSinResp(postTotales, numeroPostMostrar) {
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-espejo1'));
  	l.start();
 	 	
 	totalPostMostrados = (pages+1)*10;
 	totalPost = postTotales - totalPostMostrados;
 	
-	var contenedor = $('#js-contenedor-tarjetas');
-	var url = basePath+'adminPanel/admin/get-mas-posts-espejo?page=' + pages;
+	var contenedor = $('#contenedor1');
+	var url = basePath+'adminPanel/admin/get-mas-posts-espejo-sin-resp?page=' + pages;
 	
 	$.ajax({
 		url : url,
@@ -72,9 +72,50 @@ function cargarMasPosts(postTotales, numeroPostMostrar) {
 			
 			if(totalPost <= 0){
 				console.log(totalPost);
-				$("#js-cargar-mas-posts-espejo").remove();
+				$("#js-cargar-mas-posts-espejo1").remove();
 			}else{
-				$("#js-cargar-mas-posts-espejo label").text('('+totalPost+')');
+				$("#js-cargar-mas-posts-espejo1 label").text('('+totalPost+')');
+			}
+			
+			l.stop();
+		}
+	});
+
+}
+
+var pages2 = 1;
+var totalPostMostrados2 = 0;
+var totalPost2 = 0;
+
+//Carga mas pins de los post
+function cargarMasPostsResp(postTotales2, numeroPostMostrar2) {
+	var l = Ladda.create(document.getElementById('js-cargar-mas-posts-espejo2'));
+ 	l.start();
+	 	
+	totalPostMostrados2 = (pages2+1)*10;
+	totalPost2 = postTotales2 - totalPostMostrados2;
+	
+	var contenedor2 = $('#test2');
+	var url = basePath+'adminPanel/admin/get-mas-posts-espejo-resp?page=' + pages2;
+	
+	$.ajax({
+		url : url,
+		success : function(res) {
+
+			var $items = $(res);
+
+			contenedor2.append($items);
+			//contenedor.masonry('appended', $items);
+
+			pages2++;
+
+			//filtrarPost();
+			
+			if(totalPost2 <= 0){
+				console.log(totalPost2);
+				$("#js-cargar-mas-posts-espejo2").remove();
+			}else{
+				$("#js-cargar-mas-posts-espejo2 label").text('('+totalPost2+')');
 			}
 			
 			l.stop();
@@ -151,9 +192,21 @@ $('body').on(
 			return false;
 		});
 
-$(document).ready(function(){
-	$('.card-espejo').on('click', function(e) {
-		console.log(e);
+//$(document).ready(function(){
+//	$('.card-espejo').on('click', function(e) {
+//		console.log(e);
+//		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
+//			e.stopPropagation();
+//			return;
+//		}
+//		
+//		var token = $(this).data('token');
+//		showPostFull(token)
+//	});	
+//});
+
+$(document).on({
+	'click' : function(e){
 		if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
 			e.stopPropagation();
 			return;
@@ -161,7 +214,24 @@ $(document).ready(function(){
 		
 		var token = $(this).data('token');
 		showPostFull(token)
-	});
-	
-	
-});
+	}
+}, '.card-espejo');
+
+
+//$(document).on({
+//	'paste' : function(e) {
+//
+//		e.preventDefault();
+//		var text = '';
+//		if (e.clipboardData || e.originalEvent.clipboardData) {
+//			text = (e.originalEvent || e).clipboardData.getData('text/plain');
+//		} else if (window.clipboardData) {
+//			text = window.clipboardData.getData('Text');
+//		}
+//		if (document.queryCommandSupported('insertText')) {
+//			document.execCommand('insertText', false, text);
+//		} else {
+//			document.execCommand('paste', false, text);
+//		}
+//	}
+//}, '.obras-escritas-text-edit');
