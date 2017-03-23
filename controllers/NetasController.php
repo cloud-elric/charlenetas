@@ -181,8 +181,9 @@ class NetasController extends Controller {
 		$session = Yii::$app->session;
 		$session->set('clientes', []);
 		
+		$post = null;
 		if(!empty($token)){
-			$this->getPostByToken($token);
+			$post = $this->getPostByToken($token);
 		}
 		
 		// Recupera n numero de registros por paginacion
@@ -211,7 +212,8 @@ class NetasController extends Controller {
 				'tiposPost' => $tiposPost,
 				'listaAnuncios' => $listaAnuncios,
 				'token'=>$token,
-				'numRand' => $numRand
+				'numRand' => $numRand,
+				'post'=>$post
 		] );
 	}
 	

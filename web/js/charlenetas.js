@@ -1501,7 +1501,7 @@ function compartirTwitter(titulo){
 	$('meta[name=twitter\\:title]').attr('content', titulo);
 	$('meta[name=twitter\\:description]').attr('content', desc);
 	$('meta[name=twitter\\:image]').attr('content', basePath+'uploads/imagenesPosts/'+image);
-	console.log("jkfdjkfdjkfdkjfd");
+	
 	setDataURLTwitter(desc, basePath+'uploads/imagenesPosts/'+image, basePath+"netas/index?token="+token);
 	//$('#compartirTwitter').trigger("click");
 }
