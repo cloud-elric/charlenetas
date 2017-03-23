@@ -76,7 +76,7 @@ function cargarMasPostsSinResp(postTotales, numeroPostMostrar) {
 			}else{
 				$("#js-cargar-mas-posts-espejo1 label").text('('+totalPost+')');
 			}
-			
+			$('.modal-trigger').leanModal();
 			l.stop();
 		}
 	});
@@ -117,7 +117,7 @@ function cargarMasPostsResp(postTotales2, numeroPostMostrar2) {
 			}else{
 				$("#js-cargar-mas-posts-espejo2 label").text('('+totalPost2+')');
 			}
-			
+			$('.modal-trigger').leanModal();
 			l.stop();
 		}
 	});
@@ -129,6 +129,7 @@ function cargarMasPostsResp(postTotales2, numeroPostMostrar2) {
  * @param token
  */
 function abrirModalResponderEspejo(token){
+	console.log("dfdfdf-"+token);
 	$('#js-modal-post-editar .modal-content').html(loading);
 	var url = 'responder-espejo?token='+token;
 	$.ajax({
