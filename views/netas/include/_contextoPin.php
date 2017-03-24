@@ -14,7 +14,10 @@ use yii\helpers\Url;
  		<h3 class="pin-titulo">
  			<?=$post->txt_titulo?>
  		</h3>
- 		<p class="pin-descripcion">
+ 		<p class="pin-descripcion" style="
+    max-height: 500px;
+    overflow: hidden;
+">
  			<?=Utils::subStrTexto($post->txt_descripcion, 500)?>
  		</p>
  	</div>

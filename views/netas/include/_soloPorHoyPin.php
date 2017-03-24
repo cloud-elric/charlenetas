@@ -12,7 +12,10 @@ use yii\helpers\Url;
 
 		<a href="http://www.ordenjuridico.gob.mx/Constitucion/articulos/<?=$post->entSoloPorHoys->num_articulo?>.pdf" target="_blank" class="margin-bottom-10px">Artículo <?=$post->entSoloPorHoys->num_articulo?></a>
 
-		<div class="pin-descripcion"><?=$post->txt_descripcion?></div>
+		<div class="pin-descripcion" style="
+    max-height: 500px;
+    overflow: hidden;
+"><?=$post->txt_descripcion?></div>
 		
 	</div>
 	<?php

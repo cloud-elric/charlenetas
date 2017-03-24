@@ -20,7 +20,10 @@ $espejo = $postEspejos->find()->where(['id_post'=>$post->id_post])->one();
 
 
 	<div class="pin-content-wrapper" lang="en">
-		<div class="pin-descripcion"><?=$post->txt_descripcion?></div>
+		<div class="pin-descripcion" style="
+    max-height: 500px;
+    overflow: hidden;
+"><?=$post->txt_descripcion?></div>
 	</div>
 
 	<div class="pin-social">

@@ -13,7 +13,10 @@ use app\modules\ModUsuarios\models\Utils;
 		<h3 class="pin-titulo">
  			<?=$post->txt_titulo?>
  		</h3>
-		<div class="pin-descripcion"><?=Utils::subStrTexto($post->txt_descripcion, 500)?></div>
+		<div class="pin-descripcion" style="
+    max-height: 500px;
+    overflow: hidden;
+"><?=Utils::subStrTexto($post->txt_descripcion, 500)?></div>
 	</div>
 	<?php
 		include 'elementos/pins-social.php';
