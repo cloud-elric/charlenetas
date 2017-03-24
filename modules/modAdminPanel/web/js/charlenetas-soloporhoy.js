@@ -19,6 +19,7 @@ function cargarFormulario(){
 		url:'crear-solo-por-hoy',
 		success:function(res){
 			$('#js-modal-post .modal-content').html(res);
+			cargarTiny();
 		}
 	});
 }
@@ -96,8 +97,15 @@ function abrirModalEditarSoloPorHoy(token){
 		url:url,
 		success:function(res){
 			$('#js-modal-post-editar .modal-content').html(res);
+			tinymce.remove();
+			tinymce.init({"themes":"modern","plugins":["advlist autolink lists link charmap print preview anchor","searchreplace visualblocks code fullscreen","insertdatetime media table paste"],"toolbar":"undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image","selector":"#"+token});
 		}
 	});
+}
+
+function cargarTiny(){
+	tinymce.remove();
+	tinymce.init({"themes":"modern","plugins":["advlist autolink lists link charmap print preview anchor","searchreplace visualblocks code fullscreen","insertdatetime media table paste"],"toolbar":"undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image","selector":"#crear-wys-solo-por-hoy"});
 }
 
 function agregarTarjetaNueva(json) {
@@ -117,7 +125,7 @@ function agregarTarjetaNueva(json) {
 			+'<input type="checkbox" id="delete-'+json.tk+'" value="'+json.tk+'"/>'
   			+'<label for="delete-'+json.tk+'"></label>'
 			+'</div>'
-			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarHoyPense(\''+json.tk+'\')" href="#js-modal-post-editar">'
+			+ '<a id="button_'+json.tk+'" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy(\''+json.tk+'\')" href="#js-modal-post-editar">'
 			+'<i class="ion ion-android-more-vertical card-edit"></i>'
 			+'</a>'
 			+ '</div>'+ '</div>';

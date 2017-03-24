@@ -181,8 +181,9 @@ class NetasController extends Controller {
 		$session = Yii::$app->session;
 		$session->set('clientes', []);
 		
+		$post = null;
 		if(!empty($token)){
-			$this->getPostByToken($token);
+			$post = $this->getPostByToken($token);
 		}
 		
 		// Recupera n numero de registros por paginacion
@@ -211,7 +212,8 @@ class NetasController extends Controller {
 				'tiposPost' => $tiposPost,
 				'listaAnuncios' => $listaAnuncios,
 				'token'=>$token,
-				'numRand' => $numRand
+				'numRand' => $numRand,
+				'post'=>$post
 		] );
 	}
 	
@@ -423,7 +425,8 @@ class NetasController extends Controller {
 		$comentario->load ( Yii::$app->request->post () );
 		
 		if ($comentario->guardarComentarioUsuario ( $idUsuario, $post->id_post )) {
-			
+			$notificaciones = new EntNotificaciones();
+			$notificaciones->guardarNotificacionComentarioPost($comentario, $notificaciones);
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
 			
@@ -862,8 +865,8 @@ class NetasController extends Controller {
 		if ($post->load ( Yii::$app->request->post () )) {
 			if($postGuardado = $post->guardarEspejo($post, $anonimo)){
 						
-// 				$notificaciones = new EntNotificaciones();	
-// 				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+				$notificaciones = new EntNotificaciones();	
+				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
 				
 				$admin = EntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
 				$this->enviarEmailPreguntaEspejo($admin, $post->txt_token);
@@ -968,8 +971,8 @@ class NetasController extends Controller {
 			
 			$entCitas = new EntCitas();
 		
-// 			$notificaciones = new EntNotificaciones ();
-// 			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
+			$notificaciones = new EntNotificaciones ();
+			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
 			
 			$creditosGastados = new EntUsuariosCreditosGastados();
 			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $id_usuario, $costo->costo);

@@ -17,7 +17,7 @@ $users = $tipoUsuarios->find()->all();
 						<div class="col s3">
 							<div class="card-user-avatar">
 								<?= Html::img ( $usuario->getImageProfile())?>
-								<div class="card-user-status card-user-status-deshabilitado"></div>
+								<!-- <div class="card-user-status card-user-status-deshabilitado"></div> -->
 							</div>
   									<!-- <p class="card-user-status">Habilitado</p>
 									<p class="card-user-status">Deshabilitado</p> -->
@@ -61,3 +61,10 @@ $users = $tipoUsuarios->find()->all();
 			</div>
 		</div>
 		<?php } ?>
+		
+		<script>
+			$(document).ready(function() {
+			    $('select').material_select();
+			  });
+		</script>
+		

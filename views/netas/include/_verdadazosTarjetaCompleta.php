@@ -39,13 +39,11 @@ $usuario = $post->idUsuario;
 			<div class="feedback " onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
 			</div>
-			<div class="feedback">
-				<a href='http://twitter.com/intent/tweet?url=<?= urlencode("http://localhost/charlenetas/web/netas/index?token=".$post->txt_token) ?>'>
-					<i class="icon ion-social-twitter"></i>
-				</a>
+			<div class="feedback" onClick="compartirTwitter('Verdadazos')">
+					<i class="icon icon-twitter"></i>
 			</div>
 			<div class="feedback" onClick="compartirPinterest()">
-				<i class="icon ion-social-pinterest"></i>
+				<i class="icon icon-pinterest"></i>
 			</div>
 			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
 				<i class="material-icons">tab_unselected</i>
@@ -63,22 +61,7 @@ $usuario = $post->idUsuario;
 		</div>
 	</div>
 	
-	
-
 </section>
-
-<script>
-	function compartirTwitter(titulo){
-		desc = $('#txt_descripcion').text();
-		image = $('.full-pin-header').data('image');
-		
-		$('#meta_titulo').attr('content', titulo);
-		$('#meta_descripcion').attr('content', desc);
-		$('#meta_imagen').attr('content', basePath+'webAssets/images/espejo.png');
-	
-	}
-	compartirTwitter('Verdadazos');
- </script>
 
 <section class="full-pin-social">
 	<div id="js-comments">

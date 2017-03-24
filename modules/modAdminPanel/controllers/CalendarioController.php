@@ -13,6 +13,7 @@ use yii\web\Response;
 use app\models\EntUsuariosCreditos;
 use app\models\CatTipoCreditos;
 use app\models\ModUsuariosEntUsuarios;
+use app\models\EntNotificaciones;
 
 /**
  * Calendario controller for the `adminPanel` module
@@ -70,7 +71,10 @@ class CalendarioController extends Controller
     /**
      * Vista del calendario
      */
-    public function actionCalendario(){
+    public function actionCalendario($token = null){
+    	if(!empty($token)){
+    		$this->leerNotificacion($token);
+    	}
     	
     	return $this->render ( '_crearCitas');
     }
@@ -200,5 +204,13 @@ class CalendarioController extends Controller
     	];
     	 
     	$utils->sendAceptarCita($user->txt_email, $parametrosEmail );
+    }
+    
+    public function leerNotificacion($token) {
+    	$notificaciones = new EntNotificaciones();
+    	$notificacion = $notificaciones->find()->where(['txt_token_objeto' => $token ])->one();
+    
+    	$notificacion->b_leido = 1;
+    	$notificacion->save ();
     }
 }

@@ -444,7 +444,10 @@ function agregarAcuerdo(token, feed) {
 		dataType : 'html',
 		method : 'GET',
 		success : function(res) {
-
+			
+			if(feed == 1){
+				$('#icono_acuerdo').attr('style', 'color:green');
+			}
 		},
 		statusCode : {
 			403 : function() {
@@ -1481,17 +1484,27 @@ function compartirPinterest(){
 	setDataURL(desc, basePath+'uploads/imagenesPosts/'+image, basePath+"netas/index?token="+token);
 }
 
-//function compartirTwitter(titulo){
-//	desc = $('#txt_descripcion').text();
-//	image = $('.full-pin-header').data('image');
-//	
-//	console.log(desc+"-"+titulo+"-"+image);
-//	$('meta[name=twitter\\:title]').attr('content', titulo);
-//	$('meta[name=twitter\\:description]').attr('content', desc);
-//	$('meta[name=twitter\\:image]').attr('content', basePath+"webAssets/images/espejo.png");
-//	
-//	//$('#compartirTwitter').trigger("click");
-//}
+/*twitter*/
+function open_window_twitter(url, name){
+	window.open(url, name, 'height=320, width=640, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no');
+}
+
+function setDataURLTwitter(tituloArticulo,urlImage,urlArticulo ){
+			open_window('http://twitter.com/intent/tweet?url='+urlArticulo, 'twitter_share');
+}
+function compartirTwitter(titulo){
+	desc = $('#txt_descripcion').text();
+	image = $('.full-pin-header').data('image');
+	token = $('#js-token-post').val();
+	
+	//console.log(desc+"-"+titulo+"-"+image);
+	$('meta[name=twitter\\:title]').attr('content', titulo);
+	$('meta[name=twitter\\:description]').attr('content', desc);
+	$('meta[name=twitter\\:image]').attr('content', basePath+'uploads/imagenesPosts/'+image);
+	
+	setDataURLTwitter(desc, basePath+'uploads/imagenesPosts/'+image, basePath+"netas/index?token="+token);
+	//$('#compartirTwitter').trigger("click");
+}
 
 
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

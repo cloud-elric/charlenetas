@@ -23,9 +23,7 @@ if (! Yii::$app->user->isGuest) {
 		<img data-src="webAssets/images/<?=$post->txt_imagen?>">
 	</div>
 	<div class="pin-content-wrapper" lang="en">
-		<p class="pin-descripcion">
-			<?=$post->txt_descripcion?>
-		</p>
+		<div class="pin-descripcion"><?=$post->txt_descripcion?></div>
 		<?php 
 		if($validar){
 		?>

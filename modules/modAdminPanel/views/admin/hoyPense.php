@@ -76,6 +76,12 @@ if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 <?php
 //$postTotales -= ConstantesWeb::POSTS_MOSTRAR;
 }
+
+if (! empty ( $token )) {
+	$this->registerJs ( "
+  		showPostFull('".$token."');
+	", View::POS_END, 'mostarPost' );
+}
 ?>
 
 <?php

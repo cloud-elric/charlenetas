@@ -4,11 +4,11 @@ use app\modules\ModUsuarios\models\Utils;
 
 if($respuesta->b_de_acuerdo == 1){
 ?>
-	<i class='large material-icons' style="color:green">done</i>
+	<i id="icono_acuerdo" class='large material-icons' style="color:green">done</i>
 <?php 
 }else{
 ?>
-	<i class='large material-icons' style="opacity:0.2">done</i>
+	<i id="icono_acuerdo" class='large material-icons' style="opacity:0.2">done</i>
 <?php 
 }
 ?>

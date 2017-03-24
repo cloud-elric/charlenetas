@@ -14,9 +14,7 @@ use yii\helpers\Url;
 		<h3 class="pin-titulo">
 			<?=$post->txt_titulo?>
 		</h3>
-		<p class="pin-descripcion">
-			<?=$post->txt_descripcion?>
-		</p>
+		<div class="pin-descripcion"><?=$post->txt_descripcion?></div>
 		<div class="pin-alquimia-grades">
 			<span>Calificación Charlenetas</span>
 			<?php

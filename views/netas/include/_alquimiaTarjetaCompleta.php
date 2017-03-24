@@ -8,7 +8,7 @@ $usuario = $post->idUsuario;
 $alquimia = $post->entAlquimias;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
-<section class="full-pin-header">
+<section class="full-pin-header" data-image="<?= $post->txt_imagen?>">
 	<h2>Alquimia</h2>
 	<div class="post-publisher-data">
 		<div class="post-publisher">
@@ -29,7 +29,7 @@ $alquimia = $post->entAlquimias;
 	<div class="full-pin-body-content">
 
 		<div class="full-pin-body-content-img full-pin-body-content-img-<?= $post->txt_token ?>">
-			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>"
+			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>" data-token="img-token-<?=$post->txt_imagen?>"
 				alt="Alquimia - Películas que transforman" />
 		</div>
 
@@ -50,6 +50,14 @@ $alquimia = $post->entAlquimias;
 <!-- 		did-usr-interact -->
 			<div class="feedback" onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
+			</div>
+
+			<div class="feedback" onClick="compartirTwitter('<?=Html::encode($post->txt_titulo)?>')">
+
+					<i class="icon icon-twitter"></i>
+			</div>
+			<div class="feedback" onClick="compartirPinterest()">
+				<i class="icon ion-social-pinterest"></i>
 			</div>
 			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
 				<i class="material-icons">tab_unselected</i>

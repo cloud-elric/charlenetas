@@ -5,7 +5,7 @@ use yii\helpers\Url;
 $usuario = $post->idUsuario;
 ?>
 <input type="hidden" id="js-token-post" value="<?=$post->txt_token?>" />
-<section class="full-pin-header">
+<section class="full-pin-header" data-image="<?= $post->txt_imagen?>">
 
 	<h2>Hoy Pensé</h2>
 	<div class="post-publisher-data">
@@ -43,6 +43,9 @@ $usuario = $post->idUsuario;
 		<div class="full-pin-body-footer-sharebar">
 			<div class="feedback" onclick='compartirFacebook("<?=$post->txt_token?>")'>
 				<i class="icon icon-facebook"></i>
+			</div>
+			<div class="feedback" onClick="compartirTwitter('<?=Html::encode($post->txt_titulo)?>')">
+					<i class="icon icon-twitter"></i>
 			</div>
 			<div class="feedback" id="copy-button" data-clipboard-target="#link-<?=$post->txt_token?>" onClick="copiarClipboard()">
 				<i class="material-icons">tab_unselected</i>

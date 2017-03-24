@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use dosamigos\tinymce\TinyMce;
 $classActive = $post->isNewRecord ? '' : 'active';
 ?>
 
@@ -41,7 +42,32 @@ $form = ActiveForm::begin ( [
 		<?= $form->field($post, 'fch_publicacion')->textInput(["class"=>"datepicker"])?>
 		
 		
-		<?= $form->field($post, 'txt_descripcion', ['options'=>['class'=>'input-field col s12']])->textInput(['maxlength' => true])->textarea(['class'=>'materialize-textarea'])?>
+		</div>
+<div class="row">
+		<?php
+		
+echo TinyMce::widget ( 
+
+		[ 
+				'name' => 'EntPosts[txt_descripcion]',
+				'value' => $post->txt_descripcion,
+				'id' => $post->isNewRecord ? 'crear-wys-solo-por-hoy' : $post->txt_token,
+				'options' => [ 
+						'rows' => 15,
+						'class' => $post->isNewRecord ? 'nuevo-elemento' : $post->txt_token 
+				],
+				'language' => 'es',
+				'clientOptions' => [ 
+						'themes' => 'modern',
+						'plugins' => [ 
+								"advlist autolink lists link charmap print preview anchor",
+								"searchreplace visualblocks code fullscreen",
+								"insertdatetime media table paste" 
+						],
+						'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image" 
+				] 
+		] );
+		?>
    	</div>
 
 <?= Html::submitButton($post->isNewRecord?'crear':'editar', ['id'=>$post->isNewRecord?'js-crear-submit':'js-editar-submit', 'class'=>'btn btn-submit ladda-button', 'name' => 'boton-solo', 'data-style'=>'zoom-in'])?>

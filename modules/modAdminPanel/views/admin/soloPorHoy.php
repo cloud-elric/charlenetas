@@ -4,6 +4,7 @@ use app\models\EntComentariosPosts;
 use app\modules\modAdminPanel\assets\ModuleAsset;
 use yii\web\View;
 use app\models\ConstantesWeb;
+use yii\helpers\Html;
 $this->title = 'Solo por hoy';
 $this->icon = '<i class="ion ion-android-warning"></i>';
 ?>
@@ -20,7 +21,7 @@ $this->icon = '<i class="ion ion-android-warning"></i>';
 				
 
 				<div class="card-contexto-cont">
-					<p class="card-desc"><?=$postSoloPorHoy->txt_descripcion?></p>
+					<p class="card-desc"><?=Html::encode($postSoloPorHoy->txt_descripcion)?></p>
 				</div>
 
 				<div class="card-contexto-status">
@@ -52,7 +53,7 @@ $this->icon = '<i class="ion ion-android-warning"></i>';
 
 
 	<div class="fixed-action-btn horizontal">
-		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post">
+		<a class="btn-floating btn-large waves-effect waves-light btn-agregar modal-trigger" href="#js-modal-post" onclick="cargarTiny()">
 			<i class="ion ion-wand"></i>
 		</a>
 		<a class="btn-floating btn-large waves-effect waves-light" onclick="deletePosts()">
@@ -75,10 +76,15 @@ if($postTotales>ConstantesWeb::POSTS_MOSTRAR){
 
 <?php
 }
+
+if (! empty ( $token )) {
+	$this->registerJs ( "
+  		showPostFull('".$token."');
+	", View::POS_END, 'mostarPost' );
+}
 ?>
 
 <?php
-
 $bundle = ModuleAsset::register ( Yii::$app->view );
 $bundle->js [] = 'js/charlenetas-soloporhoy.js'; // dynamic file added
 

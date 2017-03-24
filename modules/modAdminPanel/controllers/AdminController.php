@@ -32,6 +32,7 @@ use app\models\EntClientes;
 use app\models\EntAnuncios;
 use yii\helpers\Url;
 use app\models\EntUsuariosSubscripciones;
+use app\models\EntEspejos;
 
 /**
  * Default controller for the `adminPanel` module
@@ -156,36 +157,91 @@ class AdminController extends Controller {
 				"usuarios" => $usuarios 
 		] );
 	}
-	public function actionEspejo($page = 0) {
+	public function actionEspejo($page = 0, $token = null, $idNotif = null) {
 		$idPost = 1;
-		$postsEspejo = EntPosts::getPosts ( $page, $idPost );
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
+			$this->leerNotificacion($token, $idNotif);
+		}
+		//$postsEspejo = EntPosts::getPosts ( $page, $idPost );
+		
+		/*
+		 * Separar posts por respondidos y si responder pero con paginación y mostrarlos en la vista
+		 */
+		$arrayEspejosResp = null;
+		$espejosResp = EntPosts::getPostsEspejosResp($page, $idPost);
+		$index = 0;
+		foreach($espejosResp as $espejoResp){
+			$arrayEspejosResp[$index] = (int)$espejoResp->id_post;
+			$index++;
+		}
+// 		var_dump($arrayEspejosResp);
+// 		exit();
+		$espejosSinResp = EntPosts::getPostsEspejosSinResp($page, $idPost);
+		
+		/*
+		 * Separar posts pero si el paginado para verificar el total y tenerlo como referencia al cargar mas posts 
+		 */
+		$arrayEspejosResp2 = null;
+		$totalEspejosResp = EntRespuestasEspejo::find()->all();
+		$index2 = 0;
+		foreach($totalEspejosResp as $espejoResp2){
+			$arrayEspejosResp2[$index2] = (int)$espejoResp2->id_post;
+			$index2++;
+		}
+		$totalEspejosSinResp = EntEspejos::find()->where(['not in', 'id_post', $arrayEspejosResp2])->all();
+		
 		
 		return $this->render ( 'espejo', [ 
-				"postsEspejo" => $postsEspejo 
+				//"postsEspejo" => $postsEspejo,
+				'espejosResp' => $espejosResp,
+				'espejosSinResp' => $espejosSinResp,
+				'totalEspejosSinResp' => $totalEspejosSinResp,
+				'totalEspejosResp' => $totalEspejosResp,
+				'token'=>$token,
 		] );
 	}
-	public function actionAlquimia($page = 0) {
+	public function actionAlquimia($page = 0, $token = null, $idNotif = null) {
 		$idPost = 2;
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
+			$this->leerNotificacion($token, $idNotif);
+		}
 		$postsAlquimia = EntPosts::getPosts ( $page, $idPost );
 		
 		return $this->render ( 'alquimia', [ 
-				"postsAlquimia" => $postsAlquimia 
+				"postsAlquimia" => $postsAlquimia,
+				'token'=>$token
 		] );
 	}
-	public function actionVerdadazos($page = 0) {
+	public function actionVerdadazos($page = 0, $token = null, $idNotif = null) {
 		$idPost = 3;
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
+			$this->leerNotificacion($token, $idNotif);
+		}
 		$postsVerdadazos = EntPosts::getPosts ( $page, $idPost );
 		
 		return $this->render ( 'verdadazos', [ 
-				"postsVerdadazos" => $postsVerdadazos 
+				"postsVerdadazos" => $postsVerdadazos,
+				'token'=>$token,
 		] );
 	}
-	public function actionHoyPense($page = 0) {
+	public function actionHoyPense($page = 0, $token = null, $idNotif = null) {
 		$idPost = 4;
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
+			$this->leerNotificacion($token, $idNotif);
+		}
 		$postsHoypense = EntPosts::getPosts ( $page, $idPost );
 		
 		return $this->render ( 'hoyPense', [ 
-				"postsHoyPense" => $postsHoypense 
+				"postsHoyPense" => $postsHoypense,
+				'token'=>$token
 		] );
 	}
 	public function actionMedia($page = 0) {
@@ -204,12 +260,18 @@ class AdminController extends Controller {
 				"postsContexto" => $postsContexto 
 		] );
 	}
-	public function actionSoloPorHoy($page = 0) {
+	public function actionSoloPorHoy($page = 0, $token = null, $idNotif = null) {
 		$idPost = 7;
+		
+		if(!empty($token)){
+			$this->getPostByToken($token);
+			$this->leerNotificacion($token, $idNotif);
+		}
 		$postsSoloPorHoy = EntPosts::getPosts ( $page, $idPost );
 		
 		return $this->render ( 'soloPorHoy', [ 
-				"postsSoloPorHoy" => $postsSoloPorHoy 
+				"postsSoloPorHoy" => $postsSoloPorHoy,
+				'token'=>$token
 		] );
 	}
 	public function actionSabiasQue($page = 0) {
@@ -1096,11 +1158,9 @@ class AdminController extends Controller {
 			throw new NotFoundHttpException( 'The requested page does not exist.' );
 		}
 	}
-	public function actionLeerNotificacion($token) {
+	public function leerNotificacion($token, $idNotif) {
 		$notificaciones = new EntNotificaciones ();
-		$notificacion = $notificaciones->find ()->where ( [ 
-				'txt_token_objeto' => $token 
-		] )->one ();
+		$notificacion = $notificaciones->find()->where(['id_notificacion'=>$idNotif])->andWhere(['txt_token_objeto' => $token ])->one();
 		
 		$notificacion->b_leido = 1;
 		$notificacion->save ();
@@ -1164,20 +1224,39 @@ class AdminController extends Controller {
 	}
 	
 	/**
-	 * Obtiene los post por paginacion
+	 * Obtiene los post espejo sin responder por paginacion
 	 */
-	public function actionGetMasPostsEspejo($page = 1) {
+	public function actionGetMasPostsEspejoSinResp($page = 1) {
 		
 		// Layout que usara la vista
 		$this->layout = false;
 		$tipoPost = ConstantesWeb::POST_TYPE_ESPEJO;
 		
 		// Recupera n numero de registros por paginacion
-		$listaPost = EntPostsExtend::getPosts ( $page, $tipoPost );
+		//$listaPost = EntPostsExtend::getPostsEspejosResp ( $page, $tipoPost );
+		$listaPost = EntPostsExtend::getPostsEspejosSinResp($page, $tipoPost);		
 		
 		// Pintar vista
 		return $this->renderAjax ( 'itemsEspejo', [ 
 				'postsEspejo' => $listaPost 
+		] );
+	}
+	
+	/**
+	 * Obtiene los post espejo respondidos por paginacion
+	 */
+	public function actionGetMasPostsEspejoResp($page = 1) {
+	
+		// Layout que usara la vista
+		$this->layout = false;
+		$tipoPost = ConstantesWeb::POST_TYPE_ESPEJO;
+	
+		// Recupera n numero de registros por paginacion
+		$listaPost = EntPostsExtend::getPostsEspejosResp ( $page, $tipoPost );
+	
+		// Pintar vista
+		return $this->renderAjax ( 'itemsEspejo', [
+				'postsEspejo' => $listaPost
 		] );
 	}
 	

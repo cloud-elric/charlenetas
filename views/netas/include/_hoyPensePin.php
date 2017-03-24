@@ -13,9 +13,9 @@ use yii\helpers\Url;
 		<h3 class="pin-titulo">
  			<?=$post->txt_titulo?>
  		</h3>
-		<p class="pin-descripcion">
-			<?=Utils::subStrTexto($post->txt_descripcion, 500)?>
-		</p>
+		<div class="pin-descripcion">
+			<?=$post->txt_descripcion?>
+		</div>
 	</div>
 	<?php
 		include 'elementos/pins-social.php';

@@ -98,6 +98,47 @@ class EntPosts extends \yii\db\ActiveRecord {
 		return $dataProvider->getModels ();
 	}
 	
+	public static function getPostsEspejosResp($page = 0, $post, $pageSize = ConstantesWeb::POSTS_MOSTRAR,$params=null) {	
+		$query = EntRespuestasEspejo::find();
+		$order = [
+				'id_post' => 'asc'
+		];
+		// Carga el dataprovider
+		$dataProvider = new ActiveDataProvider( [
+				'query' => $query,
+				'sort' => [
+						'defaultOrder' => $order
+				],
+				'pagination' => [
+						'pageSize' => $pageSize,
+						'page' => $page
+				]
+		] );
+		
+		return $dataProvider->getModels ();
+	}
+	
+	public static function getPostsEspejosSinResp($page = 0, $post, $pageSize = ConstantesWeb::POSTS_MOSTRAR,$params=null) {
+		//$query = EntEspejos::find()->where(['not in', 'id_post', $array]);
+		$query = EntEspejos::find()->where("id_post not in (select re.id_post from ent_respuestas_espejo as re )");
+		
+		$order = [
+				'id_post' => 'asc'
+		];
+		// Carga el dataprovider
+		$dataProvider = new ActiveDataProvider ( [
+				'query' => $query,
+				'sort' => [
+						'defaultOrder' => $order
+				],
+				'pagination' => [
+						'pageSize' => $pageSize,
+						'page' => $page
+				]
+		] );
+	
+		return $dataProvider->getModels ();
+	}
 	/**
 	 * Busca un post por su token
 	 *

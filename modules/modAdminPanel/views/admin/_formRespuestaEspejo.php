@@ -38,7 +38,8 @@ $form = ActiveForm::begin ( [
 
 	</div>
 
-	<?= Html::submitButton('Responder <i class="ion ion-ios-paperplane right"></i>', array('class'=>'btn btn-submit waves-effect'))?>
+	<?= Html::submitButton('Responder <i class="ion ion-ios-paperplane right"></i>', array('id' => 'responder_espejo', 'class'=>'btn btn-submit waves-effect ladda-button',
+					'data-style' =>'zoom-in'))?>
 
 <?php
 
