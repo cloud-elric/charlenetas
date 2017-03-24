@@ -288,7 +288,7 @@ class AdminController extends Controller {
 				'id_usuario' => Yii::$app->user->identity 
 		] )->andWhere ( [ 
 				'b_leido' => 0 
-		] )->orderBy ( 'fch_creacion ASC' )->limit ( 15 )->all ();
+		] )->orderBy ( 'fch_creacion ASC' )->all ();
 		
 		return $this->render ( 'notificaciones', [ 
 				'notificaciones' => $admin 
