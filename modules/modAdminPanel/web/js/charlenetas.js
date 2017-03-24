@@ -636,3 +636,44 @@ function copiarClipboard(){
 //	    console.error('Trigger:', e.trigger);
 //	});
 }
+
+/*pinterest*/
+function open_window(url, name){
+	window.open(url, name, 'height=320, width=640, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no');
+}
+
+function setDataURL(tituloArticulo,urlImage,urlArticulo ){
+			open_window('https://pinterest.com/pin/create/button/?url='+urlArticulo+'&media='+urlImage+'&description='+tituloArticulo, 'pinterest_share');
+}
+
+function compartirPinterest(){
+	desc = $('#txt_descripcion').text();
+	image = $('.full-pin-header').data('image');
+	token = $('#js-token-post').val();
+	//alert(desc+image+token);
+	
+	setDataURL(desc, basePath+'uploads/imagenesPosts/'+image, basePath+"netas/index?token="+token);
+}
+
+/*twitter*/
+function open_window_twitter(url, name){
+	window.open(url, name, 'height=320, width=640, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no');
+}
+
+function setDataURLTwitter(tituloArticulo,urlImage,urlArticulo ){
+			open_window('http://twitter.com/intent/tweet?url='+urlArticulo, 'twitter_share');
+}
+function compartirTwitter(titulo){
+	desc = $('#txt_descripcion').text();
+	image = $('.full-pin-header').data('image');
+	token = $('#js-token-post').val();
+	
+	//console.log(desc+"-"+titulo+"-"+image);
+	$('meta[name=twitter\\:title]').attr('content', titulo);
+	$('meta[name=twitter\\:description]').attr('content', desc);
+	$('meta[name=twitter\\:image]').attr('content', basePath+'uploads/imagenesPosts/'+image);
+	console.log("jkfdjkfdjkfdkjfd");
+	setDataURLTwitter(desc, basePath+'uploads/imagenesPosts/'+image, basePath+"netas/index?token="+token);
+	//$('#compartirTwitter').trigger("click");
+}
+

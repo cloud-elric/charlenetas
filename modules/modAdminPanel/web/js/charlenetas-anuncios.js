@@ -263,9 +263,9 @@ $(document).on({
 			img = new Image();
 			img.onload = function() {
 				//alert(this.width + " " + this.height);
-				if(this.width == 250 /*&& this.heigth == 250*/){
+				if(this.width == 250 && this.height == 250){
 					console.log("tu imagen ha sido cargada correctamente");
-					swal("Imagen correcta!", "You clicked the button!", "success")
+					swal("Imagen correcta!"," ","success")
 				}else{
 					console.log("error imagen no tiene el tamaño permitido");
 					swal("Error al cargar imagen!", "Debe ser de 250 x 250");
@@ -293,9 +293,9 @@ $(document).on({
 			img = new Image();
 			img.onload = function() {
 				//alert(this.width + " " + this.height);
-				if(this.width == 250 /*&& this.heigth == 400*/){
+				if(this.width == 250 && this.height == 400){
 					console.log("tu imagen ha sido cargada correctamente");
-					swal("Imagen correcta!", "You clicked the button!", "success")
+					swal("Imagen correcta!", " ", "success")
 				}else{
 					console.log("error imagen no tiene el tamaño permitido");
 					swal("Error al cargar imagen!", "Debe ser de 250 x 400");

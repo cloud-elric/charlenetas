@@ -32,7 +32,7 @@ $users = $tipoUsuarios->find()->all();
 						<div class="col s3">
 							<div class="card-user-avatar">
 								<?= Html::img ( $usuario->getImageProfile())?>
-								<div class="card-user-status card-user-status-deshabilitado"></div>
+								<!-- <div class="card-user-status card-user-status-deshabilitado"></div> -->
 							</div>
   									<!-- <p class="card-user-status">Habilitado</p>
 									<p class="card-user-status">Deshabilitado</p> -->
@@ -43,7 +43,7 @@ $users = $tipoUsuarios->find()->all();
 							<!-- <p class="card-user-tipo-user"><?= $usuario->idTipoUsuario->txt_nombre?></p> -->
 							<?php if($usuario->idTipoUsuario->txt_nombre != "Super administrador"){ ?>
 							<div class="input-field col s12">
-    							<select onChange="cambioUser(<?=$usuario->id_usuario?>,value)">
+								<select onChange="cambioUser(<?=$usuario->id_usuario?>,value)">
 								    <option value="<?= $usuario->idTipoUsuario->id_tipo_usuario?>"><?= $usuario->idTipoUsuario->txt_nombre?></option>
 								    <?php foreach($users as $us){ ?>
 								    	<?php if($us->txt_nombre != $usuario->idTipoUsuario->txt_nombre){ ?>

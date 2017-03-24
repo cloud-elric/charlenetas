@@ -78,7 +78,7 @@ $('#form-espejo').submit();
 		var valor = 0;
 		$("input:checked").each(function(){
 			//console.log($(this).val());
-			valor = $(this).val();
+			valor = 1;//$(this).val();
 		});
 
 		var url = form.attr('action')+"?anonimo="+valor;
