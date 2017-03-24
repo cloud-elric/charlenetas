@@ -14,7 +14,7 @@ use yii\helpers\Url;
  			<?=$post->txt_titulo?>
  		</h3>
 		<div class="pin-descripcion">
-			<?=Utils::subStrTexto($post->txt_descripcion, 500)?>
+			<?=$post->txt_descripcion?>
 		</div>
 	</div>
 	<?php
