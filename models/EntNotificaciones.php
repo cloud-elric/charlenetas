@@ -3,18 +3,21 @@
 namespace app\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "ent_notificaciones".
  *
  * @property string $id_notificacion
  * @property string $id_usuario
+ * @property string $id_usuario2
  * @property string $txt_titulo
  * @property string $txt_token_objeto
  * @property string $txt_descripcion
  * @property string $b_leido
  *
  * @property ModUsuariosEntUsuarios $idUsuario
+ * @property ModUsuariosEntUsuarios $idUsuario2
  */
 class EntNotificaciones extends \yii\db\ActiveRecord
 {
@@ -33,11 +36,12 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     {
         return [
             [['id_usuario', 'txt_titulo', 'txt_token_objeto', 'txt_descripcion'], 'required'],
-            [['id_notificacion', 'id_usuario', 'b_leido'], 'integer'],
+            [['id_notificacion', 'id_usuario', 'id_usuario2', 'b_leido'], 'integer'],
             [['txt_titulo'], 'string', 'max' => 50],
             [['txt_token_objeto'], 'string', 'max' => 60],
             [['txt_descripcion'], 'string', 'max' => 500],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => ModUsuariosEntUsuarios::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
+        	[['id_usuario2'], 'exist', 'skipOnError' => true, 'targetClass' => ModUsuariosEntUsuarios::className(), 'targetAttribute' => ['id_usuario2' => 'id_usuario']],
         ];
     }
 
@@ -49,6 +53,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
         return [
             'id_notificacion' => 'Id Notificacion',
             'id_usuario' => 'Id Usuario',
+        	'id_usuario2' => 'Id Usuario2',
             'txt_titulo' => 'Txt Titulo',
             'txt_token_objeto' => 'Txt Token Objeto',
             'txt_descripcion' => 'Txt Descripcion',
@@ -64,15 +69,49 @@ class EntNotificaciones extends \yii\db\ActiveRecord
         return $this->hasOne(ModUsuariosEntUsuarios::className(), ['id_usuario' => 'id_usuario']);
     }
     
+	/**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdUsuario2()
+    {
+        return $this->hasOne(ModUsuariosEntUsuarios::className(), ['id_usuario' => 'id_usuario2']);
+    }
+    
+    public static function getNotificaciones($page = 0, $pageSize = 5){
+    	$query = EntNotificaciones::find()->where([ 
+				'id_usuario' => Yii::$app->user->identity 
+		])->andWhere ( [ 
+				'b_leido' => 0 
+		]);
+    	
+    	$order = [
+    			'fch_creacion' => 'asc'
+    	];
+    	// Carga el dataprovider
+    	$dataProvider = new ActiveDataProvider( [
+    			'query' => $query,
+    			'sort' => [
+    					'defaultOrder' => $order
+    			],
+    			'pagination' => [
+    					'pageSize' => $pageSize,
+    					'page' => $page
+    			]
+    	] );
+    	
+    	return $dataProvider;
+    }
+    
     /**
      * Guarda las notificaciones de las respuestas de los comentario en los posts
      * @param unknown $comentario
      * @throws Exception
      * @return boolean
      */
-    public function guardarNotificacion($comentario, $notificaciones){
+    public function guardarNotificacion($comentario, $notificaciones, $idUsuario){
     	
     	$notificaciones->id_usuario = $comentario->id_usuario;
+    	$notificaciones->id_usuario2 = $idUsuario;
     	$notificaciones->txt_token_objeto = $comentario->txt_token;
     	$notificaciones->txt_descripcion = "te han respondido";
     	$notificaciones->txt_titulo = "te han respondido";
@@ -103,9 +142,10 @@ class EntNotificaciones extends \yii\db\ActiveRecord
      * @throws Exception
      * @return boolean
      */
-    public function guardarNotificacionPreguntas($post, $notificaciones){
+    public function guardarNotificacionPreguntas($post, $notificaciones, $idUsuario){
     	 
     	$notificaciones->id_usuario = 25;//Yii::$app->user->identity->id_usuario;
+    	$notificaciones->id_usuario2 = $idUsuario;
     	$notificaciones->id_tipo_post = 1;
     	$notificaciones->txt_token_objeto = $post->txt_token;
     	$notificaciones->txt_descripcion = $post->txt_descripcion;
@@ -140,6 +180,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     public function guardarNotificacionRespuestasAdmin($post, $notificaciones){
     
     	$notificaciones->id_usuario = $post->id_usuario;
+    	$notificaciones->id_usuario2 = 25;
     	$notificaciones->txt_token_objeto = $post->txt_token;
     	$notificaciones->txt_descripcion = "te han respondido tu pregunta";
     	$notificaciones->txt_titulo = "te han respondido tu pregunta";
@@ -170,9 +211,10 @@ class EntNotificaciones extends \yii\db\ActiveRecord
      * @throws Exception
      * @return boolean
      */
-    public function guardarNotificacionAcuerdo($post, $notificaciones){
+    public function guardarNotificacionAcuerdo($post, $notificaciones, $idUsuario){
     
     	$notificaciones->id_usuario = 25;
+    	$notificaciones->id_usuario2 = $idUsuario;
     	$notificaciones->id_tipo_post = 1;
     	$notificaciones->txt_token_objeto = $post->txt_token;
     	$notificaciones->txt_descripcion = "Al usuario le gusto o no tu respuesta";
@@ -204,9 +246,10 @@ class EntNotificaciones extends \yii\db\ActiveRecord
      * @throws Exception
      * @return boolean
      */
-    public function guardarNotificacionCitas($notificaciones, $title, $txt_token){
+    public function guardarNotificacionCitas($notificaciones, $title, $txt_token, $idUsuario){
     
     	$notificaciones->id_usuario = 25;
+    	$notificaciones->id_usuario2 = $idUsuario;
     	$notificaciones->txt_token_objeto = $txt_token;
     	$notificaciones->txt_descripcion = "Un charlenauta realizó una cita";
     	$notificaciones->txt_titulo = "Un charlenauta realizó una cita";
@@ -240,6 +283,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     	$com = EntPosts::find()->where(['id_post'=>$comentario->id_post])->one(); 
     	
     	$notificaciones->id_usuario = 25;
+    	$notificaciones->id_usuario2 = $comentario->id_usuario;
     	$notificaciones->id_tipo_post = $com->id_tipo_post;
     	$notificaciones->txt_token_objeto = $com->txt_token;
     	$notificaciones->txt_descripcion = $comentario->txt_comentario;
