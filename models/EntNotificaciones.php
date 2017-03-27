@@ -77,7 +77,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
         return $this->hasOne(ModUsuariosEntUsuarios::className(), ['id_usuario' => 'id_usuario2']);
     }
     
-    public static function getNotificaciones($page = 0, $pageSize = 5){
+    public static function getNotificaciones($page = 0, $pageSize = 30){
     	$query = EntNotificaciones::find()->where([ 
 				'id_usuario' => Yii::$app->user->identity 
 		])->andWhere ( [ 
@@ -95,7 +95,7 @@ class EntNotificaciones extends \yii\db\ActiveRecord
     			],
     			'pagination' => [
     					'pageSize' => $pageSize,
-    					'page' => $page
+    					//'page' => $page
     			]
     	] );
     	

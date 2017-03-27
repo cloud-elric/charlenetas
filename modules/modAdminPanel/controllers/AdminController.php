@@ -300,9 +300,11 @@ class AdminController extends Controller {
 			'dataProvider' => $dataProvider
 		]);
 	}
+	
 	public function actionAgenda() {
 		return $this->render ( 'agenda' );
 	}
+	
 	public function actionHabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc") {
 		$postHabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postHabilitar->b_habilitado = 1;
