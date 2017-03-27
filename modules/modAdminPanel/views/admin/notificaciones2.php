@@ -4,24 +4,22 @@ use yii\helpers\Html;
 use app\models\ModUsuariosEntUsuarios;
 ?>
 <?php \yii\widgets\Pjax::begin(); ?>
-<div class="row">
-	<div class="col-md-10 col-md-offset-1">
-		<div class="panel panel-primary">
-			<div class="panel-body"></div>
-    		
-		    <?= GridView::widget([
-		        'dataProvider' => $dataProvider,
-		        'columns' => [
-		            ['class' => 'yii\grid\SerialColumn'],
-		        	[ 	
-		        		'attribute' => 'Usuario',
-		        		'format' => 'raw',
-		        		'value' => function ($data){
-		        			//$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$dat->id_usuario])->one();
-		        			return Html::img ( $data->idUsuario2->getImageProfile (), [ 'width' => '50px' ] );
-		        		}
-		        	],
-		        	[ 
+
+<div class="container">
+	<div class="row">
+		<div class="col-s6 offset-s6">
+	    		
+			<?= GridView::widget([
+				'dataProvider' => $dataProvider,
+			    'columns' => [
+			        [ 	
+			        	'attribute' => 'Usuario',
+			        	'format' => 'raw',
+			        	'value' => function ($data){
+			        		return Html::img ( $data->idUsuario2->getImageProfile (), [ 'width' => '50px' ] );
+			        	}
+			        ],
+			        [ 
 						'attribute' => 'Descripcion',
 						'format' => 'raw',
 						'value' => function ($data){
@@ -48,17 +46,10 @@ use app\models\ModUsuariosEntUsuarios;
 							}
 						} 
 					],
-		        ],
-		    ]); ?>
-		    
-			<div class="panel-footer">
-				<div class="row">
-					<div class="col-md-12 text-center">
-				 		
-			        </div>
-				</div>
-			</div>
+			    ],
+			]); ?>
+			    
 		</div>
 	</div>
-</div>
+</div>	
 <?php \yii\widgets\Pjax::end(); ?>
