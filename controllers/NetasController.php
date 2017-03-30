@@ -627,7 +627,7 @@ class NetasController extends Controller {
 			if($idUsuario != $comentario->id_usuario){
 			
 				$notificaciones = new EntNotificaciones();
-				$notificaciones->guardarNotificacion($comentario, $notificaciones);
+				$notificaciones->guardarNotificacion($comentario, $notificaciones, $idUsuario);
 				
 // 				$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$comentario->id_usuario])->one();
 // 				$this->enviarEmailComentario($user, $token);
@@ -861,12 +861,14 @@ class NetasController extends Controller {
 		$post = new EntPosts ( [ 
 				'scenario' => 'agregarEspejo' 
 		] );
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
 		
 		if ($post->load ( Yii::$app->request->post () )) {
 			if($postGuardado = $post->guardarEspejo($post, $anonimo)){
 						
 				$notificaciones = new EntNotificaciones();	
-				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones);
+				$notificaciones->guardarNotificacionPreguntas($postGuardado, $notificaciones, $idUsuario);
 				
 				$admin = EntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
 				$this->enviarEmailPreguntaEspejo($admin, $post->txt_token);
@@ -891,7 +893,9 @@ class NetasController extends Controller {
 	 */
 	public function actionAgregarAcuerdo($token, $feed) {
 		$this->layout = false;
-	
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
+		
 		$acuerdo = new EntRespuestasEspejo();
 		$posts = new EntPosts();
 		$post = $posts->find()->where(['txt_token'=>$token])->one();
@@ -901,7 +905,7 @@ class NetasController extends Controller {
 		$respuesta->b_de_acuerdo = $feed;
 		
 		$notificacion = new EntNotificaciones();
-		$notificacion->guardarNotificacionAcuerdo($post,$notificacion);
+		$notificacion->guardarNotificacionAcuerdo($post, $notificacion, $idUsuario);
 	
 		if($respuesta->save ())
 			echo "success";
@@ -915,13 +919,14 @@ class NetasController extends Controller {
 	 */
 	public function actionCrearCita() {
 		$cita = new EntCitas();
-	
+		// id del usuario logueado
+		$idUsuario = Yii::$app->user->identity->id_usuario;
 		if ($cita->load ( Yii::$app->request->post () )) {
 			if($citaGuardada = $cita->guardarCitas($cita)){
 	
 				$notificaciones = new EntNotificaciones();
 					
-				$notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones);
+				$notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones, $idUsuario);
 	
 				return 'success';
 			} else{
@@ -972,7 +977,7 @@ class NetasController extends Controller {
 			$entCitas = new EntCitas();
 		
 			$notificaciones = new EntNotificaciones ();
-			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token );
+			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token, $id_usuario);
 			
 			$creditosGastados = new EntUsuariosCreditosGastados();
 			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $id_usuario, $costo->costo);

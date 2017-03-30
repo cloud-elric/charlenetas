@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use app\modules\ModUsuarios\models\EntUsuariosFacebook;
 
 /**
  * This is the model class for table "mod_usuarios_ent_usuarios".
@@ -272,5 +273,32 @@ class ModUsuariosEntUsuarios extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ModUsuariosEntUsuariosFacebook::className(), ['id_usuario' => 'id_usuario']);
     }
-   
+    
+    
+    public function getEntUsuariosFacebook() {
+    	return $this->hasOne ( EntUsuariosFacebook::className (), [
+    			'id_usuario' => 'id_usuario'
+    	] );
+    }
+    
+    /**
+     * Si la imagen esta vacia mandamos una por default
+     *
+     * @return string
+     */
+    public function getImageProfile() {
+    	$basePath = Yii::getAlias ( '@web' );
+    
+    	$usuarioFacebook = $this->entUsuariosFacebook;
+    
+    	if(empty($usuarioFacebook)){
+    		if ($this->txt_imagen) {
+    			return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageProfile'] . $this->txt_imagen;
+    		}
+    			
+    		return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageDefault'];
+    	}
+    
+    	return 'http://graph.facebook.com/'.$usuarioFacebook->id_facebook.'/picture';;
+    }
 }

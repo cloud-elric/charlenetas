@@ -68,7 +68,6 @@ use yii\web\View;
 			<!-- Notificaciones -->
 			<?php 
 				$notificaciones = new EntNotificaciones();
-				$admin = $notificaciones->find()->where(['id_usuario'=>Yii::$app->user->identity])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->limit(15)->count('id_usuario');
 				$mostrarNotificaciones = $notificaciones->find()->where(['id_usuario'=>25/*Yii::$app->user->identity->id_usuario*/])->andWhere(['b_leido'=>0])->orderBy('fch_creacion ASC')->all();
 				
 				$cont = 0;
@@ -86,6 +85,7 @@ use yii\web\View;
 						if($comparar1 === false)
 							$cont++;
 					}
+					$cont2 = 0;
 				?>
 				<span class="badge badge-warning"><?= $cont ?></span>
 			</a>
@@ -100,26 +100,37 @@ use yii\web\View;
 					
 						if($comparar === false){
 							if($mostrarNotificacion->id_tipo_post == 1){
+								$cont2++;
 				?>
 								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/espejo?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
 				<?php 
 							}else if($mostrarNotificacion->id_tipo_post == 2){
+								$cont2++;
 				?>
 								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/alquimia?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
 				<?php
 							}else if($mostrarNotificacion->id_tipo_post == 3){
+								$cont2++;
 				?>
 								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/verdadazos?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
 				<?php
 							}else if($mostrarNotificacion->id_tipo_post == 4){
+								$cont2++;
 				?>
 								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/hoy-pense?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
 				<?php
 							}else if($mostrarNotificacion->id_tipo_post == 7){
+								$cont2++;
 				?>
 								<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/solo-por-hoy?page=0&token=<?= $mostrarNotificacion->txt_token_objeto?>&idNotif=<?= $mostrarNotificacion->id_notificacion ?>"><?php echo $mostrarNotificacion->txt_descripcion?></a></li> 
 				<?php
 							}
+						}
+						if($cont2 > 5){
+				?>
+							<li class="js-notificacion-item" data-token="<?php echo $mostrarNotificacion->txt_token_objeto?>"><a href="<?=Url::base()?>/adminPanel/admin/notificaciones"><?php echo "Ver mas..."?></a></li>
+				<?php
+							break;
 						}
 					}
 				?>
@@ -144,20 +155,3 @@ use yii\web\View;
 </div>
 <!-- end /.header -->
 
-<?php 
-$this->registerJs ( "
-// 	$(document).ready(function(){
-// 		$('.card-espejo').on('click', function(e) {
-// 			console.log(e);
-// 			if (e.target.localName == 'i' || e.target.localName == 'label' || e.target.localName == 'input') {
-// 				e.stopPropagation();
-// 				return;
-// 			}
-			
-// 			var token = $(this).data('token');
-// 			showPostFull(token)
-// 		});
-// 	});
-
-", View::POS_END );
-?>

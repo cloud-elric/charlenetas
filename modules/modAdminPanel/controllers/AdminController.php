@@ -282,21 +282,29 @@ class AdminController extends Controller {
 				"postsSabiasQue" => $postsSabiasQue 
 		] );
 	}
-	public function actionNotificaciones() {
-		$notificaciones = new EntNotificaciones ();
-		$admin = $notificaciones->find ()->where ( [ 
-				'id_usuario' => Yii::$app->user->identity 
-		] )->andWhere ( [ 
-				'b_leido' => 0 
-		] )->orderBy ( 'fch_creacion ASC' )->limit ( 15 )->all ();
+	public function actionNotificaciones($page = 0) {
+// 		$notificaciones = new EntNotificaciones ();
+// 		$admin = $notificaciones->find ()->where ( [ 
+// 				'id_usuario' => Yii::$app->user->identity 
+// 		] )->andWhere ( [ 
+// 				'b_leido' => 0 
+// 		] )->orderBy ( 'fch_creacion ASC' )->all ();
+// 		$admin = EntNotificaciones::getNotificaciones();
+// 		return $this->render ( 'notificaciones', [ 
+// 				'notificaciones' => $admin 
+// 		] );
+
 		
-		return $this->render ( 'notificaciones', [ 
-				'notificaciones' => $admin 
-		] );
+		$dataProvider = EntNotificaciones::getNotificaciones($page); 
+		return $this->render ( 'notificaciones2', [
+			'dataProvider' => $dataProvider
+		]);
 	}
+	
 	public function actionAgenda() {
 		return $this->render ( 'agenda' );
 	}
+	
 	public function actionHabilitarPost($tokenPost = "post_3f6f718c45db9be09ccf7c5a427cb79557b217121b6bc") {
 		$postHabilitar = EntPosts::getPostByToken ( $tokenPost );
 		$postHabilitar->b_habilitado = 1;
