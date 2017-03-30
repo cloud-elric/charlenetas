@@ -735,7 +735,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 			return $basePath . '/' . Yii::$app->params ['modUsuarios'] ['pathImageDefault'];
 		}
 		
-		return 'http://graph.facebook.com/'.$usuarioFacebook->id_facebook.'/picture';;
+		return 'http://graph.facebook.com/'.$usuarioFacebook->id_facebook.'/picture';
 		
 	}
 }
