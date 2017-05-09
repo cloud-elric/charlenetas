@@ -12,7 +12,7 @@ use vendor\facebook\FacebookI;
 use app\models\Pagos;
 use app\models\Utils;
 
-class SiteController extends Controller
+class PagosController extends Controller
 {
     /**
      * @inheritdoc

@@ -146,7 +146,7 @@ class Utils {
 	
 	public function sendSuscripcion($email, $parametrosEmail) {
 		// Envia el correo electronico
-		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/suscripcion-a-pregunta.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Suscripcion a pregunta.', $parametrosEmail );
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/suscripcion-a-pregunta.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Suscripción a pregunta.', $parametrosEmail );
 	}
 	
 	public function sendPreguntaEspejo($email, $parametrosEmail) {
