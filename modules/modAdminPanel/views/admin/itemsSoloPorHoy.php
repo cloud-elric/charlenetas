@@ -4,7 +4,7 @@ use app\models\EntComentariosPosts;
 
 <?php foreach ($postsSoloPorHoy as $postSoloPorHoy){?>
 		<div class="col s12 m6 l4" id="card_<?=$postSoloPorHoy->txt_token?>">
-			<div class="card card-solo-por-hoy" data-token="<?=$postSoloPorHoy->txt_token?>">
+			<div class="card card-solo-por-hoy" data-token="<?=$postSoloPorHoy->txt_token?>" onclick="showPostFull('<?=$postSoloPorHoy->txt_token?>')">
 				
 
 				<div class="card-contexto-cont">
@@ -23,8 +23,7 @@ use app\models\EntComentariosPosts;
 				<input type="checkbox" id="delete-<?=$postSoloPorHoy->txt_token?>" value="<?=$postSoloPorHoy->txt_token?>" />
 				<label for="delete-<?=$postSoloPorHoy->txt_token?>"></label>
 			</div>
-					<a  id="button_<?=$postSoloPorHoy->txt_token?> class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
-
+					<a  id="button_<?=$postSoloPorHoy->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>

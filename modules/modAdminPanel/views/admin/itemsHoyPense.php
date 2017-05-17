@@ -3,7 +3,7 @@
 	foreach ($postsHoyPense as $postHoyPense){ ?>
 		
 		<div class="col s12 m6 l4" id="card_<?=$postHoyPense->txt_token?>">
-			<div class="card card-hoy-pense" data-token="<?=$postHoyPense->txt_token?>">
+			<div class="card card-hoy-pense" data-token="<?=$postHoyPense->txt_token?>" onclick="showPostFull('<?=$postHoyPense->txt_token?>')">
 				
 				<div class="card-contexto-cont">
 					<h3 class="card-title"><?= $postHoyPense->txt_titulo ?></h3>
