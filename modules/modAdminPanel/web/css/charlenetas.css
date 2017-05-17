@@ -2120,3 +2120,7 @@ button.picker__close:focus {
     -moz-osx-font-smoothing: grayscale;
     /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
  }
+
+ .separate-element{
+   margin-top: 15px;
+ }

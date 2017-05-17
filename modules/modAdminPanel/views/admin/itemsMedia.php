@@ -14,7 +14,7 @@
 				<label for="delete-<?=$postMedia->txt_token?>"></label>
 			</div>
 
-					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarMedia('<?=$postMedia->txt_token?>')" href="#js-modal-post-editar">
+					<a id="button_<?=$postMedia->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarMedia('<?=$postMedia->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>

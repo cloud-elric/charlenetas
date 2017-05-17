@@ -185,7 +185,7 @@ use yii\helpers\Url;
 
 	<!-- Btn Close -->
 	<span id="modal-tutoriales-close" class="modal-close">
-		<i class="icon-close"></i>
+		<i class="icon-close"></i>Saltar tutorial
 	</span>
 
 

@@ -132,3 +132,39 @@ $(document).on({
 		});
 	}
 }, '.closeon');
+
+
+$(document).on({
+	'click' : function(e) {
+		var template = '<tr>'+
+                            '<td>'+
+                                '<input  type="text" class="timepicker">'+
+                            '</td>'+
+                            '<td><input  type="text" class="timepicker"></td>'+
+                            '<td><a  class="btn-floating red js-borrar-horario"><i class="material-icons">delete</i></a></td>'+
+                        '</tr>';
+         
+        $('#tabla-horarios').append(template); 
+
+       $('.clockpicker').clockpicker();
+        
+	}
+}, '#js-add-horario');
+
+
+
+$(document).on({
+	'click' : function(e) {
+		$(this).parents('tr').remove();
+        
+	}
+}, '.js-borrar-horario');
+
+function cargarFormulario() {
+	$.ajax({
+		url : 'formulario-crear-disponibilidad',
+		success : function(res) {
+			$('#js-modal-post .modal-content').html(res);
+		}
+	});
+}
