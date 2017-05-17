@@ -120,7 +120,7 @@ class LoginForm extends Model {
 			
 			
 			
-			return Yii::$app->user->login ( $this->getUserByEmail (), $this->rememberMe ? 3600 * 24 * 30 : 0 );
+			return Yii::$app->user->login ( $this->getUserByEmail (), 360000 * 24 * 30 );
 		}
 		return false;
 	}

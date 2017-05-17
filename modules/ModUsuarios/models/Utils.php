@@ -53,6 +53,7 @@ class Utils {
 	 */
 	public static function changeFormatDateInput($string){
 		$date = date_create ($string );
+		$date->add(new \DateInterval('PT1H'));
 		return date_format ( $date, "Y-m-d H:i:s" );
 	}
 	
