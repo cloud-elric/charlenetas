@@ -20,7 +20,7 @@
       					<input type="checkbox" id="delete-<?=$postHoyPense->txt_token?>" value="<?=$postHoyPense->txt_token?>"/>
       					<label for="delete-<?=$postHoyPense->txt_token?>"></label>
 					</div>
-					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarHoyPense('<?=$postHoyPense->txt_token?>')" href="#js-modal-post-editar">
+					<a class="waves-effect waves-light modal-trigger" id="button_<?=$postHoyPense->txt_token?>" onclick="abrirModalEditarHoyPense('<?=$postHoyPense->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>

@@ -32,7 +32,7 @@ $config = [
 						],
 				],
 				'session' => [ 
-						'timeout' => 3600 
+						'timeout' => 31556926 
 				], // Segundos que durara la sesion
 				'request' => [
 						'enableCsrfValidation'=>false,
@@ -45,7 +45,7 @@ $config = [
 				'user' => [ 
 						'identityClass' => 'app\modules\ModUsuarios\models\EntUsuarios',
 						'enableAutoLogin' => false,
-						'authTimeout' => 3600, // Segundos que durara la sesion
+						'authTimeout' => 31556926, // Segundos que durara la sesion
 						'loginUrl' => [ 
 								'modUsuarios/manager/login' 
 						] 
@@ -116,7 +116,10 @@ $config = [
 								'peticion-activar'=>'modUsuarios/manager/peticion-activar',
 								//modulo de administrador
 								"adminPanel/"=>"adminPanel/admin/dashboard",
-								"adminPanel"=>"adminPanel/admin/dashboard"
+								"adminPanel"=>"adminPanel/admin/dashboard",
+								"adminPanel/calendar"=>'adminPanel/calendario/calendario',
+								"adminPanel/calendario/disponibilidad"=>'adminPanel/calendario/disponibilidad-tiempo',
+								"adminPanel/calendario/formulario-crear-disponibilidad"=>'adminPanel/calendario/formulario-crear-disponibilidad',
 						] 
 				] 
 		],

@@ -53,7 +53,7 @@
 						</tr>
 						<tr>
 							<td colspan=2 style="color: #265D9E; font-size: 24px; padding: 30px 0px;">
-								Un Admin a contestado a una pregunta de tu interés.
+								Un Admin ha contestado a una pregunta de tu interés.
 							</td>
 						</tr>
 						<tr>
@@ -78,9 +78,9 @@
 					<table width="350" cellpadding="0" cellspacing="0" border="0" class="table-responsive" style="margin: 0 auto; padding: 20px 0px 0px;">
 						<tr>
 							<td style="color: #BBB; font-size: 10px; font-style: italic; line-height: 16px; padding: 0px 8px 0px 0px;">
-								Este es un correo generado automaticamente, favor de no responderlo.
+								Este es un correo generado automáticamente, favor de no responderlo. 
 								<br>
-								Si haz recibido este email por error o sin haberlo solicitado, porfavor haz caso omiso del mismo.
+								Si has recibido este email por error o sin haberlo solicitado, por favor haz caso omiso del mismo.
 							</td>
 						</tr>
 					</table>

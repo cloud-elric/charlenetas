@@ -37,7 +37,8 @@ class CalendarioController extends Controller
 								'anadir-citas',
 								'actualizar-citas',
 								'agregar-citas',
-								'eliminar-citas'
+								'eliminar-citas',
+								'disponiblidad-tiempo'
 						],
 						'rules' => [
 								[
@@ -46,7 +47,8 @@ class CalendarioController extends Controller
 								'anadir-citas',
 								'actualizar-citas',
 								'agregar-citas',
-								'eliminar-citas'
+								'eliminar-citas',
+								'disponibilidad-tiempo'
 										],
 										'allow' => true,
 										// Allow users, moderators and admins to create
@@ -213,4 +215,15 @@ class CalendarioController extends Controller
     	$notificacion->b_leido = 1;
     	$notificacion->save ();
     }
+
+	public function actionDisponibilidadTiempo(){
+
+		return $this->render('disponibilidad');
+	}
+
+	public function actionFormularioCrearDisponibilidad(){
+		return $this->renderAjax ( 'crearDisponibilidad', [ 
+				
+		] );
+	}
 }
