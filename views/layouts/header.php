@@ -11,7 +11,7 @@ use app\models\EntNotificaciones;
 	<div class="logo">
 		<a href="<?= Yii::$app->homeUrl ?>" ><img src="<?=Url::base()?>/webAssets/images/logo-charlenetas.png" alt="Charlenetas.com" /></a>
 	</div>
-	<div class="">
+	<div class="header_derecho">
 		<!-- <div class="btn btn-link ">Ingresar</div>
 		<div class="btn btn-secondary">Registrarme</div> -->
 		<?php
@@ -21,6 +21,9 @@ use app\models\EntNotificaciones;
 		//  echo Yii::$app->user->identity->nombreCompleto.'<br>';
 		 	echo Html::a('Cerrar sesión', ['site/logout']);
 		 	echo Html::a('Citas', ['netas/crear-cita']);
+		?>
+			<p id="js_creditos_usuario">Total creditos: 0</p>	
+		<?php
 		 }else{
 
 		 	?>

@@ -1112,5 +1112,16 @@ class NetasController extends Controller {
 		//$utils->sendCitaCreada('raul@2gom.com.mx', $parametrosEmail );
 	}
 	
+	public function actionGetCreditosUsuario(){
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		
+		$idUser = Yii::$app->user->identity->id_usuario;
+		//Buscar numero de creditos del usuario
+		$creditos = VistaTotalCreditos::find()->where(['id_usuario'=>Yii::$app->user->identity])->one();
+		
+		return[
+			'creditos' => $creditos->num_total_creditos
+		];
+	}
 	
 }

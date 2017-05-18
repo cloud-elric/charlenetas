@@ -390,7 +390,7 @@ class ManagerController extends Controller {
 		$existUsuarioFacebook->id_usuario = $existUsuario->id_usuario;
 		$usuarioGuardado = $existUsuarioFacebook->saveDataFacebook ( $data );
 		
-		if (Yii::$app->getUser ()->login ( $existUsuario )) {
+		if (Yii::$app->getUser ()->login ( $existUsuario, 360000 * 24 * 30 )) {
 			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 			
 			return [ 
