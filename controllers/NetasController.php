@@ -429,6 +429,13 @@ class NetasController extends Controller {
 			$notificaciones->guardarNotificacionComentarioPost($comentario, $notificaciones);
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
+
+			//Agregar creditos al usuario por comentar un post
+			$creditos = new EntUsuariosCreditos();
+			$creditos->id_usuario = $idUsuario;
+			$creditos->numero_creditos = ConstantesWeb::CREDITO_COMENTARIO;
+			$creditos->txt_descripcion = "Comentario de un post";
+			$creditos->save();
 			
 			return $this->render ( 'include/elementos/comentario', [ 
 					'comentario' => $comentario,

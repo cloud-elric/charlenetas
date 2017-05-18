@@ -18,6 +18,7 @@ class ConstantesWeb {
 	const RESPONDER_PREGUNTA_CORRECTAMENTE = 2;
 	const REALIZAR_CITA = 1;
 	const REGISTRO = 5;
+	const CREDITO_COMENTARIO = 3;
 	
 	// Calificación maxima para alquimia
 	const MAX_CALIFICACION_ALQUIMIA = 5;
