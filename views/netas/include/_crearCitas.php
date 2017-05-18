@@ -1,13 +1,7 @@
 <?php
 use yii\helpers\Url;
+$this->title="Agendar cita";
 ?>
-
-<head>
-	<link rel='stylesheet' href='/fullcalendar-3.0.1/fullcalendar.css' />
-	<script src='/fullcalendar-3.0.1/lib/jquery.min.js'></script>
-	<script src='/fullcalendar-3.0.1/lib/moment.min.js'></script>
-	<script src='/fullcalendar-3.0.1/fullcalendar.js'></script>
-	
 	<style>
 
 		#calendar {
@@ -16,8 +10,6 @@ use yii\helpers\Url;
 		}
 
 	</style>
-</head>
-
 <?php include 'elementos/calendario.php'?>
 
 <?= $this->render ('//layouts/header') ?>
