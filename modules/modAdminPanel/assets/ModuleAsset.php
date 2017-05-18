@@ -20,7 +20,7 @@ class ModuleAsset extends AssetBundle {
 			'plugins/tags-input/jquery.tagsinput.min.css',
 			'css/sweetalert.css',
 			'https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css',
-			'plugins/multidates/jquery-ui.multidatespicker.css'
+			
 	];
 	public $js = [ 
 			//'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js',
@@ -39,7 +39,7 @@ class ModuleAsset extends AssetBundle {
 			'plugins/tags-input/jquery.tagsinput.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js',
 			'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
-			'plugins/multidates/jquery-ui.multidatespicker.js',
+			
 			
 	];
 	

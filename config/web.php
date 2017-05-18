@@ -37,14 +37,14 @@ $config = [
 				'request' => [
 						'enableCsrfValidation'=>false,
 						// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-						'cookieValidationKey' => 'KBI6OjMCowgwXJCMlZGkMY7SyGdyGb7s' 
+						'cookieValidationKey' => 'KBI6OjcharrrMooCollowgwXJCMlZGkMY7SleyGdyGbdessaa7s' 
 				],
 				'cache' => [ 
 						'class' => 'yii\caching\FileCache' 
 				],
 				'user' => [ 
 						'identityClass' => 'app\modules\ModUsuarios\models\EntUsuarios',
-						'enableAutoLogin' => false,
+						'enableAutoLogin' => true,
 						'authTimeout' => 31556926, // Segundos que durara la sesion
 						'loginUrl' => [ 
 								'modUsuarios/manager/login' 

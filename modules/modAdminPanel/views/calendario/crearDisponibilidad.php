@@ -10,8 +10,8 @@ use yii\bootstrap\ActiveForm;
     <form class="col s12">
       <div class="row">
         <div class="input-field col s8">
-          <input id="first_name" type="text" class="datepicker">
-          <label for="first_name">Selecciona una fecha</label>
+          <input id="js-date" type="text" class="datepicker">
+          <label for="js-date">Selecciona una fecha</label>
         </div>
       
         <div class="input-field col s4">
@@ -34,9 +34,9 @@ use yii\bootstrap\ActiveForm;
                 <tbody>
                 <tr>
                     <td>
-                        <input id="basicExample"  type="text" class="">
+                        <input value="9:00"  type="text" class="time-picker-inicial">
                     </td>
-                    <td><input  type="text" class=""></td>
+                    <td><input value="9:30" type="text" class="time-picker-final"></td>
                 </tr>
                
                 </tbody>
@@ -50,9 +50,33 @@ use yii\bootstrap\ActiveForm;
   </div>
 <script>
 
-$('#basicExample').timepicker({
-    'minTime': '2:00pm',
-    'maxTime': '11:30pm'
+$('.time-picker-inicial').timepicker({
+    'minTime': '9:00',
+    'maxTime': '21:00',
+    'timeFormat': 'H:i' 
+});
+
+$('.time-picker-final').timepicker({
+      'minTime': '9:30',
+    'maxTime': '21:00',
+    'timeFormat': 'H:i' 
+});
+
+$('.time-picker-inicial').on('changeTime', function() {
+  var inicialHora = $(this).val();
+  var finalHora = $('.time-picker-final').val();
+
+  if(Date.parse('01/01/2011 '+finalHora) < Date.parse('01/01/2011 '+inicialHora)){
+    inicialHora = finalHora;
+  }
+
+  $('.time-picker-final').timepicker('remove');
+
+  $('.time-picker-final').timepicker({
+      'minTime': inicialHora,
+      'maxTime': '21:00',
+      'timeFormat': 'H:i' 
+  });
 });
 
 </script>
@@ -61,6 +85,8 @@ $('#basicExample').timepicker({
 use yii\web\View;
 
 $this->registerJs ( "
+
+
 		$('.datepicker').pickadate({
 		
 // 		weekdaysShort: ['D', 'L', 'M', 'Mi', 'J', 'V', 'S'],
@@ -77,6 +103,8 @@ $this->registerJs ( "
 		selectMonths: true, // Creates a dropdown to control month
     	selectYears: 15 // Creates a dropdown of 15 years to control year
   });
+
+
 ", View::POS_END );
 ?>
 
