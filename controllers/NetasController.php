@@ -429,6 +429,11 @@ class NetasController extends Controller {
 			$notificaciones->guardarNotificacionComentarioPost($comentario, $notificaciones);
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
+
+			//Agregar creditos al usuario por comentar un post
+			$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::CREDITO_COMENTARIO])->one();
+			$userCreditos = new EntUsuariosCreditos();
+			$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
 			
 			return $this->render ( 'include/elementos/comentario', [ 
 					'comentario' => $comentario,
@@ -471,6 +476,14 @@ class NetasController extends Controller {
 		// Si existen feedbacks al comentario
 		if ($feedbackComentarios) {
 			$feedbackComentarios = $feedbackComentarios->num_usuarios;
+
+			//Agregra creditos si tiene mas de 10 me gusta en comentario
+			if($feedbackComentarios == 10 && $comentario->id_comentario_padre == null){
+				$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::ME_GUSTA_10])->one();
+				$userCreditos = new EntUsuariosCreditos();
+				$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
+			}
+
 		} else {
 			$feedbackComentarios = 0;
 		}
@@ -717,12 +730,8 @@ class NetasController extends Controller {
 				
 				
 				$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::RESPONDER_PREGUNTA_CORRECTAMENTE])->one();
-				
-				$creditos = new EntUsuariosCreditos();
-				$creditos->id_usuario = $idUsuario;
-				$creditos->numero_creditos = $contestar->costo;
-				$creditos->txt_descripcion = "Por contestar un sabias que correctamente";
-				$creditos->save();
+				$userCreditos = new EntUsuariosCreditos();
+				$userCreditos->agregarCreditos($idUsuario, $contestar->costo);
 				
 				$resp = $boolRes?'verdadero':'falso';
 				return [
@@ -1112,5 +1121,16 @@ class NetasController extends Controller {
 		//$utils->sendCitaCreada('raul@2gom.com.mx', $parametrosEmail );
 	}
 	
-	
+	public function actionGetCreditosUsuario(){
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		
+		$idUser = Yii::$app->user->identity->id_usuario;
+		//Buscar numero de creditos del usuario
+		$creditos = VistaTotalCreditos::find()->where(['id_usuario'=>Yii::$app->user->identity])->one();
+		
+		return[
+			'creditos' => $creditos->num_total_creditos
+		];
+	}
+
 }

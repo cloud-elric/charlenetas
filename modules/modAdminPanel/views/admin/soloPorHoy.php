@@ -35,7 +35,7 @@ $this->icon = '<i class="ion ion-android-warning"></i>';
       					<input type="checkbox" id="delete-<?=$postSoloPorHoy->txt_token?>" value="<?=$postSoloPorHoy->txt_token?>"/>
       					<label for="delete-<?=$postSoloPorHoy->txt_token?>"></label>
 					</div>
-					<a class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
+					<a id="button_<?=$postSoloPorHoy->txt_token?>" class="waves-effect waves-light modal-trigger" onclick="abrirModalEditarSoloPorHoy('<?=$postSoloPorHoy->txt_token?>')" href="#js-modal-post-editar">
 						<i class="ion ion-android-more-vertical card-edit"></i>
 					</a>
 				</div>

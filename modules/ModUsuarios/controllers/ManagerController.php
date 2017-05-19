@@ -15,6 +15,8 @@ use yii\web\UploadedFile;
 use yii\base\Response;
 use app\models\ConstantesWeb;
 use yii\widgets\ActiveForm;
+use app\models\EntUsuariosCreditos;
+use app\models\CatTipoCreditos;
 
 /**
  * Default controller for the `musuarios` module
@@ -66,6 +68,12 @@ class ManagerController extends Controller {
 					// $this->redirect ( [
 					// 'login'
 					// ] );
+
+					//Agregar creditos al usuario por registrarse
+					$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::REGISTRO])->one();
+					$userCreditos = new EntUsuariosCreditos();
+					$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
+
 					return [ 
 							'status' => 'success',
 							'message'=>$model->nombreCompleto,
@@ -360,6 +368,12 @@ class ManagerController extends Controller {
 			$entUsuario->addDataFromFaceBook ( $data );
 			
 			$existUsuario = $entUsuario->signup ( true );
+			if($existUsuario){
+				//Agregar creditos al usuario por registrarse
+				$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::REGISTRO])->one();
+				$userCreditos = new EntUsuariosCreditos();
+				$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
+			}
 		}
 		
 		// Buscamos si existe la cuenta de facebook en la base de datos
@@ -373,7 +387,7 @@ class ManagerController extends Controller {
 		$existUsuarioFacebook->id_usuario = $existUsuario->id_usuario;
 		$usuarioGuardado = $existUsuarioFacebook->saveDataFacebook ( $data );
 		
-		if (Yii::$app->getUser ()->login ( $existUsuario )) {
+		if (Yii::$app->getUser ()->login ( $existUsuario, 360000 * 24 * 30 )) {
 			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 			
 			return [ 

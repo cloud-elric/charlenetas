@@ -44,4 +44,12 @@ class EntUsuariosCreditos extends \yii\db\ActiveRecord
             'txt_descripcion' => 'Txt Descripcion',
         ];
     }
+
+    public function agregarCreditos($idUser, $tipoCredito){
+		$creditos = new EntUsuariosCreditos();
+		$creditos->id_usuario = $idUser;
+		$creditos->numero_creditos = $tipoCredito;
+		$creditos->txt_descripcion = "Se asignaron creditos";
+		$creditos->save();
+	}
 }
