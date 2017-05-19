@@ -29,7 +29,7 @@ var calendar = $('#calendar').fullCalendar({
 		//var view = $('#calendar').fullCalendar('getView');
 		//calendar.fullCalendar('gotoDate',date)
 		//calendar.fullCalendar('changeView','agendaDay')
-		
+		//console.log(valForm);
 		//if(view.name == 'agendaDay'){
 			$('.modal-trigger.modal-cita').trigger('click');
 			//var title = prompt('Title:');
@@ -42,12 +42,15 @@ var calendar = $('#calendar').fullCalendar({
 			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
 			//alert(end);
 				
-			$('#submitButton').on('click', function(e){
+			$('#submitButtonLlenar').on('click', function(e){
 				e.preventDefault();
 				title = "Haz hecho una cita en charlenetas";//$('#nombreCita').val()
+				campo1 = $('#Campo1').val();
+				campo2 = $('#Campo2').val();
+				campo3 = $('#Campo3').val();
 				$.ajax({
 					url: 'agregar-citas',
-					data: 'title='+ title +'&start='+ start +'&end='+ end ,
+					data: 'title='+ title +'&start='+ start +'&end='+ end +'&campo1='+campo1 +'&campo2='+campo2 +'&campo3='+campo3,
 					//dataType: "JSON",
 					type: 'POST',
 					success: function(json) {
@@ -64,6 +67,8 @@ var calendar = $('#calendar').fullCalendar({
 									},
 								true // make the event 'stick'
 								);
+							valForm = 1;
+							//location.reload(true);
 						}else {
 							//alert("No tienes los creditos suficientes");
 							$('.modal-trigger.modal-creditos').trigger('click');

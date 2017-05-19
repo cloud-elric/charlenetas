@@ -35,6 +35,7 @@ use app\models\VistaTotalCreditos;
 use app\models\CatTiposUsuarios;
 use app\models\EntUsuariosCreditosGastados;
 use app\models\EntClientes;
+use app\models\EntFormCita;
 
 
 class NetasController extends Controller {
@@ -927,14 +928,16 @@ class NetasController extends Controller {
 	 * crear cita para el usuario en sesión
 	 */
 	public function actionCrearCita() {
-		$cita = new EntCitas();
 		// id del usuario logueado
 		$idUsuario = Yii::$app->user->identity->id_usuario;
+		$cita = new EntCitas();
+		$formUser = EntFormCita::find()->where(['id_usuario'=>$idUsuario])->one();
+		//var_dump($formUser);
+		//exit();
+		
 		if ($cita->load ( Yii::$app->request->post () )) {
-			if($citaGuardada = $cita->guardarCitas($cita)){
-	
-				$notificaciones = new EntNotificaciones();
-					
+			if($citaGuardada = $cita->guardarCitas($cita)){	
+				$notificaciones = new EntNotificaciones();					
 				$notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones, $idUsuario);
 	
 				return 'success';
@@ -942,10 +945,11 @@ class NetasController extends Controller {
 				return 'error';
 			}
 		}
-	
+
 		return $this->render ( '//netas/include/_crearCitas', [
-				'cita' => $cita
-		] );
+			'cita' => $cita,
+			'formUser' => $formUser
+		]);
 	}
 	
 	/**
@@ -967,6 +971,10 @@ class NetasController extends Controller {
 		$title = $_POST ['title'];
 		$start = $_POST ['start'];
 		$end = $_POST ['end'];
+		$campo1 = $_POST['campo1'];
+		$campo2 = $_POST['campo2'];
+		$campo3 = $_POST['campo3'];
+
 		$id_usuario = Yii::$app->user->identity->id_usuario;
 		$txt_token = Utils::generateToken ( 'cita_' );
 		Yii::$app->response->format = Response::FORMAT_JSON;
@@ -1002,6 +1010,22 @@ class NetasController extends Controller {
 			$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$id_usuario])->one();
 			$this->enviarEmailAgregarCita($admin, $usuario);
 			
+			//Guardar formulario en la BD
+			$formularioUser = EntFormCita::find()->where(['id_usuario'=>$id_usuario])->one();
+			if($formularioUser){
+				$formularioUser->txt_campo1 = $campo1;
+				$formularioUser->txt_campo2 = $campo2;
+				$formularioUser->txt_campo3 = $campo3;
+				$formularioUser->save();
+			}else{
+				$formUser = new EntFormCita();
+				$formUser->id_usuario = $id_usuario;
+				$formUser->txt_campo1 = $campo1;
+				$formUser->txt_campo2 = $campo2;
+				$formUser->txt_campo3 = $campo3;
+				$formUser->save();
+			}
+
 			$success = "creditosSuficientes";
 			return ["status"=>$success];
 		}
