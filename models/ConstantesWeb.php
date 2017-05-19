@@ -17,8 +17,9 @@ class ConstantesWeb {
 	// TIPOS CREDITOS
 	const RESPONDER_PREGUNTA_CORRECTAMENTE = 2;
 	const REALIZAR_CITA = 1;
-	const REGISTRO = 5;
-	const CREDITO_COMENTARIO = 3;
+	const REGISTRO = 3;
+	const CREDITO_COMENTARIO = 4;
+	const ME_GUSTA_10 = 5;
 	
 	// Calificación maxima para alquimia
 	const MAX_CALIFICACION_ALQUIMIA = 5;

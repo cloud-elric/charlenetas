@@ -16,6 +16,7 @@ use yii\base\Response;
 use app\models\ConstantesWeb;
 use yii\widgets\ActiveForm;
 use app\models\EntUsuariosCreditos;
+use app\models\CatTipoCreditos;
 
 /**
  * Default controller for the `musuarios` module
@@ -69,11 +70,9 @@ class ManagerController extends Controller {
 					// ] );
 
 					//Agregar creditos al usuario por registrarse
-					$creditos = new EntUsuariosCreditos();
-					$creditos->id_usuario = $user->id_usuario;
-					$creditos->numero_creditos = ConstantesWeb::REGISTRO;
-					$creditos->txt_descripcion = "Registro exitoso en charlenetas";
-					$creditos->save();
+					$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::REGISTRO])->one();
+					$userCreditos = new EntUsuariosCreditos();
+					$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
 
 					return [ 
 							'status' => 'success',
@@ -371,11 +370,9 @@ class ManagerController extends Controller {
 			$existUsuario = $entUsuario->signup ( true );
 			if($existUsuario){
 				//Agregar creditos al usuario por registrarse
-				$creditos = new EntUsuariosCreditos();
-				$creditos->id_usuario = $existUsuario->id_usuario;
-				$creditos->numero_creditos = ConstantesWeb::REGISTRO;
-				$creditos->txt_descripcion = "Registro exitoso en charlenetas";
-				$creditos->save();
+				$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::REGISTRO])->one();
+				$userCreditos = new EntUsuariosCreditos();
+				$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
 			}
 		}
 		
