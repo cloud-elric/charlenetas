@@ -971,9 +971,19 @@ class NetasController extends Controller {
 		$title = $_POST ['title'];
 		$start = $_POST ['start'];
 		$end = $_POST ['end'];
-		$campo1 = $_POST['campo1'];
-		$campo2 = $_POST['campo2'];
-		$campo3 = $_POST['campo3'];
+
+		$txtSexo = $_POST['txtSexo'];
+		$txtGenero = $_POST['txtGenero'];
+		$txtReligion = $_POST['txtReligion'];
+		$txtEstadoCivil = $_POST['txtEstadoCivil'];
+		$txtEdad = $_POST['txtEdad'];
+		$txtNacionalidad = $_POST['txtNacionalidad'];
+		$txtDomicilio = $_POST['txtDomicilio'];
+		$txtPalabra = $_POST['txtPalabra'];
+		$txtOcupacion = $_POST['txtOcupacion'];
+		$txtPregunta = $_POST['txtPregunta'];
+		$txtFinalPreg = $_POST['txtFinalPreg'];
+		
 
 		$id_usuario = Yii::$app->user->identity->id_usuario;
 		$txt_token = Utils::generateToken ( 'cita_' );
@@ -1013,16 +1023,32 @@ class NetasController extends Controller {
 			//Guardar formulario en la BD
 			$formularioUser = EntFormCita::find()->where(['id_usuario'=>$id_usuario])->one();
 			if($formularioUser){
-				$formularioUser->txt_campo1 = $campo1;
-				$formularioUser->txt_campo2 = $campo2;
-				$formularioUser->txt_campo3 = $campo3;
+				$formularioUser->txt_sexo = $txtSexo;
+				$formularioUser->txt_genero = $txtGenero;
+				$formularioUser->txt_religion = $txtReligion;
+				$formularioUser->txt_estado_civil = $txtEstadoCivil;
+				$formularioUser->txt_edad = $txtEdad;
+				$formularioUser->txt_nacionalidad = $txtNacionalidad;
+				$formularioUser->txt_domicilio = $txtDomicilio;
+				$formularioUser->txt_palabra = $txtPalabra;
+				$formularioUser->txt_ocupacion = $txtOcupacion;
+				$formularioUser->txt_pregunta = $txtPregunta;
+				$formularioUser->txt_final_pregunta = $txtFinalPreg;
 				$formularioUser->save();
 			}else{
 				$formUser = new EntFormCita();
 				$formUser->id_usuario = $id_usuario;
-				$formUser->txt_campo1 = $campo1;
-				$formUser->txt_campo2 = $campo2;
-				$formUser->txt_campo3 = $campo3;
+				$formUser->txt_sexo = $txtSexo;
+				$formUser->txt_genero = $txtGenero;
+				$formUser->txt_religion = $txtReligion;
+				$formUser->txt_estado_civil = $txtEstadoCivil;
+				$formUser->txt_edad = $txtEdad;
+				$formUser->txt_nacionalidad = $txtNacionalidad;
+				$formUser->txt_domicilio = $txtDomicilio;
+				$formUser->txt_palabra = $txtPalabra;
+				$formUser->txt_ocupacion = $txtOcupacion;
+				$formUser->txt_pregunta = $txtPregunta;
+				$formUser->txt_final_pregunta = $txtFinalPreg;
 				$formUser->save();
 			}
 

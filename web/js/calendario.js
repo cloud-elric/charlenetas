@@ -45,12 +45,25 @@ var calendar = $('#calendar').fullCalendar({
 			$('#submitButtonLlenar').on('click', function(e){
 				e.preventDefault();
 				title = "Haz hecho una cita en charlenetas";//$('#nombreCita').val()
-				campo1 = $('#Campo1').val();
-				campo2 = $('#Campo2').val();
-				campo3 = $('#Campo3').val();
+				txtSexo = $('#txt_sexo select').val();
+				txtGenero = $('#txt_genero select').val();
+				txtReligion = $('#txt_religion select').val();
+				txtEstadoCivil = $('#txt_estado_civil').val();
+				txtEdad = $('#txt_edad').val();
+				txtNacionalidad = $('#txt_nacionalidad').val();
+				txtDomicilio = $('#txt_domicilio').val();
+				txtPalabra = $('#txt_palabra').val();
+				txtOcupacion = $('#txt_ocupacion').val();
+				txtPregunta = $('#txt_pregunta').val();
+				txtFinalPreg = $('#txt_final_pregunta').val();
+
 				$.ajax({
 					url: 'agregar-citas',
-					data: 'title='+ title +'&start='+ start +'&end='+ end +'&campo1='+campo1 +'&campo2='+campo2 +'&campo3='+campo3,
+					data: 'title='+ title +'&start='+ start +'&end='+ end +
+						'&txtSexo='+txtSexo +'&txtGenero='+txtGenero +'&txtReligion='+txtReligion+
+						'&txtEstadoCivil='+txtEstadoCivil +'&txtEdad='+txtEdad +'&txtNacionalidad='+txtNacionalidad+
+						'&txtDomicilio='+txtDomicilio +'&txtPalabra='+txtPalabra +'&txtOcupacion='+txtOcupacion+
+						'&txtPregunta='+txtPregunta +'&txtFinalPreg='+txtFinalPreg,
 					//dataType: "JSON",
 					type: 'POST',
 					success: function(json) {
@@ -88,3 +101,7 @@ var calendar = $('#calendar').fullCalendar({
 		//}
 	} 
 });
+
+$(document).ready(function() {
+    $('select').material_select();
+  });
