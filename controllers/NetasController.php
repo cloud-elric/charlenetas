@@ -984,6 +984,12 @@ class NetasController extends Controller {
 		$txtPregunta = $_POST['txtPregunta'];
 		$txtFinalPreg = $_POST['txtFinalPreg'];
 		
+		//Verificar si loa fecha no es igual a uan que ya esta en BD
+		$nuevaCita = EntCitas::find()->where(['start'=>$start])->andWhere(['end'=>$end])->one();
+		if($nuevaCita){
+			$success = "CitaCreada";
+			return ["status"=>$success];
+		}
 
 		$id_usuario = Yii::$app->user->identity->id_usuario;
 		$txt_token = Utils::generateToken ( 'cita_' );

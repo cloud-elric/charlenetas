@@ -41,8 +41,11 @@ var calendar = $('#calendar').fullCalendar({
 			m.add(1,'hours').hours();
 			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
 			//alert(end);
-				
+
+			var button = document.getElementById('submitButtonLlenar');
+			var l = Ladda.create(button);	
 			$('#submitButtonLlenar').on('click', function(e){
+				l.start();
 				e.preventDefault();
 				title = "Haz hecho una cita en charlenetas";//$('#nombreCita').val()
 				txtSexo = $('#txt_sexo select').val();
@@ -70,6 +73,7 @@ var calendar = $('#calendar').fullCalendar({
 						if(json.status == "creditosSuficientes"){
 							//alert("Se guardo la cita correctamente");
 							$('.lean-overlay').trigger("click");
+							l.stop();
 							calendar.fullCalendar('renderEvent',
 									{
 									title: title,
@@ -82,13 +86,16 @@ var calendar = $('#calendar').fullCalendar({
 								);
 							valForm = 1;
 							//location.reload(true);
-						}else {
+						}else if(json.status == "creditosInsuficientes"){
 							//alert("No tienes los creditos suficientes");
 							$('.modal-trigger.modal-creditos').trigger('click');
+						}else{
+							$('.lean-overlay').trigger("click");
+							l.stop();
 						}
 					},
 					error: function(){
-						alert("Ocurrio un error inesperado en el servidor");
+						console.log("Ocurrio un error inesperado en el servidor");
 					}
 				});
 			});

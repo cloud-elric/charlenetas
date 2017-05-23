@@ -107,8 +107,8 @@ use yii\helpers\Url;
 	 			<input type="text" id="txt_final_pregunta" name="txt_final_pregunta" value="<?= $formUser ? $formUser->txt_final_pregunta : '' ?>">
 				
 				<div class="modal-footer">
-					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat" id="submitButtonLlenar" >Aceptar</button>
-					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat" id="submitButtonCancelar" >Cancelar</button>
+					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat ladda-button" data-style="zoom-in" id="submitButtonLlenar" >Aceptar</button>
+					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat ladda-button" data-style="zoom-in" id="submitButtonCancelar" >Cancelar</button>
 				</div>
 			</form>
 	  	</div>
