@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use yii\widgets\ListView;
 ?>
 
 <head>
@@ -24,10 +25,32 @@ use yii\helpers\Url;
 
 	</style>
 </head>
-<script>var valForm = <?= $formUser?1:0 ?> </script>
-<?php include 'elementos/calendario.php'?>
+<?php include 'elementos/calendario.php' ?>
 
 <?= $this->render ('//layouts/header') ?>
+
+<ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header row"><i class="material-icons">view_list</i>Lista de citas</div>
+    
+	  <?= ListView::widget([
+      	  'dataProvider' => $dataProvider,
+		  'options' => [
+              'tag' => 'div',
+        	  'class' => 'collapsible-body',
+    	  ],
+		  'itemView' => function ($model, $key, $index, $widget) {
+        	 return $this->render('_list_citas',['model' => $model]);
+    	  }, 
+	  ]); ?>
+	  
+    </li>
+</ul>
+
+<input id="fecha" type="hidden" value="">
+<input id="hora1" type="hidden" value="">
+<input id="hora2" type="hidden" value="">
+<input id="creditos" type="hidden" value="">
 
 <!-- .crear-cita -->
 <div class="crear-cita js-crear-cita" data-id="<?= Yii::$app->user->identity->id_usuario?>">
@@ -38,12 +61,14 @@ use yii\helpers\Url;
 </div>
 <!-- end - .crear-cita -->
 
+<!-- .fixed-action-btn -->
+<div class="fixed-action-btn horizontal">
+	<div id="modalFinalizar" class="btn-floating more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in">
+		<span class="ladda-label">Finalizar</span>
+	</div>
+</div>
+<!-- end /.fixed-action-btn -->
 
-<?php //if($creditos->numero_creditos > 0){ ?>
-
-	<!-- <div id='calendar'></div>
-	<br/> -->
-	
 	<a class="modal-trigger modal-cita waves-effect waves-light btn" href="#modal1" style="display: none">Modal</a>
 	<!-- Modal Structure -->
   	<div id="modal1" class="modal">
@@ -121,6 +146,19 @@ use yii\helpers\Url;
       		<h4>No tienes los creditos suficientes</h4>
 	  	</div>
 	</div>
+
+	<a class="modal-trigger modal-finalizar waves-effect waves-light btn" href="#modal3" style="display: none">Modal</a>
+	<!-- Modal Structure -->
+  	<div id="modal3" class="modal">
+    	<div class="modal-content">
+      		<p>Estas apunto de agendar una cita.</p>
+			<p>Revisa tus datos.</p>
+	  	</div>
+		<div class="modal-footer">
+			<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat ladda-button" data-style="zoom-in" id="submitFinalizarCita" >Aceptar</button>
+			<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat ladda-button" data-style="zoom-in" >Cancelar</button>
+		</div>
+	</div>
 	
 	<?php 
 		$this->registerJsFile('@web/js/calendario.js',['depends' => [\app\assets\AppAsset::className()]]);
@@ -128,4 +166,4 @@ use yii\helpers\Url;
 
 <?php //}?>
 
-<?php include "elementos/tutorial.php"?>
+<?php include "elementos/tutorial.php" ?>

@@ -1,36 +1,81 @@
 //var basePath = 'http://localhost/charlenetas/web'; 
 var idUsuario = $('.js-crear-cita').data("id");
 console.log(idUsuario);
-var date = new Date();
-var d = date.getDate();
-var m = date.getMonth();
-var y = date.getFullYear();
+var date1 = new Date();
+var d = date1.getDate();
+var m = date1.getMonth();
+var y = date1.getFullYear();
 
 var calendar = $('#calendar').fullCalendar({
     // put your options and callbacks here
-	defaultView: 'agendaWeek',
+	defaultView: 'agendaDay',
+	//allDaySlot: false,
+    minTime: "08:00:00",
+    maxTime: "21:00:00",
+	slotDuration: "00:15:00",
 	eventLimit: true,
 	monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
     monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
     dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
     dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+	editable: false,
+	eventLimit: true, 
+	selectable: true,
+	eventOverlap: false,
+	selectHelper: true,
+	unselectAuto : false,
+	selectConstraint: 'disponible',
+    eventConstraint: 'disponible',
 	events: basePath + 'netas/anadir-citas',
 	eventRender: function(event, element, view) {
-        if(event.id_usuario != idUsuario) {
+       if(event.id_usuario != idUsuario && event.id_usuario != 0) {
             element.css('backgroundColor', '#6F6868');
             $(element).text('No disponible');
         }
+		if(event.id_usuario == 0){
+			event.overlap = true;
+			event.id = 'disponible';
+		}
         if(event.b_activo == 1 && event.id_usuario == idUsuario) {
 			element.css('backgroundColor', '#04B404');
 	    }
 	},
-	    
-	dayClick: function(date, jsEvent, view ){
-		//var view = $('#calendar').fullCalendar('getView');
-		//calendar.fullCalendar('gotoDate',date)
-		//calendar.fullCalendar('changeView','agendaDay')
-		//console.log(valForm);
-		//if(view.name == 'agendaDay'){
+	eventDrop: function(event, delta) {
+		start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
+		//alert(start);
+		end = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
+		m = moment(date1);
+		m.add(.25,'hours').hours();
+		end = moment(m).format('YYYY-MM-DD HH:mm:ss');
+		//alert(end);
+		$.ajax({
+			url: 'actualizar-citas',
+			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
+			type: 'POST',
+			success: function(json) {
+				//alert('OK');
+				console.log("actializar");
+				actualizarDatosCita(json.fecha, json.horaInicio, json.horaFin, json.restrarCred);
+			}
+		});
+	},
+	eventResize: function(event, delta) {
+		start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
+		end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD HH:mm:ss');
+		$.ajax({
+			url: 'actualizar-citas',
+			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
+			type: 'POST',
+			success: function(json) {
+				//alert('OK');
+				console.log("actializar");
+				actualizarDatosCita(json.fecha, json.horaInicio, json.horaFin, json.restrarCred);
+			}
+		});		 
+	},
+	select: function(date, jsEvent, view ){
+		if(date._d >= date1){
+			//console.log(date._d);
 			$('.modal-trigger.modal-cita').trigger('click');
 			//var title = prompt('Title:');
 			//if (title) {
@@ -38,10 +83,9 @@ var calendar = $('#calendar').fullCalendar({
 			//alert(start);
 			end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
 			m = moment(date);
-			m.add(1,'hours').hours();
+			m.add(.25,'hours').hours();
 			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
 			//alert(end);
-
 			var button = document.getElementById('submitButtonLlenar');
 			var l = Ladda.create(button);	
 			$('#submitButtonLlenar').on('click', function(e){
@@ -79,16 +123,31 @@ var calendar = $('#calendar').fullCalendar({
 									title: title,
 									start: start,
 									end: end,
-									id_usuario: idUsuario
+									id_usuario: idUsuario,
+									id: json.idCita,
+									overlap: true,
+									editable: true
 									//allDay: allDay
 									},
 								true // make the event 'stick'
 								);
-							valForm = 1;
+								//CAMBIAR VALOR DE INPUTS
+								actualizarDatosCita(json.fecha, json.horaInicio, json.horaFin, json.restrarCred);
+
+								$('#submitFinalizarCita').prepend("<input id='valorIdCita' type='hidden' value="+json.idCita+">");
+								$("#modalFinalizar").on('click', function(){
+									//$('.modal-trigger.modal-finalizar').trigger('click');
+									fecha = $('#fecha').val();
+									hora1 = $('#hora1').val();
+									hora2 = $('#hora2').val();
+									costo = $('#creditos').val();
+									alertDatosCita(fecha, hora1, hora2, costo);
+								});
 							//location.reload(true);
 						}else if(json.status == "creditosInsuficientes"){
 							//alert("No tienes los creditos suficientes");
 							$('.modal-trigger.modal-creditos').trigger('click');
+							l.stop();
 						}else{
 							$('.lean-overlay').trigger("click");
 							l.stop();
@@ -96,19 +155,67 @@ var calendar = $('#calendar').fullCalendar({
 					},
 					error: function(){
 						console.log("Ocurrio un error inesperado en el servidor");
+						l.stop();
 					}
 				});
+				l.stop();
 			});
 			
 			$('#submitButtonCancelar').on('click', function(e){
 				$('.lean-overlay').trigger("click");
-			});
-			
+			});	
 			calendar.fullCalendar('unselect');	
-		//}
-	} 
+		}else{
+			//alert("Fecha incorrecta");
+			swal("Fecha no disponoble");
+		}
+	}
 });
+
+function actualizarDatosCita(fecha, hora1, hora2, costo){
+	$('#fecha').val(fecha);
+	$('#hora1').val(hora1);
+	$('#hora2').val(hora2);
+	$('#creditos').val(costo);
+	console.log($('#creditos').val());
+}
+
+function alertDatosCita(fecha, hora1, hora2, costo){
+	swal({
+		title: "Estas a punto de agendar una cita",
+		text: "Revisa tus datos\nFecha: "+fecha+"\nHora: "+hora1+" a "+hora2+"\nCosto: "+costo+" creditos",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Si, agendar cita",
+		closeOnConfirm: false,
+		showLoaderOnConfirm: true,
+	},
+	function(){
+		var idCita = $('#valorIdCita').val();
+		var costo = $('#creditos').val();
+		//console.log("+++"+idCita);
+		$.ajax({
+			url: 'habilitar-cita',
+			data: 'idCita='+ idCita+"&costo="+costo,
+			type: 'POST',
+			success: function(resp){
+				if(resp.status == "creditosSuficientes"){
+					//console.log('*****SUCCESS*****');
+					setTimeout(function(){
+						swal("Correcto", "Tu cita ha sido agendada.", "success");
+					}, 3000);
+					location.reload(true);
+				}else if(resp.status == "creditosInsuficientes"){
+					//alert("No tienes los creditos suficientes");
+					//$('.modal-trigger.modal-creditos').trigger('click');
+					swal("Error", "No tienes los creditos suficientes", "error");
+				}
+			}
+		});
+	});
+}
 
 $(document).ready(function() {
     $('select').material_select();
-  });
+});
