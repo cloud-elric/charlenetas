@@ -22,7 +22,7 @@ use app\models\EntNotificaciones;
 		 	echo Html::a('Cerrar sesión', ['site/logout']);
 		 	echo Html::a('Citas', ['netas/crear-cita']);
 		?>
-			<p id="js_creditos_usuario">Total creditos: 0</p>	
+			
 		<?php
 		 }else{
 
@@ -32,7 +32,7 @@ use app\models\EntNotificaciones;
 		 	<?php 
 		 }
 		 ?>
-		 
+		 <a href="<?=Url::base()?>/pagos/seleccionar-producto" id="js_creditos_usuario">Total creditos: 0</a>	
 		 <!-- Notificaciones -->
 			<?php 
 				$notificaciones = new EntNotificaciones();

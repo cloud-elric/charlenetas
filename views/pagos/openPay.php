@@ -1,116 +1,356 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>NOMBRE TIENDA</title>
-<link href="pago.css" rel="stylesheet" type="text/css">
-</head>
+ 
+<?php
+use yii\helpers\Url;
+?>
 
-<body>
+<ul class="collapsible" data-collapsible="accordion">
+    <li>
+        <div class="collapsible-header"><i class="ion ion-ios-barcode"></i>Imprimir ticket</div>
+        <div class="collapsible-body">
+            <div>
+                <div class="btn-floating btn-large waves-effect waves-light green print-button js-print-button">
+                    <i class="ion ion-printer"></i>
+                </div>
+            </div>
+            <div class="tickert-print">
 
-<div class="whitepaper">
-	<div class="Header">
-	<div class="Logo_empresa">
-    	<img src="images/logo.png" alt="Logo">
-    </div>
-    <div class="Logo_paynet">
-    	<div>Servicio a pagar</div>
-    	<img src="images/paynet_logo.png" alt="Logo Paynet">
-    </div>
-    </div>
-    <div class="Data">
-    	<div class="Big_Bullet">
-        	<span></span>
+                <div class="whitepaper">
+                    <div class="header center-align">
+                        <div class="row">
+                            <div class="col m6 offset-m3">
+                                <img src="<?=Url::base()?>/webAssets/images/logo-charlenetas.png" alt="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row center-align">
+                        <div class="col m6">
+                            <img  src="<?=$charger->payment_method->barcode_url?>" alt="Código de Barras">
+                            <div><?=$charger->payment_method->reference?></div>
+                            <small>
+                                En caso de que el escáner no sea capaz de leer el código de barras, escribir la referencia tal como se muestra.
+                            </small>
+                        </div>
+                    
+                        <div class="col m6 center-align">
+                            <h4>Total a pagar</h4>
+                            <h3>$ <?=number_format($charger->amount)?>
+                                <small> MXN</small>
+                            </h3>
+                            <h3>más comisión</h3>
+                        </div>
+                    </div>
+                    
+
+                    <div class="row">
+                        <div class="col m12">
+                            <h3>Detalles de la compra</h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col m12">
+
+                            <div class="row">
+                                <div class="col m3 offset-m3 right-align ">
+                                    <span>
+                                        Descripción:
+                                    </span>
+                                </div>
+                                <div class="col m6">
+                                    <span>
+                                        <?=$charger->description?>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col m3 offset-m3 right-align ">
+                                    <span>
+                                        Fecha y hora:
+                                    </span>
+                                </div>
+                                <div class="col m6">
+                                    <span>
+                                        <?=$charger->creation_date?>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col m3 offset-m3 right-align ">
+                                    <span>
+                                        Monto a pagar:
+                                    </span>
+                                </div>
+                                <div class="col m6">
+                                    <span>
+                                        $ <?=number_format($charger->amount)?> MXN más comisión
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col m6">
+                            <h5>Como realizar el pago</h5>
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    1.- Acude a cualquier tienda afiliada
+                                </li>
+                                <li class="collection-item">
+                                    2.- Entrega al cajero el código de barras y menciona que 
+                                    realizarás un pago de servicio Paynet
+                                </li>
+                                <li class="collection-item">
+                                    3.- Realizar el pago en efectivo por $ <?=number_format($charger->amount)?> 
+                                    más comisión
+                                </li>
+                                <li class="collection-item">
+                                    4.- Conserva el ticket para cualquier aclaración
+                                </li>
+                            </ul>
+                            <div class="row">
+                                <div class="small">
+                                    <b>Si tienes dudas comunicate a NOMBRE TIENDA al teléfono TELEFONO TIENDA o al correo CORREO SOPORTE TIENDA</b>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col m6">
+                            <h5>Instrucciones para el cajero</h5>
+                            <ul class="collection">
+                                    <li class="collection-item">
+                                        1.- Ingresar al menú de Pago de Servicios
+                                    </li>
+                                    <li class="collection-item">
+                                        2.- Seleccionar Paynet
+                                    </li>
+                                    <li class="collection-item">
+                                        3.- Escanear el código de barras o ingresar el núm. de referencia
+                                    </li>
+                                    <li class="collection-item">
+                                        4.- Ingresa la cantidad total a pagar
+                                    </li>
+                                    <li class="collection-item">
+                                        5.- Cobrar al cliente el monto total más la comisión
+                                    </li>
+                                    <li class="collection-item">
+                                        6.- Confirmar la transacción y entregar el ticket al cliente
+                                    </li>
+                                </ul>
+                                <div class="row">
+                                    <div class="small">
+                                        <b>Para cualquier duda sobre como cobrar, por favor llamar al teléfono 
+                                        01 800 300 08 08 en un horario de 8am a 9pm de lunes a domingo</b>
+                                    </div>
+                                </div>   
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row center-align valign-wrapper footer-images">
+                        <div class="col m3"><img class="responsive-img" src="<?=Url::base()?>/images/openpay/7eleven.png" alt="7elven"></div>
+                        <div class="col m3"><img class="responsive-img" src="<?=Url::base()?>/images/openpay/extra.png" alt="7elven"></div>
+                        <div class="col m3"><img class="responsive-img" src="<?=Url::base()?>/images/openpay/farmacia_ahorro.png" alt="7elven"></div>
+                        <div class="col m3"><img class="responsive-img" src="<?=Url::base()?>/images/openpay/benavides.png" alt="7elven"></div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col m12 center-align">
+                            <small>
+                                ¿Quieres pagar en otras tiendas? <br> visita: www.openpay.mx/tiendas
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="row center-align">
+                        <img style="height:20px;" class="responsive-img" src="<?=Url::base()?>/images/openpay/powered_openpay.png" alt="Powered by Openpay">
+                    </div>
+                </div>
+            </div>
         </div>
-    	<div class="col1">
-        	<h3>Fecha límite de pago</h3>
-            <h4>30 de Noviembre 2014, a las 2:30 AM</h4>
-            <img width="300" src="images/codigo_barras.gif" alt="Código de Barras">
-        	<span>000020TRTJGWX6WVE2NF3R7FOW0260006</span>
-            <small>En caso de que el escáner no sea capaz de leer el código de barras, escribir la referencia tal como se muestra.</small>
+    </li>
+    <li>
+        <div class="collapsible-header"><i class="ion ion-card"></i>Pagar con tarjeta de crédito</div>
+        <div class="collapsible-body">
+            <form
+                action="<?=Url::base()?>/pagos/pagar-tarjeta-open-pay"
+                method="POST" id="payment-form">
+                <input type="hidden" name="token_id" id="token_id">
+                <div class="container-form-pago-tarjeta">
+
+                    <div class="row">
+                        <div class="col m4">
+                            <h5>
+                                Tarjetas de crédito
+                            </h5>
+                            <div class="tarjetas-credito">
+
+                            </div>
+                        </div>
+                        <div class="col m8">
+                            <h5>
+                                Tarjetas de débito
+                            </h5>
+                            <div class="tarjetas-debito">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col m6">
+                            <input value="Humberto Antonio" id="nombre-titular"
+                                    type="text"
+                                    autocomplete="off" data-openpay-card="holder_name">
+                            <label for="nombre-titular">Nombre del titular (Como aparece en tarjeta)</label>        
+                        </div>
+                        <div class="input-field col m6">
+                            <input value="<?=$ordenCompra->txt_order_number?>"
+                                    type="hidden" name="orderId"> 
+                            <input type="text" id="numero-tarjeta"
+                                    autocomplete="off" data-openpay-card="card_number"
+                                    maxlength="16" value="4111111111111111">
+                             <label for="numero-tarjeta">Número de tarjeta</label>        
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col m6">
+                            <label>
+                                Fecha de expiración
+                            </label>
+                            <div class="row">
+                                <div class="input-field col m6">
+                                     <input type="number" value="12" maxlength="2" min="0" max="12" type="text" placeholder="Mes"
+                                        data-openpay-card="expiration_month">
+                                </div>
+                                <div class="input-field col m6">
+                                    <input value="17" maxlength="2" type="number" min="17" max="99" placeholder="Año"
+                                        data-openpay-card="expiration_year">
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="col m6">
+                            <label for="codigo-seguridad">
+                               Código de seguridad
+                            </label>
+                            <div class="row">
+                                <div class="input-field col m6">
+                                     <input value="" id="codigo-seguridad" type="text" placeholder="3 dígitos"
+                                        autocomplete="off" data-openpay-card="cvv2">
+                                </div>
+                                <div class="col m6">
+                                    <div class="help-codigo-seguridad"></div>
+                                </div>
+                            </div>
+                        </div>    
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col m4">
+                            <div>
+                                <small>Transacciones realizadas vía:</small>
+                            </div>
+                            <div class="logo-open-pay">
+
+                            </div>
+                        </div>
+                        <div class="col m4">
+                            <div class="shield">
+
+                            </div>
+                            
+                            <small>
+                                Tus pagos se realizan de forma segura con encriptación de 256 bits
+                            </small>
+                            
+                        </div>
+                        <div class="col m4 center-align">
+                            <button id="pay-button" class="waves-effect waves-light btn  btn-large btn-pagar-tarjeta">
+                                Pagar
+                            </button>
+                        </div>
+                    </div>    
+
+
+                </div>
+            </form>
+        </div>
+    </li>
+
+  </ul>
+
+<script>
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+
+    $('.js-print-button').on('click', function(e){
+        e.preventDefault();
+
+        $('.tickert-print').printArea({
+            mode: 'iframe'
+        });
+    });
+
+    console.log('aqui');
+
+
+      OpenPay.setId('mgvepau0yawr74pc5p5x');
+         OpenPay.setApiKey('pk_a4208044e7e4429090c369eae2f2efb3');
+            
+            OpenPay.setSandboxMode(true);
+            //Se genera el id de dispositivo
+            var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
+            
+            $('#pay-button').on('click', function(event) {
+                event.preventDefault();
+                $("#pay-button").prop( "disabled", true);
+                OpenPay.token.extractFormAndCreate('payment-form', sucess_callbak, error_callbak);                
+            });
+
+            var sucess_callbak = function(response) {
+                console.log(response);
+              var token_id = response.data.id;
+              $('#token_id').val(token_id);
+              var forma = $('#payment-form');
+			
+			$.ajax({
+				url: forma.attr("action"),
+				data:forma.serialize(),
+				method:"POST",
+				success: function(response){
+
+					if(response=="success"){
+						//toastrSuccess("Pago realizado con exito");
+					}else{
+						//toastrError(response);
+						$("#pay-button").prop( "disabled", false);
+					}
+				},error:function(){
+
+					}
+			});
+              
+            };
+
+            var error_callbak = function(response) {
+                var desc = response.data.description != undefined ? response.data.description : response.message;
+                
+                //alert("ERROR [" + response.status + "] " + desc);
+                swal("Un momento", 'Open pay rechazó el pago por: '+desc, "warning")
+                $("#pay-button").prop("disabled", false);
+            };
+
         
-        </div>
-        <div class="col2">
-        	<h2>Total a pagar</h2>
-            <h1>$9,000<span>.00</span><small> MXN</small></h1>
-            <h2 class="S-margin">+8 pesos por comisión</h2>
-        </div>
-    </div>
-    <div class="DT-margin"></div>
-    <div class="Data">
-    	<div class="Big_Bullet">
-        	<span></span>
-        </div>
-    	<div class="col1">
-        	<h3>Detalles de la compra</h3>
-        </div>
-	</div>
-    <div class="Table-Data">
-    	<div class="table-row color1">
-        	<div>Descripción</div>
-            <span>Descripcion de la compra realizada</span>
-        </div>
-    	<div class="table-row color2">
-        	<div>Fecha y hora</div>
-            <span>30 de Noviembre de 2014 a las 4:00 A.M.</span>
-        </div>
-    	<div class="table-row color1">
-        	<div>Correo del cliente</div>
-            <span>nombre@dominio.com</span>
-        </div>
-    	<div class="table-row color2"  style="display:none">
-        	<div>&nbsp;</div>
-            <span>&nbsp;</span>
-        </div>
-    	<div class="table-row color1" style="display:none">
-        	<div>&nbsp;</div>
-            <span>&nbsp;</span>
-        </div>
-    </div>
-    <div class="DT-margin"></div>
-    <div>
-        <div class="Big_Bullet">
-        	<span></span>
-        </div>
-    	<div class="col1">
-        	<h3>Como realizar el pago</h3>
-            <ol>
-            	<li>Acude a cualquier tienda afiliada</li>
-                <li>Entrega al cajero el código de barras y menciona que realizarás un pago de servicio Paynet</li>
-                <li>Realizar el pago en efectivo por $ 260.00 MXN (más $8 pesos por comisión)</li>
-                <li>Conserva el ticket para cualquier aclaración</li>
-            </ol>
-            <small>Si tienes dudas comunicate a NOMBRE TIENDA al teléfono TELEFONO TIENDA o al correo CORREO SOPORTE TIENDA</small>
-        </div>
-    	<div class="col1">
-        	<h3>Instrucciones para el cajero</h3>
-            <ol>
-            	<li>Ingresar al menú de Pago de Servicios</li>
-                <li>Seleccionar Paynet</li>
-                <li>Escanear el código de barras o ingresar el núm. de referencia</li>
-                <li>Ingresa la cantidad total a pagar</li>
-                <li>Cobrar al cliente el monto total más la comisión de $8 pesos</li>
-                <li>Confirmar la transacción y entregar el ticket al cliente</li>
-            </ol>
-            <small>Para cualquier duda sobre como cobrar, por favor llamar al teléfono 01 800 300 08 08 en un horario de 8am a 9pm de lunes a domingo</small>
-        </div>    
-    </div>
-    
-    <div class="logos-tiendas">
-    	<div><img width="50" src="images/7eleven.png" alt="7elven"></div>
-        <div class="margen2"><img width="90" src="images/extra.png" alt="7elven"></div>
-        <div class="margen2"><img width="90" src="images/farmacia_ahorro.png" alt="7elven"></div>
-        <div class="mg3"><img width="150" src="images/benavides.png" alt="7elven"></div>
-        <div class="mg3"><small>¿Quieres pagar en otras tiendas? <br> visita: www.openpay.mx/tiendas</small></div>
-    </div>
-    <div class="Powered">
-    	<img src="images/powered_openpay.png" alt="Powered by Openpay" width="150">
-    </div>
-    
-    
-    
-    
-</div>
 
-</body>
-</html>
+
+  });
+</script>

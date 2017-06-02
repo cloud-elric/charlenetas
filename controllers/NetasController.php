@@ -27,7 +27,7 @@ use app\models\EntCitas;
 use app\models\EntUsuariosRespuestasSabiasQue;
 use app\models\EntUsuariosCreditos;
 use app\models\CatTipoCreditos;
-
+use app\models\Products;
 use app\models\ModUsuariosEntUsuarios;
 use app\models\EntAnuncios;
 use yii\db\Expression;
@@ -35,6 +35,7 @@ use app\models\VistaTotalCreditos;
 use app\models\CatTiposUsuarios;
 use app\models\EntUsuariosCreditosGastados;
 use app\models\EntClientes;
+use app\models\PayCatPaymentsTypes;
 
 
 class NetasController extends Controller {
@@ -205,6 +206,11 @@ class NetasController extends Controller {
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
 				'b_habilitado' => 1 
 		] )->orderBy ( 'txt_nombre' )->all ();
+
+
+		$productos = Products::find()->where(['b_enabled'=>1])->orderBy('num_order')->all();
+
+		$formasPago = PayCatPaymentsTypes::find()->where(['b_enabled'=>1])->all();
 		
 		// Pintar vista
 		return $this->render ( 'index', [ 
@@ -213,7 +219,9 @@ class NetasController extends Controller {
 				'listaAnuncios' => $listaAnuncios,
 				'token'=>$token,
 				'numRand' => $numRand,
-				'post'=>$post
+				'post'=>$post,
+				'productos'=>$productos,
+				'formasPago'=>$formasPago
 		] );
 	}
 	
@@ -1134,6 +1142,8 @@ class NetasController extends Controller {
 				'creditos' => $creditos->num_total_creditos
 			];
 		}
+
+		return ['creditos'=>-1];
 	}
 
 }
