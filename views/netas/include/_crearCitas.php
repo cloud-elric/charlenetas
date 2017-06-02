@@ -31,13 +31,13 @@ use yii\widgets\ListView;
 
 <ul class="collapsible" data-collapsible="accordion">
     <li>
-      <div class="collapsible-header row"><i class="material-icons">view_list</i>Lista de citas</div>
+      <div class="collapsible-header"><i class="material-icons">view_list</i>Lista de citas</div>
     
 	  <?= ListView::widget([
       	  'dataProvider' => $dataProvider,
 		  'options' => [
               'tag' => 'div',
-        	  'class' => 'collapsible-body',
+        	  'class' => 'collapsible-body row',
     	  ],
 		  'itemView' => function ($model, $key, $index, $widget) {
         	 return $this->render('_list_citas',['model' => $model]);
