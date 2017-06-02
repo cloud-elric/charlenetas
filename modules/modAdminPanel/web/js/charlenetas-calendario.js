@@ -25,12 +25,12 @@ var calendar = $('#calendar').fullCalendar({
 			//alert(start);
 			end = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
 			m = moment(date);
-			m.add(1,'hours').hours();
+			m.add(.25,'hours').hours();
 			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
 			//alert(end);
 			$.ajax({
 				url: 'actualizar-citas',
-				data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
+				data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id_cita ,
 				type: 'POST',
 				success: function(json) {
 					//alert('OK');
@@ -42,7 +42,7 @@ var calendar = $('#calendar').fullCalendar({
 			end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD HH:mm:ss');
 			$.ajax({
 				url: 'actualizar-citas',
-				data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
+				data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id_cita ,
 				type: 'POST',
 				success: function(json) {
 					//alert('OK');

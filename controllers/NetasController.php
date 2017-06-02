@@ -36,6 +36,10 @@ use app\models\CatTiposUsuarios;
 use app\models\EntUsuariosCreditosGastados;
 use app\models\EntClientes;
 use app\models\PayCatPaymentsTypes;
+use app\models\EntFormCita;
+use app\models\EntDisponibilidadesTiempo;
+use yii\data\ActiveDataProvider;
+
 
 
 class NetasController extends Controller {
@@ -935,14 +939,20 @@ class NetasController extends Controller {
 	 * crear cita para el usuario en sesión
 	 */
 	public function actionCrearCita() {
-		$cita = new EntCitas();
 		// id del usuario logueado
 		$idUsuario = Yii::$app->user->identity->id_usuario;
+		$cita = new EntCitas();
+		$formUser = EntFormCita::find()->where(['id_usuario'=>$idUsuario])->one();
+		$dataProvider = new ActiveDataProvider([
+            'query' => EntCitas::find()->where(['id_usuario' => $idUsuario])->andWhere(['b_habilitado'=>1])->orderBy('start DESC'),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+		
 		if ($cita->load ( Yii::$app->request->post () )) {
-			if($citaGuardada = $cita->guardarCitas($cita)){
-	
-				$notificaciones = new EntNotificaciones();
-					
+			if($citaGuardada = $cita->guardarCitas($cita)){	
+				$notificaciones = new EntNotificaciones();					
 				$notificaciones->guardarNotificacionCitas($citaGuardada, $notificaciones, $idUsuario);
 	
 				return 'success';
@@ -950,18 +960,18 @@ class NetasController extends Controller {
 				return 'error';
 			}
 		}
-	
+
 		return $this->render ( '//netas/include/_crearCitas', [
-				'cita' => $cita
-		] );
+			'cita' => $cita,
+			'formUser' => $formUser,
+			'dataProvider' => $dataProvider
+		]);
 	}
 	
 	/**
 	 * A�adir las citas al calendario
 	 */
 	public function actionAnadirCitas(){
-		
-
 		$entCitas = new EntCitas();
 		$ordenCitas = $entCitas->find()->where(['b_habilitado'=>1])->orderBy('id ASC')->asArray()->all();
 		
@@ -972,51 +982,113 @@ class NetasController extends Controller {
 	 * Agregar citas a la base de datos
 	 */
 	public function actionAgregarCitas() {
+		Yii::$app->response->format = Response::FORMAT_JSON;
+
 		$title = $_POST ['title'];
 		$start = $_POST ['start'];
 		$end = $_POST ['end'];
+
+		$txtSexo = $_POST['txtSexo'];
+		$txtGenero = $_POST['txtGenero'];
+		$txtReligion = $_POST['txtReligion'];
+		$txtEstadoCivil = $_POST['txtEstadoCivil'];
+		$txtEdad = $_POST['txtEdad'];
+		$txtNacionalidad = $_POST['txtNacionalidad'];
+		$txtDomicilio = $_POST['txtDomicilio'];
+		$txtPalabra = $_POST['txtPalabra'];
+		$txtOcupacion = $_POST['txtOcupacion'];
+		$txtPregunta = $_POST['txtPregunta'];
+		$txtFinalPreg = $_POST['txtFinalPreg'];
+		$idCita = 0;
+
+		//Creditos a restar 
+		$start1 = new \DateTime($start);
+		$end1 = new \DateTime($end);
+		$diferencia = date_diff($start1,$end1);
+		$diff = $diferencia->format('%i');
+		$restrarCred = ($diff / 15) * ConstantesWeb::REALIZAR_CITA;
+
+		//Cambiar formato fecha
+		$horaInicio = date_format($start1, 'g:i A');
+		$horaFin = date_format($end1, 'g:i A');
+		$fecha = date_format($start1, 'j-F-Y');
+
+		$mes = explode('-', $fecha);
+		$meses = array('January'=>'Enero', 'February' =>'Febrero', 'March'=>'Marzo', 'April'=>'Abril', 'May'=>'Mayo', 'June'=>'Junio', 'July'=>'Julio',
+		'August'=>'Agosto', 'September'=>'Septiembre', 'October'=>'Octubre', 'November'=>'Noviembre', 'December'=>'Diciembre');
+		foreach($meses as $key=>$value){
+			if($key == $mes[1]){
+				$fecha = $mes[0] . "-" . $value . "-" . $mes[2];
+			}
+		}
+
+		//Verificar si loa fecha no es igual a uan que ya esta en BD
+		$nuevaCita = EntCitas::find()->where(['>=','start', $start])->andWhere(['<=','end',$start])->orWhere(['>=','start', $end])->andWhere(['<=','end',$end])->andWhere(['b_habilitado'=>1])->all();
+		if($nuevaCita){
+			$success = "CitaCreada";
+			return ["status"=>$success];
+		}
+
 		$id_usuario = Yii::$app->user->identity->id_usuario;
 		$txt_token = Utils::generateToken ( 'cita_' );
 		Yii::$app->response->format = Response::FORMAT_JSON;
-		
-		//buscar los creditos del usuario, si tienen los sufucientes para hacer la cita.
-		//$creditosUsuarios = new EntUsuariosCreditos();
-		$tipoCredito = new CatTipoCreditos();
-		
-		$costo = $tipoCredito->find()->where(['nombre'=>'Cita'])->one();
-		//$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$id_usuario])->one();
-		
-		$vistaCreditos = new VistaTotalCreditos();
-		$vistaCredito = $vistaCreditos->find()->where(['id_usuario'=>$id_usuario])->one();
-	
-		if($vistaCredito->num_total_creditos >= $costo->costo){
 			
-			$entCitas = new EntCitas();
+		$entCitas = new EntCitas();
 		
-			$notificaciones = new EntNotificaciones ();
-			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $title, $txt_token, $id_usuario);
-			
-			$creditosGastados = new EntUsuariosCreditosGastados();
-			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $id_usuario, $costo->costo);
+		$entCitas->title = $title;
+		$entCitas->start = $start;
+		$entCitas->end = $end;
+		$entCitas->id_usuario = $id_usuario;
+		$entCitas->txt_token = $txt_token;
+		$entCitas->save();
 		
-			$entCitas->title = $title;
-			$entCitas->start = $start;
-			$entCitas->end = $end;
-			$entCitas->id_usuario = $id_usuario;
-			$entCitas->txt_token = $txt_token;
-			$entCitas->save();
-			
-			$admin = ModUsuariosEntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
-			$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$id_usuario])->one();
-			$this->enviarEmailAgregarCita($admin, $usuario);
-			
-			$success = "creditosSuficientes";
-			return ["status"=>$success];
+		$idCita = $entCitas->id_cita;
+
+		$cita = EntCitas::find()->where(['id_cita'=>$entCitas->id_cita])->one();
+		$cita->id = $cita->id_cita;
+		$cita->save();
+					
+		//Guardar formulario en la BD
+		$formularioUser = EntFormCita::find()->where(['id_usuario'=>$id_usuario])->one();
+		if($formularioUser){
+			$formularioUser->txt_sexo = $txtSexo;
+			$formularioUser->txt_genero = $txtGenero;
+			$formularioUser->txt_religion = $txtReligion;
+			$formularioUser->txt_estado_civil = $txtEstadoCivil;
+			$formularioUser->txt_edad = $txtEdad;
+			$formularioUser->txt_nacionalidad = $txtNacionalidad;
+			$formularioUser->txt_domicilio = $txtDomicilio;
+			$formularioUser->txt_palabra = $txtPalabra;
+			$formularioUser->txt_ocupacion = $txtOcupacion;
+			$formularioUser->txt_pregunta = $txtPregunta;
+			$formularioUser->txt_final_pregunta = $txtFinalPreg;
+			$formularioUser->save();
+		}else{
+			$formUser = new EntFormCita();
+			$formUser->id_usuario = $id_usuario;
+			$formUser->txt_sexo = $txtSexo;
+			$formUser->txt_genero = $txtGenero;
+			$formUser->txt_religion = $txtReligion;
+			$formUser->txt_estado_civil = $txtEstadoCivil;
+			$formUser->txt_edad = $txtEdad;
+			$formUser->txt_nacionalidad = $txtNacionalidad;
+			$formUser->txt_domicilio = $txtDomicilio;
+			$formUser->txt_palabra = $txtPalabra;
+			$formUser->txt_ocupacion = $txtOcupacion;
+			$formUser->txt_pregunta = $txtPregunta;
+			$formUser->txt_final_pregunta = $txtFinalPreg;
+			$formUser->save();
 		}
-		else{ 
-		 	$error = "creditosInsuficientes";
-			return ["status"=>$error] ;
-		}
+			
+		$success = "creditosSuficientes";
+		return [
+			"status" => $success,
+			"idCita" => $idCita,
+			'restrarCred' => $restrarCred,
+			'horaInicio' => $horaInicio,
+			'horaFin' => $horaFin,
+			'fecha' => $fecha
+		];
 	}
 	
 	public function actionPayPal(){
@@ -1146,4 +1218,93 @@ class NetasController extends Controller {
 		return ['creditos'=>-1];
 	}
 
+	/**
+     * Cambia la fecha y la hora de la cita al mover el evento en el calendario
+     */
+    public function actionActualizarCitas(){
+    	Yii::$app->response->format = Response::FORMAT_JSON;
+    	$id=$_POST['id'];
+    	$title=$_POST['title'];
+    	$start=$_POST['start'];
+    	$end=$_POST['end'];
+		
+    	$entCitas = new EntCitas();
+    	$actualizar = $entCitas->find()->where(['id_cita'=>$id])->one();
+    	
+    	$actualizar->title = $title;
+    	$actualizar->start = $start;
+    	$actualizar->end = $end;
+    	$actualizar->save();
+
+		//Creditos a restar 
+		$start1 = new \DateTime($start);
+		$end1 = new \DateTime($end);
+		
+		$start2 = strtotime($start);
+		$end2 = strtotime($end);
+		$restrarCred = round(abs($start2 - $end2))/60;
+		$restrarCred = ($restrarCred / 15) * ConstantesWeb::REALIZAR_CITA;
+
+		//Cambiar formato fecha
+		$horaInicio = date_format($start1, 'g:i A');
+		$horaFin = date_format($end1, 'g:i A');
+		$fecha = date_format($start1, 'j-F-Y');
+
+		$mes = explode('-', $fecha);
+		$meses = array('January'=>'Enero', 'February' =>'Febrero', 'March'=>'Marzo', 'April'=>'Abril', 'May'=>'Mayo', 'June'=>'Junio', 'July'=>'Julio',
+		'August'=>'Agosto', 'September'=>'Septiembre', 'October'=>'Octubre', 'November'=>'Noviembre', 'December'=>'Diciembre');
+		foreach($meses as $key=>$value){
+			if($key == $mes[1]){
+				$fecha = $mes[0] . "-" . $value . "-" . $mes[2];
+			}
+		}
+
+		$success = "success";
+		return [
+			'status' => $success,
+			'restrarCred' => $restrarCred,
+			'horaInicio' => $horaInicio,
+			'horaFin' => $horaFin,
+			'fecha' => $fecha
+		];
+    }
+
+	public function actionHabilitarCita(){
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		$idCita = $_POST['idCita'];
+		$costo = $_POST['costo'];
+		$cita = EntCitas::find()->where(['id_cita'=>$idCita])->one();
+		
+		//buscar los creditos del usuario, si tienen los sufucientes para hacer la cita.
+		$creditosUsuarios = new EntUsuariosCreditos();
+		//$tipoCredito = new CatTipoCreditos();
+		
+		//$costo = $tipoCredito->find()->where(['nombre'=>'Cita'])->one();
+		$creditos = $creditosUsuarios->find()->where(['id_usuario'=>$cita->id_usuario])->one();
+		
+		$vistaCreditos = new VistaTotalCreditos();
+		$vistaCredito = $vistaCreditos->find()->where(['id_usuario'=>$cita->id_usuario])->one();
+	
+		if($vistaCredito->num_total_creditos >= $costo){
+			$notificaciones = new EntNotificaciones ();
+			$notificacion = $notificaciones->guardarNotificacionCitas ( $notificaciones, $cita->title, $cita->txt_token, $cita->id_usuario);
+			
+			$creditosGastados = new EntUsuariosCreditosGastados();
+			$gastos = $creditosGastados->guardarCreditosGastados($creditosGastados, $cita->id_usuario, $costo);
+
+			$cita->b_habilitado = 1;
+			$cita->save();
+
+			$admin = ModUsuariosEntUsuarios::find()->where(['id_tipo_usuario'=>2])->one();
+			$usuario = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$cita->id_usuario])->one();
+			$this->enviarEmailAgregarCita($admin, $usuario);
+
+			$success = "creditosSuficientes";
+			return ["status" => $success];
+		}
+		else{ 
+		 	$error = "creditosInsuficientes";
+			return ["status"=>$error] ;
+		}
+	}
 }
