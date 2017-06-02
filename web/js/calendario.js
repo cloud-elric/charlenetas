@@ -41,6 +41,9 @@ var calendar = $('#calendar').fullCalendar({
 			element.css('backgroundColor', '#04B404');
 			event.overlap = false;
 	    }
+		if(event.id != 1){
+			event.overlap = false;
+		}
 	},
 	eventDrop: function(event, delta) {
 		start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
@@ -51,7 +54,7 @@ var calendar = $('#calendar').fullCalendar({
 		//alert(end);
 		$.ajax({
 			url: 'actualizar-citas',
-			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
+			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id_cita ,
 			type: 'POST',
 			success: function(json) {
 				//alert('OK');
@@ -65,7 +68,7 @@ var calendar = $('#calendar').fullCalendar({
 		end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD HH:mm:ss');
 		$.ajax({
 			url: 'actualizar-citas',
-			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
+			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id_cita ,
 			type: 'POST',
 			success: function(json) {
 				//alert('OK');
@@ -121,11 +124,12 @@ var calendar = $('#calendar').fullCalendar({
 							l.stop();
 							calendar.fullCalendar('renderEvent',
 									{
+									id_cita: json.idCita,
 									title: title,
 									start: start,
 									end: end,
 									id_usuario: idUsuario,
-									id: json.idCita,
+									id: 1,
 									overlap: true,
 									editable: true,
 									//allDay: allDay
