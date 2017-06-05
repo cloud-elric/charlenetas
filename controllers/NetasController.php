@@ -1044,9 +1044,9 @@ class NetasController extends Controller {
 		
 		$idCita = $entCitas->id_cita;
 
-		$cita = EntCitas::find()->where(['id_cita'=>$entCitas->id_cita])->one();
+		/*$cita = EntCitas::find()->where(['id_cita'=>$entCitas->id_cita])->one();
 		$cita->id = $cita->id_cita;
-		$cita->save();
+		$cita->save();*/
 					
 		//Guardar formulario en la BD
 		$formularioUser = EntFormCita::find()->where(['id_usuario'=>$id_usuario])->one();
@@ -1273,7 +1273,10 @@ class NetasController extends Controller {
 		Yii::$app->response->format = Response::FORMAT_JSON;
 		$idCita = $_POST['idCita'];
 		$costo = $_POST['costo'];
+		
 		$cita = EntCitas::find()->where(['id_cita'=>$idCita])->one();
+		$cita->id = $cita->id_cita;
+		$cita->save();
 		
 		//buscar los creditos del usuario, si tienen los sufucientes para hacer la cita.
 		$creditosUsuarios = new EntUsuariosCreditos();

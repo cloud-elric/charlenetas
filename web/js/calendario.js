@@ -31,6 +31,7 @@ var calendar = $('#calendar').fullCalendar({
        if(event.id_usuario != idUsuario && event.id_usuario != 0) {
             element.css('backgroundColor', '#6F6868');
             $(element).text('No disponible');
+			event.overlap = false;
         }
 		if(event.id_usuario == 0){
 			event.overlap = true;
@@ -38,23 +39,26 @@ var calendar = $('#calendar').fullCalendar({
 		}
         if(event.b_activo == 1 && event.id_usuario == idUsuario) {
 			element.css('backgroundColor', '#04B404');
+			event.overlap = false;
 	    }
+		if(event.id != 1){
+			event.overlap = false;
+		}
 	},
 	eventDrop: function(event, delta) {
 		start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
-		//alert(start);
-		end = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
-		m = moment(date1);
+		end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD HH:mm:ss');
+		/*m = moment(date1);
 		m.add(.25,'hours').hours();
-		end = moment(m).format('YYYY-MM-DD HH:mm:ss');
+		end = moment(m).format('YYYY-MM-DD HH:mm:ss');*/
 		//alert(end);
 		$.ajax({
 			url: 'actualizar-citas',
-			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
+			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id_cita ,
 			type: 'POST',
 			success: function(json) {
 				//alert('OK');
-				console.log("actializar");
+				console.log("actializar1");
 				actualizarDatosCita(json.fecha, json.horaInicio, json.horaFin, json.restrarCred);
 			}
 		});
@@ -64,7 +68,7 @@ var calendar = $('#calendar').fullCalendar({
 		end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD HH:mm:ss');
 		$.ajax({
 			url: 'actualizar-citas',
-			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
+			data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id_cita ,
 			type: 'POST',
 			success: function(json) {
 				//alert('OK');
@@ -120,13 +124,14 @@ var calendar = $('#calendar').fullCalendar({
 							l.stop();
 							calendar.fullCalendar('renderEvent',
 									{
+									id_cita: json.idCita,
 									title: title,
 									start: start,
 									end: end,
 									id_usuario: idUsuario,
-									id: json.idCita,
+									id: 1,
 									overlap: true,
-									editable: true
+									editable: true,
 									//allDay: allDay
 									},
 								true // make the event 'stick'
@@ -202,9 +207,9 @@ function alertDatosCita(fecha, hora1, hora2, costo){
 			success: function(resp){
 				if(resp.status == "creditosSuficientes"){
 					//console.log('*****SUCCESS*****');
-					setTimeout(function(){
+					//setTimeout(function(){
 						swal("Correcto", "Tu cita ha sido agendada.", "success");
-					}, 3000);
+					//}, 3000);
 					location.reload(true);
 				}else if(resp.status == "creditosInsuficientes"){
 					//alert("No tienes los creditos suficientes");
