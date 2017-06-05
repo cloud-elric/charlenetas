@@ -15,6 +15,7 @@ use app\models\Products;
 use app\models\PayCatPaymentsTypes;
 use app\models\PayOrdenesCompras;
 use yii\web\BadRequestHttpException;
+use app\models\PayPaymentsRecibed;
 
 class PagosController extends Controller
 {
@@ -205,14 +206,116 @@ class PagosController extends Controller
 				break;
 		}
 	}
+
+    // $userCreditos = new EntUsuariosCreditos();
+	// 		$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
+
+    /**
+	 * Guarda registro del pago
+	 *
+	 * @param unknown $json        	
+	 * @param unknown $data        	
+	 */
+	private function processPaymentOP($json, $data) {
+		$transaction = $json ['transaction'];
+		
+		$txn_id = $transaction ['id'];
+		$payment_amount = $transaction ['amount'];
+		$payment_currency = "NOT DEFINED";
+		$payment_status = $transaction ['status'];
+		$quantity = 1;
+		$mc_gross = $transaction ['amount'];
+		$order_id = $transaction ['order_id'];
+		
+		$ordenCompra = PayOrdenesCompras::find()->where(['txt_order_number'=>$order_id,'b_pagado'=>0])->one();
+		
+		if(empty($ordenCompra)){
+			$this->crearLog ('OpenPayError', "El order ID no existe o ya esta marcado como completo :" . $order_id );
+			return;
+		}
+			
+		// Carga la orden
+		$item_number = $ordenCompra->txt_order_number;
+		$custom = $ordenCompra->id_usuario;
+		$item_name = $ordenCompra->txt_description;
+		
+		$this->crearLog ('OpenPayUser'.$ordenCompra->id_usuario, "------------- PAGO RECIBIDO de transacción :$txn_id -----------\n\r" );
+		
+		// Solo genera el log cambiar al de yii
+		if (true) {
+			
+			$this->crearLog ('OpenPayUser'.$ordenCompra->id_usuario, 
+                                "Item name:" . $item_name . "\n\r" . 
+                                "Item number :" . $item_number . "\n\r" . 
+                                "quantity :" . $quantity . "\n\r" . 
+                                "Payment Status :" . $payment_status . "\n\r" . 
+                                "Payment amount :" . $payment_amount . "\n\r" . 
+                                "Txn Id :" . $txn_id . "\n\r" . 
+                                "custom :" . $custom . "\n\r" . 
+                                "mc gross :" . $mc_gross . "\n\r" );
+		}
+		
+		// VALIDA QUE LA TRANSACCION NO SE ENCUIENTRE REGISTRADA EN LA BASE DE DATOS PREVIAMENTE
+        $pagoRecibed = PayPaymentsRecibed::find()->where(['txt_transaccion'=>$txn_id])->one();
+
+		
+		if (! empty ( $pagoRecibed )) {
+			$this->crearLog ('OpenPayUser'.$ordenCompra->id_usuario, "TRANSACCION REPETIDA: $txn_id \n\r" );
+			return;
+		}
+		
+		// Verifica el precio vs el producto
+		if (( double ) $ordenCompra->num_total != ( double ) $mc_gross) {
+			$this->crearLog ('OpenPayUser'.$ordenCompra->id_usuario, "PRODUCTO Y MONTO INCORRECTO: id_product=$item_number AND num_price=$mc_gross\n\r" );
+			return;
+		}
+		
+		// Verifica que la cantidad de productos adquiridos sean 1
+		if ($quantity != 1) {
+			$this->crearLog ('OpenPayUser'.$ordenCompra->id_usuario, "CANTIDAD DE PRODUCTOS INCORRECTO: quantity=$quantity\n\r" );
+		}
+		
+		$pagoRecibido = new PayPaymentsRecibed ();
+		$pagoRecibido->id_usuario = $ordenCompra->id_usuario;
+		$pagoRecibido->id_tipo_pago = 2;
+		$pagoRecibido->txt_transaccion_local = 'Local';
+		$pagoRecibido->txt_notas = 'Notas';
+		$pagoRecibido->txt_estatus = $payment_status;
+		$pagoRecibido->txt_transaccion = $txn_id;
+		$pagoRecibido->txt_cadena_comprador = $data;
+		$pagoRecibido->txt_monto_pago = $mc_gross;
+		$pagoRecibido->id_orden_compra = $ordenCompra->id_orden_compra;
+		
+		$transaction = Yii::$app->db->beginTransaction();
+		$error = false;
+		try {
+			if ($pagoRecibido->save ()) {
+				
+			} else {
+				$error = true;
+				$this->crearLog ('OpenPayUser'.$ordenCompra->id_usuario, "Error al guardar el pago " . json_encode ( $pagoRecibido->errors) );
+			}
+			if ($error) {
+				$transaction->rollback ();
+				return;
+			} else {
+				$transaction->commit ();
+			}
+		} catch ( ErrorException $e ) {
+			$this->crearLog ('OpenPayUser'.$ordenCompra->id_usuario, "Ocurrio un problema al guardar la información=print_r($e)\n\r" );
+			$transaction->rollback ();
+		}
+		
+		$this->crearLog ('OpenPayUser'.$ordenCompra->id_usuario, "------------------- PAGO CORRECTO ---------------------\n\r" );
+	}
     
 
     public function crearLog($nombreArchivo,$message){
         
         $basePath = Yii::getAlias('@app'); 
-        $fichero = $basePath.'/logsPagos/logexameple.log';
+        $fichero = $basePath.'/logsPagos/'.$nombreArchivo.'.log';
 
-        $persona =  Utils::getFechaActual().$message."\n";
+        $persona =  Utils::getFechaActual().'\n'.$message."\n\n";
         
         $fp = fopen($fichero,"a");
         fwrite($fp,$persona);

@@ -329,6 +329,7 @@ $(document).ready(function(){
 				success: function(response){
 
 					if(response=="success"){
+                        $("#pay-button").prop("disabled", false);
 						//toastrSuccess("Pago realizado con exito");
 					}else{
 						//toastrError(response);

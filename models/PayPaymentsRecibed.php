@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\modules\ModUsuarios\models\EntUsuarios;
 
 /**
  * This is the model class for table "2gom_pay_payments_recibed".
@@ -24,9 +25,9 @@ use Yii;
  * @property string $verify_sign
  * @property string $fch_pago
  *
- * @property 2gomPayCatPaymentsTypes $idTipoPago
- * @property 2gomPayOrdenesCompras $idOrdenCompra
- * @property ModUsuariosEntUsuarios $idUsuario
+ * @property PayCatPaymentsTypes $idTipoPago
+ * @property PayOrdenesCompras $idOrdenCompra
+ * @property EntUsuarios $idUsuario
  */
 class PayPaymentsRecibed extends \yii\db\ActiveRecord
 {
@@ -52,10 +53,10 @@ class PayPaymentsRecibed extends \yii\db\ActiveRecord
             [['txt_notas', 'txt_estatus', 'txt_transaccion', 'txt_tipo_transaccion', 'verify_sign'], 'string', 'max' => 100],
             [['txt_cadena_pago'], 'string', 'max' => 2000],
             [['txt_cadena_producto'], 'string', 'max' => 1000],
-            [['txt_monto_pago'], 'string', 'max' => 10],
-            [['id_tipo_pago'], 'exist', 'skipOnError' => true, 'targetClass' => 2gomPayCatPaymentsTypes::className(), 'targetAttribute' => ['id_tipo_pago' => 'id_payment_type']],
-            [['id_orden_compra'], 'exist', 'skipOnError' => true, 'targetClass' => 2gomPayOrdenesCompras::className(), 'targetAttribute' => ['id_orden_compra' => 'id_orden_compra']],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => ModUsuariosEntUsuarios::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
+            
+            [['id_tipo_pago'], 'exist', 'skipOnError' => true, 'targetClass' => PayCatPaymentsTypes::className(), 'targetAttribute' => ['id_tipo_pago' => 'id_payment_type']],
+            [['id_orden_compra'], 'exist', 'skipOnError' => true, 'targetClass' => PayOrdenesCompras::className(), 'targetAttribute' => ['id_orden_compra' => 'id_orden_compra']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => EntUsuarios::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
         ];
     }
 
@@ -89,7 +90,7 @@ class PayPaymentsRecibed extends \yii\db\ActiveRecord
      */
     public function getIdTipoPago()
     {
-        return $this->hasOne(2gomPayCatPaymentsTypes::className(), ['id_payment_type' => 'id_tipo_pago']);
+        return $this->hasOne(PayCatPaymentsTypes::className(), ['id_payment_type' => 'id_tipo_pago']);
     }
 
     /**
@@ -97,7 +98,7 @@ class PayPaymentsRecibed extends \yii\db\ActiveRecord
      */
     public function getIdOrdenCompra()
     {
-        return $this->hasOne(2gomPayOrdenesCompras::className(), ['id_orden_compra' => 'id_orden_compra']);
+        return $this->hasOne(PayOrdenesCompras::className(), ['id_orden_compra' => 'id_orden_compra']);
     }
 
     /**
@@ -105,6 +106,6 @@ class PayPaymentsRecibed extends \yii\db\ActiveRecord
      */
     public function getIdUsuario()
     {
-        return $this->hasOne(ModUsuariosEntUsuarios::className(), ['id_usuario' => 'id_usuario']);
+        return $this->hasOne(EntUsuarios::className(), ['id_usuario' => 'id_usuario']);
     }
 }
