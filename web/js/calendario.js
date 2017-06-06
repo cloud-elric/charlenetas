@@ -98,6 +98,7 @@ var calendar = $('#calendar').fullCalendar({
 			var l = Ladda.create(button);	
 			$('#submitButtonLlenar').on('click', function(e){
 				l.start();
+				$("#div_nuevo").show();
 				e.preventDefault();
 				title = "Haz hecho una cita en charlenetas";//$('#nombreCita').val()
 				txtSexo = $('#txt_sexo select').val();
@@ -114,6 +115,7 @@ var calendar = $('#calendar').fullCalendar({
 
 				$.ajax({
 					url: 'agregar-citas',
+
 					data: 'title='+ title +'&start='+ start +'&end='+ end +
 						'&txtSexo='+txtSexo +'&txtGenero='+txtGenero +'&txtReligion='+txtReligion+
 						'&txtEstadoCivil='+txtEstadoCivil +'&txtEdad='+txtEdad +'&txtNacionalidad='+txtNacionalidad+
@@ -124,8 +126,7 @@ var calendar = $('#calendar').fullCalendar({
 					success: function(json) {
 						if(json.status == "creditosSuficientes"){
 							//alert("Se guardo la cita correctamente");
-							$('.lean-overlay').trigger("click");
-							l.stop();
+							
 							calendar.fullCalendar('renderEvent',
 									{
 									id_cita: json.idCita,
@@ -140,11 +141,12 @@ var calendar = $('#calendar').fullCalendar({
 									},
 								true // make the event 'stick'
 								);
+
 								$('#js_btn_fin').data("id", "1");
 								console.log($('#js_btn_fin').data("id"));
 								//CAMBIAR VALOR DE INPUTS
 								actualizarDatosCita(json.fecha, json.horaInicio, json.horaFin, json.restrarCred);
-
+								
 								$('#submitFinalizarCita').prepend("<input id='valorIdCita' type='hidden' value="+json.idCita+">");
 								$("#modalFinalizar").on('click', function(){
 									//$('.modal-trigger.modal-finalizar').trigger('click');
@@ -154,6 +156,9 @@ var calendar = $('#calendar').fullCalendar({
 									costo = $('#creditos').val();
 									alertDatosCita(fecha, hora1, hora2, costo);
 								});
+								l.stop();
+								$("#div_nuevo").hide();
+								$('.lean-overlay').trigger("click");
 							//location.reload(true);
 						}else if(json.status == "creditosInsuficientes"){
 							//alert("No tienes los creditos suficientes");

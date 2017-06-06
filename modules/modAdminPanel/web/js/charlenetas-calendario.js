@@ -6,8 +6,14 @@ var y = date.getFullYear();
 var idUsuario = $('.js-calendario').data('id');
 	
 var calendar = $('#calendar').fullCalendar({
-		minTime: "09:00:00",
-        maxTime: "20:00:00",
+		header: {
+			left: 'title',
+			center: '',
+			right: ''
+		},
+		minTime: "08:00:00",
+    	maxTime: "21:00:00",
+		slotDuration: "00:15:00",
 		allDaySlot: false,
 		defaultView: 'agendaWeek',
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
@@ -20,12 +26,25 @@ var calendar = $('#calendar').fullCalendar({
 		selectable: true,
 		eventOverlap: false,
 		selectHelper: true,
+		eventRender: function(event, element, view) {
+			if(event.id_usuario == 0){
+				event.overlap = true;
+				event.title = 'Disponible';
+				event.rendering = '';
+				event.constraint = '';
+			}else{
+				element.css('backgroundColor', '#6F6868');
+				$(element).text('No disponible');
+				event.overlap = false;
+				event.editable = true;
+			}
+		},
 		eventDrop: function(event, delta) {
 			start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
 			//alert(start);
-			end = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
+			end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD HH:mm:ss');
 			m = moment(date);
-			m.add(.25,'hours').hours();
+			//m.add(.25,'hours').hours();
 			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
 			//alert(end);
 			$.ajax({
@@ -54,55 +73,89 @@ var calendar = $('#calendar').fullCalendar({
 //			var view = $('#calendar').fullCalendar('getView');
 //			calendar.fullCalendar('gotoDate',date)
 //			calendar.fullCalendar('changeView','agendaDay')	
-		start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
-				end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
-				m = moment(date);
-				m.add(1,'hours').hours();
-				end = moment(m).format('YYYY-MM-DD HH:mm:ss');
-        calendar.fullCalendar('renderEvent', { title: '', start: start, end:end, allDay: false }, true );
+			/*start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+			end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
+			m = moment(date);
+			m.add(.25,'hours').hours();
+			end = moment(m).format('YYYY-MM-DD HH:mm:ss');*/
+			//calendar.fullCalendar('renderEvent', { title: '', start: start, end:end, allDay: false }, true );
 
-			if(view.name == 'agendaDay'){
+			//if(view.name == 'agendaDay'){
 
 //			
 //			if(view.name == 'agendaDay'){
 
 				//$('.modal-trigger').leanModal();
-				$('.modal-trigger.js-crear').trigger('click');
+				//$('.modal-trigger.js-crear').trigger('click');
 				//var title = prompt("Evento:");
 				//if (title) {
 				start = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
 				end = $.fullCalendar.moment(date).format('YYYY-MM-DD HH:mm:ss');
 				m = moment(date);
-				m.add(1,'hours').hours();
+				m.add(.25,'hours').hours();
 				end = moment(m).format('YYYY-MM-DD HH:mm:ss');
 				
-				$('#submitButton').on('click', function(e){
-					e.preventDefault();
+				//$('#submitButton').on('click', function(e){
+				//	e.preventDefault();
 					//title = $('#nombreCita').val()
-					title = "Un charlenauta realizó una cita"
+					title = "Disponible"
 					$.ajax({
 						url: 'agregar-citas',
 						data: 'title='+ title+'&start='+ start +'&end='+ end ,
 						type: 'POST',
 						success: function(json) {
 							//alert('OK');
-							$('.lean-overlay').trigger("click");
+							//$('.lean-overlay').trigger("click");
 							calendar.fullCalendar('renderEvent',
 							{
 								//title: title,
+								id_cita: json.idCita,
+								title: title,
 								start: start,
 								end: end,
+								overlap: true,
+								editable: true,
 							},
 							true
 							);
+
+							$("#modalFinalizar").on('click', function(){
+								//$('.modal-trigger.modal-finalizar').trigger('click');
+								//alertDatosCita(fecha, hora1, hora2, costo);
+							});
 						}
 					});
-				});
+				//});
 				calendar.fullCalendar('unselect');	
-			}
+			//}
 		},
 		
 	});
+
+function alertDatosCita(fecha, hora1, hora2, costo){
+	swal({
+		title: "Estas segura de ese horario",
+		text: "Rivisa bien los datos",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Si, agendar horario",
+		closeOnConfirm: false,
+		showLoaderOnConfirm: true,
+	},
+	function(){
+		//console.log("+++"+idCita);
+		$.ajax({
+			url: 'habilitar-cita',
+			data: 'idCita='+ idCita+"&costo="+costo,
+			type: 'POST',
+			success: function(resp){
+				swal("Correcto", "Tu cita ha sido agendada.", "success");
+				location.reload(true);
+			}
+		});
+	});
+}
 
 $(document).ready(function(){
 	$('.modal-trigger').leanModal();	

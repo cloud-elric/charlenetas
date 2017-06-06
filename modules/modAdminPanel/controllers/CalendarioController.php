@@ -106,7 +106,7 @@ class CalendarioController extends Controller
     	$end=$_POST['end'];
     	
     	$entCitas = new EntCitas();
-    	$actualizar = $entCitas->find()->where(['id'=>$id])->one();
+    	$actualizar = $entCitas->find()->where(['id_cita'=>$id])->one();
     	
     	$actualizar->title = $title;
     	$actualizar->start = $start;
@@ -118,22 +118,33 @@ class CalendarioController extends Controller
      * Agregar citas a la base de datos
      */
     public function actionAgregarCitas(){
+		Yii::$app->response->format = Response::FORMAT_JSON;
     	
     	$title=$_POST['title'];
     	$start=$_POST['start'];
     	$end=$_POST['end'];
-    	$id_usuario = Yii::$app->user->identity->id_usuario;
+    	$id_usuario = 0;//Yii::$app->user->identity->id_usuario;
     	$txt_token = Utils::generateToken ( 'cita_' );
     	
     	$entCitas = new EntCitas();
     	
+		$entCitas->id = "disponible";
     	$entCitas->title = $title;
     	$entCitas->start = $start;
     	$entCitas->end = $end;
     	$entCitas->id_usuario = $id_usuario;
     	$entCitas->txt_token = $txt_token;
+		$entCitas->rendering = "inverse-background";
+		$entCitas->constraint = "disponible";
+		$entCitas->overlap = 1;
+		$entCitas->b_habilitado = 1;
     	
     	$entCitas->save();
+		$idCita = $entCitas->id_cita;
+
+		return [
+			"idCita" => $idCita,
+		];
     	//print_r($entCitas);
     }
     
