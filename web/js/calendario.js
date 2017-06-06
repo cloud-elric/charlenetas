@@ -28,6 +28,10 @@ var calendar = $('#calendar').fullCalendar({
     eventConstraint: 'disponible',
 	events: basePath + 'netas/anadir-citas',
 	eventRender: function(event, element, view) {
+		if($('#js_btn_fin').data('id') == 1 && !event.id){
+			console.log(event.id);
+			return false;
+		}
        if(event.id_usuario != idUsuario && event.id_usuario != 0) {
             element.css('backgroundColor', '#6F6868');
             $(element).text('No disponible');
@@ -78,7 +82,7 @@ var calendar = $('#calendar').fullCalendar({
 		});		 
 	},
 	select: function(date, jsEvent, view ){
-		if(date._d >= date1){
+		if(date._d >= date1 && $('#js_btn_fin').data('id') == 0){
 			//console.log(date._d);
 			$('.modal-trigger.modal-cita').trigger('click');
 			//var title = prompt('Title:');
@@ -136,6 +140,8 @@ var calendar = $('#calendar').fullCalendar({
 									},
 								true // make the event 'stick'
 								);
+								$('#js_btn_fin').data("id", "1");
+								console.log($('#js_btn_fin').data("id"));
 								//CAMBIAR VALOR DE INPUTS
 								actualizarDatosCita(json.fecha, json.horaInicio, json.horaFin, json.restrarCred);
 
@@ -170,6 +176,8 @@ var calendar = $('#calendar').fullCalendar({
 				$('.lean-overlay').trigger("click");
 			});	
 			calendar.fullCalendar('unselect');	
+		}else if($('#js_btn_fin').data('id') == 1){
+			swal("Presionar el boton de finalizar para agendar la cita");
 		}else{
 			//alert("Fecha incorrecta");
 			swal("Fecha no disponoble");

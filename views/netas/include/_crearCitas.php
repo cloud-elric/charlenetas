@@ -63,7 +63,7 @@ use yii\widgets\ListView;
 <!-- end - .crear-cita -->
 
 <!-- .fixed-action-btn -->
-<div class="fixed-action-btn horizontal">
+<div id="js_btn_fin" class="fixed-action-btn horizontal" data-id="0">
 	<div id="modalFinalizar" class="btn-floating more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in">
 		<span class="ladda-label">Finalizar</span>
 	</div>
