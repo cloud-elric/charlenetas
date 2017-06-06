@@ -52,19 +52,52 @@ class Pagos {
 		$charge = $openpay->charges->create ( $chargeData );
 		
 		
-		$dataOpenPay ['txt_barcode_url'] = $charge->payment_method->barcode_url;
+		return $charge;
+	}
+
+	/**
+	 * Cargo
+	 * 
+	 * @param string $description        	
+	 * @param string $orderId        	
+	 * @param string $amount        	
+	 * @return unknown
+	 */
+	public function createChargeCreditCard($description = null, $orderId = null, $amount = null, $tokenId=null, $deviceId=null) {
+
+		$this->alias = Yii::getAlias ( '@app' ) . '/vendor/openpay';
 		
-		$dataOpenPay ['txt_reference'] = $charge->payment_method->reference;
+		require ($this->alias . DIRECTORY_SEPARATOR . 'Openpay.php');
 		
-		$dataOpenPay ['num_amount'] = number_format ( $charge->amount );
+
+		// pruebas
+		$openpay = \Openpay::getInstance ( 'mgvepau0yawr74pc5p5x', 'sk_b1885d10781b4a05838869f02c211d48' );
 		
-		$dataOpenPay ['txt_currency'] = $charge->currency;
+		// produccion
+		//$openpay = Openpay::getInstance ( 'mxmzxkxphmwhz8hnbzu8', 'sk_a9c337fd308f4838854f422c802f4645' );
 		
-		$dataOpenPay ['txt_descripcion'] = $charge->description;
+		//$openpay = Openpay::getInstance ( 'muqckh3xbqhszkgapcer', 'sk_e4b7e0e618804517bea2a0fef5e0609e' );
+		//$openpay = Openpay::getInstance ( 'mxmzxkxphmwhz8hnbzu8', 'sk_a9c337fd308f4838854f422c802f4645' );
+		$usuario = Yii::$app->user->identity->txt_username.' '. Yii::$app->user->identity->txt_apellido_paterno;
+		$correo = Yii::$app->user->identity->txt_email;
+		$custom = array (
+				"name" => $usuario,
+				"email" => $correo 
+		);
 		
-		$dataOpenPay ['fch_creation_date'] = $charge->creation_date;
+		$chargeData = array (
+				'method' => 'card',
+				'customer' => $custom,
+				'source_id' => $tokenId,
+				'amount' => ( float ) $amount,
+				'description' => $description,
+				'order_id' => $orderId,
+				// 'use_card_points' => $_POST["use_card_points"], // Opcional, si estamos usando puntos
+				'device_session_id' => $deviceId
+		);
 		
-		return $dataOpenPay;
+		$charge = $openpay->charges->create ( $chargeData );
+		return $charge;
 	}
 }
 

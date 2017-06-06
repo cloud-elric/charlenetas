@@ -5,6 +5,7 @@ var comentariosShow = 0;
 var comentariosRestantes = 0;
 var totalPostMostrados = 0;
 var totalPost = 0;
+var creditos = -1;
 
 var masonryOptions = {
 	itemSelector : '.pin',
@@ -1513,17 +1514,32 @@ function compartirTwitter(titulo){
 
 //Verificae los creditos de cada usuario
 $(document).ready(function(){
+
+	$('#js_creditos_usuario').on('click', function(e){
+		e.preventDefault();
+		if(creditos>-1){
+			$("#js-modal-creditos").trigger('click');
+		}
+	});
+
+	
+
+
 	function getCreditosUser(){
 		var url = basePath + 'netas/get-creditos-usuario';
 
-		$.ajax({
-			url:url,
-			success: function(res) {
-				$('#js_creditos_usuario').remove();
-				$(".header_derecho").append("<p id='js_creditos_usuario'>Total creditos: "+res.creditos+"</p>")
-				//$('#js_creditos_usuario').text(value+res.creditos);
-			}
-		});
+		 $.ajax({
+		  	url:url,
+		 	success: function(res) {
+		  		if(res.creditos>-1){
+		  			$("#js-numero-creditos").html(res.creditos);	
+		 		}
+		  			creditos = res.creditos;
+				
+				
+		  		$('#js-numero-creditos').html(creditos);
+		  	}
+		  });
     }
     setInterval(getCreditosUser, 3000);
 });

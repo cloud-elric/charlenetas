@@ -169,6 +169,11 @@ class Utils {
 		// Envia el correo electronico
 		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/cita-aceptada.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Cambio de una cita.', $parametrosEmail );
 	}
+
+	public function sendPagoNotificacion($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/creditos-comprados.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Créditos comprados.', $parametrosEmail );
+	}
 	
 	/**
 	 * Envia mensaje de correo electronico

@@ -1,0 +1,171 @@
+#modal-creditos.modal{
+    width: 90%;
+    min-height: 80%
+}
+
+.modal .btn{
+    border: 1px solid #1E88E5;
+    
+}
+
+.modal .btn:hover{
+    border: 1px solid #1E88E5;
+    color: white;
+}
+
+.headers-steps .col .header-label-step{
+    padding: 10px;
+    color: black;
+    text-align: center;
+    border-radius: 5px;
+    background-color:#e1f5fe;
+
+}
+
+.headers-steps .header-label-step.active{
+    background-color: #039be5;
+    color: white;
+}
+
+.step{
+    display:none;
+}
+
+.step.active{
+    display:block;
+}
+
+.img-forma-pago{
+    min-height: 120px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+}
+
+.tickert-print{
+    display: block;
+}
+
+.whitepaper{
+    padding: 25px;
+    background: white;
+}
+.whitepaper .header{
+    background: white;
+}
+
+.collapsible-body{
+    position: relative;
+}
+
+.print-button{
+    position: absolute;
+    right: 25px;
+    top: 25px;
+
+}
+
+.container-form-pago-tarjeta{
+    padding: 25px;
+}
+
+.tarjetas-credito{
+    background-image: url(../images/openpay/tarjetas-credito.png);
+    background-repeat: no-repeat;
+    height: 30px;
+    background-size: contain;
+    background-position: center;
+}
+
+.tarjetas-debito{
+    background-image: url(../images/openpay/tarjetas-debito.png);
+    background-repeat: no-repeat;
+    height: 30px;
+    background-size: contain;
+    background-position: center;
+}
+
+.help-codigo-seguridad{
+    background-image: url(../images/openpay/cvv.png);
+    background-repeat: no-repeat;
+    height: 30px;
+    background-size: contain;
+    background-position: center;
+}
+
+.logo-open-pay{
+    background-image: url(../images/openpay/openpay.png);
+    height: 32px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.shield{
+    background-image: url(../images/openpay/security.png);
+    height: 37px;
+    width: 31px;
+    float: left;
+    margin-top: 7px;
+    margin-right: 10px;
+}
+.modal .btn-pagar-tarjeta:hover {
+    background: #345678;
+}
+
+@media print {
+   .row .col.m6 {
+    width: 50%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
+.row .col.m12 {
+    width: 100%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
+.row .col.m3 {
+    width: 25%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+.whitepaper{
+    padding: 0px 25px;
+}
+
+.whitepaper h3 {
+    font-size: 1.5rem;
+}
+.whitepaper h4 {
+    font-size: 1.2em;
+}  
+
+.whitepaper .header{
+    padding-bottom: 0;
+}
+
+.whitepaper .header img{
+        height: 100px;
+} 
+
+.tickert-print .row{
+    margin-bottom:10px;
+}
+
+.collection .collection-item {
+    padding: 5px 10px;
+}
+
+.tickert-print b{
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+.tickert-print .footer-images{
+    height: 30px;
+}
+}

@@ -27,7 +27,7 @@ use app\models\EntCitas;
 use app\models\EntUsuariosRespuestasSabiasQue;
 use app\models\EntUsuariosCreditos;
 use app\models\CatTipoCreditos;
-
+use app\models\Products;
 use app\models\ModUsuariosEntUsuarios;
 use app\models\EntAnuncios;
 use yii\db\Expression;
@@ -35,9 +35,11 @@ use app\models\VistaTotalCreditos;
 use app\models\CatTiposUsuarios;
 use app\models\EntUsuariosCreditosGastados;
 use app\models\EntClientes;
+use app\models\PayCatPaymentsTypes;
 use app\models\EntFormCita;
 use app\models\EntDisponibilidadesTiempo;
 use yii\data\ActiveDataProvider;
+
 
 
 class NetasController extends Controller {
@@ -208,6 +210,11 @@ class NetasController extends Controller {
 		$tiposPost = CatTiposPosts::find ()->where ( [ 
 				'b_habilitado' => 1 
 		] )->orderBy ( 'txt_nombre' )->all ();
+
+
+		$productos = Products::find()->where(['b_enabled'=>1])->orderBy('num_order')->all();
+
+		$formasPago = PayCatPaymentsTypes::find()->where(['b_enabled'=>1])->all();
 		
 		// Pintar vista
 		return $this->render ( 'index', [ 
@@ -216,7 +223,9 @@ class NetasController extends Controller {
 				'listaAnuncios' => $listaAnuncios,
 				'token'=>$token,
 				'numRand' => $numRand,
-				'post'=>$post
+				'post'=>$post,
+				'productos'=>$productos,
+				'formasPago'=>$formasPago
 		] );
 	}
 	
@@ -1195,13 +1204,18 @@ class NetasController extends Controller {
 	public function actionGetCreditosUsuario(){
 		Yii::$app->response->format = Response::FORMAT_JSON;
 		
-		$idUser = Yii::$app->user->identity->id_usuario;
-		//Buscar numero de creditos del usuario
-		$creditos = VistaTotalCreditos::find()->where(['id_usuario'=>Yii::$app->user->identity])->one();
-		
-		return[
-			'creditos' => $creditos->num_total_creditos
-		];
+		if(!Yii::$app->user->isGuest){
+
+			$idUser = Yii::$app->user->identity->id_usuario;
+			//Buscar numero de creditos del usuario
+			$creditos = VistaTotalCreditos::find()->where(['id_usuario'=>Yii::$app->user->identity])->one();
+			
+			return[
+				'creditos' => $creditos->num_total_creditos
+			];
+		}
+
+		return ['creditos'=>-1];
 	}
 
 	/**
