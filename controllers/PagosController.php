@@ -16,6 +16,7 @@ use app\models\PayCatPaymentsTypes;
 use app\models\PayOrdenesCompras;
 use yii\web\BadRequestHttpException;
 use app\models\PayPaymentsRecibed;
+use app\models\EntUsuariosCreditos;
 
 class PagosController extends Controller
 {
@@ -147,8 +148,7 @@ class PagosController extends Controller
     
     private function generarOrdenCompraOpenPay($description='Descripción del producto', $orderNumber=null, $monto ){
     	$pago = new Pagos();
-    	$orderId = Utils::generateToken('odc');
-    	return $pago->oPCodeBar($description, $orderId, $monto);
+    	return $pago->oPCodeBar($description, $orderNumber, $monto);
     }
 
 
@@ -190,18 +190,19 @@ class PagosController extends Controller
 		$json = json_decode ( $entityBody, true );
 		
         $this->crearLog('Open Pay', '------------- RECEPCION DE WEBHOOK -------------------');
-        $this->crearLog('Open Pay','type' . $json ['type'] );
-		$this->crearLog('Open Pay',"event_date " . $json ['event_date']);
+        $this->crearLog('Open Pay','type: ' . $json ['type'] );
+		$this->crearLog('Open Pay',"event_date: " . $json ['event_date']);
 		
 		
 		switch ($json ['type']) {
 			case "verification" :
-                $this->crearLog('Open Pay',"Codigo de verificacion:" . $json ['verification_code']);
-                $this->crearLog('Open Pay',"Id de peticion:" . $json ["id"]);
+                $this->crearLog('Open Pay',"Codigo de verificacion: " . $json ['verification_code']);
+                $this->crearLog('Open Pay',"Id de peticion: " . $json ["id"]);
 			
 				break;
 			
 			case "charge.succeeded" :
+			 	$this->crearLog('Open Pay',"Inicio de proceso de pago");
 				$this->processPaymentOP ( $json, $entityBody );
 				break;
 		}
@@ -286,10 +287,23 @@ class PagosController extends Controller
 		$pagoRecibido->txt_monto_pago = $mc_gross;
 		$pagoRecibido->id_orden_compra = $ordenCompra->id_orden_compra;
 		
+		$producto = $ordenCompra->idProducto;	
+
 		$transaction = Yii::$app->db->beginTransaction();
 		$error = false;
 		try {
 			if ($pagoRecibido->save ()) {
+
+				$ordenCompra->b_pagado = 1;
+				if($ordenCompra->save()){
+					
+					$userCreditos = new EntUsuariosCreditos();
+					$userCreditos->agregarCreditos($ordenCompra->id_usuario, $producto->num_creditos, 'Compra de '.$producto->num_creditos.' créditos');
+					
+				}else{
+					$error = true;
+					$this->crearLog('OpenPayUser'.$ordenCompra->id_usuario, 'No se puedo actualizar la orden de compra'. json_encode ( $ordenCompra->errors) );
+				}
 				
 			} else {
 				$error = true;
@@ -315,7 +329,7 @@ class PagosController extends Controller
         $basePath = Yii::getAlias('@app'); 
         $fichero = $basePath.'/logsPagos/'.$nombreArchivo.'.log';
 
-        $persona =  Utils::getFechaActual().'\n'.$message."\n\n";
+        $persona =  Utils::getFechaActual()."\n".$message."\n\n";
         
         $fp = fopen($fichero,"a");
         fwrite($fp,$persona);

@@ -5,7 +5,7 @@ var comentariosShow = 0;
 var comentariosRestantes = 0;
 var totalPostMostrados = 0;
 var totalPost = 0;
-var creditos = 0;
+var creditos = -1;
 
 var masonryOptions = {
 	itemSelector : '.pin',
@@ -1528,18 +1528,18 @@ $(document).ready(function(){
 	function getCreditosUser(){
 		var url = basePath + 'netas/get-creditos-usuario';
 
-		//  $.ajax({
-		//  	url:url,
-		// 	success: function(res) {
-		//  		if(res.creditos>-1){
-		//  			$("#js_creditos_usuario").html("Total creditos: "+res.creditos);	
-		// 		}
-		//  			creditos = res.creditos;
+		 $.ajax({
+		  	url:url,
+		 	success: function(res) {
+		  		if(res.creditos>-1){
+		  			$("#js_creditos_usuario").html("Total creditos: "+res.creditos);	
+		 		}
+		  			creditos = res.creditos;
 				
 				
-		//  		$('#js_creditos_usuario').text(value+res.creditos);
-		//  	}
-		//  });
+		  		$('#js_creditos_usuario').text(value+res.creditos);
+		  	}
+		  });
     }
     setInterval(getCreditosUser, 3000);
 });

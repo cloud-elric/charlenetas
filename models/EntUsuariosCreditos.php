@@ -45,11 +45,14 @@ class EntUsuariosCreditos extends \yii\db\ActiveRecord
         ];
     }
 
-    public function agregarCreditos($idUser, $tipoCredito){
+    public function agregarCreditos($idUser, $tipoCredito, $descripcion='Se asignaron créditos'){
 		$creditos = new EntUsuariosCreditos();
 		$creditos->id_usuario = $idUser;
 		$creditos->numero_creditos = $tipoCredito;
-		$creditos->txt_descripcion = "Se asignaron creditos";
-		$creditos->save();
+		$creditos->txt_descripcion = $descripcion;
+		
+        
+        $creditos->save();
+        return $creditos;
 	}
 }
