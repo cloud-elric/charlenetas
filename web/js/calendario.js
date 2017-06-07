@@ -18,7 +18,7 @@ var calendar = $('#calendar').fullCalendar({
     monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
     dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
     dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
-	editable: false,
+	editable: true,
 	eventLimit: true, 
 	selectable: true,
 	eventOverlap: false,
@@ -32,21 +32,39 @@ var calendar = $('#calendar').fullCalendar({
 			console.log(event.id);
 			return false;
 		}
-       if(event.id_usuario != idUsuario && event.id_usuario != 0) {
+		/*if(event.id_usuario == 0){
+			event.overlap = true;
+			console.log(event);
+		
+			//console.log("sdfdfsdsd");
+			//event.id = 'disponible';
+		}else*/
+		if(event.id_usuario != idUsuario && event.id_usuario != 0) {
             element.css('backgroundColor', '#6F6868');
             $(element).text('No disponible');
 			event.overlap = false;
-        }
-		if(event.id_usuario == 0){
-			event.overlap = true;
-			event.id = 'disponible';
-		}
+			
+        }else
         if(event.b_activo == 1 && event.id_usuario == idUsuario) {
 			element.css('backgroundColor', '#04B404');
 			event.overlap = false;
-	    }
-		if(event.id != 1){
+			
+		}else
+		//console.log(event.title);
+	
+		if(event.id !== '1'){
+			console.log(event.id);
 			event.overlap = false;
+			event.editable = false;
+			
+		}else
+		if(event.id === '1'){
+			event.editable = true;
+			event.overlap = false;
+			console.log(event);
+		}
+		else{
+			console.log("No entro a ninguno");
 		}
 	},
 	eventDrop: function(event, delta) {
@@ -130,13 +148,14 @@ var calendar = $('#calendar').fullCalendar({
 							calendar.fullCalendar('renderEvent',
 									{
 									id_cita: json.idCita,
-									title: title,
+									title: "valor",
 									start: start,
 									end: end,
 									id_usuario: idUsuario,
-									id: 1,
+									id: "1",
 									overlap: true,
 									editable: true,
+									
 									//allDay: allDay
 									},
 								true // make the event 'stick'

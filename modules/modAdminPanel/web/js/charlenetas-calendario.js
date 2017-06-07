@@ -27,16 +27,11 @@ var calendar = $('#calendar').fullCalendar({
 		eventOverlap: false,
 		selectHelper: true,
 		eventRender: function(event, element, view) {
-			if(event.id_usuario == 0){
-				event.overlap = true;
-				event.title = 'Disponible';
-				event.rendering = '';
-				event.constraint = '';
-			}else{
+			if(event.id_usuario != 0 && event.id != "disponible"){
 				element.css('backgroundColor', '#6F6868');
 				$(element).text('No disponible');
 				event.overlap = false;
-				event.editable = true;
+				event.editable = false;
 			}
 		},
 		eventDrop: function(event, delta) {
@@ -110,6 +105,7 @@ var calendar = $('#calendar').fullCalendar({
 							{
 								//title: title,
 								id_cita: json.idCita,
+								id_usuario: json.idUser,
 								title: title,
 								start: start,
 								end: end,

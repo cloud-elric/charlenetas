@@ -90,9 +90,23 @@ class CalendarioController extends Controller
     	 
     	$entCitas = new EntCitas();
     	$ordenCitas = $entCitas->find()->where(['b_habilitado'=>1])->orderBy('id ASC')->asArray()->all();
-    	 
-    	echo json_encode($ordenCitas);
-    	 
+        $respuesta= [];
+		//var_dump($ordenCitas);
+		//exit();
+		foreach($ordenCitas as $cita){
+			if($cita['id'] == "disponible"){
+				
+				unset($cita['rendering']);
+				unset($cita['constraint']);
+				//$cita['rendering'] = "";
+				//$cita['constraint'] = "";
+				//var_dump( $cita);
+				//exit();
+			}
+			$respuesta[] = $cita;
+		}
+
+    	echo json_encode($respuesta);
     }
     
     /**
@@ -144,6 +158,7 @@ class CalendarioController extends Controller
 
 		return [
 			"idCita" => $idCita,
+			"idUser" => $entCitas->id_usuario
 		];
     	//print_r($entCitas);
     }
