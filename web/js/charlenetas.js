@@ -1532,12 +1532,12 @@ $(document).ready(function(){
 		  	url:url,
 		 	success: function(res) {
 		  		if(res.creditos>-1){
-		  			$("#js_creditos_usuario").html("Total creditos: "+res.creditos);	
+		  			$("#js-numero-creditos").html(res.creditos);	
 		 		}
 		  			creditos = res.creditos;
 				
 				
-		  		$('#js_creditos_usuario').text(value+res.creditos);
+		  		$('#js-numero-creditos').html(creditos);
 		  	}
 		  });
     }

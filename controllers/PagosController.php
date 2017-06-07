@@ -17,6 +17,8 @@ use app\models\PayOrdenesCompras;
 use yii\web\BadRequestHttpException;
 use app\models\PayPaymentsRecibed;
 use app\models\EntUsuariosCreditos;
+use app\models\IPNPayPal;
+use app\modules\ModUsuarios\models\EntUsuarios;
 
 class PagosController extends Controller
 {
@@ -71,8 +73,18 @@ class PagosController extends Controller
     public function actionGenerarOrdenCompra(){
 
         if(isset($_POST['producto']) && isset($_POST['formaPago'])  ){
-            $producto = $this->getProductoByToken($_POST['producto']);
+           
+		   $producto = $this->getProductoByToken($_POST['producto']);
             $formaPago = $this->getFormaPagoByToken($_POST['formaPago']);
+
+            return $this->vistaPago($producto, $formaPago);
+
+        }
+
+    }
+
+	public function crearOrdenCompra($producto, $formaPago){
+		 
             $idUsuario = Yii::$app->user->identity->id_usuario;
             $idFormaPago = $formaPago->id_payment_type;
             $idProducto = $producto->id_product;
@@ -93,24 +105,29 @@ class PagosController extends Controller
             $ordenCompra->num_sub_total = $numSubTotal;
             $ordenCompra->num_total = $numTotal;
             $ordenCompra->b_habilitado = 1;
+			$ordenCompra->save();
+           return  $ordenCompra;
+	}
 
-            $ordenCompra->save();
+	/**
+	 * IPN para payl pal
+	 */
+	public function actionIpnPaypal() {
+		$payPal = new IPNPayPal ();
+		$payPal->payPalIPN ();
+	}
 
-            return $this->vistaPago($ordenCompra);
-
-        }
-
-    }
-
-    private function vistaPago($ordenCompra){
-        
-        switch ($ordenCompra->id_payment_type){
+    private function vistaPago($producto, $formaPago){
+        $ordenCompra = $this->crearOrdenCompra($producto, $formaPago);
+        switch ($formaPago->id_payment_type){
             case 1:
                 return $this->renderAjax('formPayPal', ['ordenCompra'=>$ordenCompra]);
             break;
             case 2:
+				$ordenCompra2 = $this->crearOrdenCompra($producto, $formaPago);
+
                 $charger =  $this->generarOrdenCompraOpenPay($ordenCompra->txt_description, $ordenCompra->txt_order_number, $ordenCompra->num_total);
-                return $this->renderAjax('openPay', ['charger'=>$charger, 'ordenCompra'=>$ordenCompra]);
+                return $this->renderAjax('openPay', ['charger'=>$charger, 'ordenCompra'=>$ordenCompra, 'ordenCompra2'=>$ordenCompra2]);
             break;
 
         }
@@ -300,6 +317,19 @@ class PagosController extends Controller
 					$userCreditos = new EntUsuariosCreditos();
 					$userCreditos->agregarCreditos($ordenCompra->id_usuario, $producto->num_creditos, 'Compra de '.$producto->num_creditos.' créditos');
 					
+					$usuario = EntUsuarios::find()->where(['id_usuario'=>$ordenCompra->id_usuario])->one();
+					$utils = new \app\modules\ModUsuarios\models\Utils();
+					$parametrosEmail = [
+							'nombre' => $usuario->txt_username,
+							'ap_paterno' => $usuario->txt_apellido_paterno,
+							'numCreditos' => $producto->num_creditos,
+							'formaPago'=>$ordenCompra->idPaymentType->txt_name,
+							'transaccion'=>$ordenCompra->txt_order_number,
+							'totalPagado'=>$ordenCompra->num_total
+					];
+				
+					$utils->sendPagoNotificacion($usuario->txt_email, $parametrosEmail );
+
 				}else{
 					$error = true;
 					$this->crearLog('OpenPayUser'.$ordenCompra->id_usuario, 'No se puedo actualizar la orden de compra'. json_encode ( $ordenCompra->errors) );

@@ -210,7 +210,7 @@ use yii\helpers\Url;
                             <label for="nombre-titular">Nombre del titular (Como aparece en tarjeta)</label>        
                         </div>
                         <div class="input-field col m6">
-                            <input value="<?=$ordenCompra->txt_order_number?>"
+                            <input value="<?=$ordenCompra2->txt_order_number?>"
                                     type="hidden" name="orderId"> 
                             <input type="text" id="numero-tarjeta"
                                     autocomplete="off" data-openpay-card="card_number"
@@ -330,7 +330,9 @@ $(document).ready(function(){
 
 					if(response=="success"){
                         $("#pay-button").prop("disabled", false);
-						//toastrSuccess("Pago realizado con exito");
+                        $('.lean-overlay').trigger('click');
+						swal("Correcto", "La compra se ha procesado correctamente", "success");
+                        paso1();
 					}else{
 						//toastrError(response);
 						$("#pay-button").prop( "disabled", false);

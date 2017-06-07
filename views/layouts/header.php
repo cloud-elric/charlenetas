@@ -32,7 +32,9 @@ use app\models\EntNotificaciones;
 		 	<?php 
 		 }
 		 ?>
-		 <a href="<?=Url::base()?>/pagos/seleccionar-producto" id="js_creditos_usuario">Total creditos: 0</a>	
+
+		 
+		 <a href="<?=Url::base()?>/pagos/seleccionar-producto" id="js_creditos_usuario">Total creditos: <span id="js-numero-creditos">0</span></a>	
 		 <!-- Notificaciones -->
 			<?php 
 				$notificaciones = new EntNotificaciones();
