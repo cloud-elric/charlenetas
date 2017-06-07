@@ -18,7 +18,7 @@ var calendar = $('#calendar').fullCalendar({
     monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
     dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
     dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
-	editable: true,
+	editable: false,
 	eventLimit: true, 
 	selectable: true,
 	eventOverlap: false,
@@ -32,13 +32,13 @@ var calendar = $('#calendar').fullCalendar({
 			console.log(event.id);
 			return false;
 		}
-		/*if(event.id_usuario == 0){
+		if(event.id_usuario == 0){
 			event.overlap = true;
 			console.log(event);
 		
 			//console.log("sdfdfsdsd");
 			//event.id = 'disponible';
-		}else*/
+		}else
 		if(event.id_usuario != idUsuario && event.id_usuario != 0) {
             element.css('backgroundColor', '#6F6868');
             $(element).text('No disponible');
@@ -49,10 +49,12 @@ var calendar = $('#calendar').fullCalendar({
 			element.css('backgroundColor', '#04B404');
 			event.overlap = false;
 			
-		}else
+		}else if(event.id == 1){
+				event.editable = true;
+		}//else
 		//console.log(event.title);
 	
-		if(event.id !== '1'){
+		/*if(event.id !== '1' && event.id !== "disponible"){
 			console.log(event.id);
 			event.overlap = false;
 			event.editable = false;
@@ -62,8 +64,9 @@ var calendar = $('#calendar').fullCalendar({
 			event.editable = true;
 			event.overlap = false;
 			console.log(event);
-		}
-		else{
+		}else if(event.id === "disponible"){
+			event.overlap = true;
+		}*/else{
 			console.log("No entro a ninguno");
 		}
 	},
@@ -152,7 +155,7 @@ var calendar = $('#calendar').fullCalendar({
 									start: start,
 									end: end,
 									id_usuario: idUsuario,
-									id: "1",
+									id: 1,
 									overlap: true,
 									editable: true,
 									
