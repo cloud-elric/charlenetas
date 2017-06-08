@@ -249,4 +249,32 @@ class CalendarioController extends Controller
 				
 		] );
 	}
+
+	/**
+     * Datos de usuarios al dar click en la cita
+     */
+    public function actionDatosUsuarios(){
+    	Yii::$app->response->format = Response::FORMAT_JSON;
+    	$idUser = $_POST['idUser'];
+    	$idCita = $_POST['idCita'];
+
+		$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$idUser])->one();
+		$cita = EntCitas::find()->where(['id_cita'=>$idCita])->one();
+		
+		//Cambiar formato fecha
+		$start1 = new \DateTime($cita->start);
+		$end1 = new \DateTime($cita->end);
+		$horaInicio = date_format($start1, 'g:i A');
+		$horaFin = date_format($end1, 'g:i A');
+		$fecha = date_format($start1, 'j-F-Y');
+    	
+    	return [
+			'userNombre' => $user->txt_username,
+			'userAp' => $user->txt_apellido_paterno,
+			'userEmail' => $user->txt_email,
+			'horaInicio' => $horaInicio,
+			'horaFin' => $horaFin,
+			'fecha' => $fecha
+		];
+    }
 }

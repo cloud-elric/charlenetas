@@ -63,7 +63,20 @@ var calendar = $('#calendar').fullCalendar({
 				}
 			});		 
 		},
-		
+		eventClick:  function(event, jsEvent, view){
+			//set the values and open the modal
+			if(event.id_usuario != 0){
+				$.ajax({
+					url: 'datos-usuarios',
+					data: 'idUser='+ event.id_usuario+'&idCita='+event.id_cita,
+					type: 'POST',
+					success: function(resp){
+						swal(resp.userNombre+" "+resp.userAp+"\n"+resp.userEmail, "Realizo una cita en: \nFecha: "+
+						resp.fecha+"\nInicio: "+resp.horaInicio+"\nFin: "+resp.horaFin);
+					}
+				});
+			}
+		},
 		dayClick: function(date, jsEvent, view ){
 //			var view = $('#calendar').fullCalendar('getView');
 //			calendar.fullCalendar('gotoDate',date)

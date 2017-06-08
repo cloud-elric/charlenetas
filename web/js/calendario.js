@@ -186,6 +186,10 @@ var calendar = $('#calendar').fullCalendar({
 							//alert("No tienes los creditos suficientes");
 							$('.modal-trigger.modal-creditos').trigger('click');
 							l.stop();
+						}else if(json.status == "CitaCreada"){
+							l.stop();
+							$("#div_nuevo").hide();
+							swal("Lo sentimos", "Al parecer ya hay una cita agendada en este horario")
 						}else{
 							$('.lean-overlay').trigger("click");
 							l.stop();

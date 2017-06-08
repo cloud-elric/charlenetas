@@ -1023,7 +1023,8 @@ class NetasController extends Controller {
 		}
 
 		//Verificar si loa fecha no es igual a uan que ya esta en BD
-		$nuevaCita = EntCitas::find()->where(['>=','start', $start])->andWhere(['<=','end',$start])->orWhere(['>=','start', $end])->andWhere(['<=','end',$end])->andWhere(['b_habilitado'=>1])->andWhere(['!=', 'id_usuario', 0])->all();
+		//$nuevaCita = EntCitas::find()->where(['>=','start', $start])->andWhere(['<=','end',$start])->orWhere(['>=','start', $end])->andWhere(['<=','end',$end])->andWhere(['b_habilitado'=>1])->andWhere(['!=', 'id_usuario', 0])->all();
+		$nuevaCita = EntCitas::find()->where(['start'=>$start])->andWhere(['end'=>$end])->andWhere(['b_habilitado'=>1])->andWhere(['!=', 'id_usuario', 0])->one();
 		if($nuevaCita){
 			$success = "CitaCreada";
 			return ["status"=>$success];
