@@ -1,8 +1,8 @@
 
-var date = new Date();
-var d = date.getDate();
-var m = date.getMonth();
-var y = date.getFullYear();
+var date1 = new Date();
+var d = date1.getDate();
+var m = date1.getMonth();
+var y = date1.getFullYear();
 var idUsuario = $('.js-calendario').data('id');
 	
 var calendar = $('#calendar').fullCalendar({
@@ -38,9 +38,9 @@ var calendar = $('#calendar').fullCalendar({
 			start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD HH:mm:ss');
 			//alert(start);
 			end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD HH:mm:ss');
-			m = moment(date);
+			//m = moment(date);
 			//m.add(.25,'hours').hours();
-			end = moment(m).format('YYYY-MM-DD HH:mm:ss');
+			//end = moment(m).format('YYYY-MM-DD HH:mm:ss');
 			//alert(end);
 			$.ajax({
 				url: 'actualizar-citas',
@@ -78,7 +78,7 @@ var calendar = $('#calendar').fullCalendar({
 			//if(view.name == 'agendaDay'){
 
 //			
-//			if(view.name == 'agendaDay'){
+			if(date._d >= date1){
 
 				//$('.modal-trigger').leanModal();
 				//$('.modal-trigger.js-crear').trigger('click');
@@ -123,7 +123,9 @@ var calendar = $('#calendar').fullCalendar({
 					});
 				//});
 				calendar.fullCalendar('unselect');	
-			//}
+			}else{
+				swal("Fecha no disponoble");
+			}
 		},
 		
 	});

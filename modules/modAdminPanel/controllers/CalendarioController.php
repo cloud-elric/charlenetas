@@ -98,10 +98,7 @@ class CalendarioController extends Controller
 				
 				unset($cita['rendering']);
 				unset($cita['constraint']);
-				//$cita['rendering'] = "";
-				//$cita['constraint'] = "";
-				//var_dump( $cita);
-				//exit();
+				$cita['id'] = $cita['id_cita'];
 			}
 			$respuesta[] = $cita;
 		}
