@@ -90,9 +90,20 @@ class CalendarioController extends Controller
     	 
     	$entCitas = new EntCitas();
     	$ordenCitas = $entCitas->find()->where(['b_habilitado'=>1])->orderBy('id ASC')->asArray()->all();
-    	 
-    	echo json_encode($ordenCitas);
-    	 
+        $respuesta= [];
+		//var_dump($ordenCitas);
+		//exit();
+		foreach($ordenCitas as $cita){
+			if($cita['id'] == "disponible"){
+				
+				unset($cita['rendering']);
+				unset($cita['constraint']);
+				$cita['id'] = $cita['id_cita'];
+			}
+			$respuesta[] = $cita;
+		}
+
+    	echo json_encode($respuesta);
     }
     
     /**
@@ -106,7 +117,7 @@ class CalendarioController extends Controller
     	$end=$_POST['end'];
     	
     	$entCitas = new EntCitas();
-    	$actualizar = $entCitas->find()->where(['id'=>$id])->one();
+    	$actualizar = $entCitas->find()->where(['id_cita'=>$id])->one();
     	
     	$actualizar->title = $title;
     	$actualizar->start = $start;
@@ -118,22 +129,34 @@ class CalendarioController extends Controller
      * Agregar citas a la base de datos
      */
     public function actionAgregarCitas(){
+		Yii::$app->response->format = Response::FORMAT_JSON;
     	
     	$title=$_POST['title'];
     	$start=$_POST['start'];
     	$end=$_POST['end'];
-    	$id_usuario = Yii::$app->user->identity->id_usuario;
+    	$id_usuario = 0;//Yii::$app->user->identity->id_usuario;
     	$txt_token = Utils::generateToken ( 'cita_' );
     	
     	$entCitas = new EntCitas();
     	
+		$entCitas->id = "disponible";
     	$entCitas->title = $title;
     	$entCitas->start = $start;
     	$entCitas->end = $end;
     	$entCitas->id_usuario = $id_usuario;
     	$entCitas->txt_token = $txt_token;
+		$entCitas->rendering = "inverse-background";
+		$entCitas->constraint = "disponible";
+		$entCitas->overlap = 1;
+		$entCitas->b_habilitado = 1;
     	
     	$entCitas->save();
+		$idCita = $entCitas->id_cita;
+
+		return [
+			"idCita" => $idCita,
+			"idUser" => $entCitas->id_usuario
+		];
     	//print_r($entCitas);
     }
     
@@ -226,4 +249,32 @@ class CalendarioController extends Controller
 				
 		] );
 	}
+
+	/**
+     * Datos de usuarios al dar click en la cita
+     */
+    public function actionDatosUsuarios(){
+    	Yii::$app->response->format = Response::FORMAT_JSON;
+    	$idUser = $_POST['idUser'];
+    	$idCita = $_POST['idCita'];
+
+		$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$idUser])->one();
+		$cita = EntCitas::find()->where(['id_cita'=>$idCita])->one();
+		
+		//Cambiar formato fecha
+		$start1 = new \DateTime($cita->start);
+		$end1 = new \DateTime($cita->end);
+		$horaInicio = date_format($start1, 'g:i A');
+		$horaFin = date_format($end1, 'g:i A');
+		$fecha = date_format($start1, 'j-F-Y');
+    	
+    	return [
+			'userNombre' => $user->txt_username,
+			'userAp' => $user->txt_apellido_paterno,
+			'userEmail' => $user->txt_email,
+			'horaInicio' => $horaInicio,
+			'horaFin' => $horaFin,
+			'fecha' => $fecha
+		];
+    }
 }
