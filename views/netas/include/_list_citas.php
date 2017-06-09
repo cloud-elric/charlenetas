@@ -17,6 +17,6 @@ foreach($meses as $key=>$value){
 	}
 }
 ?>
-<div class="col m5" style="margin:10px">
+<div class="col m6" style="margin:10px">
     <span><?= "FECHA: " . $fecha . " HORARIO: " . $horaInicio . " a " . $horaFin?></span>
 </div>

@@ -113,6 +113,11 @@
     background: #345678;
 }
 
+.empty{
+    padding: 30px !important;
+}    
+    
+
 @media print {
    .row .col.m6 {
     width: 50%;
