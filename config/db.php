@@ -8,13 +8,14 @@ if (YII_ENV_DEV) {
 			'charset' => 'utf8'
 	];
 
-// 	$dataBase = [
-// 			'class' => 'yii\db\Connection',
-// 			'dsn' => 'mysql:host=localhost;dbname=charlenetas_geekdb',
-// 			'username' => 'root',
-// 			'password' => 'root',
-// 			'charset' => 'utf8'
-// 	];
+/* 	$dataBase = [
+ 			'class' => 'yii\db\Connection',
+ 			'dsn' => 'mysql:host=localhost;dbname=charlenetas_produccion',
+ 			'username' => 'root',
+ 			'password' => 'root',
+ 			'charset' => 'utf8'
+ 	];
+*/
 } else {
 	$dataBase = [
 			'class' => 'yii\db\Connection',
