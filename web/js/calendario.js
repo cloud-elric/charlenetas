@@ -151,7 +151,7 @@ var calendar = $('#calendar').fullCalendar({
 							calendar.fullCalendar('renderEvent',
 									{
 									id_cita: json.idCita,
-									title: "valor",
+									title: "Haz hecho una cita en charlenetas",
 									start: start,
 									end: end,
 									id_usuario: idUsuario,

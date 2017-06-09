@@ -29,7 +29,7 @@ var calendar = $('#calendar').fullCalendar({
 		eventRender: function(event, element, view) {
 			if(event.id_usuario != 0 && event.id != "disponible"){
 				element.css('backgroundColor', '#6F6868');
-				$(element).text('No disponible');
+				$(element).text('Cita');
 				event.overlap = false;
 				event.editable = false;
 			}
