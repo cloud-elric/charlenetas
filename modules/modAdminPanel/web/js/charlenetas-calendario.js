@@ -9,7 +9,7 @@ var calendar = $('#calendar').fullCalendar({
 		header: {
 			left: 'title',
 			center: '',
-			right: ''
+			right: 'prev,next'
 		},
 		minTime: "08:00:00",
     	maxTime: "21:00:00",
