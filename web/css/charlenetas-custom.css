@@ -115,6 +115,10 @@
 
 .empty{
     padding: 30px !important;
+}
+
+.collapsible-body {
+    padding: 15px;
 }    
     
 

@@ -946,7 +946,7 @@ class NetasController extends Controller {
 		$dataProvider = new ActiveDataProvider([
             'query' => EntCitas::find()->where(['id_usuario' => $idUsuario])->andWhere(['b_habilitado'=>1])->orderBy('start DESC'),
             'pagination' => [
-                'pageSize' => 1,
+                'pageSize' => 20,
             ],
         ]);
 		

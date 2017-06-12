@@ -38,15 +38,21 @@ use yii\helpers\Html;
 			'dataProvider' => $dataProvider,
 			'options' => [
 				'tag' => 'div',
-				'class' => 'collapsible-body row',
+				'class' => 'collapsible-body',
 			],
 			'emptyTextOptions'=>[
-				'class'=>'empty col m12'
+				'class'=>'empty col m6'
+			],
+			'summaryOptions'=>[
+				'class'=>'summary col m12 right-align'
+			],
+			'itemOptions'=>[
+				'class'=>'row'
 			],
 			'itemView' => function ($model, $key, $index, $widget) {
 				return $this->render('_list_citas',['model' => $model]);
 			}, 
-			'layout'=>'{items}<div class="row">{summary}{pager}</div>'
+			'layout'=>'{items}<div class="row">{summary}</div><div class="row"><div class="col m12 center-align">{pager}</div></div>'
 		]); ?>
 		
 		</li>
@@ -61,7 +67,7 @@ use yii\helpers\Html;
 <!-- .crear-cita -->
 <div class="crear-cita js-crear-cita" data-id="<?= Yii::$app->user->identity->id_usuario?>">
 
-	<h4><span>Crear cita <?=Yii::$app->user->identity->id_usuario?></span></h4>
+	<h4><span>Crear cita</span></h4>
 	<div id='calendar'></div>
 
 </div>
