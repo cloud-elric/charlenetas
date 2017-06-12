@@ -1515,16 +1515,6 @@ function compartirTwitter(titulo){
 //Verificae los creditos de cada usuario
 $(document).ready(function(){
 
-	$('#js_creditos_usuario').on('click', function(e){
-		e.preventDefault();
-		if(creditos>-1){
-			$("#js-modal-creditos").trigger('click');
-		}
-	});
-
-	
-
-
 	function getCreditosUser(){
 		var url = basePath + 'netas/get-creditos-usuario';
 

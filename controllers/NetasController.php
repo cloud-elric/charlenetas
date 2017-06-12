@@ -946,7 +946,7 @@ class NetasController extends Controller {
 		$dataProvider = new ActiveDataProvider([
             'query' => EntCitas::find()->where(['id_usuario' => $idUsuario])->andWhere(['b_habilitado'=>1])->orderBy('start DESC'),
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 20,
             ],
         ]);
 		
@@ -961,10 +961,16 @@ class NetasController extends Controller {
 			}
 		}
 
+		$productos = Products::find()->where(['b_enabled'=>1])->orderBy('num_order')->all();
+
+		$formasPago = PayCatPaymentsTypes::find()->where(['b_enabled'=>1])->all();
+
 		return $this->render ( '//netas/include/_crearCitas', [
 			'cita' => $cita,
 			'formUser' => $formUser,
-			'dataProvider' => $dataProvider
+			'dataProvider' => $dataProvider,
+			'productos'=>$productos,
+			'formasPago'=>$formasPago
 		]);
 	}
 	

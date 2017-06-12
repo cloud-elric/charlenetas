@@ -113,6 +113,21 @@
     background: #345678;
 }
 
+.empty{
+    padding: 30px !important;
+}
+
+.collapsible-body {
+    padding: 15px;
+}   
+
+#modalFinalizar{
+    position: relative;
+    margin-left: 0;
+    left: 0;
+    right: 0; 
+}    
+
 @media print {
    .row .col.m6 {
     width: 50%;

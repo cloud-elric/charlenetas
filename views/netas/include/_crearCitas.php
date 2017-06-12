@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\widgets\ListView;
+use yii\helpers\Html;
 ?>
 
 <head>
@@ -37,11 +38,21 @@ use yii\widgets\ListView;
 			'dataProvider' => $dataProvider,
 			'options' => [
 				'tag' => 'div',
-				'class' => 'collapsible-body row',
+				'class' => 'collapsible-body',
+			],
+			'emptyTextOptions'=>[
+				'class'=>'empty col m6'
+			],
+			'summaryOptions'=>[
+				'class'=>'summary col m12 right-align'
+			],
+			'itemOptions'=>[
+				'class'=>'row'
 			],
 			'itemView' => function ($model, $key, $index, $widget) {
 				return $this->render('_list_citas',['model' => $model]);
 			}, 
+			'layout'=>'{items}<div class="row">{summary}</div><div class="row"><div class="col m12 center-align">{pager}</div></div>'
 		]); ?>
 		
 		</li>
@@ -172,3 +183,137 @@ use yii\widgets\ListView;
 <div id="div_nuevo" style="display: none;position:fixed;top:0;left: 0;right: 0;bottom: 0;background-color: rgba(0, 0, 0, 0.39);z-index: 4;">
 
 </div>
+
+
+<a class="waves-effect waves-light btn modal-trigger"
+	href="#modal-creditos" style="display: none;" id="js-modal-creditos"></a>
+
+<div id="modal-creditos" class="modal">
+	<form id="js-form-pagar">
+		<input type="hidden" name="producto" value="" id="js-form-pagar-producto">
+		<input type="hidden" name="formaPago" value="" id="js-form-pagar-formaPago">		
+	</form>
+
+	<div class="modal-content">
+		<br>
+		<div class="row">
+			<div class="col m12">
+				<span>
+					Consigue créditos con los cuales podrás cambiar por citas o preguntas al espejo.
+				</span>
+			</div>
+		</div>
+		<div class="headers-steps">
+			<div class="row">
+				<div class="col m3">
+					<h5 class="header-label-step header-label-step-1 active">
+						Seleccionar producto
+					</h5>	
+				</div>
+				<div class="col m3">
+					<h5 class="header-label-step header-label-step-2">
+						Forma de pago
+					</h5>	
+				</div>
+
+				<div class="col m3">
+					<h5 class="header-label-step header-label-step-3">
+						Revisar información
+					</h5>	
+				</div>
+
+			
+			</div>
+		</div>
+
+
+		<div class="step step-1 active">
+			<div class="row">
+
+			<?php 
+			foreach($productos as $producto){
+			?>
+				<div class="col m4 l4">
+					<div class="card-panel teal center-align">
+						<h1 class="white-text">
+							<?=$producto->txt_name?>
+						</h1>
+						
+						<p class="white-text">
+							<i class="ion ion-social-usd"></i>
+							<?=$producto->num_price?>
+						</p>
+
+						<p>
+							<?=Html::a('Seleccionar', [''], ['class'=>'waves-effect waves-light btn blue darken-1 js-seleccionar-producto-boton', 'data-token'=>$producto->txt_product_number]);?>
+						</p>
+					</div>
+				</div>
+
+			<?php }?>	
+
+			</div> 
+
+		 </div>
+
+		 <div class="step step-2">
+		 	<div class="row">
+			 	<?php 
+				 foreach($formasPago as $formaPago){
+				 ?>
+				 <div class="col m6">
+					 <div data-token="<?=$formaPago->txt_payment_type_number?>" class="img-forma-pago js-seleccinar-forma-pago" style="background-image:url('<?=Url::base()?>/images/<?=$formaPago->txt_icon_url?>')">
+
+					 </div>
+				 	
+				 </div>
+				 <?php }?>
+			 </div>
+			 <div class="row">
+				 <div class="col m3 offset-m6">
+					 <div class="waves-effect waves-light btn blue darken-1 js-back-step-1" >Atras</div>
+				 </div>
+			 </div>
+		 </div>
+
+		 <div class="step step-3">
+		 	<div class="row">
+				 <div class="container container-pago">
+				 	<div class="progress">
+     				 <div class="indeterminate"></div>
+  				</div>
+				 </div>
+			 	
+			 </div>
+
+			  <div class="row">
+				 <div class="col m3 offset-m6">
+					 <div class="waves-effect waves-light btn blue darken-1 js-back-step-2" >Atras</div>
+				 </div>
+			 </div>
+		 </div>
+
+		 <div class="step step-4">
+			<div class="row">
+
+			 </div>
+		 </div>
+
+	</div>
+</div>	
+
+<?php
+
+$this->registerCssFile ( '@web/css/charlenetas-custom.css', [
+		'depends' => [
+				\app\assets\AppAsset::className ()
+		],
+
+] );
+
+$this->registerJsFile ( '@web/js/wizard-pago.js', [
+		'depends' => [
+				\app\assets\AppAsset::className ()
+		],
+
+] );
