@@ -21,7 +21,7 @@ $espejo = $postEspejos->find()->where(['id_post'=>$post->id_post])->one();
 
 	<div class="pin-content-wrapper" lang="en">
 		<div class="pin-descripcion" style="
-    max-height: 500px;
+    max-height: 200px;
     overflow: hidden;
 "><?=$post->txt_descripcion?></div>
 	</div>
