@@ -75,9 +75,9 @@ use yii\helpers\Html;
 
 <!-- .fixed-action-btn -->
 <div id="js_btn_fin" class="fixed-action-btn horizontal" data-id="0">
-	<div id="modalFinalizar" class="btn-floating more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in">
+	<button id="modalFinalizar" class="btn-floating more-entries waves-effect waves-light btn ladda-button" data-style="zoom-in">
 		<span class="ladda-label">Finalizar</span>
-	</div>
+	</button>
 </div>
 <!-- end /.fixed-action-btn -->
 
@@ -145,7 +145,7 @@ use yii\helpers\Html;
 				
 				<div class="modal-footer">
 					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat ladda-button" data-style="zoom-in" id="submitButtonLlenar" >Aceptar</button>
-					<button type="submit" class=" modal-action modal-close waves-effect waves-light btn-flat ladda-button" data-style="zoom-in" id="submitButtonCancelar" >Cancelar</button>
+					<button type="reset" class=" modal-action modal-close waves-effect waves-light btn-flat ladda-button" data-style="zoom-in" id="submitButtonCancelar" >Cancelar</button>
 				</div>
 			</form>
 	  	</div>
