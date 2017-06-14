@@ -317,3 +317,24 @@ $this->registerJsFile ( '@web/js/wizard-pago.js', [
 		],
 
 ] );
+
+$this->registerJsFile ( '@web/plugins/printArea/jquery.PrintArea.js', [
+		'depends' => [
+				\app\assets\AppAsset::className ()
+		],
+
+] );
+
+$this->registerJsFile ( 'https://openpay.s3.amazonaws.com/openpay.v1.min.js', [
+		'depends' => [
+				\app\assets\AppAsset::className ()
+		],
+
+] );
+
+$this->registerJsFile ( 'https://openpay.s3.amazonaws.com/openpay-data.v1.min.js', [
+		'depends' => [
+				\app\assets\AppAsset::className ()
+		],
+
+] );

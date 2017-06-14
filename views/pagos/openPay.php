@@ -274,8 +274,8 @@ use yii\helpers\Url;
                             
                         </div>
                         <div class="col m4 center-align">
-                            <button id="pay-button" class="waves-effect waves-light btn  btn-large btn-pagar-tarjeta">
-                                Pagar
+                            <button id="pay-button" class="waves-effect waves-light btn btn-large btn-pagar-tarjeta ladda-button" data-style="zoom-in">
+                                <span class="ladda-label">Pagar</span>
                             </button>
                         </div>
                     </div>    
@@ -310,7 +310,10 @@ $(document).ready(function(){
             //Se genera el id de dispositivo
             var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
             
+            var button = document.getElementById('pay-button');
+			var l = Ladda.create(button);
             $('#pay-button').on('click', function(event) {
+                l.start();
                 event.preventDefault();
                 $("#pay-button").prop( "disabled", true);
                 OpenPay.token.extractFormAndCreate('payment-form', sucess_callbak, error_callbak);                
@@ -333,13 +336,15 @@ $(document).ready(function(){
                         $('.lean-overlay').trigger('click');
 						swal("Correcto", "La compra se ha procesado correctamente", "success");
                         paso1();
+                        l.stop();
 					}else{
 						//toastrError(response);
 						$("#pay-button").prop( "disabled", false);
+                        l.stop();
 					}
 				},error:function(){
-
-					}
+                    l.stop();
+				}
 			});
               
             };
@@ -350,6 +355,7 @@ $(document).ready(function(){
                 //alert("ERROR [" + response.status + "] " + desc);
                 swal("Un momento", 'Open pay rechazó el pago por: '+desc, "warning")
                 $("#pay-button").prop("disabled", false);
+                l.stop();
             };
 
         
