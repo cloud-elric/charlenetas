@@ -15,7 +15,7 @@ use yii\helpers\Url;
 			<?=$post->txt_titulo?>
 		</h3>
 		<div class="pin-descripcion" style="
-    max-height: 500px;
+    max-height: 200px;
     overflow: hidden;
 "><?=$post->txt_descripcion?></div>
 		<div class="pin-alquimia-grades">

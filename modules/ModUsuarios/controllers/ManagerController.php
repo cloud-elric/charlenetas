@@ -72,7 +72,7 @@ class ManagerController extends Controller {
 					//Agregar creditos al usuario por registrarse
 					$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::REGISTRO])->one();
 					$userCreditos = new EntUsuariosCreditos();
-					$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
+					$userCreditos->agregarCreditos($user->id_usuario, $contestar->costo);
 
 					return [ 
 							'status' => 'success',
@@ -372,7 +372,7 @@ class ManagerController extends Controller {
 				//Agregar creditos al usuario por registrarse
 				$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::REGISTRO])->one();
 				$userCreditos = new EntUsuariosCreditos();
-				$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
+				$userCreditos->agregarCreditos($existUsuario->id_usuario, $contestar->costo);
 			}
 		}
 		
