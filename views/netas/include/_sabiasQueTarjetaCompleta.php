@@ -32,7 +32,7 @@ $usuario = $post->idUsuario;
 
 		<h3><?= $post->txt_descripcion ?></h3>
 
-		<div class="full-pin-body-content-img">
+		<div class="full-pin-body-content-img full-pin-body-content-img-<?= $post->txt_token ?>">
 			<img src="<?=Url::base()?>/uploads/imagenesPosts/<?=Html::encode($post->txt_imagen)?>" alt="" />
 		</div>
 

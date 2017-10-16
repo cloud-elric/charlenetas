@@ -429,6 +429,7 @@ class NetasController extends Controller {
 	public function actionComentarPost($token = null) {
 		$this->layout = false;
 		$idUsuario = Yii::$app->user->identity->id_usuario;
+		$usuario = Yii::$app->user->identity;
 		
 		// Obtenemos el post
 		$post = $this->getPostByToken ( $token );
@@ -446,6 +447,8 @@ class NetasController extends Controller {
 			$contestar = CatTipoCreditos::find()->where(['id_credito'=>ConstantesWeb::CREDITO_COMENTARIO])->one();
 			$userCreditos = new EntUsuariosCreditos();
 			$userCreditos->agregarCreditos($comentario->id_usuario, $contestar->costo);
+
+			$this->sendNotificacionAdminComentario($usuario, $token);
 			
 			return $this->render ( 'include/elementos/comentario', [ 
 					'comentario' => $comentario,
@@ -631,13 +634,13 @@ class NetasController extends Controller {
 	 *
 	 * @param unknown $token        	
 	 */
-	public function actionResponderComentario($token) {
+	 public function actionResponderComentario($token) {
 		// no se usara un layout
 		$this->layout = false;
 		
 		// id del usuario logueado
 		$idUsuario = Yii::$app->user->identity->id_usuario;
-		
+		$usuario = Yii::$app->user->identity;
 		// Busca el comentario por el token
 		$comentario = $this->getComentarioByToken ( $token );
 		
@@ -661,6 +664,8 @@ class NetasController extends Controller {
 			$post = EntPosts::find()->where(['id_post'=>$comentario->id_post])->one();
 			$user = ModUsuariosEntUsuarios::find()->where(['id_usuario'=>$comentario->id_usuario])->one();
 			$this->enviarEmailComentario($user, $post->txt_token);
+
+			$this->sendNotificacionAdminComentario($usuario, $token);
 				
 			// Tipos de feedbacks
 			$feedbacks = $this->obtenerTiposFeedbacks ();
@@ -1179,6 +1184,22 @@ class NetasController extends Controller {
 	
 		$utils->sendComentarioContestado($user->txt_email, $parametrosEmail );
 	}
+
+	private function sendNotificacionAdminComentario($user, $token){
+		
+			$utils = new Utils();
+			$parametrosEmail = [
+					'nombre' => $user->txt_username,
+					'correo' => $user->txt_email,
+					'ap_paterno' => $user->txt_apellido_paterno,
+					'ap_materno' => $user->txt_apellido_materno,
+					'token' => $token
+			];
+		
+			$utils->sendNotificacionAdminComentario("cloudelric74@gmail.com", $parametrosEmail );
+		}
+
+	
 	
 	private function enviarEmailPreguntaEspejo($admin, $token){
 	

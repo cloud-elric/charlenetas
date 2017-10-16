@@ -174,6 +174,11 @@ class Utils {
 		// Envia el correo electronico
 		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/creditos-comprados.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Créditos comprados.', $parametrosEmail );
 	}
+
+	public function sendNotificacionAdminComentario($email, $parametrosEmail) {
+		// Envia el correo electronico
+		return $this->sendEmail ( '@app/modules/ModUsuarios/email/layouts/comentario-admin.php', '@app/modules/ModUsuarios/email/', 'welcome@charlenetas.com', $email, 'Han hecho un comentario.', $parametrosEmail );
+	}
 	
 	/**
 	 * Envia mensaje de correo electronico

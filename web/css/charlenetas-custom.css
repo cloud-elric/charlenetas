@@ -126,7 +126,11 @@
     margin-left: 0;
     left: 0;
     right: 0; 
-}    
+}  
+
+.pin.pin-sabias-que .pin-content-wrapper p.pin-descripcion  , .pin-sabias-que .pin-content-wrapper {
+	max-height: inherit;
+} 
 
 @media print {
    .row .col.m6 {
